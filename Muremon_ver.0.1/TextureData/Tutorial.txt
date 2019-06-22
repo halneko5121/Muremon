@@ -1,0 +1,2 @@
+Graphics\\M_sukkiri.png
+Graphics\\M_normal.png

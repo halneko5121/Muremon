@@ -1,0 +1,2 @@
+Graphics\\rank.png
+Graphics\\G_font.png

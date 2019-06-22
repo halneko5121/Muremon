@@ -1,0 +1,44 @@
+#pragma once
+
+/************************************************************************************
+ *	役割：放物線処理の設定															*
+ *	説明：																			*
+ *	作成日：2009年 3月 21日															*
+ *	更新日：	年	月	 日															*
+ *													by	三上　亘					*
+ ************************************************************************************/
+
+/*================================
+		Include
+=================================*/
+#include <math.h>
+#include <d3dx9math.h>
+
+#include "Define.h"
+
+/*================================
+		Define
+=================================*/
+#define GRAVITY 						(0.98f)				//重力加速度
+
+/*================================
+		Class
+=================================*/
+class C_OrbitParadora
+{
+public:
+	/****************************************************************************************************
+	*	役割	：放物線処理																			*
+	*	関数名	：POS_CC OrbitParabola(float acceleration, float move_x, float limit_y ,POS_CC draw_cc)	*
+	*	引数	：float  acceleration					加速度											*
+	*			：float move_x　　移動量	：float limit_y　　yの限界値　	：POS_CC draw_cc　　中心座標*
+	*	戻り値	：POS_CC draw_cc  中心座標																*
+	*	作成日	：2009年 3月 21日																		*
+	*	更新日	：	年	月	 日							by	三上　亘									*
+	****************************************************************************************************/
+	POS_CC<float> OrbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc, int char_num);
+	
+	
+	C_OrbitParadora(void);
+	~C_OrbitParadora(void);
+};

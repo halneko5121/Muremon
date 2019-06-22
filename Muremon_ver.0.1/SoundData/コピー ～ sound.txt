@@ -1,0 +1,19 @@
+Sound\\BGM\\title.wav	//タイトルBGM
+Sound\\SE\\cursor.wav	//カーソル移動音
+Sound\\SE\\ok.wav	//決定音
+Sound\\BGM\\battle.wav	//バトルBGM
+Sound\\SE\\start.wav	//ゲームスタート
+Sound\\SE\\siren.wav	//危険
+Sound\\SE\\osirase.wav	//ミッション開始
+Sound\\SE\\nami.wav	//奥義
+Sound\\SE\\mclear.wav	//ミッションクリア
+Sound\\SE\\dead.wav	//しゃっく　死んだ時
+Sound\\SE\\nikuman.wav	//肉まん　攻撃が当たった時
+Sound\\SE\\hip.wav	//吉太郎　地上攻撃が当たった時
+Sound\\SE\\huusen.wav	//吉太郎　空中攻撃が当たった時
+Sound\\SE\\koke.wav	//のっぽ　こけた時
+Sound\\SE\\peti.wav	//のっぽ　頭の長いのが当たった時
+Sound\\SE\\ganmen.wav	//のっぽ　空中攻撃が当たった時
+Sound\\SE\\mclear.wav	//ゲームクリア
+Sound\\SE\\over.wav	//ゲームオーバー
+

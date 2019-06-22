@@ -1,0 +1,61 @@
+﻿cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
+  Tutorial.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Title.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Ranking.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Mission.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Logo.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  GameRefresh.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  GameNormal.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  OrbitWave.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\orbit\orbitwave.h(15): fatal error C1083: include ファイルを開けません。'd3dx9math.h':No such file or directory
+  OrbitRebound.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\orbit\orbitrebound.h(15): fatal error C1083: include ファイルを開けません。'd3dx9math.h':No such file or directory
+  OrbitParadora.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\orbit\orbitparadora.h(15): fatal error C1083: include ファイルを開けません。'd3dx9math.h':No such file or directory
+  OrbitCalculation.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\orbit\orbitcalculation.h(15): fatal error C1083: include ファイルを開けません。'd3dx9math.h':No such file or directory
+  Vertex.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Texture.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  DirectSound.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directsound.cpp(56): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: 'fopen' の宣言を確認してください
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directsound.cpp(65): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: 'fscanf' の宣言を確認してください
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directsound.cpp(75): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: 'fscanf' の宣言を確認してください
+  DirectInput.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  DirectGraphics.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  DirectFont.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Window.cpp
+  SceneManage.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Revenant.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  GameManage.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Control.cpp
+  Chara_Yoshi.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Chara_Noppo.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Chara_Nikuman.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  CharaCommon.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Boss.cpp
+e:\works\development\home\project\vocationalschool\muremon\muremon_ver.0.1\library\directgraphics.h(15): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  コードを生成中...

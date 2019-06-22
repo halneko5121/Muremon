@@ -1,0 +1,8 @@
+Graphics\\GAME\\G_background.png
+Graphics\\G_font.png
+Graphics\\GAME\\S_niku.png
+Graphics\\GAME\\S_yoshi.png
+Graphics\\GAME\\S_noppo.png
+Graphics\\GAME\\S_syack.png
+Graphics\\GAME\\S_atc.png
+Graphics\\GAME\\G_mission.png

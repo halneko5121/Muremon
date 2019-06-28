@@ -489,11 +489,10 @@ bool C_Vertex::LoadRect(char *pFileName)	//‹éŒ`‚ğtxt‚©‚ç“Ç‚İ‚ŞŠÖ”
 	position_2 = new RECT[MAX_DATA];
 
 	for(int i = 0;i < MAX_DATA;i++){
-		fscanf_s(fp,"%d,",&position_2[i].top,GRAPHIC64);
-		fscanf_s(fp,"%d,",&position_2[i].bottom,GRAPHIC64);
-		fscanf_s(fp,"%d,",&position_2[i].left,GRAPHIC64);
-		fscanf_s(fp,"%d\n",&position_2[i].right,GRAPHIC64);
-		/*fscanf_s(fp,"%s\n",countFile,GRAPHIC64);*/
+		fscanf_s(fp,"%d,",&position_2[i].top);
+		fscanf_s(fp,"%d,",&position_2[i].bottom);
+		fscanf_s(fp,"%d,",&position_2[i].left);
+		fscanf_s(fp,"%d\n",&position_2[i].right);
 	}
 	
 	if(fclose(fp))

@@ -97,7 +97,7 @@ int C_GameMain::MsgLoop(void)
 
     scene->InitScene(gra->GetDevice(),/*input,*/font, /*mapread,*/ sou,0);
 
-	sou->LoadSoundData("data\\sound_data.txt");
+	sou->LoadSoundData("Data\\sound_data.txt");
 
 	srand((unsigned int)time(NULL));
 

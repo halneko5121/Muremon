@@ -38,8 +38,8 @@ void C_Tutorial::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont *apFont, C_DSound *
 	sound = apSound;
 	C_SceneManage::InitScene(apDev,apFont,apSound,0);
 
-	texture->LoadTextureData("data\\TextureData\\Tutorial.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("data\\RectData\\Tutorial.txt");
+	texture->LoadTextureData("Data\\TextureData\\Tutorial.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	vertex->LoadRect("Data\\RectData\\Tutorial.txt");
 }
 
 bool C_Tutorial::RunScene()

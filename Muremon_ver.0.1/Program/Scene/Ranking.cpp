@@ -84,8 +84,8 @@ void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, /*C_DInput *apinput,*/ C_DFon
 
 	add_score = score;
 
-	texture->LoadTextureData("data\\TextureData\\ranking.txt",apDev);		//絵の読み込み
-	vertex->LoadRect("data\\RectData\\ranking.txt");
+	texture->LoadTextureData("Data\\TextureData\\ranking.txt",apDev);		//絵の読み込み
+	vertex->LoadRect("Data\\RectData\\ranking.txt");
 	RankLoad();
 	RankCheck();
 }
@@ -268,7 +268,7 @@ void C_Ranking::RankScoreDraw()
 
 void C_Ranking::RankLoad()
 {
-	fopen_s(&fp,"data\\rankingdata.txt","r");		//ファイルを開く
+	fopen_s(&fp,"Data\\rankingdata.txt","r");		//ファイルを開く
 
 	if(fp == NULL)					//ファイルがなかった場合
 	{
@@ -287,7 +287,7 @@ void C_Ranking::RankLoad()
 
 void C_Ranking::RankWrite()
 {
-	fp = fopen("data\\rankingdata.txt","w");	
+	fp = fopen("Data\\rankingdata.txt","w");	
 
 	for(int i = 0; i < 5; i++)
 	{

@@ -40,7 +40,7 @@ void C_Prologue::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_D
 
 	sound = apSound;
 
-	texture->LoadTextureData("TextureData\\prologue.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	texture->LoadTextureData("data\\TextureData\\prologue.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("RectData\\prologue.txt");
 }
 

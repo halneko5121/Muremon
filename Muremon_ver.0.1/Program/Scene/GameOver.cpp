@@ -27,7 +27,7 @@ C_GameOver::~C_GameOver(void)
 void C_GameOver::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound)
 {
 	C_SceneManage::InitScene(apDev,/*apinput,*/apFont,apSound,0);
-	texture->LoadTextureData("TextureData\\gameover.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	texture->LoadTextureData("data\\TextureData\\gameover.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("RectData\\gameover.txt");
 }
 

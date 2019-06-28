@@ -64,7 +64,7 @@ void C_Title::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFon
 
 	sound = apSound;
 
-	texture->LoadTextureData("TextureData\\title.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	texture->LoadTextureData("data\\TextureData\\title.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("RectData\\title.txt");
 }
 

@@ -94,7 +94,7 @@ void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C
 
 	boss = new C_Boss(texture,vertex,pDevice,apSound);
 
-	texture->LoadTextureData("TextureData\\gamenormal.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	texture->LoadTextureData("data\\TextureData\\gamenormal.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("RectData\\gamenormal.txt");
 
 	mission = new C_Mission(texture,vertex,pDevice,apSound);

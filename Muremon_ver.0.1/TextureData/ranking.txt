@@ -1,2 +1,2 @@
-Graphics\\rank.png
-Graphics\\G_font.png
+Resource\\Graphics\\rank.png
+Resource\\Graphics\\G_font.png

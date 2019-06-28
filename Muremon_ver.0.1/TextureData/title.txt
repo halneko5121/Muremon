@@ -1,6 +1,2 @@
-Graphics\\GAME\\G_background.png
-Graphics\\G_font.png
-
-
-
-
+Resource\\Graphics\\GAME\\G_background.png
+Resource\\Graphics\\G_font.png

@@ -1,2 +1,2 @@
-Graphics\\a.png
+Resource\\Graphics\\a.png
 

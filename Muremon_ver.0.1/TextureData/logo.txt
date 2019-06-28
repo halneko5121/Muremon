@@ -1,2 +1,1 @@
-Graphics\\T_BCHIKU.png
-
+Resource\\Graphics\\T_BCHIKU.png

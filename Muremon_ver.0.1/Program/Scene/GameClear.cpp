@@ -24,7 +24,7 @@ void C_GameClear::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont *apFont, C_DSound 
 {
 	C_SceneManage::InitScene(apDev, apFont, apSound, 0);
 	texture->LoadTextureData("data\\TextureData\\gameclear.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("RectData\\gameclear.txt");
+	vertex->LoadRect("data\\RectData\\gameclear.txt");
 }
 
 bool C_GameClear::RunScene()

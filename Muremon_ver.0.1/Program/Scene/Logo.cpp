@@ -26,7 +26,7 @@ void C_Logo::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont
 {
 	C_SceneManage::InitScene(apDev,/*apinput,*/apFont,apSound,0);
 	texture->LoadTextureData("data\\TextureData\\logo.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("RectData\\logo.txt");
+	vertex->LoadRect("data\\RectData\\logo.txt");
 }
 
 bool C_Logo::RunScene()

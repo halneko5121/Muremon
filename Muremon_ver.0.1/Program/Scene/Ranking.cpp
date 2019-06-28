@@ -85,7 +85,7 @@ void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, /*C_DInput *apinput,*/ C_DFon
 	add_score = score;
 
 	texture->LoadTextureData("data\\TextureData\\ranking.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("RectData\\ranking.txt");
+	vertex->LoadRect("data\\RectData\\ranking.txt");
 	RankLoad();
 	RankCheck();
 }

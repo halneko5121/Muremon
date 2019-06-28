@@ -23,7 +23,7 @@ void C_Ending::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFo
 {
 	C_SceneManage::InitScene(apDev,/*apinput,*/apFont,apSound,0);
 	texture->LoadTextureData("data\\TextureData\\ending.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("RectData\\ending.txt");
+	vertex->LoadRect("data\\RectData\\ending.txt");
 }
 
 bool C_Ending::RunScene()

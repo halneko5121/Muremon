@@ -29,7 +29,7 @@ POS_CC<float> C_OrbitWave::OrbitSinWave(float limit_x, POS_CC<float> draw_cc, in
 
 	switch(mode){
 	case WAVE_MODE_NORMAL:
-		wave_y	= amplitude * sin((amplitude * cycle) * deg[chara_num]);
+		wave_y	= amplitude * static_cast<float>(sin((amplitude * cycle)) * deg[chara_num]);
 		break;
 	case WAVE_MODE_GAME:
 		if( time2[chara_num]++	> 10){ settle[chara_num]++; time2[chara_num] = 0; }

@@ -17,8 +17,8 @@
 //include
 #include <dinput.h>
 #include "Library/DirectGraphics.h"
-#include "gManage/Window.h"
-#include "Define.h"
+#include "Program/gManage/Window.h"
+#include "Program/Define.h"
 
 //lib
 #pragma comment(lib,"dinput8.lib")

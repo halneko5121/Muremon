@@ -14,7 +14,7 @@
 #include <math.h>
 #include <d3dx9math.h>
 
-#include "Define.h"
+#include "Program/Define.h"
 
 /*================================
 		Define

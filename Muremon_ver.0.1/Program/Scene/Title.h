@@ -8,10 +8,10 @@
 //---------------------------------------------
 #pragma once
 
-#include "gManage/SceneManage.h"
+#include "Program/gManage/SceneManage.h"
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "Control.h"
+#include "Program/Control.h"
 
 #define TITLE_ALPHA_INCREASE		(5)		//アルファ値の増加量
 #define	TITLE_MAX_ALPHA				(255)	//アルファ値の最大

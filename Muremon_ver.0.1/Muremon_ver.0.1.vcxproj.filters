@@ -1,217 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
-    </Filter>
-    <Filter Include="各シーン">
-      <UniqueIdentifier>{cbc71b32-f1d4-4f4c-af55-27bbe66912cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="各シーン\ゲーム本編">
-      <UniqueIdentifier>{a49f31f1-c6f8-46d0-b05f-680fc215ec5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ライブラリ">
-      <UniqueIdentifier>{0097c93e-c9f9-4582-9940-3a4aaf550462}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ライブラリ\キー関係">
-      <UniqueIdentifier>{acfc7659-1ec6-46b6-b37f-006a227d2c8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ライブラリ\シーン・ゲーム管理">
-      <UniqueIdentifier>{0ffc61cb-b876-4389-aca1-2bc9d5e2fe28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ライブラリ\描画関係">
-      <UniqueIdentifier>{1909c80b-be06-41c3-bded-90a8d95c9516}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="計算">
-      <UniqueIdentifier>{40aaf52f-c03c-4094-9599-1e20955d4832}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="計算\各軌道">
-      <UniqueIdentifier>{e27f319f-7a3a-4e3f-934c-9c36882b3a30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクラス">
-      <UniqueIdentifier>{99f7337b-7d7f-442e-864a-22b8bb19f782}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクラス\のっぽ">
-      <UniqueIdentifier>{c9513533-f388-4b37-882f-52b85243182e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクラス\吉たろう">
-      <UniqueIdentifier>{00d4d59e-5c22-46f3-ad07-88a128afe001}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクラス\肉まん">
-      <UniqueIdentifier>{8c1c59fc-3c2f-4e80-88e7-f32bf17e5419}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="program\Chara\Boss.cpp" />
+    <ClCompile Include="program\Chara\Chara_Nikuman.cpp" />
+    <ClCompile Include="program\Chara\Chara_Noppo.cpp" />
+    <ClCompile Include="program\Chara\Chara_Yoshi.cpp" />
+    <ClCompile Include="program\Chara\CharaCommon.cpp" />
+    <ClCompile Include="program\gManage\GameManage.cpp" />
+    <ClCompile Include="program\gManage\Revenant.cpp" />
+    <ClCompile Include="program\gManage\SceneManage.cpp" />
+    <ClCompile Include="program\gManage\Window.cpp" />
+    <ClCompile Include="program\Orbit\OrbitCalculation.cpp" />
+    <ClCompile Include="program\Orbit\OrbitParadora.cpp" />
+    <ClCompile Include="program\Orbit\OrbitRebound.cpp" />
+    <ClCompile Include="program\Orbit\OrbitWave.cpp" />
+    <ClCompile Include="program\Scene\Ending.cpp" />
+    <ClCompile Include="program\Scene\GameClear.cpp" />
+    <ClCompile Include="program\Scene\GameNormal.cpp" />
+    <ClCompile Include="program\Scene\GameOver.cpp" />
+    <ClCompile Include="program\Scene\GameRefresh.cpp" />
+    <ClCompile Include="program\Scene\Logo.cpp" />
+    <ClCompile Include="program\Scene\Mission.cpp" />
+    <ClCompile Include="program\Scene\Prologue.cpp" />
+    <ClCompile Include="program\Scene\Ranking.cpp" />
+    <ClCompile Include="program\Scene\Title.cpp" />
+    <ClCompile Include="program\Scene\Tutorial.cpp" />
+    <ClCompile Include="program\Control.cpp" />
+    <ClCompile Include="Library\DirectFont.cpp" />
+    <ClCompile Include="Library\DirectGraphics.cpp" />
+    <ClCompile Include="Library\DirectInput.cpp" />
+    <ClCompile Include="Library\DirectSound.cpp" />
+    <ClCompile Include="Library\Texture.cpp" />
+    <ClCompile Include="Library\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Scene\Logo.cpp">
-      <Filter>各シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Ranking.cpp">
-      <Filter>各シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Title.cpp">
-      <Filter>各シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Tutorial.cpp">
-      <Filter>各シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\GameNormal.cpp">
-      <Filter>各シーン\ゲーム本編</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\GameRefresh.cpp">
-      <Filter>各シーン\ゲーム本編</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Mission.cpp">
-      <Filter>各シーン\ゲーム本編</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\DirectFont.cpp">
-      <Filter>ライブラリ</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\DirectSound.cpp">
-      <Filter>ライブラリ</Filter>
-    </ClCompile>
-    <ClCompile Include="Control.cpp">
-      <Filter>ライブラリ\キー関係</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\DirectInput.cpp">
-      <Filter>ライブラリ\キー関係</Filter>
-    </ClCompile>
-    <ClCompile Include="gManage\GameManage.cpp">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClCompile>
-    <ClCompile Include="gManage\Revenant.cpp">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClCompile>
-    <ClCompile Include="gManage\SceneManage.cpp">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClCompile>
-    <ClCompile Include="gManage\Window.cpp">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\DirectGraphics.cpp">
-      <Filter>ライブラリ\描画関係</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\Texture.cpp">
-      <Filter>ライブラリ\描画関係</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\Vertex.cpp">
-      <Filter>ライブラリ\描画関係</Filter>
-    </ClCompile>
-    <ClCompile Include="Orbit\OrbitCalculation.cpp">
-      <Filter>計算</Filter>
-    </ClCompile>
-    <ClCompile Include="Orbit\OrbitParadora.cpp">
-      <Filter>計算\各軌道</Filter>
-    </ClCompile>
-    <ClCompile Include="Orbit\OrbitRebound.cpp">
-      <Filter>計算\各軌道</Filter>
-    </ClCompile>
-    <ClCompile Include="Orbit\OrbitWave.cpp">
-      <Filter>計算\各軌道</Filter>
-    </ClCompile>
-    <ClCompile Include="Chara\Boss.cpp">
-      <Filter>キャラクラス</Filter>
-    </ClCompile>
-    <ClCompile Include="Chara\CharaCommon.cpp">
-      <Filter>キャラクラス</Filter>
-    </ClCompile>
-    <ClCompile Include="Chara\Chara_Noppo.cpp">
-      <Filter>キャラクラス\のっぽ</Filter>
-    </ClCompile>
-    <ClCompile Include="Chara\Chara_Yoshi.cpp">
-      <Filter>キャラクラス\吉たろう</Filter>
-    </ClCompile>
-    <ClCompile Include="Chara\Chara_Nikuman.cpp">
-      <Filter>キャラクラス\肉まん</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Scene\Logo.h">
-      <Filter>各シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Ranking.h">
-      <Filter>各シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Title.h">
-      <Filter>各シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Tutorial.h">
-      <Filter>各シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="D_Game.h">
-      <Filter>各シーン\ゲーム本編</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\GameNormal.h">
-      <Filter>各シーン\ゲーム本編</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\GameRefresh.h">
-      <Filter>各シーン\ゲーム本編</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Mission.h">
-      <Filter>各シーン\ゲーム本編</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>ライブラリ</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\DirectFont.h">
-      <Filter>ライブラリ</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\DirectSound.h">
-      <Filter>ライブラリ</Filter>
-    </ClInclude>
-    <ClInclude Include="Control.h">
-      <Filter>ライブラリ\キー関係</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\DirectInput.h">
-      <Filter>ライブラリ\キー関係</Filter>
-    </ClInclude>
-    <ClInclude Include="gManage\GameManage.h">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClInclude>
-    <ClInclude Include="gManage\Revenant.h">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClInclude>
-    <ClInclude Include="gManage\SceneManage.h">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClInclude>
-    <ClInclude Include="gManage\Window.h">
-      <Filter>ライブラリ\シーン・ゲーム管理</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\DirectGraphics.h">
-      <Filter>ライブラリ\描画関係</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Texture.h">
-      <Filter>ライブラリ\描画関係</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Vertex.h">
-      <Filter>ライブラリ\描画関係</Filter>
-    </ClInclude>
-    <ClInclude Include="Orbit\OrbitCalculation.h">
-      <Filter>計算</Filter>
-    </ClInclude>
-    <ClInclude Include="Orbit\OrbitParadora.h">
-      <Filter>計算\各軌道</Filter>
-    </ClInclude>
-    <ClInclude Include="Orbit\OrbitRebound.h">
-      <Filter>計算\各軌道</Filter>
-    </ClInclude>
-    <ClInclude Include="Orbit\OrbitWave.h">
-      <Filter>計算\各軌道</Filter>
-    </ClInclude>
-    <ClInclude Include="Chara\Boss.h">
-      <Filter>キャラクラス</Filter>
-    </ClInclude>
-    <ClInclude Include="Chara\CharaCommon.h">
-      <Filter>キャラクラス</Filter>
-    </ClInclude>
-    <ClInclude Include="Chara\Chara_Noppo.h">
-      <Filter>キャラクラス\のっぽ</Filter>
-    </ClInclude>
-    <ClInclude Include="Chara\Chara_Yoshi.h">
-      <Filter>キャラクラス\吉たろう</Filter>
-    </ClInclude>
-    <ClInclude Include="Chara\Chara_Nikuman.h">
-      <Filter>キャラクラス\肉まん</Filter>
-    </ClInclude>
+    <ClInclude Include="program\Chara\Boss.h" />
+    <ClInclude Include="program\Chara\Chara_Nikuman.h" />
+    <ClInclude Include="program\Chara\Chara_Noppo.h" />
+    <ClInclude Include="program\Chara\Chara_Yoshi.h" />
+    <ClInclude Include="program\Chara\CharaCommon.h" />
+    <ClInclude Include="program\gManage\GameManage.h" />
+    <ClInclude Include="program\gManage\Revenant.h" />
+    <ClInclude Include="program\gManage\SceneManage.h" />
+    <ClInclude Include="program\gManage\Window.h" />
+    <ClInclude Include="program\Orbit\OrbitCalculation.h" />
+    <ClInclude Include="program\Orbit\OrbitParadora.h" />
+    <ClInclude Include="program\Orbit\OrbitRebound.h" />
+    <ClInclude Include="program\Orbit\OrbitWave.h" />
+    <ClInclude Include="program\Scene\Ending.h" />
+    <ClInclude Include="program\Scene\GameClear.h" />
+    <ClInclude Include="program\Scene\GameNormal.h" />
+    <ClInclude Include="program\Scene\GameOver.h" />
+    <ClInclude Include="program\Scene\GameRefresh.h" />
+    <ClInclude Include="program\Scene\Logo.h" />
+    <ClInclude Include="program\Scene\Mission.h" />
+    <ClInclude Include="program\Scene\Prologue.h" />
+    <ClInclude Include="program\Scene\Ranking.h" />
+    <ClInclude Include="program\Scene\Title.h" />
+    <ClInclude Include="program\Scene\Tutorial.h" />
+    <ClInclude Include="program\Control.h" />
+    <ClInclude Include="program\D_Game.h" />
+    <ClInclude Include="program\Define.h" />
+    <ClInclude Include="Library\DirectFont.h" />
+    <ClInclude Include="Library\DirectGraphics.h" />
+    <ClInclude Include="Library\DirectInput.h" />
+    <ClInclude Include="Library\DirectSound.h" />
+    <ClInclude Include="Library\Texture.h" />
+    <ClInclude Include="Library\Vertex.h" />
   </ItemGroup>
 </Project>

@@ -53,11 +53,12 @@ void C_GameOver::DrawScene()
 {
 }
 
-void C_GameOver::EndScene()
+int C_GameOver::EndScene()
 {
 	ChangeScene(LOGO);
 	texture->AllReleaseTexture();
 	vertex->AllReleaseRect();
+	return 0;
 }
 
 void C_GameOver::FadeControl()

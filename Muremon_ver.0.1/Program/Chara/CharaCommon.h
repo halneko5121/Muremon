@@ -15,9 +15,9 @@
 #include "Library/Vertex.h"
 #include "Library/DirectSound.h"
 
-#include "Control.h"
-#include "Orbit/OrbitCalculation.h"
-#include "D_Game.h"
+#include "Program/Control.h"
+#include "Program/Orbit/OrbitCalculation.h"
+#include "Program/D_Game.h"
 
 /*================================
 		Define

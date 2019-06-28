@@ -8,10 +8,10 @@
 //---------------------------------------------
 #pragma once
 
-#include "gManage/SceneManage.h"
+#include "Program/gManage/SceneManage.h"
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "Control.h"
+#include "Program/Control.h"
 
 #define POSITION_Y	(150)	//名前のYの中心位置
 #define PLACE_POSITION_X	(50)	//順位のフォントXの中心位置

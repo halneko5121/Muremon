@@ -8,15 +8,15 @@
 //---------------------------------------------
 #pragma once
 
-#include "gManage/SceneManage.h"
+#include "Program/gManage/SceneManage.h"
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "Chara/Boss.h"
-#include "Chara/Chara_nikuman.h"
-#include "Chara/Chara_Noppo.h"
-#include "Chara/Chara_yoshi.h"
-#include "Control.h"
-#include "D_Game.h"
+#include "Program/Chara/Boss.h"
+#include "Program/Chara/Chara_nikuman.h"
+#include "Program/Chara/Chara_Noppo.h"
+#include "Program/Chara/Chara_yoshi.h"
+#include "Program/Control.h"
+#include "Program/D_Game.h"
 
 class C_GameRefresh:public C_SceneManage
 {

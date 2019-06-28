@@ -13,7 +13,7 @@
 //include
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "gManage/Window.h"
+#include "Program/gManage/Window.h"
 
 //lib
 #pragma comment(lib,"d3d9.lib")

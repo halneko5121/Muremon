@@ -10,18 +10,18 @@
 #ifndef _GAMEMANAGE_H_
 #define _GAMEMANAGE_H_
 
-#include "gManage/Window.h"
-#include "gManage/SceneManage.h"
+#include "program/gManage/Window.h"
+#include "program/gManage/SceneManage.h"
 #include "Library/DirectFont.h"
 #include "LIbrary/DirectSound.h"
 #include "LIbrary/Vertex.h"
 
-#include "Scene/Logo.h"
-#include "Scene/Title.h"
-#include "Scene/Tutorial.h"
-#include "Scene/GameRefresh.h"
-#include "Scene/GameNormal.h"
-#include "Scene/Ranking.h"
+#include "program/Scene/Logo.h"
+#include "program/Scene/Title.h"
+#include "program/Scene/Tutorial.h"
+#include "program/Scene/GameRefresh.h"
+#include "program/Scene/GameNormal.h"
+#include "program/Scene/Ranking.h"
 
 //#include "..\\GameScene.h"
 //#include "..\\TitleScene.h"

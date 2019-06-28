@@ -10,6 +10,74 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Library\DirectFont.cpp" />
+    <ClCompile Include="Library\DirectGraphics.cpp" />
+    <ClCompile Include="Library\DirectInput.cpp" />
+    <ClCompile Include="Library\DirectSound.cpp" />
+    <ClCompile Include="Library\Texture.cpp" />
+    <ClCompile Include="Library\Vertex.cpp" />
+    <ClCompile Include="program\Chara\Boss.cpp" />
+    <ClCompile Include="program\Chara\CharaCommon.cpp" />
+    <ClCompile Include="program\Chara\Chara_Nikuman.cpp" />
+    <ClCompile Include="program\Chara\Chara_Noppo.cpp" />
+    <ClCompile Include="program\Chara\Chara_Yoshi.cpp" />
+    <ClCompile Include="program\Control.cpp" />
+    <ClCompile Include="program\gManage\GameManage.cpp" />
+    <ClCompile Include="program\gManage\Revenant.cpp" />
+    <ClCompile Include="program\gManage\SceneManage.cpp" />
+    <ClCompile Include="program\gManage\Window.cpp" />
+    <ClCompile Include="program\Orbit\OrbitCalculation.cpp" />
+    <ClCompile Include="program\Orbit\OrbitParadora.cpp" />
+    <ClCompile Include="program\Orbit\OrbitRebound.cpp" />
+    <ClCompile Include="program\Orbit\OrbitWave.cpp" />
+    <ClCompile Include="program\Scene\Ending.cpp" />
+    <ClCompile Include="program\Scene\GameClear.cpp" />
+    <ClCompile Include="program\Scene\GameNormal.cpp" />
+    <ClCompile Include="program\Scene\GameOver.cpp" />
+    <ClCompile Include="program\Scene\GameRefresh.cpp" />
+    <ClCompile Include="program\Scene\Logo.cpp" />
+    <ClCompile Include="program\Scene\Mission.cpp" />
+    <ClCompile Include="program\Scene\Prologue.cpp" />
+    <ClCompile Include="program\Scene\Ranking.cpp" />
+    <ClCompile Include="program\Scene\Title.cpp" />
+    <ClCompile Include="program\Scene\Tutorial.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Library\DirectFont.h" />
+    <ClInclude Include="Library\DirectGraphics.h" />
+    <ClInclude Include="Library\DirectInput.h" />
+    <ClInclude Include="Library\DirectSound.h" />
+    <ClInclude Include="Library\Texture.h" />
+    <ClInclude Include="Library\Vertex.h" />
+    <ClInclude Include="program\Chara\Boss.h" />
+    <ClInclude Include="program\Chara\CharaCommon.h" />
+    <ClInclude Include="program\Chara\Chara_Nikuman.h" />
+    <ClInclude Include="program\Chara\Chara_Noppo.h" />
+    <ClInclude Include="program\Chara\Chara_Yoshi.h" />
+    <ClInclude Include="program\Control.h" />
+    <ClInclude Include="program\Define.h" />
+    <ClInclude Include="program\D_Game.h" />
+    <ClInclude Include="program\gManage\GameManage.h" />
+    <ClInclude Include="program\gManage\Revenant.h" />
+    <ClInclude Include="program\gManage\SceneManage.h" />
+    <ClInclude Include="program\gManage\Window.h" />
+    <ClInclude Include="program\Orbit\OrbitCalculation.h" />
+    <ClInclude Include="program\Orbit\OrbitParadora.h" />
+    <ClInclude Include="program\Orbit\OrbitRebound.h" />
+    <ClInclude Include="program\Orbit\OrbitWave.h" />
+    <ClInclude Include="program\Scene\Ending.h" />
+    <ClInclude Include="program\Scene\GameClear.h" />
+    <ClInclude Include="program\Scene\GameNormal.h" />
+    <ClInclude Include="program\Scene\GameOver.h" />
+    <ClInclude Include="program\Scene\GameRefresh.h" />
+    <ClInclude Include="program\Scene\Logo.h" />
+    <ClInclude Include="program\Scene\Mission.h" />
+    <ClInclude Include="program\Scene\Prologue.h" />
+    <ClInclude Include="program\Scene\Ranking.h" />
+    <ClInclude Include="program\Scene\Title.h" />
+    <ClInclude Include="program\Scene\Tutorial.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>Muremon_ver.1.0</ProjectName>
     <ProjectGuid>{47177955-E6DF-4B3C-B6A1-59486DE1F3D3}</ProjectGuid>
@@ -92,66 +160,6 @@
       <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Chara\Boss.cpp" />
-    <ClCompile Include="Chara\CharaCommon.cpp" />
-    <ClCompile Include="Chara\Chara_Nikuman.cpp" />
-    <ClCompile Include="Chara\Chara_Noppo.cpp" />
-    <ClCompile Include="Chara\Chara_Yoshi.cpp" />
-    <ClCompile Include="Control.cpp" />
-    <ClCompile Include="gManage\GameManage.cpp" />
-    <ClCompile Include="gManage\Revenant.cpp" />
-    <ClCompile Include="gManage\SceneManage.cpp" />
-    <ClCompile Include="gManage\Window.cpp" />
-    <ClCompile Include="Library\DirectFont.cpp" />
-    <ClCompile Include="Library\DirectGraphics.cpp" />
-    <ClCompile Include="Library\DirectInput.cpp" />
-    <ClCompile Include="Library\DirectSound.cpp" />
-    <ClCompile Include="Library\Texture.cpp" />
-    <ClCompile Include="Library\Vertex.cpp" />
-    <ClCompile Include="Orbit\OrbitCalculation.cpp" />
-    <ClCompile Include="Orbit\OrbitParadora.cpp" />
-    <ClCompile Include="Orbit\OrbitRebound.cpp" />
-    <ClCompile Include="Orbit\OrbitWave.cpp" />
-    <ClCompile Include="Scene\GameNormal.cpp" />
-    <ClCompile Include="Scene\GameRefresh.cpp" />
-    <ClCompile Include="Scene\Logo.cpp" />
-    <ClCompile Include="Scene\Mission.cpp" />
-    <ClCompile Include="Scene\Ranking.cpp" />
-    <ClCompile Include="Scene\Title.cpp" />
-    <ClCompile Include="Scene\Tutorial.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Chara\Boss.h" />
-    <ClInclude Include="Chara\CharaCommon.h" />
-    <ClInclude Include="Chara\Chara_Nikuman.h" />
-    <ClInclude Include="Chara\Chara_Noppo.h" />
-    <ClInclude Include="Chara\Chara_Yoshi.h" />
-    <ClInclude Include="Control.h" />
-    <ClInclude Include="Define.h" />
-    <ClInclude Include="D_Game.h" />
-    <ClInclude Include="gManage\GameManage.h" />
-    <ClInclude Include="gManage\Revenant.h" />
-    <ClInclude Include="gManage\SceneManage.h" />
-    <ClInclude Include="gManage\Window.h" />
-    <ClInclude Include="Library\DirectFont.h" />
-    <ClInclude Include="Library\DirectGraphics.h" />
-    <ClInclude Include="Library\DirectInput.h" />
-    <ClInclude Include="Library\DirectSound.h" />
-    <ClInclude Include="Library\Texture.h" />
-    <ClInclude Include="Library\Vertex.h" />
-    <ClInclude Include="Orbit\OrbitCalculation.h" />
-    <ClInclude Include="Orbit\OrbitParadora.h" />
-    <ClInclude Include="Orbit\OrbitRebound.h" />
-    <ClInclude Include="Orbit\OrbitWave.h" />
-    <ClInclude Include="Scene\GameNormal.h" />
-    <ClInclude Include="Scene\GameRefresh.h" />
-    <ClInclude Include="Scene\Logo.h" />
-    <ClInclude Include="Scene\Mission.h" />
-    <ClInclude Include="Scene\Ranking.h" />
-    <ClInclude Include="Scene\Title.h" />
-    <ClInclude Include="Scene\Tutorial.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

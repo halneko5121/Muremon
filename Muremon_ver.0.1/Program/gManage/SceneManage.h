@@ -1,10 +1,6 @@
 //---------------------------------------------
-//
 //      シーンの管理を行う
-//      作成開始日:3月17日
-//			更新日:3月17日
 //			作成者:平野
-//
 //---------------------------------------------
 
 #ifndef _SCENEMANAGE_H_
@@ -38,7 +34,6 @@ protected:
 	C_DInput			*pInput;    //インプットクラスのインスタンス
     C_DFont             *pFont;     //フォントクラスのインスタンス
 	C_DSound			*pSound;
-	//MapRead			*pMapRead;
 
 public:
     //////////////////////////////////////////////////////////
@@ -64,7 +59,7 @@ public:
     //　　　戻り値：なし
     //
     //////////////////////////////////////////////////////////
-	virtual void InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont,/* MapRead *apMapRead,*/ C_DSound *apSound,int score);
+	virtual void InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound,int score);
 
 	//////////////////////////////////////////////////////////
     //

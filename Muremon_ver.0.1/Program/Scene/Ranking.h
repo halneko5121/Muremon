@@ -156,7 +156,7 @@ private:
 	bool ranking_flag;
 
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score);
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score) override;
 	bool RunScene();
 	void ControlScene();
 	void DrawScene();

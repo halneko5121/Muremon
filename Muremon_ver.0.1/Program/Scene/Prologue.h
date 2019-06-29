@@ -53,7 +53,7 @@ private:
 
 	bool scene_change;	//ƒV[ƒ“‚ª•Ï‚í‚é‚ğ’m‚ç‚¹‚é
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score);
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score) override;
 
 	bool RunScene();
 	void ControlScene();

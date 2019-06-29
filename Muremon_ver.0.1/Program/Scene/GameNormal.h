@@ -39,7 +39,7 @@ public:
 	C_GameNormal(void);
 	~C_GameNormal(void);
 
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound);
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score) override;
 
 	bool RunScene();
 	void ControlScene();

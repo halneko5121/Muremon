@@ -34,13 +34,13 @@ C_Prologue::~C_Prologue(void)
 {
 }
 
-void C_Prologue::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score)
+void C_Prologue::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound, int score)
 {
-	C_SceneManage::InitScene(apDev,/*apinput,*/apFont,apSound,0);
+	C_SceneManage::InitScene(apDev, apFont, apSound, score);
 
 	sound = apSound;
 
-	texture->LoadTextureData("Data\\TextureData\\prologue.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	texture->LoadTextureData("Data\\TextureData\\prologue.txt", apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("Data\\RectData\\prologue.txt");
 }
 

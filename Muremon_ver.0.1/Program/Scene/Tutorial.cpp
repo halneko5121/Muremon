@@ -33,10 +33,10 @@ C_Tutorial::~C_Tutorial(void)
 {
 }
 
-void C_Tutorial::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont *apFont, C_DSound *apSound,int score)
+void C_Tutorial::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound, int score)
 {
 	sound = apSound;
-	C_SceneManage::InitScene(apDev,apFont,apSound,0);
+	C_SceneManage::InitScene(apDev, apFont, apSound, score);
 
 	texture->LoadTextureData("Data\\TextureData\\Tutorial.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("Data\\RectData\\Tutorial.txt");

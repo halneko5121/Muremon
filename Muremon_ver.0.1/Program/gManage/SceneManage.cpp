@@ -40,20 +40,10 @@ C_SceneManage::~C_SceneManage()
 //
 //////////////////////////////////////////////////////////
 
-//void SceneManage::InitScene(LPDIRECT3DDEVICE9 apDev , DInput *apInput , DFont *apFont)
-//{
-//	pDevice = apDev;	//デバイスセット
-//	pInput	= apInput;	//キー入力を渡す
-//    pFont   = apFont;   //文字表示可能にする
-//}
-
-void C_SceneManage::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, /*MapRead *apMapRead,*/ C_DSound *apSound,int score)
+void C_SceneManage::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound,int score)
 {
 	pDevice = apDev;	//デバイスセット
-	//pInput	= apInput;	//キー入力を渡す
     pFont   = apFont;   //文字表示可能にする
-	//pSound	= apSound;
-	/*pMapRead = apMapRead;*/
 }
 
 //////////////////////////////////////////////////////////

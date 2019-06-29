@@ -58,9 +58,9 @@ C_Title::~C_Title(void)
 {
 }
 
-void C_Title::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score)
+void C_Title::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score)
 {
-	C_SceneManage::InitScene(apDev,/*apinput,*/apFont,apSound,0);
+	C_SceneManage::InitScene(apDev, apFont, apSound, score);
 
 	sound = apSound;
 

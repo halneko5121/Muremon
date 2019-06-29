@@ -78,9 +78,9 @@ C_GameNormal::~C_GameNormal(void)
 {
 }
 
-void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound)
+void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, 0);
+	C_SceneManage::InitScene(apDev, apFont, apSound, score);
 
 	mSound = apSound;
 

@@ -52,14 +52,6 @@ C_Ranking::C_Ranking(void)
 		}
 	}
 
-	//name_alpha[5][3]=255;
-
-	//name_red[5][3]=255;
-
-	//name_bule[5][3]=255;
-
-	//name_green[5][3]=255;
-
 	name_blink=false;
 
 	name_alpha_down=false;
@@ -77,9 +69,9 @@ C_Ranking::~C_Ranking(void)
 {
 }
 
-void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, /*C_DInput *apinput,*/ C_DFont *apFont, C_DSound *apSound,int score)
+void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound,int score)
 {
-	C_SceneManage::InitScene(apDev,/*apinput,*/apFont,apSound,0);
+	C_SceneManage::InitScene(apDev, apFont, apSound, score);
 	sound = apSound;
 
 	add_score = score;

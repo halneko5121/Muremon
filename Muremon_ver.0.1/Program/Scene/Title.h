@@ -137,7 +137,7 @@ private:
 
 	int cnt_move;
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score);
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score) override;
 
 	bool RunScene();
 	void ControlScene();
@@ -147,8 +147,6 @@ public:
 	void PosiDrawControl();
 
 	void KeyControl();
-
-	/*void Key*/
 
 	void FadeControl();
 

@@ -57,8 +57,6 @@ int WINAPI C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR
 		return 0;
 	}
 
-//	fps->SetHwnd(mWindow->GetHwnd());
-
 	//DirectSound‰Šú‰»
 	if(FAILED(mSound->InitDSound(mWindow->GetHwnd())))
 	{
@@ -97,9 +95,6 @@ int C_GameMain::MsgLoop(void)
 	mSound->LoadSoundData("Data\\sound_data.txt");
 
 	srand((unsigned int)time(NULL));
-
-//	static int fps_count = 0; 
-//	char str_fps[80];
 
 	while(msg.message != WM_QUIT)
 	{

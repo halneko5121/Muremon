@@ -67,8 +67,9 @@ private:
 	int alpha_count;	//アルファ値のカウント
 
 	bool scene_change;	//シーンが変わる時を知らせる
+
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score);
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score) override;
 
 	bool RunScene();
 	void ControlScene();

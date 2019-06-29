@@ -14,7 +14,7 @@ namespace
 	const int cDegRand = 30;						// ランダムの幅
 	const int cDegRandMin = 180 + 45;				// 75°までの間
 
-	// 描画位置
+	// 開始座標
 	const int cRandY = 300;
 	const int cRandYMin = -200;
 

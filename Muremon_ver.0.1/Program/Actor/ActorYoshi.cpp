@@ -1,13 +1,37 @@
 #include "ActorYoshi.h"
 
-CHARADATA init_charadata_yoshi = {
-	(0.0f),0,0,(MAX_ALPHA),
-	//スピード,アニメーション,矩形,透過度
-	false,false,false,false,false,false,false,false,
-	//各フラグ
-	(-RADIUS_YOSHI),(GAMESIZE_WIDE + 50.f + RADIUS_YOSHI),
-	//中心座標
-};
+namespace
+{
+	// 放物線関係
+	const int cParaRandAcc = 15;							// 加速度
+	const int cParaRandAccMin = 5;
+	const int cParaRandMoveX = -15;							// 移動量				
+	const int cParaRandMoveXMin = -5;
+
+	const float cParaLimitY = 600.f + RADIUS_YOSHI + 50.f;	// 放物線の最終座標
+
+	// バウンド関係
+	const int cDegRand = 30;								// ランダムの幅
+	const int cDegRandMin = 180 + 45;						// 75°までの間
+
+	// 開始座標
+	const int cRandY = 400;
+	const int cRandYMin = 100;
+
+	// 波処理関係
+	const int cWaveAmplit = 10;								// 振幅(上下に動く幅)					
+	const int cWaveCycle = 200;								// 周期(多きければ大きい程周期が短く)
+	const int cWaveLimitX = 400;							// この座標まで来ると直線運動へ移行
+
+	CHARADATA cInitActorData = {
+		// スピード,アニメーション,矩形,透過度
+		(0.0f), 0, 0, (MAX_ALPHA),
+		//各フラグ
+		false, false, false, false, false, false, false, false,
+		// 中心座標
+		(-RADIUS_YOSHI),(GAMESIZE_WIDE + 50.f + RADIUS_YOSHI),
+	};
+}
 
 /**
  * @brief コンストラクタ
@@ -36,7 +60,7 @@ C_ActorYoshi::~C_ActorYoshi(void)
 void
 C_ActorYoshi::Init()											
 {
-	mOrbit->pWave->InitWave(WAVE_AMPLIT_YOSHI,WAVE_CYCLE_YOSHI,NULL,WAVE_MODE_GAME);
+	mOrbit->pWave->InitWave(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
 	//praivate変数
 	s_atk_start_y = 0.f;
@@ -74,7 +98,7 @@ C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int r
 	//きーのチェック:攻撃開始
 	if( (key == KEY_GROUND_1) || (key == KEY_SKY_1) ){
 		if(mFlagTurn2){
-			mCharaData[mCharaNum]	= init_charadata_yoshi;
+			mCharaData[mCharaNum]	= cInitActorData;
 			mCountEffect[mCharaNum] = 0;
 			init[mCharaNum] = true;
 		}
@@ -83,15 +107,15 @@ C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int r
 
 		switch(key){
 		case KEY_GROUND_1:
-			rand_deg[mCharaNum]	 = (float)(rand() % DEG_RAND_YOSHI + DEG_RAND_YOSHI_MIN);
+			rand_deg[mCharaNum]	 = (float)(rand() % cDegRand + cDegRandMin);
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI,G_ATK_1_START_Y);
 			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
 			break;
 		case KEY_SKY_1:
-			s_atk_start_y			 = (float)(rand() % RAND_Y_YOSHI + RAND_Y_MIN_YOSHI);
-			rand_acc[mCharaNum]	 = (float)(rand() % PARA_RAND_ACC_YOSHI		+ PARA_RAND_ACC_YOSHI_MIN);	
-			rand_move_x[mCharaNum] = (float)(rand() % PARA_RAND_MOVE_X_YOSHI  + PARA_RAND_MOVE_X_YOSHI_MIN);	
+			s_atk_start_y			 = (float)(rand() % cRandY + cRandYMin);
+			rand_acc[mCharaNum]	 = (float)(rand() % cParaRandAcc		+ cParaRandAccMin);	
+			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX  + cParaRandMoveXMin);	
 			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 			
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI,s_atk_start_y);
@@ -235,7 +259,7 @@ C_ActorYoshi::Draw(int rect_startnum)
 POS_CC<float>
 C_ActorYoshi::CharaAttack_2(int mCharaNum)														//キー入力による動作その2
 {
-	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(WAVE_LIMIT_X_YOSHI,mCharaData[mCharaNum].draw_cc,mCharaNum);
+	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
 	return mCharaData[mCharaNum].draw_cc;
 }
@@ -276,7 +300,7 @@ C_ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)					
 			mCharaData[mCharaNum].animetion = 0;																//描画を固定
 			mCharaData[mCharaNum].rect_num  = ANIME_DEATH_YOSHI;
 
-			mCharaData[mCharaNum].draw_cc	 = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],PARA_LIMIT_Y_YOSHI,mCharaData[mCharaNum].draw_cc,mCharaNum);
+			mCharaData[mCharaNum].draw_cc	 = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
 		}
 	}
 

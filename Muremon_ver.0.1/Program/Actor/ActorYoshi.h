@@ -3,37 +3,10 @@
 /************************************************************************************
  *	役割：吉たろうの管理															*
  *	説明：																			*
- *	作成日：2009年 3月 19日															*
- *	更新日：	年	月	 日															*
  *													by	三上　亘					*
  ************************************************************************************/
 
-/*================================
-		Include
-=================================*/
 #include "ActorBase.h"
-
-/*================================
-		Define
-=================================*/
-
-//放物線関係
-#define PARA_RAND_ACC_YOSHI				(15)	//加速度
-#define PARA_RAND_ACC_YOSHI_MIN			(5)		
-#define PARA_RAND_MOVE_X_YOSHI			(-15)	//移動量				
-#define PARA_RAND_MOVE_X_YOSHI_MIN		(-5)						
-
-#define PARA_LIMIT_Y_YOSHI				(600.f + RADIUS_YOSHI + 50.f)//放物線の最終座標		
-//波処理関係
-#define WAVE_AMPLIT_YOSHI				(10)		//振幅(上下に動く幅)					
-#define WAVE_CYCLE_YOSHI				(200)		//周期(多きければ大きい程周期が短く)
-#define WAVE_LIMIT_X_YOSHI				(400)		//この座標まで来ると直線運動へ移行
-//バウンド関係
-#define DEG_RAND_YOSHI					(30)		//ランダムの幅					
-#define DEG_RAND_YOSHI_MIN				(180 + 45)	//75°までの間
-//開始座標
-#define RAND_Y_YOSHI					(400)		
-#define RAND_Y_MIN_YOSHI				(100)	
 
 enum ANIME_YOSHI
 {

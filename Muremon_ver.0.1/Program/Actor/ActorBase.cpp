@@ -1,4 +1,4 @@
-#include "ActorCommon.h"
+#include "ActorBase.h"
 
 namespace
 {

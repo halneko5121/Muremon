@@ -31,7 +31,7 @@
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
-    <ClCompile Include="Program\Actor\ActorCommon.cpp" />
+    <ClCompile Include="Program\Actor\ActorBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\gManage\GameManage.h" />
@@ -66,6 +66,6 @@
     <ClInclude Include="Program\Actor\ActorNikuman.h" />
     <ClInclude Include="Program\Actor\ActorNoppo.h" />
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
-    <ClInclude Include="Program\Actor\ActorCommon.h" />
+    <ClInclude Include="Program\Actor\ActorBase.h" />
   </ItemGroup>
 </Project>

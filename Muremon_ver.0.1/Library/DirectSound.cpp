@@ -62,7 +62,7 @@ bool C_DSound::LoadSoundData(LPTSTR FileName)
 	}
 
 	//ファイルの中身をカウント
-	while(fscanf(fp,"%s\n",countFile,sizeof(countFile)) != EOF)
+	while(fscanf_s(fp,"%s\n",countFile,sizeof(countFile)) != EOF)
 	{
 		maxSou++;	//ファイル名をカウント
 	}
@@ -72,7 +72,7 @@ bool C_DSound::LoadSoundData(LPTSTR FileName)
 
 	//読み込み処理
 	for(int i = 0;i < maxSou;i++){
-		fscanf(fp,"%s\n",countFile,sizeof(countFile));
+		fscanf_s(fp,"%s\n",countFile,sizeof(countFile));
 		LoadSound(countFile,i);
 	}
 

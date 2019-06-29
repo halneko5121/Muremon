@@ -26,9 +26,9 @@ F_RECT rect_pos_e = {DRAW_E_RAD_X,DRAW_E_RAD_Y,DRAW_E_RAD_X,DRAW_E_RAD_Y};
  */
 C_ActorBase::C_ActorBase(void)
 {
-	m_pOrbit	 = new C_OrbitCalculation();
+	mOrbit	 = new C_OrbitCalculation();
 
-	m_pSound	 = new C_DSound();
+	mSound	 = new C_DSound();
 }
 
 /**
@@ -42,11 +42,11 @@ C_ActorBase::~C_ActorBase(void)
  * @brief UŒ‚ˆ—
  */
 POS_CC<float>
-C_ActorBase::CharaAttack_1(int m_chara_num)
+C_ActorBase::CharaAttack_1(int mCharaNum)
 {
-	m_charadata[m_chara_num].draw_cc.x += m_charadata[m_chara_num].speed;			//‰E‚ÉˆÚ“®
+	mCharaData[mCharaNum].draw_cc.x += mCharaData[mCharaNum].speed;			//‰E‚ÉˆÚ“®
 
-	return m_charadata[m_chara_num].draw_cc;
+	return mCharaData[mCharaNum].draw_cc;
 }
 
 /**
@@ -107,13 +107,13 @@ C_ActorBase::SetSpeed(int key)
 {
 	switch(key){
 	case KEY_SKY_2://“÷‚Ü‚ñ‚ÌUŒ‚2‚ÍŒvZ•û–@‚ªˆá‚¤‚Ì‚Å
-		m_randspeed = (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
+		mRandSpeed = (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
 		break;
 	default:
-		m_randspeed = (float)(rand() % SPEED_RAND) + SPEED_MIN;			
+		mRandSpeed = (float)(rand() % SPEED_RAND) + SPEED_MIN;			
 		break;
 	}
-	return m_randspeed;
+	return mRandSpeed;
 }
 
 /**

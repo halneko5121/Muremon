@@ -12,16 +12,14 @@ CHARADATA init_charadata_noppo = {
 /**
  * @brief コンストラクタ
  */
-C_ActorNoppo::C_ActorNoppo(C_Vertex *vertex , C_Texture  *texture, LPDIRECT3DDEVICE9 device, C_DSound *sound)
+C_ActorNoppo::C_ActorNoppo(C_Vertex* vertex, C_Texture* texture, C_DSound* sound)
 {
-	m_pTexture	= new C_Texture();
-	m_pVertex	= new C_Vertex();
+	mTexture	= new C_Texture();
+	mVertex		= new C_Vertex();
 
-	m_pTexture	= texture;
-	m_pVertex	= vertex;
-	m_pDevice	= device;
-	m_pSound		= sound;
-
+	mTexture	= texture;
+	mVertex		= vertex;
+	mSound		= sound;
 }
 
 /**
@@ -37,31 +35,31 @@ C_ActorNoppo::~C_ActorNoppo(void)
 void
 C_ActorNoppo::Init()											
 {
-	m_pOrbit->pWave->InitWave(WAVE_AMPLIT_NOPPO,WAVE_CYCLE_NOPPO,NULL,WAVE_MODE_GAME);
+	mOrbit->pWave->InitWave(WAVE_AMPLIT_NOPPO,WAVE_CYCLE_NOPPO,NULL,WAVE_MODE_GAME);
 
 	//praivate変数
 	alpha			= MAX_ALPHA;
 	s_atk_start_y	= 0.f;
 	//protected変数
-	m_randspeed  = 0.f;
-	m_delay		 = m_max_animetion = m_chara_num = 0;
-	m_flag_turn2 = m_set_hitcheck  = false;
+	mRandSpeed  = 0.f;
+	mDelay		 = mMaxAnimetion = mCharaNum = 0;
+	mFlagTurn2 = mSetHitCheck  = false;
 
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		//構造体
-		m_charadata[i].flag_atk1		= m_charadata[i].flag_atk2		 = false;
-		m_charadata[i].flag_death		= m_charadata[i].flag_deathfade	 = false;
-		m_charadata[i].flag_effect		= m_charadata[i].flag_effectfont = false;
-		m_charadata[i].flag_hit			= m_charadata[i].flag_death_next = false;
-		m_charadata[i].draw_cc.x		= (-RADIUS_NOPPO);						//キャラ座標の初期化
-		m_charadata[i].draw_cc.y		= (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
-		m_charadata[i].speed			= 0.f;
-		m_charadata[i].animetion		= 0;									//アニメーションさせる最大枚数
-		m_charadata[i].rect_num			= 0;
-		m_charadata[i].alpha			= 0;
+		mCharaData[i].flag_atk1		= mCharaData[i].flag_atk2		 = false;
+		mCharaData[i].flag_death		= mCharaData[i].flag_deathfade	 = false;
+		mCharaData[i].flag_effect		= mCharaData[i].flag_effectfont = false;
+		mCharaData[i].flag_hit			= mCharaData[i].flag_death_next = false;
+		mCharaData[i].draw_cc.x		= (-RADIUS_NOPPO);						//キャラ座標の初期化
+		mCharaData[i].draw_cc.y		= (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
+		mCharaData[i].speed			= 0.f;
+		mCharaData[i].animetion		= 0;									//アニメーションさせる最大枚数
+		mCharaData[i].rect_num			= 0;
+		mCharaData[i].alpha			= 0;
 
-		pos_effectfont[i].x				= pos_effectfont[i].y = m_deg_spin[i] = 0.f;
-		m_count_effect[i]				= 0;
+		pos_effectfont[i].x				= pos_effectfont[i].y = mDegSpin[i] = 0.f;
+		mCountEffect[i]				= 0;
 		init[i]							= true;
 	}
 }
@@ -72,97 +70,97 @@ C_ActorNoppo::Init()
 void
 C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
 {
-	m_randspeed = 0.f;
+	mRandSpeed = 0.f;
 
 	//きーのチェック:攻撃開始
 	if( (key == KEY_GROUND_3) || (key == KEY_SKY_3) ){
-		if(m_flag_turn2){
-			m_charadata[m_chara_num]	= init_charadata_noppo;
-			m_count_effect[m_chara_num] = 0;
-			init[m_chara_num] = true;
+		if(mFlagTurn2){
+			mCharaData[mCharaNum]	= init_charadata_noppo;
+			mCountEffect[mCharaNum] = 0;
+			init[mCharaNum] = true;
 		}
-		m_charadata[m_chara_num]		 = SetAtk_Flag(key,m_charadata[m_chara_num]);
-		m_charadata[m_chara_num].speed	 = SetSpeed(key);
+		mCharaData[mCharaNum]		 = SetAtk_Flag(key,mCharaData[mCharaNum]);
+		mCharaData[mCharaNum].speed	 = SetSpeed(key);
 
 		switch(key){
 		case KEY_GROUND_3:
-			m_charadata[m_chara_num].draw_cc = SetAtk_Pos(RADIUS_NOPPO,G_ATK_3_START_Y);
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO,G_ATK_3_START_Y);
 			break;
 		case KEY_SKY_3:
 			s_atk_start_y			 = (float)(rand() % RAND_Y_NOPPO);		
-			rand_acc[m_chara_num]	 = (float)(rand() % PARA_RAND_ACC_NOPPO		+ PARA_RAND_ACC_NOPPO_MIN);	
-			rand_move_x[m_chara_num] = (float)(rand() % PARA_RAND_MOVE_X_NOPPO  + PARA_RAND_MOVE_X_NOPPO_MIN);
-			m_deg_spin[m_chara_num]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+			rand_acc[mCharaNum]	 = (float)(rand() % PARA_RAND_ACC_NOPPO		+ PARA_RAND_ACC_NOPPO_MIN);	
+			rand_move_x[mCharaNum] = (float)(rand() % PARA_RAND_MOVE_X_NOPPO  + PARA_RAND_MOVE_X_NOPPO_MIN);
+			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-			m_charadata[m_chara_num].draw_cc = SetAtk_Pos(RADIUS_NOPPO,s_atk_start_y);
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO,s_atk_start_y);
 			break;
 		}
-		if(m_chara_num >= (MAX_VALLUE_PLAYER-1) ){ m_chara_num = 0; m_flag_turn2 = true; }	//最大数を超えたら1体目へ			
-		else m_chara_num++;																//2体目、3体目～
+		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//最大数を超えたら1体目へ			
+		else mCharaNum++;																//2体目、3体目～
 	}
 
 	//キャラの動作(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		//当たり判定
-		if(!m_charadata[i].flag_death){
+		if(!mCharaData[i].flag_death){
 			if(!boss_death){
-				if(HitCheck(m_charadata[i].draw_cc,boss_cc,ID_NIKUMAN)){
-					m_charadata[i].flag_hit		= true;
-					m_charadata[i].flag_death	= true;	
+				if(HitCheck(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
+					mCharaData[i].flag_hit		= true;
+					mCharaData[i].flag_death	= true;	
 					SetFlagHit(true);
-					m_chara_y = m_charadata[i].draw_cc.y;
+					m_chara_y = mCharaData[i].draw_cc.y;
 
-					if(m_charadata[i].flag_atk1){
-						if(m_pSound->SoundPlayCheck(S_NOPPO_KOKE)) m_pSound->SoundStop(true,S_NOPPO_KOKE);
-						m_pSound->SoundPlay(false,S_NOPPO_KOKE);
-						if( (m_pSound->SoundPlayCheck(S_NOPPO_PETI)) && (m_pSound->SoundPlayCheck(S_NOPPO_KOKE)) ) {
-							m_pSound->SoundStop(true,S_NOPPO_PETI);
+					if(mCharaData[i].flag_atk1){
+						if(mSound->SoundPlayCheck(S_NOPPO_KOKE)) mSound->SoundStop(true,S_NOPPO_KOKE);
+						mSound->SoundPlay(false,S_NOPPO_KOKE);
+						if( (mSound->SoundPlayCheck(S_NOPPO_PETI)) && (mSound->SoundPlayCheck(S_NOPPO_KOKE)) ) {
+							mSound->SoundStop(true,S_NOPPO_PETI);
 						}
-						if(m_pSound->SoundPlayCheck(S_NOPPO_KOKE)) m_pSound->SoundPlay(false,(S_NOPPO_PETI));
+						if(mSound->SoundPlayCheck(S_NOPPO_KOKE)) mSound->SoundPlay(false,(S_NOPPO_PETI));
 					}
-					if(m_charadata[i].flag_atk2){
-						if(m_pSound->SoundPlayCheck(S_NOPPO_GANMEN)) m_pSound->SoundStop(true,S_NOPPO_GANMEN);
-						m_pSound->SoundPlay(false,S_NOPPO_GANMEN);
+					if(mCharaData[i].flag_atk2){
+						if(mSound->SoundPlayCheck(S_NOPPO_GANMEN)) mSound->SoundStop(true,S_NOPPO_GANMEN);
+						mSound->SoundPlay(false,S_NOPPO_GANMEN);
 					}
 				}
 			}
 
 			//攻撃処理(xが画面外じゃなければ処理)
-			if(m_charadata[i].flag_atk1){
-				if(m_charadata[i].draw_cc.x - RADIUS_NOPPO < GAMESIZE_WIDE){
-					m_charadata[i].draw_cc	 = CharaAttack_1(i);
-					m_charadata[i].animetion = SetAnimetion(ANIME_G_ATK4_NOPPO,m_charadata[i].animetion,NULL,i);
+			if(mCharaData[i].flag_atk1){
+				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < GAMESIZE_WIDE){
+					mCharaData[i].draw_cc	 = CharaAttack_1(i);
+					mCharaData[i].animetion = SetAnimetion(ANIME_G_ATK4_NOPPO,mCharaData[i].animetion,NULL,i);
 				}
 			}
-			else if(m_charadata[i].flag_atk2){
-				if(m_charadata[i].draw_cc.x - RADIUS_NOPPO < GAMESIZE_WIDE){
-					m_pOrbit->pWave->SetSpeed(m_charadata[i].speed);
-					m_charadata[i].draw_cc	 = CharaAttack_2(i);
-					m_charadata[i].animetion = SetAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO),m_charadata[i].animetion,ANIME_S_ATK1_NOPPO,i);
+			else if(mCharaData[i].flag_atk2){
+				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < GAMESIZE_WIDE){
+					mOrbit->pWave->SetSpeed(mCharaData[i].speed);
+					mCharaData[i].draw_cc	 = CharaAttack_2(i);
+					mCharaData[i].animetion = SetAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO),mCharaData[i].animetion,ANIME_S_ATK1_NOPPO,i);
 				}
 			}
 		}
 		else DeathControl(i,sound_startnum,rect_startnum);
 
 		//当たった後の処理
-		if(m_charadata[i].flag_hit){
+		if(mCharaData[i].flag_hit){
 			//画面外なら死亡
-			if( (m_charadata[i].draw_cc.x < -(RADIUS_NOPPO + 50)) || (m_charadata[i].draw_cc.x > GAMESIZE_WIDE  + RADIUS_NOPPO + 50) &&
-				(m_charadata[i].draw_cc.y < -(RADIUS_NOPPO + 50)) || (m_charadata[i].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NOPPO + 50) ){
-					m_charadata[m_chara_num].flag_death = true;
+			if( (mCharaData[i].draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData[i].draw_cc.x > GAMESIZE_WIDE  + RADIUS_NOPPO + 50) &&
+				(mCharaData[i].draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData[i].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NOPPO + 50) ){
+					mCharaData[mCharaNum].flag_death = true;
 			}
 
-			if(!m_charadata[i].flag_effectfont){
-				if(m_count_effect[i]++ < FONT_SET){
-					pos_effectfont[i] = SetE_Font(m_charadata[i].draw_cc, RADIUS_NOPPO,POS_HITFONT_X);
-					m_charadata[i].flag_effectfont	= true;
+			if(!mCharaData[i].flag_effectfont){
+				if(mCountEffect[i]++ < FONT_SET){
+					pos_effectfont[i] = SetE_Font(mCharaData[i].draw_cc, RADIUS_NOPPO,POS_HITFONT_X);
+					mCharaData[i].flag_effectfont	= true;
 				}	
 			}
 			else{
-				if(m_count_effect[i]++ < FONT_DELETE){
+				if(mCountEffect[i]++ < FONT_DELETE){
 					pos_effectfont[i] = EffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
 				}
-				else{ m_charadata[i].flag_effectfont = false; m_count_effect[i] = 0;}
+				else{ mCharaData[i].flag_effectfont = false; mCountEffect[i] = 0;}
 			}
 		}
 	}
@@ -172,7 +170,7 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
  * @brief アニメ設定
  */
 int
-C_ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int m_chara_num)
+C_ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int mCharaNum)
 {
 	static int delay = 0;
 
@@ -185,7 +183,7 @@ C_ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int 
 		delay = 0;
 	}
 
-	m_charadata[m_chara_num].rect_num	= rect_num;
+	mCharaData[mCharaNum].rect_num	= rect_num;
 
 	return anime_count;
 }
@@ -200,12 +198,12 @@ C_ActorNoppo::DrawEffectFont(int rect_startnum)
 
 	//フォントエフェクトの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
-		if(m_charadata[i].flag_hit){
-			if(m_count_effect[i]++ < FONT_DELETE){
-				if(m_charadata[i].flag_atk1)		rect_change = 0; 
-				else if(m_charadata[i].flag_atk2)	rect_change = 1;
-				m_pVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-				m_pVertex->DrawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum + rect_change);
+		if(mCharaData[i].flag_hit){
+			if(mCountEffect[i]++ < FONT_DELETE){
+				if(mCharaData[i].flag_atk1)		rect_change = 0; 
+				else if(mCharaData[i].flag_atk2)	rect_change = 1;
+				mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+				mVertex->DrawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum + rect_change);
 			}
 		}
 	}
@@ -219,24 +217,24 @@ C_ActorNoppo::Draw(int rect_startnum)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
-		if(m_charadata[i].flag_atk1){
-			m_pVertex->SetAngle(0.f);
-			if(m_charadata[i].flag_deathfade){
-				m_charadata[i].alpha = m_pVertex->FadeOut((10.f/60.f),m_charadata[i].alpha);
-				m_pVertex->SetColor((D3DCOLOR)m_charadata[i].alpha,MAX_RGB,MAX_RGB,MAX_RGB);
+		if(mCharaData[i].flag_atk1){
+			mVertex->SetAngle(0.f);
+			if(mCharaData[i].flag_deathfade){
+				mCharaData[i].alpha = mVertex->FadeOut((10.f/60.f),mCharaData[i].alpha);
+				mVertex->SetColor((D3DCOLOR)mCharaData[i].alpha,MAX_RGB,MAX_RGB,MAX_RGB);
 			}
 			else{
-				m_pVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-				m_pVertex->DrawF(m_charadata[i].draw_cc.x,m_charadata[i].draw_cc.y,(rect_startnum + m_charadata[i].rect_num + m_charadata[i].animetion) );
+				mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+				mVertex->DrawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y,(rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
 			}
 		}
-		else if(m_charadata[i].flag_atk2){
-			if(m_charadata[i].flag_hit){
-				m_pVertex->SetAngle(m_deg_spin[i] += m_deg_spin[i]);
+		else if(mCharaData[i].flag_atk2){
+			if(mCharaData[i].flag_hit){
+				mVertex->SetAngle(mDegSpin[i] += mDegSpin[i]);
 			}
-			else m_pVertex->SetAngle(0.f);
-			m_pVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			m_pVertex->DrawF(m_charadata[i].draw_cc.x,m_charadata[i].draw_cc.y,(rect_startnum + m_charadata[i].rect_num + m_charadata[i].animetion) );
+			else mVertex->SetAngle(0.f);
+			mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+			mVertex->DrawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y,(rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
 		}
 	}
 }
@@ -245,56 +243,56 @@ C_ActorNoppo::Draw(int rect_startnum)
  * @brief 攻撃処理
  */
 POS_CC<float>
-C_ActorNoppo::CharaAttack_2(int m_chara_num)																//キー入力による動作その2
+C_ActorNoppo::CharaAttack_2(int mCharaNum)																//キー入力による動作その2
 {
-	m_charadata[m_chara_num].draw_cc = m_pOrbit->pWave->OrbitSinWave(WAVE_LIMIT_X_NOPPO,m_charadata[m_chara_num].draw_cc,m_chara_num);
+	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(WAVE_LIMIT_X_NOPPO,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
-	return m_charadata[m_chara_num].draw_cc;
+	return mCharaData[mCharaNum].draw_cc;
 }
 
 /**
  * @brief 死亡処理
  */
 void
-C_ActorNoppo::DeathControl(int m_chara_num, int sound_startnum ,int rect_startnum)							//死亡処理
+C_ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)							//死亡処理
 {
 	static int wait_count[MAX_VALLUE_PLAYER] = {0};
 
-	if(init[m_chara_num]){
-		if(m_charadata[m_chara_num].animetion != 0) m_charadata[m_chara_num].animetion = 0;
-		init[m_chara_num] = false;
+	if(init[mCharaNum]){
+		if(mCharaData[mCharaNum].animetion != 0) mCharaData[mCharaNum].animetion = 0;
+		init[mCharaNum] = false;
 	}
 
-	if(m_charadata[m_chara_num].flag_atk1){
-		if(!m_charadata[m_chara_num].flag_death_next){
-			m_charadata[m_chara_num].animetion = SetAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO),m_charadata[m_chara_num].animetion,ANIME_MOTION1_NOPPO,m_chara_num);
-			if(m_charadata[m_chara_num].animetion == 2) m_charadata[m_chara_num].flag_death_next = true;
+	if(mCharaData[mCharaNum].flag_atk1){
+		if(!mCharaData[mCharaNum].flag_death_next){
+			mCharaData[mCharaNum].animetion = SetAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO),mCharaData[mCharaNum].animetion,ANIME_MOTION1_NOPPO,mCharaNum);
+			if(mCharaData[mCharaNum].animetion == 2) mCharaData[mCharaNum].flag_death_next = true;
 		}
 		else{
-			m_charadata[m_chara_num].animetion = 0;																//描画を固定
-			m_charadata[m_chara_num].rect_num  = ANIME_MOTION3_NOPPO;
-			if(wait_count[m_chara_num]++ > WAIT_MOTION_NOPPO){
-				m_charadata[m_chara_num].flag_deathfade = true;
-				wait_count[m_chara_num] = 0;
+			mCharaData[mCharaNum].animetion = 0;																//描画を固定
+			mCharaData[mCharaNum].rect_num  = ANIME_MOTION3_NOPPO;
+			if(wait_count[mCharaNum]++ > WAIT_MOTION_NOPPO){
+				mCharaData[mCharaNum].flag_deathfade = true;
+				wait_count[mCharaNum] = 0;
 			}
 		}
 	}
-	else if(m_charadata[m_chara_num].flag_atk2){
-		m_charadata[m_chara_num].animetion = 0;																	//描画を固定
-		m_charadata[m_chara_num].rect_num  = ANIME_S_ATK2_NOPPO;
+	else if(mCharaData[mCharaNum].flag_atk2){
+		mCharaData[mCharaNum].animetion = 0;																	//描画を固定
+		mCharaData[mCharaNum].rect_num  = ANIME_S_ATK2_NOPPO;
 
-		m_charadata[m_chara_num].draw_cc   = m_pOrbit->pParadora->OrbitParabola(rand_acc[m_chara_num],rand_move_x[m_chara_num],PARA_LIMIT_Y_NOPPO,m_charadata[m_chara_num].draw_cc,m_chara_num);
+		mCharaData[mCharaNum].draw_cc   = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],PARA_LIMIT_Y_NOPPO,mCharaData[mCharaNum].draw_cc,mCharaNum);
 	}	
-	if(m_charadata[m_chara_num].flag_deathfade){
-		if(m_charadata[m_chara_num].alpha <= 0){
-			m_charadata[m_chara_num].draw_cc.x = (-RADIUS_NOPPO);
-			m_charadata[m_chara_num].draw_cc.y = (GAME_GROUND - RADIUS_NOPPO);
-			m_charadata[m_chara_num].flag_deathfade	 = false;
+	if(mCharaData[mCharaNum].flag_deathfade){
+		if(mCharaData[mCharaNum].alpha <= 0){
+			mCharaData[mCharaNum].draw_cc.x = (-RADIUS_NOPPO);
+			mCharaData[mCharaNum].draw_cc.y = (GAME_GROUND - RADIUS_NOPPO);
+			mCharaData[mCharaNum].flag_deathfade	 = false;
 		}
 	}
 
-	if( (m_charadata[m_chara_num].draw_cc.y < (-RADIUS_NOPPO)) || (m_charadata[m_chara_num].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NOPPO + 30) ){
-		m_charadata[m_chara_num].flag_atk1  = m_charadata[m_chara_num].flag_atk2 = false;
-		m_charadata[m_chara_num].flag_death = m_charadata[m_chara_num].flag_hit  = false;
+	if( (mCharaData[mCharaNum].draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData[mCharaNum].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NOPPO + 30) ){
+		mCharaData[mCharaNum].flag_atk1  = mCharaData[mCharaNum].flag_atk2 = false;
+		mCharaData[mCharaNum].flag_death = mCharaData[mCharaNum].flag_hit  = false;
 	}
 }

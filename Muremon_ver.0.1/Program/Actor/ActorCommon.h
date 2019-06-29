@@ -164,28 +164,27 @@ public:
 	************************************************************************************/
 	F_RECT CalculateBack_Rect(POS_CC<float> draw_cc, F_RECT rect_pos);
 
-	void SetFlagHit(bool hitcheck) { m_set_hitcheck = hitcheck; }
+	void SetFlagHit(bool hitcheck) { mSetHitCheck = hitcheck; }
 
-	bool GetFlagHit() { return m_set_hitcheck; }
+	bool GetFlagHit() { return mSetHitCheck; }
 
 protected:
-	C_OrbitCalculation  *m_pOrbit;
+	C_OrbitCalculation*	mOrbit;
 
-	C_Texture			*m_pTexture;
-	C_Vertex			*m_pVertex;
-	C_DSound			*m_pSound;
-	LPDIRECT3DDEVICE9	m_pDevice;
+	C_Texture*			mTexture;
+	C_Vertex*			mVertex;
+	C_DSound*			mSound;
 
 
-	CHARADATA			m_charadata[MAX_VALLUE_PLAYER];
-	float				m_deg_spin[MAX_VALLUE_PLAYER];
-	float				m_randspeed;
+	CHARADATA			mCharaData[MAX_VALLUE_PLAYER];
+	float				mDegSpin[MAX_VALLUE_PLAYER];
+	float				mRandSpeed;
 
-	int					m_chara_num;
-	int					m_delay;
-	int					m_count_effect[MAX_VALLUE_PLAYER];
-	int					m_max_animetion;
+	int					mCharaNum;
+	int					mDelay;
+	int					mCountEffect[MAX_VALLUE_PLAYER];
+	int					mMaxAnimetion;
 
-	bool				m_flag_turn2;								//二週目のフラグ
-	bool				m_set_hitcheck;
+	bool				mFlagTurn2;								//二週目のフラグ
+	bool				mSetHitCheck;
 };

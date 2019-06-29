@@ -58,9 +58,9 @@ void C_GameRefresh::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont *apFont, C_DSoun
 
 	sound = apSound;
 
-	pNiku	= new C_ActorNikuman(vertex,texture,apDev,apSound);
-	pNoppo	= new C_ActorNoppo(vertex,texture,apDev,apSound);
-	pYoshi	= new C_ActorYoshi(vertex,texture,apDev,apSound);
+	pNiku	= new C_ActorNikuman(vertex, texture, apSound);
+	pNoppo	= new C_ActorNoppo(vertex, texture, apSound);
+	pYoshi	= new C_ActorYoshi(vertex, texture, apSound);
 
 	pNiku->Init();
 	pNoppo->Init();

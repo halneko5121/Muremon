@@ -54,7 +54,7 @@ enum ANIME_NOPPO
 class C_ActorNoppo : public C_ActorBase
 {
 public:
-	C_ActorNoppo(C_Vertex *vertex, C_Texture  *texture, LPDIRECT3DDEVICE9  device, C_DSound *sound);
+	C_ActorNoppo(C_Vertex *vertex, C_Texture  *texture, C_DSound *sound);
 	~C_ActorNoppo(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num);

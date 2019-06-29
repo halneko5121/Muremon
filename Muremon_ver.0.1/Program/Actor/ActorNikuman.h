@@ -46,7 +46,7 @@ enum ANIME_NIKU
 class C_ActorNikuman :	public C_ActorBase
 {
 public:
-	C_ActorNikuman(C_Vertex *vertex, C_Texture *texture, LPDIRECT3DDEVICE9  device, C_DSound *sound);
+	C_ActorNikuman(C_Vertex *vertex, C_Texture *texture, C_DSound *sound);
 	~C_ActorNikuman(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc);

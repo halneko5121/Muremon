@@ -6,28 +6,7 @@
  *													by	三上　亘					*
  ************************************************************************************/
 
-/*================================
-		Include
-=================================*/
 #include "ActorBase.h"
-
-/*================================
-		Define
-=================================*/
-
-//放物線関係
-#define PARA_RAND_ACC_NIKU				(15)		//加速度(肉まん)
-#define PARA_RAND_ACC_NIKU_MIN			(5)		
-#define PARA_RAND_MOVE_X_NIKU			(-15)		//移動量				
-#define PARA_RAND_MOVE_X_NIKU_MIN		(-5)						
-
-#define PARA_LIMIT_Y_NIKU				(600.f + RADIUS_NIKU)//放物線の最終座標		
-//バウンド関係
-#define DEG_RAND_NIKU					(30)		//ランダムの幅							
-#define DEG_RAND_NIKU_MIN				(180 + 45)	//75°までの間					
-//描画位置
-#define RAND_Y_NIKU						(300)		
-#define RAND_Y_MIN_NIKU					(-200)	
 
 enum ANIME_NIKU
 {

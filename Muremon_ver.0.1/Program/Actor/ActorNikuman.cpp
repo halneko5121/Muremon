@@ -1,13 +1,32 @@
 #include "ActorNikuman.h"
 
-CHARADATA init_charadata_niku = {
-	(0.0f),0,0,(MAX_ALPHA),
-	//スピード,アニメーション,矩形,透過度
-	false,false,false,false,false,false,false,false,
-	//各フラグ
-	0.f,0.f,
-	//中心座標
-};
+namespace 
+{
+	// 放物線関係
+	const int cParaRandAcc = 15;					// 加速度
+	const int cParaRandAccMin = 5;
+	const int cParaRandMoveX = -15;					// 移動量				
+	const int cParaRandMoveXMin = -5;
+
+	const float cParaLimitY = 600.f + RADIUS_NIKU;	// 放物線の最終座標
+
+	// バウンド関係
+	const int cDegRand = 30;						// ランダムの幅
+	const int cDegRandMin = 180 + 45;				// 75°までの間
+
+	// 描画位置
+	const int cRandY = 300;
+	const int cRandYMin = -200;
+
+	CHARADATA cInitActorData = {
+		// スピード, アニメーション, 矩形, 透過度
+		(0.0f), 0, 0, (MAX_ALPHA),
+		// 各フラグ
+		false, false, false, false, false, false, false, false,
+		// 中心座標
+		0.f, 0.f,
+	};
+}
 
 /**
  * @brief コンストラクタ
@@ -71,7 +90,7 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 	//きーのチェック:攻撃開始
 	if( (key == KEY_GROUND_2) || (key == KEY_SKY_2) ){
 		if(mFlagTurn2){
-			mCharaData[mCharaNum]	  = init_charadata_niku;
+			mCharaData[mCharaNum]	  = cInitActorData;
 			mCountEffect[mCharaNum]	  = 0;
 			mDegSpin[mCharaNum]		  = 0.f;
 		}
@@ -79,15 +98,15 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 
 		switch(key){
 		case KEY_GROUND_2:
-			rand_deg[mCharaNum]	 = (float)(rand() % DEG_RAND_NIKU + DEG_RAND_NIKU_MIN);	
+			rand_deg[mCharaNum]	 = (float)(rand() % cDegRand + cDegRandMin);	
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU,G_ATK_2_START_Y);
 			mCharaData[mCharaNum].speed   = SetSpeed(key);
 			mDegSpin[mCharaNum]			 = 0.f;
 			break;
 		case KEY_SKY_2:
-			s_atk_start_y			 = (float)(rand() % RAND_Y_NIKU + RAND_Y_MIN_NIKU);			
-			rand_acc[mCharaNum]	 = (float)(rand() % PARA_RAND_ACC_NIKU + PARA_RAND_ACC_NIKU_MIN);	
-			rand_move_x[mCharaNum] = (float)(rand() % PARA_RAND_MOVE_X_NIKU + PARA_RAND_MOVE_X_NIKU_MIN);	
+			s_atk_start_y			 = (float)(rand() % cRandY + cRandYMin);			
+			rand_acc[mCharaNum]	 = (float)(rand() % cParaRandAcc + cParaRandAccMin);	
+			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);	
 			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
 			mCharaData[mCharaNum].speed   = SetSpeed(key);
@@ -240,7 +259,7 @@ C_ActorNikuman::DeathControl(int mCharaNum , int sound_num, int rect_startnum)		
 		mCharaData[mCharaNum].draw_cc  = mOrbit->pRebound->OrbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);
 	}
 	else if(mCharaData[mCharaNum].flag_atk2){
-		mCharaData[mCharaNum].draw_cc  = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],PARA_LIMIT_Y_NIKU,mCharaData[mCharaNum].draw_cc,mCharaNum);	
+		mCharaData[mCharaNum].draw_cc  = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);	
 	}
 
 	if( (mCharaData[mCharaNum].draw_cc.y < -RADIUS_NIKU) || (mCharaData[mCharaNum].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NIKU) ){

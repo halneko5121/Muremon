@@ -66,11 +66,11 @@ private:
 public:
 	POS_CC<float>	CharaAttack_2(int m_chara_num);											
 	void			DeathControl(int m_chara_num, int sound_startnum ,int rect_startnum);	
-	void			Init();																	
-	void			Control(int key, POS_CC<float> boss_cc,int sound_startnum ,int rect_startnum,bool boss_death);
-	void			Draw(int rect_startnum);
-	void			DrawEffectFont(int rect_startnum);
-	int				SetAnimetion(int max_animetion, int anime_count ,int rect_num , int m_chara_num);
+	void			Init() override;
+	void			Control(int key, POS_CC<float> boss_cc,int sound_startnum ,int rect_startnum,bool boss_death) override;
+	void			Draw(int rect_startnum) override;
+	void			DrawEffectFont(int rect_startnum) override;
+	int				SetAnimetion(int max_animetion, int anime_count ,int rect_num , int m_chara_num) override;
 
 	C_Chara_Noppo(C_Vertex *vertex , C_Texture  *texture , LPDIRECT3DDEVICE9  device, C_DSound *sound);
 	~C_Chara_Noppo(void);

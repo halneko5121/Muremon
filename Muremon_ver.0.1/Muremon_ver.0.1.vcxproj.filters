@@ -10,10 +10,6 @@
     <ClCompile Include="program\gManage\Revenant.cpp" />
     <ClCompile Include="program\gManage\SceneManage.cpp" />
     <ClCompile Include="program\gManage\Window.cpp" />
-    <ClCompile Include="program\Orbit\OrbitCalculation.cpp" />
-    <ClCompile Include="program\Orbit\OrbitParadora.cpp" />
-    <ClCompile Include="program\Orbit\OrbitRebound.cpp" />
-    <ClCompile Include="program\Orbit\OrbitWave.cpp" />
     <ClCompile Include="program\Scene\Ending.cpp" />
     <ClCompile Include="program\Scene\GameClear.cpp" />
     <ClCompile Include="program\Scene\GameNormal.cpp" />
@@ -25,13 +21,17 @@
     <ClCompile Include="program\Scene\Ranking.cpp" />
     <ClCompile Include="program\Scene\Title.cpp" />
     <ClCompile Include="program\Scene\Tutorial.cpp" />
-    <ClCompile Include="program\Control.cpp" />
     <ClCompile Include="Library\DirectFont.cpp" />
     <ClCompile Include="Library\DirectGraphics.cpp" />
     <ClCompile Include="Library\DirectInput.cpp" />
     <ClCompile Include="Library\DirectSound.cpp" />
     <ClCompile Include="Library\Texture.cpp" />
     <ClCompile Include="Library\Vertex.cpp" />
+    <ClCompile Include="Program\Util\Control.cpp" />
+    <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
+    <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
+    <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
+    <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\Chara\Boss.h" />
@@ -43,10 +43,6 @@
     <ClInclude Include="program\gManage\Revenant.h" />
     <ClInclude Include="program\gManage\SceneManage.h" />
     <ClInclude Include="program\gManage\Window.h" />
-    <ClInclude Include="program\Orbit\OrbitCalculation.h" />
-    <ClInclude Include="program\Orbit\OrbitParadora.h" />
-    <ClInclude Include="program\Orbit\OrbitRebound.h" />
-    <ClInclude Include="program\Orbit\OrbitWave.h" />
     <ClInclude Include="program\Scene\Ending.h" />
     <ClInclude Include="program\Scene\GameClear.h" />
     <ClInclude Include="program\Scene\GameNormal.h" />
@@ -58,7 +54,6 @@
     <ClInclude Include="program\Scene\Ranking.h" />
     <ClInclude Include="program\Scene\Title.h" />
     <ClInclude Include="program\Scene\Tutorial.h" />
-    <ClInclude Include="program\Control.h" />
     <ClInclude Include="program\D_Game.h" />
     <ClInclude Include="program\Define.h" />
     <ClInclude Include="Library\DirectFont.h" />
@@ -67,5 +62,10 @@
     <ClInclude Include="Library\DirectSound.h" />
     <ClInclude Include="Library\Texture.h" />
     <ClInclude Include="Library\Vertex.h" />
+    <ClInclude Include="Program\Util\Control.h" />
+    <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
+    <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
+    <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />
+    <ClInclude Include="Program\Util\Orbit\OrbitWave.h" />
   </ItemGroup>
 </Project>

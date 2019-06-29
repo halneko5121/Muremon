@@ -15,7 +15,7 @@
 #include "Program/Chara/Chara_nikuman.h"
 #include "Program/Chara/Chara_Noppo.h"
 #include "Program/Chara/Chara_yoshi.h"
-#include "Program/Control.h"
+#include "Program/Util/Control.h"
 #include "Program/D_Game.h"
 
 class C_GameRefresh:public C_SceneManage

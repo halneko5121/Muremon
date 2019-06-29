@@ -11,7 +11,7 @@
 #include "Program/gManage/SceneManage.h"
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "Program/Control.h"
+#include "Program/Util/Control.h"
 
 #define OUTLINE_CENTER	(300)	//¡‚ÌŠA‰¼İ’è
 

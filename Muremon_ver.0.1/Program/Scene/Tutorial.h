@@ -11,7 +11,7 @@
 #include "program/gManage/SceneManage.h"
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "program/Control.h"
+#include "Program/Util/Control.h"
 
 #define TR_RIGHT_X	(1200.f)
 #define TR_CENTER_X	(400.f)

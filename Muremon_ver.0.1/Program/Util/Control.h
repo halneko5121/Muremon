@@ -9,7 +9,7 @@
 #pragma once
 
 #include <windows.h>
-#include "Define.h"
+#include "Program/Define.h"
 
 class C_Control
 {

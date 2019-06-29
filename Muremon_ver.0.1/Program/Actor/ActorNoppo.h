@@ -68,8 +68,8 @@ public:
 	void			DeathControl(int m_chara_num, int sound_startnum ,int rect_startnum);	
 	void			Init();																	
 	void			Control(int key, POS_CC<float> boss_cc,int sound_startnum ,int rect_startnum,bool boss_death);
-	void			Draw(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data);
-	void			DrawEffectFont(int t_num, int rect_startnum,LPDIRECT3DDEVICE9 device_data);
+	void			Draw(int rect_startnum);
+	void			DrawEffectFont(int rect_startnum);
 	int				SetAnimetion(int max_animetion, int anime_count ,int rect_num , int m_chara_num);
 
 	C_Chara_Noppo(C_Vertex *vertex , C_Texture  *texture , LPDIRECT3DDEVICE9  device, C_DSound *sound);

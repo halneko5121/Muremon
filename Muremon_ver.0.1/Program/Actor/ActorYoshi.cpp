@@ -191,7 +191,7 @@ C_Chara_Yoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,in
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-C_Chara_Yoshi::DrawEffectFont(int t_num, int rect_startnum,LPDIRECT3DDEVICE9 device_data)
+C_Chara_Yoshi::DrawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -211,21 +211,22 @@ C_Chara_Yoshi::DrawEffectFont(int t_num, int rect_startnum,LPDIRECT3DDEVICE9 dev
  * @brief •`‰æˆ—
  */
 void
-C_Chara_Yoshi::Draw(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
+C_Chara_Yoshi::Draw(int rect_startnum)
 {
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		if(m_charadata[i].flag_atk1){
 			m_pVertex->SetAngle(0.f);
-			m_pVertex->DrawF(m_charadata[i].draw_cc.x,m_charadata[i].draw_cc.y, (rect_startnum + m_charadata[i].rect_num + m_charadata[i].animetion) );
 		}
 		else if(m_charadata[i].flag_atk2){
 			if(m_charadata[i].flag_death_next){
 				m_pVertex->SetAngle(m_deg_spin[i] += m_deg_spin[i]);
 			}
-			else m_pVertex->SetAngle(0.f);
-			m_pVertex->DrawF(m_charadata[i].draw_cc.x,m_charadata[i].draw_cc.y, (rect_startnum + m_charadata[i].rect_num + m_charadata[i].animetion) );
+			else {
+				m_pVertex->SetAngle(0.f);
+			}
 		}
+		m_pVertex->DrawF(m_charadata[i].draw_cc.x, m_charadata[i].draw_cc.y, (rect_startnum + m_charadata[i].rect_num + m_charadata[i].animetion));
 	}
 }
 

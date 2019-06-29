@@ -194,7 +194,7 @@ C_Chara_Noppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-C_Chara_Noppo::DrawEffectFont(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
+C_Chara_Noppo::DrawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -215,7 +215,7 @@ C_Chara_Noppo::DrawEffectFont(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 de
  * @brief •`‰æˆ—
  */
 void
-C_Chara_Noppo::Draw(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
+C_Chara_Noppo::Draw(int rect_startnum)
 {
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){

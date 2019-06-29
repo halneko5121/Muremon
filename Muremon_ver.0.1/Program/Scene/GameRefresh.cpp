@@ -253,21 +253,19 @@ void C_GameRefresh::DrawScene()
 		vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
 
 		vertex->SetTextureData(texture->GetTextureData(T_CAHRA_NOPPO),pDevice);
-		pNoppo->Draw(T_CAHRA_NOPPO,R_NOPPO_G_ATK1,pDevice);
+		pNoppo->Draw(R_NOPPO_G_ATK1);
 
 		vertex->SetTextureData(texture->GetTextureData(T_CAHRA_YOSHI),pDevice);
-		pYoshi->Draw(T_CAHRA_YOSHI,R_YOSHI_G_ATK1,pDevice);
+		pYoshi->Draw(R_YOSHI_G_ATK1);
 
 		vertex->SetTextureData(texture->GetTextureData(T_CAHRA_NIKU),pDevice);
-		pNiku->Draw(T_CAHRA_NIKU,R_NIKU_G_ATK1,pDevice);
+		pNiku->Draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
 		vertex->SetTextureData(texture->GetTextureData(T_GAME_EFFECT),pDevice);
-		pNoppo->DrawEffectFont(T_GAME_EFFECT,R_NOPPO_PETI,pDevice);
-	
-		pYoshi->DrawEffectFont(T_GAME_EFFECT,R_YOSHI_BOYO,pDevice);
-
-		pNiku->DrawEffectFont(T_GAME_EFFECT,R_NIKU_BETYA,pDevice);
+		pNoppo->DrawEffectFont(R_NOPPO_PETI);
+		pYoshi->DrawEffectFont(R_YOSHI_BOYO);
+		pNiku->DrawEffectFont(R_NIKU_BETYA);
 
 		vertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 	}

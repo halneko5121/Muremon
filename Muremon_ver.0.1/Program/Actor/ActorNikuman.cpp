@@ -181,7 +181,7 @@ C_Chara_Nikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, 
  * @brief フォントの描画処理
  */
 void
-C_Chara_Nikuman::DrawEffectFont(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
+C_Chara_Nikuman::DrawEffectFont(int rect_startnum)
 {
 	//フォントエフェクトの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -198,7 +198,7 @@ C_Chara_Nikuman::DrawEffectFont(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 
  * @brief 描画処理
  */
 void
-C_Chara_Nikuman::Draw(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
+C_Chara_Nikuman::Draw(int rect_startnum)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){

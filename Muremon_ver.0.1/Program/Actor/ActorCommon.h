@@ -112,8 +112,9 @@ public:
 	virtual void		DeathControl(int m_chara_num ,int start_soundnum, int rect_startnum) = 0;		
 	virtual void		Init() = 0;																		
 	virtual void		Control(int key, POS_CC<float> boss_cc, int sound_startnum,int rect_startnum, bool both_death) = 0;
-	virtual void		Draw(int t_num, int rect_num, LPDIRECT3DDEVICE9 device_data)		   = 0;		//•`‰æ
-	virtual void		DrawEffectFont(int t_num, int rect_startnum,LPDIRECT3DDEVICE9 device_data) = 0;
+	//•`‰æ
+	virtual void		Draw(int rect_num) = 0;
+	virtual void		DrawEffectFont(int rect_startnum) = 0;
 	virtual int			SetAnimetion(int max_animetion, int anime_count ,int rect_num , int m_chara_num)	= 0;
 
 	//‹¤’Ê‚·‚éˆ—

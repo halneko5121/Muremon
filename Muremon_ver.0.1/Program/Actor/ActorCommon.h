@@ -106,7 +106,6 @@ public:
 	*	関数名	：float SetSpeed();														*
 	*	引数	：int key			キー情報											*
 	*	戻り値	：float m_randspeed			移動スピード								*
-	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
 	float	SetSpeed(int key);
 
@@ -115,7 +114,6 @@ public:
 	*	関数名	：POS_CC<float> SetAtk_Pos();											*
 	*	引数	：float	start_x,start_y		開始座標									*
 	*	戻り値	：中心座標																*
-	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
 	POS_CC<float> SetAtk_Pos(float start_x, float start_y);
 
@@ -124,7 +122,6 @@ public:
 	*	関数名	：CHARADATA SetAtk(int key , CHARADATA set_charadata);					*
 	*	引数	：int key キー情報		CHARADATA　：set_charadata　キャラ情報			*
 	*	戻り値	：キャラデータ(フラグの状態)											*
-	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
 	CHARADATA SetAtk_Flag(int key, CHARADATA set_charadata);
 
@@ -135,7 +132,6 @@ public:
 	*			：float chara_radius													*
 	*			：float range_font														*
 	*	戻り値	：中心座標																*
-	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
 	POS_CC<float> SetE_Font(POS_CC<float> font_cc, float chara_radius, float range_font);
 
@@ -145,7 +141,6 @@ public:
 	*	引数	：float change_x ,float change_y	揺れ幅								*
 	*			：POS_CC<float> font_cc					中心座標						*
 	*	戻り値	：中心座標																*
-	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
 	POS_CC<float> EffectShake(float change_x, float change_y, POS_CC<float> font_cc);
 
@@ -154,7 +149,6 @@ public:
 	*	関数名	：void CharaAttack_1(bool flag_atk1_charakind , int m_chara_num)		*
 	*	引数	：int  m_chara_num			キャラの『何体目か』						*
 	*	戻り値	：中心座標																*
-	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
 	POS_CC<float> CharaAttack_1(int m_chara_num);
 
@@ -164,7 +158,6 @@ public:
 	*	引数	：POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e,	味方、敵の中心座標	*
 	*			：int m_chara_num							キャラの何体目か			*
 	*	戻り値	：敵と当たったかどうかのフラグ											*
-	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
 	bool HitCheck(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int m_chara_num);
 
@@ -174,8 +167,6 @@ public:
 	*	引数	：POS_CC<float> draw_cc			中心座標								*
 	*			：F_RECT　rect_pos			矩形情報(各半径情報)						*
 	*	戻り値	：与えた中心座標からrect_posの値を与えたtop,bottom,left,right			*
-	*	作成日	：2009年 3月 19日														*
-	*	更新日	：	年	月	 日							by	三上　亘					*
 	************************************************************************************/
 	F_RECT CalculateBack_Rect(POS_CC<float> draw_cc, F_RECT rect_pos);
 

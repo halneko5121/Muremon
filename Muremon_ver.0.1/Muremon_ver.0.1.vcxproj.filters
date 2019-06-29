@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="program\Chara\Boss.cpp" />
-    <ClCompile Include="program\Chara\Chara_Nikuman.cpp" />
-    <ClCompile Include="program\Chara\Chara_Noppo.cpp" />
-    <ClCompile Include="program\Chara\Chara_Yoshi.cpp" />
-    <ClCompile Include="program\Chara\CharaCommon.cpp" />
     <ClCompile Include="program\gManage\GameManage.cpp" />
     <ClCompile Include="program\gManage\Revenant.cpp" />
     <ClCompile Include="program\gManage\SceneManage.cpp" />
@@ -32,13 +27,13 @@
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp" />
+    <ClCompile Include="Program\Actor\Boss.cpp" />
+    <ClCompile Include="Program\Actor\Chara_Nikuman.cpp" />
+    <ClCompile Include="Program\Actor\Chara_Noppo.cpp" />
+    <ClCompile Include="Program\Actor\Chara_Yoshi.cpp" />
+    <ClCompile Include="Program\Actor\CharaCommon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="program\Chara\Boss.h" />
-    <ClInclude Include="program\Chara\Chara_Nikuman.h" />
-    <ClInclude Include="program\Chara\Chara_Noppo.h" />
-    <ClInclude Include="program\Chara\Chara_Yoshi.h" />
-    <ClInclude Include="program\Chara\CharaCommon.h" />
     <ClInclude Include="program\gManage\GameManage.h" />
     <ClInclude Include="program\gManage\Revenant.h" />
     <ClInclude Include="program\gManage\SceneManage.h" />
@@ -67,5 +62,10 @@
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitWave.h" />
+    <ClInclude Include="Program\Actor\Boss.h" />
+    <ClInclude Include="Program\Actor\Chara_Nikuman.h" />
+    <ClInclude Include="Program\Actor\Chara_Noppo.h" />
+    <ClInclude Include="Program\Actor\Chara_Yoshi.h" />
+    <ClInclude Include="Program\Actor\CharaCommon.h" />
   </ItemGroup>
 </Project>

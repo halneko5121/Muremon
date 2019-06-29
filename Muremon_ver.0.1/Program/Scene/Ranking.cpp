@@ -278,7 +278,7 @@ void C_Ranking::RankLoad()
 
 	for(int i = 0; i < 5; i++)
 	{
-		fscanf(fp,"%d,%d,%d,%d\n",&data[i].name[0],&data[i].name[1],&data[i].name[2],&data[i].score);
+		fscanf(fp,"%hhd,%hhd,%hhd,%d\n",&data[i].name[0],&data[i].name[1],&data[i].name[2],&data[i].score);
 	}
 	fclose(fp);
 	newdata.name[0] = newdata.name[1] = newdata.name[2] = 0;		//ƒvƒŒƒC‚µ‚½name‚Ì‰Šú‰»

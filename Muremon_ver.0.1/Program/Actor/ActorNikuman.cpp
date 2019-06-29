@@ -9,6 +9,9 @@ CHARADATA init_charadata_niku = {
 	//中心座標
 };
 
+/**
+ * @brief コンストラクタ
+ */
 C_Chara_Nikuman::C_Chara_Nikuman(C_Vertex *vertex ,C_Texture  *texture, LPDIRECT3DDEVICE9  device , C_DSound *sound)
 {
 	m_pTexture	= new C_Texture();
@@ -21,11 +24,18 @@ C_Chara_Nikuman::C_Chara_Nikuman(C_Vertex *vertex ,C_Texture  *texture, LPDIRECT
 
 }
 
+/**
+ * @brief デストラクタ
+ */
 C_Chara_Nikuman::~C_Chara_Nikuman(void)
 {
 }
 
-void C_Chara_Nikuman::Init()								
+/**
+ * @brief 初期化
+ */
+void
+C_Chara_Nikuman::Init()								
 {
 	//praivate変数
 	s_atk_start_y = 0.f;
@@ -52,7 +62,11 @@ void C_Chara_Nikuman::Init()
 	}
 }
 
-void C_Chara_Nikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
+/**
+ * @brief 更新
+ */
+void
+C_Chara_Nikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
 {
 	m_randspeed = 0.f;
 
@@ -141,7 +155,11 @@ void C_Chara_Nikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum
 	}
 }
 
-int C_Chara_Nikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int m_chara_num)
+/**
+ * @brief アニメ設定
+ */
+int
+C_Chara_Nikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int m_chara_num)
 {
 	static int delay = 0;
 
@@ -159,8 +177,11 @@ int C_Chara_Nikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_n
 	return anime_count;
 }
 
-
-void C_Chara_Nikuman::DrawEffectFont(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
+/**
+ * @brief フォントの描画処理
+ */
+void
+C_Chara_Nikuman::DrawEffectFont(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
 {
 	//フォントエフェクトの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -173,7 +194,11 @@ void C_Chara_Nikuman::DrawEffectFont(int t_num, int rect_startnum, LPDIRECT3DDEV
 	}
 }
 
-void C_Chara_Nikuman::Draw(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
+/**
+ * @brief 描画処理
+ */
+void
+C_Chara_Nikuman::Draw(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 device_data)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -183,7 +208,11 @@ void C_Chara_Nikuman::Draw(int t_num, int rect_startnum, LPDIRECT3DDEVICE9 devic
 	}
 }
 
-POS_CC<float> C_Chara_Nikuman::CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc)		//キー入力による動作その2
+/**
+ * @brief 攻撃処理
+ */
+POS_CC<float>
+C_Chara_Nikuman::CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc)		//キー入力による動作その2
 {
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
@@ -200,8 +229,11 @@ POS_CC<float> C_Chara_Nikuman::CharaAttack_2(int m_chara_num, POS_CC<float> boss
 	return m_charadata[m_chara_num].draw_cc;
 }
 
-
-void C_Chara_Nikuman::DeathControl(int m_chara_num , int sound_num, int rect_startnum)			//死亡処理
+/**
+ * @brief 死亡処理
+ */
+void
+C_Chara_Nikuman::DeathControl(int m_chara_num , int sound_num, int rect_startnum)			//死亡処理
 {
 	m_charadata[m_chara_num].animetion = 0;
 	m_charadata[m_chara_num].animetion	= SetAnimetion(NULL,m_charadata[m_chara_num].animetion,ANIME_DEATH_NIKU,m_chara_num);

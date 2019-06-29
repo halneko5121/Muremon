@@ -10,6 +10,9 @@ F_RECT rect_pos_p[] = {
 
 F_RECT rect_pos_e = {DRAW_E_RAD_X,DRAW_E_RAD_Y,DRAW_E_RAD_X,DRAW_E_RAD_Y};
 
+/**
+ * @brief コンストラクタ
+ */
 C_CharaCommon::C_CharaCommon(void)
 {
 	m_pOrbit	 = new C_OrbitCalculation();
@@ -17,19 +20,29 @@ C_CharaCommon::C_CharaCommon(void)
 	m_pSound	 = new C_DSound();
 }
 
+/**
+ * @brief デストラクタ
+ */
 C_CharaCommon::~C_CharaCommon(void)
 {
 }
 
-POS_CC<float> C_CharaCommon::CharaAttack_1(int m_chara_num)
+/**
+ * @brief 攻撃処理
+ */
+POS_CC<float>
+C_CharaCommon::CharaAttack_1(int m_chara_num)
 {
 	m_charadata[m_chara_num].draw_cc.x += m_charadata[m_chara_num].speed;			//右に移動
 
 	return m_charadata[m_chara_num].draw_cc;
 }
 
-
-bool C_CharaCommon::HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id)
+/**
+ * @brief 衝突チェック
+ */
+bool
+C_CharaCommon::HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id)
 {
 	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
 	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
@@ -60,9 +73,13 @@ bool C_CharaCommon::HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, i
 	return FALSE;
 }
 
-F_RECT C_CharaCommon::CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos)
+/**
+ * @brief 四隅を計算
+ */
+F_RECT
+C_CharaCommon::CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos)
 {
-	//中心座標からそれぞれ絵の半径を加・減算 
+	// 中心座標からそれぞれ絵の半径を加・減算 
 	rect_pos.left		= (draw_cc.x - rect_pos.left);
 	rect_pos.top		= (draw_cc.y - rect_pos.top);
 	rect_pos.right		= (draw_cc.x + rect_pos.right);
@@ -71,7 +88,11 @@ F_RECT C_CharaCommon::CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos
 	return rect_pos;
 }
 
-float C_CharaCommon::SetSpeed(int key)
+/**
+ * @brief スピードの設定
+ */
+float
+C_CharaCommon::SetSpeed(int key)
 {
 	switch(key){
 	case KEY_SKY_2://肉まんの攻撃2は計算方法が違うので
@@ -84,7 +105,11 @@ float C_CharaCommon::SetSpeed(int key)
 	return m_randspeed;
 }
 
-CHARADATA C_CharaCommon::SetAtk_Flag(int key , CHARADATA set_charadata)
+/**
+ * @brief 攻撃フラグの設定
+ */
+CHARADATA
+C_CharaCommon::SetAtk_Flag(int key , CHARADATA set_charadata)
 {
 	switch(key){
 		case KEY_GROUND_1: case KEY_GROUND_2: case KEY_GROUND_3:
@@ -97,7 +122,11 @@ CHARADATA C_CharaCommon::SetAtk_Flag(int key , CHARADATA set_charadata)
 	return set_charadata;
 }
 
-POS_CC<float> C_CharaCommon::SetAtk_Pos(float start_x, float start_y)
+/**
+ * @brief 位置の設定
+ */
+POS_CC<float>
+C_CharaCommon::SetAtk_Pos(float start_x, float start_y)
 {
 	POS_CC<float> draw_cc = {0.f,0.f};
 
@@ -107,8 +136,11 @@ POS_CC<float> C_CharaCommon::SetAtk_Pos(float start_x, float start_y)
 	return draw_cc;
 }
 
-
-POS_CC<float> C_CharaCommon::SetE_Font(POS_CC<float> font_cc ,float chara_radius, float range_font)
+/**
+ * @brief フォント位置の設定
+ */
+POS_CC<float>
+C_CharaCommon::SetE_Font(POS_CC<float> font_cc ,float chara_radius, float range_font)
 {
 	POS_CC<float> pos_effectfont = { 0.f	,0.f };
 
@@ -119,7 +151,11 @@ POS_CC<float> C_CharaCommon::SetE_Font(POS_CC<float> font_cc ,float chara_radius
 	return pos_effectfont;
 }
 
-POS_CC<float> C_CharaCommon::EffectShake(float change_x ,float change_y, POS_CC<float> font_cc)
+/**
+ * @brief シェイク効果
+ */
+POS_CC<float>
+C_CharaCommon::EffectShake(float change_x ,float change_y, POS_CC<float> font_cc)
 {
 	static float shake_x	,shake_y	= 0.f; 
 	static bool  flag_shake_right,flag_shake_down = false; 

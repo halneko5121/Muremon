@@ -1,5 +1,16 @@
 #include "ActorCommon.h"
 
+namespace
+{
+	// 速度関係
+	const int SPEED_RAND		= (450 / 60);	// キャラの速さ		
+	const int SPEED_MIN			= (200 / 60);
+
+	// 肉まん(特殊)
+	const int SPEED_RAND_NIKU	= 15;			// その回数をかけて目的地点に到達する
+	const int SPEED_MIN_NIKU	= 15;
+}
+
 //l,t,r,b
 //中心から、上下左右の幅
 F_RECT rect_pos_p[] = {

@@ -8,9 +8,6 @@
  *													by	三上　亘					*
  ************************************************************************************/
 
-/*================================
-		Include
-=================================*/
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
 #include "Library/DirectSound.h"
@@ -22,13 +19,6 @@
 /*================================
 		Define
 =================================*/
-//速度関係
-#define SPEED_RAND					(450/60)	//キャラの速さ		
-#define SPEED_MIN					(200/60)	
-//肉まん(特殊)
-#define SPEED_RAND_NIKU				(15)		//その回数をかけて目的地点に到達する			
-#define SPEED_MIN_NIKU				(15)	
-
 //シェイク関係
 #define SHAKE_X						(1.f)		//揺れ幅
 #define SHAKE_Y						(0.5f)

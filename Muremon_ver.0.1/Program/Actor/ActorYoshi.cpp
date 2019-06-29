@@ -151,7 +151,7 @@ C_Chara_Yoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int 
 			
 			if(!m_charadata[i].flag_effectfont){
 				if(m_count_effect[i]++ < FONT_SET){
-					pos_effectfont[i] = SetE_Font(m_charadata[i].draw_cc,RADIUS_NIKU,POS_HITFONT_X);
+					pos_effectfont[i] = SetE_Font(m_charadata[i].draw_cc, RADIUS_YOSHI,POS_HITFONT_X);
 					m_charadata[i].flag_effectfont	= true;
 				}	
 			}

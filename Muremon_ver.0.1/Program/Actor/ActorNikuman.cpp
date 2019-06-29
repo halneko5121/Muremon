@@ -134,7 +134,7 @@ C_Chara_Nikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int
 		if(m_charadata[i].flag_hit){
 			//’†SÀ•W‚ª‰æ–ÊŠO‚È‚ç€–S
 			if( (m_charadata[i].draw_cc.x < -RADIUS_NIKU)  || (m_charadata[i].draw_cc.x > GAMESIZE_WIDE  + RADIUS_NIKU) &&
-				(m_charadata[i].draw_cc.y < -RADIUS_NOPPO) || (m_charadata[i].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NOPPO) ){
+				(m_charadata[i].draw_cc.y < -RADIUS_NIKU) || (m_charadata[i].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NIKU) ){
 					m_charadata[i].flag_death = true;
 			}
 

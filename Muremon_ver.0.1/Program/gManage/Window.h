@@ -14,8 +14,6 @@
 #include <windows.h>
 #include <time.h>
 #include <stdlib.h>
-//#include "..\\resource.h"
-//#include "DirectGraphics.h"
 
 //define
 #define WINDOW_MODE			(true)						//true:ウィンドウ	false:フルスクリーン

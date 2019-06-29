@@ -33,9 +33,6 @@ namespace
  */
 C_ActorNikuman::C_ActorNikuman(C_Vertex* vertex , C_Texture* texture, C_DSound* sound)
 {
-	mTexture	= new C_Texture();
-	mVertex		= new C_Vertex();
-
 	mVertex		= vertex;
 	mTexture	= texture;
 	mSound		= sound;

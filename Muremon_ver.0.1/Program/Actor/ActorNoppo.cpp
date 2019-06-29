@@ -36,9 +36,6 @@ namespace
  */
 C_ActorNoppo::C_ActorNoppo(C_Vertex* vertex, C_Texture* texture, C_DSound* sound)
 {
-	mTexture	= new C_Texture();
-	mVertex		= new C_Vertex();
-
 	mTexture	= texture;
 	mVertex		= vertex;
 	mSound		= sound;

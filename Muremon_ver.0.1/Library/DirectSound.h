@@ -24,6 +24,10 @@
 class C_DSound
 {
 public:
+	static C_DSound* GetInstance();
+	static void Create();
+	static void Destroy();
+	
 	C_DSound();
 
 	/*===================================================
@@ -104,11 +108,13 @@ public:
 	void UnInitDSound();
 
 private:
-	LPDIRECTSOUND8			pDSound;
-	LPDIRECTSOUNDBUFFER		pDSPrimary;				// プライマリーバッファ
-	LPDIRECTSOUNDBUFFER		pDSBuffer[MAX_SOUND];	// セカンダリバッファ
-
-	int maxSou;
+	static C_DSound*		mInstance;
+	LPDIRECTSOUND8			mDirectSound;
+	LPDIRECTSOUNDBUFFER		mPrimaryBuffer;					// プライマリーバッファ
+	LPDIRECTSOUNDBUFFER		mSecondaryBuffer[MAX_SOUND];	// セカンダリバッファ
+	int						mMaxSound;
 };
+
+static C_DSound* GetDirectSound() { return C_DSound::GetInstance(); }
 
 #endif//_DIRECTSOUND_H_

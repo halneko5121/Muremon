@@ -13,7 +13,6 @@
 #include "program/gManage/Window.h"
 #include "program/gManage/SceneManage.h"
 #include "Library/DirectFont.h"
-#include "LIbrary/DirectSound.h"
 #include "LIbrary/Vertex.h"
 
 #include "program/Scene/Logo.h"
@@ -28,7 +27,6 @@ class C_GameMain
 private:
 	C_Window*		mWindow;	// ウィンドウクラスへのポインタ
 	C_DGraphics*	mGraphics;	// グラフィッククラスへのポインタ
-	C_DSound*		mSound;		// サウンドクラスへのポインタ
     C_DFont*		mFont;		// フォントクラスへのポインタ
 	C_SceneManage*	mScene;		// シーンクラスへのポインタ
 	DWORD			mBackground;

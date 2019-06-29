@@ -2,7 +2,6 @@
 
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "Library/DirectSound.h"
 #include "Program/Util/Control.h"
 #include "Program/D_Game.h"
 
@@ -80,7 +79,6 @@ private:
 	C_Texture	*texture;
 	C_Vertex	*vertex;
 	C_Control	*key;
-	C_DSound	*sound;
 
 	LPDIRECT3DDEVICE9 pDevice;
 
@@ -180,6 +178,6 @@ public:
 	void Mission13D();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void Mission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev,C_DSound * asound);
+	C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
 	~C_Mission(void);
 };

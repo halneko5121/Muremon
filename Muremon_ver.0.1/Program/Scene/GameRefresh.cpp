@@ -1,12 +1,11 @@
 //---------------------------------------------
 //
 //      ゲーム本編
-//      作成開始日:	3月17日
-//			更新日:	3月18日
 //			作成者:	平野
 //
 //---------------------------------------------
 #include "GameRefresh.h"
+#include "Library/DirectSound.h"
 
 POS_CC<float> boss_cc = { 600, 350 };
 
@@ -15,7 +14,6 @@ C_GameRefresh::C_GameRefresh(void)
 	mVertex  = new C_Vertex();
 	mTexture = new C_Texture();
 	mKey		= new C_Control();
-	mSound	= new C_DSound();
 
 	mStartAlpha = mAlpha = 0;	//アルファ値
 
@@ -52,15 +50,13 @@ C_GameRefresh::~C_GameRefresh(void)
 {
 }
 
-void C_GameRefresh::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score)
+void C_GameRefresh::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
+	C_SceneManage::InitScene(apDev, apFont, score);
 
-	mSound = apSound;
-
-	mNiku	= new C_ActorNikuman(mVertex, mTexture, apSound);
-	mNoppo	= new C_ActorNoppo(mVertex, mTexture, apSound);
-	mYoshi	= new C_ActorYoshi(mVertex, mTexture, apSound);
+	mNiku	= new C_ActorNikuman(mVertex, mTexture);
+	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
+	mYoshi	= new C_ActorYoshi(mVertex, mTexture);
 
 	mNiku->Init();
 	mNoppo->Init();
@@ -68,7 +64,7 @@ void C_GameRefresh::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound
 	
 	//mBoss->Init();
 
-	mBoss = new C_Boss(mTexture,mVertex,pDevice,apSound);
+	mBoss = new C_Boss(mTexture,mVertex,pDevice);
 
 	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt",apDev);		//絵の読み込み
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
@@ -84,7 +80,7 @@ bool C_GameRefresh::RunScene()
 void C_GameRefresh::ControlScene()
 {
 	if(mSameState == G_START_SCENE){
-		mSound->SoundPlay(false,S_GAME_START);
+		GetDirectSound()->SoundPlay(false, S_GAME_START);
 		FadeControl();
 	}
 	else if(mSameState == G_GAME_SCENE){
@@ -92,7 +88,7 @@ void C_GameRefresh::ControlScene()
 		boss_cc.x =	mBoss->boss_move_x;
 		boss_cc.y = mBoss->boss_move_y;
 	
-		mSound->SoundPlay(true,S_BGM_BATTLE);
+		GetDirectSound()->SoundPlay(true, S_BGM_BATTLE);
 
 		mKeyState = mKey->KeyCheckGame();
 
@@ -276,7 +272,7 @@ int C_GameRefresh::EndScene()
 	//タイトルへ
 	ChangeScene(TITLE);
 
-	mSound->SoundStop(true,S_BGM_BATTLE);
+	GetDirectSound()->SoundStop(true, S_BGM_BATTLE);
 
 	mTexture->AllReleaseTexture();
 	mVertex->AllReleaseRect();

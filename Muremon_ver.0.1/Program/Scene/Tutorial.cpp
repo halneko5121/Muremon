@@ -1,12 +1,11 @@
 //---------------------------------------------
 //
 //      操作説明
-//      作成開始日:	3月17日
-//			更新日:	3月18日
 //			作成者:	平野
 //
 //---------------------------------------------
 #include "Tutorial.h"
+#include "Library/DirectSound.h"
 
 C_Tutorial::C_Tutorial(void)
 {
@@ -33,10 +32,9 @@ C_Tutorial::~C_Tutorial(void)
 {
 }
 
-void C_Tutorial::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound, int score)
+void C_Tutorial::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
 {
-	sound = apSound;
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
+	C_SceneManage::InitScene(apDev, apFont, score);
 
 	texture->LoadTextureData("Data\\TextureData\\Tutorial.txt",apDev);		//絵の読み込み
 	vertex->LoadRect("Data\\RectData\\Tutorial.txt");
@@ -51,8 +49,7 @@ bool C_Tutorial::RunScene()
 
 void C_Tutorial::ControlScene()
 {
-	sound->SoundPlay(false,S_BGM_TITLE);
-	//FadeControl();
+	GetDirectSound()->SoundPlay(false, S_BGM_TITLE);
 
 	KeyControl();
 
@@ -136,7 +133,7 @@ void C_Tutorial::KeyControl()
 		scene_change = false;
 	}
 	if(key_state == KEY_LEFT){	//←が押されたら
-		sound->SoundPlay(false,S_SE_CURSOR_MOVE);
+		GetDirectSound()->SoundPlay(false, S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_NORMAL){
 			flag_draw_state = TR_REFRESH;
 		}
@@ -145,7 +142,7 @@ void C_Tutorial::KeyControl()
 		}
 	}
 	if(key_state == KEY_RIGHT){	//→が押されたら
-		sound->SoundPlay(false,S_SE_CURSOR_MOVE);
+		GetDirectSound()->SoundPlay(false, S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_REFRESH){
 			flag_draw_state = TR_NORMAL;
 		}

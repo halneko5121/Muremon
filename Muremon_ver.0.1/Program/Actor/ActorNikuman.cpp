@@ -1,4 +1,5 @@
 #include "ActorNikuman.h"
+#include "Library/DirectSound.h"
 
 namespace 
 {
@@ -31,11 +32,10 @@ namespace
 /**
  * @brief コンストラクタ
  */
-C_ActorNikuman::C_ActorNikuman(C_Vertex* vertex , C_Texture* texture, C_DSound* sound)
+C_ActorNikuman::C_ActorNikuman(C_Vertex* vertex , C_Texture* texture)
 {
 	mVertex		= vertex;
 	mTexture	= texture;
-	mSound		= sound;
 }
 
 /**
@@ -120,7 +120,7 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 		if(!mCharaData[i].flag_death){
 			if(!boss_death){
 				if(HitCheck(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
-					mSound->SoundPlay(false,S_NIKUMAN);
+					GetDirectSound()->SoundPlay(false,S_NIKUMAN);
 					mCharaData[i].flag_hit		= true;
 					mCharaData[i].flag_death	= true;	
 					SetFlagHit(true);

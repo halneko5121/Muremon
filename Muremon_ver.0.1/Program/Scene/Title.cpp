@@ -1,19 +1,17 @@
 //---------------------------------------------
 //
 //      タイトル
-//      作成開始日:	3月17日
-//			更新日:	3月20日
 //			作成者:	平野
 //
 //---------------------------------------------
 #include "Title.h"
+#include "Library/DirectSound.h"
 
 C_Title::C_Title(void)
 {
 	vertex  = new C_Vertex();
 	texture = new C_Texture();
 	key		= new C_Control();
-	sound	= new C_DSound();
 
 	cursor_posi.x = CURSOR_X;
 	cursor_posi.y = CURSOR_Y;
@@ -58,11 +56,9 @@ C_Title::~C_Title(void)
 {
 }
 
-void C_Title::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score)
+void C_Title::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
-
-	sound = apSound;
+	C_SceneManage::InitScene(apDev, apFont, score);
 
 	texture->LoadTextureData("Data\\TextureData\\title.txt",apDev);		//絵の読み込み
 	vertex->LoadRect("Data\\RectData\\title.txt");
@@ -77,7 +73,7 @@ bool C_Title::RunScene()
 
 void C_Title::ControlScene()
 {
-	sound->SoundPlay(true,S_BGM_TITLE);
+	GetDirectSound()->SoundPlay(true,S_BGM_TITLE);
 
 	FadeControl();
 	PosiDrawControl();
@@ -160,7 +156,7 @@ int C_Title::EndScene()
 {
 	ChangeScene(flag_scene_change);
 
-	sound->SoundStop(true,S_BGM_TITLE);
+	GetDirectSound()->SoundStop(true,S_BGM_TITLE);
 
 	texture->AllReleaseTexture();
 	vertex->AllReleaseRect();
@@ -249,14 +245,14 @@ void C_Title::KeyControl()
 	key_state = key->KeyCheck();
 
 	//めっちゃ上下押されても違和感にないように
-	if(sound->SoundPlayCheck(S_SE_CURSOR_MOVE)){
+	if(GetDirectSound()->SoundPlayCheck(S_SE_CURSOR_MOVE)){
 		if(key_state == KEY_UP || key_state == KEY_DOWN){
-			sound->SoundStop(true,S_SE_CURSOR_MOVE);
+			GetDirectSound()->SoundStop(true,S_SE_CURSOR_MOVE);
 		}
 	}
 
 	if(key_state == KEY_Z){
-		sound->SoundPlay(false,S_SE_OK);
+		GetDirectSound()->SoundPlay(false,S_SE_OK);
 		if(draw_scene_change == DRAW_Z_PUSH){		//PUSH_Zが表示されている時にＺキーが押されたら
 			draw_scene_change = DRAW_MENU;
 		}
@@ -290,7 +286,7 @@ void C_Title::KeyControl()
 	}
 
 	if(key_state == KEY_UP){		//↑キーが押されたら
-		if(draw_scene_change != DRAW_Z_PUSH) sound->SoundPlay(false,S_SE_CURSOR_MOVE);
+		if(draw_scene_change != DRAW_Z_PUSH) GetDirectSound()->SoundPlay(false,S_SE_CURSOR_MOVE);
 		flag_select--;
 		if(draw_scene_change == DRAW_MENU){
 			if(flag_select < G_START){
@@ -309,7 +305,7 @@ void C_Title::KeyControl()
 	}
 
 	if(key_state == KEY_DOWN){	//↓キーが押されたら
-		if(draw_scene_change != DRAW_Z_PUSH) sound->SoundPlay(false,S_SE_CURSOR_MOVE);
+		if(draw_scene_change != DRAW_Z_PUSH) GetDirectSound()->SoundPlay(false,S_SE_CURSOR_MOVE);
 		flag_select++;
 		if(draw_scene_change == DRAW_MENU){
 			if(flag_select > G_END){
@@ -328,7 +324,7 @@ void C_Title::KeyControl()
 	}
 
 	if(key_state == KEY_X){
-		sound->SoundPlay(false,S_CANCEL);
+		GetDirectSound()->SoundPlay(false, S_CANCEL);
 		if(draw_scene_change == DRAW_MENU){
 			draw_scene_change = DRAW_Z_PUSH;
 			flag_select = G_START;

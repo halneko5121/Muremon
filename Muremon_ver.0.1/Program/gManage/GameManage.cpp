@@ -1,14 +1,12 @@
 //---------------------------------------------
 //
 //      ゲーム全体の管理を行う
-//      作成開始日:3月17日
-//			更新日:3月17日
 //			作成者:平野
 //
 //---------------------------------------------
 
-//include
 #include "GameManage.h"
+#include "LIbrary/DirectSound.h"
 
 //////////////////////////////////////////////////////////
 //
@@ -24,7 +22,7 @@ void C_GameMain::InitGameMain(void)
 	mGraphics	= new C_DGraphics;
     mFont		= new C_DFont;
 	mScene		= new C_Logo();
-	mSound		= new C_DSound;
+	C_DSound::Create();
 }
 
 //////////////////////////////////////////////////////////
@@ -58,7 +56,7 @@ int WINAPI C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR
 	}
 
 	//DirectSound初期化
-	if(FAILED(mSound->InitDSound(mWindow->GetHwnd())))
+	if(FAILED(GetDirectSound()->InitDSound(mWindow->GetHwnd())))
 	{
 		MessageBox(NULL,TEXT("DirectSoundの初期化に失敗"),NULL,MB_OK);
 		return 0;
@@ -90,9 +88,9 @@ int C_GameMain::MsgLoop(void)
 
 	mGraphics->SetRender();	//描画設定
 
-    mScene->InitScene(mGraphics->GetDevice(), mFont, mSound, 0);
+    mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
 
-	mSound->LoadSoundData("Data\\sound_data.txt");
+	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
 
 	srand((unsigned int)time(NULL));
 
@@ -157,7 +155,7 @@ void C_GameMain::ReleaseGameMain(void)
 	delete mGraphics;
     delete mFont;
 	delete mWindow;
-	delete mSound;
+	C_DSound::Destroy();
 }
 
 //////////////////////////////////////////////////////////
@@ -174,32 +172,32 @@ void C_GameMain::ControlGame(void)
 	case LOGO:
 		delete mScene;
 		mScene = new C_Logo();
-		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
+		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
 		break;
     case TITLE:
         delete mScene;
 		mScene = new C_Title();
-		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
+		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
         break;
 	case TUTORIAL:
 		delete mScene;
 		mScene = new C_Tutorial();
-		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
+		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
 		break;
 	case GAME_REFRESH:
         delete mScene;
 		mScene = new C_GameRefresh();
-		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
+		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
         break;
 	case GAME_NORMAL:
         delete mScene;
 		mScene = new C_GameNormal();
-		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
+		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
         break;
 	case RANKING:
 		delete mScene;
 		mScene = new C_Ranking();
-		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,mScore);
+		mScene->InitScene(mGraphics->GetDevice(), mFont, mScore);
 		break;
 	case GAME_END:
 		PostQuitMessage(0);

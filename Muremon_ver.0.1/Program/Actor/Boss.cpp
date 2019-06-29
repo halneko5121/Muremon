@@ -1,11 +1,11 @@
 #include "Boss.h"
+#include "Library/DirectSound.h"
 
-C_Boss::C_Boss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev,C_DSound* asound)
+C_Boss::C_Boss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
 	texture = m_texture;
 	vertex	= m_vertex;
 	pDevice = apDev;
-	sound	= asound;
 
 	//ボス
 	boss_fall_flag=false;
@@ -255,7 +255,10 @@ void C_Boss::BossControl(int play_mode)
 			}
 		}
 
-		if(boss_fadeout_time==BOSS_FALL_TIME)	sound->SoundPlay(false,S_DEAD);
+		if (boss_fadeout_time == BOSS_FALL_TIME)
+		{
+			GetDirectSound()->SoundPlay(false, S_DEAD);
+		}
 
 		//「No～」のフェードインアウト
 		switch(no_fade_flag)

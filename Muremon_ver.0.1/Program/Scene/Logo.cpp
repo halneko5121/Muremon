@@ -1,8 +1,6 @@
 //---------------------------------------------
 //
 //      ƒƒS
-//      ì¬ŠJŽn“ú:	3ŒŽ17“ú
-//			XV“ú:	3ŒŽ20“ú
 //			ì¬ŽÒ:	•½–ì
 //
 //---------------------------------------------
@@ -22,9 +20,9 @@ C_Logo::~C_Logo(void)
 {
 }
 
-void C_Logo::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound, int score)
+void C_Logo::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
+	C_SceneManage::InitScene(apDev, apFont, score);
 	texture->LoadTextureData("Data\\TextureData\\logo.txt", apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("Data\\RectData\\logo.txt");
 }

@@ -9,21 +9,46 @@
 
 #include "DirectSound.h"
 
+// 唯一のインスタンスを nullptr で初期化
+C_DSound* C_DSound::mInstance = nullptr;
+
+/**
+ * @brief インスンタンスの取得
+ */
+C_DSound*
+C_DSound::GetInstance()
+{
+	return mInstance;
+}
+
+void
+C_DSound::Create()
+{
+	mInstance = new C_DSound();
+}
+
+void
+C_DSound::Destroy()
+{
+	delete mInstance;
+	mInstance = nullptr;
+}
+
 C_DSound::C_DSound()
 {
-	maxSou = 0;
+	mMaxSound = 0;
 }
 
 //DirectSoundの初期化
 bool C_DSound::InitDSound(HWND hWnd)
 {
 	//IDirectSound8インターフェイスの取得
-	if(FAILED(DirectSoundCreate8(NULL,&pDSound, NULL)))
+	if(FAILED(DirectSoundCreate8(NULL,&mDirectSound, NULL)))
 	{
 		return false;
 	}
 	//協調レベルの設定
-	if(FAILED(pDSound->SetCooperativeLevel(hWnd,DSSCL_PRIORITY)))
+	if(FAILED(mDirectSound->SetCooperativeLevel(hWnd,DSSCL_PRIORITY)))
 	{
 		return false;
 	}
@@ -39,13 +64,13 @@ bool C_DSound::InitDSound(HWND hWnd)
 //開放処理
 void C_DSound::UnInitDSound()
 {
-	for(short i = 0 ; i < (short)maxSou ; i++)
+	for(short i = 0 ; i < (short)mMaxSound ; i++)
 	{
 		SoundStop(true, i);
-		SAFE_RELEASE(pDSBuffer[i]);
+		SAFE_RELEASE(mSecondaryBuffer[i]);
 	}
-	SAFE_RELEASE(pDSPrimary);
-	SAFE_RELEASE(pDSound);
+	SAFE_RELEASE(mPrimaryBuffer);
+	SAFE_RELEASE(mDirectSound);
 }
 
 //音楽データ読み込み
@@ -64,14 +89,14 @@ bool C_DSound::LoadSoundData(LPTSTR FileName)
 	//ファイルの中身をカウント
 	while(fscanf_s(fp,"%s\n",countFile,sizeof(countFile)) != EOF)
 	{
-		maxSou++;	//ファイル名をカウント
+		mMaxSound++;	//ファイル名をカウント
 	}
 
 	//読み込んでいるファイルを最初の位置に戻す
 	fseek(fp,0,SEEK_SET);
 
 	//読み込み処理
-	for(int i = 0;i < maxSou;i++){
+	for(int i = 0;i < mMaxSound;i++){
 		fscanf_s(fp,"%s\n",countFile,sizeof(countFile));
 		LoadSound(countFile,i);
 	}
@@ -188,9 +213,9 @@ void C_DSound::SoundPlay(bool loop, short ID)
 		return;
 	}
 
-	if(pDSBuffer[ID])
+	if(mSecondaryBuffer[ID])
 	{
-		pDSBuffer[ID]->Play(0, 0, DSBPLAY_LOOPING & loop);
+		mSecondaryBuffer[ID]->Play(0, 0, DSBPLAY_LOOPING & loop);
 	}
 }
 
@@ -202,13 +227,13 @@ void C_DSound::SoundStop(bool ResetFlg, short ID)
 		return;
 	}
 
-	if(pDSBuffer[ID])
+	if(mSecondaryBuffer[ID])
 	{
-		pDSBuffer[ID]->Stop();
+		mSecondaryBuffer[ID]->Stop();
 		if(ResetFlg)
 		{
 			//最初に戻る
-			pDSBuffer[ID]->SetCurrentPosition(0);
+			mSecondaryBuffer[ID]->SetCurrentPosition(0);
 		}
 	}
 }
@@ -221,13 +246,13 @@ bool C_DSound::SoundPlayCheck(short ID)
 		MessageBox(NULL, TEXT("ＩＤが大きすぎます"), NULL, MB_OK);
 		return false;
 	}
-	if(!pDSBuffer[ID])
+	if(!mSecondaryBuffer[ID])
 	{
 		return false;
 	}
 
 	DWORD state;
-	pDSBuffer[ID]->GetStatus(&state);
+	mSecondaryBuffer[ID]->GetStatus(&state);
 
 	return (state & DSBSTATUS_PLAYING);
 }
@@ -239,7 +264,7 @@ void C_DSound::VolumeChange(short volume, short ID)
 	{
 		return;
 	}
-	if(!pDSBuffer[ID])
+	if(!mSecondaryBuffer[ID])
 	{
 		return;
 	}
@@ -252,7 +277,7 @@ void C_DSound::VolumeChange(short volume, short ID)
 	{
 		volume = DSBVOLUME_MIN;
 	}
-	pDSBuffer[ID]->SetVolume(volume);
+	mSecondaryBuffer[ID]->SetVolume(volume);
 }
 
 //プライマリバッファ作成
@@ -267,7 +292,7 @@ bool C_DSound::CreatePriBuffer()
 	dsbd.dwBufferBytes	= 0;
 	dsbd.lpwfxFormat	= NULL;
 	//バッファの作成
-	if(FAILED(pDSound->CreateSoundBuffer(&dsbd, &pDSPrimary, NULL)))
+	if(FAILED(mDirectSound->CreateSoundBuffer(&dsbd, &mPrimaryBuffer, NULL)))
 	{
 		MessageBox(NULL,TEXT("バッファ作成に失敗"),TEXT("DSound"),MB_OK);
 		return false;
@@ -282,7 +307,7 @@ bool C_DSound::CreatePriBuffer()
 	wfex.nBlockAlign	= (wfex.nChannels * wfex.wBitsPerSample) / 8;		//ブロック・アライメント(バイトあたりのビット数)
 	wfex.nAvgBytesPerSec= wfex.nSamplesPerSec * wfex.nBlockAlign;			//１秒間に転送するバイト数
 	
-	if(FAILED(pDSPrimary->SetFormat(&wfex)))
+	if(FAILED(mPrimaryBuffer->SetFormat(&wfex)))
 	{
 		MessageBox(NULL,TEXT("フォーマット設定失敗"),TEXT("DSound"),MB_OK);
 		return false;
@@ -306,16 +331,16 @@ HRESULT C_DSound::CreateSecBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBu
 	dsbd.lpwfxFormat	= &wfex;
 
 	//セカンダリバッファ作成
-	if(SUCCEEDED(hr = pDSound->CreateSoundBuffer(&dsbd, &pDSBuf, NULL)))
+	if(SUCCEEDED(hr = mDirectSound->CreateSoundBuffer(&dsbd, &pDSBuf, NULL)))
 	{
-		hr = pDSBuf->QueryInterface(IID_IDirectSoundBuffer8, (LPVOID*)&pDSBuffer[ID]);
+		hr = pDSBuf->QueryInterface(IID_IDirectSoundBuffer8, (LPVOID*)&mSecondaryBuffer[ID]);
 		pDSBuf->Release();
 
 		void* lpData;
 		DWORD dwSize;
-		pDSBuffer[ID]->Lock(0, dwBufferSize, &lpData, &dwSize, NULL, NULL, 0);
+		mSecondaryBuffer[ID]->Lock(0, dwBufferSize, &lpData, &dwSize, NULL, NULL, 0);
 		memcpy(lpData, lpBuffer, dwSize);
-		pDSBuffer[ID]->Unlock(lpData, dwSize, NULL, 0);
+		mSecondaryBuffer[ID]->Unlock(lpData, dwSize, NULL, 0);
 	}
 	SAFE_DELETE_ARRAY(lpBuffer);
 

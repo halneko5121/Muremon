@@ -1,4 +1,5 @@
 #include "ActorNoppo.h"
+#include "Library/DirectSound.h"
 
 namespace
 {
@@ -34,11 +35,10 @@ namespace
 /**
  * @brief コンストラクタ
  */
-C_ActorNoppo::C_ActorNoppo(C_Vertex* vertex, C_Texture* texture, C_DSound* sound)
+C_ActorNoppo::C_ActorNoppo(C_Vertex* vertex, C_Texture* texture)
 {
 	mTexture	= texture;
 	mVertex		= vertex;
-	mSound		= sound;
 }
 
 /**
@@ -130,16 +130,27 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
-						if(mSound->SoundPlayCheck(S_NOPPO_KOKE)) mSound->SoundStop(true,S_NOPPO_KOKE);
-						mSound->SoundPlay(false,S_NOPPO_KOKE);
-						if( (mSound->SoundPlayCheck(S_NOPPO_PETI)) && (mSound->SoundPlayCheck(S_NOPPO_KOKE)) ) {
-							mSound->SoundStop(true,S_NOPPO_PETI);
+						if (GetDirectSound()->SoundPlayCheck(S_NOPPO_KOKE))
+						{
+							GetDirectSound()->SoundStop(true, S_NOPPO_KOKE);
 						}
-						if(mSound->SoundPlayCheck(S_NOPPO_KOKE)) mSound->SoundPlay(false,(S_NOPPO_PETI));
+						GetDirectSound()->SoundPlay(false,S_NOPPO_KOKE);
+						if( (GetDirectSound()->SoundPlayCheck(S_NOPPO_PETI)) &&
+							(GetDirectSound()->SoundPlayCheck(S_NOPPO_KOKE)) ) 
+						{
+							GetDirectSound()->SoundStop(true,S_NOPPO_PETI);
+						}
+						if (GetDirectSound()->SoundPlayCheck(S_NOPPO_KOKE))
+						{
+							GetDirectSound()->SoundPlay(false, (S_NOPPO_PETI));
+						}
 					}
 					if(mCharaData[i].flag_atk2){
-						if(mSound->SoundPlayCheck(S_NOPPO_GANMEN)) mSound->SoundStop(true,S_NOPPO_GANMEN);
-						mSound->SoundPlay(false,S_NOPPO_GANMEN);
+						if (GetDirectSound()->SoundPlayCheck(S_NOPPO_GANMEN))
+						{
+							GetDirectSound()->SoundStop(true, S_NOPPO_GANMEN);
+						}
+						GetDirectSound()->SoundPlay(false,S_NOPPO_GANMEN);
 					}
 				}
 			}

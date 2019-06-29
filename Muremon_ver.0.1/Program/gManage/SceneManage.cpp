@@ -7,8 +7,8 @@
 //
 //---------------------------------------------
 
-//include
 #include "SceneManage.h"
+#include "Library/DirectSound.h"
 
 //////////////////////////////////////////////////////////
 //
@@ -40,7 +40,7 @@ C_SceneManage::~C_SceneManage()
 //
 //////////////////////////////////////////////////////////
 
-void C_SceneManage::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound,int score)
+void C_SceneManage::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
 {
 	pDevice = apDev;	//デバイスセット
     pFont   = apFont;   //文字表示可能にする

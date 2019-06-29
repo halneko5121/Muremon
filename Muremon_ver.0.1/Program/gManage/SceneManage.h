@@ -10,7 +10,6 @@
 #include "Library/DirectGraphics.h"
 #include "Library/DirectInput.h"
 #include "Library/DirectFont.h"
-#include "Library/DirectSound.h"
 
 //enum
 enum SCENE_NAME
@@ -33,7 +32,6 @@ protected:
 	LPDIRECT3DDEVICE9	pDevice;    //デバイス
 	C_DInput			*pInput;    //インプットクラスのインスタンス
     C_DFont             *pFont;     //フォントクラスのインスタンス
-	C_DSound			*pSound;
 
 public:
     //////////////////////////////////////////////////////////
@@ -59,7 +57,7 @@ public:
     //　　　戻り値：なし
     //
     //////////////////////////////////////////////////////////
-	virtual void InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound,int score);
+	virtual void InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont,int score);
 
 	//////////////////////////////////////////////////////////
     //

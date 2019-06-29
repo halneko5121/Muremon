@@ -97,7 +97,6 @@ class C_Ranking:public C_SceneManage
 private:
 	C_Texture	*texture;
 	C_Vertex	*vertex;
-	C_DSound	*sound;
 	C_Control	*key;
 
 	bool scene_change;	//ƒV[ƒ“‚ª•Ï‚í‚é‚ğ’m‚ç‚¹‚é
@@ -156,7 +155,7 @@ private:
 	bool ranking_flag;
 
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score) override;
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
 	bool RunScene();
 	void ControlScene();
 	void DrawScene();

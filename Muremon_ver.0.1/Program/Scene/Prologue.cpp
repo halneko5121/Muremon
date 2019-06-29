@@ -1,8 +1,6 @@
 //---------------------------------------------
 //
 //      あらすじ
-//      作成開始日:	3月17日
-//			更新日:	3月18日
 //			作成者:	平野
 //
 //---------------------------------------------
@@ -12,7 +10,6 @@ C_Prologue::C_Prologue(void)
 {
 	vertex  = new C_Vertex();
 	texture = new C_Texture();
-	sound	= new C_DSound();
 	key		= new C_Control();
 
 	move_count = 0;
@@ -34,11 +31,9 @@ C_Prologue::~C_Prologue(void)
 {
 }
 
-void C_Prologue::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound, int score)
+void C_Prologue::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
-
-	sound = apSound;
+	C_SceneManage::InitScene(apDev, apFont, score);
 
 	texture->LoadTextureData("Data\\TextureData\\prologue.txt", apDev);		//絵の読み込み
 	vertex->LoadRect("Data\\RectData\\prologue.txt");

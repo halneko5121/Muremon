@@ -20,7 +20,7 @@ public:
 	C_GameRefresh(void);
 	~C_GameRefresh(void);
 
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score) override;
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
 
 	bool RunScene();
 	void ControlScene();
@@ -40,7 +40,6 @@ public:
 private:
 	C_Texture*			mTexture;
 	C_Vertex*			mVertex;
-	C_DSound*			mSound;
 	C_Control*			mKey;
 
 	C_ActorNikuman*		mNiku;

@@ -1,12 +1,11 @@
 //---------------------------------------------
 //
 //      ランキング
-//      作成開始日:	3月17日
-//			更新日:	3月18日
 //			作成者:	平野
 //
 //---------------------------------------------
 #include "Ranking.h"
+#include "Library/DirectSound.h"
 
 FILE *fp;
 struct RANK data[5];
@@ -69,11 +68,9 @@ C_Ranking::~C_Ranking(void)
 {
 }
 
-void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound,int score)
+void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
-	sound = apSound;
-
+	C_SceneManage::InitScene(apDev, apFont, score);
 	add_score = score;
 
 	texture->LoadTextureData("Data\\TextureData\\ranking.txt",apDev);		//絵の読み込み
@@ -91,7 +88,7 @@ bool C_Ranking::RunScene()
 
 void C_Ranking::ControlScene()
 {
-	sound->SoundPlay(true,S_BGM_TITLE);
+	GetDirectSound()->SoundPlay(true,S_BGM_TITLE);
 
 	FadeControl();
 	RankControl(rank);
@@ -106,7 +103,7 @@ void C_Ranking::RankControl(int rank)
 	{
 		if(GetAsyncKeyState(i))
 		{
-			sound->SoundPlay(false,S_SE_CURSOR_MOVE);
+			GetDirectSound()->SoundPlay(false,S_SE_CURSOR_MOVE);
 			key_no = i - 'A';
 			keep_key[flag] = key_no;
 			//newdata.name[flag] = key;
@@ -139,7 +136,7 @@ void C_Ranking::RankControl(int rank)
 		{
 			if(GetAsyncKeyState(VK_RETURN))
 			{
-				sound->SoundPlay(false,S_SE_OK);
+				GetDirectSound()->SoundPlay(false,S_SE_OK);
 				name_alpha[rank][flag]=255;
 				flag++;
 				deray = 0;

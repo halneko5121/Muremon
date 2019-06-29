@@ -1,7 +1,6 @@
 #pragma once
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "Library/DirectSound.h"
 #include "Program/Util/Control.h"
 #include "Program/D_Game.h"
 
@@ -47,7 +46,6 @@ private:
 	C_Texture	*texture;
 	C_Vertex	*vertex;
 	C_Control	*key;
-	C_DSound	*sound;
 
 	LPDIRECT3DDEVICE9 pDevice;
 
@@ -143,7 +141,7 @@ private:
 	float add_boss_life;
 
 public:
-	C_Boss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev,C_DSound * asound);
+	C_Boss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
 	~C_Boss(void);
 
 	void Init();		//èâä˙âª

@@ -1,8 +1,6 @@
 //---------------------------------------------
 //
 //      エンディング
-//      作成開始日:	3月17日
-//			更新日:	3月18日
 //			作成者:	平野
 //
 //---------------------------------------------
@@ -19,9 +17,9 @@ C_Ending::~C_Ending(void)
 {
 }
 
-void C_Ending::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, C_DSound* apSound, int score)
+void C_Ending::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
+	C_SceneManage::InitScene(apDev, apFont, score);
 	texture->LoadTextureData("Data\\TextureData\\ending.txt",apDev);		//絵の読み込み
 	vertex->LoadRect("Data\\RectData\\ending.txt");
 }

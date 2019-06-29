@@ -8,7 +8,6 @@
 
 #include "Library/Texture.h"
 #include "Library/Vertex.h"
-#include "Library/DirectSound.h"
 
 #include "Program/Util/Control.h"
 #include "Program/Util/Orbit/OrbitCalculation.h"
@@ -173,8 +172,6 @@ protected:
 
 	C_Texture*			mTexture;
 	C_Vertex*			mVertex;
-	C_DSound*			mSound;
-
 
 	CHARADATA			mCharaData[MAX_VALLUE_PLAYER];
 	float				mDegSpin[MAX_VALLUE_PLAYER];

@@ -32,7 +32,7 @@ enum ANIME_YOSHI
 class C_ActorYoshi : public C_ActorBase
 {
 public:
-	C_ActorYoshi(C_Vertex *vertex, C_Texture *texture, C_DSound  *Sound);
+	C_ActorYoshi(C_Vertex *vertex, C_Texture *texture);
 	~C_ActorYoshi(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num);

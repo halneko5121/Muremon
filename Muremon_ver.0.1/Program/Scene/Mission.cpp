@@ -1,11 +1,11 @@
 #include "Mission.h"
+#include "Library/DirectSound.h"
 
-C_Mission::C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev,C_DSound* asound)
+C_Mission::C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
 	texture = m_texture;
 	vertex	= m_vertex;
 	pDevice = apDev;
-	sound	= asound;
 
 	key = new C_Control();
 
@@ -105,7 +105,7 @@ int C_Mission::Control()
 	}
 	else if(mission_state == MISSION_MIDDLE){
 		if(flag_sound){
-			sound->SoundPlay(false,S_OSIRASE);
+			GetDirectSound()->SoundPlay(false,S_OSIRASE);
 			flag_sound = false;
 		}
 		MissionControl();
@@ -113,13 +113,13 @@ int C_Mission::Control()
 	else{
 		if(mission_state == MISSION_SEIKO){
 			if(flag_sound2){
-				sound->SoundPlay(false,S_M_CLEAR);
+				GetDirectSound()->SoundPlay(false,S_M_CLEAR);
 				flag_sound = false;
 			}
 		}
 		else if(mission_state == MISSION_SIPPAI){
 			if(flag_sound2){
-				sound->SoundPlay(false,S_M_OVER);
+				GetDirectSound()->SoundPlay(false,S_M_OVER);
 				flag_sound2 = false;
 			}
 		}

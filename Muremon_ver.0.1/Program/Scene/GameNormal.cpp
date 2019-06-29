@@ -1,12 +1,11 @@
 //---------------------------------------------
 //
 //      ゲーム本編
-//      作成開始日:	3月17日
-//			更新日:	3月18日
 //			作成者:	平野
 //
 //---------------------------------------------
 #include "GameNormal.h"
+#include "Library/DirectSound.h"
 
 POS_CC<float> boss_cc2 = { 600, 350 };
 
@@ -14,8 +13,7 @@ C_GameNormal::C_GameNormal(void)
 {
 	mVertex  = new C_Vertex();
 	mTexture = new C_Texture();
-	mKey		= new C_Control();
-	mSound	= new C_DSound();
+	mKey	 = new C_Control();
 
 	mScore = 0;
 
@@ -78,26 +76,24 @@ C_GameNormal::~C_GameNormal(void)
 {
 }
 
-void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound, int score)
+void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, apSound, score);
+	C_SceneManage::InitScene(apDev, apFont, score);
 
-	mSound = apSound;
-
-	mNiku	= new C_ActorNikuman(mVertex, mTexture, apSound);
-	mNoppo	= new C_ActorNoppo(mVertex, mTexture, apSound);
-	mYoshi	= new C_ActorYoshi(mVertex, mTexture, apSound);
+	mNiku	= new C_ActorNikuman(mVertex, mTexture);
+	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
+	mYoshi	= new C_ActorYoshi(mVertex, mTexture);
 
 	mNiku->Init();
 	mNoppo->Init();
 	mYoshi->Init();
 
-	mBoss = new C_Boss(mTexture,mVertex,pDevice,apSound);
+	mBoss = new C_Boss(mTexture,mVertex,pDevice);
 
 	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt",apDev);		//絵の読み込み
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 
-	mMission = new C_Mission(mTexture,mVertex,pDevice,apSound);
+	mMission = new C_Mission(mTexture,mVertex,pDevice);
 }
 
 bool C_GameNormal::RunScene()
@@ -110,7 +106,7 @@ bool C_GameNormal::RunScene()
 void C_GameNormal::ControlScene()
 {
 	if(mGameState == G_START_SCENE){
-		mSound->SoundPlay(false,S_GAME_START);
+		GetDirectSound()->SoundPlay(false,S_GAME_START);
 		FadeControl();
 	}
 	else if(mGameState == G_GAME_SCENE){
@@ -120,9 +116,12 @@ void C_GameNormal::ControlScene()
 
 		if(mGameState != G_GAME_OVER){
 			if((boss_cc2.x - 150) < 500){
-				mSound->SoundPlay(true,S_SAIREN);
+				GetDirectSound()->SoundPlay(true, S_SAIREN);
 			}
-			else mSound->SoundStop(true,S_SAIREN);
+			else
+			{
+				GetDirectSound()->SoundStop(true, S_SAIREN);
+			}
 		}
 
 		mKeyState = mKey->KeyCheckGame();
@@ -144,7 +143,7 @@ void C_GameNormal::ControlScene()
 		//mMissionGage = 5000;
 		if(mMissionGage >= MISSION_GAGE_MAX){
 			if(!mIsInit){
-				mSound->SoundPlay(false,S_OSIRASE);
+				GetDirectSound()->SoundPlay(false, S_OSIRASE);
 				mMission->Init(mNikumanKeyCount,mYoshitaroKeyCount,mNoppoKeyCount);
 				mIsInit = true;
 			}
@@ -182,7 +181,7 @@ void C_GameNormal::ControlScene()
 			return ;
 		}
 
-		mSound->SoundPlay(true,S_BGM_BATTLE);
+		GetDirectSound()->SoundPlay(true, S_BGM_BATTLE);
 
 		mNiku->Control(mKeyState, boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
@@ -255,7 +254,7 @@ void C_GameNormal::ControlScene()
 		{
 			mGameState = G_GAME_OVER;
 			mFlagFadeStart = 0;
-			mSound->SoundStop(true,S_SAIREN);
+			GetDirectSound()->SoundStop(true, S_SAIREN);
 			return ;
 		}
 
@@ -293,16 +292,6 @@ void C_GameNormal::DrawScene()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG),pDevice);
 
-	/*if((boss_cc2.x - 150) < 500){
-		if(mIsRed){
-			mVertex->SetColor(mAlpha - 55,200,0,0);
-			mIsRed = false;
-		}
-		else{
-			mVertex->SetColor(mAlpha - 55,255,255,255);
-			mIsRed = true;
-		}
-	}*/
 	if(mAlpha - 55 < 0){
 		mVertex->SetColor(0,255,255,255);
 	}
@@ -351,7 +340,7 @@ void C_GameNormal::DrawScene()
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
 		if(mIsSound){
-			mSound->SoundPlay(false,S_OVER);
+			GetDirectSound()->SoundPlay(false, S_OVER);
 			mIsSound = false;
 		}
 	}
@@ -360,7 +349,7 @@ void C_GameNormal::DrawScene()
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
 		if(mIsSound){
-			mSound->SoundPlay(false,S_G_CLEAR);
+			GetDirectSound()->SoundPlay(false, S_G_CLEAR);
 			mIsSound = false;
 		}
 	}
@@ -420,7 +409,7 @@ int C_GameNormal::EndScene()
 	//ゲームオーバーの場合
 	ChangeScene(RANKING);
 
-	mSound->SoundStop(true,S_BGM_BATTLE);
+	GetDirectSound()->SoundStop(true, S_BGM_BATTLE);
 
 	mTexture->AllReleaseTexture();
 	mVertex->AllReleaseRect();
@@ -616,7 +605,7 @@ void C_GameNormal::ControlMissionOugi()
 	}
 	else if(mTimeCount >= 180 && 210 > mTimeCount){
 		if(mTimeCount == 180){
-			mSound->SoundPlay(false,S_NAMI);
+			GetDirectSound()->SoundPlay(false, S_NAMI);
 		}
 	}
 	else if(mTimeCount >= 210 && 420 > mTimeCount){		//波を動かす(3.5sec)

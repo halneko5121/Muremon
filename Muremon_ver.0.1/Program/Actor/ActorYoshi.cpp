@@ -1,4 +1,5 @@
 #include "ActorYoshi.h"
+#include "Library/DirectSound.h"
 
 namespace
 {
@@ -36,12 +37,10 @@ namespace
 /**
  * @brief コンストラクタ
  */
-C_ActorYoshi::C_ActorYoshi(C_Vertex* vertex, C_Texture* texture, C_DSound* sound)
+C_ActorYoshi::C_ActorYoshi(C_Vertex* vertex, C_Texture* texture)
 {
 	mTexture	= texture;
 	mVertex		= vertex;
-	mSound		= sound;
-
 }
 
 /**
@@ -135,12 +134,18 @@ C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int r
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
-						if(mSound->SoundPlayCheck(S_YOSHI_HIP)) mSound->SoundStop(true,S_YOSHI_HIP);
-						mSound->SoundPlay(false,S_YOSHI_HIP);
+						if (GetDirectSound()->SoundPlayCheck(S_YOSHI_HIP))
+						{
+							GetDirectSound()->SoundStop(true, S_YOSHI_HIP);
+						}
+						GetDirectSound()->SoundPlay(false,S_YOSHI_HIP);
 					}
 					if(mCharaData[i].flag_atk2){
-						if(mSound->SoundPlayCheck(S_YOSHI_HUSEN)) mSound->SoundStop(true,S_YOSHI_HUSEN);
-						mSound->SoundPlay(false,S_YOSHI_HUSEN);
+						if (GetDirectSound()->SoundPlayCheck(S_YOSHI_HUSEN))
+						{
+							GetDirectSound()->SoundStop(true, S_YOSHI_HUSEN);
+						}
+						GetDirectSound()->SoundPlay(false,S_YOSHI_HUSEN);
 					}
 				}
 			}

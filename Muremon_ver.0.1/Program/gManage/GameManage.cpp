@@ -112,26 +112,14 @@ int C_GameMain::MsgLoop(void)
 			DWORD nowTime = timeGetTime();
 			if(nowTime - oldTime >= 1000/60)
 			{
-				//1秒たった
-//				fps_count++;
-
-
 				mGraphics->RenderStart(mBackground);
-				//fps->FpsCount();
 				if(!mScene->RunScene())
 				{
 					mScore = mScene->EndScene();								//シーン終了
 					if(mScene->GetSceneID() == TITLE) mBackground = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);	//ロゴが終わったらクリア時の色を白にする
 					if(mScene->GetSceneID() == PROLOGUE) mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);	//タイトルが終わったらクリア時の色を黒にする
 					ControlGame();										//シーン切り替え
-					//mScene->InitScene(mGraphics->GetDevice() , /*input ,*/ mFont, /*mapread,*/ mSound);	//シーン初期化
 				}
-
-//				wsprintf(str_fps,"FPS:%d\n",fps_count);
-//				OutputDebugString(str_fps);
-
-//				mFont->DrawFont(str_fps ,100,100);
-//				fps_count = 0;
 
 				mGraphics->RenderEnd();
 

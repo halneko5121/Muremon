@@ -20,6 +20,27 @@
 
 class C_GameRefresh:public C_SceneManage
 {
+public:
+	C_GameRefresh(void);
+	~C_GameRefresh(void);
+
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont *apFont, C_DSound *apSound, int score);
+
+	bool RunScene();
+	void ControlScene();
+	void DrawScene();
+	int EndScene();
+
+	void DrawNum();
+	void DrawGageHp();
+
+	void FadeControl();		//フェードコントロール		
+	void FadeIn();			//フェードイン
+	void FadeOut();			//フェードアウト
+
+	void HitFlagInit();
+	void HitEffectDraw();
+
 private:
 	C_Texture*			mTexture;
 	C_Vertex*			mVertex;
@@ -52,25 +73,4 @@ private:
 	int					mHitEffectTime;
 	float				mCharaAtkY;
 	bool				mSceneChange;		// シーンが変わる時を知らせる
-
-public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont *apFont, C_DSound *apSound,int score);
-
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
-
-	void DrawNum();
-	void DrawGageHp();
-
-	void FadeControl();		//フェードコントロール		
-	void FadeIn();			//フェードイン
-	void FadeOut();			//フェードアウト
-
-	void HitFlagInit();
-	void HitEffectDraw();
-
-	C_GameRefresh(void);
-	~C_GameRefresh(void);
 };

@@ -19,15 +19,12 @@
 //////////////////////////////////////////////////////////
 void C_GameMain::InitGameMain(void)
 {
-    //新しく生成
-	wind	= new C_Window;
-	gra		= new C_DGraphics;
-    font    = new C_DFont;
-	scene	= new C_Logo();
-
-	//fps		= new CFps;
-	//mapread = new MapRead;
-	sou		= new C_DSound;
+    // 新しく生成
+	mWindow		= new C_Window;
+	mGraphics	= new C_DGraphics;
+    mFont		= new C_DFont;
+	mScene		= new C_Logo();
+	mSound		= new C_DSound;
 }
 
 //////////////////////////////////////////////////////////
@@ -45,25 +42,25 @@ int WINAPI C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR
     //生成
     InitGameMain();
 	//ウィンドウ初期化関数
-	wind->InitWindow(hInstance);
+	mWindow->InitWindow(hInstance);
 
 	//DirectGraphics初期化
-	if(FAILED(gra->InitDGraphics(wind,wind->GetHwnd(),800,600)))
+	if(FAILED(mGraphics->InitDGraphics(mWindow,mWindow->GetHwnd(),800,600)))
 	{
 		MessageBox(NULL,TEXT("DirectGraphicsの初期化に失敗"),NULL,MB_OK);
 		return 0;
 	}
     //DirectFont初期化
-	if(FAILED(font->InitDFont(gra->GetDevice())))
+	if(FAILED(mFont->InitDFont(mGraphics->GetDevice())))
 	{
 		MessageBox(NULL,TEXT("DirectFontの初期化に失敗"),NULL,MB_OK);
 		return 0;
 	}
 
-//	fps->SetHwnd(wind->GetHwnd());
+//	fps->SetHwnd(mWindow->GetHwnd());
 
 	//DirectSound初期化
-	if(FAILED(sou->InitDSound(wind->GetHwnd())))
+	if(FAILED(mSound->InitDSound(mWindow->GetHwnd())))
 	{
 		MessageBox(NULL,TEXT("DirectSoundの初期化に失敗"),NULL,MB_OK);
 		return 0;
@@ -88,16 +85,16 @@ int C_GameMain::MsgLoop(void)
 
 	int cnt = 0;
 
-	background = D3DCOLOR_XRGB(0x00,0x00,0x00);
+	mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);
 
 	//初期化
 	ZeroMemory(&msg , sizeof(msg));
 
-	gra->SetRender();	//描画設定
+	mGraphics->SetRender();	//描画設定
 
-    scene->InitScene(gra->GetDevice(),/*input,*/font, /*mapread,*/ sou,0);
+    mScene->InitScene(mGraphics->GetDevice(), mFont, mSound, 0);
 
-	sou->LoadSoundData("Data\\sound_data.txt");
+	mSound->LoadSoundData("Data\\sound_data.txt");
 
 	srand((unsigned int)time(NULL));
 
@@ -124,24 +121,24 @@ int C_GameMain::MsgLoop(void)
 //				fps_count++;
 
 
-				gra->RenderStart(background);
+				mGraphics->RenderStart(mBackground);
 				//fps->FpsCount();
-				if(!scene->RunScene())
+				if(!mScene->RunScene())
 				{
-					score = scene->EndScene();								//シーン終了
-					if(scene->GetSceneID() == TITLE) background = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);	//ロゴが終わったらクリア時の色を白にする
-					if(scene->GetSceneID() == PROLOGUE) background = D3DCOLOR_XRGB(0x00,0x00,0x00);	//タイトルが終わったらクリア時の色を黒にする
+					mScore = mScene->EndScene();								//シーン終了
+					if(mScene->GetSceneID() == TITLE) mBackground = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);	//ロゴが終わったらクリア時の色を白にする
+					if(mScene->GetSceneID() == PROLOGUE) mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);	//タイトルが終わったらクリア時の色を黒にする
 					ControlGame();										//シーン切り替え
-					//scene->InitScene(gra->GetDevice() , /*input ,*/ font, /*mapread,*/ sou);	//シーン初期化
+					//mScene->InitScene(mGraphics->GetDevice() , /*input ,*/ mFont, /*mapread,*/ mSound);	//シーン初期化
 				}
 
 //				wsprintf(str_fps,"FPS:%d\n",fps_count);
 //				OutputDebugString(str_fps);
 
-//				font->DrawFont(str_fps ,100,100);
+//				mFont->DrawFont(str_fps ,100,100);
 //				fps_count = 0;
 
-				gra->RenderEnd();
+				mGraphics->RenderEnd();
 
 				oldTime = nowTime;
 				cnt++;
@@ -150,7 +147,7 @@ int C_GameMain::MsgLoop(void)
 			static DWORD oldTime2 = timeGetTime();
 			DWORD nowTime2 = timeGetTime();
 			if(nowTime2 - oldTime2 >= 1000){
-				font->DrawFont("a",750,550);
+				mFont->DrawFont("a",750,550);
 				cnt = 0;
 				oldTime2 = nowTime2;
 			}
@@ -172,12 +169,12 @@ int C_GameMain::MsgLoop(void)
 void C_GameMain::ReleaseGameMain(void)
 {
     //開放
-	scene->EndScene();
-	delete scene;
-	delete gra;
-    delete font;
-	delete wind;
-	delete sou;
+	mScene->EndScene();
+	delete mScene;
+	delete mGraphics;
+    delete mFont;
+	delete mWindow;
+	delete mSound;
 }
 
 //////////////////////////////////////////////////////////
@@ -189,37 +186,37 @@ void C_GameMain::ReleaseGameMain(void)
 //////////////////////////////////////////////////////////
 void C_GameMain::ControlGame(void)
 {
-    switch(scene->GetSceneID()) //シーンIDによって分岐
+    switch(mScene->GetSceneID()) //シーンIDによって分岐
     {
 	case LOGO:
-		delete scene;
-		scene = new C_Logo();
-		scene->InitScene(gra->GetDevice(),font,sou,0);
+		delete mScene;
+		mScene = new C_Logo();
+		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
 		break;
     case TITLE:
-        delete scene;
-		scene = new C_Title();
-		scene->InitScene(gra->GetDevice(),font,sou,0);
+        delete mScene;
+		mScene = new C_Title();
+		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
         break;
 	case TUTORIAL:
-		delete scene;
-		scene = new C_Tutorial();
-		scene->InitScene(gra->GetDevice(),font,sou,0);
+		delete mScene;
+		mScene = new C_Tutorial();
+		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
 		break;
 	case GAME_REFRESH:
-        delete scene;
-		scene = new C_GameRefresh();
-		scene->InitScene(gra->GetDevice(),font,sou,0);
+        delete mScene;
+		mScene = new C_GameRefresh();
+		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
         break;
 	case GAME_NORMAL:
-        delete scene;
-		scene = new C_GameNormal();
-		scene->InitScene(gra->GetDevice(),font,sou,0);
+        delete mScene;
+		mScene = new C_GameNormal();
+		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,0);
         break;
 	case RANKING:
-		delete scene;
-		scene = new C_Ranking();
-		scene->InitScene(gra->GetDevice(),font,sou,score);
+		delete mScene;
+		mScene = new C_Ranking();
+		mScene->InitScene(mGraphics->GetDevice(),mFont,mSound,mScore);
 		break;
 	case GAME_END:
 		PostQuitMessage(0);

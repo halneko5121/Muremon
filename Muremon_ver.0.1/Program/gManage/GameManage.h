@@ -23,26 +23,17 @@
 #include "program/Scene/GameNormal.h"
 #include "program/Scene/Ranking.h"
 
-//#include "..\\GameScene.h"
-//#include "..\\TitleScene.h"
-//#include "..\\Fps.h"
-//#include "..\\MapRead.h"
-
 class C_GameMain
 {
 private:
-	C_Window		*wind;	//ウィンドウクラスへのポインタ
-	//C_DInput		*input;	//インプットクラスへのポインタ
-	C_DGraphics		*gra;	//グラフィッククラスへのポインタ
-	C_DSound		*sou;	//サウンドクラスへのポインタ
-    C_DFont			*font;  //フォントクラスへのポインタ
-	C_SceneManage	*scene;	//シーンクラスへのポインタ
+	C_Window*		mWindow;	// ウィンドウクラスへのポインタ
+	C_DGraphics*	mGraphics;	// グラフィッククラスへのポインタ
+	C_DSound*		mSound;		// サウンドクラスへのポインタ
+    C_DFont*		mFont;		// フォントクラスへのポインタ
+	C_SceneManage*	mScene;		// シーンクラスへのポインタ
+	DWORD			mBackground;
+	int				mScore;
 
-	DWORD background;
-
-	int score;
-	//CFps		*fps;
-	//MapRead		*mapread;
 public:
     //////////////////////////////////////////////////////////
     //

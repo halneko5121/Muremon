@@ -1,10 +1,6 @@
 //---------------------------------------------
-//
 //      ゲーム本編
-//      作成開始日:	3月17日
-//			更新日:	3月18日
 //			作成者:	平野
-//
 //---------------------------------------------
 #pragma once
 
@@ -24,7 +20,7 @@ public:
 	C_GameRefresh(void);
 	~C_GameRefresh(void);
 
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont *apFont, C_DSound *apSound, int score);
+	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, C_DSound* apSound);
 
 	bool RunScene();
 	void ControlScene();

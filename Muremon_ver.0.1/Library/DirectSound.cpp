@@ -9,6 +9,14 @@
 
 #include "DirectSound.h"
 
+#define SAFE_RELEASE(p) { if(p) { (p)->Release(); (p)=NULL; } }
+#define SAFE_DELETE_ARRAY(p)	{if(p){delete[](p);		(p) = NULL;} }
+
+#define CHANNELS		2		// チャンネル数
+#define SAMPLESPERSEC	44100	// サンプリングレート
+#define BITSPERSAMPLE	16		// １サンプルあたりのビット数
+
+
 // 唯一のインスタンスを nullptr で初期化
 C_DSound* C_DSound::mInstance = nullptr;
 

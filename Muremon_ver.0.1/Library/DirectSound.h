@@ -13,14 +13,6 @@
 #pragma comment (lib,"dxguid.lib")
 #pragma comment (lib, "winmm.lib")
 
-#define SAFE_RELEASE(p) { if(p) { (p)->Release(); (p)=NULL; } }
-#define SAFE_DELETE_ARRAY(p)	{if(p){delete[](p);		(p) = NULL;} }
-
-#define CHANNELS		2		// チャンネル数
-#define SAMPLESPERSEC	44100	// サンプリングレート
-#define BITSPERSAMPLE	16		// １サンプルあたりのビット数
-#define MAX_SOUND       20      // 読み込めるサウンドの最大数
-
 class C_DSound
 {
 public:
@@ -106,6 +98,9 @@ public:
 		開放処理
 	=====================================================*/
 	void UnInitDSound();
+
+private:
+	enum { MAX_SOUND = 20 };								 // 読み込めるサウンドの最大数
 
 private:
 	static C_DSound*		mInstance;

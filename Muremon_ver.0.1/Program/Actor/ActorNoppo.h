@@ -3,36 +3,10 @@
 /************************************************************************************
  *	役割：のっぽっぽの管理															*
  *	説明：																			*
- *	作成日：2009年 3月 19日															*
- *	更新日：	年	月	 日															*
  *													by	三上　亘					*
  ************************************************************************************/
 
-/*================================
-		Include
-=================================*/
 #include "ActorBase.h"
-
-/*================================
-		Define
-=================================*/
-
-//放物線関係
-#define PARA_RAND_ACC_NOPPO				(15)	//加速度
-#define PARA_RAND_ACC_NOPPO_MIN			(5)		
-#define PARA_RAND_MOVE_X_NOPPO			(-15)	//移動量				
-#define PARA_RAND_MOVE_X_NOPPO_MIN		(-5)						
-
-#define PARA_LIMIT_Y_NOPPO				(GAMESIZE_HEGHT + RADIUS_NOPPO + 50)//放物線の最終座標		
-//波処理関係
-#define WAVE_AMPLIT_NOPPO				(20)	//振幅(上下に動く幅)					
-#define WAVE_CYCLE_NOPPO				(200)	//周期(多きければ大きい程周期が短く)
-#define WAVE_LIMIT_X_NOPPO				(500)	//この座標まで来ると直線運動へ移行
-//ランダム関係
-#define RAND_Y_NOPPO					(400)	//開始位置y座標(ランダム幅)	
-#define RAND_Y_MIN_NOPPO				(100)	//開始位置y座標
-
-#define WAIT_MOTION_NOPPO				(15)
 
 enum ANIME_NOPPO
 {

@@ -1,13 +1,35 @@
 #include "ActorNoppo.h"
 
-CHARADATA init_charadata_noppo = {
-	(0.0f),0,0,(MAX_ALPHA),
-	//スピード,アニメーション,矩形,透過度
-	false,false,false,false,false,false,false,false,
-	//各フラグ
-	(-RADIUS_NOPPO),(GAMESIZE_WIDE + 50.f + RADIUS_NOPPO),
-	//中心座標
-};
+namespace
+{
+	//放物線関係
+	const int cParaRandAcc = 15;									// 加速度
+	const int cParaRandAccMin = 5;
+	const int cParaRandMoveX = -15;									// 移動量				
+	const int cParaRandMoveXMin = -5;
+
+	const float cParaLimitY = GAMESIZE_HEGHT + RADIUS_NOPPO + 50;	// 放物線の最終座標
+
+	// 波処理関係
+	const int cWaveAmplit = 20;										// 振幅(上下に動く幅)					
+	const int cWaveCycle = 200;										// 周期(多きければ大きい程周期が短く)
+	const int cWaveLimitX = 500;									// この座標まで来ると直線運動へ移行
+
+	// 開始座標
+	const int cRandY = 400;
+	const int cRandYMin = 100;
+
+	const int cWaitMotion = 15;
+
+	CHARADATA init_charadata_noppo = {
+		// スピード, アニメーション, 矩形, 透過度
+		(0.0f), 0, 0, (MAX_ALPHA),
+		// 各フラグ
+		false, false, false, false, false, false, false, false,
+		// 中心座標
+		(-RADIUS_NOPPO), (GAMESIZE_WIDE + 50.f + RADIUS_NOPPO),
+	};
+}
 
 /**
  * @brief コンストラクタ
@@ -35,7 +57,7 @@ C_ActorNoppo::~C_ActorNoppo(void)
 void
 C_ActorNoppo::Init()											
 {
-	mOrbit->pWave->InitWave(WAVE_AMPLIT_NOPPO,WAVE_CYCLE_NOPPO,NULL,WAVE_MODE_GAME);
+	mOrbit->pWave->InitWave(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
 	//praivate変数
 	alpha			= MAX_ALPHA;
@@ -87,9 +109,9 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO,G_ATK_3_START_Y);
 			break;
 		case KEY_SKY_3:
-			s_atk_start_y			 = (float)(rand() % RAND_Y_NOPPO);		
-			rand_acc[mCharaNum]	 = (float)(rand() % PARA_RAND_ACC_NOPPO		+ PARA_RAND_ACC_NOPPO_MIN);	
-			rand_move_x[mCharaNum] = (float)(rand() % PARA_RAND_MOVE_X_NOPPO  + PARA_RAND_MOVE_X_NOPPO_MIN);
+			s_atk_start_y			 = (float)(rand() % cRandY);		
+			rand_acc[mCharaNum]	 = (float)(rand() % cParaRandAcc		+ cParaRandAccMin);	
+			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX  + cParaRandMoveXMin);
 			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO,s_atk_start_y);
@@ -245,7 +267,7 @@ C_ActorNoppo::Draw(int rect_startnum)
 POS_CC<float>
 C_ActorNoppo::CharaAttack_2(int mCharaNum)																//キー入力による動作その2
 {
-	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(WAVE_LIMIT_X_NOPPO,mCharaData[mCharaNum].draw_cc,mCharaNum);
+	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
 	return mCharaData[mCharaNum].draw_cc;
 }
@@ -271,7 +293,7 @@ C_ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)
 		else{
 			mCharaData[mCharaNum].animetion = 0;																//描画を固定
 			mCharaData[mCharaNum].rect_num  = ANIME_MOTION3_NOPPO;
-			if(wait_count[mCharaNum]++ > WAIT_MOTION_NOPPO){
+			if(wait_count[mCharaNum]++ > cWaitMotion){
 				mCharaData[mCharaNum].flag_deathfade = true;
 				wait_count[mCharaNum] = 0;
 			}
@@ -281,7 +303,7 @@ C_ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)
 		mCharaData[mCharaNum].animetion = 0;																	//描画を固定
 		mCharaData[mCharaNum].rect_num  = ANIME_S_ATK2_NOPPO;
 
-		mCharaData[mCharaNum].draw_cc   = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],PARA_LIMIT_Y_NOPPO,mCharaData[mCharaNum].draw_cc,mCharaNum);
+		mCharaData[mCharaNum].draw_cc   = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
 	}	
 	if(mCharaData[mCharaNum].flag_deathfade){
 		if(mCharaData[mCharaNum].alpha <= 0){

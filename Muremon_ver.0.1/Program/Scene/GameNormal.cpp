@@ -12,406 +12,406 @@ POS_CC<float> boss_cc2 = { 600, 350 };
 
 C_GameNormal::C_GameNormal(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
-	key		= new C_Control();
-	sound	= new C_DSound();
+	mVertex  = new C_Vertex();
+	mTexture = new C_Texture();
+	mKey		= new C_Control();
+	mSound	= new C_DSound();
 
-	score = 0;
+	mScore = 0;
 
-	flag_pose = false;
+	mIsPose = false;
 
-	time = TIME_LIMIT;
+	mTime = TIME_LIMIT;
 
-	start_alpha = alpha = 0;	//アルファ値
+	mStartAlpha = mAlpha = 0;	//アルファ値
 
-	alpha_count = 0;
+	mAlphaCount = 0;
 
-	flag_fade = GS_FADE_IN;
+	mFlagFade = GS_FADE_IN;
 
-	game_state = G_START_SCENE;
+	mGameState = G_START_SCENE;
 
-	key_state = 0;
+	mKeyState = 0;
 
-	cnt_key_nikuman = cnt_key_yoshitaro = cnt_key_noppo = 0;
+	mNikumanKeyCount = mYoshitaroKeyCount = mNoppoKeyCount = 0;
 
-	mission_state_keep = 0;
+	mMissionStateKeep = 0;
 
-	flag_fade_start = 0;
+	mFlagFadeStart = 0;
 
-	flag_fade_in = false;
+	mIsFadeIn = false;
 
-	flag_init = false;
+	mIsInit = false;
 
-	scene_change = true;
+	mIsSceneChange = true;
 
-	mission_gage = 0;
+	mMissionGage = 0;
 
-	flag_red = false;
+	mIsRed = false;
 
-	hit_effect_alpha = 0;
-	hit_effect_flag = false;
-	hit_effect_time = 0;
+	mHitEffectAlpha = 0;
+	mIsHitEffect = false;
+	mHitEffectTime = 0;
 
-	hit_niku = false;
+	mIsHitNiku = false;
 
-	hit_yoshi = false;
+	mIsHitYoshi = false;
 
-	hit_noppo = false;
+	mIsHitNoppo = false;
 
-	chara_atk_y = 0;
+	mCharaAtkY = 0;
 
-	flag_sound = true;
+	mIsSound = true;
 
 	//奥義
-	alpha_font = 0;
-	time_cnt = 0;
-	wave_posi.x = WAVE_INIT_X;
-	wave_posi.y = WAVE_INIT_Y;
+	mAlphaFont = 0;
+	mTimeCount = 0;
+	mWavePos.x = WAVE_INIT_X;
+	mWavePos.y = WAVE_INIT_Y;
 
 	//NEGATIVE
-	negative_state = NO_NEGATIVE;
-	negative_damege = 1;
+	mNegativeState = NO_NEGATIVE;
+	mNegativeDamege = 1;
 }
 
 C_GameNormal::~C_GameNormal(void)
 {
 }
 
-void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score)
+void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont *apFont, C_DSound *apSound,int mScore)
 {
-	C_SceneManage::InitScene(apDev,/*apinput,*/apFont,apSound,0);
+	C_SceneManage::InitScene(apDev, apFont, apSound, 0);
 
-	sound = apSound;
+	mSound = apSound;
 
-	pNiku	= new C_ActorNikuman(vertex, texture, apSound);
-	pNoppo	= new C_ActorNoppo(vertex, texture, apSound);
-	pYoshi	= new C_ActorYoshi(vertex, texture, apSound);
+	mNiku	= new C_ActorNikuman(mVertex, mTexture, apSound);
+	mNoppo	= new C_ActorNoppo(mVertex, mTexture, apSound);
+	mYoshi	= new C_ActorYoshi(mVertex, mTexture, apSound);
 
-	pNiku->Init();
-	pNoppo->Init();
-	pYoshi->Init();
+	mNiku->Init();
+	mNoppo->Init();
+	mYoshi->Init();
 
-	boss = new C_Boss(texture,vertex,pDevice,apSound);
+	mBoss = new C_Boss(mTexture,mVertex,pDevice,apSound);
 
-	texture->LoadTextureData("Data\\TextureData\\gamenormal.txt",apDev);		//絵の読み込み
-	vertex->LoadRect("Data\\RectData\\gamenormal.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt",apDev);		//絵の読み込み
+	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 
-	mission = new C_Mission(texture,vertex,pDevice,apSound);
+	mMission = new C_Mission(mTexture,mVertex,pDevice,apSound);
 }
 
 bool C_GameNormal::RunScene()
 {
 	ControlScene();
 	DrawScene();
-	return scene_change;
+	return mIsSceneChange;
 }
 
 void C_GameNormal::ControlScene()
 {
-	if(game_state == G_START_SCENE){
-		sound->SoundPlay(false,S_GAME_START);
+	if(mGameState == G_START_SCENE){
+		mSound->SoundPlay(false,S_GAME_START);
 		FadeControl();
 	}
-	else if(game_state == G_GAME_SCENE){
+	else if(mGameState == G_GAME_SCENE){
 
-		boss_cc2.x = boss->boss_move_x;
-		boss_cc2.y = boss->boss_move_y;
+		boss_cc2.x = mBoss->boss_move_x;
+		boss_cc2.y = mBoss->boss_move_y;
 
-		if(game_state != G_GAME_OVER){
+		if(mGameState != G_GAME_OVER){
 			if((boss_cc2.x - 150) < 500){
-				sound->SoundPlay(true,S_SAIREN);
+				mSound->SoundPlay(true,S_SAIREN);
 			}
-			else sound->SoundStop(true,S_SAIREN);
+			else mSound->SoundStop(true,S_SAIREN);
 		}
 
-		key_state = key->KeyCheckGame();
+		mKeyState = mKey->KeyCheckGame();
 
-		if(key_state == KEY_ENTER){
-			if(flag_pose){
-				flag_pose = false;
+		if(mKeyState == KEY_ENTER){
+			if(mIsPose){
+				mIsPose = false;
 			}
 			else{
-				flag_pose = true;
+				mIsPose = true;
 			}
 		}
 
-		if(flag_pose){
+		if(mIsPose){
 			return;
 		}
 
 		//ミッションが起動する段階までいったら
-		//mission_gage = 5000;
-		if(mission_gage >= MISSION_GAGE_MAX){
-			if(!flag_init){
-				sound->SoundPlay(false,S_OSIRASE);
-				mission->Init(cnt_key_nikuman,cnt_key_yoshitaro,cnt_key_noppo);
-				flag_init = true;
+		//mMissionGage = 5000;
+		if(mMissionGage >= MISSION_GAGE_MAX){
+			if(!mIsInit){
+				mSound->SoundPlay(false,S_OSIRASE);
+				mMission->Init(mNikumanKeyCount,mYoshitaroKeyCount,mNoppoKeyCount);
+				mIsInit = true;
 			}
-			if(mission_state_keep < MISSION_OUGI){
-				mission_state_keep = mission->Control();
-				if(cnt_key_nikuman != mission->GetCntKeyNikuman()){
-					cnt_key_nikuman = mission->GetCntKeyNikuman();
+			if(mMissionStateKeep < MISSION_OUGI){
+				mMissionStateKeep = mMission->Control();
+				if(mNikumanKeyCount != mMission->GetCntKeyNikuman()){
+					mNikumanKeyCount = mMission->GetCntKeyNikuman();
 				}
-				if(cnt_key_yoshitaro != mission->GetCntKeyYoshitaro()){
-					cnt_key_yoshitaro = mission->GetCntKeyYoshitaro();
+				if(mYoshitaroKeyCount != mMission->GetCntKeyYoshitaro()){
+					mYoshitaroKeyCount = mMission->GetCntKeyYoshitaro();
 				}
-				if(cnt_key_noppo != mission->GetCntKeyNoppo()){
-					cnt_key_noppo = mission->GetCntKeyNoppo();
+				if(mNoppoKeyCount != mMission->GetCntKeyNoppo()){
+					mNoppoKeyCount = mMission->GetCntKeyNoppo();
 				}
 			}
-			else if(mission_state_keep == MISSION_OUGI){
+			else if(mMissionStateKeep == MISSION_OUGI){
 				ControlMissionOugi();
 			}
-			else if(mission_state_keep == MISSION_NEGATIVE){
+			else if(mMissionStateKeep == MISSION_NEGATIVE){
 				ControlMissionNegative();
 			}
-			else if(mission_state_keep == MISSION_END){
-				negative_state = NO_NEGATIVE;
-				time_cnt = 0;
-				mission_state_keep = 0;
-				mission_gage = 0;
-				flag_init = false;
+			else if(mMissionStateKeep == MISSION_END){
+				mNegativeState = NO_NEGATIVE;
+				mTimeCount = 0;
+				mMissionStateKeep = 0;
+				mMissionGage = 0;
+				mIsInit = false;
 			}
 			return ;
 		}
 
-		if(time == 0){
-			game_state = G_GAME_CLEAR;
-			flag_fade_start = 0;
+		if(mTime == 0){
+			mGameState = G_GAME_CLEAR;
+			mFlagFadeStart = 0;
 			return ;
 		}
 
-		sound->SoundPlay(true,S_BGM_BATTLE);
+		mSound->SoundPlay(true,S_BGM_BATTLE);
 
-		pNiku->Control(key_state, boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,boss->boss_fall_flag);
+		mNiku->Control(mKeyState, boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
-		pYoshi->Control(key_state, boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,boss->boss_fall_flag);
+		mYoshi->Control(mKeyState, boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
 
-		pNoppo->Control(key_state, boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,boss->boss_fall_flag);
+		mNoppo->Control(mKeyState, boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
 
-		time -= 1;
+		mTime -= 1;
 
-		hit_niku  = pNiku->GetFlagHit();//あたったというフラグが帰ってきます
+		mIsHitNiku  = mNiku->GetFlagHit();//あたったというフラグが帰ってきます
 
-		hit_yoshi = pYoshi->GetFlagHit();//これをつかってダメージなどを
+		mIsHitYoshi = mYoshi->GetFlagHit();//これをつかってダメージなどを
 
-		hit_noppo = pNoppo->GetFlagHit();//反映させてください
+		mIsHitNoppo = mNoppo->GetFlagHit();//反映させてください
 
-		if(hit_niku)
+		if(mIsHitNiku)
 		{
-			boss->hit_count++;
-			boss->boss_life -= NIKUMAN_DAMAGE / negative_damege;
-			mission_gage += NIKUMAN_GAGE;
-			score += NIKUMAN_SCORE;
-			hit_effect_flag = true;
-			chara_atk_y = pNiku->m_chara_y;
-			pNiku->SetFlagHit(false);
+			mBoss->hit_count++;
+			mBoss->boss_life -= NIKUMAN_DAMAGE / mNegativeDamege;
+			mMissionGage += NIKUMAN_GAGE;
+			mScore += NIKUMAN_SCORE;
+			mIsHitEffect = true;
+			mCharaAtkY = mNiku->m_chara_y;
+			mNiku->SetFlagHit(false);
 		}
 
-		if(hit_yoshi)
+		if(mIsHitYoshi)
 		{
-			boss->hit_count++;
-			boss->boss_life -= YOSHITARO_DAMAGE / negative_damege;
-			mission_gage += YOSHITARO_GAGE;
-			score += YOSHITARO_SCORE;
-			hit_effect_flag = true;
-			chara_atk_y = pYoshi->m_chara_y;
-			pYoshi->SetFlagHit(false);
+			mBoss->hit_count++;
+			mBoss->boss_life -= YOSHITARO_DAMAGE / mNegativeDamege;
+			mMissionGage += YOSHITARO_GAGE;
+			mScore += YOSHITARO_SCORE;
+			mIsHitEffect = true;
+			mCharaAtkY = mYoshi->m_chara_y;
+			mYoshi->SetFlagHit(false);
 		}
 
-		if(hit_noppo)
+		if(mIsHitNoppo)
 		{
-			boss->hit_count++;
-			boss->boss_life -= NOPPO_DAMAGE / negative_damege;
-			mission_gage += NOPPO_GAGE;
-			score += YOSHITARO_SCORE;
-			hit_effect_flag = true;
-			chara_atk_y = pNoppo->m_chara_y;
-			pNoppo->SetFlagHit(false);
+			mBoss->hit_count++;
+			mBoss->boss_life -= NOPPO_DAMAGE / mNegativeDamege;
+			mMissionGage += NOPPO_GAGE;
+			mScore += YOSHITARO_SCORE;
+			mIsHitEffect = true;
+			mCharaAtkY = mNoppo->m_chara_y;
+			mNoppo->SetFlagHit(false);
 		}
 
-		if(key_state == KEY_GROUND_2 || key_state == KEY_SKY_2){	//にくまん
-			cnt_key_nikuman++;
+		if(mKeyState == KEY_GROUND_2 || mKeyState == KEY_SKY_2){	//にくまん
+			mNikumanKeyCount++;
 		}
-		else if(key_state == KEY_GROUND_1 || key_state == KEY_SKY_1){	//よしたろう
-			cnt_key_yoshitaro++;
+		else if(mKeyState == KEY_GROUND_1 || mKeyState == KEY_SKY_1){	//よしたろう
+			mYoshitaroKeyCount++;
 		}
-		else if(key_state == KEY_GROUND_3 || key_state == KEY_SKY_3){	//のっぽ
-			cnt_key_noppo++;
+		else if(mKeyState == KEY_GROUND_3 || mKeyState == KEY_SKY_3){	//のっぽ
+			mNoppoKeyCount++;
 		}
 
 		ReCover();
 
 		//if(GetAsyncKeyState(VK_RETURN)){	//エンターキーが押されたらタイトルに戻る
-		//	scene_change = false;
+		//	mIsSceneChange = false;
 		//}
 		
-		//boss->NormalControl();
-		boss->BossControl(PLAY_NORMAL);
+		//mBoss->NormalControl();
+		mBoss->BossControl(PLAY_NORMAL);
 
 		//ゲームオーバー条件
-		if(boss->boss_win_flag)
+		if(mBoss->boss_win_flag)
 		{
-			game_state = G_GAME_OVER;
-			flag_fade_start = 0;
-			sound->SoundStop(true,S_SAIREN);
+			mGameState = G_GAME_OVER;
+			mFlagFadeStart = 0;
+			mSound->SoundStop(true,S_SAIREN);
 			return ;
 		}
 
-		if(!boss->boss_fall_flag)
+		if(!mBoss->boss_fall_flag)
 		{
-			if(hit_effect_flag) 
+			if(mIsHitEffect) 
 			{
-				hit_effect_alpha = 255;
-				hit_effect_time++;
-				if(hit_effect_time == 1)
+				mHitEffectAlpha = 255;
+				mHitEffectTime++;
+				if(mHitEffectTime == 1)
 				{
-					hit_effect_flag=false;
-					hit_effect_time=0;
+					mIsHitEffect=false;
+					mHitEffectTime=0;
 				}		
 			}
 			else{
-					hit_effect_alpha = 0;
-					hit_effect_time = 0;
+					mHitEffectAlpha = 0;
+					mHitEffectTime = 0;
 			}
 		}
 		else{
-			hit_effect_flag = false;
-			hit_effect_alpha=0;
+			mIsHitEffect = false;
+			mHitEffectAlpha=0;
 		}
 	}
-	else if(game_state == G_GAME_OVER){
+	else if(mGameState == G_GAME_OVER){
 		FadeControl();
 	}
-	else if(game_state == G_GAME_CLEAR){
+	else if(mGameState == G_GAME_CLEAR){
 		FadeControl();
 	}
 }
 
 void C_GameNormal::DrawScene()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_GAME_BG),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG),pDevice);
 
 	/*if((boss_cc2.x - 150) < 500){
-		if(flag_red){
-			vertex->SetColor(alpha - 55,200,0,0);
-			flag_red = false;
+		if(mIsRed){
+			mVertex->SetColor(mAlpha - 55,200,0,0);
+			mIsRed = false;
 		}
 		else{
-			vertex->SetColor(alpha - 55,255,255,255);
-			flag_red = true;
+			mVertex->SetColor(mAlpha - 55,255,255,255);
+			mIsRed = true;
 		}
 	}*/
-	if(alpha - 55 < 0){
-		vertex->SetColor(0,255,255,255);
+	if(mAlpha - 55 < 0){
+		mVertex->SetColor(0,255,255,255);
 	}
 	else{
-		vertex->SetColor(alpha - 55,255,255,255);
+		mVertex->SetColor(mAlpha - 55,255,255,255);
 	}
 
-	vertex->DrawF(G_BG_X,G_BG_Y,R_GAME_BG);
+	mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_BG);
 
-	vertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
+	mVertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
-	if(game_state == G_START_SCENE){
-		vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
+	if(mGameState == G_START_SCENE){
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
 
-		vertex->SetColor(alpha - start_alpha,255,255,255);
+		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 
-		vertex->DrawF(G_BG_X,G_BG_Y,R_GAME_START);	//ゲームスタート
+		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_START);	//ゲームスタート
 	}
-	else if(game_state == G_GAME_SCENE){
+	else if(mGameState == G_GAME_SCENE){
 
-		boss->BossDraw();
+		mBoss->BossDraw();
 
-		boss->FallDraw();
+		mBoss->FallDraw();
 
 		HitEffectDraw();
 		//キャラ達
-		vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
 
-		vertex->SetTextureData(texture->GetTextureData(T_CAHRA_NOPPO),pDevice);
-		pNoppo->Draw(R_NOPPO_G_ATK1);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NOPPO),pDevice);
+		mNoppo->Draw(R_NOPPO_G_ATK1);
 
-		vertex->SetTextureData(texture->GetTextureData(T_CAHRA_YOSHI),pDevice);
-		pYoshi->Draw(R_YOSHI_G_ATK1);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_YOSHI),pDevice);
+		mYoshi->Draw(R_YOSHI_G_ATK1);
 
-		vertex->SetTextureData(texture->GetTextureData(T_CAHRA_NIKU),pDevice);
-		pNiku->Draw(R_NIKU_G_ATK1);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NIKU),pDevice);
+		mNiku->Draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
-		vertex->SetTextureData(texture->GetTextureData(T_GAME_EFFECT),pDevice);
-		pNoppo->DrawEffectFont(R_NOPPO_PETI);
-		pYoshi->DrawEffectFont(R_YOSHI_BOYO);
-		pNiku->DrawEffectFont(R_NIKU_BETYA);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
+		mNoppo->DrawEffectFont(R_NOPPO_PETI);
+		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
+		mNiku->DrawEffectFont(R_NIKU_BETYA);
 	}
-	else if(game_state == G_GAME_OVER){
-		vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-		vertex->SetColor(alpha - start_alpha,255,255,255);
-		vertex->DrawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
-		if(flag_sound){
-			sound->SoundPlay(false,S_OVER);
-			flag_sound = false;
+	else if(mGameState == G_GAME_OVER){
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
+		if(mIsSound){
+			mSound->SoundPlay(false,S_OVER);
+			mIsSound = false;
 		}
 	}
-	else if(game_state == G_GAME_CLEAR){
-		vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-		vertex->SetColor(alpha - start_alpha,255,255,255);
-		vertex->DrawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
-		if(flag_sound){
-			sound->SoundPlay(false,S_G_CLEAR);
-			flag_sound = false;
+	else if(mGameState == G_GAME_CLEAR){
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
+		if(mIsSound){
+			mSound->SoundPlay(false,S_G_CLEAR);
+			mIsSound = false;
 		}
 	}
 
-	if(mission_state_keep == MISSION_OUGI){
+	if(mMissionStateKeep == MISSION_OUGI){
 		DrawMissionOugi();
 	}
-	else if(mission_state_keep == MISSION_NEGATIVE){
+	else if(mMissionStateKeep == MISSION_NEGATIVE){
 		DrawMissionNegative();
 	}
 
-	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
 
-	vertex->SetColor(alpha,255,255,255);
+	mVertex->SetColor(mAlpha,255,255,255);
 
-	vertex->DrawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
+	mVertex->DrawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
 
-	vertex->DrawF(G_SCORE_X,G_SCORE_Y,R_SCORE);		//すこあ
+	mVertex->DrawF(G_SCORE_X,G_SCORE_Y,R_SCORE);		//すこあ
 
 	DrawNumS();
 
-	vertex->DrawF(G_TIME_X,G_TIME_Y,R_TIME);		//たいむ
+	mVertex->DrawF(G_TIME_X,G_TIME_Y,R_TIME);		//たいむ
 
 	DrawNumT();
 
-	vertex->DrawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//にくまん顔
-	vertex->DrawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//よしたろう顔
-	vertex->DrawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//のっぽ顔
+	mVertex->DrawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//にくまん顔
+	mVertex->DrawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//よしたろう顔
+	mVertex->DrawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//のっぽ顔
 
 	DrawNum();
 
-	vertex->DrawF(G_MISSION_X,G_MISSION_Y,R_MISSION_GAGE);	//みっしょんげ～じ
-	vertex->DrawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_IN);	//みっしょんゲージ
+	mVertex->DrawF(G_MISSION_X,G_MISSION_Y,R_MISSION_GAGE);	//みっしょんげ～じ
+	mVertex->DrawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_IN);	//みっしょんゲージ
 
 	DrawGageMission();
 
-	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
 
-	vertex->DrawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_FRAME);	//みっしょんゲージ枠
+	mVertex->DrawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_FRAME);	//みっしょんゲージ枠
 
-	vertex->DrawF(G_HP_X,G_HP_Y,R_HP);	//しゃっくの体力
-	vertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
+	mVertex->DrawF(G_HP_X,G_HP_Y,R_HP);	//しゃっくの体力
+	mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 
 	DrawGageHp();
 
-	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
 
-	vertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
+	mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 
-	if(mission_gage >= MISSION_GAGE_MAX){
-		mission->Draw();
+	if(mMissionGage >= MISSION_GAGE_MAX){
+		mMission->Draw();
 	}
 }
 
@@ -420,18 +420,18 @@ int C_GameNormal::EndScene()
 	//ゲームオーバーの場合
 	ChangeScene(RANKING);
 
-	sound->SoundStop(true,S_BGM_BATTLE);
+	mSound->SoundStop(true,S_BGM_BATTLE);
 
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
-	delete mission;
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
+	delete mMission;
 
-	return score;
+	return mScore;
 }
 
 void C_GameNormal::FadeControl()
 {
-	switch(flag_fade)
+	switch(mFlagFade)
 	{
 	case GS_FADE_IN:
 		FadeIn();
@@ -444,51 +444,51 @@ void C_GameNormal::FadeControl()
 
 void C_GameNormal::FadeIn()
 {
-	if(flag_fade_start > 60){
-		start_alpha += G_ALPHA_INCREASE - 10;
-		if(start_alpha > 255){
-			start_alpha = 255;
-			if(game_state == G_START_SCENE){
-				game_state = G_GAME_SCENE;
+	if(mFlagFadeStart > 60){
+		mStartAlpha += G_ALPHA_INCREASE - 10;
+		if(mStartAlpha > 255){
+			mStartAlpha = 255;
+			if(mGameState == G_START_SCENE){
+				mGameState = G_GAME_SCENE;
 			}
-			else if(game_state == G_GAME_OVER || game_state == G_GAME_CLEAR){
-				scene_change = false;
+			else if(mGameState == G_GAME_OVER || mGameState == G_GAME_CLEAR){
+				mIsSceneChange = false;
 			}
 		}
 		return ;
 	}
-	else if(flag_fade_start >= 1){
-		flag_fade_start++;
+	else if(mFlagFadeStart >= 1){
+		mFlagFadeStart++;
 		return ;
 	}
 
-	if(flag_fade_in){
-		start_alpha -= G_ALPHA_INCREASE - 10;
-		if(start_alpha < 0){
-			start_alpha = 0;
-			flag_fade_start = 1;
+	if(mIsFadeIn){
+		mStartAlpha -= G_ALPHA_INCREASE - 10;
+		if(mStartAlpha < 0){
+			mStartAlpha = 0;
+			mFlagFadeStart = 1;
 			//サウンド鳴らす予定
 		}
 		return ; 
 	}
-	else if(alpha_count++ > 1){
-		alpha += G_ALPHA_INCREASE;
-		if(alpha > G_MAX_ALPHA){
-			alpha = G_MAX_ALPHA;
-			flag_fade_in = true;
+	else if(mAlphaCount++ > 1){
+		mAlpha += G_ALPHA_INCREASE;
+		if(mAlpha > G_MAX_ALPHA){
+			mAlpha = G_MAX_ALPHA;
+			mIsFadeIn = true;
 		}
-		alpha_count = 0;
-		start_alpha = alpha;
+		mAlphaCount = 0;
+		mStartAlpha = mAlpha;
 	}
 }
 
 void C_GameNormal::FadeOut()
 {
-	if(alpha == 0) { return ; }
-	else if(alpha_count++ > 1){
-		alpha -= G_ALPHA_INCREASE;
-		if(alpha < 0) { alpha = 0; }
-		alpha_count = 0;
+	if(mAlpha == 0) { return ; }
+	else if(mAlphaCount++ > 1){
+		mAlpha -= G_ALPHA_INCREASE;
+		if(mAlpha < 0) { mAlpha = 0; }
+		mAlphaCount = 0;
 	}
 }
 
@@ -496,27 +496,27 @@ void C_GameNormal::DrawNum()
 {
 	//にくまん
 	for(int i = 0;i < 4;i++){
-		int num = cnt_key_nikuman;
+		int num = mNikumanKeyCount;
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		vertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NIKUMAN_Y,R_0 + num%10);
+		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NIKUMAN_Y,R_0 + num%10);
 	}
 	//よしたろう
 	for(int i = 0;i < 4;i++){
-		int num = cnt_key_yoshitaro;
+		int num = mYoshitaroKeyCount;
 		for(int j = 1;j < 4 - i;j++){
 			num = num / 10;
 		}
-		vertex->DrawF(G_PUSHNUM + 20.f * i,G_F_YOSHITARO_Y,R_0 + num%10);
+		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_YOSHITARO_Y,R_0 + num%10);
 	}
 	//のっぽ
 	for(int i = 0;i < 4;i++){
-		int num = cnt_key_noppo;
+		int num = mNoppoKeyCount;
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		vertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NOPPO_Y,R_0 + num%10);
+		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NOPPO_Y,R_0 + num%10);
 	}
 }
 
@@ -524,11 +524,11 @@ void C_GameNormal::DrawNumS()
 {
 	//スコア
 	for(int i = 0;i < 9;i++){
-		int num = score;
+		int num = mScore;
 		for(int j = 1; j < 9 - i;j++){
 			num = num / 10;
 		}
-		vertex->DrawF(G_SCORENUM_X + 20.f * i,G_SCORENUM_Y,R_0 + num%10);
+		mVertex->DrawF(G_SCORENUM_X + 20.f * i,G_SCORENUM_Y,R_0 + num%10);
 	}
 }
 
@@ -536,7 +536,7 @@ void C_GameNormal::DrawNumT()
 {
 	//タイム
 	for(int i = 0;i < 5;i++){
-		int num = time;
+		int num = mTime;
 		if(i != 2){
 			int a = 0;
 			if(i > 2){
@@ -557,186 +557,186 @@ void C_GameNormal::DrawNumT()
 				}
 			}
 			if(i == 0 || i == 3){
-				vertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%6);
+				mVertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%6);
 			}
 			else{
-				vertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%10);
+				mVertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%10);
 			}
 		}
 		else{
-			vertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_SEMICORON);
+			mVertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_SEMICORON);
 		}
 	}
 }
 
 void C_GameNormal::DrawGageHp()
 {
-	float num = boss->boss_life / boss->max_boss_life;
+	float num = mBoss->boss_life / mBoss->max_boss_life;
 
-	vertex->SetScale(num,1.f);
+	mVertex->SetScale(num,1.f);
 
-	vertex->SetColor(alpha,200,30,30);
+	mVertex->SetColor(mAlpha,200,30,30);
 	
-	vertex->DrawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
+	mVertex->DrawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
 void C_GameNormal::HitEffectDraw()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_GAME_EFFECT),pDevice);
-	vertex->SetColor(hit_effect_alpha,255,255,255);
-	vertex->DrawF(boss->boss_move_x - HIT_EFFECT_X,chara_atk_y,R_HIT_EFFECT);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
+	mVertex->SetColor(mHitEffectAlpha,255,255,255);
+	mVertex->DrawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 void C_GameNormal::DrawGageMission()
 {
-	float num = (float)mission_gage / (float)MISSION_GAGE_MAX;
+	float num = (float)mMissionGage / (float)MISSION_GAGE_MAX;
 
-	vertex->SetScale(num,1.f);
+	mVertex->SetScale(num,1.f);
 
-	vertex->SetColor(alpha,30,30,200);
+	mVertex->SetColor(mAlpha,30,30,200);
 	
-	vertex->DrawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
+	mVertex->DrawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
 }
 
 void C_GameNormal::ControlMissionOugi()
 {
-	if(time_cnt >= 0 && 60 > time_cnt){
-		alpha_font += 5;
-		if(alpha_font > 255){
-			alpha_font = 255;
+	if(mTimeCount >= 0 && 60 > mTimeCount){
+		mAlphaFont += 5;
+		if(mAlphaFont > 255){
+			mAlphaFont = 255;
 		}
 	}
-	else if(time_cnt >= 60 && 120 > time_cnt){
-		alpha_font = 255;
+	else if(mTimeCount >= 60 && 120 > mTimeCount){
+		mAlphaFont = 255;
 	}
-	else if(time_cnt >= 120 && 180 > time_cnt){
-		alpha_font -= 5;
-		if(alpha_font < 0){
-			alpha_font = 0;
+	else if(mTimeCount >= 120 && 180 > mTimeCount){
+		mAlphaFont -= 5;
+		if(mAlphaFont < 0){
+			mAlphaFont = 0;
 		}
 	}
-	else if(time_cnt >= 180 && 210 > time_cnt){
-		if(time_cnt == 180){
-			sound->SoundPlay(false,S_NAMI);
+	else if(mTimeCount >= 180 && 210 > mTimeCount){
+		if(mTimeCount == 180){
+			mSound->SoundPlay(false,S_NAMI);
 		}
 	}
-	else if(time_cnt >= 210 && 420 > time_cnt){		//波を動かす(3.5sec)
-		wave_posi.x += WAVE_SPEED_X;
-		wave_posi.y -= WAVE_UP_Y;
-		if(time_cnt % 10 <= 4){
-			wave_posi.y -= 2.f;
+	else if(mTimeCount >= 210 && 420 > mTimeCount){		//波を動かす(3.5sec)
+		mWavePos.x += WAVE_SPEED_X;
+		mWavePos.y -= WAVE_UP_Y;
+		if(mTimeCount % 10 <= 4){
+			mWavePos.y -= 2.f;
 		}
-		else if(time_cnt % 10 <= 9){
-			wave_posi.y += 2.f;
+		else if(mTimeCount % 10 <= 9){
+			mWavePos.y += 2.f;
 		}
 	}
-	else if(time_cnt >= 420 && 450 > time_cnt){
+	else if(mTimeCount >= 420 && 450 > mTimeCount){
 	}
-	else if(time_cnt >= 450 && 630 > time_cnt){
+	else if(mTimeCount >= 450 && 630 > mTimeCount){
 	}
-	if(time_cnt > 630){
-		boss->boss_life -= 7000;
+	if(mTimeCount > 630){
+		mBoss->boss_life -= 7000;
 		ReCover();
-		mission_state_keep = MISSION_END;
-		wave_posi.x = WAVE_INIT_X;
-		wave_posi.y = WAVE_INIT_Y;
-		score+=MISSION_CLEAR_SCORE;
+		mMissionStateKeep = MISSION_END;
+		mWavePos.x = WAVE_INIT_X;
+		mWavePos.y = WAVE_INIT_Y;
+		mScore+=MISSION_CLEAR_SCORE;
 	}
-	time_cnt++;
+	mTimeCount++;
 }
 
 void C_GameNormal::DrawMissionOugi()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_MISSION),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION),pDevice);
 
-	vertex->SetColor(alpha_font,255,255,255);
+	mVertex->SetColor(mAlphaFont,255,255,255);
 
-	vertex->DrawF(400.f,300.f,R_MISSION_OSIRASE);
+	mVertex->DrawF(400.f,300.f,R_MISSION_OSIRASE);
 
-	vertex->DrawF(400.f,300.f,R_OUGI_FONT);
+	mVertex->DrawF(400.f,300.f,R_OUGI_FONT);
 
-	vertex->SetTextureData(texture->GetTextureData(T_GAME_EFFECT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
 
-	vertex->DrawF(wave_posi.x,wave_posi.y,R_OUGI);
+	mVertex->DrawF(mWavePos.x,mWavePos.y,R_OUGI);
 }
 
 void C_GameNormal::ControlMissionNegative()
 {
 	NegativeSelect();
 
-	negative_state = SLIDE_IN;
+	mNegativeState = SLIDE_IN;
 
-	if(time_cnt >= 0 && 60 > time_cnt){
-		alpha_font += 5;
-		if(alpha_font > 255){
-			alpha_font = 255;
+	if(mTimeCount >= 0 && 60 > mTimeCount){
+		mAlphaFont += 5;
+		if(mAlphaFont > 255){
+			mAlphaFont = 255;
 		}
 	}
-	else if(time_cnt >= 60 && 120 > time_cnt){
-		alpha_font = 255;
+	else if(mTimeCount >= 60 && 120 > mTimeCount){
+		mAlphaFont = 255;
 	}
-	else if(time_cnt >= 120 && 180 > time_cnt){
-		alpha_font -= 5;
-		if(alpha_font < 0){
-			alpha_font = 0;
+	else if(mTimeCount >= 120 && 180 > mTimeCount){
+		mAlphaFont -= 5;
+		if(mAlphaFont < 0){
+			mAlphaFont = 0;
 		}
 	}
-	else if(time_cnt >= 180){
-		switch(negative_state)
+	else if(mTimeCount >= 180){
+		switch(mNegativeState)
 		{
 		case SPEED_UP:
-			boss->speed_x = 3;
+			mBoss->speed_x = 3;
 			break;
 		case RECOVER:
-			boss->boss_life = boss->max_boss_life;
+			mBoss->boss_life = mBoss->max_boss_life;
 			break;
 		case SLIDE_IN:
-			boss->boss_move_x = 500;
+			mBoss->boss_move_x = 500;
 			break;
 		case ATTACK_DOWN:
-			negative_damege += 1;
+			mNegativeDamege += 1;
 			break;
 		}
-		mission_state_keep = MISSION_END;
+		mMissionStateKeep = MISSION_END;
 	}
-	time_cnt++;
+	mTimeCount++;
 }
 
 void C_GameNormal::DrawMissionNegative()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_MISSION),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION),pDevice);
 
-	vertex->SetColor(alpha_font,255,255,255);
+	mVertex->SetColor(mAlphaFont,255,255,255);
 
-	vertex->DrawF(400.f,300.f,R_MISSION_OSIRASE);
+	mVertex->DrawF(400.f,300.f,R_MISSION_OSIRASE);
 
-	vertex->DrawF(400.f,300.f,R_NEGATIVE1 + negative_state - 1);
+	mVertex->DrawF(400.f,300.f,R_NEGATIVE1 + mNegativeState - 1);
 }
 
 void C_GameNormal::NegativeSelect()
 {
-	if(negative_state != 0){
+	if(mNegativeState != 0){
 		return ;
 	}
 
-	negative_state = rand()%100+1;
+	mNegativeState = rand()%100+1;
 
-	if(negative_state > 0 && negative_state <= NEGATIVE_PAR1){
-		negative_state = SPEED_UP;
+	if(mNegativeState > 0 && mNegativeState <= NEGATIVE_PAR1){
+		mNegativeState = SPEED_UP;
 	}
-	else if(negative_state > NEGATIVE_PAR1 && negative_state <= NEGATIVE_PAR2){
-		negative_state = RECOVER;
+	else if(mNegativeState > NEGATIVE_PAR1 && mNegativeState <= NEGATIVE_PAR2){
+		mNegativeState = RECOVER;
 	}
-	else if(negative_state > NEGATIVE_PAR2 && negative_state <= NEGATIVE_PAR3){
-		negative_state = SLIDE_IN;
+	else if(mNegativeState > NEGATIVE_PAR2 && mNegativeState <= NEGATIVE_PAR3){
+		mNegativeState = SLIDE_IN;
 	}
-	else if(negative_state > NEGATIVE_PAR3 && negative_state <= NEGATIVE_PAR4){
-		negative_state = ATTACK_DOWN;
+	else if(mNegativeState > NEGATIVE_PAR3 && mNegativeState <= NEGATIVE_PAR4){
+		mNegativeState = ATTACK_DOWN;
 	}
 }
 
 void C_GameNormal::ReCover()
 {
-	if(boss->boss_life <= 0){
-		negative_damege = 1;
+	if(mBoss->boss_life <= 0){
+		mNegativeDamege = 1;
 	}
 }

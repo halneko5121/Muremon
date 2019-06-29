@@ -39,7 +39,7 @@ public:
 	C_GameNormal(void);
 	~C_GameNormal(void);
 
-	void InitScene(LPDIRECT3DDEVICE9 apDev, /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound, int score);
+	void InitScene(LPDIRECT3DDEVICE9 apDev, /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound, int mScore);
 
 	bool RunScene();
 	void ControlScene();
@@ -65,83 +65,58 @@ public:
 	void HitEffectDraw();
 
 private:
-	C_Texture	*texture;
-	C_Vertex	*vertex;
-	C_DSound	*sound;
-	C_Control	*key;
-	C_Mission	*mission;
+	C_Texture*			mTexture;
+	C_Vertex*			mVertex;
+	C_DSound*			mSound;
+	C_Control*			mKey;
+	C_Mission*			mMission;
+	C_Boss*				mBoss;
 
-	C_Boss		*boss;
+	C_ActorNikuman*		mNiku;
+	C_ActorNoppo*		mNoppo;
+	C_ActorYoshi*		mYoshi;
 
-	C_ActorNikuman		*pNiku;
-	C_ActorNoppo		*pNoppo;
-	C_ActorYoshi		*pYoshi;
+	int					mTime;				// 時間をはかる
+	bool				mIsPose;			// ポーズをしているかしていないか
+	int					mScore;
+	int					mAlpha;				// アルファ値
+	int					mAlphaCount;		// アルファのディレイ
+	int					mStartAlpha;		// げ～むすた～とのアルファ差分
+	int					mGameState;			// ゲームの状態(スタート・すっきりゲーム)
+	int					mFlagFade;			// フェードインアウトなどの段階を知らせる
+	int					mFlagFadeStart;		// げ～むすた～とのフェードイン・フェードアウトを知らせるのに使用
+	bool				mIsFadeIn;			// フェードインが終わった状態かを知らせる
+	int					mKeyState;			// キーの状態
+	int					mMissionStateKeep;	// ミッションの状態をキープ
+	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
+	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
+	int					mNoppoKeyCount;		// のっぽの押されたキーの数をカウント
+	bool				mIsInit;			// 初期化したかどうか
+	bool				mIsRed;				// 色かえる
+	int					mMissionGage;		// 必殺ゲージ
+	bool				mIsHitNiku;
+	bool				mIsHitYoshi;
+	bool				mIsHitNoppo;
+	bool				mIsHitEffect;
 
-	int time;	//時間をはかる
+	// ヒットエフェクト
+	int					mHitEffectAlpha;
+	int					mHitEffectTime;
 
-	bool flag_pose;	//ポーズをしているかしていないか
+	float				mCharaAtkY;
+	bool				mIsSound;
 
-	int score;
+	// 奥義内で使用
+	int mAlphaFont;
+	int mTimeCount;
 
-	int alpha;	//アルファ値
+	int mSpeedX;
 
-	int alpha_count;	//アルファのディレイ
+	POSI mWavePos;
 
-	int start_alpha;	//げ～むすた～とのアルファ差分
-
-	int game_state;		//ゲームの状態(スタート・すっきりゲーム)
-
-	int flag_fade;		//フェードインアウトなどの段階を知らせる
-
-	int flag_fade_start;	//げ～むすた～とのフェードイン・フェードアウトを知らせるのに使用
-
-	bool flag_fade_in;		//フェードインが終わった状態かを知らせる
-
-	int key_state;			//キーの状態
-
-	int mission_state_keep;	//ミッションの状態をキープ
-
-	int cnt_key_nikuman;	//にくまんの押されたキーの数をカウント
-
-	int cnt_key_yoshitaro;	//吉たろうの押されたキーの数をカウント
-
-	int cnt_key_noppo;		//のっぽの押されたキーの数をカウント
-
-	int flag_init;			//初期化したかどうか
-
-	bool flag_red;			//色かえる
-
-	int mission_gage;		//必殺ゲージ
-
-	bool hit_niku;
-
-	bool hit_yoshi;
-
-	bool hit_noppo;
-
-	bool hit_effect_flag;
-
-	//ヒットエフェクト
-
-	int hit_effect_alpha;
-
-	int hit_effect_time;
-
-	float chara_atk_y;
-
-	bool flag_sound;
-
-	//奥義内で使用
-	int alpha_font;
-	int time_cnt;
-
-	int speed_x;
-
-	POSI wave_posi;
-
-	//NEGATIVEで使用
-	int negative_state;
-	int negative_damege;
+	// NEGATIVEで使用
+	int mNegativeState;
+	int mNegativeDamege;
 	
-	bool scene_change;	//シーンが変わる時を知らせる
+	bool mIsSceneChange;	//シーンが変わる時を知らせる
 };

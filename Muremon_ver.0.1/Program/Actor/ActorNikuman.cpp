@@ -1,4 +1,4 @@
-#include "Chara_Nikuman.h"
+#include "ActorNikuman.h"
 
 CHARADATA init_charadata_niku = {
 	(0.0f),0,0,(MAX_ALPHA),

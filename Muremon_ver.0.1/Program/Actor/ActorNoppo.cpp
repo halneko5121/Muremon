@@ -1,4 +1,4 @@
-#include "Chara_Noppo.h"
+#include "ActorNoppo.h"
 
 CHARADATA init_charadata_noppo = {
 	(0.0f),0,0,(MAX_ALPHA),

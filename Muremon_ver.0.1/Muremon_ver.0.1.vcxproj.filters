@@ -28,10 +28,10 @@
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp" />
     <ClCompile Include="Program\Actor\Boss.cpp" />
-    <ClCompile Include="Program\Actor\Chara_Nikuman.cpp" />
-    <ClCompile Include="Program\Actor\Chara_Noppo.cpp" />
-    <ClCompile Include="Program\Actor\Chara_Yoshi.cpp" />
-    <ClCompile Include="Program\Actor\CharaCommon.cpp" />
+    <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
+    <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
+    <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
+    <ClCompile Include="Program\Actor\ActorCommon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\gManage\GameManage.h" />
@@ -63,9 +63,9 @@
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitWave.h" />
     <ClInclude Include="Program\Actor\Boss.h" />
-    <ClInclude Include="Program\Actor\Chara_Nikuman.h" />
-    <ClInclude Include="Program\Actor\Chara_Noppo.h" />
-    <ClInclude Include="Program\Actor\Chara_Yoshi.h" />
-    <ClInclude Include="Program\Actor\CharaCommon.h" />
+    <ClInclude Include="Program\Actor\ActorNikuman.h" />
+    <ClInclude Include="Program\Actor\ActorNoppo.h" />
+    <ClInclude Include="Program\Actor\ActorYoshi.h" />
+    <ClInclude Include="Program\Actor\ActorCommon.h" />
   </ItemGroup>
 </Project>

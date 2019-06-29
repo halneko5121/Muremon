@@ -13,9 +13,9 @@
 #include "Library/Vertex.h"
 #include "Program/Scene/Mission.h"
 #include "Program/Actor/Boss.h"
-#include "Program/Actor/Chara_nikuman.h"
-#include "Program/Actor/Chara_Noppo.h"
-#include "Program/Actor/Chara_yoshi.h"
+#include "Program/Actor/Actornikuman.h"
+#include "Program/Actor/ActorNoppo.h"
+#include "Program/Actor/ActorYoshi.h"
 #include "Program/Util/Control.h"
 #include "Program/D_Game.h"
 

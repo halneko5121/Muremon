@@ -1,4 +1,4 @@
-#include "CharaCommon.h"
+#include "ActorCommon.h"
 
 //l,t,r,b
 //’†S‚©‚çAã‰º¶‰E‚Ì•

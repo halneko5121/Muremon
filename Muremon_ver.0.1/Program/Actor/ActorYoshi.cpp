@@ -1,4 +1,4 @@
-#include "Chara_Yoshi.h"
+#include "ActorYoshi.h"
 
 CHARADATA init_charadata_yoshi = {
 	(0.0f),0,0,(MAX_ALPHA),

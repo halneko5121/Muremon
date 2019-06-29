@@ -35,6 +35,35 @@ enum NEGATIVE_DATA
 
 class C_GameNormal:public C_SceneManage
 {
+public:
+	C_GameNormal(void);
+	~C_GameNormal(void);
+
+	void InitScene(LPDIRECT3DDEVICE9 apDev, /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound, int score);
+
+	bool RunScene();
+	void ControlScene();
+	void DrawScene();
+	int EndScene();
+
+	void DrawNum();		//連打数
+	void DrawNumS();	//スコア
+	void DrawNumT();	//タイム
+	void DrawGageHp();
+	void DrawGageMission();
+
+	void ControlMissionOugi();		// アクシデント奥義のコントロール
+	void DrawMissionOugi();			// アクシデント奥義を描画
+	void ControlMissionNegative();	// ミッション失敗時の処理
+	void NegativeSelect();			// どの処理にするかを判断
+	void DrawMissionNegative();		// ミッション失敗時の処理
+
+	void ReCover();					// ミッション失敗で下がったものを元に戻す
+	void FadeControl();				// フェードコントロール		
+	void FadeIn();					// フェードイン
+	void FadeOut();					// フェードアウト
+	void HitEffectDraw();
+
 private:
 	C_Texture	*texture;
 	C_Vertex	*vertex;
@@ -115,48 +144,4 @@ private:
 	int negative_damege;
 	
 	bool scene_change;	//シーンが変わる時を知らせる
-public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C_DFont *apFont, C_DSound *apSound,int score);
-
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
-
-	void DrawNum();		//連打数
-
-	void DrawNumS();	//スコア
-
-	void DrawNumT();	//タイム
-
-	void DrawGageHp();
-
-	void DrawGageMission();
-
-	void ControlMissionOugi();	//アクシデント奥義のコントロール
-
-	void DrawMissionOugi();	//アクシデント奥義を描画
-
-	void ControlMissionNegative();	//ミッション失敗時の処理
-
-	void NegativeSelect();			//どの処理にするかを判断
-
-	void DrawMissionNegative();		//ミッション失敗時の処理
-
-	void ReCover();					//ミッション失敗で下がったものを元に戻す
-
-	void FadeControl();		//フェードコントロール		
-
-	void FadeIn();			//フェードイン
-
-	void FadeOut();			//フェードアウト
-
-	void Calculate(int getchara);	//計算処理（総ダメージ、必殺ゲージ増加）
-
-	void ScoreDamageDraw();	//総ダメージスコア
-
-	void HitEffectDraw();
-
-	C_GameNormal(void);
-	~C_GameNormal(void);
 };

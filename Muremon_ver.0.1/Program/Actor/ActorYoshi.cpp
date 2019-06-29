@@ -12,7 +12,7 @@ CHARADATA init_charadata_yoshi = {
 /**
  * @brief ƒRƒ“ƒXƒgƒ‰ƒNƒ^
  */
-C_Chara_Yoshi::C_Chara_Yoshi(C_Vertex *vertex , C_Texture  *texture, LPDIRECT3DDEVICE9  device, C_DSound *sound)
+C_ActorYoshi::C_ActorYoshi(C_Vertex *vertex , C_Texture  *texture, LPDIRECT3DDEVICE9  device, C_DSound *sound)
 {
 	m_pTexture	= new C_Texture();
 	m_pVertex		= new C_Vertex();
@@ -27,7 +27,7 @@ C_Chara_Yoshi::C_Chara_Yoshi(C_Vertex *vertex , C_Texture  *texture, LPDIRECT3DD
 /**
  * @brief ƒfƒXƒgƒ‰ƒNƒ^
  */
-C_Chara_Yoshi::~C_Chara_Yoshi(void)
+C_ActorYoshi::~C_ActorYoshi(void)
 {
 }
 
@@ -35,7 +35,7 @@ C_Chara_Yoshi::~C_Chara_Yoshi(void)
  * @brief ‰Šú‰»
  */
 void
-C_Chara_Yoshi::Init()											
+C_ActorYoshi::Init()											
 {
 	m_pOrbit->pWave->InitWave(WAVE_AMPLIT_YOSHI,WAVE_CYCLE_YOSHI,NULL,WAVE_MODE_GAME);
 
@@ -68,7 +68,7 @@ C_Chara_Yoshi::Init()
  * @brief XV
  */
 void
-C_Chara_Yoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
+C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
 {
 	m_randspeed = 0.f;
 
@@ -169,7 +169,7 @@ C_Chara_Yoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int 
  * @brief ƒAƒjƒİ’è
  */
 int
-C_Chara_Yoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,int m_chara_num)
+C_ActorYoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,int m_chara_num)
 {
 	static int delay = 0;
 
@@ -191,7 +191,7 @@ C_Chara_Yoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,in
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-C_Chara_Yoshi::DrawEffectFont(int rect_startnum)
+C_ActorYoshi::DrawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -211,7 +211,7 @@ C_Chara_Yoshi::DrawEffectFont(int rect_startnum)
  * @brief •`‰æˆ—
  */
 void
-C_Chara_Yoshi::Draw(int rect_startnum)
+C_ActorYoshi::Draw(int rect_startnum)
 {
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -234,7 +234,7 @@ C_Chara_Yoshi::Draw(int rect_startnum)
  * @brief UŒ‚ˆ—
  */
 POS_CC<float>
-C_Chara_Yoshi::CharaAttack_2(int m_chara_num)														//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
+C_ActorYoshi::CharaAttack_2(int m_chara_num)														//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
 {
 	m_charadata[m_chara_num].draw_cc = m_pOrbit->pWave->OrbitSinWave(WAVE_LIMIT_X_YOSHI,m_charadata[m_chara_num].draw_cc,m_chara_num);
 
@@ -245,7 +245,7 @@ C_Chara_Yoshi::CharaAttack_2(int m_chara_num)														//ƒL[“ü—Í‚É‚æ‚é“®ì‚
  * @brief €–Sˆ—
  */
 void
-C_Chara_Yoshi::DeathControl(int m_chara_num, int sound_num, int rect_startnum)						//€–Sˆ—
+C_ActorYoshi::DeathControl(int m_chara_num, int sound_num, int rect_startnum)						//€–Sˆ—
 {
 
 	if(init[m_chara_num]){

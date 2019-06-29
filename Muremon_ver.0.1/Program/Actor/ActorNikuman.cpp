@@ -12,7 +12,7 @@ CHARADATA init_charadata_niku = {
 /**
  * @brief コンストラクタ
  */
-C_Chara_Nikuman::C_Chara_Nikuman(C_Vertex *vertex ,C_Texture  *texture, LPDIRECT3DDEVICE9  device , C_DSound *sound)
+C_ActorNikuman::C_ActorNikuman(C_Vertex *vertex ,C_Texture  *texture, LPDIRECT3DDEVICE9  device , C_DSound *sound)
 {
 	m_pTexture	= new C_Texture();
 	m_pVertex	= new C_Vertex();
@@ -27,7 +27,7 @@ C_Chara_Nikuman::C_Chara_Nikuman(C_Vertex *vertex ,C_Texture  *texture, LPDIRECT
 /**
  * @brief デストラクタ
  */
-C_Chara_Nikuman::~C_Chara_Nikuman(void)
+C_ActorNikuman::~C_ActorNikuman(void)
 {
 }
 
@@ -35,7 +35,7 @@ C_Chara_Nikuman::~C_Chara_Nikuman(void)
  * @brief 初期化
  */
 void
-C_Chara_Nikuman::Init()								
+C_ActorNikuman::Init()								
 {
 	//praivate変数
 	s_atk_start_y = 0.f;
@@ -66,7 +66,7 @@ C_Chara_Nikuman::Init()
  * @brief 更新
  */
 void
-C_Chara_Nikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
+C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
 {
 	m_randspeed = 0.f;
 
@@ -159,7 +159,7 @@ C_Chara_Nikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int
  * @brief アニメ設定
  */
 int
-C_Chara_Nikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int m_chara_num)
+C_ActorNikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int m_chara_num)
 {
 	static int delay = 0;
 
@@ -181,7 +181,7 @@ C_Chara_Nikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, 
  * @brief フォントの描画処理
  */
 void
-C_Chara_Nikuman::DrawEffectFont(int rect_startnum)
+C_ActorNikuman::DrawEffectFont(int rect_startnum)
 {
 	//フォントエフェクトの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -198,7 +198,7 @@ C_Chara_Nikuman::DrawEffectFont(int rect_startnum)
  * @brief 描画処理
  */
 void
-C_Chara_Nikuman::Draw(int rect_startnum)
+C_ActorNikuman::Draw(int rect_startnum)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -212,7 +212,7 @@ C_Chara_Nikuman::Draw(int rect_startnum)
  * @brief 攻撃処理
  */
 POS_CC<float>
-C_Chara_Nikuman::CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc)		//キー入力による動作その2
+C_ActorNikuman::CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc)		//キー入力による動作その2
 {
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
@@ -233,7 +233,7 @@ C_Chara_Nikuman::CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc)		//キー入
  * @brief 死亡処理
  */
 void
-C_Chara_Nikuman::DeathControl(int m_chara_num , int sound_num, int rect_startnum)			//死亡処理
+C_ActorNikuman::DeathControl(int m_chara_num , int sound_num, int rect_startnum)			//死亡処理
 {
 	m_charadata[m_chara_num].animetion = 0;
 	m_charadata[m_chara_num].animetion	= SetAnimetion(NULL,m_charadata[m_chara_num].animetion,ANIME_DEATH_NIKU,m_chara_num);

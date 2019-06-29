@@ -12,7 +12,7 @@ CHARADATA init_charadata_noppo = {
 /**
  * @brief ƒRƒ“ƒXƒgƒ‰ƒNƒ^
  */
-C_Chara_Noppo::C_Chara_Noppo(C_Vertex *vertex , C_Texture  *texture, LPDIRECT3DDEVICE9 device, C_DSound *sound)
+C_ActorNoppo::C_ActorNoppo(C_Vertex *vertex , C_Texture  *texture, LPDIRECT3DDEVICE9 device, C_DSound *sound)
 {
 	m_pTexture	= new C_Texture();
 	m_pVertex	= new C_Vertex();
@@ -27,7 +27,7 @@ C_Chara_Noppo::C_Chara_Noppo(C_Vertex *vertex , C_Texture  *texture, LPDIRECT3DD
 /**
  * @brief ƒfƒXƒgƒ‰ƒNƒ^
  */
-C_Chara_Noppo::~C_Chara_Noppo(void)
+C_ActorNoppo::~C_ActorNoppo(void)
 {
 }
 
@@ -35,7 +35,7 @@ C_Chara_Noppo::~C_Chara_Noppo(void)
  * @brief ‰Šú‰»
  */
 void
-C_Chara_Noppo::Init()											
+C_ActorNoppo::Init()											
 {
 	m_pOrbit->pWave->InitWave(WAVE_AMPLIT_NOPPO,WAVE_CYCLE_NOPPO,NULL,WAVE_MODE_GAME);
 
@@ -70,7 +70,7 @@ C_Chara_Noppo::Init()
  * @brief XV
  */
 void
-C_Chara_Noppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//ƒLƒƒƒ‰ƒNƒ^‚Ì§Œä
+C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//ƒLƒƒƒ‰ƒNƒ^‚Ì§Œä
 {
 	m_randspeed = 0.f;
 
@@ -172,7 +172,7 @@ C_Chara_Noppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int r
  * @brief ƒAƒjƒİ’è
  */
 int
-C_Chara_Noppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int m_chara_num)
+C_ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int m_chara_num)
 {
 	static int delay = 0;
 
@@ -194,7 +194,7 @@ C_Chara_Noppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-C_Chara_Noppo::DrawEffectFont(int rect_startnum)
+C_ActorNoppo::DrawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -215,7 +215,7 @@ C_Chara_Noppo::DrawEffectFont(int rect_startnum)
  * @brief •`‰æˆ—
  */
 void
-C_Chara_Noppo::Draw(int rect_startnum)
+C_ActorNoppo::Draw(int rect_startnum)
 {
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -245,7 +245,7 @@ C_Chara_Noppo::Draw(int rect_startnum)
  * @brief UŒ‚ˆ—
  */
 POS_CC<float>
-C_Chara_Noppo::CharaAttack_2(int m_chara_num)																//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
+C_ActorNoppo::CharaAttack_2(int m_chara_num)																//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
 {
 	m_charadata[m_chara_num].draw_cc = m_pOrbit->pWave->OrbitSinWave(WAVE_LIMIT_X_NOPPO,m_charadata[m_chara_num].draw_cc,m_chara_num);
 
@@ -256,7 +256,7 @@ C_Chara_Noppo::CharaAttack_2(int m_chara_num)																//ƒL[“ü—Í‚É‚æ‚é“®
  * @brief €–Sˆ—
  */
 void
-C_Chara_Noppo::DeathControl(int m_chara_num, int sound_startnum ,int rect_startnum)							//€–Sˆ—
+C_ActorNoppo::DeathControl(int m_chara_num, int sound_startnum ,int rect_startnum)							//€–Sˆ—
 {
 	static int wait_count[MAX_VALLUE_PLAYER] = {0};
 

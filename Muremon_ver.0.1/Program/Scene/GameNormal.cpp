@@ -84,9 +84,9 @@ void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev , /*C_DInput *apInput ,*/ C
 
 	sound = apSound;
 
-	pNiku	= new C_Chara_Nikuman(vertex,texture,apDev,apSound);
-	pNoppo	= new C_Chara_Noppo(vertex,texture,apDev,apSound);
-	pYoshi	= new C_Chara_Yoshi(vertex,texture,apDev,apSound);
+	pNiku	= new C_ActorNikuman(vertex,texture,apDev,apSound);
+	pNoppo	= new C_ActorNoppo(vertex,texture,apDev,apSound);
+	pYoshi	= new C_ActorYoshi(vertex,texture,apDev,apSound);
 
 	pNiku->Init();
 	pNoppo->Init();

@@ -56,11 +56,11 @@ enum ANIME_YOSHI
 	MAX_ANIME_YOSHI,
 };
 
-class C_Chara_Yoshi : public C_CharaCommon
+class C_ActorYoshi : public C_ActorBase
 {
 public:
-	C_Chara_Yoshi(C_Vertex *vertex, C_Texture *texture, LPDIRECT3DDEVICE9 device, C_DSound  *Sound);
-	~C_Chara_Yoshi(void);
+	C_ActorYoshi(C_Vertex *vertex, C_Texture *texture, LPDIRECT3DDEVICE9 device, C_DSound  *Sound);
+	~C_ActorYoshi(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num);
 	void			DeathControl(int m_chara_num, int sound_num, int rect_startnum) override;

@@ -44,9 +44,9 @@ private:
 
 	C_Boss		*boss;
 
-	C_Chara_Nikuman		*pNiku;
-	C_Chara_Noppo		*pNoppo;
-	C_Chara_Yoshi		*pYoshi;
+	C_ActorNikuman		*pNiku;
+	C_ActorNoppo		*pNoppo;
+	C_ActorYoshi		*pYoshi;
 
 	int time;	//ŽžŠÔ‚ð‚Í‚©‚é
 

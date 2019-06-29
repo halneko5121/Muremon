@@ -1,10 +1,8 @@
 #pragma once
 
 /************************************************************************************
- *	役割：キャラの共通する部分の管理												*
+ *	役割：アクターの共通する部分の管理												*
  *	説明：																			*
- *	作成日：2009年 3月 19日															*
- *	更新日：	年	月	 日															*
  *													by	三上　亘					*
  ************************************************************************************/
 
@@ -81,15 +79,11 @@ typedef struct CHARADATA{
 	POS_CC<float>  draw_cc;
 }CHARADATA;
 
-
-/*================================
-		Class
-=================================*/
-class C_CharaCommon
+class C_ActorBase
 {
 public:
-	C_CharaCommon(void);
-	~C_CharaCommon(void);
+	C_ActorBase(void);
+	virtual ~C_ActorBase(void);
 
 	float				m_chara_y;
 	virtual void		DeathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;

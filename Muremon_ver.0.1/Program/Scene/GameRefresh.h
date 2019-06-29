@@ -26,9 +26,9 @@ private:
 	C_DSound	*sound;
 	C_Control	*key;
 
-	C_Chara_Nikuman		*pNiku;
-	C_Chara_Noppo		*pNoppo;
-	C_Chara_Yoshi		*pYoshi;
+	C_ActorNikuman		*pNiku;
+	C_ActorNoppo		*pNoppo;
+	C_ActorYoshi		*pYoshi;
 
 	C_Boss				*boss;
 

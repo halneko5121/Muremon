@@ -3,8 +3,6 @@
 /************************************************************************************
  *	役割：にくまんの管理															*
  *	説明：																			*
- *	作成日：2009年 3月 19日															*
- *	更新日：	年	月	 日															*
  *													by	三上　亘					*
  ************************************************************************************/
 
@@ -45,11 +43,11 @@ enum ANIME_NIKU
 	MAX_ANIME_NIKU,
 };
 
-class C_Chara_Nikuman :	public C_CharaCommon
+class C_ActorNikuman :	public C_ActorBase
 {
 public:
-	C_Chara_Nikuman(C_Vertex *vertex, C_Texture *texture, LPDIRECT3DDEVICE9  device, C_DSound *sound);
-	~C_Chara_Nikuman(void);
+	C_ActorNikuman(C_Vertex *vertex, C_Texture *texture, LPDIRECT3DDEVICE9  device, C_DSound *sound);
+	~C_ActorNikuman(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc);
 	void			DeathControl(int m_chara_num, int sound_num, int rect_start_num);

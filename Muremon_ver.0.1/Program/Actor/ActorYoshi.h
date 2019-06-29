@@ -58,6 +58,19 @@ enum ANIME_YOSHI
 
 class C_Chara_Yoshi : public C_CharaCommon
 {
+public:
+	C_Chara_Yoshi(C_Vertex *vertex, C_Texture *texture, LPDIRECT3DDEVICE9 device, C_DSound  *Sound);
+	~C_Chara_Yoshi(void);
+
+	POS_CC<float>	CharaAttack_2(int m_chara_num);
+	void			DeathControl(int m_chara_num, int sound_num, int rect_startnum) override;
+
+	void			Init() override;
+	void			Control(int key, POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death) override;
+	void			Draw(int rect_startnum) override;
+	void			DrawEffectFont(int rect_startnum) override;
+	int				SetAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) override;
+
 private:
 	float			s_atk_start_y;
 
@@ -69,16 +82,4 @@ private:
 	POS_CC<float>	pos_effectfont[MAX_VALLUE_PLAYER];
 	bool			init[MAX_VALLUE_PLAYER];
 	int				sound_count[MAX_VALLUE_PLAYER];
-
-public:
-	POS_CC<float>	CharaAttack_2(int m_chara_num);											
-	void			DeathControl(int m_chara_num ,int sound_num ,int rect_startnum) override;
-	void			Init() override;
-	void			Control(int key, POS_CC<float> boss_cc, int sound_startnum ,int rect_startnum, bool boss_death) override;
-	void			Draw(int rect_startnum) override;
-	void			DrawEffectFont(int rect_startnum) override;
-	int				SetAnimetion(int max_animetion, int anime_count ,int rect_num , int m_chara_num) override;
-
-	C_Chara_Yoshi(C_Vertex *vertex , C_Texture *texture , LPDIRECT3DDEVICE9 device ,C_DSound  *Sound);
-	~C_Chara_Yoshi(void);
 };

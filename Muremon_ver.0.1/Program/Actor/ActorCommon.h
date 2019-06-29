@@ -87,35 +87,18 @@ typedef struct CHARADATA{
 =================================*/
 class C_CharaCommon
 {
-protected:
-	C_OrbitCalculation  *m_pOrbit;
-
-	C_Texture			*m_pTexture;
-	C_Vertex			*m_pVertex;
-	C_DSound			*m_pSound;
-	LPDIRECT3DDEVICE9	m_pDevice;
-
-
-	CHARADATA			m_charadata[MAX_VALLUE_PLAYER];
-	float				m_deg_spin[MAX_VALLUE_PLAYER];
-	float				m_randspeed;
-
-	int					m_chara_num;
-	int					m_delay;
-	int					m_count_effect[MAX_VALLUE_PLAYER];
-	int					m_max_animetion;
-
-	bool				m_flag_turn2;								//二週目のフラグ
-	bool				m_set_hitcheck;
 public:
+	C_CharaCommon(void);
+	~C_CharaCommon(void);
+
 	float				m_chara_y;
-	virtual void		DeathControl(int m_chara_num ,int start_soundnum, int rect_startnum) = 0;		
-	virtual void		Init() = 0;																		
-	virtual void		Control(int key, POS_CC<float> boss_cc, int sound_startnum,int rect_startnum, bool both_death) = 0;
+	virtual void		DeathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;
+	virtual void		Init() = 0;
+	virtual void		Control(int key, POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool both_death) = 0;
 	//描画
 	virtual void		Draw(int rect_num) = 0;
 	virtual void		DrawEffectFont(int rect_startnum) = 0;
-	virtual int			SetAnimetion(int max_animetion, int anime_count ,int rect_num , int m_chara_num)	= 0;
+	virtual int			SetAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) = 0;
 
 	//共通する処理
 	/************************************************************************************
@@ -143,7 +126,7 @@ public:
 	*	戻り値	：キャラデータ(フラグの状態)											*
 	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
-	CHARADATA SetAtk_Flag(int key , CHARADATA set_charadata);
+	CHARADATA SetAtk_Flag(int key, CHARADATA set_charadata);
 
 	/************************************************************************************
 	*	役割	：エフェクトフォント(『ぱん！』とか)の位置を設定						*
@@ -154,7 +137,7 @@ public:
 	*	戻り値	：中心座標																*
 	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
-	POS_CC<float> SetE_Font(POS_CC<float> font_cc ,float chara_radius, float range_font);
+	POS_CC<float> SetE_Font(POS_CC<float> font_cc, float chara_radius, float range_font);
 
 	/************************************************************************************
 	*	役割	：上下左右に小刻みに揺らす												*
@@ -164,7 +147,7 @@ public:
 	*	戻り値	：中心座標																*
 	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
-	POS_CC<float> EffectShake(float change_x ,float change_y, POS_CC<float> font_cc);
+	POS_CC<float> EffectShake(float change_x, float change_y, POS_CC<float> font_cc);
 
 	/************************************************************************************
 	*	役割	：キャラの攻撃移動処理1　(キーその１の処理)								*
@@ -183,8 +166,8 @@ public:
 	*	戻り値	：敵と当たったかどうかのフラグ											*
 	*	作成日	：2009年 3月 19日						by	三上　亘					*
 	************************************************************************************/
-	bool HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int m_chara_num);
-	
+	bool HitCheck(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int m_chara_num);
+
 	/************************************************************************************
 	*	役割	：中心座標から矩形を逆算												*
 	*	関数名	：F_RECT CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos);	*
@@ -194,12 +177,30 @@ public:
 	*	作成日	：2009年 3月 19日														*
 	*	更新日	：	年	月	 日							by	三上　亘					*
 	************************************************************************************/
-	F_RECT CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos);
+	F_RECT CalculateBack_Rect(POS_CC<float> draw_cc, F_RECT rect_pos);
 
-	void SetFlagHit(bool hitcheck) {  m_set_hitcheck = hitcheck ;}
+	void SetFlagHit(bool hitcheck) { m_set_hitcheck = hitcheck; }
 
-	bool GetFlagHit() {  return m_set_hitcheck;}
+	bool GetFlagHit() { return m_set_hitcheck; }
 
-	C_CharaCommon(void);
-	~C_CharaCommon(void);
+protected:
+	C_OrbitCalculation  *m_pOrbit;
+
+	C_Texture			*m_pTexture;
+	C_Vertex			*m_pVertex;
+	C_DSound			*m_pSound;
+	LPDIRECT3DDEVICE9	m_pDevice;
+
+
+	CHARADATA			m_charadata[MAX_VALLUE_PLAYER];
+	float				m_deg_spin[MAX_VALLUE_PLAYER];
+	float				m_randspeed;
+
+	int					m_chara_num;
+	int					m_delay;
+	int					m_count_effect[MAX_VALLUE_PLAYER];
+	int					m_max_animetion;
+
+	bool				m_flag_turn2;								//二週目のフラグ
+	bool				m_set_hitcheck;
 };

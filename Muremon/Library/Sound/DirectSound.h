@@ -82,11 +82,16 @@ public:
 	void SoundPlayLoop(short id);
 
 	/**
-	 * @brief	停止
-	 * @param	is_pouse	一時停止か
+	 * @brief	一時停止
 	 * @param	id			サウンドのID
 	 */
-	void SoundStop(bool is_pouse, short id);
+	void SoundPouse(short id);
+
+	/**
+	 * @brief	停止
+	 * @param	id			サウンドのID
+	 */
+	void SoundStop(short id);
 
 	/**
 	 * @brief	指定IDのサウンドが再生中か
@@ -123,6 +128,13 @@ private:
 	 * @param	id		サウンドのID
 	 */
 	void SoundPlayImple(bool loop, short id);
+
+	/**
+	 * @brief	停止
+	 * @param	is_pouse	一時停止か
+	 * @param	id			サウンドのID
+	 */
+	void SoundStopImple(bool is_pouse, short id);
 
 private:
 	enum { MAX_SOUND = 20 };								// 読み込めるサウンドの最大数

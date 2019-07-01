@@ -82,7 +82,7 @@ private:
 
 	LPDIRECT3DDEVICE9 pDevice;
 
-	POSI mission_start;	//みっしょん開始の位置
+	D3DXVECTOR2 mission_start;	//みっしょん開始の位置
 
 	int alpha_count;	//
 

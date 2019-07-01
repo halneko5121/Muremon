@@ -57,7 +57,7 @@ private:
 
 	int flag_draw_state;	//描画しているものを知らせる
 
-	POSI tutorial[2];
+	D3DXVECTOR2 tutorial[2];
 
 	int fade_flag;	//フェードのフラグ
 

@@ -101,8 +101,8 @@ private:
 	C_Vertex	*vertex;
 	C_Control	*key;
 
-	POSI cursor_posi;
-	POSI title_posi;
+	D3DXVECTOR2 cursor_posi;
+	D3DXVECTOR2 title_posi;
 
 	int key_state;
 

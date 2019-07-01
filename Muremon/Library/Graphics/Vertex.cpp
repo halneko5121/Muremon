@@ -1,520 +1,497 @@
-//---------------------------------------------
-//
-//      テクスチャデータ
-//      作成開始日:3月17日
-//			更新日:3月17日
-//			作成者:平野
-//
-//---------------------------------------------
+/******************************************************************
+ *	@file	Vertex.cpp
+ *	@brief	バーテックスの管理を行う
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
-//include
 #include "Vertex.h"
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャのデータをセットする
-//      引数  ：LPDIRECT3DTEXTURE9  *pTexture   テクスチャデータ
-//              LPDIRECT3DDEVICE9   pD3dDevice  デバイス
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::SetTextureData(LPDIRECT3DTEXTURE9 *pTexture , LPDIRECT3DDEVICE9 pD3dDevice)
+#define TEX_FVF				(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)	//FVF定数
+#define UV					(0.5f)
+
+typedef struct _CUSTOM_VERTEX
 {
-	//テクスチャ情報を保存
+	float		x, y, z, rhw;	// 座標
+	D3DCOLOR	color;			// 色情報
+	float		u, v;			// UV値
+}CUSTOM_VERTEX, *LPCUSTOM_VERTEX;
+
+
+/**
+ * @brief	コンストラクタ
+ */
+C_Vertex::C_Vertex()
+{
+
+}
+
+/**
+ * @brief	デストラクタ
+ */
+C_Vertex::~C_Vertex()
+{
+}
+
+/**
+ * @brief	テクスチャのデータをセットする
+ * @param	pTexture	テクスチャデータ
+ * @param	pD3dDevice  デバイス
+ */
+void
+C_Vertex::SetTextureData(LPDIRECT3DTEXTURE9* texture, LPDIRECT3DDEVICE9 d3d_device)
+{
+	// テクスチャのデータを取得
 	D3DSURFACE_DESC desc;
-	(*pTexture)->GetLevelDesc(0,&desc);				//テクスチャのデータを取得
+	(*texture)->GetLevelDesc(0, &desc);
 
-	pTex = pTexture;	//テクスチャセット
-	texX = desc.Width;	//横幅保存
-	texY = desc.Height;	//縦幅保存
-	texU = 1.0f / texX;	//UV値設定
-	texV = 1.0f / texY;
+	// テクスチャセット
+	mTexture = texture;
 
-	//メンバをここで初期化しておく
-	scaleX	= 1.0f;			//横倍率
-	scaleY	= 1.0f;			//縦倍率
-	radian	= 0.0f;			//角度
-	color	= 0xFFFFFFFF;	//カラー値
-
-	//デバイスセット
-	pDevice = pD3dDevice;
-}
+	// 横幅・縦幅保存
+	mTextureWidth = desc.Width;
+	mTextureHeight = desc.Height;
 	
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの拡大・縮小率を指定
-//      引数  ：float   scaX    横幅の拡大率
-//              float   scaY    縦幅の拡大率
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::SetScale(float scaX , float scaY)
-{
-	scaleX = scaX;	//横倍率セット
-	scaleY = scaY;	//縦倍率セット
+	// UV値設定
+	mTextureU = 1.0f / mTextureWidth;
+	mTextureV = 1.0f / mTextureHeight;
+
+	// メンバをここで初期化しておく
+	mScaleX	= 1.0f;			// 横倍率
+	mScaleY	= 1.0f;			// 縦倍率
+	mDegree	= 0.0f;			// 角度
+	mColor	= 0xFFFFFFFF;	// カラー値
+
+	// デバイスセット
+	mDevice = d3d_device;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの回転角度を指定
-//      引数  ：float   rad 回転させる角度
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::SetAngle(float rad)
+/**
+ * @brief	テクスチャの拡大・縮小率を指定
+ * @param	scale_x    横幅の拡大率
+ * @param	scale_y    縦幅の拡大率
+ */
+void
+C_Vertex::SetScale(float scale_x , float scale_y)
 {
-	radian = rad;	//角度セット
+	mScaleX = scale_x;	// 横倍率セット
+	mScaleY = scale_y;	// 縦倍率セット
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの色指定
-//      引数  ：D3DCOLOR    alpha   アルファ値
-//              D3DCOLOR    red     赤の値
-//              D3DCOLOR    green   緑の値
-//              D3DCOLOR    blue    青の値
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::SetColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
+/**
+ * @brief	テクスチャの回転角度を指定
+ * @param	degree		回転させる角度
+ */
+void
+C_Vertex::SetAngle(float degree)
 {
-	color = D3DCOLOR_ARGB(alpha , red , green , blue);
+	mDegree = degree;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの色指定(仮作成('A`))
-//      引数  ：D3DCOLOR    alpha   アルファ値
-//              D3DCOLOR    red     赤の値
-//              D3DCOLOR    green   緑の値
-//              D3DCOLOR    blue    青の値
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::SetColor2(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue , int Num)
+/**
+ * @brief	テクスチャの色指定
+ * @param	alpha   アルファ値
+ * @param	red		赤の値
+ * @param	green	緑の値
+ * @param	blue	青の値
+ */
+void
+C_Vertex::SetColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
 {
-	color1[Num] = D3DCOLOR_ARGB(alpha , red , green , blue);
+	mColor = D3DCOLOR_ARGB(alpha , red , green , blue);
 }
 
-/************************************************************************************
- *	説明	：フェードイン処理														*
- *	引数	：int fade_speed	int texture_alpha:テクスチャのalpha値				*
- *	戻り値	：int alpha																*
- *													by	三上　亘					*
- ************************************************************************************/
-int C_Vertex::FadeIn(int fade_speed ,int texture_alpha) 
+void
+C_Vertex::SetColor2(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue , int Num)
 {
-	alpha_i = texture_alpha;
-	alpha_i += fade_speed;
-
-	if(alpha_i >= 255 )	alpha_i = 255;
-
-	return alpha_i;
+	mColor1[Num] = D3DCOLOR_ARGB(alpha , red , green , blue);
 }
 
-float C_Vertex::FadeIn(float fade_speed ,float texture_alpha) 
+/**
+ * @brief	フェードイン処理
+ * @param	fade_speed		フェードスピード
+ * @param	texture_alpha	テクスチャのalpha値
+ * @return	アルファ値
+ */
+int
+C_Vertex::FadeIn(int fade_speed ,int texture_alpha)
 {
-	alpha_f  = texture_alpha;
-	alpha_f += fade_speed;
+	mAlpha = texture_alpha;
+	mAlpha += fade_speed;
 
-	if(alpha_f >= 255 )	alpha_f = 255;
+	if (mAlpha >= 255)
+	{
+		mAlpha = 255;
+	}
 
-	return alpha_f;
+	return mAlpha;
 }
 
-/************************************************************************************
- *	説明	：フェードアウト処理													*					
- *	引数	：int fade_speed	int texture_alpha:テクスチャのalpha値				*
- *	戻り値	：int alpha																*
- *													by	三上　亘					*
- ************************************************************************************/
-int C_Vertex::FadeOut(int fade_speed ,int texture_alpha) 
+/**
+ * @brief	フェードアウト処理
+ * @param	fade_speed		フェードスピード
+ * @param	texture_alpha	テクスチャのalpha値
+ * @return	アルファ値
+ */
+int
+C_Vertex::FadeOut(int fade_speed ,int texture_alpha)
 {
-	alpha_i = texture_alpha;
-	alpha_i -= fade_speed;
+	mAlpha = texture_alpha;
+	mAlpha -= fade_speed;
 
-	if(alpha_i <= 0 )	alpha_i = 0;
+	if (mAlpha <= 0)
+	{
+		mAlpha = 0;
+	}
 
-	return alpha_i;
+	return mAlpha;
 }
 
-float C_Vertex::FadeOut(float fade_speed ,float texture_alpha) 
+/**
+ * @brief	テクスチャの矩形を指定
+ */
+void
+C_Vertex::SetTextureRect(long left , long top , long right , long bottom)
 {
-	alpha_f = texture_alpha;
-	alpha_f -= fade_speed;
-
-	if(alpha_f <= 0 )	alpha_f = 0;
-
-	return alpha_f;
+	// 矩形データセット
+	mRectPosition.top		= top;
+	mRectPosition.bottom	= bottom;
+	mRectPosition.left		= left;
+	mRectPosition.right		= right;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの矩形を指定
-//      引数  ：long    top     上の値
-//              long    bottom  下の値
-//              long    left    左の値
-//              long    right   右の値
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::SetTextureRect(long left , long top , long right , long bottom)
-{
-	//矩形データセット
-	position.top		= top;
-	position.bottom		= bottom;
-	position.left		= left;
-	position.right		= right;
-}
-
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの描画を行う
-//      引数  ：float   x   X座標
-//              float   y   Y座標
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
+/**
+ * @brief	テクスチャの描画を行う
+ * @param	x	X座標
+ * @param	y	Y座標
+ */
 void C_Vertex::Draw(float x , float y)
 {
-	//テクスチャの中心点からの距離を計算(ここで倍率も計算)
-	float texSizeX = abs(position.right - position.left) / 2.0f;
-	float texSizeY = abs(position.bottom - position.top) / 2.0f;
+	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
+	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
+	float texSizeY = abs(mRectPosition.bottom - mRectPosition.top) / 2.0f;
 
-    //回転の中心座標
+    // 回転の中心座標
     D3DXVECTOR2 l_center(x,y);
 
-    //回転角度
-    float texSin = sinf(D3DXToRadian(radian));
-    float texCos = cosf(D3DXToRadian(radian));
+    // 回転角度
+    float texSin = sinf(D3DXToRadian(mDegree));
+    float texCos = cosf(D3DXToRadian(mDegree));
 
-    //中心点からの4点の距離
+    // 中心点からの4点の距離
     D3DXVECTOR2 vector[] = 
     {
-        D3DXVECTOR2(-texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(-texSizeX * scaleX , texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , texSizeY * scaleY),
+        D3DXVECTOR2(-texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(-texSizeX * mScaleX , texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , texSizeY * mScaleY),
     };
 
-	//4点を設定
-	float u1 = ((float)position.left + UV) * texU;
-	float u2 = ((float)position.right - UV) * texU;
-	float v1 = ((float)position.top + UV) * texV;
-	float v2 = ((float)position.bottom - UV) * texV;
+	// 4点を設定
+	float u1 = ((float)mRectPosition.left + UV) * mTextureU;
+	float u2 = ((float)mRectPosition.right - UV) * mTextureU;
+	float v1 = ((float)mRectPosition.top + UV) * mTextureV;
+	float v2 = ((float)mRectPosition.bottom - UV) * mTextureV;
 
-	//ヴァーテックス情報
+	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
 	{
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v2},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v2}
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v2},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v2}
 	};
 
-    //4点を回転させる
+    // 4点を回転させる
     for( int i = 0 ; i < 4 ; i++)
     {
         ver[i].x = (vector[i].x * texCos) + (vector[i].y * -texSin) + l_center.x;
         ver[i].y = (vector[i].x * texSin) + (vector[i].y * texCos) + l_center.y;
     }
 
-	pDevice->SetTexture(0,*pTex);												//テクスチャセット
-	pDevice->SetFVF(TEX_FVF);													//FVFセット
-    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	//描画
+	mDevice->SetTexture(0, *mTexture);													// テクスチャセット
+	mDevice->SetFVF(TEX_FVF);														// FVFセット
+    mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2, ver, sizeof(CUSTOM_VERTEX));	// 描画
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの描画を行う(仮作成)
-//      引数  ：float   x   X座標
-//              float   y   Y座標
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::DrawLT(float x , float y)
+/**
+ * @brief	テクスチャの描画を行う（マウスカーソル用仮作成）
+ * @param	x			X座標
+ * @param	y			Y座標
+ */
+void
+C_Vertex::DrawLT(float x , float y)
 {
-	//テクスチャの距離を計算(ここで倍率も計算)
-	float texSizeX = (float)abs(position.right - position.left);
-	float texSizeY = (float)abs(position.bottom - position.top);
+	// テクスチャの距離を計算(ここで倍率も計算)
+	float texSizeX = (float)abs(mRectPosition.right - mRectPosition.left);
+	float texSizeY = (float)abs(mRectPosition.bottom - mRectPosition.top);
 
-    //回転の中心座標
+    // 回転の中心座標
     D3DXVECTOR2 l_center(x,y);
 
-    //回転角度
-    float texSin = sinf(D3DXToRadian(radian));
-    float texCos = cosf(D3DXToRadian(radian));
+    // 回転角度
+    float texSin = sinf(D3DXToRadian(mDegree));
+    float texCos = cosf(D3DXToRadian(mDegree));
 
-    //左上の点からの4点の距離
+    // 左上の点からの4点の距離
     D3DXVECTOR2 vector[] = 
     {
         D3DXVECTOR2(0.f , 0.f),
-        D3DXVECTOR2(texSizeX * scaleX , 0.f),
-        D3DXVECTOR2(0.f , texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , texSizeY * scaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , 0.f),
+        D3DXVECTOR2(0.f , texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , texSizeY * mScaleY),
     };
 
-	//4点を設定
-	float u1 = ((float)position.left + UV) * texU;
-	float u2 = ((float)position.right - UV) * texU;
-	float v1 = ((float)position.top + UV) * texV;
-	float v2 = ((float)position.bottom - UV) * texV;
+	// 4点を設定
+	float u1 = ((float)mRectPosition.left + UV) * mTextureU;
+	float u2 = ((float)mRectPosition.right - UV) * mTextureU;
+	float v1 = ((float)mRectPosition.top + UV) * mTextureV;
+	float v2 = ((float)mRectPosition.bottom - UV) * mTextureV;
 
-	//ヴァーテックス情報
+	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
 	{
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v2},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v2}
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v2},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v2}
 	};
 
-    //4点を回転させる
+    // 4点を回転させる
     for( int i = 0 ; i < 4 ; i++)
     {
         ver[i].x = (vector[i].x * texCos) + (vector[i].y * -texSin) + l_center.x;
         ver[i].y = (vector[i].x * texSin) + (vector[i].y * texCos) + l_center.y;
     }
 
-	pDevice->SetTexture(0,*pTex);												//テクスチャセット
-	pDevice->SetFVF(TEX_FVF);													//FVFセット
-    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	//描画
+	mDevice->SetTexture(0, *mTexture);											// テクスチャセット
+	mDevice->SetFVF(TEX_FVF);													// FVFセット
+    mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	// 描画
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの描画を行う()
-//      引数  ：float   x   X座標
-//              float   y   Y座標
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::DrawRB(float x , float y)
+/**
+ * @brief	テクスチャの描画を行う（マウスカーソル用仮作成）
+ * @param	x			X座標
+ * @param	y			Y座標
+ */
+void
+C_Vertex::DrawRB(float x, float y)
 {
-	//テクスチャの中心点からの距離を計算(ここで倍率も計算)
-	float texSizeX = abs(position.right - position.left) / 2.0f;
-	float texSizeY = abs(position.bottom - position.top) / 2.0f;
+	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
+	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
+	float texSizeY = abs(mRectPosition.bottom - mRectPosition.top) / 2.0f;
 
-    //回転の中心座標
+    // 回転の中心座標
     D3DXVECTOR2 l_center(x,y);
 
-    //回転角度
-    float texSin = sinf(D3DXToRadian(radian));
-    float texCos = cosf(D3DXToRadian(radian));
+    // 回転角度
+    float texSin = sinf(D3DXToRadian(mDegree));
+    float texCos = cosf(D3DXToRadian(mDegree));
 
-    //中心点からの4点の距離
+    // 中心点からの4点の距離
     D3DXVECTOR2 vector[] = 
     {
-        D3DXVECTOR2(-texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(-texSizeX * scaleX , texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , texSizeY * scaleY),
+        D3DXVECTOR2(-texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(-texSizeX * mScaleX , texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , texSizeY * mScaleY),
     };
 
-	//4点を設定
-	float u1 = ((float)position.left + UV) * texU;
-	float u2 = ((float)position.right - UV) * texU;
-	float v1 = ((float)position.top + UV) * texV;
-	float v2 = ((float)position.bottom - UV) * texV;
+	// 4点を設定
+	float u1 = ((float)mRectPosition.left + UV) * mTextureU;
+	float u2 = ((float)mRectPosition.right - UV) * mTextureU;
+	float v1 = ((float)mRectPosition.top + UV) * mTextureV;
+	float v2 = ((float)mRectPosition.bottom - UV) * mTextureV;
 
-	//ヴァーテックス情報
+	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
 	{
-		{0.f , 0.f , 0.5f , 1.0f , color1[0] , u1 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color1[1] , u2 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color1[2] , u1 , v2},
-		{0.f , 0.f , 0.5f , 1.0f , color1[3] , u2 , v2}
+		{0.f , 0.f , 0.5f , 1.0f , mColor1[0] , u1 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor1[1] , u2 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor1[2] , u1 , v2},
+		{0.f , 0.f , 0.5f , 1.0f , mColor1[3] , u2 , v2}
 	};
 
-    //4点を回転させる
+    // 4点を回転させる
     for( int i = 0 ; i < 4 ; i++)
     {
         ver[i].x = (vector[i].x * texCos) + (vector[i].y * -texSin) + l_center.x;
         ver[i].y = (vector[i].x * texSin) + (vector[i].y * texCos) + l_center.y;
     }
 
-	pDevice->SetTexture(0,*pTex);												//テクスチャセット
-	pDevice->SetFVF(TEX_FVF);													//FVFセット
-    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	//描画
+	mDevice->SetTexture(0,*mTexture);											//テクスチャセット
+	mDevice->SetFVF(TEX_FVF);													//FVFセット
+    mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	//描画
 }
 
-
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの描画を行う
-//      引数  ：float   x   X座標
-//              float   y   Y座標
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::DrawCB(float x , float y)
+/**
+ * @brief	テクスチャの描画を行う（中心の下から）
+ * @param	x	X座標
+ * @param	y	Y座標
+ */
+void C_Vertex::DrawCB(float x, float y)
 {
-	//テクスチャの中心点からの距離を計算(ここで倍率も計算)
-	float texSizeX = abs(position.right - position.left) / 2.0f;
-	float texSizeY = (float)abs(position.bottom - position.top);
+	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
+	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
+	float texSizeY = (float)abs(mRectPosition.bottom - mRectPosition.top);
 
-    //回転の中心座標
+    // 回転の中心座標
     D3DXVECTOR2 l_center(x,y);
 
-    //回転角度
-    float texSin = sinf(D3DXToRadian(radian));
-    float texCos = cosf(D3DXToRadian(radian));
+    // 回転角度
+    float texSin = sinf(D3DXToRadian(mDegree));
+    float texCos = cosf(D3DXToRadian(mDegree));
 
-    //中心点からの4点の距離
+    // 中心点からの4点の距離
     D3DXVECTOR2 vector[] = 
     {
-        D3DXVECTOR2(-texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(-texSizeX * scaleX , 0.f),
-        D3DXVECTOR2(texSizeX * scaleX , 0.f),
+        D3DXVECTOR2(-texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(-texSizeX * mScaleX , 0.f),
+        D3DXVECTOR2(texSizeX * mScaleX , 0.f),
     };
 
-	//4点を設定
-	float u1 = ((float)position.left + UV) * texU;
-	float u2 = ((float)position.right - UV) * texU;
-	float v1 = ((float)position.top + UV) * texV;
-	float v2 = ((float)position.bottom - UV) * texV;
+	// 4点を設定
+	float u1 = ((float)mRectPosition.left + UV) * mTextureU;
+	float u2 = ((float)mRectPosition.right - UV) * mTextureU;
+	float v1 = ((float)mRectPosition.top + UV) * mTextureV;
+	float v2 = ((float)mRectPosition.bottom - UV) * mTextureV;
 
-	//ヴァーテックス情報
+	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
 	{
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v2},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v2}
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v2},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v2}
 	};
 
-    //4点を回転させる
+    // 4点を回転させる
     for( int i = 0 ; i < 4 ; i++)
     {
         ver[i].x = (vector[i].x * texCos) + (vector[i].y * -texSin) + l_center.x;
         ver[i].y = (vector[i].x * texSin) + (vector[i].y * texCos) + l_center.y;
     }
 
-	pDevice->SetTexture(0,*pTex);												//テクスチャセット
-	pDevice->SetFVF(TEX_FVF);													//FVFセット
-    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	//描画
+	mDevice->SetTexture(0,*mTexture);											// テクスチャセット
+	mDevice->SetFVF(TEX_FVF);													// FVFセット
+    mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	// 描画
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：テクスチャの描画を行う
-//      引数  ：float   x   X座標
-//              float   y   Y座標
-//				int		Num 登録されている矩形のNo
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::DrawF(float x , float y , int Num)
+/**
+ * @brief	テクスチャの描画を行う
+ * @param	x			X座標
+ * @param	y			Y座標
+ * @param	rect_num	登録されている矩形のNo
+ */
+void
+C_Vertex::DrawF(float x, float y, int rect_num)
 {
-	//テクスチャの中心点からの距離を計算(ここで倍率も計算)
-	float texSizeX = abs(position_2[Num].right - position_2[Num].left) / 2.0f;
-	float texSizeY = abs(position_2[Num].bottom - position_2[Num].top) / 2.0f;
+	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
+	float texSizeX = abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left) / 2.0f;
+	float texSizeY = abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top) / 2.0f;
 
-    //回転の中心座標
+    // 回転の中心座標
     D3DXVECTOR2 l_center(x,y);
 
-    //回転角度
-    float texSin = sinf(D3DXToRadian(radian));
-    float texCos = cosf(D3DXToRadian(radian));
+    // 回転角度
+    float texSin = sinf(D3DXToRadian(mDegree));
+    float texCos = cosf(D3DXToRadian(mDegree));
 
-    //中心点からの4点の距離
+    // 中心点からの4点の距離
     D3DXVECTOR2 vector[] = 
     {
-        D3DXVECTOR2(-texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , -texSizeY * scaleY),
-        D3DXVECTOR2(-texSizeX * scaleX , texSizeY * scaleY),
-        D3DXVECTOR2(texSizeX * scaleX , texSizeY * scaleY),
+        D3DXVECTOR2(-texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , -texSizeY * mScaleY),
+        D3DXVECTOR2(-texSizeX * mScaleX , texSizeY * mScaleY),
+        D3DXVECTOR2(texSizeX * mScaleX , texSizeY * mScaleY),
     };
 
-	//4点を設定
-	float u1 = ((float)position_2[Num].left + UV) * texU;
-	float u2 = ((float)position_2[Num].right - UV) * texU;
-	float v1 = ((float)position_2[Num].top + UV) * texV;
-	float v2 = ((float)position_2[Num].bottom - UV) * texV;
+	// 4点を設定
+	float u1 = ((float)mRectPosition2[rect_num].left + UV) * mTextureU;
+	float u2 = ((float)mRectPosition2[rect_num].right - UV) * mTextureU;
+	float v1 = ((float)mRectPosition2[rect_num].top + UV) * mTextureV;
+	float v2 = ((float)mRectPosition2[rect_num].bottom - UV) * mTextureV;
 
-	//ヴァーテックス情報
+	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
 	{
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , color , u1 , v2},
-		{0.f , 0.f , 0.5f , 1.0f , color , u2 , v2}
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v1},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v2},
+		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v2}
 	};
 
-    //4点を回転させる
+    // 4点を回転させる
     for( int i = 0 ; i < 4 ; i++)
     {
         ver[i].x = (vector[i].x * texCos) + (vector[i].y * -texSin) + l_center.x;
         ver[i].y = (vector[i].x * texSin) + (vector[i].y * texCos) + l_center.y;
     }
 
-	pDevice->SetTexture(0,*pTex);												//テクスチャセット
-	pDevice->SetFVF(TEX_FVF);													//FVFセット
-    pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	//描画
+	mDevice->SetTexture(0, *mTexture);											// テクスチャセット
+	mDevice->SetFVF(TEX_FVF);													// FVFセット
+    mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,ver,sizeof(CUSTOM_VERTEX));	// 描画
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：矩形をtxtデータから読み込む
-//      引数  ：txtファイル名
-//				
-//      戻り値：true:false(ロードが成功したか失敗したか)
-//
-//////////////////////////////////////////////////////////
-bool C_Vertex::LoadRect(char *pFileName)	//矩形をtxtから読み込む関数
+/**
+ * @brief	矩形をtxtデータから読み込む
+ * @param	file_name		txtファイル名
+ * @return	ロードが成功したか失敗したか
+ */
+bool
+C_Vertex::LoadRect(char *file_name)
 {
-	FILE *fp;				//ファイル型のポインタ宣言
+	mLoadedRectCount = 0;
+	FILE *fp;							// ファイルポインタ
+	char load_file_name[256];			// カウント+読み込み用
+	fopen_s(&fp, file_name, "r");		// ファイルオープン
 
-	MAX_DATA = 0;
-
-	char countFile[256];	//カウント用
-
-	fopen_s(&fp,pFileName,"r");
-
-	//エラー処理
-	if(fp == NULL){		//ファイルが存在しなければ、読み込みを中止
-		MessageBox(NULL,TEXT("ファイルオープンに失敗しました"),NULL,MB_OK);
+	// エラー処理
+	// ファイルが存在しなければ、読み込みを中止
+	if(fp == NULL)
+	{
+		MessageBox(NULL, TEXT("ファイルオープンに失敗しました"), NULL, MB_OK);
 		return false;
 	}
 
-	//ファイルの中身をカウント
-	while(fscanf(fp,"%s\n",countFile) != EOF){
-		MAX_DATA++;	//ファイル名をカウント
+	// ファイルの中身をカウント
+	while (fscanf_s(fp, "%s\n", load_file_name, sizeof(load_file_name)) != EOF)
+	{
+		mLoadedRectCount++;
 	}
 
-	//読み込んでいるファイルを最初の位置に戻す
+	// 読み込んでいるファイルを最初の位置に戻す
 	fseek(fp,0,SEEK_SET);
 
-	position_2 = new RECT[MAX_DATA];
+	mRectPosition2 = new RECT[mLoadedRectCount];
 
-	for(int i = 0;i < MAX_DATA;i++){
-		fscanf_s(fp,"%d,",&position_2[i].top);
-		fscanf_s(fp,"%d,",&position_2[i].bottom);
-		fscanf_s(fp,"%d,",&position_2[i].left);
-		fscanf_s(fp,"%d\n",&position_2[i].right);
+	for(int i = 0;i < mLoadedRectCount;i++)
+	{
+		fscanf_s(fp,"%d,",&mRectPosition2[i].top);
+		fscanf_s(fp,"%d,",&mRectPosition2[i].bottom);
+		fscanf_s(fp,"%d,",&mRectPosition2[i].left);
+		fscanf_s(fp,"%d\n",&mRectPosition2[i].right);
 	}
 	
+	// エラー処理
 	if(fclose(fp))
 	{
-		//エラー処理
-		MessageBox(NULL,TEXT("ファイルクローズに失敗しました"),NULL,MB_OK);
+		MessageBox(NULL, TEXT("ファイルクローズに失敗しました"), NULL, MB_OK);
 		return false;
 	}
 
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：矩形データを開放
-//      引数  ：なし	
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_Vertex::AllReleaseRect(void)
+/**
+ * @brief	矩形データを開放
+ */
+void
+C_Vertex::AllReleaseRect(void)
 {
-	//読み込まれたレクトデータを全て開放する処理
-	delete[] position_2;	//開放処理
-	MAX_DATA = 0;			//全体数を初期化しておく(一応)
+	// 読み込まれた矩形データを全て開放する処理
+	APP_SAFE_DELETE_ARRAY(mRectPosition2);	// 開放処理
+	mLoadedRectCount = 0;					// 全体数を初期化しておく(一応)
 }

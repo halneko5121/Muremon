@@ -111,7 +111,7 @@ private:
 
 	int mSpeedX;
 
-	POSI mWavePos;
+	D3DXVECTOR2 mWavePos;
 
 	// NEGATIVE‚ÅŽg—p
 	int mNegativeState;

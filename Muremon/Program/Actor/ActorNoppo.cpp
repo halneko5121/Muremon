@@ -134,7 +134,7 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 						{
 							GetDirectSound()->SoundStop(false, S_NOPPO_KOKE);
 						}
-						GetDirectSound()->SoundPlay(false, S_NOPPO_KOKE);
+						GetDirectSound()->SoundPlayOnce(S_NOPPO_KOKE);
 						if( (GetDirectSound()->IsPlaySound(S_NOPPO_PETI)) &&
 							(GetDirectSound()->IsPlaySound(S_NOPPO_KOKE)) ) 
 						{
@@ -142,7 +142,7 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 						}
 						if (GetDirectSound()->IsPlaySound(S_NOPPO_KOKE))
 						{
-							GetDirectSound()->SoundPlay(false, (S_NOPPO_PETI));
+							GetDirectSound()->SoundPlayOnce((S_NOPPO_PETI));
 						}
 					}
 					if(mCharaData[i].flag_atk2){
@@ -150,7 +150,7 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 						{
 							GetDirectSound()->SoundStop(false, S_NOPPO_GANMEN);
 						}
-						GetDirectSound()->SoundPlay(false,S_NOPPO_GANMEN);
+						GetDirectSound()->SoundPlayOnce(S_NOPPO_GANMEN);
 					}
 				}
 			}

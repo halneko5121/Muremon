@@ -49,7 +49,7 @@ bool C_Tutorial::RunScene()
 
 void C_Tutorial::ControlScene()
 {
-	GetDirectSound()->SoundPlay(false, S_BGM_TITLE);
+	GetDirectSound()->SoundPlayOnce(S_BGM_TITLE);
 
 	KeyControl();
 
@@ -133,7 +133,7 @@ void C_Tutorial::KeyControl()
 		scene_change = false;
 	}
 	if(key_state == KEY_LEFT){	//©‚ª‰Ÿ‚³‚ê‚½‚ç
-		GetDirectSound()->SoundPlay(false, S_SE_CURSOR_MOVE);
+		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_NORMAL){
 			flag_draw_state = TR_REFRESH;
 		}
@@ -142,7 +142,7 @@ void C_Tutorial::KeyControl()
 		}
 	}
 	if(key_state == KEY_RIGHT){	//¨‚ª‰Ÿ‚³‚ê‚½‚ç
-		GetDirectSound()->SoundPlay(false, S_SE_CURSOR_MOVE);
+		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_REFRESH){
 			flag_draw_state = TR_NORMAL;
 		}

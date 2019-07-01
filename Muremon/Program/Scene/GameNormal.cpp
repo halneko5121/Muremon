@@ -106,7 +106,7 @@ bool C_GameNormal::RunScene()
 void C_GameNormal::ControlScene()
 {
 	if(mGameState == G_START_SCENE){
-		GetDirectSound()->SoundPlay(false,S_GAME_START);
+		GetDirectSound()->SoundPlayOnce(S_GAME_START);
 		FadeControl();
 	}
 	else if(mGameState == G_GAME_SCENE){
@@ -116,7 +116,7 @@ void C_GameNormal::ControlScene()
 
 		if(mGameState != G_GAME_OVER){
 			if((boss_cc2.x - 150) < 500){
-				GetDirectSound()->SoundPlay(true, S_SAIREN);
+				GetDirectSound()->SoundPlayLoop(S_SAIREN);
 			}
 			else
 			{
@@ -143,7 +143,7 @@ void C_GameNormal::ControlScene()
 		//mMissionGage = 5000;
 		if(mMissionGage >= MISSION_GAGE_MAX){
 			if(!mIsInit){
-				GetDirectSound()->SoundPlay(false, S_OSIRASE);
+				GetDirectSound()->SoundPlayOnce(S_OSIRASE);
 				mMission->Init(mNikumanKeyCount,mYoshitaroKeyCount,mNoppoKeyCount);
 				mIsInit = true;
 			}
@@ -181,7 +181,7 @@ void C_GameNormal::ControlScene()
 			return ;
 		}
 
-		GetDirectSound()->SoundPlay(true, S_BGM_BATTLE);
+		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
 
 		mNiku->Control(mKeyState, boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
@@ -340,7 +340,7 @@ void C_GameNormal::DrawScene()
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
 		if(mIsSound){
-			GetDirectSound()->SoundPlay(false, S_OVER);
+			GetDirectSound()->SoundPlayOnce(S_OVER);
 			mIsSound = false;
 		}
 	}
@@ -349,7 +349,7 @@ void C_GameNormal::DrawScene()
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
 		if(mIsSound){
-			GetDirectSound()->SoundPlay(false, S_G_CLEAR);
+			GetDirectSound()->SoundPlayOnce(S_G_CLEAR);
 			mIsSound = false;
 		}
 	}
@@ -605,7 +605,7 @@ void C_GameNormal::ControlMissionOugi()
 	}
 	else if(mTimeCount >= 180 && 210 > mTimeCount){
 		if(mTimeCount == 180){
-			GetDirectSound()->SoundPlay(false, S_NAMI);
+			GetDirectSound()->SoundPlayOnce(S_NAMI);
 		}
 	}
 	else if(mTimeCount >= 210 && 420 > mTimeCount){		//波を動かす(3.5sec)

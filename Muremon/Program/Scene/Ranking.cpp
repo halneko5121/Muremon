@@ -88,7 +88,7 @@ bool C_Ranking::RunScene()
 
 void C_Ranking::ControlScene()
 {
-	GetDirectSound()->SoundPlay(true,S_BGM_TITLE);
+	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 
 	FadeControl();
 	RankControl(rank);
@@ -103,7 +103,7 @@ void C_Ranking::RankControl(int rank)
 	{
 		if(GetAsyncKeyState(i))
 		{
-			GetDirectSound()->SoundPlay(false,S_SE_CURSOR_MOVE);
+			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 			key_no = i - 'A';
 			keep_key[flag] = key_no;
 			//newdata.name[flag] = key;
@@ -136,7 +136,7 @@ void C_Ranking::RankControl(int rank)
 		{
 			if(GetAsyncKeyState(VK_RETURN))
 			{
-				GetDirectSound()->SoundPlay(false,S_SE_OK);
+				GetDirectSound()->SoundPlayOnce(S_SE_OK);
 				name_alpha[rank][flag]=255;
 				flag++;
 				deray = 0;

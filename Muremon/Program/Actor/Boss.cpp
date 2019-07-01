@@ -257,7 +257,7 @@ void C_Boss::BossControl(int play_mode)
 
 		if (boss_fadeout_time == BOSS_FALL_TIME)
 		{
-			GetDirectSound()->SoundPlay(false, S_DEAD);
+			GetDirectSound()->SoundPlayOnce(S_DEAD);
 		}
 
 		//「No～」のフェードインアウト

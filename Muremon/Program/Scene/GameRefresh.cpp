@@ -80,7 +80,7 @@ bool C_GameRefresh::RunScene()
 void C_GameRefresh::ControlScene()
 {
 	if(mSameState == G_START_SCENE){
-		GetDirectSound()->SoundPlay(false, S_GAME_START);
+		GetDirectSound()->SoundPlayOnce(S_GAME_START);
 		FadeControl();
 	}
 	else if(mSameState == G_GAME_SCENE){
@@ -88,7 +88,7 @@ void C_GameRefresh::ControlScene()
 		boss_cc.x =	mBoss->boss_move_x;
 		boss_cc.y = mBoss->boss_move_y;
 	
-		GetDirectSound()->SoundPlay(true, S_BGM_BATTLE);
+		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
 
 		mKeyState = mKey->KeyCheckGame();
 

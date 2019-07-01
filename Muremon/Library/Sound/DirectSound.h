@@ -70,11 +70,16 @@ public:
 	HRESULT LoadSound(LPTSTR file_name, short id);
 
 	/**
-	 * @brief	再生
-	 * @param	loop	ループするか
+	 * @brief	ワンス再生
 	 * @param	id		サウンドのID
 	 */
-	void SoundPlay(bool loop, short id);
+	void SoundPlayOnce(short id);
+
+	/**
+	 * @brief	ループ再生
+	 * @param	id		サウンドのID
+	 */
+	void SoundPlayLoop(short id);
 
 	/**
 	 * @brief	停止
@@ -110,6 +115,14 @@ public:
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
 	HRESULT CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id);
+
+private:
+	/**
+	 * @brief	再生
+	 * @param	loop	ループするか
+	 * @param	id		サウンドのID
+	 */
+	void SoundPlayImple(bool loop, short id);
 
 private:
 	enum { MAX_SOUND = 20 };								// 読み込めるサウンドの最大数

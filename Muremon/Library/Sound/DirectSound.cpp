@@ -249,25 +249,22 @@ C_DSound::LoadSound(LPTSTR file_name, short id)
 
 /**
  * @brief	再生
- * @param	loop	ループするか
  * @param	id		サウンドのID
  */
 void
-C_DSound::SoundPlay(bool loop, short id)
+C_DSound::SoundPlayOnce(short id)
 {
-	if(id >= MAX_SOUND)
-	{
-		return;
-	}
-	if(IsPlaySound(id))
-	{
-		return;
-	}
+	SoundPlayImple(false, id);
+}
 
-	if(mSecondaryBuffer[id])
-	{
-		mSecondaryBuffer[id]->Play(0, 0, DSBPLAY_LOOPING& loop);
-	}
+/**
+ * @brief	ループ再生
+ * @param	id		サウンドのID
+ */
+void
+C_DSound::SoundPlayLoop(short id)
+{
+	SoundPlayImple(true, id);
 }
 
 /**
@@ -421,4 +418,27 @@ C_DSound::CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBuff
 	SAFE_DELETE_ARRAY(lpBuffer);
 
 	return hr;
+}
+
+/**
+ * @brief	再生
+ * @param	loop	ループするか
+ * @param	id		サウンドのID
+ */
+void
+C_DSound::SoundPlayImple(bool loop, short id)
+{
+	if (id >= MAX_SOUND)
+	{
+		return;
+	}
+	if (IsPlaySound(id))
+	{
+		return;
+	}
+
+	if (mSecondaryBuffer[id])
+	{
+		mSecondaryBuffer[id]->Play(0, 0, DSBPLAY_LOOPING& loop);
+	}
 }

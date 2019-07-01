@@ -105,7 +105,7 @@ int C_Mission::Control()
 	}
 	else if(mission_state == MISSION_MIDDLE){
 		if(flag_sound){
-			GetDirectSound()->SoundPlay(false,S_OSIRASE);
+			GetDirectSound()->SoundPlayOnce(S_OSIRASE);
 			flag_sound = false;
 		}
 		MissionControl();
@@ -113,13 +113,13 @@ int C_Mission::Control()
 	else{
 		if(mission_state == MISSION_SEIKO){
 			if(flag_sound2){
-				GetDirectSound()->SoundPlay(false,S_M_CLEAR);
+				GetDirectSound()->SoundPlayOnce(S_M_CLEAR);
 				flag_sound = false;
 			}
 		}
 		else if(mission_state == MISSION_SIPPAI){
 			if(flag_sound2){
-				GetDirectSound()->SoundPlay(false,S_M_OVER);
+				GetDirectSound()->SoundPlayOnce(S_M_OVER);
 				flag_sound2 = false;
 			}
 		}

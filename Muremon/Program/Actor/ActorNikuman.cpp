@@ -120,7 +120,7 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 		if(!mCharaData[i].flag_death){
 			if(!boss_death){
 				if(HitCheck(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
-					GetDirectSound()->SoundPlay(false,S_NIKUMAN);
+					GetDirectSound()->SoundPlayOnce(S_NIKUMAN);
 					mCharaData[i].flag_hit		= true;
 					mCharaData[i].flag_death	= true;	
 					SetFlagHit(true);

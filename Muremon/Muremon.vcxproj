@@ -81,7 +81,7 @@
   <PropertyGroup Label="Globals">
     <ProjectName>Muremon</ProjectName>
     <ProjectGuid>{47177955-E6DF-4B3C-B6A1-59486DE1F3D3}</ProjectGuid>
-    <RootNamespace>Muremon_ver01</RootNamespace>
+    <RootNamespace>Muremon</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

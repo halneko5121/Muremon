@@ -4,7 +4,7 @@
 	Version="9.00"
 	Name="Muremon"
 	ProjectGUID="{47177955-E6DF-4B3C-B6A1-59486DE1F3D3}"
-	RootNamespace="Muremon_ver01"
+	RootNamespace="Muremon"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>

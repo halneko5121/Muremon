@@ -1,64 +1,51 @@
-//---------------------------------------------
-//
-//      テクスチャの管理を行う
-//      作成開始日:3月17日
-//			更新日:3月17日
-//			作成者:平野
-//
-//---------------------------------------------
+#pragma once
+/******************************************************************
+ *	@file	Texture.h
+ *	@brief	テクスチャの管理を行う
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
-#ifndef _TEXTURE_H_
-#define _TEXTURE_H_
-
-//include
 #include "DirectGraphics.h"
-#include <stdio.h>
-
-//警告強制解除
-#pragma warning(disable:4996)
 
 class C_Texture
 {
-private:
-	LPDIRECT3DTEXTURE9	*pTexture;	//テクスチャ
-	DWORD				maxTex;		//読み込まれているテクスチャの総数
 public:
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：コンストラクタ
-    //
-    //////////////////////////////////////////////////////////
+	/**
+	 * @brief	コンストラクタ
+	 */
 	C_Texture();
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：テクスチャデータをロードする
-    //      引数  ：LPCSTR              fileName    ファイル名
-    //              LPDIRECT3DDEVICE9   pDevice     デバイス
-    //      戻り値：bool    true:読み込み成功   false:読み込み失敗
-    //
-    //////////////////////////////////////////////////////////
-	bool LoadTextureData(LPCSTR fileName , LPDIRECT3DDEVICE9 pDevice);
+	/**
+	 * @brief	デストラクタ
+	 */
+	~C_Texture();
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：テクスチャデータを全て開放する
-    //      引数  ：なし
-    //      戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-	void AllReleaseTexture(void);
+	/**
+	 * @brief	テクスチャデータをロードする
+	 * @param	file_name	ファイル名
+	 * @param	pDevice     デバイス
+	 * @return	true:読み込み成功   false:読み込み失敗
+	 */
+	bool					LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device);
+
+	/**
+	 * @brief	テクスチャデータを全て開放する
+	 */
+	void					AllReleaseTexture();
 
 	//-情報取得関数-
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：テクスチャデータを指定して取得する
-    //      引数  ：DWORD   num 番号
-    //      戻り値：LPDIRECT3DTEXTURE9  テクスチャ
-    //
-    //////////////////////////////////////////////////////////
-	LPDIRECT3DTEXTURE9 *GetTextureData(DWORD num)	{return &(pTexture[num]);}
-};
+	/**
+	 * @brief	テクスチャデータを指定して取得する
+	 * @param	num 番号
+	 * @return	テクスチャ
+	 */
+	LPDIRECT3DTEXTURE9*		GetTextureData(DWORD num) { return &(mTexture[num]); }
+	LPDIRECT3DTEXTURE9		GetTextureDataPtr(DWORD num) { return mTexture[num]; }
 
-#endif	//_TEXTURE_H_
+private:
+	LPDIRECT3DTEXTURE9*		mTexture;				// テクスチャ
+	DWORD					mLoadedTextureCount;	// 読み込まれているテクスチャの総数
+};

@@ -85,27 +85,23 @@ public:
 	/**
 	 * @brief	指定のキーの入力判定(押されているかどうか)
 	 * @param	key		キーの状態
-	 * @return	true　押されている   false:　押されていない
 	 */
 	bool					IsKeyDown(USHORT key);
 
 	/**
 	 * @brief	指定のキーが瞬間的に押されたか
 	 * @param	key		キーの状態
-	 * @return	true　押された   false:　押されていない
 	 */
 	bool					IsKeyPushed(USHORT key);
 
 	/**
 	 * @brief	指定のキーが離されたかどうか
 	 * @param	key		キーの状態
-	 * @return	true　離された   false:　離されていない
 	 */
 	bool					IsKeyReleased(USHORT key);
 
 	/**
 	 * @brief	いずれかのキーが押されたか
-	 * @return	true　押された   false:　押されていない
 	 */
 	bool					IsAnyKeyDown();
 

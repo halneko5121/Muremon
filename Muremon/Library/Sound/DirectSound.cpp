@@ -1,11 +1,10 @@
-//---------------------------------------------
-//
-//      サウンドの設定
-//      作成開始日:3月17日
-//			更新日:3月17日
-//			作成者:平野
-//
-//---------------------------------------------
+/******************************************************************
+ *	@file	DirectSound.cpp
+ *	@brief	サウンドの管理
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
 #include "DirectSound.h"
 
@@ -13,9 +12,22 @@
 #define SAMPLESPERSEC	44100	// サンプリングレート
 #define BITSPERSAMPLE	16		// １サンプルあたりのビット数
 
-
-// 唯一のインスタンスを nullptr で初期化
 C_DSound* C_DSound::mInstance = nullptr;
+
+/**
+ * @brief	コンストラクタ
+ */
+C_DSound::C_DSound()
+	: mMaxSound(0)
+{
+}
+
+/**
+ * @brief	デストラクタ
+ */
+C_DSound::~C_DSound()
+{
+}
 
 /**
  * @brief インスンタンスの取得
@@ -26,39 +38,44 @@ C_DSound::GetInstance()
 	return mInstance;
 }
 
+/**
+ * @brief	インスタンスの生成
+ */
 void
 C_DSound::Create()
 {
 	mInstance = new C_DSound();
 }
 
+/**
+ * @brief	インスタンスの破棄
+ */
 void
 C_DSound::Destroy()
 {
-	delete mInstance;
-	mInstance = nullptr;
+	APP_SAFE_DELETE(mInstance);
 }
 
-C_DSound::C_DSound()
+/**
+ * @brief	初期化
+ * @param	window_handle    ウィンドウハンドル
+ * @return	true:成功   false:失敗
+ */
+bool
+C_DSound::InitDSound(HWND window_handle)
 {
-	mMaxSound = 0;
-}
-
-//DirectSoundの初期化
-bool C_DSound::InitDSound(HWND hWnd)
-{
-	//IDirectSound8インターフェイスの取得
+	// IDirectSound8インターフェイスの取得
 	if(FAILED(DirectSoundCreate8(NULL,&mDirectSound, NULL)))
 	{
 		return false;
 	}
-	//協調レベルの設定
-	if(FAILED(mDirectSound->SetCooperativeLevel(hWnd,DSSCL_PRIORITY)))
+	// 協調レベルの設定
+	if(FAILED(mDirectSound->SetCooperativeLevel(window_handle,DSSCL_PRIORITY)))
 	{
 		return false;
 	}
-	//プライマリバッファの作成
-	if(!CreatePriBuffer())
+	// プライマリバッファの作成
+	if(!CreatePrimaryBuffer())
 	{
 		return false;
 	}
@@ -66,8 +83,11 @@ bool C_DSound::InitDSound(HWND hWnd)
 	return true;
 }
 
-//開放処理
-void C_DSound::UnInitDSound()
+/**
+ * @brief	開放処理
+ */
+void
+C_DSound::UnInitDSound()
 {
 	for(short i = 0 ; i < (short)mMaxSound ; i++)
 	{
@@ -78,48 +98,64 @@ void C_DSound::UnInitDSound()
 	SAFE_RELEASE(mDirectSound);
 }
 
-//音楽データ読み込み
-bool C_DSound::LoadSoundData(LPTSTR FileName)
+/**
+ * @brief	音楽データ読み込み
+ * @param	file_name	ファイル名
+ * @return	true:成功   false:失敗
+ */
+bool
+C_DSound::LoadSoundData(LPTSTR file_name)
 {
-	FILE *fp;					//ファイルポインタ
-	char countFile[128];		//カウント+読み込み用
-	fopen_s(&fp, FileName,"r");	//ファイルオープン
+	FILE *fp;						// ファイルポインタ
+	char countFile[128];			// カウント+読み込み用
+	fopen_s(&fp, file_name, "r");	// ファイルオープン
 
-	//エラー処理
-	if(fp == NULL){
+	// エラー処理
+	if(fp == NULL)
+	{
 		MessageBox(NULL,TEXT("ファイルオープンに失敗しました"),NULL,MB_OK);
 		return false;
 	}
 
-	//ファイルの中身をカウント
+	// ファイルの中身をカウント
 	while(fscanf_s(fp,"%s\n",countFile,sizeof(countFile)) != EOF)
 	{
-		mMaxSound++;	//ファイル名をカウント
+		// ファイル名をカウント
+		mMaxSound++;
 	}
 
-	//読み込んでいるファイルを最初の位置に戻す
-	fseek(fp,0,SEEK_SET);
+	// 読み込んでいるファイルを最初の位置に戻す
+	fseek(fp, 0, SEEK_SET);
 
-	//読み込み処理
-	for(int i = 0;i < mMaxSound;i++){
-		fscanf_s(fp,"%s\n",countFile,sizeof(countFile));
-		LoadSound(countFile,i);
+	// 読み込み処理
+	for(int i = 0;i < mMaxSound;i++)
+	{
+		fscanf_s(fp,"%s\n", countFile, sizeof(countFile));
+		LoadSound(countFile, i);
 	}
 
-	//エラー処理
-	if(fclose(fp)){
+	// エラー処理
+	if(fclose(fp))
+	{
 		MessageBox(NULL,TEXT("ファイルクローズに失敗しました"),NULL,MB_OK);
 		return false;
 	}
+
 	return true;
 }
 
-//音楽データ読み込み
-HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
+/**
+ * @brief	音楽データ読み込み
+ * @param	file_name	ファイル名
+ * @param	id			登録するサウンドのID
+ * @return	S_OK:成功   E_FAIL:失敗
+ */
+HRESULT
+C_DSound::LoadSound(LPTSTR file_name, short id)
 {
-	if(ID >= MAX_SOUND)
+	if(id >= MAX_SOUND)
 	{
-		MessageBox(NULL, TEXT("登録しようとしているＩＤが大きすぎます"), NULL, MB_OK);
+		MessageBox(NULL, TEXT("登録しようとしているIDが大きすぎます"), NULL, MB_OK);
 		return E_FAIL;
 	}
 
@@ -127,10 +163,10 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 	MMCKINFO		ckInfo;
 	WAVEFORMATEX	wfex;
 
-	//WAVEファイル内のヘッダ情報の確認と読み込み
-	hmmio = mmioOpen(pFileName, NULL, MMIO_ALLOCBUF | MMIO_READ);
+	// WAVEファイル内のヘッダ情報の確認と読み込み
+	hmmio = mmioOpen(file_name, NULL, MMIO_ALLOCBUF | MMIO_READ);
 
-	//RIFFファイルのチャンクの先頭に進入
+	// RIFFファイルのチャンクの先頭に進入
 	if(mmioDescend(hmmio, &ckInfo, NULL, 0) != MMSYSERR_NOERROR)
 	{
 		MessageBox(NULL,TEXT("チャンクへの進入失敗[RIFF]"),TEXT("DSound"),MB_OK);
@@ -138,7 +174,7 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		return E_FAIL;
 	}
 
-	//チャンクの検索
+	// チャンクの検索
 	if(ckInfo.ckid != FOURCC_RIFF || ckInfo.fccType != mmioFOURCC('W','A','V','E'))
 	{
 		MessageBox(NULL,TEXT("発見できませんでした[RIFF][WAVE]"),TEXT("DSound"),MB_OK);
@@ -146,7 +182,7 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		return E_FAIL;
 	}
 
-	//フォーマットチャンクの検索
+	// フォーマットチャンクの検索
 	ckInfo.ckid = mmioFOURCC('f','m','t',' ');
 	if(mmioDescend(hmmio, &ckInfo, NULL, MMIO_FINDCHUNK) != MMSYSERR_NOERROR)
 	{
@@ -154,7 +190,8 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		mmioClose(hmmio,0);
 		return E_FAIL;
 	}
-	//フォーマットの読み込み
+
+	// フォーマットの読み込み
 	ZeroMemory(&wfex, sizeof(WAVEFORMATEX));
 	if(mmioRead(hmmio, (HPSTR)&wfex, sizeof(WAVEFORMATEX)) != sizeof(WAVEFORMATEX))
 	{
@@ -162,7 +199,8 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		mmioClose(hmmio,0);
 		return E_FAIL;
 	}
-	//チャンクから退出
+
+	// チャンクから退出
 	if(mmioAscend(hmmio, &ckInfo, NULL) != MMSYSERR_NOERROR)
 	{
 		MessageBox(NULL,TEXT("チャンクからの退出に失敗しました[fmt ]"),TEXT("DSound"),MB_OK);
@@ -170,7 +208,7 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		return E_FAIL;
 	}
 
-	//データチャンクの検索
+	// データチャンクの検索
 	ckInfo.ckid = mmioFOURCC('d','a','t','a');
 	if(mmioDescend(hmmio, &ckInfo, NULL, MMIO_FINDCHUNK) != MMSYSERR_NOERROR)
 	{
@@ -178,7 +216,8 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		mmioClose(hmmio,0);
 		return E_FAIL;
 	}
-	//データの読み込み
+
+	// データの読み込み
 	char	*lpBuffer = new char[ckInfo.cksize];
 	if(mmioRead(hmmio, lpBuffer, ckInfo.cksize) != (LONG)ckInfo.cksize)
 	{
@@ -187,7 +226,8 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		SAFE_DELETE_ARRAY(lpBuffer);		//念のため
 		return E_FAIL;
 	}
-	//チャンクから退出
+
+	// チャンクから退出
 	if(mmioAscend(hmmio, &ckInfo, NULL) != MMSYSERR_NOERROR)
 	{
 		MessageBox(NULL,TEXT("チャンクからの退出に失敗しました[data]"),TEXT("DSound"),MB_OK);
@@ -195,81 +235,100 @@ HRESULT C_DSound::LoadSound(LPTSTR pFileName, short ID)
 		SAFE_DELETE_ARRAY(lpBuffer);		//念のため
 		return E_FAIL;
 	}
-	if(FAILED(CreateSecBuffer(wfex, lpBuffer, ckInfo.cksize, ID)))
+	if(FAILED(CreateSecondaryBuffer(wfex, lpBuffer, ckInfo.cksize, id)))
 	{
 		MessageBox(NULL,TEXT("セカンダリバッファ作成失敗"),TEXT("DSound"),MB_OK);
 		return E_FAIL;
 	}
-	//WAVEファイルを閉じる
+
+	// WAVEファイルを閉じる
 	mmioClose(hmmio, 0);
 
 	return S_OK;
 }
 
-//音楽再生
-void C_DSound::SoundPlay(bool loop, short ID)
+/**
+ * @brief	再生
+ * @param	loop	ループするか
+ * @param	id		サウンドのID
+ */
+void
+C_DSound::SoundPlay(bool loop, short id)
 {
-	if(ID >= MAX_SOUND)
+	if(id >= MAX_SOUND)
 	{
 		return;
 	}
-	if(SoundPlayCheck(ID))
+	if(IsPlaySound(id))
 	{
 		return;
 	}
 
-	if(mSecondaryBuffer[ID])
+	if(mSecondaryBuffer[id])
 	{
-		mSecondaryBuffer[ID]->Play(0, 0, DSBPLAY_LOOPING & loop);
+		mSecondaryBuffer[id]->Play(0, 0, DSBPLAY_LOOPING& loop);
 	}
 }
 
-//音楽停止
-void C_DSound::SoundStop(bool ResetFlg, short ID)
+/**
+ * @brief	停止
+ * @param	is_pouse	完全停止か(true = 一時停止、false = 完全停止
+ * @param	id			サウンドのID
+ */
+void
+C_DSound::SoundStop(bool is_reset, short id)
 {
-	if(ID >= MAX_SOUND)
+	if(id >= MAX_SOUND)
 	{
 		return;
 	}
 
-	if(mSecondaryBuffer[ID])
+	if(mSecondaryBuffer[id])
 	{
-		mSecondaryBuffer[ID]->Stop();
-		if(ResetFlg)
+		mSecondaryBuffer[id]->Stop();
+		if(is_reset)
 		{
 			//最初に戻る
-			mSecondaryBuffer[ID]->SetCurrentPosition(0);
+			mSecondaryBuffer[id]->SetCurrentPosition(0);
 		}
 	}
 }
 
-//音楽の再生状態の確認
-bool C_DSound::SoundPlayCheck(short ID)
+/**
+ * @brief	指定IDのサウンドが再生中か
+ */
+bool
+C_DSound::IsPlaySound(short id)
 {
-	if(ID >= MAX_SOUND)
+	if(id >= MAX_SOUND)
 	{
-		MessageBox(NULL, TEXT("ＩＤが大きすぎます"), NULL, MB_OK);
+		MessageBox(NULL, TEXT("IDが大きすぎます"), NULL, MB_OK);
 		return false;
 	}
-	if(!mSecondaryBuffer[ID])
+	if(!mSecondaryBuffer[id])
 	{
 		return false;
 	}
 
 	DWORD state;
-	mSecondaryBuffer[ID]->GetStatus(&state);
+	mSecondaryBuffer[id]->GetStatus(&state);
 
 	return (state & DSBSTATUS_PLAYING);
 }
 
-//ボリュームチェンジ
-void C_DSound::VolumeChange(short volume, short ID)
+/**
+ * @brief	ボリューム設定
+ * @param	volume		ボリュームの値（「０(最大ボリューム)」～「－１００００(最小ボリューム)」）
+ * @param	id			サウンドのID
+ */
+void
+C_DSound::SetVolume(short volume, short id)
 {
-	if(ID >= MAX_SOUND)
+	if(id >= MAX_SOUND)
 	{
 		return;
 	}
-	if(!mSecondaryBuffer[ID])
+	if(!mSecondaryBuffer[id])
 	{
 		return;
 	}
@@ -282,35 +341,39 @@ void C_DSound::VolumeChange(short volume, short ID)
 	{
 		volume = DSBVOLUME_MIN;
 	}
-	mSecondaryBuffer[ID]->SetVolume(volume);
+	mSecondaryBuffer[id]->SetVolume(volume);
 }
 
-//プライマリバッファ作成
-bool C_DSound::CreatePriBuffer()
+/**
+ * @brief	プライマリバッファの作成
+ * @return	true:成功   false:失敗
+ */
+bool
+C_DSound::CreatePrimaryBuffer()
 {
-	//DSBUFFERDESC構造体を設定
+	// DSBUFFERDESC構造体を設定
 	DSBUFFERDESC	dsbd;
 	ZeroMemory(&dsbd,sizeof(DSBUFFERDESC));
-	//プライマリバッファを指定
+	// プライマリバッファを指定
 	dsbd.dwSize			= sizeof(DSBUFFERDESC);
 	dsbd.dwFlags		= DSBCAPS_CTRLVOLUME | DSBCAPS_CTRLPAN | DSBCAPS_PRIMARYBUFFER;
 	dsbd.dwBufferBytes	= 0;
 	dsbd.lpwfxFormat	= NULL;
-	//バッファの作成
+	// バッファの作成
 	if(FAILED(mDirectSound->CreateSoundBuffer(&dsbd, &mPrimaryBuffer, NULL)))
 	{
 		MessageBox(NULL,TEXT("バッファ作成に失敗"),TEXT("DSound"),MB_OK);
 		return false;
 	}
-	//プライマリバッファのWaveフォーマットを設定
+	// プライマリバッファのWaveフォーマットを設定
 	WAVEFORMATEX	wfex;
 	ZeroMemory(&wfex, sizeof(WAVEFORMATEX));
-	wfex.wFormatTag		= WAVE_FORMAT_PCM;		//WAVEフォーマットの種類
-	wfex.nChannels		= CHANNELS;				//チャンネル数			ステレオ
-	wfex.nSamplesPerSec	= SAMPLESPERSEC;		//サンプリングレート	44.1kHz
-	wfex.wBitsPerSample	= BITSPERSAMPLE;		//16ビット
-	wfex.nBlockAlign	= (wfex.nChannels * wfex.wBitsPerSample) / 8;		//ブロック・アライメント(バイトあたりのビット数)
-	wfex.nAvgBytesPerSec= wfex.nSamplesPerSec * wfex.nBlockAlign;			//１秒間に転送するバイト数
+	wfex.wFormatTag		= WAVE_FORMAT_PCM;								// WAVEフォーマットの種類
+	wfex.nChannels		= CHANNELS;										// チャンネル数			ステレオ
+	wfex.nSamplesPerSec	= SAMPLESPERSEC;								// サンプリングレート	44.1kHz
+	wfex.wBitsPerSample	= BITSPERSAMPLE;								// 16ビット
+	wfex.nBlockAlign	= (wfex.nChannels * wfex.wBitsPerSample) / 8;	// ブロック・アライメント(バイトあたりのビット数)
+	wfex.nAvgBytesPerSec= wfex.nSamplesPerSec * wfex.nBlockAlign;		// １秒間に転送するバイト数
 	
 	if(FAILED(mPrimaryBuffer->SetFormat(&wfex)))
 	{
@@ -320,14 +383,22 @@ bool C_DSound::CreatePriBuffer()
 	return true;
 }
 
-//セカンダリバッファ作成
-HRESULT C_DSound::CreateSecBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short ID)
+/**
+ * @brief	セカンダリバッファの作成
+ * @param	wfex			WAVEファイルのフォーマット
+ * @param	lpBuffer		バッファ
+ * @param	dwBufferSize	バッファサイズ
+ * @param	id				サウンドID
+ * @return	S_OK:成功   E_FAIL:失敗
+ */
+HRESULT
+C_DSound::CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id)
 {
 	HRESULT				hr;
 	DSBUFFERDESC		dsbd;
 	LPDIRECTSOUNDBUFFER	pDSBuf;
 
-	//DSBUFFERDESC構造体の設定
+	// DSBUFFERDESC構造体の設定
 	ZeroMemory(&dsbd, sizeof(dsbd));
 	dsbd.dwSize			= sizeof(dsbd);
 	dsbd.dwFlags		= DSBCAPS_CTRLPAN | DSBCAPS_CTRLVOLUME | DSBCAPS_CTRLFREQUENCY | DSBCAPS_CTRLFX;
@@ -335,17 +406,17 @@ HRESULT C_DSound::CreateSecBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBu
 	dsbd.guid3DAlgorithm= DS3DALG_DEFAULT;
 	dsbd.lpwfxFormat	= &wfex;
 
-	//セカンダリバッファ作成
+	// セカンダリバッファ作成
 	if(SUCCEEDED(hr = mDirectSound->CreateSoundBuffer(&dsbd, &pDSBuf, NULL)))
 	{
-		hr = pDSBuf->QueryInterface(IID_IDirectSoundBuffer8, (LPVOID*)&mSecondaryBuffer[ID]);
+		hr = pDSBuf->QueryInterface(IID_IDirectSoundBuffer8, (LPVOID*)&mSecondaryBuffer[id]);
 		pDSBuf->Release();
 
 		void* lpData;
 		DWORD dwSize;
-		mSecondaryBuffer[ID]->Lock(0, dwBufferSize, &lpData, &dwSize, NULL, NULL, 0);
+		mSecondaryBuffer[id]->Lock(0, dwBufferSize, &lpData, &dwSize, NULL, NULL, 0);
 		memcpy(lpData, lpBuffer, dwSize);
-		mSecondaryBuffer[ID]->Unlock(lpData, dwSize, NULL, 0);
+		mSecondaryBuffer[id]->Unlock(lpData, dwSize, NULL, 0);
 	}
 	SAFE_DELETE_ARRAY(lpBuffer);
 

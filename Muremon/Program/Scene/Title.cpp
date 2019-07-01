@@ -245,7 +245,7 @@ void C_Title::KeyControl()
 	key_state = key->KeyCheck();
 
 	//‚ß‚Á‚¿‚áã‰º‰Ÿ‚³‚ê‚Ä‚àˆá˜aŠ´‚É‚È‚¢‚æ‚¤‚É
-	if(GetDirectSound()->SoundPlayCheck(S_SE_CURSOR_MOVE)){
+	if(GetDirectSound()->IsPlaySound(S_SE_CURSOR_MOVE)){
 		if(key_state == KEY_UP || key_state == KEY_DOWN){
 			GetDirectSound()->SoundStop(true,S_SE_CURSOR_MOVE);
 		}

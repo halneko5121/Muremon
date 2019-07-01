@@ -1,106 +1,118 @@
-//---------------------------------------------
-//      サウンドの設定
-//			作成者:平野
-//---------------------------------------------
-
-#ifndef _DIRECTSOUND_H_
-#define _DIRECTSOUND_H_
+#pragma once 
+/******************************************************************
+ *	@file	DirectSound.h
+ *	@brief	サウンドの管理
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
 #include <dsound.h>
 #include <stdio.h>
 
-#pragma comment (lib,"dsound.lib")
-#pragma comment (lib,"dxguid.lib")
+#pragma comment (lib, "dsound.lib")
+#pragma comment (lib, "dxguid.lib")
 #pragma comment (lib, "winmm.lib")
 
 class C_DSound
 {
 public:
-	static C_DSound* GetInstance();
-	static void Create();
-	static void Destroy();
-	
+	/**
+	 * @brief	コンストラクタ
+	 */
 	C_DSound();
 
-	/*===================================================
-		DirectSoundの初期化
-		引数	ウィンドウハンドル
-		戻り値	true	初期化成功
-				false	失敗
-	=====================================================*/
-	bool InitDSound(HWND hWnd);
+	/**
+	 * @brief	デストラクタ
+	 */
+	~C_DSound();
 
-	/*===================================================
-		音楽データ読み込み
-		引数１	ファイル名
-		戻り値	true	読み込み成功
-				false	失敗
-	=====================================================*/
-	bool LoadSoundData(LPTSTR FileName);
+	/**
+	 * @brief	インスタンスの取得
+	 */
+	static C_DSound* GetInstance();
 
-	/*===================================================
-		音楽データ読み込み
-		引数１	ファイル名
-		引数２	登録するサウンドのID
-		戻り値	S_OK	読み込み成功
-				E_FAIL	失敗
-	=====================================================*/
-	HRESULT LoadSound(LPTSTR pFileName, short ID);
+	/**
+	 * @brief	インスタンスの生成
+	 */
+	static void Create();
 
-	/*===================================================
-		音楽再生
-		引数１	ループするか(true = ループする、false = １度だけ再生)
-		引数２	サウンドのID
-	=====================================================*/
-	void SoundPlay(bool loop, short ID);
+	/**
+	 * @brief	インスタンスの破棄
+	 */
+	static void Destroy();
 
-	/*===================================================
-		音楽停止
-		引数１	完全停止か(true = 完全停止、false = 一時停止)
-		引数２	サウンドのID
-	=====================================================*/
-	void SoundStop(bool ResetFlg, short ID);
+	/**
+	 * @brief	初期化
+	 * @param	window_handle    ウィンドウハンドル
+	 * @return	true:成功   false:失敗
+	 */
+	bool InitDSound(HWND window_handle);
 
-	/*===================================================
-		音楽の再生状態の確認
-		引数	サウンドのID
-		戻り値	true	再生中
-				false	停止中
-	=====================================================*/
-	bool SoundPlayCheck(short ID);
-
-	/*===================================================
-		ボリュームチェンジ
-		引数１	変更したいボリュームの値（「０(最大ボリューム)」～「－１００００(最小ボリューム)」）
-		引数２	サウンドのID
-	=====================================================*/
-	void VolumeChange(short volume, short ID);
-
-	/*===================================================
-		プライマリバッファの作成
-		戻り値	true	作成成功
-				false	失敗
-	=====================================================*/
-	bool CreatePriBuffer();
-
-	/*===================================================
-		セカンダリバッファの作成
-		引数１	WAVEファイルのフォーマット
-		引数２	バッファ
-		引数３	バッファサイズ
-		引数４	サウンドのID
-		戻り値	S_OK	作成成功
-				E_FAIL	失敗
-	=====================================================*/
-	HRESULT CreateSecBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short ID);
-
-	/*===================================================
-		開放処理
-	=====================================================*/
+	/**
+	 * @brief	開放処理
+	 */
 	void UnInitDSound();
 
+	/**
+	 * @brief	音楽データ読み込み
+	 * @param	file_name	ファイル名
+	 * @return	true:成功   false:失敗
+	 */
+	bool LoadSoundData(LPTSTR file_name);
+
+	/**
+	 * @brief	音楽データ読み込み
+	 * @param	file_name	ファイル名
+	 * @param	id			登録するサウンドのID
+	 * @return	S_OK:成功   E_FAIL:失敗
+	 */
+	HRESULT LoadSound(LPTSTR file_name, short id);
+
+	/**
+	 * @brief	再生
+	 * @param	loop	ループするか
+	 * @param	id		サウンドのID
+	 */
+	void SoundPlay(bool loop, short id);
+
+	/**
+	 * @brief	停止
+	 * @param	is_pouse	完全停止か(true = 一時停止、false = 完全停止
+	 * @param	id			サウンドのID
+	 */
+	void SoundStop(bool is_reset, short id);
+
+	/**
+	 * @brief	指定IDのサウンドが再生中か
+	 */
+	bool IsPlaySound(short id);
+
+	/**
+	 * @brief	ボリューム設定
+	 * @param	volume		ボリュームの値（「０(最大ボリューム)」～「－１００００(最小ボリューム)」）
+	 * @param	id			サウンドのID
+	 */
+	void SetVolume(short volume, short id);
+
+	/**
+	 * @brief	プライマリバッファの作成
+	 * @return	true:成功   false:失敗
+	 */
+	bool CreatePrimaryBuffer();
+
+	/**
+	 * @brief	セカンダリバッファの作成
+	 * @param	wfex			WAVEファイルのフォーマット
+	 * @param	lpBuffer		バッファ
+	 * @param	dwBufferSize	バッファサイズ
+	 * @param	id				サウンドID
+	 * @return	S_OK:成功   E_FAIL:失敗
+	 */
+	HRESULT CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id);
+
 private:
-	enum { MAX_SOUND = 20 };								 // 読み込めるサウンドの最大数
+	enum { MAX_SOUND = 20 };								// 読み込めるサウンドの最大数
 
 private:
 	static C_DSound*		mInstance;
@@ -111,5 +123,3 @@ private:
 };
 
 static C_DSound* GetDirectSound() { return C_DSound::GetInstance(); }
-
-#endif//_DIRECTSOUND_H_

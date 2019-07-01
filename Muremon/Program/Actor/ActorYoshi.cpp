@@ -134,14 +134,14 @@ C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int r
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
-						if (GetDirectSound()->SoundPlayCheck(S_YOSHI_HIP))
+						if (GetDirectSound()->IsPlaySound(S_YOSHI_HIP))
 						{
 							GetDirectSound()->SoundStop(true, S_YOSHI_HIP);
 						}
 						GetDirectSound()->SoundPlay(false,S_YOSHI_HIP);
 					}
 					if(mCharaData[i].flag_atk2){
-						if (GetDirectSound()->SoundPlayCheck(S_YOSHI_HUSEN))
+						if (GetDirectSound()->IsPlaySound(S_YOSHI_HUSEN))
 						{
 							GetDirectSound()->SoundStop(true, S_YOSHI_HUSEN);
 						}

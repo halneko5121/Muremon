@@ -276,7 +276,7 @@ void C_Ranking::RankLoad()
 
 void C_Ranking::RankWrite()
 {
-	fp = fopen("Data\\rankingdata.txt","w");	
+	fopen_s(&fp, "Data\\rankingdata.txt", "w");
 
 	for(int i = 0; i < 5; i++)
 	{

@@ -247,7 +247,7 @@ void C_Title::KeyControl()
 	//‚ß‚Á‚¿‚áã‰º‰Ÿ‚³‚ê‚Ä‚àˆá˜aŠ´‚É‚È‚¢‚æ‚¤‚É
 	if(GetDirectSound()->IsPlaySound(S_SE_CURSOR_MOVE)){
 		if(key_state == KEY_UP || key_state == KEY_DOWN){
-			GetDirectSound()->SoundStop(true,S_SE_CURSOR_MOVE);
+			GetDirectSound()->SoundStop(false, S_SE_CURSOR_MOVE);
 		}
 	}
 

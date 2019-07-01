@@ -120,7 +120,7 @@ void C_GameNormal::ControlScene()
 			}
 			else
 			{
-				GetDirectSound()->SoundStop(true, S_SAIREN);
+				GetDirectSound()->SoundStop(false, S_SAIREN);
 			}
 		}
 
@@ -254,7 +254,7 @@ void C_GameNormal::ControlScene()
 		{
 			mGameState = G_GAME_OVER;
 			mFlagFadeStart = 0;
-			GetDirectSound()->SoundStop(true, S_SAIREN);
+			GetDirectSound()->SoundStop(false, S_SAIREN);
 			return ;
 		}
 
@@ -409,7 +409,7 @@ int C_GameNormal::EndScene()
 	//ゲームオーバーの場合
 	ChangeScene(RANKING);
 
-	GetDirectSound()->SoundStop(true, S_BGM_BATTLE);
+	GetDirectSound()->SoundStop(false, S_BGM_BATTLE);
 
 	mTexture->AllReleaseTexture();
 	mVertex->AllReleaseRect();

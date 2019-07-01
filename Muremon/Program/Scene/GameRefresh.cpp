@@ -272,7 +272,7 @@ int C_GameRefresh::EndScene()
 	//ƒ^ƒCƒgƒ‹‚Ö
 	ChangeScene(TITLE);
 
-	GetDirectSound()->SoundStop(true, S_BGM_BATTLE);
+	GetDirectSound()->SoundStop(false, S_BGM_BATTLE);
 
 	mTexture->AllReleaseTexture();
 	mVertex->AllReleaseRect();

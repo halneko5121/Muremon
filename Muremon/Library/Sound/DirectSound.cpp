@@ -91,7 +91,7 @@ C_DSound::UnInitDSound()
 {
 	for(short i = 0 ; i < (short)mMaxSound ; i++)
 	{
-		SoundStop(true, i);
+		SoundStop(false, i);
 		SAFE_RELEASE(mSecondaryBuffer[i]);
 	}
 	SAFE_RELEASE(mPrimaryBuffer);
@@ -272,11 +272,11 @@ C_DSound::SoundPlay(bool loop, short id)
 
 /**
  * @brief	’âŽ~
- * @param	is_pouse	Š®‘S’âŽ~‚©(true = ˆêŽž’âŽ~Afalse = Š®‘S’âŽ~
+ * @param	is_pouse	ˆêŽž’âŽ~‚©
  * @param	id			ƒTƒEƒ“ƒh‚ÌID
  */
 void
-C_DSound::SoundStop(bool is_reset, short id)
+C_DSound::SoundStop(bool is_pouse, short id)
 {
 	if(id >= MAX_SOUND)
 	{
@@ -286,9 +286,9 @@ C_DSound::SoundStop(bool is_reset, short id)
 	if(mSecondaryBuffer[id])
 	{
 		mSecondaryBuffer[id]->Stop();
-		if(is_reset)
+		if(!is_pouse)
 		{
-			//Å‰‚É–ß‚é
+			// Å‰‚É–ß‚é
 			mSecondaryBuffer[id]->SetCurrentPosition(0);
 		}
 	}

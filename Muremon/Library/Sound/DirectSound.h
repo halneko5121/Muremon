@@ -78,10 +78,10 @@ public:
 
 	/**
 	 * @brief	停止
-	 * @param	is_pouse	完全停止か(true = 一時停止、false = 完全停止
+	 * @param	is_pouse	一時停止か
 	 * @param	id			サウンドのID
 	 */
-	void SoundStop(bool is_reset, short id);
+	void SoundStop(bool is_pouse, short id);
 
 	/**
 	 * @brief	指定IDのサウンドが再生中か

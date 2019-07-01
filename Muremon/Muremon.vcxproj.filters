@@ -31,37 +31,37 @@
     <ClCompile Include="Program\Actor\Boss.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\Ending.cpp">
+    <ClCompile Include="Program\Scene\Ending.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\GameClear.cpp">
+    <ClCompile Include="Program\Scene\GameClear.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\GameNormal.cpp">
+    <ClCompile Include="Program\Scene\GameNormal.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\GameOver.cpp">
+    <ClCompile Include="Program\Scene\GameOver.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\GameRefresh.cpp">
+    <ClCompile Include="Program\Scene\GameRefresh.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\Logo.cpp">
+    <ClCompile Include="Program\Scene\Logo.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\Mission.cpp">
+    <ClCompile Include="Program\Scene\Mission.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\Prologue.cpp">
+    <ClCompile Include="Program\Scene\Prologue.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\Ranking.cpp">
+    <ClCompile Include="Program\Scene\Ranking.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\Title.cpp">
+    <ClCompile Include="Program\Scene\Title.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\Tutorial.cpp">
+    <ClCompile Include="Program\Scene\Tutorial.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Program\Util\Control.cpp">
@@ -79,10 +79,10 @@
     <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp">
       <Filter>Util\Orbit</Filter>
     </ClCompile>
-    <ClCompile Include="program\gManage\GameManage.cpp">
+    <ClCompile Include="Program\gManage\GameManage.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="program\gManage\SceneManage.cpp">
+    <ClCompile Include="Program\Scene\SceneManage.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Library\Graphics\Texture.cpp">
@@ -91,11 +91,11 @@
     <ClCompile Include="Library\Graphics\Vertex.cpp">
       <Filter>Library\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="program\gManage\main.cpp" />
+    <ClCompile Include="Program\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="program\D_Game.h" />
-    <ClInclude Include="program\Define.h" />
+    <ClInclude Include="Program\D_Game.h" />
+    <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Library\Font\DirectFont.h">
       <Filter>Library\Font</Filter>
     </ClInclude>
@@ -126,37 +126,37 @@
     <ClInclude Include="Program\Actor\Boss.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\Ending.h">
+    <ClInclude Include="Program\Scene\Ending.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\GameClear.h">
+    <ClInclude Include="Program\Scene\GameClear.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\GameNormal.h">
+    <ClInclude Include="Program\Scene\GameNormal.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\GameOver.h">
+    <ClInclude Include="Program\Scene\GameOver.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\GameRefresh.h">
+    <ClInclude Include="Program\Scene\GameRefresh.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\Logo.h">
+    <ClInclude Include="Program\Scene\Logo.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\Mission.h">
+    <ClInclude Include="Program\Scene\Mission.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\Prologue.h">
+    <ClInclude Include="Program\Scene\Prologue.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\Ranking.h">
+    <ClInclude Include="Program\Scene\Ranking.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\Title.h">
+    <ClInclude Include="Program\Scene\Title.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\Tutorial.h">
+    <ClInclude Include="Program\Scene\Tutorial.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Util\Control.h">
@@ -174,10 +174,10 @@
     <ClInclude Include="Program\Util\Orbit\OrbitWave.h">
       <Filter>Util\Orbit</Filter>
     </ClInclude>
-    <ClInclude Include="program\gManage\GameManage.h">
+    <ClInclude Include="Program\gManage\GameManage.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="program\gManage\SceneManage.h">
+    <ClInclude Include="Program\Scene\SceneManage.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Library\Graphics\Texture.h">
@@ -186,7 +186,7 @@
     <ClInclude Include="Library\Graphics\Vertex.h">
       <Filter>Library\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="program\gManage\main.h" />
+    <ClInclude Include="Program\main.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

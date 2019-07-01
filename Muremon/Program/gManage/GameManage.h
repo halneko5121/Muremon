@@ -11,7 +11,7 @@
 #define _GAMEMANAGE_H_
 
 #include "Library/Window/Window.h"
-#include "Program/gManage/SceneManage.h"
+#include "Program/Scene/SceneManage.h"
 #include "Library/Font/DirectFont.h"
 #include "Library/Graphics/Vertex.h"
 

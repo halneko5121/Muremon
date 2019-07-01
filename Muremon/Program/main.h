@@ -10,8 +10,4 @@
 #ifndef _REVENANT_H_
 #define _REVENANT_H_
 
-//include
-#include <crtdbg.h> //メモリーリークチェック
-#include "GameManage.h"
-
 #endif	//_REVENANT_H_

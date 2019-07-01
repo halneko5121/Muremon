@@ -79,7 +79,7 @@
     <ClInclude Include="program\Scene\Tutorial.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>Muremon_ver.1.0</ProjectName>
+    <ProjectName>Muremon</ProjectName>
     <ProjectGuid>{47177955-E6DF-4B3C-B6A1-59486DE1F3D3}</ProjectGuid>
     <RootNamespace>Muremon_ver01</RootNamespace>
     <Keyword>Win32Proj</Keyword>

@@ -1,34 +1,34 @@
-//---------------------------------------------
-//
-//      メイン
-//      作成開始日:2月16日
-//      更新日:2月16日
-//      作成者:西井
-//
-//---------------------------------------------
+/******************************************************************
+ *	@file	main.cpp
+ *	@brief	メイン
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
-#include <crtdbg.h> // メモリーリークチェック
+#include <crtdbg.h> //メモリーリークチェック
 #include "main.h"
-#include "Program/gManage/GameManage.h"
+#include "gManage/GameManage.h"
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：メイン(ここからプログラムがスタート)
-//      引数  ：HINSTANCE   hInstance   インスタンスハンドル
-//              HINSTANCE   hPrevInst   ゲームメインに渡す
-//              LPSTR       lpCmdLine   ゲームメインに渡す
-//              int         nShowCmd    ゲームメインに渡す
-//      戻り値：int         ループ
-//
-//////////////////////////////////////////////////////////
-int	WINAPI WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
+/**
+ * @brief	メイン(ここからプログラムがスタート)
+ * @param	hInstance   インスタンスハンドル(プログラムを動かすためのもの)
+ * @param	hPrevInst	↑の前の状態を保存しておく	(1つ目に情報が入ってなかった時用)
+ * @param	lpCmdLine   Windowsからの命令が格納される(ポインタの先頭アドレス)
+ * @param	nShowCmd	その命令がいくつあるのか
+ * @return	ループ
+ * @note	WINAPI		ウィンドウアプリケーションですよとわからせるためのもの
+ * @note	WinMain		これがないとWindowsアプリケーションの始まりがわからない
+ */
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nShowCmd)
 {
-	int l_return = 0;
-	C_GameMain gMain;	//インスタンス生成
+	// インスタンス生成
+	C_GameMain gMain;
 
-	l_return = gMain.WinMain(hInstance,hPrevInst,lpCmdLine,nShowCmd);
+	int l_return = gMain.WinMain(hInstance,hPrevInst,lpCmdLine,nShowCmd);
 
-	_CrtDumpMemoryLeaks();					// 現在のメモリリーク状態がわかる
+	// 現在のメモリリーク状態がわかる
+	_CrtDumpMemoryLeaks();
 
 	return l_return;
 }

@@ -104,7 +104,7 @@ private:
 	float				mTextureV;			// テクスチャUV値
 	float				mScaleX;			// X方向の拡大率
 	float				mScaleY;			// Y方向の拡大率
-	float				mRadian;			// 角度
+	float				mDegree;			// 角度
 	int					mLoadedRectCount;	// 読み込まれている矩形の総数
 	D3DCOLOR			mColor;				// 色
 	D3DCOLOR			mColor1[4];			// 色

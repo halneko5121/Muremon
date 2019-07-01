@@ -105,6 +105,7 @@ public:
 	 */
 	void SetVolume(short volume, short id);
 
+private:
 	/**
 	 * @brief	プライマリバッファの作成
 	 * @return	true:成功   false:失敗
@@ -121,7 +122,6 @@ public:
 	 */
 	HRESULT CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id);
 
-private:
 	/**
 	 * @brief	再生
 	 * @param	loop	ループするか

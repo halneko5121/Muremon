@@ -25,7 +25,7 @@
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
     <ClCompile Include="Program\Util\Control.cpp" />
     <ClCompile Include="program\gManage\GameManage.cpp" />
-    <ClCompile Include="program\gManage\Revenant.cpp" />
+    <ClCompile Include="program\gManage\main.cpp" />
     <ClCompile Include="program\gManage\SceneManage.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
@@ -60,7 +60,7 @@
     <ClInclude Include="program\Define.h" />
     <ClInclude Include="program\D_Game.h" />
     <ClInclude Include="program\gManage\GameManage.h" />
-    <ClInclude Include="program\gManage\Revenant.h" />
+    <ClInclude Include="program\gManage\main.h" />
     <ClInclude Include="program\gManage\SceneManage.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />

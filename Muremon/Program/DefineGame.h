@@ -6,15 +6,25 @@
 //			作成者:平野
 //
 //---------------------------------------------
-
 #pragma once
+
+const int GAMESIZE_HEIGHT = 600;
+const int GAMESIZE_WIDE = 800;
+const float GAMESIZE_CENTER_X = (GAMESIZE_WIDE / 2.f);
+const float GAMESIZE_CENTER_Y = (GAMESIZE_HEIGHT / 2.f);
+
+// Windowを表示する位置
+const int WINDOW_TOP = 100;
+const int WINDOW_LEFT = 220;
+// ゲーム用カーソルのサイズ
+const int CURSOR_HEIGHT = 20;
+const int CURSOR_WIDE = 20;
 
 #define G_ALPHA_INCREASE			(15)
 #define G_MAX_ALPHA					(255)
 
 #define TIME_LIMIT					(10800)	//制限時間(仮　3:00)
 #define DEADLINE					(300.f)	//ゲームオーバーライン
-
 
 //描画位置
 #define G_BG_X						(400.f)

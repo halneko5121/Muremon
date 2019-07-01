@@ -30,7 +30,7 @@ class C_SceneManage
 protected:
     DWORD               sceneID;    //シーンの番号
 	LPDIRECT3DDEVICE9	pDevice;    //デバイス
-	C_DInput			*pInput;    //インプットクラスのインスタンス
+	C_DInputKey			*pInput;    //インプットクラスのインスタンス
     C_DFont             *pFont;     //フォントクラスのインスタンス
 
 public:

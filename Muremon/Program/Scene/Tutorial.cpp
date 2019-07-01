@@ -5,7 +5,7 @@
 //
 //---------------------------------------------
 #include "Tutorial.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 C_Tutorial::C_Tutorial(void)
 {

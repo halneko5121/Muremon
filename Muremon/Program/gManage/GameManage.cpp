@@ -6,7 +6,7 @@
 //---------------------------------------------
 
 #include "GameManage.h"
-#include "LIbrary/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 //////////////////////////////////////////////////////////
 //

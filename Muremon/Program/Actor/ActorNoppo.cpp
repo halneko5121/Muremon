@@ -1,5 +1,5 @@
 #include "ActorNoppo.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 namespace
 {

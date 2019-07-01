@@ -5,7 +5,7 @@
 //
 //---------------------------------------------
 #include "GameNormal.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 POS_CC<float> boss_cc2 = { 600, 350 };
 

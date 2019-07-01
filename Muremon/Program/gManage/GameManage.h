@@ -12,7 +12,7 @@
 
 #include "program/gManage/Window.h"
 #include "program/gManage/SceneManage.h"
-#include "Library/DirectFont.h"
+#include "Library/Font/DirectFont.h"
 #include "Library/Graphics/Vertex.h"
 
 #include "program/Scene/Logo.h"

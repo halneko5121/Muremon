@@ -1,5 +1,5 @@
 #include "Mission.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 C_Mission::C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {

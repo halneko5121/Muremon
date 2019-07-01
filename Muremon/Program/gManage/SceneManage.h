@@ -8,8 +8,8 @@
 
 //include
 #include "Library/Graphics/DirectGraphics.h"
-#include "Library/DirectInput.h"
-#include "Library/DirectFont.h"
+#include "Library/Input/DirectInput.h"
+#include "Library/Font/DirectFont.h"
 
 //enum
 enum SCENE_NAME

@@ -1,5 +1,5 @@
 #include "ActorYoshi.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 namespace
 {

@@ -5,7 +5,7 @@
 //
 //---------------------------------------------
 #include "Title.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 C_Title::C_Title(void)
 {

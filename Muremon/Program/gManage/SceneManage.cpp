@@ -8,7 +8,7 @@
 //---------------------------------------------
 
 #include "SceneManage.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 //////////////////////////////////////////////////////////
 //

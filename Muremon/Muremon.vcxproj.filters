@@ -16,9 +16,9 @@
     <ClCompile Include="program\Scene\Ranking.cpp" />
     <ClCompile Include="program\Scene\Title.cpp" />
     <ClCompile Include="program\Scene\Tutorial.cpp" />
-    <ClCompile Include="Library\DirectFont.cpp" />
-    <ClCompile Include="Library\DirectInput.cpp" />
-    <ClCompile Include="Library\DirectSound.cpp" />
+    <ClCompile Include="Library\Font\DirectFont.cpp" />
+    <ClCompile Include="Library\Input\DirectInput.cpp" />
+    <ClCompile Include="Library\Sound\DirectSound.cpp" />
     <ClCompile Include="Program\Util\Control.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
@@ -51,9 +51,9 @@
     <ClInclude Include="program\Scene\Tutorial.h" />
     <ClInclude Include="program\D_Game.h" />
     <ClInclude Include="program\Define.h" />
-    <ClInclude Include="Library\DirectFont.h" />
-    <ClInclude Include="Library\DirectInput.h" />
-    <ClInclude Include="Library\DirectSound.h" />
+    <ClInclude Include="Library\Font\DirectFont.h" />
+    <ClInclude Include="Library\Input\DirectInput.h" />
+    <ClInclude Include="Library\Sound\DirectSound.h" />
     <ClInclude Include="Program\Util\Control.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />

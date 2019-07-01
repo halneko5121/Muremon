@@ -5,7 +5,7 @@
 //
 //---------------------------------------------
 #include "Ranking.h"
-#include "Library/DirectSound.h"
+#include "Library/Sound/DirectSound.h"
 
 FILE *fp;
 struct RANK data[5];

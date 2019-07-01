@@ -9,8 +9,8 @@
 #pragma once
 
 #include "Program/gManage/SceneManage.h"
-#include "Library/Texture.h"
-#include "Library/Vertex.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/Control.h"
 
 #define TITLE_ALPHA_INCREASE		(5)		//アルファ値の増加量

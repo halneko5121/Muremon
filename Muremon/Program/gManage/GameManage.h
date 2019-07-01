@@ -13,7 +13,7 @@
 #include "program/gManage/Window.h"
 #include "program/gManage/SceneManage.h"
 #include "Library/DirectFont.h"
-#include "LIbrary/Vertex.h"
+#include "Library/Graphics/Vertex.h"
 
 #include "program/Scene/Logo.h"
 #include "program/Scene/Title.h"

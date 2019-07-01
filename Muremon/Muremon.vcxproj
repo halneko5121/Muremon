@@ -12,11 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Library\DirectFont.cpp" />
-    <ClCompile Include="Library\DirectGraphics.cpp" />
     <ClCompile Include="Library\DirectInput.cpp" />
     <ClCompile Include="Library\DirectSound.cpp" />
-    <ClCompile Include="Library\Texture.cpp" />
-    <ClCompile Include="Library\Vertex.cpp" />
+    <ClCompile Include="Library\Graphics\DirectGraphics.cpp" />
+    <ClCompile Include="Library\Graphics\Texture.cpp" />
+    <ClCompile Include="Library\Graphics\Vertex.cpp" />
     <ClCompile Include="Program\Actor\Boss.cpp" />
     <ClCompile Include="Program\Actor\ActorBase.cpp" />
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
@@ -45,11 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Library\DirectFont.h" />
-    <ClInclude Include="Library\DirectGraphics.h" />
     <ClInclude Include="Library\DirectInput.h" />
     <ClInclude Include="Library\DirectSound.h" />
-    <ClInclude Include="Library\Texture.h" />
-    <ClInclude Include="Library\Vertex.h" />
+    <ClInclude Include="Library\Graphics\DirectGraphics.h" />
+    <ClInclude Include="Library\Graphics\Texture.h" />
+    <ClInclude Include="Library\Graphics\Vertex.h" />
     <ClInclude Include="Program\Actor\Boss.h" />
     <ClInclude Include="Program\Actor\ActorBase.h" />
     <ClInclude Include="Program\Actor\ActorNikuman.h" />

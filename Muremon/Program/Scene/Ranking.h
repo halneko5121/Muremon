@@ -9,8 +9,8 @@
 #pragma once
 
 #include "Program/gManage/SceneManage.h"
-#include "Library/Texture.h"
-#include "Library/Vertex.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/Control.h"
 
 #define POSITION_Y	(150)	//–¼‘O‚ÌY‚Ì’†SˆÊ’u

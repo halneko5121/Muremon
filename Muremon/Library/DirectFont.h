@@ -15,7 +15,7 @@
 #define DEFAULT_FONT_SIZE_Y (30)    //基本のフォントサイズ
 
 //include
-#include "DirectGraphics.h"
+#include "Library/Graphics/DirectGraphics.h"
 
 class C_DFont
 {

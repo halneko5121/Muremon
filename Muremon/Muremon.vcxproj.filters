@@ -17,11 +17,8 @@
     <ClCompile Include="program\Scene\Title.cpp" />
     <ClCompile Include="program\Scene\Tutorial.cpp" />
     <ClCompile Include="Library\DirectFont.cpp" />
-    <ClCompile Include="Library\DirectGraphics.cpp" />
     <ClCompile Include="Library\DirectInput.cpp" />
     <ClCompile Include="Library\DirectSound.cpp" />
-    <ClCompile Include="Library\Texture.cpp" />
-    <ClCompile Include="Library\Vertex.cpp" />
     <ClCompile Include="Program\Util\Control.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
@@ -32,6 +29,9 @@
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
     <ClCompile Include="Program\Actor\ActorBase.cpp" />
+    <ClCompile Include="Library\Graphics\DirectGraphics.cpp" />
+    <ClCompile Include="Library\Graphics\Texture.cpp" />
+    <ClCompile Include="Library\Graphics\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\gManage\GameManage.h" />
@@ -52,11 +52,8 @@
     <ClInclude Include="program\D_Game.h" />
     <ClInclude Include="program\Define.h" />
     <ClInclude Include="Library\DirectFont.h" />
-    <ClInclude Include="Library\DirectGraphics.h" />
     <ClInclude Include="Library\DirectInput.h" />
     <ClInclude Include="Library\DirectSound.h" />
-    <ClInclude Include="Library\Texture.h" />
-    <ClInclude Include="Library\Vertex.h" />
     <ClInclude Include="Program\Util\Control.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
@@ -67,5 +64,8 @@
     <ClInclude Include="Program\Actor\ActorNoppo.h" />
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
     <ClInclude Include="Program\Actor\ActorBase.h" />
+    <ClInclude Include="Library\Graphics\Vertex.h" />
+    <ClInclude Include="Library\Graphics\DirectGraphics.h" />
+    <ClInclude Include="Library\Graphics\Texture.h" />
   </ItemGroup>
 </Project>

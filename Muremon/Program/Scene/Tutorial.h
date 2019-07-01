@@ -9,8 +9,8 @@
 #pragma once
 
 #include "program/gManage/SceneManage.h"
-#include "Library/Texture.h"
-#include "Library/Vertex.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/Control.h"
 
 #define TR_RIGHT_X	(1200.f)

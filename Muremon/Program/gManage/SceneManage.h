@@ -7,7 +7,7 @@
 #define _SCENEMANAGE_H_
 
 //include
-#include "Library/DirectGraphics.h"
+#include "Library/Graphics/DirectGraphics.h"
 #include "Library/DirectInput.h"
 #include "Library/DirectFont.h"
 

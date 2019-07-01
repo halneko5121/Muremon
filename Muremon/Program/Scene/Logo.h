@@ -9,8 +9,8 @@
 #pragma once
 
 #include "Program/gManage/SceneManage.h"
-#include "Library/Texture.h"
-#include "Library/Vertex.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 
 #define MAXALPHATIME		(51)
 #define ALPHADWINDLITIME	(129)

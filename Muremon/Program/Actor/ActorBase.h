@@ -6,8 +6,8 @@
  *													by	éOè„Å@òj					*
  ************************************************************************************/
 
-#include "Library/Texture.h"
-#include "Library/Vertex.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 
 #include "Program/Util/Control.h"
 #include "Program/Util/Orbit/OrbitCalculation.h"

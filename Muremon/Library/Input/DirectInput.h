@@ -87,27 +87,27 @@ public:
 	 * @param	key		キーの状態
 	 * @return	true　押されている   false:　押されていない
 	 */
-	bool					CheckKeyDown(USHORT key);
+	bool					IsKeyDown(USHORT key);
 
 	/**
 	 * @brief	指定のキーが瞬間的に押されたか
 	 * @param	key		キーの状態
 	 * @return	true　押された   false:　押されていない
 	 */
-	bool					CheckKeyPushed(USHORT key);
+	bool					IsKeyPushed(USHORT key);
 
 	/**
 	 * @brief	指定のキーが離されたかどうか
 	 * @param	key		キーの状態
 	 * @return	true　離された   false:　離されていない
 	 */
-	bool					CheckKeyReleased(USHORT key);
+	bool					IsKeyReleased(USHORT key);
 
 	/**
 	 * @brief	いずれかのキーが押されたか
 	 * @return	true　押された   false:　押されていない
 	 */
-	bool					CheckAnyKeyDown();
+	bool					IsAnyKeyDown();
 
 private:
 	enum { MAX_KEYDATA = 256 };								// 一度に受け付けるキーの最大数

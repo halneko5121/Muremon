@@ -146,7 +146,7 @@ C_DInputKey::ReleaseDirectInput()
  * @return	true　押されている   false:　押されていない
  */
 bool
-C_DInputKey::CheckKeyDown(USHORT key)
+C_DInputKey::IsKeyDown(USHORT key)
 {
 	KeyBordRefresh();
 
@@ -164,10 +164,10 @@ C_DInputKey::CheckKeyDown(USHORT key)
  * @return	true　押された   false:　押されていない
  */
 bool
-C_DInputKey::CheckKeyPushed(USHORT key)
+C_DInputKey::IsKeyPushed(USHORT key)
 {
 	// 現在押されていて,かつ,直前に押されていない時TRUE
-	if( CheckKeyDown(key) && !(mKeyStatePrev[key] & 0x80) ) return TRUE;
+	if( IsKeyDown(key) && !(mKeyStatePrev[key] & 0x80) ) return TRUE;
 
 	return FALSE;
 }
@@ -178,10 +178,10 @@ C_DInputKey::CheckKeyPushed(USHORT key)
  * @return	true　離された   false:　離されていない
  */
 bool
-C_DInputKey::CheckKeyReleased(USHORT key)
+C_DInputKey::IsKeyReleased(USHORT key)
 {
 	//現在押されておらず,かつ,直前に押されている時TRUE
-	if( !(CheckKeyDown(key)) && (mKeyStatePrev[key] & 0x80) ) return TRUE;
+	if( !(IsKeyDown(key)) && (mKeyStatePrev[key] & 0x80) ) return TRUE;
 
 	return FALSE;
 }
@@ -191,10 +191,10 @@ C_DInputKey::CheckKeyReleased(USHORT key)
  * @return	true　押された   false:　押されていない
  */
 bool
-C_DInputKey::CheckAnyKeyDown()
+C_DInputKey::IsAnyKeyDown()
 {
 	for(int i = 0;i < MAX_KEYDATA;i++){
-		if(CheckKeyDown(i)) return TRUE;
+		if(IsKeyDown(i)) return TRUE;
 	}
 
 	return FALSE;

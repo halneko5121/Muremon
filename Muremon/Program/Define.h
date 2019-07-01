@@ -11,7 +11,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <tchar.h>
-#include "D_Game.h"
+#include "DefineGame.h"
 
 #define APP_SAFE_RELEASE(p)				{if(p){(p)->Release();	(p) = nullptr;} }
 #define APP_SAFE_DELETE_ARRAY(p)		{if(p){delete[](p);		(p) = nullptr;} }

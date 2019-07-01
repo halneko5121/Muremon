@@ -3,7 +3,7 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/Control.h"
-#include "Program/D_Game.h"
+#include "Program/DefineGame.h"
 
 #define TEN_SECOND	(600)
 

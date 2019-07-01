@@ -17,7 +17,7 @@
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"
 #include "Program/Util/Control.h"
-#include "Program/D_Game.h"
+#include "Program/DefineGame.h"
 
 #define NEGATIVE_PAR1	(40)
 #define NEGATIVE_PAR2	(60)

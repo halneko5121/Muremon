@@ -94,7 +94,6 @@
     <ClCompile Include="Program\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Program\D_Game.h" />
     <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Library\Font\DirectFont.h">
       <Filter>Library\Font</Filter>
@@ -187,6 +186,7 @@
       <Filter>Library\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Program\main.h" />
+    <ClInclude Include="program\DefineGame.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

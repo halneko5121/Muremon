@@ -12,7 +12,7 @@
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"
 #include "Program/Util/Control.h"
-#include "Program/D_Game.h"
+#include "Program/DefineGame.h"
 
 class C_GameRefresh:public C_SceneManage
 {

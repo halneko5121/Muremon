@@ -58,7 +58,7 @@
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
     <ClInclude Include="Program\Util\Control.h" />
     <ClInclude Include="program\Define.h" />
-    <ClInclude Include="program\D_Game.h" />
+    <ClInclude Include="program\DefineGame.h" />
     <ClInclude Include="program\gManage\GameManage.h" />
     <ClInclude Include="program\main.h" />
     <ClInclude Include="program\Scene\SceneManage.h" />

@@ -1,118 +1,84 @@
-//---------------------------------------------
-//
-//      ウィンドウ作成
-//      作成開始日:3月17日
-//			更新日:3月17日
-//			作成者:平野
-//
-//---------------------------------------------
+#pragma once
+/******************************************************************
+ *	@file	Window.h
+ *	@brief	ウィンドウ作成
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
-#ifndef _WINDOW_H_
-#define _WINDOW_H_
+#define _WINDOW_MODE_
 
-//include
-#include <windows.h>
-#include <time.h>
-#include <stdlib.h>
+#include <dsound.h> // @todo_mikami:なぜこれ必要？
 
-//define
-#define WINDOW_MODE			(true)						//true:ウィンドウ	false:フルスクリーン
-#define FULL_MODE			(false)
-#define WINDOW_WIDTH		(800)						//ウィンドウサイズ(横)
-#define WINDOW_HEIGHT		(600)						//ウィンドウサイズ(縦)
-#define WINDOW_STYLE_W		(WS_OVERLAPPEDWINDOW)		//ウィンドウモード
-#define WINDOW_STYLE_F		(WS_POPUP | WS_VISIBLE)		//フルスクリーンモード
-#define CLASS_NAME			TEXT("My Class")			//クラスネーム
-#define WINDOW_NAME			TEXT("むれもん")			//ウィンドウネーム
+#pragma comment( lib, "winmm.lib") 
 
-//class
+#if defined(DEBUG) || defined(_DEBUG)
+#pragma comment( lib, "d3dx9d.lib")
+#else
+#pragma comment( lib, "d3dx9.lib" )
+#endif
+
 class C_Window
 {
-private:
-	HINSTANCE	hInstance;		//インスタンスハンドル
-	HWND		hWnd;			//ウィンドウハンドル
-	RECT		windowSize;		//ウィンドウサイズ
-	bool		windowMode;		//ウィンドウモード
 public:
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：ウィンドウ初期化
-    //      引数  ：HINSTANCE   hInst   インスタンスハンドル
-    //      戻り値：HRESULT S_OK:成功   E_FAIL:失敗
-    //
-    //////////////////////////////////////////////////////////
+	/**
+	 * @brief	初期設定
+	 * @param	hInst   インスタンスハンドル
+	 * @return	S_OK:成功   E_FAIL:失敗
+	 */
 	HRESULT InitWindow(HINSTANCE hInst);
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：ウィンドウ生成
-    //      引数  ：なし
-    //      戻り値：bool    true:成功   false:失敗
-    //
-    //////////////////////////////////////////////////////////
-	bool WindowCreate(void);
+	/**
+	 * @brief	生成
+	 * @return	true:成功   false:失敗
+	 */
+	bool WindowCreate();
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：ウィンドウクラス独自のウィンドウプロシージャ
-    //      引数  ：HWND    hWnd    ウィンドウハンドル
-    //              UINT    uMsg    メッセージ
-    //              WPARAM  wParam  パラメータ
-    //              LPARAM  lParam  パラメータ
-    //      戻り値：LRESULT ウィンドウプロシージャに渡す
-    //
-    //////////////////////////////////////////////////////////
+	/**
+	 * @brief	ウィンドウクラス独自のウィンドウプロシージャ
+	 * @param	hWnd    ウィンドウハンドル
+	 * @param	uMsg    メッセージ
+	 * @param	wParam  パラメータ
+	 * @param	lParam  パラメータ
+	 * @return	ウィンドウプロシージャに渡す
+	 */
 	static LRESULT CALLBACK WindowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam);
 	
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：共通のウィンドウプロシージャ
-    //      引数  ：HWND    hWnd    ウィンドウハンドル
-    //              UINT    uMsg    メッセージ
-    //              WPARAM  wParam  パラメータ
-    //              LPARAM  lParam  パラメータ
-    //      戻り値：LRESULT ウィンドウ初期化時に渡す
-    //
-    //////////////////////////////////////////////////////////
+	/**
+	 * @brief	共通のウィンドウプロシージャ
+	 * @param	hWnd    ウィンドウハンドル
+	 * @param	uMsg    メッセージ
+	 * @param	wParam  パラメータ
+	 * @param	lParam  パラメータ
+	 * @return	ウィンドウ初期化時に渡す
+	 */
 	LRESULT WndProc(HWND hWnd , UINT iMsg , WPARAM wParam , LPARAM lParam);
 
-	//-情報取得関数-
+	/*-情報取得関数-*/
+	/**
+	 * @brief	インスタンスハンドル取得
+	 */
+	HINSTANCE GetHinst()	{ return mHInstance; }
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：インスタンスハンドル取得
-    //      引数  ：なし
-    //      戻り値：HINSTANCE   インスタンスハンドル
-    //
-    //////////////////////////////////////////////////////////
-	HINSTANCE GetHinst(void)	{return hInstance;}
+	/**
+	 * @brief	ウィンドウハンドル取得
+	 */
+	HWND GetHwnd()			{ return mWindowHandle; }
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：ウィンドウハンドル取得
-    //      引数  ：なし
-    //      戻り値：HWND   ウィンドウハンドル
-    //
-    //////////////////////////////////////////////////////////
-	HWND GetHwnd(void)			{return hWnd;}
+	/**
+	 * @brief	ウィンドウサイズ取得
+	 */
+	RECT GetWindowSize()	{ return mWindowSize; }
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：ウィンドウサイズ取得
-    //      引数  ：なし
-    //      戻り値：RECT    ウィンドウのサイズ
-    //
-    //////////////////////////////////////////////////////////
-	RECT GetWindowSize(void)	{return windowSize;}
+	/**
+	 * @brief	ウィンドウモードか
+	 */
+	bool IsWindowMode()		{ return mWindowMode; }
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：ウィンドウモード取得
-    //      引数  ：なし
-    //      戻り値：bool    true:ウィンドウモード   false:フルスクリーン
-    //
-    //////////////////////////////////////////////////////////
-	bool GetWindowMode(void)	{return windowMode;}
+private:
+	HINSTANCE	mHInstance;			// インスタンスハンドル
+	HWND		mWindowHandle;		// ウィンドウハンドル
+	RECT		mWindowSize;		// ウィンドウサイズ
+	bool		mWindowMode;		// ウィンドウモード
 };
-
-#endif	//_WINDOW_H_

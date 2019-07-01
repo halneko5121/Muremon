@@ -8,7 +8,7 @@
 //---------------------------------------------
 #pragma once
 
-#include "program/gManage/SceneManage.h"
+#include "Program/gManage/SceneManage.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/Control.h"

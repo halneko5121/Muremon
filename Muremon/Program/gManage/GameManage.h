@@ -10,17 +10,17 @@
 #ifndef _GAMEMANAGE_H_
 #define _GAMEMANAGE_H_
 
-#include "program/gManage/Window.h"
-#include "program/gManage/SceneManage.h"
+#include "Library/Window/Window.h"
+#include "Program/gManage/SceneManage.h"
 #include "Library/Font/DirectFont.h"
 #include "Library/Graphics/Vertex.h"
 
-#include "program/Scene/Logo.h"
-#include "program/Scene/Title.h"
-#include "program/Scene/Tutorial.h"
-#include "program/Scene/GameRefresh.h"
-#include "program/Scene/GameNormal.h"
-#include "program/Scene/Ranking.h"
+#include "Program/Scene/Logo.h"
+#include "Program/Scene/Title.h"
+#include "Program/Scene/Tutorial.h"
+#include "Program/Scene/GameRefresh.h"
+#include "Program/Scene/GameNormal.h"
+#include "Program/Scene/Ranking.h"
 
 class C_GameMain
 {

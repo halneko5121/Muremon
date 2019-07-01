@@ -17,6 +17,7 @@
     <ClCompile Include="Library\Graphics\DirectGraphics.cpp" />
     <ClCompile Include="Library\Graphics\Texture.cpp" />
     <ClCompile Include="Library\Graphics\Vertex.cpp" />
+    <ClCompile Include="Library\Window\Window.cpp" />
     <ClCompile Include="Program\Actor\Boss.cpp" />
     <ClCompile Include="Program\Actor\ActorBase.cpp" />
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
@@ -26,7 +27,6 @@
     <ClCompile Include="program\gManage\GameManage.cpp" />
     <ClCompile Include="program\gManage\Revenant.cpp" />
     <ClCompile Include="program\gManage\SceneManage.cpp" />
-    <ClCompile Include="program\gManage\Window.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
@@ -50,6 +50,7 @@
     <ClInclude Include="Library\Graphics\DirectGraphics.h" />
     <ClInclude Include="Library\Graphics\Texture.h" />
     <ClInclude Include="Library\Graphics\Vertex.h" />
+    <ClInclude Include="Library\Window\Window.h" />
     <ClInclude Include="Program\Actor\Boss.h" />
     <ClInclude Include="Program\Actor\ActorBase.h" />
     <ClInclude Include="Program\Actor\ActorNikuman.h" />
@@ -61,7 +62,6 @@
     <ClInclude Include="program\gManage\GameManage.h" />
     <ClInclude Include="program\gManage\Revenant.h" />
     <ClInclude Include="program\gManage\SceneManage.h" />
-    <ClInclude Include="program\gManage\Window.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />

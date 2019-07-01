@@ -15,7 +15,7 @@
 //include
 #include <dinput.h>
 #include "Library/Graphics/DirectGraphics.h"
-#include "Program/gManage/Window.h"
+#include "Library/Window/Window.h"
 #include "Program/Define.h"
 
 //lib

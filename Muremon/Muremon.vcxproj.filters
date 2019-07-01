@@ -4,7 +4,6 @@
     <ClCompile Include="program\gManage\GameManage.cpp" />
     <ClCompile Include="program\gManage\Revenant.cpp" />
     <ClCompile Include="program\gManage\SceneManage.cpp" />
-    <ClCompile Include="program\gManage\Window.cpp" />
     <ClCompile Include="program\Scene\Ending.cpp" />
     <ClCompile Include="program\Scene\GameClear.cpp" />
     <ClCompile Include="program\Scene\GameNormal.cpp" />
@@ -32,12 +31,12 @@
     <ClCompile Include="Library\Graphics\DirectGraphics.cpp" />
     <ClCompile Include="Library\Graphics\Texture.cpp" />
     <ClCompile Include="Library\Graphics\Vertex.cpp" />
+    <ClCompile Include="Library\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="program\gManage\GameManage.h" />
     <ClInclude Include="program\gManage\Revenant.h" />
     <ClInclude Include="program\gManage\SceneManage.h" />
-    <ClInclude Include="program\gManage\Window.h" />
     <ClInclude Include="program\Scene\Ending.h" />
     <ClInclude Include="program\Scene\GameClear.h" />
     <ClInclude Include="program\Scene\GameNormal.h" />
@@ -67,5 +66,6 @@
     <ClInclude Include="Library\Graphics\Vertex.h" />
     <ClInclude Include="Library\Graphics\DirectGraphics.h" />
     <ClInclude Include="Library\Graphics\Texture.h" />
+    <ClInclude Include="Library\Window\Window.h" />
   </ItemGroup>
 </Project>

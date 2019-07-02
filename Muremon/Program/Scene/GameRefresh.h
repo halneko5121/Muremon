@@ -45,7 +45,7 @@ private:
 	C_ActorNikuman*		mNiku;
 	C_ActorNoppo*		mNoppo;
 	C_ActorYoshi*		mYoshi;
-	C_Boss*				mBoss;
+	C_ActorBoss*				mBoss;
 
 private:
 	int					mAlpha;				// アルファ値

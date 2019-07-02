@@ -88,7 +88,7 @@ void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score
 	mNoppo->Init();
 	mYoshi->Init();
 
-	mBoss = new C_Boss(mTexture,mVertex,pDevice);
+	mBoss = new C_ActorBoss(mTexture,mVertex,pDevice);
 
 	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");

@@ -1,7 +1,7 @@
 #include "ActorBoss.h"
 #include "Library/Sound/DirectSound.h"
 
-C_Boss::C_Boss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
+C_ActorBoss::C_ActorBoss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
 	texture = m_texture;
 	vertex	= m_vertex;
@@ -70,11 +70,11 @@ C_Boss::C_Boss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 	effect_font_move = false;
 }
 
-C_Boss::~C_Boss(void)
+C_ActorBoss::~C_ActorBoss(void)
 {
 }
 
-void C_Boss::Init()
+void C_ActorBoss::Init()
 {
 	//ボス
 	boss_alpha_count=0;
@@ -140,7 +140,7 @@ void C_Boss::Init()
 	boss_fall_flag=false;
 }
 
-void C_Boss::BossControl(int play_mode)
+void C_ActorBoss::BossControl(int play_mode)
 {
 	//ボスの移動コントロール
 	if(boss_move_flag)
@@ -339,14 +339,14 @@ void C_Boss::BossControl(int play_mode)
 	}
 }
 
-void C_Boss::BossDraw()
+void C_ActorBoss::BossDraw()
 {
 	vertex->SetTextureData(texture->GetTextureData(T_CAHRA_BOSS),pDevice);
 	vertex->SetColor(boss_alpha,255,255,255);
 	vertex->DrawF(boss_move_x + damage_x,boss_move_y + damage_y,boss_rect_data);
 }
 
-void C_Boss::FallDraw()
+void C_ActorBoss::FallDraw()
 {
 	vertex->SetTextureData(texture->GetTextureData(T_GAME_EFFECT),pDevice);
 	vertex->SetColor(no_font_alpha,255,255,255);

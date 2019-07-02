@@ -69,7 +69,7 @@ private:
 	C_Vertex*			mVertex;
 	C_Control*			mKey;
 	C_Mission*			mMission;
-	C_Boss*				mBoss;
+	C_ActorBoss*				mBoss;
 
 	C_ActorNikuman*		mNiku;
 	C_ActorNoppo*		mNoppo;

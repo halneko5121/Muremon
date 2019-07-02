@@ -26,7 +26,7 @@
     <ClCompile Include="Program\Util\Control.cpp" />
     <ClCompile Include="program\gManage\GameManage.cpp" />
     <ClCompile Include="program\main.cpp" />
-    <ClCompile Include="program\Scene\SceneManage.cpp" />
+    <ClCompile Include="program\Scene\SceneBase.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
@@ -61,7 +61,7 @@
     <ClInclude Include="program\DefineGame.h" />
     <ClInclude Include="program\gManage\GameManage.h" />
     <ClInclude Include="program\main.h" />
-    <ClInclude Include="program\Scene\SceneManage.h" />
+    <ClInclude Include="program\Scene\SceneBase.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />

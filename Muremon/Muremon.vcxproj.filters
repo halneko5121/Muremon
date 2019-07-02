@@ -79,9 +79,6 @@
     <ClCompile Include="Program\gManage\GameManage.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Scene\SceneManage.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Library\Graphics\Texture.cpp">
       <Filter>Library\Graphics</Filter>
     </ClCompile>
@@ -91,6 +88,9 @@
     <ClCompile Include="Program\main.cpp" />
     <ClCompile Include="Program\Actor\ActorBoss.cpp">
       <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\SceneBase.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +173,6 @@
     <ClInclude Include="Program\gManage\GameManage.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Scene\SceneManage.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Library\Graphics\Texture.h">
       <Filter>Library\Graphics</Filter>
     </ClInclude>
@@ -186,6 +183,9 @@
     <ClInclude Include="program\DefineGame.h" />
     <ClInclude Include="Program\Actor\ActorBoss.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneBase.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

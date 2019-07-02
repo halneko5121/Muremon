@@ -28,9 +28,6 @@
     <ClCompile Include="Program\Actor\ActorYoshi.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Actor\Boss.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Scene\Ending.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
       <Filter>Library\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Program\main.cpp" />
+    <ClCompile Include="Program\Actor\ActorBoss.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -120,9 +120,6 @@
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="Program\Actor\ActorYoshi.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Actor\Boss.h">
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="Program\Scene\Ending.h">
@@ -187,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="Program\main.h" />
     <ClInclude Include="program\DefineGame.h" />
+    <ClInclude Include="Program\Actor\ActorBoss.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

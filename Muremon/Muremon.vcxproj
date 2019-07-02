@@ -18,7 +18,7 @@
     <ClCompile Include="Library\Graphics\Texture.cpp" />
     <ClCompile Include="Library\Graphics\Vertex.cpp" />
     <ClCompile Include="Library\Window\Window.cpp" />
-    <ClCompile Include="Program\Actor\Boss.cpp" />
+    <ClCompile Include="Program\Actor\ActorBoss.cpp" />
     <ClCompile Include="Program\Actor\ActorBase.cpp" />
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
@@ -51,7 +51,7 @@
     <ClInclude Include="Library\Graphics\Texture.h" />
     <ClInclude Include="Library\Graphics\Vertex.h" />
     <ClInclude Include="Library\Window\Window.h" />
-    <ClInclude Include="Program\Actor\Boss.h" />
+    <ClInclude Include="Program\Actor\ActorBoss.h" />
     <ClInclude Include="Program\Actor\ActorBase.h" />
     <ClInclude Include="Program\Actor\ActorNikuman.h" />
     <ClInclude Include="Program\Actor\ActorNoppo.h" />

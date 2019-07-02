@@ -12,7 +12,7 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/Scene/Mission.h"
-#include "Program/Actor/Boss.h"
+#include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"

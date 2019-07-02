@@ -39,12 +39,10 @@ public:
 	C_GameNormal(void);
 	~C_GameNormal(void);
 
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
-
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
+	void InitScene() override;
+	bool ControlScene() override;
+	void DrawScene() override;
+	int EndScene() override;
 
 	void DrawNum();		//連打数
 	void DrawNumS();	//スコア
@@ -65,11 +63,9 @@ public:
 	void HitEffectDraw();
 
 private:
-	C_Texture*			mTexture;
-	C_Vertex*			mVertex;
 	C_Control*			mKey;
 	C_Mission*			mMission;
-	C_ActorBoss*				mBoss;
+	C_ActorBoss*		mBoss;
 
 	C_ActorNikuman*		mNiku;
 	C_ActorNoppo*		mNoppo;
@@ -116,6 +112,4 @@ private:
 	// NEGATIVEで使用
 	int mNegativeState;
 	int mNegativeDamege;
-	
-	bool mIsSceneChange;	//シーンが変わる時を知らせる
 };

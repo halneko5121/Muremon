@@ -24,17 +24,12 @@ enum RECT_DATA_ENDING
 
 class C_Ending:public C_SceneBase
 {
-private:
-	C_Texture	*texture;
-	C_Vertex	*vertex;
-
-	bool scene_change;	//ƒV[ƒ“‚ª•Ï‚í‚é‚ğ’m‚ç‚¹‚é
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
+	void InitScene() override;
+	bool ControlScene() override;
+	void DrawScene() override;
+	int EndScene() override;
+
 	C_Ending(void);
 	~C_Ending(void);
 };

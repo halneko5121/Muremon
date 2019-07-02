@@ -9,8 +9,6 @@
 
 C_Title::C_Title(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
 	key		= new C_Control();
 
 	cursor_posi.x = CURSOR_X;
@@ -35,7 +33,7 @@ C_Title::C_Title(void)
 
 	alpha_count = 0;
 
-	scene_change = true;
+	mIsSceneChange = true;
 
 	flag_scene_change = 0;
 
@@ -56,22 +54,13 @@ C_Title::~C_Title(void)
 {
 }
 
-void C_Title::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
+void C_Title::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-
-	texture->LoadTextureData("Data\\TextureData\\title.txt",apDev);		//絵の読み込み
-	vertex->LoadRect("Data\\RectData\\title.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\title.txt", mDevice);		//絵の読み込み
+	mVertex->LoadRect("Data\\RectData\\title.txt");
 }
 
-bool C_Title::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_Title::ControlScene()
+bool C_Title::ControlScene()
 {
 	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 
@@ -83,12 +72,12 @@ void C_Title::ControlScene()
 
 	if(alpha == 0){
 		if(flag_fade == TITLE_FADE_OUT0){
-			scene_change = false;
-			flag_scene_change = LOGO;
+			mIsSceneChange = false;
+			flag_scene_change = cSceneName_Logo;
 		}
 		else if(flag_fade == TITLE_FADE_OUT1){
-			scene_change = false;
-			flag_scene_change = RANKING;
+			mIsSceneChange = false;
+			flag_scene_change = cSceneName_Ranking;
 		}
 		else if(flag_fade == TITLE_FADE_OUT2){
 			PostQuitMessage(0);
@@ -106,49 +95,51 @@ void C_Title::ControlScene()
 	if(flag_fade == TITLE_FADE_OUT0 && time_count < BACK_SCENE_TIME){
 		flag_fade = TITLE_FADE_IN;
 	}
+
+	return mIsSceneChange;
 }
 
 void C_Title::DrawScene()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_TITLE_BG),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_TITLE_BG), mDevice);
 
 	if(alpha - 55 < 0){
-		vertex->SetColor(0,255,255,255);
+		mVertex->SetColor(0,255,255,255);
 	}
 	else{
-		vertex->SetColor(alpha - 55,255,255,255);
+		mVertex->SetColor(alpha - 55,255,255,255);
 	}
 
-	vertex->DrawF(TITLE_BG_X,TITLE_BG_Y,R_TITLE_BG);
+	mVertex->DrawF(TITLE_BG_X,TITLE_BG_Y,R_TITLE_BG);
 
-	vertex->SetTextureData(texture->GetTextureData(T_FONT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_FONT), mDevice);
 
-	vertex->SetColor(alpha,255,255,255);
-	vertex->DrawF(title_posi.x,title_posi.y,R_TITLE);
+	mVertex->SetColor(alpha,255,255,255);
+	mVertex->DrawF(title_posi.x,title_posi.y,R_TITLE);
 	
 	if(draw_scene_change == DRAW_Z_PUSH){
-		vertex->SetColor(alpha - alpha_z,255,255,255);
-		vertex->DrawF(ZPUSH_X,ZPUSH_Y,R_ZPUSH);
+		mVertex->SetColor(alpha - alpha_z,255,255,255);
+		mVertex->DrawF(ZPUSH_X,ZPUSH_Y,R_ZPUSH);
 	}
 	else if(draw_scene_change == DRAW_MENU){
-		vertex->SetColor(alpha,255,255,255);
-		vertex->DrawF(START_X,START_Y,R_START);
-		vertex->DrawF(RANKING_X,RANKING_Y,R_RANKING);
-		vertex->DrawF(END_X,END_Y,R_END);
+		mVertex->SetColor(alpha,255,255,255);
+		mVertex->DrawF(START_X,START_Y,R_START);
+		mVertex->DrawF(RANKING_X,RANKING_Y,R_RANKING);
+		mVertex->DrawF(END_X,END_Y,R_END);
 	}
 	else{
 		//モード選択(すっきり・のーまる・操作説明)
-		vertex->SetColor(alpha,255,255,255);
-		vertex->DrawF(START_X,START_Y,R_REFRESH);
-		vertex->DrawF(RANKING_X,RANKING_Y,R_NORMAL);
-		vertex->DrawF(END_X,END_Y,R_TUTORIAL_T);
+		mVertex->SetColor(alpha,255,255,255);
+		mVertex->DrawF(START_X,START_Y,R_REFRESH);
+		mVertex->DrawF(RANKING_X,RANKING_Y,R_NORMAL);
+		mVertex->DrawF(END_X,END_Y,R_TUTORIAL_T);
 	}
 	
 	//カーソル
-	vertex->SetColor(alpha,255,255,255);
+	mVertex->SetColor(alpha,255,255,255);
 	if(draw_scene_change != DRAW_Z_PUSH){
-		vertex->DrawF(cursor_posi.x,cursor_posi.y,R_CURSOR1+anime_cursor%2);
-		vertex->DrawF(cursor_posi.x + CURSOR2_X,cursor_posi.y,R_CURSOR1+anime_cursor%2);
+		mVertex->DrawF(cursor_posi.x,cursor_posi.y,R_CURSOR1+anime_cursor%2);
+		mVertex->DrawF(cursor_posi.x + CURSOR2_X,cursor_posi.y,R_CURSOR1+anime_cursor%2);
 	}
 }
 
@@ -158,8 +149,8 @@ int C_Title::EndScene()
 
 	GetDirectSound()->SoundPouse(S_BGM_TITLE);
 
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 
 	return 0;
 }
@@ -271,16 +262,16 @@ void C_Title::KeyControl()
 		else{										//ゲームメニューが表示されている時にＺキーが押されたら
 			if(flag_select == G_CLEARLY){
 				//すっきりモードを開始させるようにフラグを変える
-				flag_scene_change = GAME_REFRESH;
+				flag_scene_change = cSceneName_GameRefresh;
 			}
 			else if(flag_select == G_NORMAL){
 				//のーまるモードを開始させるようにフラグを変える
-				flag_scene_change = GAME_NORMAL;
+				flag_scene_change = cSceneName_GameNormal;
 			}
 			else{
-				flag_scene_change = TUTORIAL;
+				flag_scene_change = cSceneName_Tutorial;
 			}
-			scene_change = false;
+			mIsSceneChange = false;
 		}
 		time_count = 0;
 	}

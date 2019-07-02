@@ -9,8 +9,6 @@
 
 C_Tutorial::C_Tutorial(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
 	key		= new C_Control();
 
 	keep_key_state = key_state = 0;
@@ -25,57 +23,50 @@ C_Tutorial::C_Tutorial(void)
 	alpha_count=0;
 	fade_flag=TR_FADE_IN;
 
-	scene_change = true;
+	mIsSceneChange = true;
 }
 
 C_Tutorial::~C_Tutorial(void)
 {
 }
 
-void C_Tutorial::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
+void C_Tutorial::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-
-	texture->LoadTextureData("Data\\TextureData\\Tutorial.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("Data\\RectData\\Tutorial.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\Tutorial.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	mVertex->LoadRect("Data\\RectData\\Tutorial.txt");
 }
 
-bool C_Tutorial::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_Tutorial::ControlScene()
+bool C_Tutorial::ControlScene()
 {
 	GetDirectSound()->SoundPlayOnce(S_BGM_TITLE);
 
 	KeyControl();
 
 	DrawPosi();
+
+	return mIsSceneChange;
 }
 
 void C_Tutorial::DrawScene()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_TUTORIAL1),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_TUTORIAL1), mDevice);
 
-	//vertex->SetColor(alpha,255,255,255);
+	//mVertex->SetColor(alpha,255,255,255);
 
-	vertex->DrawF(tutorial[TR_REFRESH].x,tutorial[TR_REFRESH].y,R_TUTORIAL1);
+	mVertex->DrawF(tutorial[TR_REFRESH].x,tutorial[TR_REFRESH].y,R_TUTORIAL1);
 
-	vertex->SetTextureData(texture->GetTextureData(T_TUTORIAL2),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_TUTORIAL2), mDevice);
 
-	//vertex->SetColor(alpha,255,255,255);
+	//mVertex->SetColor(alpha,255,255,255);
 
-	vertex->DrawF(tutorial[TR_NORMAL].x,tutorial[TR_NORMAL].y,R_TUTORIAL2);
+	mVertex->DrawF(tutorial[TR_NORMAL].x,tutorial[TR_NORMAL].y,R_TUTORIAL2);
 }
 
 int C_Tutorial::EndScene()
 {
-	ChangeScene(TITLE);
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	ChangeScene(cSceneName_Title);
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 
 	return 0;
 }
@@ -130,7 +121,7 @@ void C_Tutorial::KeyControl()
 	key_state = key->KeyCheck();
 
 	if(key_state == KEY_Z){		//Z‚ª‰Ÿ‚³‚ê‚½‚ç
-		scene_change = false;
+		mIsSceneChange = false;
 	}
 	if(key_state == KEY_LEFT){	//©‚ª‰Ÿ‚³‚ê‚½‚ç
 		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
@@ -188,7 +179,7 @@ void C_Tutorial::DrawPosi()
 			tutorial[TR_NORMAL].x -= 10.f;
 		}
 		else{
-			scene_change = false;
+			mIsSceneChange = false;
 		}
 	}
 }

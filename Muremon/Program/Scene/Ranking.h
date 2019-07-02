@@ -13,13 +13,13 @@
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/Control.h"
 
-#define POSITION_Y	(150)	//名前のYの中心位置
-#define PLACE_POSITION_X	(50)	//順位のフォントXの中心位置
+#define POSITION_Y	(150)			// 名前のYの中心位置
+#define PLACE_POSITION_X	(50)	// 順位のフォントXの中心位置
 #define DOT_X	(100)
-#define NAME_POSITION_X	(150)	//名前のXの中心位置
-#define SCORE_POSITION_X	(350)	//スコアのXの中心位置
-#define DISLOCATE_X	(50)	//Xの位置をずらす(但し、同じ値でずらさないと意味がない)
-#define DISLOCATE_Y	(100)	//Yの位置をずらす(但し、同じ値でずらさないと意味がない)
+#define NAME_POSITION_X	(150)		// 名前のXの中心位置
+#define SCORE_POSITION_X	(350)	// スコアのXの中心位置
+#define DISLOCATE_X	(50)			// Xの位置をずらす(但し、同じ値でずらさないと意味がない)
+#define DISLOCATE_Y	(100)			// Yの位置をずらす(但し、同じ値でずらさないと意味がない)
 
 #define FONT_ALPHA_DOWN	(10)
 
@@ -95,11 +95,7 @@ enum RECT_DATA_RANKING
 class C_Ranking:public C_SceneBase
 {
 private:
-	C_Texture	*texture;
-	C_Vertex	*vertex;
 	C_Control	*key;
-
-	bool scene_change;	//シーンが変わる時を知らせる
 
 private:
 	int time_count;	//描画するタイムカウント
@@ -155,11 +151,11 @@ private:
 	bool ranking_flag;
 
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
+	void InitScene() override;
+	void InitScene(int score);
+	bool ControlScene() override;
+	void DrawScene() override;
+	int EndScene() override;
 
 	void FadeControl();		
 

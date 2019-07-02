@@ -8,32 +8,22 @@
 
 C_GameClear::C_GameClear(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
-
-	scene_change = true;
+	mIsSceneChange = true;
 }
 
 C_GameClear::~C_GameClear(void)
 {
 }
 
-void C_GameClear::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont *apFont, int score)
+void C_GameClear::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-	texture->LoadTextureData("Data\\TextureData\\gameclear.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("Data\\RectData\\gameclear.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\gameclear.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	mVertex->LoadRect("Data\\RectData\\gameclear.txt");
 }
 
-bool C_GameClear::RunScene()
+bool C_GameClear::ControlScene()
 {
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_GameClear::ControlScene()
-{
+	return mIsSceneChange;
 }
 
 void C_GameClear::DrawScene()
@@ -42,8 +32,8 @@ void C_GameClear::DrawScene()
 
 int C_GameClear::EndScene()
 {
-	ChangeScene(RANKING);
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	ChangeScene(cSceneName_Ranking);
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 	return 0;
 }

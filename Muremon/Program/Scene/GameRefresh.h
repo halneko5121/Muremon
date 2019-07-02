@@ -20,12 +20,10 @@ public:
 	C_GameRefresh(void);
 	~C_GameRefresh(void);
 
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
-
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
+	void InitScene() override;
+	bool ControlScene() override;
+	void DrawScene() override;
+	int EndScene() override;
 
 	void DrawNum();
 	void DrawGageHp();
@@ -38,14 +36,12 @@ public:
 	void HitEffectDraw();
 
 private:
-	C_Texture*			mTexture;
-	C_Vertex*			mVertex;
 	C_Control*			mKey;
 
 	C_ActorNikuman*		mNiku;
 	C_ActorNoppo*		mNoppo;
 	C_ActorYoshi*		mYoshi;
-	C_ActorBoss*				mBoss;
+	C_ActorBoss*		mBoss;
 
 private:
 	int					mAlpha;				// アルファ値
@@ -67,5 +63,4 @@ private:
 	int					mHitEffectAlpha;
 	int					mHitEffectTime;
 	float				mCharaAtkY;
-	bool				mSceneChange;		// シーンが変わる時を知らせる
 };

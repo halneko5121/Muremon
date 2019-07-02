@@ -1,82 +1,73 @@
-//---------------------------------------------
-//
-//      シーンの管理を行う
-//      作成開始日:3月17日
-//			更新日:3月17日
-//			作成者:平野
-//
-//---------------------------------------------
+/******************************************************************
+ *	@file	SceneManage.cpp
+ *	@brief	シーンの管理を行う
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
 #include "SceneBase.h"
-#include "Library/Sound/DirectSound.h"
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：コンストラクタ
-//
-//////////////////////////////////////////////////////////
+#include "Library/Graphics/Vertex.h"
+#include "Library/Graphics/Texture.h"
+
+/**
+ * @brief	コンストラクタ
+ */
 C_SceneBase::C_SceneBase()
 {
-    sceneID = LOGO;    //初期化
+    mSceneID	= cSceneName_Logo;    // 初期化
+	mVertex		= new C_Vertex();
+	mTexture	= new C_Texture();
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：デストラクタ(仮想関数、何もしない)
-//
-//////////////////////////////////////////////////////////
+/**
+ * @brief	デストラクタ
+ */
 C_SceneBase::~C_SceneBase()
 {
-
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：シーンの初期化処理(メンバ初期化)
-//      引数　：LPDIRECT3DDEVICE9   pDev    デバイス
-//              DInput              *pInput インプットクラスへのポインタ
-//              DFont               *pFont  フォントクラスへのポインタ
-//　　　戻り値：なし
-//
-//////////////////////////////////////////////////////////
-
-void C_SceneBase::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
+/**
+ * @brief	実行処理
+ */
+bool
+C_SceneBase::RunScene()
 {
-	pDevice = apDev;	//デバイスセット
-    pFont   = apFont;   //文字表示可能にする
+	bool is_scene_change = ControlScene();
+	DrawScene();
+	return is_scene_change;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：シーンの変更を行う
-//      引数　：DWORD   nextID  次のシーンの番号
-//　　　戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_SceneBase::ChangeScene(DWORD nextID)
+/**
+ * @brief	設定処理
+ * @param	apDev		デバイス
+ */
+void
+C_SceneBase::SetScene(LPDIRECT3DDEVICE9 apDev)
 {
-    sceneID = nextID;   //次のシーン番号を渡す
+	mDevice		= apDev;		// デバイスセット
+
+	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
+	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
+	mMouseData.mIsDownRButton = mMouseData.mIsPushRButton = mMouseData.mIsReleaseRButton = false;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：当たり判定を行う
-//      引数　：D3DXVECTOR2 centerPos   当たりをとる物体の中心座標
-//              D3DXVECTOR2 size        当たりをとる物体のサイズ
-//              DInput      *pInput     インプットクラスへのポインタ
-//　　　戻り値：なし
-//
-//////////////////////////////////////////////////////////
-bool C_SceneBase::HitCheck(D3DXVECTOR2 centerPos , D3DXVECTOR2 size)
+/**
+ * @brief	シーンの変更を行う
+ * @param	nextID		次のシーンの番号
+ */
+void
+C_SceneBase::ChangeScene(DWORD next_id)
 {
-    //if(pInput->GetMousePosition().x >= centerPos.x - size.x / 2.0f &&
-    //    pInput->GetMousePosition().x <= centerPos.x + size.x / 2.0f)
-    //{
-    //    if(pInput->GetMousePosition().y >= centerPos.y - size.y / 2.0f &&
-    //        pInput->GetMousePosition().y <= centerPos.y + size.y / 2.0f)
-    //    {
-    //        return true;    //範囲内に入っていれば当たっている
-    //    }
-    //}
-    return false;   //普段は当たっていないのでfalse
+    mSceneID = next_id;
+}
+
+/**
+ * @brief	シーン番号の取得
+ */
+DWORD
+C_SceneBase::GetSceneID()
+{
+	return mSceneID;
 }

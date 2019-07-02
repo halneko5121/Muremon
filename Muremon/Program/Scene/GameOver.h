@@ -32,23 +32,17 @@ enum GAMEOVER_FADE_MODE
 class C_GameOver:public C_SceneBase
 {
 private:
-	C_Texture	*texture;
-	C_Vertex	*vertex;
-
 	int alpha;	//アルファ値
 
 	int fade_flag;
 
 	int alpha_count;
 
-	bool scene_change;	//シーンが変わる時を知らせる
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
-
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
+	void InitScene() override;
+	bool ControlScene() override;
+	void DrawScene() override;
+	int EndScene() override;
 
 	void FadeControl();		//フェードコントロール		
 

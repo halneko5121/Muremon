@@ -47,8 +47,6 @@ enum TUTORIAL_MODE
 class C_Tutorial:public C_SceneBase
 {
 private:
-	C_Texture	*texture;
-	C_Vertex	*vertex;
 	C_Control	*key;
 
 	int key_state;	//キーの状態
@@ -65,15 +63,11 @@ private:
 
 	int alpha_count;	//アルファ値のカウント
 
-	bool scene_change;	//シーンが変わる時を知らせる
-
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
-
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
+	void InitScene() override;
+	bool ControlScene() override;
+	void DrawScene() override;
+	int EndScene() override;
 
 	void KeyControl();		//キー操作
 

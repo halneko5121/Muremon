@@ -8,49 +8,39 @@
 
 C_Logo::C_Logo(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
-
 	time_count = 0;
 	alpha = 0;
-	scene_change = true;
+	mIsSceneChange = true;
 }
 
 C_Logo::~C_Logo(void)
 {
 }
 
-void C_Logo::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
+void C_Logo::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-	texture->LoadTextureData("Data\\TextureData\\logo.txt", apDev);		//絵の読み込み
-	vertex->LoadRect("Data\\RectData\\logo.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\logo.txt", mDevice);		//絵の読み込み
+	mVertex->LoadRect("Data\\RectData\\logo.txt");
 }
 
-bool C_Logo::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_Logo::ControlScene()
+bool C_Logo::ControlScene()
 {
 	FadeControl();
+	return mIsSceneChange;
 }
 
 void C_Logo::DrawScene()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_LOGO),pDevice);
-	vertex->SetColor(alpha,255,255,255);
-	vertex->DrawF(400.f,300.f,R_LOGO);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_LOGO), mDevice);
+	mVertex->SetColor(alpha,255,255,255);
+	mVertex->DrawF(400.f,300.f,R_LOGO);
 }
 
 int C_Logo::EndScene()
 {
-	ChangeScene(TITLE);
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	ChangeScene(cSceneName_Title);
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 
 	return 0;
 }
@@ -78,7 +68,7 @@ void C_Logo::FadeControl()
 		{
 			alpha = 0;
 		}
-		if(alpha == 0) scene_change = false;/*scene_flag = TITLE;*///タイトル画面へ
+		if(alpha == 0) mIsSceneChange = false;/*scene_flag = TITLE;*///タイトル画面へ
 	}
 }
 

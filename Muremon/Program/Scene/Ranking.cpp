@@ -13,10 +13,7 @@ struct RANK newdata;				//–¼‘O‚ÆƒXƒRƒA‚Ì‰Šú‰»‚Ì‚½‚ß
 
 C_Ranking::C_Ranking(void)
 {
-	vertex = new C_Vertex();
-	texture= new C_Texture();
-
-	scene_change = true;
+	mIsSceneChange = true;
 
 	fade_flag=RANK_FADE_IN;
 
@@ -68,31 +65,28 @@ C_Ranking::~C_Ranking(void)
 {
 }
 
-void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
+void C_Ranking::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
+}
+
+void C_Ranking::InitScene(int score)
+{
 	add_score = score;
 
-	texture->LoadTextureData("Data\\TextureData\\ranking.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("Data\\RectData\\ranking.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\ranking.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	mVertex->LoadRect("Data\\RectData\\ranking.txt");
 	RankLoad();
 	RankCheck();
 }
 
-bool C_Ranking::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_Ranking::ControlScene()
+bool C_Ranking::ControlScene()
 {
 	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 
 	FadeControl();
 	RankControl(rank);
 	KeyControl();
+	return mIsSceneChange;
 }
 
 void C_Ranking::RankControl(int rank)
@@ -193,28 +187,28 @@ void C_Ranking::DrawScene()
 
 int C_Ranking::EndScene()
 {
-	ChangeScene(TITLE);
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	ChangeScene(cSceneName_Title);
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 
 	return 0;
 }
 
 void C_Ranking::RankBackGround()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_RANKING_BG),pDevice);
-	vertex->SetColor(alpha,255,255,255);
-	vertex->DrawF(400.f,300.f,R_RANKING_BG);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_RANKING_BG), mDevice);
+	mVertex->SetColor(alpha,255,255,255);
+	mVertex->DrawF(400.f,300.f,R_RANKING_BG);
 }
 
 void C_Ranking::RankPlaceDraw()
 {
 	for(int i=0;i<5;i++)
 	{
-			vertex->SetTextureData(texture->GetTextureData(T_RANKING_FONT),pDevice);
-			vertex->SetColor(alpha,255,255,255);
-			vertex->DrawF((float)PLACE_POSITION_X,(float)POSITION_Y + i * DISLOCATE_Y,R_FONT_1 + i);
-			vertex->DrawF((float)DOT_X,(float)POSITION_Y+i * DISLOCATE_Y,R_FONT_DOT);
+			mVertex->SetTextureData(mTexture->GetTextureData(T_RANKING_FONT), mDevice);
+			mVertex->SetColor(alpha,255,255,255);
+			mVertex->DrawF((float)PLACE_POSITION_X,(float)POSITION_Y + i * DISLOCATE_Y,R_FONT_1 + i);
+			mVertex->DrawF((float)DOT_X,(float)POSITION_Y+i * DISLOCATE_Y,R_FONT_DOT);
 	}
 }
 
@@ -224,10 +218,10 @@ void C_Ranking::RankNameDraw()
 	{
 		for(int i=0;i<3;i++)
 		{
-			vertex->SetTextureData(texture->GetTextureData(T_RANKING_FONT),pDevice);
-			if(fade_flag==RANK_USUALLY)	vertex->SetColor(name_alpha[j][i],255,255,255);
-			else vertex->SetColor(alpha,255,255,255);
-			vertex->DrawF((float)NAME_POSITION_X+i*DISLOCATE_X,(float)POSITION_Y+j*DISLOCATE_Y,R_FONT_A + data[j].name[i]);
+			mVertex->SetTextureData(mTexture->GetTextureData(T_RANKING_FONT), mDevice);
+			if(fade_flag==RANK_USUALLY)	mVertex->SetColor(name_alpha[j][i],255,255,255);
+			else mVertex->SetColor(alpha,255,255,255);
+			mVertex->DrawF((float)NAME_POSITION_X+i*DISLOCATE_X,(float)POSITION_Y+j*DISLOCATE_Y,R_FONT_A + data[j].name[i]);
 		}
 	}
 }
@@ -248,9 +242,9 @@ void C_Ranking::RankScoreDraw()
 		}
 		for(int j = figure ; j > 0 ; j--)
 		{
-			vertex->SetTextureData(texture->GetTextureData(T_RANKING_FONT),pDevice);
-			vertex->SetColor(alpha,255,255,255);
-			vertex->DrawF((float)SCORE_POSITION_X+(9-j)*DISLOCATE_X,(float)POSITION_Y+i*DISLOCATE_Y,R_FONT_0 + num[9-j]);		
+			mVertex->SetTextureData(mTexture->GetTextureData(T_RANKING_FONT), mDevice);
+			mVertex->SetColor(alpha,255,255,255);
+			mVertex->DrawF((float)SCORE_POSITION_X+(9-j)*DISLOCATE_X,(float)POSITION_Y+i*DISLOCATE_Y,R_FONT_0 + num[9-j]);
 		}
 	}
 }
@@ -303,7 +297,7 @@ void C_Ranking::FadeControl()
 			break;
 		case RANK_FADE_OUT:
 			FadeOut();
-			if(alpha==0) scene_change=false;
+			if(alpha==0) mIsSceneChange = false;
 			break;
 	}
 }
@@ -388,7 +382,7 @@ void C_Ranking::RankInit()
 
 void C_Ranking::ZKeyDraw()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_RANKING_FONT),pDevice);
-	vertex->SetColor(z_alpha,255,255,255);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_RANKING_FONT), mDevice);
+	mVertex->SetColor(z_alpha,255,255,255);
 	//vertex->DrawF((float)Z_KEY_POSITION_X,(float)Z_KEY_POSITION_Y,R_Z_KEY);		
 }

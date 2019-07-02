@@ -97,8 +97,6 @@ enum TITLE_FADE_MODE
 class C_Title:public C_SceneBase
 {
 private:
-	C_Texture	*texture;
-	C_Vertex	*vertex;
 	C_Control	*key;
 
 	D3DXVECTOR2 cursor_posi;
@@ -122,8 +120,6 @@ private:
 
 	int alpha_count;
 
-	bool scene_change;		//シーンが変わる時を知らせる
-
 	int flag_scene_change;	//どのシーンに変わるかを判断
 
 	unsigned int anime_cursor;	//カーソルアニメーション
@@ -136,12 +132,10 @@ private:
 
 	int cnt_move;
 public:
-	void InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score) override;
-
-	bool RunScene();
-	void ControlScene();
-	void DrawScene();
-	int EndScene();
+	void InitScene() override;
+	bool ControlScene() override;
+	void DrawScene() override;
+	int EndScene() override;
 
 	void PosiDrawControl();
 

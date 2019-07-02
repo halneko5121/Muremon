@@ -1,106 +1,129 @@
-//---------------------------------------------
-//
-//      ゲーム全体の管理を行う
-//			作成者:平野
-//
-//---------------------------------------------
+ /******************************************************************
+  *	@file	GameManage.cpp
+  *	@brief	ゲーム全体の管理を行う
+  *
+  *	製作者：三上
+  *	管理者：三上
+  ******************************************************************/
 
 #include "GameManage.h"
+#include "Library/Font/DirectFont.h"
+#include "Library/Input/DirectInput.h"
+#include "Library/Graphics/Vertex.h"
 #include "Library/Sound/DirectSound.h"
+// 各シーンのinclude
+#include "Program/Scene/Logo.h"
+#include "Program/Scene/Title.h"
+#include "Program/Scene/Tutorial.h"
+#include "Program/Scene/GameRefresh.h"
+#include "Program/Scene/GameNormal.h"
+#include "Program/Scene/Ranking.h"
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：ゲームで使うメンバの初期化
-//      引数  ：なし
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_GameMain::InitGameMain(void)
+ /**
+  * @brief	ゲームで使うメンバの初期化
+  */
+void
+C_GameMain::InitGameMain(void)
 {
-    // 新しく生成
-	mWindow		= new C_Window;
-	mGraphics	= new C_DGraphics;
-    mFont		= new C_DFont;
-	mScene		= new C_Logo();
+	mWindow			= new C_Window;
+
+	// 各ライブラリ
+	mGraphics		= C_DGraphics::Create();
+	C_DInputKey::Create();
+	C_DInputMouse::Create();
+	C_DFont::Create();
 	C_DSound::Create();
+
+	// 最初のシーンを
+	mScene = new C_Logo();
+	mScore = 0;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：メイン関数
-//      引数  ：HINSTANCE   hInstance   インスタンスハンドル
-//              HINSTANCE   hPrevInst   使用していない
-//              LPSTR       lpCmdLine   使用していない
-//              int         nShowCmd    使用していない
-//      戻り値：int         メッセージループを返す
-//
-//////////////////////////////////////////////////////////
-int WINAPI C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
+/**
+ * @brief メイン関数
+ * @param	hInstance   インスタンスハンドル(プログラムを動かすためのもの)
+ * @param	hPrevInst   ↑の前の状態を保存しておく(1つ目に情報が入ってなかった時用)
+ * @param	lpCmdLine	Windowsからの命令が格納される(ポインタの先頭アドレス)
+ * @param	nShowCmd    その命令がいくつあるのか
+ * @return  int         メッセージループを返す
+ */
+int WINAPI
+C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
 {
-    //生成
-    InitGameMain();
-	//ウィンドウ初期化関数
-	mWindow->InitWindow(hInstance);
+	InitGameMain();
+	mWindow->InitWindow(hInstance);	// ウィンドウ初期化関数
 
-	//DirectGraphics初期化
-	if(FAILED(mGraphics->InitDGraphics(mWindow,mWindow->GetHwnd(),800,600)))
+	// 各ライブラリの初期化
+	// DirectInput初期化
+	if(FAILED(GetInputKey()->Init(mWindow->GetHwnd())))
 	{
-		MessageBox(NULL,TEXT("DirectGraphicsの初期化に失敗"),NULL,MB_OK);
-		return 0;
-	}
-    //DirectFont初期化
-	if(FAILED(mFont->InitDFont(mGraphics->GetDevice())))
-	{
-		MessageBox(NULL,TEXT("DirectFontの初期化に失敗"),NULL,MB_OK);
+		MessageBox(NULL, TEXT("DirectInputの初期化に失敗"), NULL, MB_OK);
 		return 0;
 	}
 
-	//DirectSound初期化
+	if(FAILED(GetInputMouse()->Init(mWindow->GetHwnd())))
+	{
+		MessageBox(NULL, TEXT("DirectInputの初期化に失敗"), NULL, MB_OK);
+		return 0;
+	}
+
+	// DirectGraphics初期化
+	if(FAILED(mGraphics->InitDGraphics(mWindow,mWindow->GetHwnd(),GAMESIZE_WIDE,GAMESIZE_HEIGHT)))
+	{
+		MessageBox(NULL, TEXT("DirectGraphicsの初期化に失敗"), NULL, MB_OK);
+		return 0;
+	}
+
+	// DirectFont初期化
+	if(FAILED(GetDirectFont()->InitDFont(mGraphics->GetDevice())))
+	{
+		MessageBox(NULL, TEXT("DirectFontの初期化に失敗"), NULL, MB_OK);
+		return 0;
+	}
+
+	// DirectSound初期化
 	if(FAILED(GetDirectSound()->InitDSound(mWindow->GetHwnd())))
 	{
-		MessageBox(NULL,TEXT("DirectSoundの初期化に失敗"),NULL,MB_OK);
+		MessageBox(NULL, TEXT("DirectSoundの初期化に失敗"), NULL, MB_OK);
 		return 0;
 	}
-
-	srand((unsigned int)time(NULL));
-
 
 	return MsgLoop();
 }
 	
-//////////////////////////////////////////////////////////
-//
-//      説明　：ゲーム内ループ関数
-//      引数  ：なし
-//      戻り値：int     メッセージ
-//
-//////////////////////////////////////////////////////////
-int C_GameMain::MsgLoop(void)
+/**
+ * @brief	ゲーム内ループ関数
+ * @return  メッセージパラメータ
+ */
+int
+C_GameMain::MsgLoop(void)
 {
+	// 初期化
 	MSG msg;
-
 	int cnt = 0;
 
 	mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);
 
-	//初期化
+	// 初期化
 	ZeroMemory(&msg , sizeof(msg));
 
-	mGraphics->SetRender();	//描画設定
-
-    mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
+	// 描画設定
+	mGraphics->SetRender();
 
 	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
 
+	mScene->SetScene(mGraphics->GetDevice());
+	mScene->InitScene();				//最初のシーンの初期化
+
 	srand((unsigned int)time(NULL));
 
+	// ループ
 	while(msg.message != WM_QUIT)
 	{
 		if(PeekMessage(&msg , NULL , 0 , 0 , PM_REMOVE))
 		{
-			//仮想キーメッセージを文字メッセージへ変更
+			// 仮想キーメッセージを文字メッセージへ変更
 			TranslateMessage(&msg);
-
 			//ウィンドウプロシージャへメッセージを送信
 			DispatchMessage(&msg);
 		}
@@ -108,17 +131,19 @@ int C_GameMain::MsgLoop(void)
 		{
 			static DWORD oldTime = timeGetTime();
 			DWORD nowTime = timeGetTime();
+
 			if(nowTime - oldTime >= 1000/60)
 			{
 				mGraphics->RenderStart(mBackground);
 				if(!mScene->RunScene())
 				{
 					mScore = mScene->EndScene();								//シーン終了
-					if(mScene->GetSceneID() == TITLE) mBackground = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);	//ロゴが終わったらクリア時の色を白にする
-					if(mScene->GetSceneID() == PROLOGUE) mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);	//タイトルが終わったらクリア時の色を黒にする
-					ControlGame();										//シーン切り替え
-				}
+					if(mScene->GetSceneID() == cSceneName_Title) mBackground = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);	//ロゴが終わったらクリア時の色を白にする
+					if(mScene->GetSceneID() == cSceneName_Prologue) mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);	//タイトルが終わったらクリア時の色を黒にする
 
+					//シーンが変わった時の処理(シーン切り替え)↓
+					ControlSequence();				
+				}
 				mGraphics->RenderEnd();
 
 				oldTime = nowTime;
@@ -128,78 +153,81 @@ int C_GameMain::MsgLoop(void)
 			static DWORD oldTime2 = timeGetTime();
 			DWORD nowTime2 = timeGetTime();
 			if(nowTime2 - oldTime2 >= 1000){
-				mFont->DrawFont("a",750,550);
+				GetDirectFont()->DrawFont("a",750,550);
 				cnt = 0;
 				oldTime2 = nowTime2;
 			}
 		}
 	}
 
-	ReleaseGameMain();  //開放
+	ReleaseGameMain();  
 
 	return (int)msg.wParam;
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：ゲームで使うメンバの開放処理
-//      引数  ：なし
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_GameMain::ReleaseGameMain(void)
+/**
+ * @brief ゲームで使うメンバの開放処理
+ */
+void
+C_GameMain::ReleaseGameMain(void)
 {
-    //開放
+    // 開放
 	mScene->EndScene();
-	delete mScene;
-	delete mGraphics;
-    delete mFont;
-	delete mWindow;
-	C_DSound::Destroy();
+
+	GetInputKey()->ReleaseDirectInput();
+	APP_SAFE_DELETE(mScene);
+	C_DGraphics::Destroy();
+	mGraphics = nullptr;
+	C_DFont::Destroy();
+	C_DInputKey::Destroy();
+	APP_SAFE_DELETE(mWindow);
 }
 
-//////////////////////////////////////////////////////////
-//
-//      説明　：メイン部分のコントロールを行う
-//      引数  ：なし
-//      戻り値：なし
-//
-//////////////////////////////////////////////////////////
-void C_GameMain::ControlGame(void)
+/**
+ * @brief シーケンスの管理を行う
+ */
+void
+C_GameMain::ControlSequence(void)
 {
-    switch(mScene->GetSceneID()) //シーンIDによって分岐
-    {
-	case LOGO:
-		delete mScene;
+	// シーンIDによって分岐
+	switch(mScene->GetSceneID()){
+	case cSceneName_Logo:
+		APP_SAFE_DELETE(mScene);
 		mScene = new C_Logo();
-		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
+		mScene->SetScene(mGraphics->GetDevice());
+		mScene->InitScene();
 		break;
-    case TITLE:
-        delete mScene;
+    case cSceneName_Title:
+		APP_SAFE_DELETE(mScene);
 		mScene = new C_Title();
-		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
+		mScene->SetScene(mGraphics->GetDevice());
+		mScene->InitScene();
         break;
-	case TUTORIAL:
-		delete mScene;
+	case cSceneName_Tutorial:
+		APP_SAFE_DELETE(mScene);
 		mScene = new C_Tutorial();
-		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
+		mScene->SetScene(mGraphics->GetDevice());
+		mScene->InitScene();
 		break;
-	case GAME_REFRESH:
-        delete mScene;
+	case cSceneName_GameRefresh:
+		APP_SAFE_DELETE(mScene);
 		mScene = new C_GameRefresh();
-		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
-        break;
-	case GAME_NORMAL:
-        delete mScene;
-		mScene = new C_GameNormal();
-		mScene->InitScene(mGraphics->GetDevice(), mFont, 0);
-        break;
-	case RANKING:
-		delete mScene;
-		mScene = new C_Ranking();
-		mScene->InitScene(mGraphics->GetDevice(), mFont, mScore);
+		mScene->SetScene(mGraphics->GetDevice());
+		mScene->InitScene();
 		break;
-	case GAME_END:
+	case cSceneName_GameNormal:
+		APP_SAFE_DELETE(mScene);
+		mScene = new C_GameNormal();
+		mScene->SetScene(mGraphics->GetDevice());
+		mScene->InitScene();
+		break;
+	case cSceneName_Ranking:
+		APP_SAFE_DELETE(mScene);
+		mScene = new C_Ranking();
+		mScene->SetScene(mGraphics->GetDevice());
+		dynamic_cast<C_Ranking*>(mScene)->InitScene(mScore);
+		break;
+	case cSceneName_GameEnd:
 		PostQuitMessage(0);
 		break;
     }

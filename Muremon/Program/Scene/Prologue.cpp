@@ -8,8 +8,6 @@
 
 C_Prologue::C_Prologue(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
 	key		= new C_Control();
 
 	move_count = 0;
@@ -24,29 +22,20 @@ C_Prologue::C_Prologue(void)
 
 	fade_flag = PR_USUALLY;
 
-	scene_change = true;
+	mIsSceneChange = true;
 }
 
 C_Prologue::~C_Prologue(void)
 {
 }
 
-void C_Prologue::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
+void C_Prologue::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-
-	texture->LoadTextureData("Data\\TextureData\\prologue.txt", apDev);		//絵の読み込み
-	vertex->LoadRect("Data\\RectData\\prologue.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\prologue.txt", mDevice);		//絵の読み込み
+	mVertex->LoadRect("Data\\RectData\\prologue.txt");
 }
 
-bool C_Prologue::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_Prologue::ControlScene()
+bool C_Prologue::ControlScene()
 {
 	add_outline -= 0.32f;
 	
@@ -64,22 +53,24 @@ void C_Prologue::ControlScene()
 		}
 	}
 	FadeControl();
+
+	return mIsSceneChange;
 }
 
 void C_Prologue::DrawScene()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_PROLOGUE),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_PROLOGUE), mDevice);
 
-	vertex->SetColor(alpha,255,255,255);
+	mVertex->SetColor(alpha,255,255,255);
 
-	vertex->DrawF(400.f,add_outline,R_PROLOGUE);
+	mVertex->DrawF(400.f,add_outline,R_PROLOGUE);
 }
 
 int C_Prologue::EndScene()
 {
-	ChangeScene(GAME_NORMAL);
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	ChangeScene(cSceneName_GameNormal);
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 
 	return 0;
 }
@@ -95,7 +86,7 @@ void C_Prologue::FadeControl()
 			FadeOut();
 			if(alpha == 0)	//シーン移行、操作説明
 			{
-				scene_change = false;
+				mIsSceneChange = false;
 			}
 			break;
 	}

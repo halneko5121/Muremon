@@ -11,8 +11,6 @@ POS_CC<float> boss_cc = { 600, 350 };
 
 C_GameRefresh::C_GameRefresh(void)
 {
-	mVertex  = new C_Vertex();
-	mTexture = new C_Texture();
 	mKey		= new C_Control();
 
 	mStartAlpha = mAlpha = 0;	//アルファ値
@@ -31,7 +29,7 @@ C_GameRefresh::C_GameRefresh(void)
 
 	mFlagFadeIn = false;
 
-	mSceneChange = true;
+	mIsSceneChange = true;
 
 	mHitEffectAlpha = 0;
 	mIsHitEffect = false;
@@ -50,10 +48,8 @@ C_GameRefresh::~C_GameRefresh(void)
 {
 }
 
-void C_GameRefresh::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
+void C_GameRefresh::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
 	mYoshi	= new C_ActorYoshi(mVertex, mTexture);
@@ -64,20 +60,13 @@ void C_GameRefresh::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int scor
 	
 	//mBoss->Init();
 
-	mBoss = new C_ActorBoss(mTexture,mVertex,pDevice);
+	mBoss = new C_ActorBoss(mTexture, mVertex, mDevice);
 
-	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt",apDev);		//絵の読み込み
+	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt", mDevice);		//絵の読み込み
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 }
 
-bool C_GameRefresh::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return mSceneChange;
-}
-
-void C_GameRefresh::ControlScene()
+bool C_GameRefresh::ControlScene()
 {
 	if(mSameState == G_START_SCENE){
 		GetDirectSound()->SoundPlayOnce(S_GAME_START);
@@ -142,7 +131,7 @@ void C_GameRefresh::ControlScene()
 		}
 
 		if(GetAsyncKeyState(VK_RETURN)){	//エンターキーが押されたらタイトルに戻る
-			mSceneChange = false;
+			mIsSceneChange = false;
 		}
 
 		//mBoss->RefreshControl();
@@ -170,12 +159,14 @@ void C_GameRefresh::ControlScene()
 			mHitEffectAlpha=0;
 		}
 	}
+
+	return mIsSceneChange;
 }
 
 void C_GameRefresh::DrawScene()
 {
 	if(mSameState == G_START_SCENE){
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -183,7 +174,7 @@ void C_GameRefresh::DrawScene()
 
 		mVertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -200,7 +191,7 @@ void C_GameRefresh::DrawScene()
 
 		DrawGageHp();
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);					//体力ゲージ枠
 
@@ -208,7 +199,7 @@ void C_GameRefresh::DrawScene()
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_START);						//ゲームスタート
 	}
 	else if(mSameState == G_GAME_SCENE){
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -224,7 +215,7 @@ void C_GameRefresh::DrawScene()
 
 		HitEffectDraw();
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -241,24 +232,24 @@ void C_GameRefresh::DrawScene()
 
 		DrawGageHp();
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 
 		//キャラ達
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NOPPO),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NOPPO), mDevice);
 		mNoppo->Draw(R_NOPPO_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_YOSHI),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_YOSHI), mDevice);
 		mYoshi->Draw(R_YOSHI_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NIKU),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NIKU), mDevice);
 		mNiku->Draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
 		mNoppo->DrawEffectFont(R_NOPPO_PETI);
 		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
 		mNiku->DrawEffectFont(R_NIKU_BETYA);
@@ -270,7 +261,7 @@ void C_GameRefresh::DrawScene()
 int C_GameRefresh::EndScene()
 {
 	//タイトルへ
-	ChangeScene(TITLE);
+	ChangeScene(cSceneName_Title);
 
 	GetDirectSound()->SoundStop(S_BGM_BATTLE);
 
@@ -379,7 +370,7 @@ void C_GameRefresh::DrawGageHp()
 
 void C_GameRefresh::HitEffectDraw()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->SetColor(mHitEffectAlpha,255,255,255);
 	mVertex->DrawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }

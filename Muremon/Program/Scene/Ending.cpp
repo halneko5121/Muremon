@@ -8,31 +8,22 @@
 
 C_Ending::C_Ending(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
-	scene_change = true;
+	mIsSceneChange = true;
 }
 
 C_Ending::~C_Ending(void)
 {
 }
 
-void C_Ending::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
+void C_Ending::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-	texture->LoadTextureData("Data\\TextureData\\ending.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("Data\\RectData\\ending.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\ending.txt", mDevice);	// ŠG‚Ì“Ç‚Ýž‚Ý
+	mVertex->LoadRect("Data\\RectData\\ending.txt");
 }
 
-bool C_Ending::RunScene()
+bool C_Ending::ControlScene()
 {
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_Ending::ControlScene()
-{
+	return mIsSceneChange;
 }
 
 void C_Ending::DrawScene()
@@ -41,9 +32,9 @@ void C_Ending::DrawScene()
 
 int C_Ending::EndScene()
 {
-	ChangeScene(RANKING);
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	ChangeScene(cSceneName_Ranking);
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 
 	return 0;
 }

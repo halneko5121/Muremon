@@ -8,35 +8,24 @@
 
 C_GameOver::C_GameOver(void)
 {
-	vertex  = new C_Vertex();
-	texture = new C_Texture();
-
 	alpha=0;
 	alpha_count=0;
 	fade_flag=GO_FADE_IN;
 
-	scene_change = true;
+	mIsSceneChange = true;
 }
 
 C_GameOver::~C_GameOver(void)
 {
 }
 
-void C_GameOver::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
+void C_GameOver::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-	texture->LoadTextureData("Data\\TextureData\\gameover.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	vertex->LoadRect("Data\\RectData\\gameover.txt");
+	mTexture->LoadTextureData("Data\\TextureData\\gameover.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	mVertex->LoadRect("Data\\RectData\\gameover.txt");
 }
 
-bool C_GameOver::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return scene_change;
-}
-
-void C_GameOver::ControlScene()
+bool C_GameOver::ControlScene()
 {
 	if(GetAsyncKeyState('Z')||GetAsyncKeyState(VK_RETURN))
 	{
@@ -45,6 +34,8 @@ void C_GameOver::ControlScene()
 		}
 	}
 	FadeControl();
+
+	return mIsSceneChange;
 }
 
 void C_GameOver::DrawScene()
@@ -53,9 +44,9 @@ void C_GameOver::DrawScene()
 
 int C_GameOver::EndScene()
 {
-	ChangeScene(LOGO);
-	texture->AllReleaseTexture();
-	vertex->AllReleaseRect();
+	ChangeScene(cSceneName_Logo);
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
 	return 0;
 }
 

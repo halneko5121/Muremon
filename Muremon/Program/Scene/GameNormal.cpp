@@ -11,8 +11,6 @@ POS_CC<float> boss_cc2 = { 600, 350 };
 
 C_GameNormal::C_GameNormal(void)
 {
-	mVertex  = new C_Vertex();
-	mTexture = new C_Texture();
 	mKey	 = new C_Control();
 
 	mScore = 0;
@@ -76,10 +74,8 @@ C_GameNormal::~C_GameNormal(void)
 {
 }
 
-void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
+void C_GameNormal::InitScene()
 {
-	C_SceneBase::InitScene(apDev, apFont, score);
-
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
 	mYoshi	= new C_ActorYoshi(mVertex, mTexture);
@@ -88,22 +84,15 @@ void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score
 	mNoppo->Init();
 	mYoshi->Init();
 
-	mBoss = new C_ActorBoss(mTexture,mVertex,pDevice);
+	mBoss = new C_ActorBoss(mTexture, mVertex, mDevice);
 
-	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt",apDev);		//絵の読み込み
+	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt", mDevice);		//絵の読み込み
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 
-	mMission = new C_Mission(mTexture,mVertex,pDevice);
+	mMission = new C_Mission(mTexture, mVertex, mDevice);
 }
 
-bool C_GameNormal::RunScene()
-{
-	ControlScene();
-	DrawScene();
-	return mIsSceneChange;
-}
-
-void C_GameNormal::ControlScene()
+bool C_GameNormal::ControlScene()
 {
 	if(mGameState == G_START_SCENE){
 		GetDirectSound()->SoundPlayOnce(S_GAME_START);
@@ -136,7 +125,7 @@ void C_GameNormal::ControlScene()
 		}
 
 		if(mIsPose){
-			return;
+			return mIsSceneChange;
 		}
 
 		//ミッションが起動する段階までいったら
@@ -172,13 +161,13 @@ void C_GameNormal::ControlScene()
 				mMissionGage = 0;
 				mIsInit = false;
 			}
-			return ;
+			return mIsSceneChange;
 		}
 
 		if(mTime == 0){
 			mGameState = G_GAME_CLEAR;
 			mFlagFadeStart = 0;
-			return ;
+			return mIsSceneChange;
 		}
 
 		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
@@ -255,7 +244,7 @@ void C_GameNormal::ControlScene()
 			mGameState = G_GAME_OVER;
 			mFlagFadeStart = 0;
 			GetDirectSound()->SoundStop(S_SAIREN);
-			return ;
+			return mIsSceneChange;
 		}
 
 		if(!mBoss->boss_fall_flag)
@@ -286,11 +275,13 @@ void C_GameNormal::ControlScene()
 	else if(mGameState == G_GAME_CLEAR){
 		FadeControl();
 	}
+
+	return mIsSceneChange;
 }
 
 void C_GameNormal::DrawScene()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
 
 	if(mAlpha - 55 < 0){
 		mVertex->SetColor(0,255,255,255);
@@ -304,7 +295,7 @@ void C_GameNormal::DrawScene()
 	mVertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
 	if(mGameState == G_START_SCENE){
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 
@@ -318,25 +309,25 @@ void C_GameNormal::DrawScene()
 
 		HitEffectDraw();
 		//キャラ達
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NOPPO),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NOPPO), mDevice);
 		mNoppo->Draw(R_NOPPO_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_YOSHI),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_YOSHI), mDevice);
 		mYoshi->Draw(R_YOSHI_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NIKU),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NIKU), mDevice);
 		mNiku->Draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
 		mNoppo->DrawEffectFont(R_NOPPO_PETI);
 		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
 		mNiku->DrawEffectFont(R_NIKU_BETYA);
 	}
 	else if(mGameState == G_GAME_OVER){
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
 		if(mIsSound){
@@ -345,7 +336,7 @@ void C_GameNormal::DrawScene()
 		}
 	}
 	else if(mGameState == G_GAME_CLEAR){
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
 		if(mIsSound){
@@ -361,7 +352,7 @@ void C_GameNormal::DrawScene()
 		DrawMissionNegative();
 	}
 
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 	mVertex->SetColor(mAlpha,255,255,255);
 
@@ -386,7 +377,7 @@ void C_GameNormal::DrawScene()
 
 	DrawGageMission();
 
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 	mVertex->DrawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_FRAME);	//みっしょんゲージ枠
 
@@ -395,7 +386,7 @@ void C_GameNormal::DrawScene()
 
 	DrawGageHp();
 
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
 
 	mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 
@@ -407,7 +398,7 @@ void C_GameNormal::DrawScene()
 int C_GameNormal::EndScene()
 {
 	//ゲームオーバーの場合
-	ChangeScene(RANKING);
+	ChangeScene(cSceneName_Ranking);
 
 	GetDirectSound()->SoundStop(S_BGM_BATTLE);
 
@@ -571,7 +562,7 @@ void C_GameNormal::DrawGageHp()
 
 void C_GameNormal::HitEffectDraw()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->SetColor(mHitEffectAlpha,255,255,255);
 	mVertex->DrawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
@@ -635,7 +626,7 @@ void C_GameNormal::ControlMissionOugi()
 
 void C_GameNormal::DrawMissionOugi()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION), mDevice);
 
 	mVertex->SetColor(mAlphaFont,255,255,255);
 
@@ -643,7 +634,7 @@ void C_GameNormal::DrawMissionOugi()
 
 	mVertex->DrawF(400.f,300.f,R_OUGI_FONT);
 
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
 
 	mVertex->DrawF(mWavePos.x,mWavePos.y,R_OUGI);
 }
@@ -692,7 +683,7 @@ void C_GameNormal::ControlMissionNegative()
 
 void C_GameNormal::DrawMissionNegative()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION),pDevice);
+	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION), mDevice);
 
 	mVertex->SetColor(mAlphaFont,255,255,255);
 

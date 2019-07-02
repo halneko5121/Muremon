@@ -1,85 +1,66 @@
-//---------------------------------------------
-//
-//      ゲーム全体の管理を行う
-//      作成開始日:	3月17日
-//			更新日:	3月17日
-//			作成者:	平野
-//
-//---------------------------------------------
-
-#ifndef _GAMEMANAGE_H_
-#define _GAMEMANAGE_H_
+#pragma once
+/******************************************************************
+ *	@file	GameManage.h
+ *	@brief	ゲーム全体の管理を行う	
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
 #include "Library/Window/Window.h"
-#include "Program/Scene/SceneBase.h"
-#include "Library/Font/DirectFont.h"
-#include "Library/Graphics/Vertex.h"
 
-#include "Program/Scene/Logo.h"
-#include "Program/Scene/Title.h"
-#include "Program/Scene/Tutorial.h"
-#include "Program/Scene/GameRefresh.h"
-#include "Program/Scene/GameNormal.h"
-#include "Program/Scene/Ranking.h"
+class C_Window;
+class C_SceneBase;
+class C_DInputKey;
+class C_DInputMouse;
+class C_DGraphics;
+class C_Sprite;
+class C_DFont;
+class C_DWaveSound;
+class C_DOggSound;
+namespace Dix {
+	class C_PCMPlayer;
+}
 
 class C_GameMain
 {
-private:
-	C_Window*		mWindow;	// ウィンドウクラスへのポインタ
-	C_DGraphics*	mGraphics;	// グラフィッククラスへのポインタ
-    C_DFont*		mFont;		// フォントクラスへのポインタ
-	C_SceneBase*	mScene;		// シーンクラスへのポインタ
-	DWORD			mBackground;
-	int				mScore;
-
 public:
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：ゲームで使うメンバの初期化
-    //      引数  ：なし
-    //      戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-    void InitGameMain(void);
+	/**
+	 * @brief	ゲームで使うメンバの初期化
+	 */
+    void InitGameMain();
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：メイン関数
-    //      引数  ：HINSTANCE   hInstance   インスタンスハンドル
-    //              HINSTANCE   hPrevInst   実際のWinMainに渡す
-    //              LPSTR       lpCmdLine   実際のWinMainに渡す
-    //              int         nShowCmd    実際のWinMainに渡す
-    //      戻り値：int         メッセージループを返す
-    //
-    //////////////////////////////////////////////////////////
+	/**
+     * @brief	メイン関数												
+	 * @param	hInstance   インスタンスハンドル(プログラムを動かすためのもの)		
+	 * @param	hPrevInst   ↑の前の状態を保存しておく(1つ目に情報が入ってなかった時用)
+	 * @param	lpCmdLine	Windowsからの命令が格納される(ポインタの先頭アドレス)
+	 * @param	nShowCmd    その命令がいくつあるのか
+     * @return  int         メッセージループを返す						
+	 */
 	int WINAPI WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd);
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：ゲーム内ループ関数
-    //      引数  ：なし
-    //      戻り値：int     メッセージ
-    //
-    //////////////////////////////////////////////////////////
-	int MsgLoop(void);
+	/**
+	 * @brief	ゲーム内ループ関数
+     * @return  メッセージパラメータ
+	 */
+	int MsgLoop();
 
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：ゲームで使うメンバの開放処理
-    //      引数  ：なし
-    //      戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-    void ReleaseGameMain(void);
+	/**
+     * @brief ゲームで使うメンバの開放処理
+	 */
+    void ReleaseGameMain();
 
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：メイン部分のコントロールを行う
-    //      引数  ：なし
-    //      戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-    void ControlGame(void);
+	/**
+     * @brief シーケンスの管理を行う
+	 */
+	void ControlSequence();
+
+private:
+	C_Window*			mWindow;		// ウィンドウクラスへのポインタ
+	C_SceneBase*		mScene;			// シーンクラスへのポインタ
+	C_DGraphics*		mGraphics;		// グラフィッククラスへのポインタ
+	char**				mSoundText;
+	DWORD				mBackground;
+	int					mScore;
 };
-
-#endif	//_GAMEMANAGE_H_

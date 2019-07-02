@@ -1,132 +1,107 @@
-//---------------------------------------------
-//      シーンの管理を行う
-//			作成者:平野
-//---------------------------------------------
+#pragma once
+/******************************************************************
+ *	@file	SceneManage.h
+ *	@brief	シーンの管理を行う
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
-#ifndef _SCENEMANAGE_H_
-#define _SCENEMANAGE_H_
-
-//include
 #include "Library/Graphics/DirectGraphics.h"
 #include "Library/Input/DirectInput.h"
-#include "Library/Font/DirectFont.h"
 
-//enum
-enum SCENE_NAME
+class C_DInputKey;
+class C_DInputMouse;
+class C_DWaveSound;
+class C_Texture;
+class C_Vertex;
+class C_Sprite;
+class C_Animetion;
+namespace Dix
 {
-	LOGO,			//ロゴ
-    TITLE,			//タイトル
-	PROLOGUE,		//あらすじ
-	TUTORIAL,		//ゲーム操作説明
-    GAME_REFRESH,	//ゲーム画面(すっきり)
-	GAME_NORMAL,	//ゲーム画面(ノーマル)
-	ENDING,			//エンディング
-    RANKING,		//ランキング画面
-	GAME_END,		//終わり
+	class C_PCMPlayer;
+}
+
+enum SceneName
+{
+	cSceneName_Logo,		// ロゴ
+    cSceneName_Title,		// タイトル
+    cSceneName_Prologue,	// あらすじ
+	cSceneName_Tutorial,	// ゲーム操作説明
+	cSceneName_GameRefresh,	// ゲーム（すっきり）
+	cSceneName_GameNormal,	// ゲーム（ノーマル）
+	cSceneName_Ending,		// エンディング
+	cSceneName_Ranking,		// ランキング
+	cSceneName_GameEnd,		// 終わり
 };
 
 class C_SceneBase
 {
-protected:
-    DWORD               sceneID;    //シーンの番号
-	LPDIRECT3DDEVICE9	pDevice;    //デバイス
-	C_DInputKey			*pInput;    //インプットクラスのインスタンス
-    C_DFont             *pFont;     //フォントクラスのインスタンス
-
 public:
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：コンストラクタ
-    //
-    //////////////////////////////////////////////////////////
-    C_SceneBase();    
-	
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：デストラクタ(仮想関数、何もしない)
-    //
-    //////////////////////////////////////////////////////////
-    virtual ~C_SceneBase();
+	/**
+	 * @brief	コンストラクタ
+	 */
+	C_SceneBase();
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：シーンの初期化処理(メンバ初期化)
-    //      引数　：LPDIRECT3DDEVICE9   pDev    デバイス
-    //              DInput              *pInput インプットクラスへのポインタ
-    //              DFont               *pFont  フォントクラスへのポインタ
-    //　　　戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-	virtual void InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont,int score);
+	/**
+	 * @brief	デストラクタ
+	 */
+	virtual ~C_SceneBase();
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：シーン継続処理(純粋仮想関数)
-    //      引数　：なし
-    //　　　戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-	virtual bool RunScene() = 0;
+	/**
+	 * @brief	初期化処理
+	 */
+	virtual void InitScene() = 0;
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：シーン描画処理(純粋仮想関数)
-    //      引数　：なし
-    //　　　戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-    virtual void ControlScene(void) = 0;
+	/**
+	 * @brief	更新処理
+	 * @return	シーン終了か
+	 */
+	virtual bool ControlScene() = 0;
 
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：シーン描画処理(純粋仮想関数)
-    //      引数　：なし
-    //　　　戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-    virtual void DrawScene(void) = 0;
+	/**
+	 * @brief	描画処理
+	 */
+	virtual void DrawScene() = 0;
 
-	//////////////////////////////////////////////////////////
-    //
-    //      説明　：シーン終了処理(純粋仮想関数)
-    //      引数　：なし
-    //　　　戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-	virtual int EndScene(void) = 0;
+	/**
+	 * @brief	終了処理
+	 */
+	virtual int EndScene() = 0;
 
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：シーンの変更を行う
-    //      引数　：DWORD   nextID  次のシーンの番号
-    //　　　戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-    void ChangeScene(DWORD nextID);
+	/*-		共通関数	-*/
 
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：当たり判定を行う
-    //      引数　：D3DXVECTOR2 centerPos   当たりをとる物体の中心座標
-    //              D3DXVECTOR2 size        当たりをとる物体のサイズ
-    //              DInput      *pInput     インプットクラスへのポインタ
-    //　　　戻り値：なし
-    //
-    //////////////////////////////////////////////////////////
-    bool HitCheck(D3DXVECTOR2 centerPos , D3DXVECTOR2 size);
+	/**
+	 * @brief	実行処理
+	 */
+	bool RunScene();
 
+	/**
+	 * @brief	設定処理
+	 * @param	apDev		デバイス
+	 */
+	void SetScene(LPDIRECT3DDEVICE9 apDev);
 
+	/**
+	 * @brief	シーンの変更を行う
+	 * @param	nextID		次のシーンの番号
+	 */
+	void ChangeScene(DWORD next_id);
 
-    //-情報取得関数-
+	//-情報取得関数-
 
-    //////////////////////////////////////////////////////////
-    //
-    //      説明　：シーン番号の取得
-    //      引数　：なし
-    //　　　戻り値：DWORD   シーンの番号
-    //
-    //////////////////////////////////////////////////////////
-    DWORD GetSceneID(void)  {return sceneID;}
+	/**
+	 * @brief	シーン番号の取得
+	 */
+	DWORD GetSceneID();
+
+protected:
+    DWORD               mSceneID;		// シーンの番号
+	LPDIRECT3DDEVICE9	mDevice;		// デバイス
+	C_Texture*			mTexture;
+	C_Vertex*			mVertex;
+
+	int					mAlpha;			// 各シーンのalpha値		
+	bool				mIsSceneChange;	// シーンが変わる時を知らせる
+	MouseData			mMouseData;		// マウス情報
 };
-
-#endif	//_SCENEMANAGE_H_

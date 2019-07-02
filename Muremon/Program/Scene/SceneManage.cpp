@@ -15,7 +15,7 @@
 //      説明　：コンストラクタ
 //
 //////////////////////////////////////////////////////////
-C_SceneManage::C_SceneManage()
+C_SceneBase::C_SceneBase()
 {
     sceneID = LOGO;    //初期化
 }
@@ -25,7 +25,7 @@ C_SceneManage::C_SceneManage()
 //      説明　：デストラクタ(仮想関数、何もしない)
 //
 //////////////////////////////////////////////////////////
-C_SceneManage::~C_SceneManage()
+C_SceneBase::~C_SceneBase()
 {
 
 }
@@ -40,7 +40,7 @@ C_SceneManage::~C_SceneManage()
 //
 //////////////////////////////////////////////////////////
 
-void C_SceneManage::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
+void C_SceneBase::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
 {
 	pDevice = apDev;	//デバイスセット
     pFont   = apFont;   //文字表示可能にする
@@ -53,7 +53,7 @@ void C_SceneManage::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int sco
 //　　　戻り値：なし
 //
 //////////////////////////////////////////////////////////
-void C_SceneManage::ChangeScene(DWORD nextID)
+void C_SceneBase::ChangeScene(DWORD nextID)
 {
     sceneID = nextID;   //次のシーン番号を渡す
 }
@@ -67,7 +67,7 @@ void C_SceneManage::ChangeScene(DWORD nextID)
 //　　　戻り値：なし
 //
 //////////////////////////////////////////////////////////
-bool C_SceneManage::HitCheck(D3DXVECTOR2 centerPos , D3DXVECTOR2 size)
+bool C_SceneBase::HitCheck(D3DXVECTOR2 centerPos , D3DXVECTOR2 size)
 {
     //if(pInput->GetMousePosition().x >= centerPos.x - size.x / 2.0f &&
     //    pInput->GetMousePosition().x <= centerPos.x + size.x / 2.0f)

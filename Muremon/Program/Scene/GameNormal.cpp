@@ -78,7 +78,7 @@ C_GameNormal::~C_GameNormal(void)
 
 void C_GameNormal::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, score);
+	C_SceneBase::InitScene(apDev, apFont, score);
 
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);

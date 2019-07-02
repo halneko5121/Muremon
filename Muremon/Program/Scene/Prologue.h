@@ -31,7 +31,7 @@ enum PROLOGUE_FADE_MODE
 	PR_FADE_OUT,	//フェードアウト
 };
 
-class C_Prologue:public C_SceneManage
+class C_Prologue:public C_SceneBase
 {
 private:
 	C_Texture	*texture;

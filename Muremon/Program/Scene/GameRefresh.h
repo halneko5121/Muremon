@@ -14,7 +14,7 @@
 #include "Program/Util/Control.h"
 #include "Program/DefineGame.h"
 
-class C_GameRefresh:public C_SceneManage
+class C_GameRefresh:public C_SceneBase
 {
 public:
 	C_GameRefresh(void);

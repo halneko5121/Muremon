@@ -92,7 +92,7 @@ enum RECT_DATA_RANKING
 	//R_Z_KEY,
 };
 
-class C_Ranking:public C_SceneManage
+class C_Ranking:public C_SceneBase
 {
 private:
 	C_Texture	*texture;

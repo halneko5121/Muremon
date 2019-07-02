@@ -25,7 +25,7 @@ enum RECT_DATA_LOGO
 	R_LOGO,
 };
 
-class C_Logo:public C_SceneManage
+class C_Logo:public C_SceneBase
 {
 private:
 	C_Texture	*texture;

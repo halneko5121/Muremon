@@ -22,7 +22,7 @@ C_Logo::~C_Logo(void)
 
 void C_Logo::InitScene(LPDIRECT3DDEVICE9 apDev , C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, score);
+	C_SceneBase::InitScene(apDev, apFont, score);
 	texture->LoadTextureData("Data\\TextureData\\logo.txt", apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("Data\\RectData\\logo.txt");
 }

@@ -22,7 +22,7 @@ enum RECT_DATA_ENDING
 	R_ENDING,
 };
 
-class C_Ending:public C_SceneManage
+class C_Ending:public C_SceneBase
 {
 private:
 	C_Texture	*texture;

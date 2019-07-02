@@ -94,7 +94,7 @@ enum TITLE_FADE_MODE
 	TITLE_FADE_OUT2,	//フェードアウト(エンド)
 };
 
-class C_Title:public C_SceneManage
+class C_Title:public C_SceneBase
 {
 private:
 	C_Texture	*texture;

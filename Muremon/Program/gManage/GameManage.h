@@ -28,7 +28,7 @@ private:
 	C_Window*		mWindow;	// ウィンドウクラスへのポインタ
 	C_DGraphics*	mGraphics;	// グラフィッククラスへのポインタ
     C_DFont*		mFont;		// フォントクラスへのポインタ
-	C_SceneManage*	mScene;		// シーンクラスへのポインタ
+	C_SceneBase*	mScene;		// シーンクラスへのポインタ
 	DWORD			mBackground;
 	int				mScore;
 

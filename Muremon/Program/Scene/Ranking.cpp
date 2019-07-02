@@ -70,7 +70,7 @@ C_Ranking::~C_Ranking(void)
 
 void C_Ranking::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, score);
+	C_SceneBase::InitScene(apDev, apFont, score);
 	add_score = score;
 
 	texture->LoadTextureData("Data\\TextureData\\ranking.txt",apDev);		//ŠG‚Ì“Ç‚İ‚İ

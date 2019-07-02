@@ -52,7 +52,7 @@ C_GameRefresh::~C_GameRefresh(void)
 
 void C_GameRefresh::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, score);
+	C_SceneBase::InitScene(apDev, apFont, score);
 
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);

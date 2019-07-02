@@ -58,7 +58,7 @@ C_Title::~C_Title(void)
 
 void C_Title::InitScene(LPDIRECT3DDEVICE9 apDev, C_DFont* apFont, int score)
 {
-	C_SceneManage::InitScene(apDev, apFont, score);
+	C_SceneBase::InitScene(apDev, apFont, score);
 
 	texture->LoadTextureData("Data\\TextureData\\title.txt",apDev);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	vertex->LoadRect("Data\\RectData\\title.txt");

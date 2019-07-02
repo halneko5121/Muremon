@@ -33,7 +33,7 @@ enum NEGATIVE_DATA
 	ATTACK_DOWN,
 };
 
-class C_GameNormal:public C_SceneManage
+class C_GameNormal:public C_SceneBase
 {
 public:
 	C_GameNormal(void);

@@ -29,7 +29,7 @@ enum GAMEOVER_FADE_MODE
 	GO_FADE_OUT,	//フェードアウト
 };
 
-class C_GameOver:public C_SceneManage
+class C_GameOver:public C_SceneBase
 {
 private:
 	C_Texture	*texture;

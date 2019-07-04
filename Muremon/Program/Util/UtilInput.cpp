@@ -21,12 +21,20 @@ UtilInput::IsKeyPushed(unsigned short key)
 
 /**
  * @brief	決定キーが瞬間的に押されたか
- * @param	key		キーの状態
  */
 bool
 UtilInput::IsKeyPushedDecide()
 {
 	return GetInputKey()->IsKeyPushed(DIK_Z);
+}
+
+/**
+ * @brief	RETUNRキーが瞬間的に押されたか
+ */
+bool
+UtilInput::IsKeyPushedReturn()
+{
+	return GetInputKey()->IsKeyPushed(DIK_RETURN);
 }
 
 /**

@@ -850,7 +850,7 @@ void C_Mission::Mission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	if (UtilInput::IsKeyPushedZ())
+	if (UtilInput::IsKeyPushedDecide())
 	{
 		flag_time_cnt += 1;
 	}
@@ -885,7 +885,7 @@ void C_Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	if (UtilInput::IsKeyPushedZ())
+	if (UtilInput::IsKeyPushedDecide())
 	{
 		flag_time_cnt += 1;
 		if(flag_time_cnt > 2)

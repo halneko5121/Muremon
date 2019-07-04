@@ -233,7 +233,7 @@ void SceneTitle::KeyControl()
 	// ‚ß‚Á‚¿‚áã‰º‰Ÿ‚³‚ê‚Ä‚àˆá˜aŠ´‚É‚È‚¢‚æ‚¤‚É
 	if(GetDirectSound()->IsPlaySound(S_SE_CURSOR_MOVE))
 	{
-		if(UtilInput::IsKeyDown(DIK_UP) == KEY_UP ||
+		if (UtilInput::IsKeyDown(DIK_UP) ||
 			UtilInput::IsKeyDown(DIK_DOWN))
 		{
 			GetDirectSound()->SoundStop(S_SE_CURSOR_MOVE);

@@ -28,25 +28,7 @@
     <ClCompile Include="Program\Actor\ActorYoshi.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Scene\GameNormal.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Scene\GameRefresh.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Scene\Logo.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Scene\Mission.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Scene\Ranking.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Scene\Title.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Scene\Tutorial.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Program\Util\Control.cpp">
@@ -84,6 +66,24 @@
     <ClCompile Include="Program\Util\UtilBattle.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="program\Scene\SceneGameNormal.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\SceneGameRefresh.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\SceneLogo.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\SceneRanking.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\SceneTitle.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Scene\SceneTutorial.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -114,25 +114,7 @@
     <ClInclude Include="Program\Actor\ActorYoshi.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Scene\GameNormal.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\GameRefresh.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\Logo.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Program\Scene\Mission.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\Ranking.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\Title.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\Tutorial.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Util\Control.h">
@@ -170,6 +152,24 @@
     <ClInclude Include="program\System\GameManage.h" />
     <ClInclude Include="Program\Util\UtilBattle.h">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneGameNormal.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneGameRefresh.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneLogo.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneRanking.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneTitle.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="program\Scene\SceneTutorial.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

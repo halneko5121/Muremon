@@ -4,7 +4,7 @@
 //			çÏê¨é“:	ïΩñÏ
 //
 //---------------------------------------------
-#include "GameRefresh.h"
+#include "SceneGameRefresh.h"
 #include "Library/Sound/DirectSound.h"
 #include "Program/Util/UtilBattle.h"
 

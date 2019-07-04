@@ -4,7 +4,7 @@
 //			çÏê¨é“:	ïΩñÏ
 //
 //---------------------------------------------
-#include "Tutorial.h"
+#include "SceneTutorial.h"
 #include "Library/Sound/DirectSound.h"
 #include "Program/Util/UtilInput.h"
 

@@ -4,7 +4,7 @@
 //			çÏê¨é“:	ïΩñÏ
 //
 //---------------------------------------------
-#include "GameNormal.h"
+#include "SceneGameNormal.h"
 
 #include "Library/Sound/DirectSound.h"
 #include "Program/Util/UtilInput.h"

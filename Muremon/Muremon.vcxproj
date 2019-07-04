@@ -31,13 +31,13 @@
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp" />
-    <ClCompile Include="program\Scene\GameNormal.cpp" />
-    <ClCompile Include="program\Scene\GameRefresh.cpp" />
-    <ClCompile Include="program\Scene\Logo.cpp" />
+    <ClCompile Include="program\Scene\SceneGameNormal.cpp" />
+    <ClCompile Include="program\Scene\SceneGameRefresh.cpp" />
+    <ClCompile Include="program\Scene\SceneLogo.cpp" />
     <ClCompile Include="program\Scene\Mission.cpp" />
-    <ClCompile Include="program\Scene\Ranking.cpp" />
-    <ClCompile Include="program\Scene\Title.cpp" />
-    <ClCompile Include="program\Scene\Tutorial.cpp" />
+    <ClCompile Include="program\Scene\SceneRanking.cpp" />
+    <ClCompile Include="program\Scene\SceneTitle.cpp" />
+    <ClCompile Include="program\Scene\SceneTutorial.cpp" />
     <ClCompile Include="Program\Util\UtilBattle.cpp" />
     <ClCompile Include="Program\Util\UtilInput.cpp" />
   </ItemGroup>
@@ -64,13 +64,13 @@
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitWave.h" />
-    <ClInclude Include="program\Scene\GameNormal.h" />
-    <ClInclude Include="program\Scene\GameRefresh.h" />
-    <ClInclude Include="program\Scene\Logo.h" />
+    <ClInclude Include="program\Scene\SceneGameNormal.h" />
+    <ClInclude Include="program\Scene\SceneGameRefresh.h" />
+    <ClInclude Include="program\Scene\SceneLogo.h" />
     <ClInclude Include="program\Scene\Mission.h" />
-    <ClInclude Include="program\Scene\Ranking.h" />
-    <ClInclude Include="program\Scene\Title.h" />
-    <ClInclude Include="program\Scene\Tutorial.h" />
+    <ClInclude Include="program\Scene\SceneRanking.h" />
+    <ClInclude Include="program\Scene\SceneTitle.h" />
+    <ClInclude Include="program\Scene\SceneTutorial.h" />
     <ClInclude Include="Program\Util\UtilBattle.h" />
     <ClInclude Include="Program\Util\UtilInput.h" />
   </ItemGroup>

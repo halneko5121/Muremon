@@ -4,7 +4,7 @@
 //			çÏê¨é“:	ïΩñÏ
 //
 //---------------------------------------------
-#include "Title.h"
+#include "SceneTitle.h"
 #include "Library/Sound/DirectSound.h"
 #include "Program/Util/UtilInput.h"
 

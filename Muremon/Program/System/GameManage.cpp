@@ -12,12 +12,12 @@
 #include "Library/Graphics/Vertex.h"
 #include "Library/Sound/DirectSound.h"
 // 各シーンのinclude
-#include "Program/Scene/Logo.h"
-#include "Program/Scene/Title.h"
-#include "Program/Scene/Tutorial.h"
-#include "Program/Scene/GameRefresh.h"
-#include "Program/Scene/GameNormal.h"
-#include "Program/Scene/Ranking.h"
+#include "Program/Scene/SceneLogo.h"
+#include "Program/Scene/SceneTitle.h"
+#include "Program/Scene/SceneTutorial.h"
+#include "Program/Scene/SceneGameRefresh.h"
+#include "Program/Scene/SceneGameNormal.h"
+#include "Program/Scene/SceneRanking.h"
 
  /**
   * @brief	ゲームで使うメンバの初期化

@@ -4,7 +4,7 @@
 //			ì¬Ò:	•½–ì
 //
 //---------------------------------------------
-#include "Ranking.h"
+#include "SceneRanking.h"
 #include "Library/Sound/DirectSound.h"
 
 FILE *fp;

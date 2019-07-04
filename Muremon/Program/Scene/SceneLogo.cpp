@@ -4,7 +4,7 @@
 //			çÏê¨é“:	ïΩñÏ
 //
 //---------------------------------------------
-#include "Logo.h"
+#include "SceneLogo.h"
 
 SceneLogo::SceneLogo(void)
 {

@@ -88,7 +88,7 @@ C_ActorNoppo::Init()
  * @brief 更新
  */
 void
-C_ActorNoppo::Control(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
+C_ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
 {
 	mRandSpeed = 0.f;
 

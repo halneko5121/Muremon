@@ -81,7 +81,7 @@ C_ActorNikuman::Init()
  * @brief 更新
  */
 void
-C_ActorNikuman::Control(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
+C_ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
 {
 	mRandSpeed = 0.f;
 

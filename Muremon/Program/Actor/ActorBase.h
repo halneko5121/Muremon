@@ -87,7 +87,7 @@ public:
 	float				m_chara_y;
 	virtual void		DeathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;
 	virtual void		Init() = 0;
-	virtual void		Control(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool both_death) = 0;
+	virtual void		Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool both_death) = 0;
 	//•`‰æ
 	virtual void		Draw(int rect_num) = 0;
 	virtual void		DrawEffectFont(int rect_startnum) = 0;

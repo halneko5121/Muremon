@@ -78,11 +78,11 @@ bool SceneGameRefresh::Update()
 	
 		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
 
-		mNiku->Control(boss_cc, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
+		mNiku->Update(boss_cc, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
-		mYoshi->Control(boss_cc, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
+		mYoshi->Update(boss_cc, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
 
-		mNoppo->Control(boss_cc, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
+		mNoppo->Update(boss_cc, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
 	
 		mIsHitNiku  = mNiku->GetFlagHit();//‚ ‚½‚Á‚½‚Æ‚¢‚¤ƒtƒ‰ƒO‚ª‹A‚Á‚Ä‚«‚Ü‚·
 		

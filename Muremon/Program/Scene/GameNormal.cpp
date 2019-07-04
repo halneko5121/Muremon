@@ -172,11 +172,11 @@ bool SceneGameNormal::Update()
 
 		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
 
-		mNiku->Control(boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
+		mNiku->Update(boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
-		mYoshi->Control(boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
+		mYoshi->Update(boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
 
-		mNoppo->Control(boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
+		mNoppo->Update(boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
 
 		mTime -= 1;
 

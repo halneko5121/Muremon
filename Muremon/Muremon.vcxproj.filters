@@ -28,12 +28,6 @@
     <ClCompile Include="Program\Actor\ActorYoshi.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Scene\Ending.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Scene\GameClear.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Scene\GameNormal.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -121,12 +115,6 @@
     </ClInclude>
     <ClInclude Include="Program\Actor\ActorYoshi.h">
       <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\Ending.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\GameClear.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Scene\GameNormal.h">
       <Filter>Scene</Filter>

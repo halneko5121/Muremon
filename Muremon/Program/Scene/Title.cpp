@@ -54,13 +54,13 @@ C_Title::~C_Title(void)
 {
 }
 
-void C_Title::InitScene()
+void C_Title::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\title.txt");
 }
 
-bool C_Title::ControlScene()
+bool C_Title::Update()
 {
 	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 
@@ -99,7 +99,7 @@ bool C_Title::ControlScene()
 	return mIsSceneChange;
 }
 
-void C_Title::DrawScene()
+void C_Title::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_TITLE_BG), mDevice);
 
@@ -143,7 +143,7 @@ void C_Title::DrawScene()
 	}
 }
 
-int C_Title::EndScene()
+int C_Title::End()
 {
 	ChangeScene(flag_scene_change);
 

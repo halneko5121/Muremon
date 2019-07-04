@@ -48,7 +48,7 @@ C_GameRefresh::~C_GameRefresh(void)
 {
 }
 
-void C_GameRefresh::InitScene()
+void C_GameRefresh::Init()
 {
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
@@ -66,7 +66,7 @@ void C_GameRefresh::InitScene()
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 }
 
-bool C_GameRefresh::ControlScene()
+bool C_GameRefresh::Update()
 {
 	if(mSameState == G_START_SCENE){
 		GetDirectSound()->SoundPlayOnce(S_GAME_START);
@@ -163,7 +163,7 @@ bool C_GameRefresh::ControlScene()
 	return mIsSceneChange;
 }
 
-void C_GameRefresh::DrawScene()
+void C_GameRefresh::Draw()
 {
 	if(mSameState == G_START_SCENE){
 		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
@@ -258,7 +258,7 @@ void C_GameRefresh::DrawScene()
 	}
 }
 
-int C_GameRefresh::EndScene()
+int C_GameRefresh::End()
 {
 	//ƒ^ƒCƒgƒ‹‚Ö
 	ChangeScene(cSceneName_Title);

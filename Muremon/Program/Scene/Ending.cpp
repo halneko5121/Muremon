@@ -15,22 +15,22 @@ C_Ending::~C_Ending(void)
 {
 }
 
-void C_Ending::InitScene()
+void C_Ending::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\ending.txt", mDevice);	// ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\ending.txt");
 }
 
-bool C_Ending::ControlScene()
+bool C_Ending::Update()
 {
 	return mIsSceneChange;
 }
 
-void C_Ending::DrawScene()
+void C_Ending::Draw()
 {
 }
 
-int C_Ending::EndScene()
+int C_Ending::End()
 {
 	ChangeScene(cSceneName_Ranking);
 	mTexture->AllReleaseTexture();

@@ -151,11 +151,11 @@ private:
 	bool ranking_flag;
 
 public:
-	void InitScene() override;
+	void Init() override;
 	void InitScene(int score);
-	bool ControlScene() override;
-	void DrawScene() override;
-	int EndScene() override;
+	bool Update() override;
+	void Draw() override;
+	int End() override;
 
 	void FadeControl();		
 

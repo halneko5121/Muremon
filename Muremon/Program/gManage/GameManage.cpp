@@ -26,8 +26,6 @@ void
 C_GameMain::InitGameMain(void)
 {
 	mWindow			= new C_Window;
-
-	// 各ライブラリ
 	mGraphics		= C_DGraphics::Create();
 	C_DInputKey::Create();
 	C_DInputMouse::Create();
@@ -68,7 +66,7 @@ C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine 
 	}
 
 	// DirectGraphics初期化
-	if(FAILED(mGraphics->InitDGraphics(mWindow,mWindow->GetHwnd(),GAMESIZE_WIDE,GAMESIZE_HEIGHT)))
+	if(FAILED(mGraphics->InitDGraphics(mWindow, mWindow->GetHwnd(), GAMESIZE_WIDE, GAMESIZE_HEIGHT)))
 	{
 		MessageBox(NULL, TEXT("DirectGraphicsの初期化に失敗"), NULL, MB_OK);
 		return 0;
@@ -112,8 +110,9 @@ C_GameMain::MsgLoop(void)
 
 	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
 
+	// 最初のシーンの初期化
 	mScene->SetScene(mGraphics->GetDevice());
-	mScene->InitScene();				//最初のシーンの初期化
+	mScene->Init();
 
 	srand((unsigned int)time(NULL));
 
@@ -137,11 +136,14 @@ C_GameMain::MsgLoop(void)
 				mGraphics->RenderStart(mBackground);
 				if(!mScene->RunScene())
 				{
-					mScore = mScene->EndScene();								//シーン終了
-					if(mScene->GetSceneID() == cSceneName_Title) mBackground = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);	//ロゴが終わったらクリア時の色を白にする
-					if(mScene->GetSceneID() == cSceneName_Prologue) mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);	//タイトルが終わったらクリア時の色を黒にする
+					// シーン終了
+					mScore = mScene->End();
+					// ロゴが終わったらクリア時の色を白にする
+					if(mScene->GetSceneID() == cSceneName_Title) mBackground = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);
+					// タイトルが終わったらクリア時の色を黒にする
+					if(mScene->GetSceneID() == cSceneName_Prologue) mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);
 
-					//シーンが変わった時の処理(シーン切り替え)↓
+					// シーンが変わった時の処理(シーン切り替え)↓
 					ControlSequence();				
 				}
 				mGraphics->RenderEnd();
@@ -172,7 +174,7 @@ void
 C_GameMain::ReleaseGameMain(void)
 {
     // 開放
-	mScene->EndScene();
+	mScene->End();
 
 	GetInputKey()->ReleaseDirectInput();
 	APP_SAFE_DELETE(mScene);
@@ -195,31 +197,31 @@ C_GameMain::ControlSequence(void)
 		APP_SAFE_DELETE(mScene);
 		mScene = new C_Logo();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->InitScene();
+		mScene->Init();
 		break;
     case cSceneName_Title:
 		APP_SAFE_DELETE(mScene);
 		mScene = new C_Title();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->InitScene();
-        break;
+		mScene->Init();
+		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);
 		mScene = new C_Tutorial();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->InitScene();
+		mScene->Init();
 		break;
 	case cSceneName_GameRefresh:
 		APP_SAFE_DELETE(mScene);
 		mScene = new C_GameRefresh();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->InitScene();
+		mScene->Init();
 		break;
 	case cSceneName_GameNormal:
 		APP_SAFE_DELETE(mScene);
 		mScene = new C_GameNormal();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->InitScene();
+		mScene->Init();
 		break;
 	case cSceneName_Ranking:
 		APP_SAFE_DELETE(mScene);

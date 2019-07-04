@@ -34,8 +34,8 @@ C_SceneBase::~C_SceneBase()
 bool
 C_SceneBase::RunScene()
 {
-	bool is_scene_change = ControlScene();
-	DrawScene();
+	bool is_scene_change = Update();
+	Draw();
 	return is_scene_change;
 }
 

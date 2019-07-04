@@ -51,23 +51,23 @@ public:
 	/**
 	 * @brief	初期化処理
 	 */
-	virtual void InitScene() = 0;
+	virtual void Init() = 0;
 
 	/**
 	 * @brief	更新処理
 	 * @return	シーン終了か
 	 */
-	virtual bool ControlScene() = 0;
+	virtual bool Update() = 0;
 
 	/**
 	 * @brief	描画処理
 	 */
-	virtual void DrawScene() = 0;
+	virtual void Draw() = 0;
 
 	/**
 	 * @brief	終了処理
 	 */
-	virtual int EndScene() = 0;
+	virtual int End() = 0;
 
 	/*-		共通関数	-*/
 

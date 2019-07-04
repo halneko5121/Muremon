@@ -74,7 +74,7 @@ C_GameNormal::~C_GameNormal(void)
 {
 }
 
-void C_GameNormal::InitScene()
+void C_GameNormal::Init()
 {
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
@@ -92,7 +92,7 @@ void C_GameNormal::InitScene()
 	mMission = new C_Mission(mTexture, mVertex, mDevice);
 }
 
-bool C_GameNormal::ControlScene()
+bool C_GameNormal::Update()
 {
 	if(mGameState == G_START_SCENE){
 		GetDirectSound()->SoundPlayOnce(S_GAME_START);
@@ -279,7 +279,7 @@ bool C_GameNormal::ControlScene()
 	return mIsSceneChange;
 }
 
-void C_GameNormal::DrawScene()
+void C_GameNormal::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
 
@@ -395,7 +395,7 @@ void C_GameNormal::DrawScene()
 	}
 }
 
-int C_GameNormal::EndScene()
+int C_GameNormal::End()
 {
 	//ゲームオーバーの場合
 	ChangeScene(cSceneName_Ranking);

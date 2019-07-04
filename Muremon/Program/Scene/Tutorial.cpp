@@ -30,13 +30,13 @@ C_Tutorial::~C_Tutorial(void)
 {
 }
 
-void C_Tutorial::InitScene()
+void C_Tutorial::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\Tutorial.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\Tutorial.txt");
 }
 
-bool C_Tutorial::ControlScene()
+bool C_Tutorial::Update()
 {
 	GetDirectSound()->SoundPlayOnce(S_BGM_TITLE);
 
@@ -47,7 +47,7 @@ bool C_Tutorial::ControlScene()
 	return mIsSceneChange;
 }
 
-void C_Tutorial::DrawScene()
+void C_Tutorial::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_TUTORIAL1), mDevice);
 
@@ -62,7 +62,7 @@ void C_Tutorial::DrawScene()
 	mVertex->DrawF(tutorial[TR_NORMAL].x,tutorial[TR_NORMAL].y,R_TUTORIAL2);
 }
 
-int C_Tutorial::EndScene()
+int C_Tutorial::End()
 {
 	ChangeScene(cSceneName_Title);
 	mTexture->AllReleaseTexture();

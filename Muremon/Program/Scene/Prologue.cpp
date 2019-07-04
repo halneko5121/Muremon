@@ -29,13 +29,13 @@ C_Prologue::~C_Prologue(void)
 {
 }
 
-void C_Prologue::InitScene()
+void C_Prologue::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\prologue.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\prologue.txt");
 }
 
-bool C_Prologue::ControlScene()
+bool C_Prologue::Update()
 {
 	add_outline -= 0.32f;
 	
@@ -57,7 +57,7 @@ bool C_Prologue::ControlScene()
 	return mIsSceneChange;
 }
 
-void C_Prologue::DrawScene()
+void C_Prologue::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_PROLOGUE), mDevice);
 
@@ -66,7 +66,7 @@ void C_Prologue::DrawScene()
 	mVertex->DrawF(400.f,add_outline,R_PROLOGUE);
 }
 
-int C_Prologue::EndScene()
+int C_Prologue::End()
 {
 	ChangeScene(cSceneName_GameNormal);
 	mTexture->AllReleaseTexture();

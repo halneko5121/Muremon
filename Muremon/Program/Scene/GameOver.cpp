@@ -19,13 +19,13 @@ C_GameOver::~C_GameOver(void)
 {
 }
 
-void C_GameOver::InitScene()
+void C_GameOver::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\gameover.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\gameover.txt");
 }
 
-bool C_GameOver::ControlScene()
+bool C_GameOver::Update()
 {
 	if(GetAsyncKeyState('Z')||GetAsyncKeyState(VK_RETURN))
 	{
@@ -38,11 +38,11 @@ bool C_GameOver::ControlScene()
 	return mIsSceneChange;
 }
 
-void C_GameOver::DrawScene()
+void C_GameOver::Draw()
 {
 }
 
-int C_GameOver::EndScene()
+int C_GameOver::End()
 {
 	ChangeScene(cSceneName_Logo);
 	mTexture->AllReleaseTexture();

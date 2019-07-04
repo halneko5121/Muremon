@@ -64,10 +64,10 @@ private:
 	int alpha_count;	//アルファ値のカウント
 
 public:
-	void InitScene() override;
-	bool ControlScene() override;
-	void DrawScene() override;
-	int EndScene() override;
+	void Init() override;
+	bool Update() override;
+	void Draw() override;
+	int End() override;
 
 	void KeyControl();		//キー操作
 

@@ -65,7 +65,7 @@ C_Ranking::~C_Ranking(void)
 {
 }
 
-void C_Ranking::InitScene()
+void C_Ranking::Init()
 {
 }
 
@@ -79,7 +79,7 @@ void C_Ranking::InitScene(int score)
 	RankCheck();
 }
 
-bool C_Ranking::ControlScene()
+bool C_Ranking::Update()
 {
 	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 
@@ -176,7 +176,7 @@ void C_Ranking::KeyControl()
 	//}
 }
 
-void C_Ranking::DrawScene()
+void C_Ranking::Draw()
 {
 	RankBackGround();
 	RankPlaceDraw();
@@ -185,7 +185,7 @@ void C_Ranking::DrawScene()
 	ZKeyDraw();
 }
 
-int C_Ranking::EndScene()
+int C_Ranking::End()
 {
 	ChangeScene(cSceneName_Title);
 	mTexture->AllReleaseTexture();

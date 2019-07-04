@@ -17,26 +17,26 @@ C_Logo::~C_Logo(void)
 {
 }
 
-void C_Logo::InitScene()
+void C_Logo::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\logo.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\logo.txt");
 }
 
-bool C_Logo::ControlScene()
+bool C_Logo::Update()
 {
 	FadeControl();
 	return mIsSceneChange;
 }
 
-void C_Logo::DrawScene()
+void C_Logo::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_LOGO), mDevice);
 	mVertex->SetColor(alpha,255,255,255);
 	mVertex->DrawF(400.f,300.f,R_LOGO);
 }
 
-int C_Logo::EndScene()
+int C_Logo::End()
 {
 	ChangeScene(cSceneName_Title);
 	mTexture->AllReleaseTexture();

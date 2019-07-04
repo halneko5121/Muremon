@@ -29,7 +29,7 @@ C_DInputKey::C_DInputKey(void)
 	// DirectInputDeviceオブジェクト(キーボード)
 	mKeyBordDevice = nullptr;	
 
-	ZeroMemory(&mKeyStatePrev, MAX_KEYDATA);
+	ZeroMemory(&mKeyStatePrev,	MAX_KEYDATA);
 	ZeroMemory(&mKeyState,		MAX_KEYDATA);
 }
 
@@ -78,10 +78,10 @@ C_DInputKey::Init(HWND window_handle)
 {
 	// DirectInputオブジェクトの作成
 	if (FAILED(DirectInput8Create(
-		GetModuleHandle(NULL),			// ｱﾌﾟﾘｹｰｼｮﾝのｲﾝｽﾀﾝｽﾊﾝﾄﾞﾙ
+		GetModuleHandle(NULL),			// アプリのインスタンスハンドル
 		DIRECTINPUT_VERSION,			// 使用するDirectInputのversion番号。通常はDIRECTINPUT_VERSION
-		IID_IDirectInput8,				// 目的のｲﾝﾀｰﾌｪｲｽの識別子『IID_IDirectInput8』を渡す
-		(void**)&mDirectInput,				// ｲﾝﾀｰﾌｪｲｽﾎﾟｲﾝﾀを受け取る変数のﾎﾟｲﾝﾀ
+		IID_IDirectInput8,				// 目的のインターフェースの識別子『IID_IDirectInput8』を渡す
+		(void**)&mDirectInput,			// インターフェースポインタを受け取る変数のポインタ
 		NULL)))							// 通常『NULL』を渡す
 	{
 		MessageBox(NULL, TEXT("DirectInputオブジェクトの作成に失敗"), NULL, MB_OK);
@@ -91,23 +91,23 @@ C_DInputKey::Init(HWND window_handle)
 	// キーボード初期化
 	// KeyBordDeviceの取得
 	if (FAILED(mDirectInput->CreateDevice(
-		GUID_SysKeyboard,				// 入力ﾃﾞﾊﾞｲｽを指定するDUID　ﾃﾞﾌｫﾙﾄのｼｽﾃﾑ･ｷｰﾎﾞｰﾄﾞ
-		&mKeyBordDevice,				// Inputﾃﾞﾊﾞｲｽを受け取る変数のﾎﾟｲﾝﾀ
+		GUID_SysKeyboard,				// 入力デバイスを指定するDUID デフォルトのシステムキーボード
+		&mKeyBordDevice,				// Inputデバイスを受け取る変数のポインタ
 		NULL)))							// 通常『NULL』を渡す
 	{
 		MessageBox(NULL, TEXT("KeyBordDeviceの取得失敗"), NULL, MB_OK);
 		return E_FAIL;
 	}
 
-	// ﾃﾞｰﾀﾌｫｰﾏｯﾄの設定(設定は一度でおｋ)
+	// データフォーマットの設定(設定は一度でおｋ)
 	if (FAILED(mKeyBordDevice->SetDataFormat(
-		&c_dfDIKeyboard))) // ｷｰﾎﾞｰﾄﾞ用ﾃﾞｰﾀﾌｫｰﾏｯﾄ
+		&c_dfDIKeyboard))) // キーボード用データフォーマット
 	{
 		MessageBox(NULL, TEXT("KeyBordDeviceの設定失敗"), NULL, MB_OK);
 		return E_FAIL;
 	}
 
-	//ﾃﾞﾊﾞｲｽの協調ﾓｰﾄﾞの設定(ﾃﾞﾊﾞｲｽとｼｽﾃﾑ間の関係を設定)
+	// デバイスの協調モードの設定(デバイスとシステム間の関係を設定)
 	if (FAILED(mKeyBordDevice->SetCooperativeLevel(
 		window_handle,										// ウィンドウハンドル
 		DISCL_FOREGROUND | DISCL_NONEXCLUSIVE)))	// 『強調レベル』を表すフラグ
@@ -116,7 +116,7 @@ C_DInputKey::Init(HWND window_handle)
 		return E_FAIL;
 	}
 
-	//アクセス権取得(アクセス権を取得して初めて入力できる)
+	// アクセス権取得(アクセス権を取得して初めて入力できる)
 	mKeyBordDevice->Acquire();
 
 	mWindowHandle = window_handle;
@@ -125,13 +125,14 @@ C_DInputKey::Init(HWND window_handle)
 }
 
 /**
- * @brief	開放処理を行う
+ * @brief	開放処理
  */
 void
 C_DInputKey::ReleaseDirectInput()
 {
-	if(mKeyBordDevice){
-		//デバイスへのアクセス権を解放する
+	// デバイスへのアクセス権を解放する
+	if(mKeyBordDevice)
+	{
 		mKeyBordDevice->Unacquire();
 	}
 
@@ -143,7 +144,7 @@ C_DInputKey::ReleaseDirectInput()
 /**
  * @brief	指定のキーの入力判定(押されているかどうか)
  * @param	key		キーの状態
- * @return	true　押されている   false:　押されていない
+ * @return	true	押されている   false:　押されていない
  */
 bool
 C_DInputKey::IsKeyDown(USHORT key)
@@ -161,12 +162,12 @@ C_DInputKey::IsKeyDown(USHORT key)
 /**
  * @brief	指定のキーが瞬間的に押されたか
  * @param	key		キーの状態
- * @return	true　押された   false:　押されていない
+ * @return	true	押された   false:　押されていない
  */
 bool
 C_DInputKey::IsKeyPushed(USHORT key)
 {
-	// 現在押されていて,かつ,直前に押されていない時TRUE
+	// 現在押されていて かつ 直前に押されていない時TRUE
 	if( IsKeyDown(key) && !(mKeyStatePrev[key] & 0x80) ) return TRUE;
 
 	return FALSE;
@@ -175,12 +176,12 @@ C_DInputKey::IsKeyPushed(USHORT key)
 /**
  * @brief	指定のキーが離されたかどうか
  * @param	key		キーの状態
- * @return	true　離された   false:　離されていない
+ * @return	true	離された   false:　離されていない
  */
 bool
 C_DInputKey::IsKeyReleased(USHORT key)
 {
-	//現在押されておらず,かつ,直前に押されている時TRUE
+	// 現在押されておらず かつ 直前に押されている時TRUE
 	if( !(IsKeyDown(key)) && (mKeyStatePrev[key] & 0x80) ) return TRUE;
 
 	return FALSE;
@@ -231,9 +232,9 @@ C_DInputKey::KeyBordRefresh()
 	// データがなければ
 	if(FAILED(h_result))
 	{
-		//デバイスへのアクセス権を取得
+		// デバイスへのアクセス権を取得
 		mKeyBordDevice->Acquire();
-		//キー状態を初期化
+		// キー状態を初期化
 		ZeroMemory(mKeyState, MAX_KEYDATA);
 	}
 }

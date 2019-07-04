@@ -28,9 +28,6 @@
     <ClCompile Include="Program\Actor\ActorYoshi.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Scene\Mission.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp">
       <Filter>Util\Orbit</Filter>
     </ClCompile>
@@ -83,6 +80,9 @@
     <ClCompile Include="Program\System\GameManage.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Scene\Mission.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -112,9 +112,6 @@
     </ClInclude>
     <ClInclude Include="Program\Actor\ActorYoshi.h">
       <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\Mission.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h">
       <Filter>Util\Orbit</Filter>
@@ -169,6 +166,9 @@
     <ClInclude Include="Program\System\GameManage.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="Program\Scene\Mission.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -203,6 +203,9 @@
     </Filter>
     <Filter Include="System">
       <UniqueIdentifier>{11f89dbb-6b7b-43d2-b8b4-d7732866d2f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mission">
+      <UniqueIdentifier>{221fa471-355c-4d3a-9e22-dabdb17e166a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

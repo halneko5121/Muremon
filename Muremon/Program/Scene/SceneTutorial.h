@@ -11,7 +11,6 @@
 #include "Program/Scene/SceneBase.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
-#include "Program/Util/Control.h"
 
 #define TR_RIGHT_X	(1200.f)
 #define TR_CENTER_X	(400.f)

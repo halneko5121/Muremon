@@ -9,7 +9,6 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 
-#include "Program/Util/Control.h"
 #include "Program/Util/Orbit/OrbitCalculation.h"
 #include "Program/DefineGame.h"
 

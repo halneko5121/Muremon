@@ -11,7 +11,6 @@
 #include "Program/Scene/SceneBase.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
-#include "Program/Util/Control.h"
 
 #define POSITION_Y	(150)			// 名前のYの中心位置
 #define PLACE_POSITION_X	(50)	// 順位のフォントXの中心位置
@@ -94,9 +93,6 @@ enum RECT_DATA_RANKING
 
 class SceneRanking : public SceneBase
 {
-private:
-	C_Control	*key;
-
 private:
 	int time_count;	//描画するタイムカウント
 

@@ -16,7 +16,6 @@
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"
-#include "Program/Util/Control.h"
 #include "Program/DefineGame.h"
 
 #define NEGATIVE_PAR1	(40)

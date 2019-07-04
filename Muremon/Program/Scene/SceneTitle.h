@@ -11,7 +11,6 @@
 #include "Program/Scene/SceneBase.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
-#include "Program/Util/Control.h"
 
 #define TITLE_ALPHA_INCREASE		(5)		//アルファ値の増加量
 #define	TITLE_MAX_ALPHA				(255)	//アルファ値の最大

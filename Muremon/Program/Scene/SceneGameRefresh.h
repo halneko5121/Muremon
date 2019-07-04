@@ -11,7 +11,6 @@
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"
-#include "Program/Util/Control.h"
 #include "Program/DefineGame.h"
 
 class SceneGameRefresh : public SceneBase

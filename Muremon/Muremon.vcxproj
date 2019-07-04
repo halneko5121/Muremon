@@ -23,7 +23,6 @@
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
-    <ClCompile Include="Program\Util\Control.cpp" />
     <ClCompile Include="program\System\GameManage.cpp" />
     <ClCompile Include="program\main.cpp" />
     <ClCompile Include="program\Scene\SceneBase.cpp" />
@@ -54,7 +53,6 @@
     <ClInclude Include="Program\Actor\ActorNikuman.h" />
     <ClInclude Include="Program\Actor\ActorNoppo.h" />
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
-    <ClInclude Include="Program\Util\Control.h" />
     <ClInclude Include="program\Define.h" />
     <ClInclude Include="program\DefineGame.h" />
     <ClInclude Include="program\System\GameManage.h" />

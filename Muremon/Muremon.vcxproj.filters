@@ -31,9 +31,6 @@
     <ClCompile Include="Program\Scene\Mission.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Util\Control.cpp">
-      <Filter>Util</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp">
       <Filter>Util\Orbit</Filter>
     </ClCompile>
@@ -116,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="Program\Scene\Mission.h">
       <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Util\Control.h">
-      <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h">
       <Filter>Util\Orbit</Filter>

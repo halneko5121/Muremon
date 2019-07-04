@@ -1,7 +1,6 @@
 #pragma once
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
-#include "Program/Util/Control.h"
 #include "Program/DefineGame.h"
 
 //ボスのコントロールタイプ
@@ -45,7 +44,6 @@ class C_ActorBoss
 private:
 	C_Texture	*texture;
 	C_Vertex	*vertex;
-	C_Control	*key;
 
 	LPDIRECT3DDEVICE9 pDevice;
 

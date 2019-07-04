@@ -32,7 +32,6 @@
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp" />
     <ClCompile Include="program\Scene\GameNormal.cpp" />
-    <ClCompile Include="program\Scene\GameOver.cpp" />
     <ClCompile Include="program\Scene\GameRefresh.cpp" />
     <ClCompile Include="program\Scene\Logo.cpp" />
     <ClCompile Include="program\Scene\Mission.cpp" />
@@ -66,7 +65,6 @@
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitWave.h" />
     <ClInclude Include="program\Scene\GameNormal.h" />
-    <ClInclude Include="program\Scene\GameOver.h" />
     <ClInclude Include="program\Scene\GameRefresh.h" />
     <ClInclude Include="program\Scene\Logo.h" />
     <ClInclude Include="program\Scene\Mission.h" />

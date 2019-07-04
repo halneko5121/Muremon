@@ -31,9 +31,6 @@
     <ClCompile Include="Program\Scene\GameNormal.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Scene\GameOver.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Scene\GameRefresh.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -118,9 +115,6 @@
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="Program\Scene\GameNormal.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\GameOver.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Scene\GameRefresh.h">

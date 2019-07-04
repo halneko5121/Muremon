@@ -42,8 +42,8 @@ enum BOSS_CONTROLTYPE
 class ActorBoss
 {
 private:
-	C_Texture	*texture;
-	C_Vertex	*vertex;
+	Texture	*texture;
+	Vertex	*vertex;
 
 	LPDIRECT3DDEVICE9 pDevice;
 
@@ -139,7 +139,7 @@ private:
 	float add_boss_life;
 
 public:
-	ActorBoss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
+	ActorBoss(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
 	~ActorBoss(void);
 
 	void Init();		//èâä˙âª

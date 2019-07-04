@@ -13,8 +13,8 @@
 class C_DInputKey;
 class C_DInputMouse;
 class C_DWaveSound;
-class C_Texture;
-class C_Vertex;
+class Texture;
+class Vertex;
 class C_Sprite;
 class C_Animetion;
 namespace Dix
@@ -98,8 +98,8 @@ public:
 protected:
     DWORD               mSceneID;		// シーンの番号
 	LPDIRECT3DDEVICE9	mDevice;		// デバイス
-	C_Texture*			mTexture;
-	C_Vertex*			mVertex;
+	Texture*			mTexture;
+	Vertex*			mVertex;
 
 	int					mAlpha;			// 各シーンのalpha値		
 	bool				mIsSceneChange;	// シーンが変わる時を知らせる

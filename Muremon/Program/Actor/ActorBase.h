@@ -167,8 +167,8 @@ public:
 protected:
 	C_OrbitCalculation*	mOrbit;
 
-	C_Texture*			mTexture;
-	C_Vertex*			mVertex;
+	Texture*			mTexture;
+	Vertex*			mVertex;
 
 	CHARADATA			mCharaData[MAX_VALLUE_PLAYER];
 	float				mDegSpin[MAX_VALLUE_PLAYER];

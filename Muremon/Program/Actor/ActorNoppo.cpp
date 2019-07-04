@@ -53,7 +53,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorNoppo::ActorNoppo(C_Vertex* vertex, C_Texture* texture)
+ActorNoppo::ActorNoppo(Vertex* vertex, Texture* texture)
 {
 	mTexture	= texture;
 	mVertex		= vertex;

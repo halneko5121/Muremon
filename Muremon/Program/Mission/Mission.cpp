@@ -62,7 +62,7 @@ namespace
 	};
 }
 
-Mission::Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
+Mission::Mission(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
 	texture = m_texture;
 	vertex	= m_vertex;

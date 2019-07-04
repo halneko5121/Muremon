@@ -26,7 +26,7 @@ void
 C_GameMain::InitGameMain(void)
 {
 	mWindow			= new C_Window;
-	mGraphics		= C_DGraphics::Create();
+	mGraphics		= DirectGraphics::Create();
 	C_DInputKey::Create();
 	C_DInputMouse::Create();
 	C_DFont::Create();
@@ -179,7 +179,7 @@ C_GameMain::ReleaseGameMain(void)
 
 	GetInputKey()->ReleaseDirectInput();
 	APP_SAFE_DELETE(mScene);
-	C_DGraphics::Destroy();
+	DirectGraphics::Destroy();
 	mGraphics = nullptr;
 	C_DFont::Destroy();
 	C_DInputKey::Destroy();

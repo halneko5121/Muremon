@@ -14,23 +14,23 @@
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "dxguid.lib" )
 
-class C_DGraphics
+class DirectGraphics
 {
 public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	C_DGraphics();
+	DirectGraphics();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	~C_DGraphics();
+	~DirectGraphics();
 
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static C_DGraphics*	Create();
+	static DirectGraphics*	Create();
 
 	/**
 	 * @brief	インスタンスの破棄
@@ -80,7 +80,7 @@ public:
 	LPDIRECT3DDEVICE9	GetDevice() { return mDevice;	}
 
 private:
-	static C_DGraphics*		mInstance;				// インスタンス
+	static DirectGraphics*		mInstance;				// インスタンス
 	LPDIRECT3D9				mD3d;					// IDirect3D9インターフェイスへのポインタ
 	LPDIRECT3DDEVICE9		mDevice;				// IDirect3DDevice9インターフェイスへのポインタ
 	D3DPRESENT_PARAMETERS	mD3dPresentParam;		// デバイスのプレゼンテーションパラメータ

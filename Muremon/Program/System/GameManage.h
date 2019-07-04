@@ -13,7 +13,7 @@ class C_Window;
 class SceneBase;
 class C_DInputKey;
 class C_DInputMouse;
-class C_DGraphics;
+class DirectGraphics;
 class C_Sprite;
 class C_DFont;
 class C_DWaveSound;
@@ -59,7 +59,7 @@ public:
 private:
 	C_Window*			mWindow;		// ウィンドウクラスへのポインタ
 	SceneBase*		mScene;			// シーンクラスへのポインタ
-	C_DGraphics*		mGraphics;		// グラフィッククラスへのポインタ
+	DirectGraphics*		mGraphics;		// グラフィッククラスへのポインタ
 	char**				mSoundText;
 	DWORD				mBackground;
 	int					mScore;

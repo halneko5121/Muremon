@@ -11,7 +11,7 @@
 /**
  * @brief	コンストラクタ
  */
-C_Texture::C_Texture()
+Texture::Texture()
 	: mLoadedTextureCount(0)
 {
 }
@@ -19,7 +19,7 @@ C_Texture::C_Texture()
 /**
  * @brief	デストラクタ
  */
-C_Texture::~C_Texture()
+Texture::~Texture()
 {
 }
 
@@ -30,7 +30,7 @@ C_Texture::~C_Texture()
  * @return	true:読み込み成功   false:読み込み失敗
  */
 bool
-C_Texture::LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
+Texture::LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
 {
 	FILE *fp;							// ファイルポインタ
 	char load_file_name[MAX_STRING];	// カウント+読み込み用
@@ -93,7 +93,7 @@ C_Texture::LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
  * @brief	テクスチャデータを全て開放する
  */
 void
-C_Texture::AllReleaseTexture()
+Texture::AllReleaseTexture()
 {
 	mLoadedTextureCount = 0;			// 全体数を初期化しておく
 	APP_SAFE_DELETE_ARRAY(mTexture);	// 開放処理

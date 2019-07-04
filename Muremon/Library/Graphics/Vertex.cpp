@@ -22,7 +22,7 @@ typedef struct _CUSTOM_VERTEX
 /**
  * @brief	コンストラクタ
  */
-C_Vertex::C_Vertex()
+Vertex::Vertex()
 {
 
 }
@@ -30,7 +30,7 @@ C_Vertex::C_Vertex()
 /**
  * @brief	デストラクタ
  */
-C_Vertex::~C_Vertex()
+Vertex::~Vertex()
 {
 }
 
@@ -40,7 +40,7 @@ C_Vertex::~C_Vertex()
  * @param	pD3dDevice  デバイス
  */
 void
-C_Vertex::SetTextureData(LPDIRECT3DTEXTURE9* texture, LPDIRECT3DDEVICE9 d3d_device)
+Vertex::SetTextureData(LPDIRECT3DTEXTURE9* texture, LPDIRECT3DDEVICE9 d3d_device)
 {
 	// テクスチャのデータを取得
 	D3DSURFACE_DESC desc;
@@ -73,7 +73,7 @@ C_Vertex::SetTextureData(LPDIRECT3DTEXTURE9* texture, LPDIRECT3DDEVICE9 d3d_devi
  * @param	scale_y    縦幅の拡大率
  */
 void
-C_Vertex::SetScale(float scale_x , float scale_y)
+Vertex::SetScale(float scale_x , float scale_y)
 {
 	mScaleX = scale_x;	// 横倍率セット
 	mScaleY = scale_y;	// 縦倍率セット
@@ -84,7 +84,7 @@ C_Vertex::SetScale(float scale_x , float scale_y)
  * @param	degree		回転させる角度
  */
 void
-C_Vertex::SetAngle(float degree)
+Vertex::SetAngle(float degree)
 {
 	mDegree = degree;
 }
@@ -97,13 +97,13 @@ C_Vertex::SetAngle(float degree)
  * @param	blue	青の値
  */
 void
-C_Vertex::SetColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
+Vertex::SetColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
 {
 	mColor = D3DCOLOR_ARGB(alpha , red , green , blue);
 }
 
 void
-C_Vertex::SetColor2(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue , int Num)
+Vertex::SetColor2(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue , int Num)
 {
 	mColor1[Num] = D3DCOLOR_ARGB(alpha , red , green , blue);
 }
@@ -115,7 +115,7 @@ C_Vertex::SetColor2(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR bl
  * @return	アルファ値
  */
 int
-C_Vertex::FadeIn(int fade_speed ,int texture_alpha)
+Vertex::FadeIn(int fade_speed ,int texture_alpha)
 {
 	mAlpha = texture_alpha;
 	mAlpha += fade_speed;
@@ -135,7 +135,7 @@ C_Vertex::FadeIn(int fade_speed ,int texture_alpha)
  * @return	アルファ値
  */
 int
-C_Vertex::FadeOut(int fade_speed ,int texture_alpha)
+Vertex::FadeOut(int fade_speed ,int texture_alpha)
 {
 	mAlpha = texture_alpha;
 	mAlpha -= fade_speed;
@@ -152,7 +152,7 @@ C_Vertex::FadeOut(int fade_speed ,int texture_alpha)
  * @brief	テクスチャの矩形を指定
  */
 void
-C_Vertex::SetTextureRect(long left , long top , long right , long bottom)
+Vertex::SetTextureRect(long left , long top , long right , long bottom)
 {
 	// 矩形データセット
 	mRectPosition.top		= top;
@@ -166,7 +166,7 @@ C_Vertex::SetTextureRect(long left , long top , long right , long bottom)
  * @param	x	X座標
  * @param	y	Y座標
  */
-void C_Vertex::Draw(float x , float y)
+void Vertex::Draw(float x , float y)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
@@ -221,7 +221,7 @@ void C_Vertex::Draw(float x , float y)
  * @param	y			Y座標
  */
 void
-C_Vertex::DrawLT(float x , float y)
+Vertex::DrawLT(float x , float y)
 {
 	// テクスチャの距離を計算(ここで倍率も計算)
 	float texSizeX = (float)abs(mRectPosition.right - mRectPosition.left);
@@ -276,7 +276,7 @@ C_Vertex::DrawLT(float x , float y)
  * @param	y			Y座標
  */
 void
-C_Vertex::DrawRB(float x, float y)
+Vertex::DrawRB(float x, float y)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
@@ -330,7 +330,7 @@ C_Vertex::DrawRB(float x, float y)
  * @param	x	X座標
  * @param	y	Y座標
  */
-void C_Vertex::DrawCB(float x, float y)
+void Vertex::DrawCB(float x, float y)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
@@ -386,7 +386,7 @@ void C_Vertex::DrawCB(float x, float y)
  * @param	rect_num	登録されている矩形のNo
  */
 void
-C_Vertex::DrawF(float x, float y, int rect_num)
+Vertex::DrawF(float x, float y, int rect_num)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left) / 2.0f;
@@ -441,7 +441,7 @@ C_Vertex::DrawF(float x, float y, int rect_num)
  * @return	ロードが成功したか失敗したか
  */
 bool
-C_Vertex::LoadRect(char *file_name)
+Vertex::LoadRect(char *file_name)
 {
 	mLoadedRectCount = 0;
 	FILE *fp;							// ファイルポインタ
@@ -489,7 +489,7 @@ C_Vertex::LoadRect(char *file_name)
  * @brief	矩形データを開放
  */
 void
-C_Vertex::AllReleaseRect(void)
+Vertex::AllReleaseRect(void)
 {
 	// 読み込まれた矩形データを全て開放する処理
 	APP_SAFE_DELETE_ARRAY(mRectPosition2);	// 開放処理

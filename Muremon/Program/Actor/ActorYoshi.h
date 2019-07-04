@@ -11,7 +11,7 @@
 class ActorYoshi : public ActorBase
 {
 public:
-	ActorYoshi(C_Vertex *vertex, C_Texture *texture);
+	ActorYoshi(Vertex *vertex, Texture *texture);
 	~ActorYoshi(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num);

@@ -9,18 +9,18 @@
 
 #include "Texture.h"
 
-class C_Vertex
+class Vertex
 {
 public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	C_Vertex();
+	Vertex();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	~C_Vertex();
+	~Vertex();
 
 	/**
 	 * @brief	テクスチャのデータをセットする

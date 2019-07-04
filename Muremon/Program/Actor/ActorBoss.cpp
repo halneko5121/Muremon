@@ -1,7 +1,7 @@
 #include "ActorBoss.h"
 #include "Library/Sound/DirectSound.h"
 
-ActorBoss::ActorBoss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
+ActorBoss::ActorBoss(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
 	texture = m_texture;
 	vertex	= m_vertex;

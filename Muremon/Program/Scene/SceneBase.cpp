@@ -17,8 +17,8 @@
 SceneBase::SceneBase()
 {
     mSceneID	= cSceneName_Logo;    // ‰Šú‰»
-	mVertex		= new C_Vertex();
-	mTexture	= new C_Texture();
+	mVertex		= new Vertex();
+	mTexture	= new Texture();
 }
 
 /**

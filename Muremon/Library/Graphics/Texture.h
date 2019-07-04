@@ -9,18 +9,18 @@
 
 #include "DirectGraphics.h"
 
-class C_Texture
+class Texture
 {
 public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	C_Texture();
+	Texture();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	~C_Texture();
+	~Texture();
 
 	/**
 	 * @brief	テクスチャデータをロードする

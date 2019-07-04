@@ -8,12 +8,12 @@
 
 #include "DirectGraphics.h"
 
-C_DGraphics* C_DGraphics::mInstance = nullptr;
+DirectGraphics* DirectGraphics::mInstance = nullptr;
 
  /**
  * @brief	コンストラクタ
  */
-C_DGraphics::C_DGraphics()
+DirectGraphics::DirectGraphics()
 	: mD3d(nullptr)
 	, mDevice(nullptr)
 {
@@ -22,18 +22,18 @@ C_DGraphics::C_DGraphics()
 /**
  * @brief	デストラクタ
  */
-C_DGraphics::~C_DGraphics()
+DirectGraphics::~DirectGraphics()
 {
 }
 
 /**
  * @brief	インスタンスの生成
  */
-C_DGraphics*
-C_DGraphics::Create()
+DirectGraphics*
+DirectGraphics::Create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
-	mInstance = new C_DGraphics();
+	mInstance = new DirectGraphics();
 	return mInstance;
 }
 
@@ -41,7 +41,7 @@ C_DGraphics::Create()
  * @brief	インスタンスの破棄
  */
 void
-C_DGraphics::Destroy()
+DirectGraphics::Destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }
@@ -54,7 +54,7 @@ C_DGraphics::Destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-C_DGraphics::InitDGraphics(C_Window *wind, HWND hWnd, const int clientSizeX, const int clientSizeY)
+DirectGraphics::InitDGraphics(C_Window *wind, HWND hWnd, const int clientSizeX, const int clientSizeY)
 {
 	D3DDISPLAYMODE	d3ddm;
 
@@ -129,7 +129,7 @@ C_DGraphics::InitDGraphics(C_Window *wind, HWND hWnd, const int clientSizeX, con
  * @brief	ウインドウ・サイズの変更処理
  */
 void
-C_DGraphics::ChangeWindowSize(C_Window *wind, HWND hWnd, int clientSizeX , int clientSizeY)
+DirectGraphics::ChangeWindowSize(C_Window *wind, HWND hWnd, int clientSizeX , int clientSizeY)
 {	
 	if(wind->IsWindowMode()){
 		mD3dPresentParam.Windowed = true;					//ウィンドウの場合
@@ -147,7 +147,7 @@ C_DGraphics::ChangeWindowSize(C_Window *wind, HWND hWnd, int clientSizeX , int c
  * @brief	描画設定
  */
 void
-C_DGraphics::SetRender()
+DirectGraphics::SetRender()
 {
 	// アルファブレンディング
 	mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
@@ -170,7 +170,7 @@ C_DGraphics::SetRender()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-C_DGraphics::RenderStart(DWORD background)
+DirectGraphics::RenderStart(DWORD background)
 {
 	// ビューポートと深度バッファのクリアとステンシルバッファの削除(シーンのクリア)
 	if(FAILED(mDevice->Clear(
@@ -192,7 +192,7 @@ C_DGraphics::RenderStart(DWORD background)
  * @brief	描画終了
  */
 void
-C_DGraphics::RenderEnd()
+DirectGraphics::RenderEnd()
 {
 	// 描画終了
 	mDevice->EndScene();
@@ -209,7 +209,7 @@ C_DGraphics::RenderEnd()
  * @brief	開放処理
  */
 void
-C_DGraphics::ReleaseDGraphics()
+DirectGraphics::ReleaseDGraphics()
 {
 	// LPDIRECT3DDEVICE9(デバイスオブジェクト)の開放
 	APP_SAFE_RELEASE(mDevice);

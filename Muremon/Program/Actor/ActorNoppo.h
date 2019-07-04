@@ -11,7 +11,7 @@
 class ActorNoppo : public ActorBase
 {
 public:
-	ActorNoppo(C_Vertex *vertex, C_Texture  *texture);
+	ActorNoppo(Vertex *vertex, Texture  *texture);
 	~ActorNoppo(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num);

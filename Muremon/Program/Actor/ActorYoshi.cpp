@@ -59,7 +59,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorYoshi::ActorYoshi(C_Vertex* vertex, C_Texture* texture)
+ActorYoshi::ActorYoshi(Vertex* vertex, Texture* texture)
 {
 	mTexture	= texture;
 	mVertex		= vertex;

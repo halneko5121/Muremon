@@ -47,7 +47,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorNikuman::ActorNikuman(C_Vertex* vertex , C_Texture* texture)
+ActorNikuman::ActorNikuman(Vertex* vertex , Texture* texture)
 {
 	mVertex		= vertex;
 	mTexture	= texture;

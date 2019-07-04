@@ -11,7 +11,7 @@
 class ActorNikuman :	public ActorBase
 {
 public:
-	ActorNikuman(C_Vertex *vertex, C_Texture *texture);
+	ActorNikuman(Vertex *vertex, Texture *texture);
 	~ActorNikuman(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc);

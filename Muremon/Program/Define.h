@@ -56,18 +56,6 @@ struct POS_CC{
 };
 //追加↑三上3/26
 
-enum KEY
-{
-	KEY_NO_PUSH,	//キーがなにも押されていない状態
-	KEY_UP,
-	KEY_DOWN,
-	KEY_LEFT,
-	KEY_RIGHT,
-	KEY_X,
-	KEY_Z,
-	KEY_ENTER,
-};
-
 enum SOUND_DATA
 {						
 	S_BGM_TITLE,		//タイトルBGM

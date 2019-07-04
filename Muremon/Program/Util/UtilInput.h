@@ -11,6 +11,12 @@ namespace UtilInput
 {
 	bool		IsKeyPushed(unsigned short key);
 	bool		IsKeyPushedDecide();
+	bool		IsKeyPushedLineOne();
+	bool		IsKeyPushedLineTwo();
+	bool		IsKeyPushedLineThree();
+	bool		IsKeyPushedOdd();
+	bool		IsKeyPushedEven();
+
 	bool		IsKeyDown(unsigned short key);
 	bool		IsKeyReleased(unsigned short key);
 	bool		IsAnyKeyDown();

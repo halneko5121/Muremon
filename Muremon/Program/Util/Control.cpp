@@ -7,6 +7,7 @@
 //
 //---------------------------------------------
 #include "Control.h"
+#include "UtilInput.h"
 
 C_Control::C_Control(void)
 {
@@ -54,126 +55,52 @@ int C_Control::KeyCheck()
 int C_Control::KeyCheckGame()
 {
 	//一段目
-	if(GetAsyncKeyState('Q') & 0x8000){
-		key = KEY_GROUND_1;
+	if (UtilInput::IsKeyPushedLineOne())
+	{
+		if (UtilInput::IsKeyPushedOdd())
+		{
+			key = KEY_GROUND_1;
+		}
+		else if (UtilInput::IsKeyPushedEven())
+		{
+			key = KEY_SKY_1;
+		}
 	}
-	else if(GetAsyncKeyState('W') & 0x8000){
-		key = KEY_SKY_1;
-	}
-	else if(GetAsyncKeyState('E') & 0x8000){
-		key = KEY_GROUND_1;
-	}
-	else if(GetAsyncKeyState('R') & 0x8000){
-		key = KEY_SKY_1;
-	}
-	else if(GetAsyncKeyState('T') & 0x8000){
-		key = KEY_GROUND_1;
-	}
-	else if(GetAsyncKeyState('Y') & 0x8000){
-		key = KEY_SKY_1;
-	}
-	else if(GetAsyncKeyState('U') & 0x8000){
-		key = KEY_GROUND_1;
-	}
-	else if(GetAsyncKeyState('I') & 0x8000){
-		key = KEY_SKY_1;
-	}
-	else if(GetAsyncKeyState('O') & 0x8000){
-		key = KEY_GROUND_1;
-	}
-	else if(GetAsyncKeyState('P') & 0x8000){
-		key = KEY_SKY_1;
-	}
-	else if(GetAsyncKeyState(VK_OEM_3) & 0x8000){
-		key = KEY_GROUND_1;
-	}
-	else if(GetAsyncKeyState(VK_OEM_4) & 0x8000){
-		key = KEY_SKY_1;
-	}
-	//一段目終
 	//二段目
-	else if(GetAsyncKeyState('A') & 0x8000){
-		key = KEY_GROUND_2;
+	else if (UtilInput::IsKeyPushedLineTwo())
+	{
+		if (UtilInput::IsKeyPushedOdd())
+		{
+			key = KEY_GROUND_2;
+		}
+		else if (UtilInput::IsKeyPushedEven())
+		{
+			key = KEY_SKY_2;
+		}
 	}
-	else if(GetAsyncKeyState('S') & 0x8000){
-		key = KEY_SKY_2;
-	}
-	else if(GetAsyncKeyState('D') & 0x8000){
-		key = KEY_GROUND_2;
-	}
-	else if(GetAsyncKeyState('F') & 0x8000){
-		key = KEY_SKY_2;
-	}
-	else if(GetAsyncKeyState('G') & 0x8000){
-		key = KEY_GROUND_2;
-	}
-	else if(GetAsyncKeyState('H') & 0x8000){
-		key = KEY_SKY_2;
-	}
-	else if(GetAsyncKeyState('J') & 0x8000){
-		key = KEY_GROUND_2;
-	}
-	else if(GetAsyncKeyState('K') & 0x8000){
-		key = KEY_SKY_2;
-	}
-	else if(GetAsyncKeyState('L') & 0x8000){
-		key = KEY_GROUND_2;
-	}
-	else if(GetAsyncKeyState(VK_OEM_PLUS) & 0x8000){
-		key = KEY_SKY_2;
-	}
-	else if(GetAsyncKeyState(VK_OEM_1) & 0x8000){
-		key = KEY_GROUND_2;
-	}
-	else if(GetAsyncKeyState(VK_OEM_6) & 0x8000){
-		key = KEY_SKY_2;
-	}
-	//二段目終
-	//三段目
-	else if(GetAsyncKeyState('Z') & 0x8000){
-		key = KEY_GROUND_3;
-	}
-	else if(GetAsyncKeyState('X') & 0x8000){
-		key = KEY_SKY_3;
-	}
-	else if(GetAsyncKeyState('C') & 0x8000){
-		key = KEY_GROUND_3;
-	}
-	else if(GetAsyncKeyState('V') & 0x8000){
-		key = KEY_SKY_3;
-	}
-	else if(GetAsyncKeyState('B') & 0x8000){
-		key = KEY_GROUND_3;
-	}
-	else if(GetAsyncKeyState('N') & 0x8000){
-		key = KEY_SKY_3;
-	}
-	else if(GetAsyncKeyState('M') & 0x8000){
-		key = KEY_GROUND_3;
-	}
-	else if(GetAsyncKeyState(VK_OEM_COMMA) & 0x8000){
-		key = KEY_SKY_3;
-	}
-	else if(GetAsyncKeyState(VK_OEM_PERIOD) & 0x8000){
-		key = KEY_GROUND_3;
-	}
-	else if(GetAsyncKeyState(VK_OEM_2) & 0x8000){
-		key = KEY_SKY_3;
-	}
-	else if(GetAsyncKeyState(VK_OEM_5) & 0x8000){
-		key = KEY_GROUND_3;
+	else if (UtilInput::IsKeyPushedLineThree())
+	{
+		if (UtilInput::IsKeyPushedOdd())
+		{
+			key = KEY_GROUND_3;
+		}
+		else if (UtilInput::IsKeyPushedEven())
+		{
+			key = KEY_SKY_3;
+		}
 	}
 	else if(GetAsyncKeyState(VK_RETURN) & 0x8000){
 		key = KEY_ENTER;
 	}
-	//三段目終
 	else{
 		key = 0;
 	}
+
 	if(key != keep_key){
 		keep_key = key;
 		return key;
 	}
+
 	return 0;
 }
 

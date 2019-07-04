@@ -24,7 +24,7 @@
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
     <ClCompile Include="Program\Util\Control.cpp" />
-    <ClCompile Include="program\gManage\GameManage.cpp" />
+    <ClCompile Include="program\System\GameManage.cpp" />
     <ClCompile Include="program\main.cpp" />
     <ClCompile Include="program\Scene\SceneBase.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
@@ -39,7 +39,7 @@
     <ClCompile Include="program\Scene\Ranking.cpp" />
     <ClCompile Include="program\Scene\Title.cpp" />
     <ClCompile Include="program\Scene\Tutorial.cpp" />
-    <ClCompile Include="UtilInput.cpp" />
+    <ClCompile Include="Program\Util\UtilInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Library\Font\DirectFont.h" />
@@ -57,7 +57,7 @@
     <ClInclude Include="Program\Util\Control.h" />
     <ClInclude Include="program\Define.h" />
     <ClInclude Include="program\DefineGame.h" />
-    <ClInclude Include="program\gManage\GameManage.h" />
+    <ClInclude Include="program\System\GameManage.h" />
     <ClInclude Include="program\main.h" />
     <ClInclude Include="program\Scene\SceneBase.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
@@ -72,7 +72,7 @@
     <ClInclude Include="program\Scene\Ranking.h" />
     <ClInclude Include="program\Scene\Title.h" />
     <ClInclude Include="program\Scene\Tutorial.h" />
-    <ClInclude Include="UtilInput.h" />
+    <ClInclude Include="Program\Util\UtilInput.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>Muremon</ProjectName>

@@ -88,7 +88,7 @@ void SceneGameNormal::Init()
 	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 
-	mMission = new C_Mission(mTexture, mVertex, mDevice);
+	mMission = new Mission(mTexture, mVertex, mDevice);
 }
 
 bool SceneGameNormal::Update()

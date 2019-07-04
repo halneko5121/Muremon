@@ -72,7 +72,7 @@ enum MISSION_NUMBER
 	MISSION_14,	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 };
 
-class C_Mission
+class Mission
 {
 private:
 	C_Texture	*texture;
@@ -176,6 +176,6 @@ public:
 	void Mission13D();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void Mission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
-	~C_Mission(void);
+	Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
+	~Mission(void);
 };

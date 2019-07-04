@@ -62,7 +62,7 @@ public:
 	void HitEffectDraw();
 
 private:
-	C_Mission*			mMission;
+	Mission*			mMission;
 	ActorBoss*		mBoss;
 
 	ActorNikuman*		mNiku;

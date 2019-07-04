@@ -18,7 +18,7 @@ C_Mission::C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 a
 	key_state	= 0;
 	time		= TEN_SECOND;
 	key_cnt		= 0;
-	type_key	= 1;
+	success_type_count	= 1;
 	flag_mission_state = MISSION_SEIKO;
 	mission_state = MISSION_START;
 	flag_draw	= 0;
@@ -49,7 +49,7 @@ void C_Mission::Init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	key_state	= 0;
 	time		= TEN_SECOND;
 	key_cnt		= 0;
-	type_key	= 1;
+	success_type_count	= 1;
 	flag_mission_state = MISSION_SEIKO;
 	mission_state = MISSION_START;
 	flag_draw	= 0;
@@ -258,81 +258,70 @@ void C_Mission::Mission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	if(time <= 0)
 	{
-		if(type_key == MISSION4_FONT_NUM)	mission_state = MISSION_SEIKO;
+		if(success_type_count == MISSION4_FONT_NUM)	mission_state = MISSION_SEIKO;
 		else								mission_state = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(type_key < MISSION4_FONT_NUM){
-		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+	if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+	{
+		if (success_type_count == 1 || success_type_count == 7)
 		{
-			if(type_key == 1 || type_key == 7)
-			{
-				type_key++;
-			}
+			success_type_count++;
 		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
+	}
+
+	if(success_type_count < MISSION4_FONT_NUM)
+	{
+		switch (success_type_count)
 		{
-			if(type_key == 2 || type_key == 15)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
-		{
-			if(type_key == 3 || type_key == 14)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
-		{
-			if(type_key == 4 || type_key == 11)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_M))
-		{
-			if(type_key == 5)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
-		{
-			if(type_key == 6)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
-		{
-			if(type_key == 8 || type_key == 10)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
-		{
-			if(type_key == 9)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_G))
-		{
-			if(type_key == 12)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
-		{
-			if(type_key == 13)
-			{
-				type_key++;
-			}
+		case 1:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 2:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 3:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 4:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+		case 5:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_M)) success_type_count++;
+			break;
+		case 6:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 7:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 8:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 9:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 10:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 11:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+		case 12:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_G)) success_type_count++;
+			break;
+		case 13:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			break;
+		case 14:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 15:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		default:
+			break;
 		}
 	}
 	time--;
@@ -342,91 +331,85 @@ void C_Mission::Mission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	if (time <= 0)
 	{
-		if(type_key == MISSION5_FONT_NUM)	mission_state = MISSION_SEIKO;
+		if(success_type_count == MISSION5_FONT_NUM)	mission_state = MISSION_SEIKO;
 		else								mission_state = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(type_key < MISSION5_FONT_NUM)
+	if(success_type_count < MISSION5_FONT_NUM)
 	{
-		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		switch (success_type_count)
 		{
-			if(type_key == 1 || type_key == 7 || type_key == 9)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
-		{
-			if(type_key == 2 || type_key == 8 || type_key == 13)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
-		{
-			if(type_key == 3 || type_key == 12 || type_key == 16 || type_key == 17)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
-		{
-			if(type_key == 4 || type_key == 20 || type_key == 22)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_M))
-		{
-			if(type_key == 5)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
-		{
-			if(type_key == 6 || type_key == 15 || type_key == 18)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
-		{
-			if(type_key == 10)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
-		{
-			if(type_key == 11){
-				type_key++;
-			}
-			else{
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
-		{
-			if(type_key == 14)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_J))
-		{
-			if(type_key == 19){
-				type_key++;
-			}
-			else{
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
-		{
-			if(type_key == 21)
-			{
-				type_key++;
-			}
+		case 1:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 2:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 3:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 4:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+		case 5:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_M)) success_type_count++;
+			break;
+		case 6:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 7:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 8:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 9:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 10:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			break;
+
+		case 11:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			break;
+		case 12:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 13:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 14:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			break;
+		case 15:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 16:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 17:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 18:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 19:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_J)) success_type_count++;
+			break;
+		case 20:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+
+		case 21:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 22:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+		default:
+			break;
 		}
 	}
 	time--;
@@ -436,89 +419,66 @@ void C_Mission::Mission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	if (time <= 0)
 	{
-		if(type_key == MISSION6_FONT_NUM)	mission_state = MISSION_SEIKO;
+		if(success_type_count == MISSION6_FONT_NUM)	mission_state = MISSION_SEIKO;
 		else								mission_state = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(type_key < MISSION6_FONT_NUM)
+	if(success_type_count < MISSION6_FONT_NUM)
 	{
-		if (UtilInput::IsKeyPushed(UtilInput::cKey_Y))
+		switch (success_type_count)
 		{
-			if(type_key == 1)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
-		{
-			if(type_key == 2 || type_key == 8)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
-		{
-			if(type_key == 3)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
-		{
-			if(type_key == 4 || type_key == 10)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
-		{
-			if(type_key == 5 || type_key == 13)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
-		{
-			if(type_key == 6 || type_key == 12 || type_key == 14)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
-		{
-			if(type_key == 7)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_H))
-		{
-			if(type_key == 9)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_P))
-		{
-			if(type_key == 11)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_C))
-		{
-			if(type_key == 15)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
-		{
-			if(type_key == 16)
-			{
-				type_key++;
-			}
+		case 1:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_Y)) success_type_count++;
+			break;
+		case 2:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 3:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			break;
+		case 4:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 5:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 6:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 7:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			break;
+		case 8:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 9:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			break;
+		case 10:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+
+		case 11:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+		case 12:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 13:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 14:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 15:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_C)) success_type_count++;
+			break;
+		case 16:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		default:
+			break;
 		}
 	}
 	time--;
@@ -528,90 +488,72 @@ void C_Mission::Mission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	if (time <= 0)
 	{
-		if (type_key == MISSION7_FONT_NUM)	mission_state = MISSION_SEIKO;
+		if (success_type_count == MISSION7_FONT_NUM)	mission_state = MISSION_SEIKO;
 		else								mission_state = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(type_key < MISSION7_FONT_NUM)
+	if(success_type_count < MISSION7_FONT_NUM)
 	{
-		if (UtilInput::IsKeyPushed(UtilInput::cKey_Y))
+		switch (success_type_count)
 		{
-			if(type_key == 1)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
-		{
-			if(type_key == 2 || type_key == 8 || type_key == 16 || type_key == 17)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
-		{
-			if(type_key == 3 || type_key == 11 || type_key == 14)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
-		{
-			if(type_key == 4)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
-		{
-			if(type_key == 5 || type_key == 18)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
-		{
-			if(type_key == 6)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
-		{
-			if(type_key == 7)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_H))
-		{
-			if(type_key == 9 || type_key == 15)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
-		{
-			if(type_key == 10){
-				type_key++;
-			}
-			else{
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
-		{
-			if(type_key == 12)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
-		{
-			if(type_key == 13)
-			{
-				type_key++;
-			}
+		case 1:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_Y)) success_type_count++;
+			break;
+		case 2:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 3:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			break;
+		case 4:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 5:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 6:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		case 7:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			break;
+		case 8:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 9:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			break;
+		case 10:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+
+		case 11:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			break;
+		case 12:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			break;
+		case 13:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 14:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			break;
+		case 15:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			break;
+		case 16:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 17:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 18:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		default:
+			break;
 		}
 	}
 	time--;
@@ -621,58 +563,60 @@ void C_Mission::Mission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	if (time <= 0)
 	{
-		if (type_key == MISSION8_FONT_NUM)	mission_state = MISSION_SEIKO;
+		if (success_type_count == MISSION8_FONT_NUM)	mission_state = MISSION_SEIKO;
 		else								mission_state = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(type_key < MISSION8_FONT_NUM)
+	if(success_type_count < MISSION8_FONT_NUM)
 	{
-		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		switch (success_type_count)
 		{
-			if(type_key == 1)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
-		{
-			if(type_key == 2 || type_key == 5 || type_key == 7)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_P))
-		{
-			if(type_key == 3 || type_key == 4 || type_key == 10 || type_key == 11)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
-		{
-			if(type_key == 6 || type_key == 8){
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
-		{
-			if(type_key == 9 || type_key == 12)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
-		{
-			if(type_key == 13){
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
-		{
-			if(type_key == 14){
-				type_key++;
-			}
+		case 1:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 2:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 3:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+		case 4:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+		case 5:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 6:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 7:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 8:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 9:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			break;
+		case 10:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+
+		case 11:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+		case 12:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			break;
+		case 13:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 14:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		default:
+			break;
 		}
 	}
 	time--;
@@ -682,88 +626,75 @@ void C_Mission::Mission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	if (time <= 0)
 	{
-		if (type_key == MISSION9_FONT_NUM)	mission_state = MISSION_SEIKO;
-		else								mission_state = MISSION_SIPPAI;
+		if (success_type_count == MISSION9_FONT_NUM)	mission_state = MISSION_SEIKO;
+		else											mission_state = MISSION_SIPPAI;
 		return;
 	}
 
-	if(type_key < MISSION9_FONT_NUM)
+	if(success_type_count < MISSION9_FONT_NUM)
 	{
-		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		switch (success_type_count)
 		{
-			if(type_key == 1)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
-		{
-			if(type_key == 2 || type_key == 5 || type_key == 7 || type_key == 15)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_P))
-		{
-			if(type_key == 3 || type_key == 4 || type_key == 16)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_B))
-		{
-			if(type_key == 6)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
-		{
-			if(type_key == 8 || type_key == 14)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
-		{
-			if(type_key == 9 || type_key == 17)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
-		{
-			if(type_key == 10)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
-		{
-			if(type_key == 11 || type_key == 13)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
-		{
-			if(type_key == 12)
-			{
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
-		{
-			if(type_key == 18){
-				type_key++;
-			}
-		}
-		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
-		{
-			if(type_key == 19)
-			{
-				type_key++;
-			}
+		case 1:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			break;
+		case 2:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 3:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+		case 4:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+		case 5:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 6:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_B)) success_type_count++;
+			break;
+		case 7:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 8:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 9:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+		case 10:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			break;
+
+		case 11:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 12:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			break;
+		case 13:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			break;
+		case 14:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			break;
+		case 15:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			break;
+		case 16:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			break;
+		case 17:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			break;
+		case 18:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			break;
+		case 19:
+			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			break;
+		default:
+			break;
 		}
 	}
 	time--;
@@ -983,7 +914,7 @@ void C_Mission::Mission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	DrawNumT();
 	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-	for(int i = 1;i < type_key;i++){
+	for(int i = 1;i < success_type_count;i++){
 		vertex->DrawF(125.f + 29.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -992,7 +923,7 @@ void C_Mission::Mission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	DrawNumT();
 	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-	for(int i = 1;i < type_key;i++){
+	for(int i = 1;i < success_type_count;i++){
 		vertex->DrawF(76.f + 28.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1001,7 +932,7 @@ void C_Mission::Mission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	DrawNumT();
 	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-	for(int i = 1;i < type_key;i++){
+	for(int i = 1;i < success_type_count;i++){
 		vertex->DrawF(118.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1010,7 +941,7 @@ void C_Mission::Mission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	DrawNumT();
 	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-	for(int i = 1;i < type_key;i++){
+	for(int i = 1;i < success_type_count;i++){
 		vertex->DrawF(108.f + 28.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1019,7 +950,7 @@ void C_Mission::Mission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	DrawNumT();
 	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-	for(int i = 1;i < type_key;i++){
+	for(int i = 1;i < success_type_count;i++){
 		vertex->DrawF(131.f + 30.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1028,7 +959,7 @@ void C_Mission::Mission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	DrawNumT();
 	vertex->SetTextureData(texture->GetTextureData(T_GAME_FONT),pDevice);
-	for(int i = 1;i < type_key;i++){
+	for(int i = 1;i < success_type_count;i++){
 		vertex->DrawF(96.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }

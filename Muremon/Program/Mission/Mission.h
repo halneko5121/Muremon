@@ -106,7 +106,7 @@ private:
 
 	int flag_time_cnt;	//タイムカウントのフラグ
 
-	int type_key;		//タイピング時正解しているか判定
+	int success_type_count;	//タイピング時正解しているか判定
 
 	int flag_mission_state;	//ミッション成功・失敗
 

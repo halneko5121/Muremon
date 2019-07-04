@@ -66,46 +66,6 @@ enum KEY
 	KEY_X,
 	KEY_Z,
 	KEY_ENTER,
-
-//↓ゲーム
-	//1列目
-	KEY_GROUND_1,	//地上キー1
-	KEY_SKY_1,		//空中キー1
-	//2列目
-	KEY_GROUND_2,	//地上キー2
-	KEY_SKY_2,		//空中キー2
-	//3列目
-	KEY_GROUND_3,	//地上キー3
-	KEY_SKY_3,		//空中キー3
-//↑ゲーム
-
-//↓ミッション
-	KEY_Q,
-	KEY_W,
-	KEY_E,
-	KEY_R,
-	KEY_T,
-	KEY_Y,
-	KEY_U,
-	KEY_I,
-	KEY_O,
-	KEY_P,
-
-	KEY_A,
-	KEY_S,
-	KEY_D,
-	KEY_F,
-	KEY_G,
-	KEY_H,
-	KEY_J,
-	KEY_K,
-	KEY_L,
-
-	KEY_C,
-	KEY_V,
-	KEY_B,
-	KEY_N,
-	KEY_M,
 };
 
 enum SOUND_DATA

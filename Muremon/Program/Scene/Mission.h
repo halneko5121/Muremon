@@ -78,7 +78,6 @@ class C_Mission
 private:
 	C_Texture	*texture;
 	C_Vertex	*vertex;
-	C_Control	*key;
 
 	LPDIRECT3DDEVICE9 pDevice;
 

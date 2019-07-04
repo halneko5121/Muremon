@@ -8,8 +8,6 @@ C_Mission::C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 a
 	vertex	= m_vertex;
 	pDevice = apDev;
 
-	key = new C_Control();
-
 	cnt_key_nikuman = 0;	//にくまんの押されたキーの数をカウント
 
 	cnt_key_yoshitaro = 0;	//吉たろうの押されたキーの数をカウント
@@ -210,19 +208,15 @@ void C_Mission::MissionControl()
 
 void C_Mission::Mission1()	//『10秒以内に100回連打せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckGame();
+	if (time <= 0)
+	{
+		if (key_cnt >= 100)	mission_state = MISSION_SEIKO;
+		else				mission_state = MISSION_SIPPAI;
+		return;
 	}
-	else{
-		if(key_cnt >= 100){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
-	}
-	
-	if(key_state != 0){
+
+	if (UtilInput::IsAnyKeyPushed())
+	{
 		key_cnt++;
 	}
 	time--;
@@ -230,19 +224,15 @@ void C_Mission::Mission1()	//『10秒以内に100回連打せよ！！』
 
 void C_Mission::Mission2()	//『10秒間でちょうど50回連打せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckGame();
-	}
-	else{
-		if(key_cnt == 50){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
+	if (time <= 0)
+	{
+		if (key_cnt == 50)	mission_state = MISSION_SEIKO;
+		else				mission_state = MISSION_SIPPAI;
+		return;
 	}
 	
-	if(key_state != 0){
+	if (UtilInput::IsAnyKeyPushed())
+	{
 		key_cnt++;
 	}
 	time--;
@@ -250,19 +240,15 @@ void C_Mission::Mission2()	//『10秒間でちょうど50回連打せよ！！』
 
 void C_Mission::Mission3()	//『10秒間でちょうど100回連打せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckGame();
-	}
-	else{
-		if(key_cnt == 100){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
+	if(time <= 0)
+	{
+		if(key_cnt == 100)	mission_state = MISSION_SEIKO;
+		else				mission_state = MISSION_SIPPAI;
+		return;
 	}
 	
-	if(key_state != 0){
+	if (UtilInput::IsAnyKeyPushed())
+	{
 		key_cnt++;
 	}
 	time--;
@@ -270,91 +256,82 @@ void C_Mission::Mission3()	//『10秒間でちょうど100回連打せよ！！』
 
 void C_Mission::Mission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckMission();
-	}
-	else{
-		if(type_key == MISSION4_FONT_NUM){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
+	if(time <= 0)
+	{
+		if(type_key == MISSION4_FONT_NUM)	mission_state = MISSION_SEIKO;
+		else								mission_state = MISSION_SIPPAI;
+		return;
 	}
 	
 	if(type_key < MISSION4_FONT_NUM){
-		if(key_state == KEY_N){
-			if(type_key == 1 || type_key == 7){
+		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		{
+			if(type_key == 1 || type_key == 7)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_I){
-			if(type_key == 2 || type_key == 15){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
+		{
+			if(type_key == 2 || type_key == 15)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_K){
-			if(type_key == 3 || type_key == 14){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
+		{
+			if(type_key == 3 || type_key == 14)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_U){
-			if(type_key == 4 || type_key == 11){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
+		{
+			if(type_key == 4 || type_key == 11)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_M){
-			if(type_key == 5){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_M))
+		{
+			if(type_key == 5)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_A){
-			if(type_key == 6){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
+		{
+			if(type_key == 6)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_T){
-			if(type_key == 8 || type_key == 10){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
+		{
+			if(type_key == 8 || type_key == 10)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_O){
-			if(type_key == 9){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
+		{
+			if(type_key == 9)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_G){
-			if(type_key == 12){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_G))
+		{
+			if(type_key == 12)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_E){
-			if(type_key == 13){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
+		{
+			if(type_key == 13)
+			{
 				type_key++;
-			}
-			else{
-			}
-		}
-		else{
-			if(key_state != 0){
 			}
 		}
 	}
@@ -363,98 +340,92 @@ void C_Mission::Mission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 
 void C_Mission::Mission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckMission();
-	}
-	else{
-		if(type_key == MISSION5_FONT_NUM){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
+	if (time <= 0)
+	{
+		if(type_key == MISSION5_FONT_NUM)	mission_state = MISSION_SEIKO;
+		else								mission_state = MISSION_SIPPAI;
+		return;
 	}
 	
-	if(type_key < MISSION5_FONT_NUM){
-		if(key_state == KEY_N){
-			if(type_key == 1 || type_key == 7 || type_key == 9){
+	if(type_key < MISSION5_FONT_NUM)
+	{
+		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		{
+			if(type_key == 1 || type_key == 7 || type_key == 9)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_I){
-			if(type_key == 2 || type_key == 8 || type_key == 13){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
+		{
+			if(type_key == 2 || type_key == 8 || type_key == 13)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_K){
-			if(type_key == 3 || type_key == 12 || type_key == 16 || type_key == 17){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
+		{
+			if(type_key == 3 || type_key == 12 || type_key == 16 || type_key == 17)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_U){
-			if(type_key == 4 || type_key == 20 || type_key == 22){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
+		{
+			if(type_key == 4 || type_key == 20 || type_key == 22)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_M){
-			if(type_key == 5){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_M))
+		{
+			if(type_key == 5)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_A){
-			if(type_key == 6 || type_key == 15 || type_key == 18){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
+		{
+			if(type_key == 6 || type_key == 15 || type_key == 18)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_S){
-			if(type_key == 10){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
+		{
+			if(type_key == 10)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_E){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
+		{
 			if(type_key == 11){
 				type_key++;
 			}
 			else{
 			}
 		}
-		else if(key_state == KEY_R){
-			if(type_key == 14){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
+		{
+			if(type_key == 14)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_J){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_J))
+		{
 			if(type_key == 19){
 				type_key++;
 			}
 			else{
 			}
 		}
-		else if(key_state == KEY_T){
-			if(type_key == 21){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
+		{
+			if(type_key == 21)
+			{
 				type_key++;
-			}
-			else{
-			}
-		}
-		else{
-			if(key_state != 0){
 			}
 		}
 	}
@@ -463,98 +434,90 @@ void C_Mission::Mission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 
 void C_Mission::Mission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckMission();
-	}
-	else{
-		if(type_key == MISSION6_FONT_NUM){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
+	if (time <= 0)
+	{
+		if(type_key == MISSION6_FONT_NUM)	mission_state = MISSION_SEIKO;
+		else								mission_state = MISSION_SIPPAI;
+		return;
 	}
 	
-	if(type_key < MISSION6_FONT_NUM){
-		if(key_state == KEY_Y){
-			if(type_key == 1){
+	if(type_key < MISSION6_FONT_NUM)
+	{
+		if (UtilInput::IsKeyPushed(UtilInput::cKey_Y))
+		{
+			if(type_key == 1)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_O){
-			if(type_key == 2 || type_key == 8){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
+		{
+			if(type_key == 2 || type_key == 8)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_S){
-			if(type_key == 3){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
+		{
+			if(type_key == 3)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_I){
-			if(type_key == 4 || type_key == 10){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
+		{
+			if(type_key == 4 || type_key == 10)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_T){
-			if(type_key == 5 || type_key == 13){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
+		{
+			if(type_key == 5 || type_key == 13)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_A){
-			if(type_key == 6 || type_key == 12 || type_key == 14){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
+		{
+			if(type_key == 6 || type_key == 12 || type_key == 14)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_R){
-			if(type_key == 7){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
+		{
+			if(type_key == 7)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_H){
-			if(type_key == 9){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_H))
+		{
+			if(type_key == 9)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_P){
-			if(type_key == 11){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_P))
+		{
+			if(type_key == 11)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_C){
-			if(type_key == 15){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_C))
+		{
+			if(type_key == 15)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_K){
-			if(type_key == 16){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
+		{
+			if(type_key == 16)
+			{
 				type_key++;
-			}
-			else{
-			}
-		}
-		else{
-			if(key_state != 0){
 			}
 		}
 	}
@@ -563,98 +526,91 @@ void C_Mission::Mission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 
 void C_Mission::Mission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckMission();
-	}
-	else{
-		if(type_key == MISSION7_FONT_NUM){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
+	if (time <= 0)
+	{
+		if (type_key == MISSION7_FONT_NUM)	mission_state = MISSION_SEIKO;
+		else								mission_state = MISSION_SIPPAI;
+		return;
 	}
 	
-	if(type_key < MISSION7_FONT_NUM){
-		if(key_state == KEY_Y){
-			if(type_key == 1){
+	if(type_key < MISSION7_FONT_NUM)
+	{
+		if (UtilInput::IsKeyPushed(UtilInput::cKey_Y))
+		{
+			if(type_key == 1)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_O){
-			if(type_key == 2 || type_key == 8 || type_key == 16 || type_key == 17){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
+		{
+			if(type_key == 2 || type_key == 8 || type_key == 16 || type_key == 17)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_S){
-			if(type_key == 3 || type_key == 11 || type_key == 14){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
+		{
+			if(type_key == 3 || type_key == 11 || type_key == 14)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_I){
-			if(type_key == 4){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
+		{
+			if(type_key == 4)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_T){
-			if(type_key == 5 || type_key == 18){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
+		{
+			if(type_key == 5 || type_key == 18)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_A){
-			if(type_key == 6){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
+		{
+			if(type_key == 6)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_R){
-			if(type_key == 7){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
+		{
+			if(type_key == 7)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_H){
-			if(type_key == 9 || type_key == 15){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_H))
+		{
+			if(type_key == 9 || type_key == 15)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_U){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
+		{
 			if(type_key == 10){
 				type_key++;
 			}
 			else{
 			}
 		}
-		else if(key_state == KEY_E){
-			if(type_key == 12){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
+		{
+			if(type_key == 12)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_N){
-			if(type_key == 13){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		{
+			if(type_key == 13)
+			{
 				type_key++;
-			}
-			else{
-			}
-		}
-		else{
-			if(key_state != 0){
 			}
 		}
 	}
@@ -663,70 +619,59 @@ void C_Mission::Mission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 
 void C_Mission::Mission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckMission();
-	}
-	else{
-		if(type_key == MISSION8_FONT_NUM){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
+	if (time <= 0)
+	{
+		if (type_key == MISSION8_FONT_NUM)	mission_state = MISSION_SEIKO;
+		else								mission_state = MISSION_SIPPAI;
+		return;
 	}
 	
-	if(type_key < MISSION8_FONT_NUM){
-		if(key_state == KEY_N){
-			if(type_key == 1){
+	if(type_key < MISSION8_FONT_NUM)
+	{
+		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		{
+			if(type_key == 1)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_O){
-			if(type_key == 2 || type_key == 5 || type_key == 7){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
+		{
+			if(type_key == 2 || type_key == 5 || type_key == 7)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_P){
-			if(type_key == 3 || type_key == 4 || type_key == 10 || type_key == 11){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_P))
+		{
+			if(type_key == 3 || type_key == 4 || type_key == 10 || type_key == 11)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_K){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
+		{
 			if(type_key == 6 || type_key == 8){
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_E){
-			if(type_key == 9 || type_key == 12){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_E))
+		{
+			if(type_key == 9 || type_key == 12)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_T){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
+		{
 			if(type_key == 13){
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_I){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
+		{
 			if(type_key == 14){
 				type_key++;
-			}
-			else{
-			}
-		}
-		else{
-			if(key_state != 0){
 			}
 		}
 	}
@@ -735,98 +680,89 @@ void C_Mission::Mission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 
 void C_Mission::Mission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
-	if(time > 0){
-		key_state = key->KeyCheckMission();
+	if (time <= 0)
+	{
+		if (type_key == MISSION9_FONT_NUM)	mission_state = MISSION_SEIKO;
+		else								mission_state = MISSION_SIPPAI;
+		return;
 	}
-	else{
-		if(type_key == MISSION9_FONT_NUM){
-			mission_state = MISSION_SEIKO;
-		}
-		else{
-			mission_state = MISSION_SIPPAI;
-		}
-	}
-	
-	if(type_key < MISSION9_FONT_NUM){
-		if(key_state == KEY_N){
-			if(type_key == 1){
+
+	if(type_key < MISSION9_FONT_NUM)
+	{
+		if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+		{
+			if(type_key == 1)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_O){
-			if(type_key == 2 || type_key == 5 || type_key == 7 || type_key == 15){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_O))
+		{
+			if(type_key == 2 || type_key == 5 || type_key == 7 || type_key == 15)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_P){
-			if(type_key == 3 || type_key == 4 || type_key == 16){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_P))
+		{
+			if(type_key == 3 || type_key == 4 || type_key == 16)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_B){
-			if(type_key == 6){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_B))
+		{
+			if(type_key == 6)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_K){
-			if(type_key == 8 || type_key == 14){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_K))
+		{
+			if(type_key == 8 || type_key == 14)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_U){
-			if(type_key == 9 || type_key == 17){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_U))
+		{
+			if(type_key == 9 || type_key == 17)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_S){
-			if(type_key == 10){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_S))
+		{
+			if(type_key == 10)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_I){
-			if(type_key == 11 || type_key == 13){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_I))
+		{
+			if(type_key == 11 || type_key == 13)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_R){
-			if(type_key == 12){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_R))
+		{
+			if(type_key == 12)
+			{
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_T){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_T))
+		{
 			if(type_key == 18){
 				type_key++;
 			}
-			else{
-			}
 		}
-		else if(key_state == KEY_A){
-			if(type_key == 19){
+		else if (UtilInput::IsKeyPushed(UtilInput::cKey_A))
+		{
+			if(type_key == 19)
+			{
 				type_key++;
-			}
-			else{
-			}
-		}
-		else{
-			if(key_state != 0){
 			}
 		}
 	}
@@ -912,13 +848,9 @@ void C_Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 
 void C_Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 {
-	if(time > 0)
+	if (time <= 0)
 	{
-		key_state = key->KeyCheckGame();
-	}
-	else
-	{
-		if(cnt_key_nikuman > cnt_key_noppo && cnt_key_nikuman > cnt_key_yoshitaro)
+		if (cnt_key_nikuman > cnt_key_noppo && cnt_key_nikuman > cnt_key_yoshitaro)
 		{
 			mission_state = MISSION_SEIKO;
 		}
@@ -926,8 +858,9 @@ void C_Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 		{
 			mission_state = MISSION_SIPPAI;
 		}
+		return;
 	}
-	
+
 	if (UtilInput::IsKeyPushedLineOne())
 	{
 		cnt_key_nikuman++;
@@ -937,13 +870,9 @@ void C_Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 
 void C_Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 {
-	if(time > 0)
+	if (time <= 0)
 	{
-		key_state = key->KeyCheckGame();
-	}
-	else
-	{
-		if(cnt_key_yoshitaro > cnt_key_nikuman && cnt_key_yoshitaro > cnt_key_noppo)
+		if (cnt_key_yoshitaro > cnt_key_nikuman && cnt_key_yoshitaro > cnt_key_noppo)
 		{
 			mission_state = MISSION_SEIKO;
 		}
@@ -951,9 +880,10 @@ void C_Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！
 		{
 			mission_state = MISSION_SIPPAI;
 		}
+		return;
 	}
 	
-	if (UtilInput::IsKeyPushedLineTwo())
+	if (UtilInput::IsKeyPushedLineOne())
 	{
 		cnt_key_yoshitaro++;
 	}
@@ -962,11 +892,7 @@ void C_Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！
 
 void C_Mission::Mission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 {
-	if(time > 0)
-	{
-		key_state = key->KeyCheckGame();
-	}
-	else
+	if(time <= 0)
 	{
 		if(cnt_key_noppo > cnt_key_nikuman && cnt_key_noppo > cnt_key_yoshitaro)
 		{
@@ -976,6 +902,7 @@ void C_Mission::Mission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 		{
 			mission_state = MISSION_SIPPAI;
 		}
+		return;
 	}
 	
 	if (UtilInput::IsKeyPushedLineThree())

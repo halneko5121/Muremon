@@ -88,7 +88,7 @@ C_ActorYoshi::Init()
  * @brief çXêV
  */
 void
-C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
+C_ActorYoshi::Control(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
 {
 	mRandSpeed = 0.f;
 
@@ -102,8 +102,8 @@ C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int r
 			mCountEffect[mCharaNum] = 0;
 			init[mCharaNum] = true;
 		}
-		mCharaData[mCharaNum]		= SetAtk_Flag(key,mCharaData[mCharaNum]);
-		mCharaData[mCharaNum].speed  = SetSpeed(key);
+		mCharaData[mCharaNum]		= SetAtk_Flag(mCharaData[mCharaNum]);
+		mCharaData[mCharaNum].speed  = SetSpeed();
 
 		if (UtilBattle::IsRunMediumGroundAttack())
 		{

@@ -5,7 +5,9 @@
 //
 //---------------------------------------------
 #include "GameNormal.h"
+
 #include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilBattle.h"
 
 POS_CC<float> boss_cc2 = { 600, 350 };
@@ -27,8 +29,6 @@ SceneGameNormal::SceneGameNormal(void)
 	mFlagFade = GS_FADE_IN;
 
 	mGameState = G_START_SCENE;
-
-	mKeyState = 0;
 
 	mNikumanKeyCount = mYoshitaroKeyCount = mNoppoKeyCount = 0;
 
@@ -114,9 +114,8 @@ bool SceneGameNormal::Update()
 			}
 		}
 
-		mKeyState = mKey->KeyCheckGame();
-
-		if(mKeyState == KEY_ENTER){
+		if (UtilInput::IsKeyPushedReturn())
+		{
 			if(mIsPose){
 				mIsPose = false;
 			}
@@ -173,11 +172,11 @@ bool SceneGameNormal::Update()
 
 		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
 
-		mNiku->Control(mKeyState, boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
+		mNiku->Control(boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
-		mYoshi->Control(mKeyState, boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
+		mYoshi->Control(boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
 
-		mNoppo->Control(mKeyState, boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
+		mNoppo->Control(boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
 
 		mTime -= 1;
 

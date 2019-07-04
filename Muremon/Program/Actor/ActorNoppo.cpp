@@ -88,7 +88,7 @@ C_ActorNoppo::Init()
  * @brief 更新
  */
 void
-C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
+C_ActorNoppo::Control(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
 {
 	mRandSpeed = 0.f;
 
@@ -101,8 +101,8 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 			mCountEffect[mCharaNum] = 0;
 			init[mCharaNum] = true;
 		}
-		mCharaData[mCharaNum]		 = SetAtk_Flag(key,mCharaData[mCharaNum]);
-		mCharaData[mCharaNum].speed	 = SetSpeed(key);
+		mCharaData[mCharaNum]		 = SetAtk_Flag(mCharaData[mCharaNum]);
+		mCharaData[mCharaNum].speed	 = SetSpeed();
 
 		if (UtilBattle::IsRunStrongGroundAttack())
 		{

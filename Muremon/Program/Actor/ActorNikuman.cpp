@@ -81,7 +81,7 @@ C_ActorNikuman::Init()
  * @brief 更新
  */
 void
-C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
+C_ActorNikuman::Control(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
 {
 	mRandSpeed = 0.f;
 
@@ -94,13 +94,13 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 			mCountEffect[mCharaNum]	  = 0;
 			mDegSpin[mCharaNum]		  = 0.f;
 		}
-		mCharaData[mCharaNum]		= SetAtk_Flag(key,mCharaData[mCharaNum]);
+		mCharaData[mCharaNum]		= SetAtk_Flag(mCharaData[mCharaNum]);
 
 		if (UtilBattle::IsRunWeakGroundAttack())
 		{
 			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU, G_ATK_2_START_Y);
-			mCharaData[mCharaNum].speed = SetSpeed(key);
+			mCharaData[mCharaNum].speed = SetSpeed();
 			mDegSpin[mCharaNum] = 0.f;
 		}
 		else if (UtilBattle::IsRunWeakSkyAttack())
@@ -110,7 +110,7 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-			mCharaData[mCharaNum].speed = SetSpeed(key);
+			mCharaData[mCharaNum].speed = SetSpeed();
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU, s_atk_start_y);
 		}
 

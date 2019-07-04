@@ -81,7 +81,6 @@ private:
 	int					mFlagFade;			// フェードインアウトなどの段階を知らせる
 	int					mFlagFadeStart;		// げ～むすた～とのフェードイン・フェードアウトを知らせるのに使用
 	bool				mIsFadeIn;			// フェードインが終わった状態かを知らせる
-	int					mKeyState;			// キーの状態
 	int					mMissionStateKeep;	// ミッションの状態をキープ
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント

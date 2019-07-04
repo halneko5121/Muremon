@@ -87,7 +87,7 @@ public:
 	float				m_chara_y;
 	virtual void		DeathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;
 	virtual void		Init() = 0;
-	virtual void		Control(int key, POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool both_death) = 0;
+	virtual void		Control(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool both_death) = 0;
 	//描画
 	virtual void		Draw(int rect_num) = 0;
 	virtual void		DrawEffectFont(int rect_startnum) = 0;
@@ -97,10 +97,9 @@ public:
 	/************************************************************************************
 	*	役割	：攻撃スピードを設定													*
 	*	関数名	：float SetSpeed();														*
-	*	引数	：int key			キー情報											*
 	*	戻り値	：float m_randspeed			移動スピード								*
 	************************************************************************************/
-	float	SetSpeed(int key);
+	float	SetSpeed();
 
 	/************************************************************************************
 	*	役割	：攻撃開始位置を設定													*
@@ -113,10 +112,9 @@ public:
 	/************************************************************************************
 	*	役割	：押されたキーによって攻撃開始フラグをONにする							*
 	*	関数名	：CHARADATA SetAtk(int key , CHARADATA set_charadata);					*
-	*	引数	：int key キー情報		CHARADATA　：set_charadata　キャラ情報			*
 	*	戻り値	：キャラデータ(フラグの状態)											*
 	************************************************************************************/
-	CHARADATA SetAtk_Flag(int key, CHARADATA set_charadata);
+	CHARADATA SetAtk_Flag(CHARADATA set_charadata);
 
 	/************************************************************************************
 	*	役割	：エフェクトフォント(『ぱん！』とか)の位置を設定						*

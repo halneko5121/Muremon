@@ -102,7 +102,7 @@ C_ActorBase::CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos)
  * @brief スピードの設定
  */
 float
-C_ActorBase::SetSpeed(int key)
+C_ActorBase::SetSpeed()
 {
 	// 肉まんの空中攻撃は計算方法が違うので
 	if (UtilBattle::IsRunWeakSkyAttack())
@@ -121,7 +121,7 @@ C_ActorBase::SetSpeed(int key)
  * @brief 攻撃フラグの設定
  */
 CHARADATA
-C_ActorBase::SetAtk_Flag(int key , CHARADATA set_charadata)
+C_ActorBase::SetAtk_Flag(CHARADATA set_charadata)
 {
 	if (UtilBattle::IsRunGroundAttack())
 	{

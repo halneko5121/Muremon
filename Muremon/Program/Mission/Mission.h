@@ -4,45 +4,6 @@
 #include "Library/Graphics/Vertex.h"
 #include "Program/DefineGame.h"
 
-#define TEN_SECOND	(600)
-
-#define M_TIMENUM_X	(375.f)
-#define M_TIMENUM_Y	(125.f)
-
-#define M_COMBO_X	(500.f)
-#define M_COMBO_Y	(245.f)
-
-#define MISSION4_FONT_NUM	(16)
-#define MISSION5_FONT_NUM	(23)
-#define MISSION6_FONT_NUM	(17)
-#define MISSION7_FONT_NUM	(19)
-#define MISSION8_FONT_NUM	(15)
-#define MISSION9_FONT_NUM	(20)
-
-#define MISSION_1PAR	(10)
-#define MISSION_2PAR	(20)
-#define MISSION_3PAR	(25)
-#define MISSION_4PAR	(35)
-#define MISSION_5PAR	(40)
-#define MISSION_6PAR	(50)
-#define MISSION_7PAR	(55)
-#define MISSION_8PAR	(65)
-#define MISSION_9PAR	(70)
-#define MISSION_10PAR	(75)
-#define MISSION_11PAR	(85)
-#define MISSION_12PAR	(90)
-#define MISSION_13PAR	(95)
-#define MISSION_14PAR	(100)
-
-#define MISSION_ALPHA_INCREASE	(5)
-#define MISSION_ALPHA_MAX	(255)
-
-#define MISSION_HASSEI_X	(400.f)
-#define MISSION_HASSEI_Y	(50.f)
-
-#define MISSION_OSIRASE_X	(400.f)
-#define MISSION_OSIRASE_Y	(300.f)
-
 enum MISSION_STATE
 {
 	MISSION_START,
@@ -52,24 +13,6 @@ enum MISSION_STATE
 	MISSION_OUGI,
 	MISSION_NEGATIVE,
 	MISSION_END,
-};
-
-enum MISSION_NUMBER
-{
-	MISSION_1,	//『10秒以内に100回連打せよ！！』
-	MISSION_2,	//『10秒間でちょうど50回連打せよ！！』
-	MISSION_3,	//『10秒間でちょうど100回連打せよ！！』
-	MISSION_4,	//『「NIKUMANTOTUGEKI」と入力せよ！！』
-	MISSION_5,	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
-	MISSION_6,	//『「YOSITAROHIPATACK」と入力せよ！！』
-	MISSION_7,	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
-	MISSION_8,	//『「NOPPOKOKEPPETI」と入力せよ！！』
-	MISSION_9,	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
-	MISSION_10,	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
-	MISSION_11,	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
-	MISSION_12,	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
-	MISSION_13,	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
-	MISSION_14,	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 };
 
 class Mission

@@ -106,10 +106,6 @@ UtilInput::IsKeyPushedLineThree()
 	if (GetInputKey()->IsKeyPushed(cKey_N))				return true;
 	if (GetInputKey()->IsKeyPushed(cKey_M))				return true;
 
-	if (GetInputKey()->IsKeyPushed(cKey_K))				return true;
-	if (GetInputKey()->IsKeyPushed(cKey_L))				return true;
-	if (GetInputKey()->IsKeyPushed(cKey_P))				return true;
-
 	if (GetInputKey()->IsKeyPushed(cKey_Comma))			return true;
 	if (GetInputKey()->IsKeyPushed(cKey_Period))		return true;
 	if (GetInputKey()->IsKeyPushed(cKey_Slash))			return true;

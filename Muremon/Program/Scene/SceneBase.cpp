@@ -14,7 +14,7 @@
 /**
  * @brief	コンストラクタ
  */
-C_SceneBase::C_SceneBase()
+SceneBase::SceneBase()
 {
     mSceneID	= cSceneName_Logo;    // 初期化
 	mVertex		= new C_Vertex();
@@ -24,7 +24,7 @@ C_SceneBase::C_SceneBase()
 /**
  * @brief	デストラクタ
  */
-C_SceneBase::~C_SceneBase()
+SceneBase::~SceneBase()
 {
 }
 
@@ -32,7 +32,7 @@ C_SceneBase::~C_SceneBase()
  * @brief	実行処理
  */
 bool
-C_SceneBase::RunScene()
+SceneBase::RunScene()
 {
 	bool is_scene_change = Update();
 	Draw();
@@ -44,7 +44,7 @@ C_SceneBase::RunScene()
  * @param	apDev		デバイス
  */
 void
-C_SceneBase::SetScene(LPDIRECT3DDEVICE9 apDev)
+SceneBase::SetScene(LPDIRECT3DDEVICE9 apDev)
 {
 	mDevice		= apDev;		// デバイスセット
 
@@ -58,7 +58,7 @@ C_SceneBase::SetScene(LPDIRECT3DDEVICE9 apDev)
  * @param	nextID		次のシーンの番号
  */
 void
-C_SceneBase::ChangeScene(DWORD next_id)
+SceneBase::ChangeScene(DWORD next_id)
 {
     mSceneID = next_id;
 }
@@ -67,7 +67,7 @@ C_SceneBase::ChangeScene(DWORD next_id)
  * @brief	シーン番号の取得
  */
 DWORD
-C_SceneBase::GetSceneID()
+SceneBase::GetSceneID()
 {
 	return mSceneID;
 }

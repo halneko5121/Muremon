@@ -6,7 +6,7 @@
 //---------------------------------------------
 #include "GameOver.h"
 
-C_GameOver::C_GameOver(void)
+SceneGameOver::SceneGameOver(void)
 {
 	alpha=0;
 	alpha_count=0;
@@ -15,17 +15,17 @@ C_GameOver::C_GameOver(void)
 	mIsSceneChange = true;
 }
 
-C_GameOver::~C_GameOver(void)
+SceneGameOver::~SceneGameOver(void)
 {
 }
 
-void C_GameOver::Init()
+void SceneGameOver::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\gameover.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\gameover.txt");
 }
 
-bool C_GameOver::Update()
+bool SceneGameOver::Update()
 {
 	if(GetAsyncKeyState('Z')||GetAsyncKeyState(VK_RETURN))
 	{
@@ -38,11 +38,11 @@ bool C_GameOver::Update()
 	return mIsSceneChange;
 }
 
-void C_GameOver::Draw()
+void SceneGameOver::Draw()
 {
 }
 
-int C_GameOver::End()
+int SceneGameOver::End()
 {
 	ChangeScene(cSceneName_Logo);
 	mTexture->AllReleaseTexture();
@@ -50,7 +50,7 @@ int C_GameOver::End()
 	return 0;
 }
 
-void C_GameOver::FadeControl()
+void SceneGameOver::FadeControl()
 {
 	switch(fade_flag)
 	{
@@ -68,7 +68,7 @@ void C_GameOver::FadeControl()
 	}
 }
 
-void C_GameOver::FadeIn()
+void SceneGameOver::FadeIn()
 {
 	if(alpha_count++>1)
 	{
@@ -82,7 +82,7 @@ void C_GameOver::FadeIn()
 	}
 }
 
-void C_GameOver::FadeOut()
+void SceneGameOver::FadeOut()
 {
 	if(alpha_count++>1)
 	{

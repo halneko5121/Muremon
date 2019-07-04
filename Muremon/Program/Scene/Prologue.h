@@ -31,7 +31,7 @@ enum PROLOGUE_FADE_MODE
 	PR_FADE_OUT,	//フェードアウト
 };
 
-class C_Prologue:public C_SceneBase
+class ScenePrologue : public SceneBase
 {
 private:
 	C_Control	*key;
@@ -58,6 +58,6 @@ public:
 
 	void FadeOut();			//フェードアウト
 
-	C_Prologue(void);
-	~C_Prologue(void);
+	ScenePrologue();
+	~ScenePrologue();
 };

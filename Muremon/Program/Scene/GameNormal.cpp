@@ -9,7 +9,7 @@
 
 POS_CC<float> boss_cc2 = { 600, 350 };
 
-C_GameNormal::C_GameNormal(void)
+SceneGameNormal::SceneGameNormal(void)
 {
 	mKey	 = new C_Control();
 
@@ -70,11 +70,11 @@ C_GameNormal::C_GameNormal(void)
 	mNegativeDamege = 1;
 }
 
-C_GameNormal::~C_GameNormal(void)
+SceneGameNormal::~SceneGameNormal(void)
 {
 }
 
-void C_GameNormal::Init()
+void SceneGameNormal::Init()
 {
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
@@ -92,7 +92,7 @@ void C_GameNormal::Init()
 	mMission = new C_Mission(mTexture, mVertex, mDevice);
 }
 
-bool C_GameNormal::Update()
+bool SceneGameNormal::Update()
 {
 	if(mGameState == G_START_SCENE){
 		GetDirectSound()->SoundPlayOnce(S_GAME_START);
@@ -279,7 +279,7 @@ bool C_GameNormal::Update()
 	return mIsSceneChange;
 }
 
-void C_GameNormal::Draw()
+void SceneGameNormal::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
 
@@ -395,7 +395,7 @@ void C_GameNormal::Draw()
 	}
 }
 
-int C_GameNormal::End()
+int SceneGameNormal::End()
 {
 	//ゲームオーバーの場合
 	ChangeScene(cSceneName_Ranking);
@@ -409,7 +409,7 @@ int C_GameNormal::End()
 	return mScore;
 }
 
-void C_GameNormal::FadeControl()
+void SceneGameNormal::FadeControl()
 {
 	switch(mFlagFade)
 	{
@@ -422,7 +422,7 @@ void C_GameNormal::FadeControl()
 	}
 }
 
-void C_GameNormal::FadeIn()
+void SceneGameNormal::FadeIn()
 {
 	if(mFlagFadeStart > 60){
 		mStartAlpha += G_ALPHA_INCREASE - 10;
@@ -462,7 +462,7 @@ void C_GameNormal::FadeIn()
 	}
 }
 
-void C_GameNormal::FadeOut()
+void SceneGameNormal::FadeOut()
 {
 	if(mAlpha == 0) { return ; }
 	else if(mAlphaCount++ > 1){
@@ -472,7 +472,7 @@ void C_GameNormal::FadeOut()
 	}
 }
 
-void C_GameNormal::DrawNum()
+void SceneGameNormal::DrawNum()
 {
 	//にくまん
 	for(int i = 0;i < 4;i++){
@@ -500,7 +500,7 @@ void C_GameNormal::DrawNum()
 	}
 }
 
-void C_GameNormal::DrawNumS()
+void SceneGameNormal::DrawNumS()
 {
 	//スコア
 	for(int i = 0;i < 9;i++){
@@ -512,7 +512,7 @@ void C_GameNormal::DrawNumS()
 	}
 }
 
-void C_GameNormal::DrawNumT()
+void SceneGameNormal::DrawNumT()
 {
 	//タイム
 	for(int i = 0;i < 5;i++){
@@ -549,7 +549,7 @@ void C_GameNormal::DrawNumT()
 	}
 }
 
-void C_GameNormal::DrawGageHp()
+void SceneGameNormal::DrawGageHp()
 {
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
@@ -560,13 +560,13 @@ void C_GameNormal::DrawGageHp()
 	mVertex->DrawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
-void C_GameNormal::HitEffectDraw()
+void SceneGameNormal::HitEffectDraw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->SetColor(mHitEffectAlpha,255,255,255);
 	mVertex->DrawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
-void C_GameNormal::DrawGageMission()
+void SceneGameNormal::DrawGageMission()
 {
 	float num = (float)mMissionGage / (float)MISSION_GAGE_MAX;
 
@@ -577,7 +577,7 @@ void C_GameNormal::DrawGageMission()
 	mVertex->DrawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
 }
 
-void C_GameNormal::ControlMissionOugi()
+void SceneGameNormal::ControlMissionOugi()
 {
 	if(mTimeCount >= 0 && 60 > mTimeCount){
 		mAlphaFont += 5;
@@ -624,7 +624,7 @@ void C_GameNormal::ControlMissionOugi()
 	mTimeCount++;
 }
 
-void C_GameNormal::DrawMissionOugi()
+void SceneGameNormal::DrawMissionOugi()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION), mDevice);
 
@@ -639,7 +639,7 @@ void C_GameNormal::DrawMissionOugi()
 	mVertex->DrawF(mWavePos.x,mWavePos.y,R_OUGI);
 }
 
-void C_GameNormal::ControlMissionNegative()
+void SceneGameNormal::ControlMissionNegative()
 {
 	NegativeSelect();
 
@@ -681,7 +681,7 @@ void C_GameNormal::ControlMissionNegative()
 	mTimeCount++;
 }
 
-void C_GameNormal::DrawMissionNegative()
+void SceneGameNormal::DrawMissionNegative()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_MISSION), mDevice);
 
@@ -692,7 +692,7 @@ void C_GameNormal::DrawMissionNegative()
 	mVertex->DrawF(400.f,300.f,R_NEGATIVE1 + mNegativeState - 1);
 }
 
-void C_GameNormal::NegativeSelect()
+void SceneGameNormal::NegativeSelect()
 {
 	if(mNegativeState != 0){
 		return ;
@@ -714,7 +714,7 @@ void C_GameNormal::NegativeSelect()
 	}
 }
 
-void C_GameNormal::ReCover()
+void SceneGameNormal::ReCover()
 {
 	if(mBoss->boss_life <= 0){
 		mNegativeDamege = 1;

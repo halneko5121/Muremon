@@ -6,37 +6,37 @@
 //---------------------------------------------
 #include "Logo.h"
 
-C_Logo::C_Logo(void)
+SceneLogo::SceneLogo(void)
 {
 	time_count = 0;
 	alpha = 0;
 	mIsSceneChange = true;
 }
 
-C_Logo::~C_Logo(void)
+SceneLogo::~SceneLogo(void)
 {
 }
 
-void C_Logo::Init()
+void SceneLogo::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\logo.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\logo.txt");
 }
 
-bool C_Logo::Update()
+bool SceneLogo::Update()
 {
 	FadeControl();
 	return mIsSceneChange;
 }
 
-void C_Logo::Draw()
+void SceneLogo::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_LOGO), mDevice);
 	mVertex->SetColor(alpha,255,255,255);
 	mVertex->DrawF(400.f,300.f,R_LOGO);
 }
 
-int C_Logo::End()
+int SceneLogo::End()
 {
 	ChangeScene(cSceneName_Title);
 	mTexture->AllReleaseTexture();
@@ -45,7 +45,7 @@ int C_Logo::End()
 	return 0;
 }
 
-void C_Logo::FadeControl()
+void SceneLogo::FadeControl()
 {
 	time_count++;
 	

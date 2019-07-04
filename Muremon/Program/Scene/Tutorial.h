@@ -44,7 +44,7 @@ enum TUTORIAL_MODE
 	TR_END,
 };
 
-class C_Tutorial:public C_SceneBase
+class SceneTutorial : public SceneBase
 {
 private:
 	C_Control	*key;
@@ -79,6 +79,6 @@ public:
 
 	void FadeOut();			//フェードアウト
 
-	C_Tutorial(void);
-	~C_Tutorial(void);
+	SceneTutorial();
+	~SceneTutorial();
 };

@@ -94,7 +94,7 @@ enum TITLE_FADE_MODE
 	TITLE_FADE_OUT2,	//フェードアウト(エンド)
 };
 
-class C_Title:public C_SceneBase
+class SceneTitle : public SceneBase
 {
 private:
 	C_Control	*key;
@@ -147,6 +147,6 @@ public:
 
 	void FadeOut();
 
-	C_Title(void);
-	~C_Title(void);
+	SceneTitle();
+	~SceneTitle();
 };

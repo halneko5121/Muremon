@@ -25,7 +25,7 @@ enum RECT_DATA_LOGO
 	R_LOGO,
 };
 
-class C_Logo:public C_SceneBase
+class SceneLogo : public SceneBase
 {
 private:
 	int time_count;	//ロゴのタイムカウント
@@ -40,6 +40,6 @@ public:
 
 	void FadeControl();	//フェード処理
 
-	C_Logo(void);
-	~C_Logo(void);
+	SceneLogo();
+	~SceneLogo();
 };

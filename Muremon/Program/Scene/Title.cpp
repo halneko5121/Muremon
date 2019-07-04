@@ -7,7 +7,7 @@
 #include "Title.h"
 #include "Library/Sound/DirectSound.h"
 
-C_Title::C_Title(void)
+SceneTitle::SceneTitle(void)
 {
 	key		= new C_Control();
 
@@ -50,17 +50,17 @@ C_Title::C_Title(void)
 	cnt_move = 0;
 }
 
-C_Title::~C_Title(void)
+SceneTitle::~SceneTitle(void)
 {
 }
 
-void C_Title::Init()
+void SceneTitle::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\title.txt", mDevice);		//絵の読み込み
 	mVertex->LoadRect("Data\\RectData\\title.txt");
 }
 
-bool C_Title::Update()
+bool SceneTitle::Update()
 {
 	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 
@@ -99,7 +99,7 @@ bool C_Title::Update()
 	return mIsSceneChange;
 }
 
-void C_Title::Draw()
+void SceneTitle::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_TITLE_BG), mDevice);
 
@@ -143,7 +143,7 @@ void C_Title::Draw()
 	}
 }
 
-int C_Title::End()
+int SceneTitle::End()
 {
 	ChangeScene(flag_scene_change);
 
@@ -155,7 +155,7 @@ int C_Title::End()
 	return 0;
 }
 
-void C_Title::PosiDrawControl()
+void SceneTitle::PosiDrawControl()
 {
 	//カーソル位置を計算
 	cursor_posi.y = CURSOR_Y + CURSOR_Y_REMOVE * flag_select;
@@ -179,7 +179,7 @@ void C_Title::PosiDrawControl()
 	}
 }
 
-void C_Title::FadeControl()
+void SceneTitle::FadeControl()
 {
 	switch(flag_fade)
 	{
@@ -194,7 +194,7 @@ void C_Title::FadeControl()
 	}
 }
 
-void C_Title::FadeIn()
+void SceneTitle::FadeIn()
 {
 	if(flag_fade_in){
 		if(!flag_z){
@@ -221,7 +221,7 @@ void C_Title::FadeIn()
 	}
 }
 
-void C_Title::FadeOut()
+void SceneTitle::FadeOut()
 {
 	if(alpha == 0) { return ; }
 	else if(alpha_count++ > 1){
@@ -231,7 +231,7 @@ void C_Title::FadeOut()
 	}
 }
 
-void C_Title::KeyControl()
+void SceneTitle::KeyControl()
 {
 	key_state = key->KeyCheck();
 

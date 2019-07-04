@@ -33,7 +33,7 @@ C_GameMain::InitGameMain(void)
 	C_DSound::Create();
 
 	// Å‰‚ÌƒV[ƒ“‚ð
-	mScene = new C_Logo();
+	mScene = new SceneLogo();
 	mScore = 0;
 }
 
@@ -195,39 +195,39 @@ C_GameMain::ControlSequence(void)
 	switch(mScene->GetSceneID()){
 	case cSceneName_Logo:
 		APP_SAFE_DELETE(mScene);
-		mScene = new C_Logo();
+		mScene = new SceneLogo();
 		mScene->SetScene(mGraphics->GetDevice());
 		mScene->Init();
 		break;
     case cSceneName_Title:
 		APP_SAFE_DELETE(mScene);
-		mScene = new C_Title();
+		mScene = new SceneTitle();
 		mScene->SetScene(mGraphics->GetDevice());
 		mScene->Init();
 		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);
-		mScene = new C_Tutorial();
+		mScene = new SceneTutorial();
 		mScene->SetScene(mGraphics->GetDevice());
 		mScene->Init();
 		break;
 	case cSceneName_GameRefresh:
 		APP_SAFE_DELETE(mScene);
-		mScene = new C_GameRefresh();
+		mScene = new SceneGameRefresh();
 		mScene->SetScene(mGraphics->GetDevice());
 		mScene->Init();
 		break;
 	case cSceneName_GameNormal:
 		APP_SAFE_DELETE(mScene);
-		mScene = new C_GameNormal();
+		mScene = new SceneGameNormal();
 		mScene->SetScene(mGraphics->GetDevice());
 		mScene->Init();
 		break;
 	case cSceneName_Ranking:
 		APP_SAFE_DELETE(mScene);
-		mScene = new C_Ranking();
+		mScene = new SceneRanking();
 		mScene->SetScene(mGraphics->GetDevice());
-		dynamic_cast<C_Ranking*>(mScene)->InitScene(mScore);
+		dynamic_cast<SceneRanking*>(mScene)->InitScene(mScore);
 		break;
 	case cSceneName_GameEnd:
 		PostQuitMessage(0);

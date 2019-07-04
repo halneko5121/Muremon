@@ -14,11 +14,11 @@
 #include "Program/Util/Control.h"
 #include "Program/DefineGame.h"
 
-class C_GameRefresh:public C_SceneBase
+class SceneGameRefresh : public SceneBase
 {
 public:
-	C_GameRefresh(void);
-	~C_GameRefresh(void);
+	SceneGameRefresh();
+	~SceneGameRefresh();
 
 	void Init() override;
 	bool Update() override;

@@ -29,7 +29,7 @@ enum GAMEOVER_FADE_MODE
 	GO_FADE_OUT,	//フェードアウト
 };
 
-class C_GameOver:public C_SceneBase
+class SceneGameOver : public SceneBase
 {
 private:
 	int alpha;	//アルファ値
@@ -50,6 +50,6 @@ public:
 
 	void FadeOut();			//フェードアウト
 
-	C_GameOver(void);
-	~C_GameOver(void);
+	SceneGameOver();
+	~SceneGameOver();
 };

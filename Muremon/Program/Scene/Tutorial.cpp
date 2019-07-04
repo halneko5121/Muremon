@@ -7,7 +7,7 @@
 #include "Tutorial.h"
 #include "Library/Sound/DirectSound.h"
 
-C_Tutorial::C_Tutorial(void)
+SceneTutorial::SceneTutorial(void)
 {
 	key		= new C_Control();
 
@@ -26,17 +26,17 @@ C_Tutorial::C_Tutorial(void)
 	mIsSceneChange = true;
 }
 
-C_Tutorial::~C_Tutorial(void)
+SceneTutorial::~SceneTutorial(void)
 {
 }
 
-void C_Tutorial::Init()
+void SceneTutorial::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\Tutorial.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\Tutorial.txt");
 }
 
-bool C_Tutorial::Update()
+bool SceneTutorial::Update()
 {
 	GetDirectSound()->SoundPlayOnce(S_BGM_TITLE);
 
@@ -47,7 +47,7 @@ bool C_Tutorial::Update()
 	return mIsSceneChange;
 }
 
-void C_Tutorial::Draw()
+void SceneTutorial::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_TUTORIAL1), mDevice);
 
@@ -62,7 +62,7 @@ void C_Tutorial::Draw()
 	mVertex->DrawF(tutorial[TR_NORMAL].x,tutorial[TR_NORMAL].y,R_TUTORIAL2);
 }
 
-int C_Tutorial::End()
+int SceneTutorial::End()
 {
 	ChangeScene(cSceneName_Title);
 	mTexture->AllReleaseTexture();
@@ -71,7 +71,7 @@ int C_Tutorial::End()
 	return 0;
 }
 
-void C_Tutorial::FadeControl()
+void SceneTutorial::FadeControl()
 {
 	switch(fade_flag)
 	{
@@ -88,7 +88,7 @@ void C_Tutorial::FadeControl()
 	}
 }
 
-void C_Tutorial::FadeIn()
+void SceneTutorial::FadeIn()
 {
 	if(alpha_count++>1)
 	{
@@ -102,7 +102,7 @@ void C_Tutorial::FadeIn()
 	}
 }
 
-void C_Tutorial::FadeOut()
+void SceneTutorial::FadeOut()
 {
 	if(alpha_count++>1)
 	{
@@ -116,7 +116,7 @@ void C_Tutorial::FadeOut()
 	}
 }
 
-void C_Tutorial::KeyControl()
+void SceneTutorial::KeyControl()
 {
 	key_state = key->KeyCheck();
 
@@ -146,7 +146,7 @@ void C_Tutorial::KeyControl()
 	}
 }
 
-void C_Tutorial::DrawPosi()
+void SceneTutorial::DrawPosi()
 {
 	if(flag_draw_state == TR_REFRESH){
 		if(keep_key_state == KEY_LEFT){

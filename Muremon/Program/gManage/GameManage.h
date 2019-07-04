@@ -10,7 +10,7 @@
 #include "Library/Window/Window.h"
 
 class C_Window;
-class C_SceneBase;
+class SceneBase;
 class C_DInputKey;
 class C_DInputMouse;
 class C_DGraphics;
@@ -58,7 +58,7 @@ public:
 
 private:
 	C_Window*			mWindow;		// ウィンドウクラスへのポインタ
-	C_SceneBase*		mScene;			// シーンクラスへのポインタ
+	SceneBase*		mScene;			// シーンクラスへのポインタ
 	C_DGraphics*		mGraphics;		// グラフィッククラスへのポインタ
 	char**				mSoundText;
 	DWORD				mBackground;

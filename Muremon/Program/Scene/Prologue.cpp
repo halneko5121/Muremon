@@ -6,7 +6,7 @@
 //---------------------------------------------
 #include "Prologue.h"
 
-C_Prologue::C_Prologue(void)
+ScenePrologue::ScenePrologue(void)
 {
 	key		= new C_Control();
 
@@ -25,17 +25,17 @@ C_Prologue::C_Prologue(void)
 	mIsSceneChange = true;
 }
 
-C_Prologue::~C_Prologue(void)
+ScenePrologue::~ScenePrologue(void)
 {
 }
 
-void C_Prologue::Init()
+void ScenePrologue::Init()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\prologue.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\prologue.txt");
 }
 
-bool C_Prologue::Update()
+bool ScenePrologue::Update()
 {
 	add_outline -= 0.32f;
 	
@@ -57,7 +57,7 @@ bool C_Prologue::Update()
 	return mIsSceneChange;
 }
 
-void C_Prologue::Draw()
+void ScenePrologue::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_PROLOGUE), mDevice);
 
@@ -66,7 +66,7 @@ void C_Prologue::Draw()
 	mVertex->DrawF(400.f,add_outline,R_PROLOGUE);
 }
 
-int C_Prologue::End()
+int ScenePrologue::End()
 {
 	ChangeScene(cSceneName_GameNormal);
 	mTexture->AllReleaseTexture();
@@ -75,7 +75,7 @@ int C_Prologue::End()
 	return 0;
 }
 
-void C_Prologue::FadeControl()
+void ScenePrologue::FadeControl()
 {
 	switch(fade_flag)
 	{
@@ -92,7 +92,7 @@ void C_Prologue::FadeControl()
 	}
 }
 
-void C_Prologue::FadeOut()
+void ScenePrologue::FadeOut()
 {
 	if(alpha_count++ > 1)
 	{

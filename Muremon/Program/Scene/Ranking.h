@@ -92,7 +92,7 @@ enum RECT_DATA_RANKING
 	//R_Z_KEY,
 };
 
-class C_Ranking:public C_SceneBase
+class SceneRanking : public SceneBase
 {
 private:
 	C_Control	*key;
@@ -187,6 +187,6 @@ public:
 
 	void ZKeyDraw();
 
-	C_Ranking(void);
-	~C_Ranking(void);
+	SceneRanking(void);
+	~SceneRanking(void);
 };

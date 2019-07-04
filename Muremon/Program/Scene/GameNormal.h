@@ -33,11 +33,11 @@ enum NEGATIVE_DATA
 	ATTACK_DOWN,
 };
 
-class C_GameNormal:public C_SceneBase
+class SceneGameNormal : public SceneBase
 {
 public:
-	C_GameNormal(void);
-	~C_GameNormal(void);
+	SceneGameNormal();
+	~SceneGameNormal();
 
 	void Init() override;
 	bool Update() override;

@@ -9,7 +9,7 @@
 
 POS_CC<float> boss_cc = { 600, 350 };
 
-C_GameRefresh::C_GameRefresh(void)
+SceneGameRefresh::SceneGameRefresh(void)
 {
 	mKey		= new C_Control();
 
@@ -44,11 +44,11 @@ C_GameRefresh::C_GameRefresh(void)
 	mCharaAtkY = 0;
 }
 
-C_GameRefresh::~C_GameRefresh(void)
+SceneGameRefresh::~SceneGameRefresh(void)
 {
 }
 
-void C_GameRefresh::Init()
+void SceneGameRefresh::Init()
 {
 	mNiku	= new C_ActorNikuman(mVertex, mTexture);
 	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
@@ -66,7 +66,7 @@ void C_GameRefresh::Init()
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 }
 
-bool C_GameRefresh::Update()
+bool SceneGameRefresh::Update()
 {
 	if(mSameState == G_START_SCENE){
 		GetDirectSound()->SoundPlayOnce(S_GAME_START);
@@ -163,7 +163,7 @@ bool C_GameRefresh::Update()
 	return mIsSceneChange;
 }
 
-void C_GameRefresh::Draw()
+void SceneGameRefresh::Draw()
 {
 	if(mSameState == G_START_SCENE){
 		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
@@ -258,7 +258,7 @@ void C_GameRefresh::Draw()
 	}
 }
 
-int C_GameRefresh::End()
+int SceneGameRefresh::End()
 {
 	//タイトルへ
 	ChangeScene(cSceneName_Title);
@@ -271,7 +271,7 @@ int C_GameRefresh::End()
 	return 0;
 }
 
-void C_GameRefresh::FadeControl()
+void SceneGameRefresh::FadeControl()
 {
 	switch(mFlagFade)
 	{
@@ -284,7 +284,7 @@ void C_GameRefresh::FadeControl()
 	}
 }
 
-void C_GameRefresh::FadeIn()
+void SceneGameRefresh::FadeIn()
 {
 	if(mFlagFadeStart > 60){
 		mStartAlpha += G_ALPHA_INCREASE - 10;
@@ -319,7 +319,7 @@ void C_GameRefresh::FadeIn()
 	}
 }
 
-void C_GameRefresh::FadeOut()
+void SceneGameRefresh::FadeOut()
 {
 	if(mAlpha == 0) { return ; }
 	else if(mAlphaCount++ > 1){
@@ -329,7 +329,7 @@ void C_GameRefresh::FadeOut()
 	}
 }
 
-void C_GameRefresh::DrawNum()
+void SceneGameRefresh::DrawNum()
 {
 	//にくまん
 	for(int i = 0;i < 4;i++){
@@ -357,7 +357,7 @@ void C_GameRefresh::DrawNum()
 	}
 }
 
-void C_GameRefresh::DrawGageHp()
+void SceneGameRefresh::DrawGageHp()
 {
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
@@ -368,14 +368,14 @@ void C_GameRefresh::DrawGageHp()
 	mVertex->DrawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
-void C_GameRefresh::HitEffectDraw()
+void SceneGameRefresh::HitEffectDraw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->SetColor(mHitEffectAlpha,255,255,255);
 	mVertex->DrawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 
-void C_GameRefresh::HitFlagInit()
+void SceneGameRefresh::HitFlagInit()
 {
 	mIsHitNiku = false;
 

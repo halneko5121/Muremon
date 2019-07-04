@@ -35,18 +35,18 @@ enum SceneName
 	cSceneName_GameEnd,		// 終わり
 };
 
-class C_SceneBase
+class SceneBase
 {
 public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	C_SceneBase();
+	SceneBase();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	virtual ~C_SceneBase();
+	virtual ~SceneBase();
 
 	/**
 	 * @brief	初期化処理

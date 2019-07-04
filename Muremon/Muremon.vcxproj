@@ -23,6 +23,7 @@
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
+    <ClCompile Include="Program\Mission\Mission.cpp" />
     <ClCompile Include="Program\System\GameManage.cpp" />
     <ClCompile Include="Program\main.cpp" />
     <ClCompile Include="Program\Scene\SceneBase.cpp" />
@@ -33,7 +34,6 @@
     <ClCompile Include="Program\Scene\SceneGameNormal.cpp" />
     <ClCompile Include="Program\Scene\SceneGameRefresh.cpp" />
     <ClCompile Include="Program\Scene\SceneLogo.cpp" />
-    <ClCompile Include="Program\Scene\Mission.cpp" />
     <ClCompile Include="Program\Scene\SceneRanking.cpp" />
     <ClCompile Include="Program\Scene\SceneTitle.cpp" />
     <ClCompile Include="Program\Scene\SceneTutorial.cpp" />
@@ -55,6 +55,7 @@
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
     <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Program\DefineGame.h" />
+    <ClInclude Include="Program\Mission\Mission.h" />
     <ClInclude Include="Program\System\GameManage.h" />
     <ClInclude Include="Program\main.h" />
     <ClInclude Include="Program\Scene\SceneBase.h" />
@@ -65,7 +66,6 @@
     <ClInclude Include="Program\Scene\SceneGameNormal.h" />
     <ClInclude Include="Program\Scene\SceneGameRefresh.h" />
     <ClInclude Include="Program\Scene\SceneLogo.h" />
-    <ClInclude Include="Program\Scene\Mission.h" />
     <ClInclude Include="Program\Scene\SceneRanking.h" />
     <ClInclude Include="Program\Scene\SceneTitle.h" />
     <ClInclude Include="Program\Scene\SceneTutorial.h" />

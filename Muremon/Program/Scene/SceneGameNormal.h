@@ -11,7 +11,7 @@
 #include "Program/Scene/SceneBase.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
-#include "Program/Scene/Mission.h"
+#include "Program/Mission/Mission.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"

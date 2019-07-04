@@ -80,7 +80,7 @@
     <ClCompile Include="Program\System\GameManage.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Scene\Mission.cpp">
+    <ClCompile Include="Program\Mission\Mission.cpp">
       <Filter>Mission</Filter>
     </ClCompile>
   </ItemGroup>
@@ -166,7 +166,7 @@
     <ClInclude Include="Program\System\GameManage.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Scene\Mission.h">
+    <ClInclude Include="Program\Mission\Mission.h">
       <Filter>Mission</Filter>
     </ClInclude>
   </ItemGroup>

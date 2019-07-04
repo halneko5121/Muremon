@@ -53,32 +53,32 @@
     <ClCompile Include="Program\Actor\ActorBoss.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\SceneBase.cpp">
+    <ClCompile Include="Program\Scene\SceneBase.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Program\Util\UtilInput.cpp">
       <Filter>Util</Filter>
     </ClCompile>
-    <ClCompile Include="program\System\GameManage.cpp" />
+    <ClCompile Include="Program\System\GameManage.cpp" />
     <ClCompile Include="Program\Util\UtilBattle.cpp">
       <Filter>Util</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\SceneGameNormal.cpp">
+    <ClCompile Include="Program\Scene\SceneGameNormal.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\SceneGameRefresh.cpp">
+    <ClCompile Include="Program\Scene\SceneGameRefresh.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\SceneLogo.cpp">
+    <ClCompile Include="Program\Scene\SceneLogo.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\SceneRanking.cpp">
+    <ClCompile Include="Program\Scene\SceneRanking.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\SceneTitle.cpp">
+    <ClCompile Include="Program\Scene\SceneTitle.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="program\Scene\SceneTutorial.cpp">
+    <ClCompile Include="Program\Scene\SceneTutorial.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -133,36 +133,36 @@
       <Filter>Library\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Program\main.h" />
-    <ClInclude Include="program\DefineGame.h" />
+    <ClInclude Include="Program\DefineGame.h" />
     <ClInclude Include="Program\Actor\ActorBoss.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\SceneBase.h">
+    <ClInclude Include="Program\Scene\SceneBase.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Util\UtilInput.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="program\System\GameManage.h" />
+    <ClInclude Include="Program\System\GameManage.h" />
     <ClInclude Include="Program\Util\UtilBattle.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\SceneGameNormal.h">
+    <ClInclude Include="Program\Scene\SceneGameNormal.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\SceneGameRefresh.h">
+    <ClInclude Include="Program\Scene\SceneGameRefresh.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\SceneLogo.h">
+    <ClInclude Include="Program\Scene\SceneLogo.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\SceneRanking.h">
+    <ClInclude Include="Program\Scene\SceneRanking.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\SceneTitle.h">
+    <ClInclude Include="Program\Scene\SceneTitle.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="program\Scene\SceneTutorial.h">
+    <ClInclude Include="Program\Scene\SceneTutorial.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

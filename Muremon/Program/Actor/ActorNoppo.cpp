@@ -23,6 +23,23 @@ namespace
 
 	const int cWaitMotion = 15;
 
+	enum ANIME_NOPPO
+	{
+		ANIME_G_ATK1_NOPPO,
+		ANIME_G_ATK2_NOPPO,
+		ANIME_G_ATK3_NOPPO,
+		ANIME_G_ATK4_NOPPO,
+
+		ANIME_MOTION1_NOPPO,
+		ANIME_MOTION2_NOPPO,
+		ANIME_MOTION3_NOPPO,
+
+		ANIME_S_ATK1_NOPPO,
+		ANIME_S_ATK2_NOPPO,
+
+		MAX_ANIME_NOPPO,
+	};
+
 	CHARADATA init_charadata_noppo = {
 		// スピード, アニメーション, 矩形, 透過度
 		(0.0f), 0, 0, (MAX_ALPHA),

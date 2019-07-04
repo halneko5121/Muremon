@@ -20,6 +20,20 @@ namespace
 	const int cRandY = 300;
 	const int cRandYMin = -200;
 
+	enum ANIME_NIKU
+	{
+		ANIME_G_ATK1_NIKU,
+		ANIME_G_ATK2_NIKU,
+		ANIME_G_ATK3_NIKU,
+		ANIME_G_ATK4_NIKU,
+
+		ANIME_S_ATK1_NIKU,
+
+		ANIME_DEATH_NIKU,
+
+		MAX_ANIME_NIKU,
+	};
+
 	CHARADATA cInitActorData = {
 		// スピード, アニメーション, 矩形, 透過度
 		(0.0f), 0, 0, (MAX_ALPHA),

@@ -25,6 +25,27 @@ namespace
 	const int cWaveCycle = 200;								// 周期(多きければ大きい程周期が短く)
 	const int cWaveLimitX = 400;							// この座標まで来ると直線運動へ移行
 
+	enum ANIME_YOSHI
+	{
+		ANIME_G_ATK1_YOSHI,
+		ANIME_G_ATK2_YOSHI,
+		ANIME_G_ATK3_YOSHI,
+		ANIME_G_ATK4_YOSHI,
+
+		ANIME_MOTION1_YOSHI,
+		ANIME_MOTION2_YOSHI,
+		ANIME_MOTION3_YOSHI,
+
+		ANIME_S_ATK1_YOSHI,
+		ANIME_S_ATK2_YOSHI,
+		ANIME_S_ATK3_YOSHI,
+		ANIME_S_ATK4_YOSHI,
+
+		ANIME_DEATH_YOSHI,
+
+		MAX_ANIME_YOSHI,
+	};
+
 	CHARADATA cInitActorData = {
 		// スピード,アニメーション,矩形,透過度
 		(0.0f), 0, 0, (MAX_ALPHA),

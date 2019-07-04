@@ -8,20 +8,6 @@
 
 #include "ActorBase.h"
 
-enum ANIME_NIKU
-{
-	ANIME_G_ATK1_NIKU,
-	ANIME_G_ATK2_NIKU,
-	ANIME_G_ATK3_NIKU,
-	ANIME_G_ATK4_NIKU,
-
-	ANIME_S_ATK1_NIKU,
-
-	ANIME_DEATH_NIKU,
-
-	MAX_ANIME_NIKU,
-};
-
 class ActorNikuman :	public ActorBase
 {
 public:

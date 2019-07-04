@@ -124,6 +124,12 @@ C_DInputKey::Init(HWND window_handle)
 	return S_OK;
 }
 
+void
+C_DInputKey::Update()
+{
+	KeyBordRefresh();
+}
+
 /**
  * @brief	開放処理
  */
@@ -149,12 +155,13 @@ C_DInputKey::ReleaseDirectInput()
 bool
 C_DInputKey::IsKeyDown(USHORT key)
 {
-	KeyBordRefresh();
-
 	if(!mKeyBordDevice) return FALSE;
 
 	// 最上位１ビットに「押されているか」どうかのデータが格納されている
-	if(mKeyState[key] & 0x80) return TRUE;
+	if (mKeyState[key] & 0x80)
+	{
+		return TRUE;
+	}
 
 	return FALSE;
 }
@@ -225,7 +232,7 @@ C_DInputKey::KeyBordRefresh()
 			// デバイスの状態を取得
 			mKeyBordDevice->GetDeviceState(
 				sizeof(mKeyState),		// 指定したキーボードのサイズ
-				mKeyState);				// 現在の状態を受け取る構造体・変数のアドレス
+				(LPVOID)&mKeyState);	// 現在の状態を受け取る構造体・変数のアドレス
 		}
 	}
 

@@ -6,11 +6,10 @@
 //---------------------------------------------
 #include "Title.h"
 #include "Library/Sound/DirectSound.h"
+#include "Library/Input/DirectInput.h"
 
 SceneTitle::SceneTitle(void)
 {
-	key		= new C_Control();
-
 	cursor_posi.x = CURSOR_X;
 	cursor_posi.y = CURSOR_Y;
 
@@ -36,8 +35,6 @@ SceneTitle::SceneTitle(void)
 	mIsSceneChange = true;
 
 	flag_scene_change = 0;
-
-	key_state = 0;
 
 	anime_cursor = 0;
 
@@ -233,16 +230,18 @@ void SceneTitle::FadeOut()
 
 void SceneTitle::KeyControl()
 {
-	key_state = key->KeyCheck();
-
-	//めっちゃ上下押されても違和感にないように
-	if(GetDirectSound()->IsPlaySound(S_SE_CURSOR_MOVE)){
-		if(key_state == KEY_UP || key_state == KEY_DOWN){
+	// めっちゃ上下押されても違和感にないように
+	if(GetDirectSound()->IsPlaySound(S_SE_CURSOR_MOVE))
+	{
+		if(GetInputKey()->IsKeyDown(DIK_UP) == KEY_UP ||
+			GetInputKey()->IsKeyDown(DIK_DOWN))
+		{
 			GetDirectSound()->SoundStop(S_SE_CURSOR_MOVE);
 		}
 	}
 
-	if(key_state == KEY_Z){
+	if(GetInputKey()->IsKeyPushed(DIK_Z))
+	{
 		GetDirectSound()->SoundPlayOnce(S_SE_OK);
 		if(draw_scene_change == DRAW_Z_PUSH){		//PUSH_Zが表示されている時にＺキーが押されたら
 			draw_scene_change = DRAW_MENU;
@@ -276,16 +275,26 @@ void SceneTitle::KeyControl()
 		time_count = 0;
 	}
 
-	if(key_state == KEY_UP){		//↑キーが押されたら
-		if(draw_scene_change != DRAW_Z_PUSH) GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+	// ↑キーが押されたら
+	if (GetInputKey()->IsKeyPushed(DIK_UP))
+	{
+		if (draw_scene_change != DRAW_Z_PUSH)
+		{
+			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+		}
 		flag_select--;
-		if(draw_scene_change == DRAW_MENU){
-			if(flag_select < G_START){
+
+		if(draw_scene_change == DRAW_MENU)
+		{
+			if(flag_select < G_START)
+			{
 				flag_select = G_END;
 			}
 		}
-		else if(draw_scene_change == DRAW_GAME_MENU){
-			if(flag_select < G_CLEARLY){
+		else if(draw_scene_change == DRAW_GAME_MENU)
+		{
+			if(flag_select < G_CLEARLY)
+			{
 				flag_select = G_TUTORIAL;
 			}
 		}
@@ -295,16 +304,26 @@ void SceneTitle::KeyControl()
 		time_count=0;
 	}
 
-	if(key_state == KEY_DOWN){	//↓キーが押されたら
-		if(draw_scene_change != DRAW_Z_PUSH) GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+	// ↓キーが押されたら
+	if (GetInputKey()->IsKeyPushed(DIK_DOWN))
+	{
+		if (draw_scene_change != DRAW_Z_PUSH)
+		{
+			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+		}
 		flag_select++;
-		if(draw_scene_change == DRAW_MENU){
-			if(flag_select > G_END){
+
+		if(draw_scene_change == DRAW_MENU)
+		{
+			if(flag_select > G_END)
+			{
 				flag_select = G_START;
 			}
 		}
-		else if(draw_scene_change == DRAW_GAME_MENU){
-			if(flag_select > G_TUTORIAL){
+		else if(draw_scene_change == DRAW_GAME_MENU)
+		{
+			if(flag_select > G_TUTORIAL)
+			{
 				flag_select = G_CLEARLY;
 			}
 		}
@@ -314,13 +333,17 @@ void SceneTitle::KeyControl()
 		time_count=0;
 	}
 
-	if(key_state == KEY_X){
+	if (GetInputKey()->IsKeyPushed(DIK_X))
+	{
 		GetDirectSound()->SoundPlayOnce(S_CANCEL);
-		if(draw_scene_change == DRAW_MENU){
+
+		if(draw_scene_change == DRAW_MENU)
+		{
 			draw_scene_change = DRAW_Z_PUSH;
 			flag_select = G_START;
 		}
-		else if(draw_scene_change == DRAW_GAME_MENU){
+		else if(draw_scene_change == DRAW_GAME_MENU)
+		{
 			draw_scene_change = DRAW_MENU;
 			flag_select = G_CLEARLY;
 		}

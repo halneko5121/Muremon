@@ -97,12 +97,8 @@ enum TITLE_FADE_MODE
 class SceneTitle : public SceneBase
 {
 private:
-	C_Control	*key;
-
 	D3DXVECTOR2 cursor_posi;
 	D3DXVECTOR2 title_posi;
-
-	int key_state;
 
 	int time_count;			//ロゴのタイムカウント
 

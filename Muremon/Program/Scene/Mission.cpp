@@ -1,5 +1,6 @@
 #include "Mission.h"
 #include "Library/Sound/DirectSound.h"
+#include "Library/Input/DirectInput.h"
 
 C_Mission::C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
@@ -849,14 +850,15 @@ void C_Mission::Mission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	key_state = key->KeyCheck();
-	if(key_state == KEY_Z){
+	if (GetInputKey()->IsKeyPushed(DIK_Z))
+	{
 		flag_time_cnt += 1;
 	}
 	if(flag_time_cnt == 1){
 		time++;
 	}
-	else if(flag_time_cnt == 2){
+	else if(flag_time_cnt == 2)
+	{
 		if(time <= 11*60 - 31 && time >= 9*60 + 31){
 			mission_state = MISSION_SEIKO;
 		}
@@ -883,21 +885,26 @@ void C_Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	key_state = key->KeyCheck();
-	if(key_state == KEY_Z){
+	if (GetInputKey()->IsKeyPushed(DIK_Z))
+	{
 		flag_time_cnt += 1;
-		if(flag_time_cnt > 2){
+		if(flag_time_cnt > 2)
+		{
 			flag_time_cnt = 2;
 		}
 	}
-	if(flag_time_cnt == 1){
+	if(flag_time_cnt == 1)
+	{
 		time++;
 	}
-	else if(flag_time_cnt == 2){
-		if(time <= 6*60 - 31 && time >= 4*60 + 31){
+	else if(flag_time_cnt == 2)
+	{
+		if(time <= 6*60 - 31 && time >= 4*60 + 31)
+		{
 			mission_state = MISSION_SEIKO;
 		}
-		else{
+		else
+		{
 			mission_state = MISSION_SIPPAI;
 		}
 	}

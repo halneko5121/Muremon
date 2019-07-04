@@ -42,13 +42,16 @@ bool ScenePrologue::Update()
 	if(add_outline < 300.f) add_outline = 300.f;
 	else if(add_outline == 300.f) outline_center = true;
 
-	if(key->KeyCheck() == KEY_Z){	
-		if(outline_center == false){
+	if (GetInputKey()->IsKeyPushed(DIK_Z))
+	{
+		if(outline_center == false)
+		{
 			add_outline = 300.f;
 			outline_center = true;
 		}
-		else{
-			//シーン移行
+		// シーン移行
+		else
+		{
 			fade_flag = PR_FADE_OUT;
 		}
 	}

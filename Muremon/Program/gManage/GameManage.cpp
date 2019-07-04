@@ -133,6 +133,7 @@ C_GameMain::MsgLoop(void)
 
 			if(nowTime - oldTime >= 1000/60)
 			{
+				GetInputKey()->Update();
 				mGraphics->RenderStart(mBackground);
 				if(!mScene->RunScene())
 				{

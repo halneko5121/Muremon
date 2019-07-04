@@ -78,6 +78,11 @@ public:
 	HRESULT					Init(HWND window_handle);
 
 	/**
+	 * @brief	更新
+	 */
+	void					Update();
+
+	/**
 	 * @brief	開放処理を行う
 	 */
 	void					ReleaseDirectInput();

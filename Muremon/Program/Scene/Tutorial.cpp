@@ -9,11 +9,8 @@
 
 SceneTutorial::SceneTutorial(void)
 {
-	key		= new C_Control();
-
-	keep_key_state = key_state = 0;
-
 	flag_draw_state = TR_REFRESH;
+	slide_state = 0;
 
 	tutorial[TR_REFRESH].y = tutorial[TR_NORMAL].y = TR_Y;
 
@@ -118,12 +115,12 @@ void SceneTutorial::FadeOut()
 
 void SceneTutorial::KeyControl()
 {
-	key_state = key->KeyCheck();
-
-	if(key_state == KEY_Z){		//Z‚ª‰Ÿ‚³‚ê‚½‚ç
+	if (GetInputKey()->IsKeyPushed(DIK_Z))
+	{
 		mIsSceneChange = false;
 	}
-	if(key_state == KEY_LEFT){	//©‚ª‰Ÿ‚³‚ê‚½‚ç
+	else if (GetInputKey()->IsKeyPushed(DIK_LEFT))
+	{
 		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_NORMAL){
 			flag_draw_state = TR_REFRESH;
@@ -131,8 +128,10 @@ void SceneTutorial::KeyControl()
 		else if(flag_draw_state == TR_END){
 			flag_draw_state = TR_NORMAL;
 		}
+		slide_state = 1;
 	}
-	if(key_state == KEY_RIGHT){	//¨‚ª‰Ÿ‚³‚ê‚½‚ç
+	else if (GetInputKey()->IsKeyPushed(DIK_RIGHT))
+	{
 		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_REFRESH){
 			flag_draw_state = TR_NORMAL;
@@ -140,42 +139,51 @@ void SceneTutorial::KeyControl()
 		else if(flag_draw_state == TR_NORMAL){
 			flag_draw_state = TR_END;
 		}
-	}
-	if(key_state != 0){
-		keep_key_state = key_state;
+		slide_state = 2;
 	}
 }
 
 void SceneTutorial::DrawPosi()
 {
-	if(flag_draw_state == TR_REFRESH){
-		if(keep_key_state == KEY_LEFT){
-			if(tutorial[TR_REFRESH].x != TR_CENTER_X){
+	if(flag_draw_state == TR_REFRESH)
+	{
+		if (slide_state == 1)
+		{
+			if(tutorial[TR_REFRESH].x != TR_CENTER_X)
+			{
 				tutorial[TR_REFRESH].x += 10.f;
 				tutorial[TR_NORMAL].x += 10.f;
 			}
 		}
-		else{
+		else
+		{
 			if(tutorial[TR_REFRESH].x != TR_CENTER_X){
 				tutorial[TR_REFRESH].x -= 10.f;
 			}
 		}
 	}
-	else if(flag_draw_state == TR_NORMAL){
-		if(keep_key_state == KEY_LEFT){
-			if(tutorial[TR_NORMAL].x != TR_CENTER_X){
+	else if(flag_draw_state == TR_NORMAL)
+	{
+		if (slide_state == 1)
+		{
+			if(tutorial[TR_NORMAL].x != TR_CENTER_X)
+			{
 				tutorial[TR_NORMAL].x += 10.f;
 			}
 		}
-		else{
-			if(tutorial[TR_NORMAL].x != TR_CENTER_X){
+		else
+		{
+			if(tutorial[TR_NORMAL].x != TR_CENTER_X)
+			{
 				tutorial[TR_NORMAL].x -= 10.f;
 				tutorial[TR_REFRESH].x -= 10.f;
 			}
 		}
 	}
-	else if(flag_draw_state == TR_END){
-		if(tutorial[TR_NORMAL].x != TR_LEFT_X){
+	else if(flag_draw_state == TR_END)
+	{
+		if(tutorial[TR_NORMAL].x != TR_LEFT_X)
+		{
 			tutorial[TR_NORMAL].x -= 10.f;
 		}
 		else{

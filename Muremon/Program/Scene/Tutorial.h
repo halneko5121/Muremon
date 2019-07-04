@@ -47,13 +47,9 @@ enum TUTORIAL_MODE
 class SceneTutorial : public SceneBase
 {
 private:
-	C_Control	*key;
-
-	int key_state;	//ƒL[‚Ìó‘Ô
-
-	int keep_key_state;
 
 	int flag_draw_state;	//•`‰æ‚µ‚Ä‚¢‚é‚à‚Ì‚ğ’m‚ç‚¹‚é
+	int slide_state;
 
 	D3DXVECTOR2 tutorial[2];
 

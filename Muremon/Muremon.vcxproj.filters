@@ -67,9 +67,6 @@
     <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp">
       <Filter>Util\Orbit</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Systtem\GameManage.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="Library\Graphics\Texture.cpp">
       <Filter>Library\Graphics</Filter>
     </ClCompile>
@@ -84,6 +81,10 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Program\Util\UtilInput.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="program\System\GameManage.cpp" />
+    <ClCompile Include="Program\Util\UtilBattle.cpp">
       <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,9 +156,6 @@
     <ClInclude Include="Program\Util\Orbit\OrbitWave.h">
       <Filter>Util\Orbit</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Systtem\GameManage.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="Library\Graphics\Texture.h">
       <Filter>Library\Graphics</Filter>
     </ClInclude>
@@ -173,6 +171,10 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Util\UtilInput.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="program\System\GameManage.h" />
+    <ClInclude Include="Program\Util\UtilBattle.h">
       <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>

@@ -39,6 +39,7 @@
     <ClCompile Include="program\Scene\Ranking.cpp" />
     <ClCompile Include="program\Scene\Title.cpp" />
     <ClCompile Include="program\Scene\Tutorial.cpp" />
+    <ClCompile Include="Program\Util\UtilBattle.cpp" />
     <ClCompile Include="Program\Util\UtilInput.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,7 @@
     <ClInclude Include="program\Scene\Ranking.h" />
     <ClInclude Include="program\Scene\Title.h" />
     <ClInclude Include="program\Scene\Tutorial.h" />
+    <ClInclude Include="Program\Util\UtilBattle.h" />
     <ClInclude Include="Program\Util\UtilInput.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

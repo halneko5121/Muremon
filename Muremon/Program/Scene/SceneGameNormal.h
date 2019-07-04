@@ -63,11 +63,11 @@ public:
 
 private:
 	C_Mission*			mMission;
-	C_ActorBoss*		mBoss;
+	ActorBoss*		mBoss;
 
-	C_ActorNikuman*		mNiku;
-	C_ActorNoppo*		mNoppo;
-	C_ActorYoshi*		mYoshi;
+	ActorNikuman*		mNiku;
+	ActorNoppo*		mNoppo;
+	ActorYoshi*		mYoshi;
 
 	int					mTime;				// ŠÔ‚ğ‚Í‚©‚é
 	bool				mIsPose;			// ƒ|[ƒY‚ğ‚µ‚Ä‚¢‚é‚©‚µ‚Ä‚¢‚È‚¢‚©

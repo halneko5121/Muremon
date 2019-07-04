@@ -36,7 +36,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-C_ActorNoppo::C_ActorNoppo(C_Vertex* vertex, C_Texture* texture)
+ActorNoppo::ActorNoppo(C_Vertex* vertex, C_Texture* texture)
 {
 	mTexture	= texture;
 	mVertex		= vertex;
@@ -45,7 +45,7 @@ C_ActorNoppo::C_ActorNoppo(C_Vertex* vertex, C_Texture* texture)
 /**
  * @brief デストラクタ
  */
-C_ActorNoppo::~C_ActorNoppo(void)
+ActorNoppo::~ActorNoppo(void)
 {
 }
 
@@ -53,7 +53,7 @@ C_ActorNoppo::~C_ActorNoppo(void)
  * @brief 初期化
  */
 void
-C_ActorNoppo::Init()											
+ActorNoppo::Init()											
 {
 	mOrbit->pWave->InitWave(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
@@ -88,7 +88,7 @@ C_ActorNoppo::Init()
  * @brief 更新
  */
 void
-C_ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
+ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
 {
 	mRandSpeed = 0.f;
 
@@ -204,7 +204,7 @@ C_ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnu
  * @brief アニメ設定
  */
 int
-C_ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int mCharaNum)
+ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int mCharaNum)
 {
 	static int delay = 0;
 
@@ -226,7 +226,7 @@ C_ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int 
  * @brief フォントの描画処理
  */
 void
-C_ActorNoppo::DrawEffectFont(int rect_startnum)
+ActorNoppo::DrawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -247,7 +247,7 @@ C_ActorNoppo::DrawEffectFont(int rect_startnum)
  * @brief 描画処理
  */
 void
-C_ActorNoppo::Draw(int rect_startnum)
+ActorNoppo::Draw(int rect_startnum)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -277,7 +277,7 @@ C_ActorNoppo::Draw(int rect_startnum)
  * @brief 攻撃処理
  */
 POS_CC<float>
-C_ActorNoppo::CharaAttack_2(int mCharaNum)																//キー入力による動作その2
+ActorNoppo::CharaAttack_2(int mCharaNum)																//キー入力による動作その2
 {
 	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
@@ -288,7 +288,7 @@ C_ActorNoppo::CharaAttack_2(int mCharaNum)																//キー入力による動作そ
  * @brief 死亡処理
  */
 void
-C_ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)							//死亡処理
+ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)							//死亡処理
 {
 	static int wait_count[MAX_VALLUE_PLAYER] = {0};
 

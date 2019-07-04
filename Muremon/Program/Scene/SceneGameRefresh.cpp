@@ -47,9 +47,9 @@ SceneGameRefresh::~SceneGameRefresh(void)
 
 void SceneGameRefresh::Init()
 {
-	mNiku	= new C_ActorNikuman(mVertex, mTexture);
-	mNoppo	= new C_ActorNoppo(mVertex, mTexture);
-	mYoshi	= new C_ActorYoshi(mVertex, mTexture);
+	mNiku	= new ActorNikuman(mVertex, mTexture);
+	mNoppo	= new ActorNoppo(mVertex, mTexture);
+	mYoshi	= new ActorYoshi(mVertex, mTexture);
 
 	mNiku->Init();
 	mNoppo->Init();
@@ -57,7 +57,7 @@ void SceneGameRefresh::Init()
 	
 	//mBoss->Init();
 
-	mBoss = new C_ActorBoss(mTexture, mVertex, mDevice);
+	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
 
 	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");

@@ -38,7 +38,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-C_ActorYoshi::C_ActorYoshi(C_Vertex* vertex, C_Texture* texture)
+ActorYoshi::ActorYoshi(C_Vertex* vertex, C_Texture* texture)
 {
 	mTexture	= texture;
 	mVertex		= vertex;
@@ -47,7 +47,7 @@ C_ActorYoshi::C_ActorYoshi(C_Vertex* vertex, C_Texture* texture)
 /**
  * @brief デストラクタ
  */
-C_ActorYoshi::~C_ActorYoshi(void)
+ActorYoshi::~ActorYoshi(void)
 {
 }
 
@@ -55,7 +55,7 @@ C_ActorYoshi::~C_ActorYoshi(void)
  * @brief 初期化
  */
 void
-C_ActorYoshi::Init()											
+ActorYoshi::Init()											
 {
 	mOrbit->pWave->InitWave(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
@@ -88,7 +88,7 @@ C_ActorYoshi::Init()
  * @brief 更新
  */
 void
-C_ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
+ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
 {
 	mRandSpeed = 0.f;
 
@@ -197,7 +197,7 @@ C_ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnu
  * @brief アニメ設定
  */
 int
-C_ActorYoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,int mCharaNum)
+ActorYoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,int mCharaNum)
 {
 	static int delay = 0;
 
@@ -219,7 +219,7 @@ C_ActorYoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,int
  * @brief フォントの描画処理
  */
 void
-C_ActorYoshi::DrawEffectFont(int rect_startnum)
+ActorYoshi::DrawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -239,7 +239,7 @@ C_ActorYoshi::DrawEffectFont(int rect_startnum)
  * @brief 描画処理
  */
 void
-C_ActorYoshi::Draw(int rect_startnum)
+ActorYoshi::Draw(int rect_startnum)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -262,7 +262,7 @@ C_ActorYoshi::Draw(int rect_startnum)
  * @brief 攻撃処理
  */
 POS_CC<float>
-C_ActorYoshi::CharaAttack_2(int mCharaNum)														//キー入力による動作その2
+ActorYoshi::CharaAttack_2(int mCharaNum)														//キー入力による動作その2
 {
 	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
@@ -273,7 +273,7 @@ C_ActorYoshi::CharaAttack_2(int mCharaNum)														//キー入力による動作その
  * @brief 死亡処理
  */
 void
-C_ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)						//死亡処理
+ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)						//死亡処理
 {
 
 	if(init[mCharaNum]){

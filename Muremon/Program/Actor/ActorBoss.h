@@ -39,7 +39,7 @@ enum BOSS_CONTROLTYPE
 #define MISSION_CLEAR_SCORE			(50000)	//ミッションクリア加算スコア
 #define BOSS_KO_SCORE				(10000)
 
-class C_ActorBoss
+class ActorBoss
 {
 private:
 	C_Texture	*texture;
@@ -139,8 +139,8 @@ private:
 	float add_boss_life;
 
 public:
-	C_ActorBoss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
-	~C_ActorBoss(void);
+	ActorBoss(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
+	~ActorBoss(void);
 
 	void Init();		//初期化
 	

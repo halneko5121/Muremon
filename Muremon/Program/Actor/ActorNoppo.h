@@ -25,11 +25,11 @@ enum ANIME_NOPPO
 	MAX_ANIME_NOPPO,
 };
 
-class C_ActorNoppo : public C_ActorBase
+class ActorNoppo : public ActorBase
 {
 public:
-	C_ActorNoppo(C_Vertex *vertex, C_Texture  *texture);
-	~C_ActorNoppo(void);
+	ActorNoppo(C_Vertex *vertex, C_Texture  *texture);
+	~ActorNoppo(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num);
 	void			DeathControl(int m_chara_num, int sound_startnum, int rect_startnum);

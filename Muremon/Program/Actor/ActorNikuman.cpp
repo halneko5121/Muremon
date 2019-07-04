@@ -33,7 +33,7 @@ namespace
 /**
  * @brief ƒRƒ“ƒXƒgƒ‰ƒNƒ^
  */
-C_ActorNikuman::C_ActorNikuman(C_Vertex* vertex , C_Texture* texture)
+ActorNikuman::ActorNikuman(C_Vertex* vertex , C_Texture* texture)
 {
 	mVertex		= vertex;
 	mTexture	= texture;
@@ -42,7 +42,7 @@ C_ActorNikuman::C_ActorNikuman(C_Vertex* vertex , C_Texture* texture)
 /**
  * @brief ƒfƒXƒgƒ‰ƒNƒ^
  */
-C_ActorNikuman::~C_ActorNikuman(void)
+ActorNikuman::~ActorNikuman(void)
 {
 }
 
@@ -50,7 +50,7 @@ C_ActorNikuman::~C_ActorNikuman(void)
  * @brief ‰Šú‰»
  */
 void
-C_ActorNikuman::Init()								
+ActorNikuman::Init()								
 {
 	//praivate•Ï”
 	s_atk_start_y = 0.f;
@@ -81,7 +81,7 @@ C_ActorNikuman::Init()
  * @brief XV
  */
 void
-C_ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//ƒLƒƒƒ‰ƒNƒ^‚Ì§Œä
+ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//ƒLƒƒƒ‰ƒNƒ^‚Ì§Œä
 {
 	mRandSpeed = 0.f;
 
@@ -177,7 +177,7 @@ C_ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startn
  * @brief ƒAƒjƒİ’è
  */
 int
-C_ActorNikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int mCharaNum)
+ActorNikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int mCharaNum)
 {
 	static int delay = 0;
 
@@ -199,7 +199,7 @@ C_ActorNikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, i
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-C_ActorNikuman::DrawEffectFont(int rect_startnum)
+ActorNikuman::DrawEffectFont(int rect_startnum)
 {
 	//ƒtƒHƒ“ƒgƒGƒtƒFƒNƒg‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -216,7 +216,7 @@ C_ActorNikuman::DrawEffectFont(int rect_startnum)
  * @brief •`‰æˆ—
  */
 void
-C_ActorNikuman::Draw(int rect_startnum)
+ActorNikuman::Draw(int rect_startnum)
 {
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -230,7 +230,7 @@ C_ActorNikuman::Draw(int rect_startnum)
  * @brief UŒ‚ˆ—
  */
 POS_CC<float>
-C_ActorNikuman::CharaAttack_2(int mCharaNum, POS_CC<float> boss_cc)		//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
+ActorNikuman::CharaAttack_2(int mCharaNum, POS_CC<float> boss_cc)		//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
 {
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
@@ -251,7 +251,7 @@ C_ActorNikuman::CharaAttack_2(int mCharaNum, POS_CC<float> boss_cc)		//ƒL[“ü—Í‚
  * @brief €–Sˆ—
  */
 void
-C_ActorNikuman::DeathControl(int mCharaNum , int sound_num, int rect_startnum)			//€–Sˆ—
+ActorNikuman::DeathControl(int mCharaNum , int sound_num, int rect_startnum)			//€–Sˆ—
 {
 	mCharaData[mCharaNum].animetion = 0;
 	mCharaData[mCharaNum].animetion	= SetAnimetion(NULL,mCharaData[mCharaNum].animetion,ANIME_DEATH_NIKU,mCharaNum);

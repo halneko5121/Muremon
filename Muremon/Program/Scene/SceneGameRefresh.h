@@ -35,10 +35,10 @@ public:
 	void HitEffectDraw();
 
 private:
-	C_ActorNikuman*		mNiku;
-	C_ActorNoppo*		mNoppo;
-	C_ActorYoshi*		mYoshi;
-	C_ActorBoss*		mBoss;
+	ActorNikuman*		mNiku;
+	ActorNoppo*		mNoppo;
+	ActorYoshi*		mYoshi;
+	ActorBoss*		mBoss;
 
 private:
 	int					mAlpha;				// アルファ値

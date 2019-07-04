@@ -77,11 +77,11 @@ typedef struct CHARADATA{
 	POS_CC<float>  draw_cc;
 }CHARADATA;
 
-class C_ActorBase
+class ActorBase
 {
 public:
-	C_ActorBase(void);
-	virtual ~C_ActorBase(void);
+	ActorBase(void);
+	virtual ~ActorBase(void);
 
 	float				m_chara_y;
 	virtual void		DeathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;

@@ -22,11 +22,11 @@ enum ANIME_NIKU
 	MAX_ANIME_NIKU,
 };
 
-class C_ActorNikuman :	public C_ActorBase
+class ActorNikuman :	public ActorBase
 {
 public:
-	C_ActorNikuman(C_Vertex *vertex, C_Texture *texture);
-	~C_ActorNikuman(void);
+	ActorNikuman(C_Vertex *vertex, C_Texture *texture);
+	~ActorNikuman(void);
 
 	POS_CC<float>	CharaAttack_2(int m_chara_num, POS_CC<float> boss_cc);
 	void			DeathControl(int m_chara_num, int sound_num, int rect_start_num);

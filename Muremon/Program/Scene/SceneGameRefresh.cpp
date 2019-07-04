@@ -12,8 +12,6 @@ POS_CC<float> boss_cc = { 600, 350 };
 
 SceneGameRefresh::SceneGameRefresh(void)
 {
-	mKey		= new C_Control();
-
 	mStartAlpha = mAlpha = 0;	//アルファ値
 
 	mAlphaCount = 0;

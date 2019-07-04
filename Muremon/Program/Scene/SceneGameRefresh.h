@@ -36,8 +36,6 @@ public:
 	void HitEffectDraw();
 
 private:
-	C_Control*			mKey;
-
 	C_ActorNikuman*		mNiku;
 	C_ActorNoppo*		mNoppo;
 	C_ActorYoshi*		mYoshi;

@@ -63,7 +63,6 @@ public:
 	void HitEffectDraw();
 
 private:
-	C_Control*			mKey;
 	C_Mission*			mMission;
 	C_ActorBoss*		mBoss;
 

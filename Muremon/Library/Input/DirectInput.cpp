@@ -209,6 +209,20 @@ C_DInputKey::IsAnyKeyDown()
 }
 
 /**
+ * @brief	いずれかのキーが瞬間的に押されたか
+ * @return	true　押された   false:　押されていない
+ */
+bool
+C_DInputKey::IsAnyKeyPushed()
+{
+	for (int i = 0;i < MAX_KEYDATA;i++) {
+		if (IsKeyPushed(i)) return TRUE;
+	}
+
+	return FALSE;
+}
+
+/**
  * @brief	デバイス全体の情報更新
  */
 void

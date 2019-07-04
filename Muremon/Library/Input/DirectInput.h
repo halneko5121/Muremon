@@ -109,6 +109,8 @@ public:
 	 * @brief	いずれかのキーが押されたか
 	 */
 	bool					IsAnyKeyDown();
+	bool					IsAnyKeyPushed();
+
 
 private:
 	enum { MAX_KEYDATA = 256 };								// 一度に受け付けるキーの最大数

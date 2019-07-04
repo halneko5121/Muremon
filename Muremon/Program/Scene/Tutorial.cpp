@@ -6,6 +6,7 @@
 //---------------------------------------------
 #include "Tutorial.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilInput.h"
 
 SceneTutorial::SceneTutorial(void)
 {
@@ -115,11 +116,11 @@ void SceneTutorial::FadeOut()
 
 void SceneTutorial::KeyControl()
 {
-	if (GetInputKey()->IsKeyPushed(DIK_Z))
+	if (UtilInput::IsKeyPushed(DIK_Z))
 	{
 		mIsSceneChange = false;
 	}
-	else if (GetInputKey()->IsKeyPushed(DIK_LEFT))
+	else if (UtilInput::IsKeyPushed(DIK_LEFT))
 	{
 		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_NORMAL){
@@ -130,7 +131,7 @@ void SceneTutorial::KeyControl()
 		}
 		slide_state = 1;
 	}
-	else if (GetInputKey()->IsKeyPushed(DIK_RIGHT))
+	else if (UtilInput::IsKeyPushed(DIK_RIGHT))
 	{
 		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_REFRESH){

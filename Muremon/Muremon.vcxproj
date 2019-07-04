@@ -39,6 +39,7 @@
     <ClCompile Include="program\Scene\Ranking.cpp" />
     <ClCompile Include="program\Scene\Title.cpp" />
     <ClCompile Include="program\Scene\Tutorial.cpp" />
+    <ClCompile Include="UtilInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Library\Font\DirectFont.h" />
@@ -71,6 +72,7 @@
     <ClInclude Include="program\Scene\Ranking.h" />
     <ClInclude Include="program\Scene\Title.h" />
     <ClInclude Include="program\Scene\Tutorial.h" />
+    <ClInclude Include="UtilInput.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>Muremon</ProjectName>

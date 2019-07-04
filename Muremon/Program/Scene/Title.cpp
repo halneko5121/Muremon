@@ -6,7 +6,7 @@
 //---------------------------------------------
 #include "Title.h"
 #include "Library/Sound/DirectSound.h"
-#include "Library/Input/DirectInput.h"
+#include "Program/Util/UtilInput.h"
 
 SceneTitle::SceneTitle(void)
 {
@@ -233,14 +233,14 @@ void SceneTitle::KeyControl()
 	// めっちゃ上下押されても違和感にないように
 	if(GetDirectSound()->IsPlaySound(S_SE_CURSOR_MOVE))
 	{
-		if(GetInputKey()->IsKeyDown(DIK_UP) == KEY_UP ||
-			GetInputKey()->IsKeyDown(DIK_DOWN))
+		if(UtilInput::IsKeyDown(DIK_UP) == KEY_UP ||
+			UtilInput::IsKeyDown(DIK_DOWN))
 		{
 			GetDirectSound()->SoundStop(S_SE_CURSOR_MOVE);
 		}
 	}
 
-	if(GetInputKey()->IsKeyPushed(DIK_Z))
+	if(UtilInput::IsKeyPushed(DIK_Z))
 	{
 		GetDirectSound()->SoundPlayOnce(S_SE_OK);
 		if(draw_scene_change == DRAW_Z_PUSH){		//PUSH_Zが表示されている時にＺキーが押されたら
@@ -276,7 +276,7 @@ void SceneTitle::KeyControl()
 	}
 
 	// ↑キーが押されたら
-	if (GetInputKey()->IsKeyPushed(DIK_UP))
+	if (UtilInput::IsKeyPushed(DIK_UP))
 	{
 		if (draw_scene_change != DRAW_Z_PUSH)
 		{
@@ -305,7 +305,7 @@ void SceneTitle::KeyControl()
 	}
 
 	// ↓キーが押されたら
-	if (GetInputKey()->IsKeyPushed(DIK_DOWN))
+	if (UtilInput::IsKeyPushed(DIK_DOWN))
 	{
 		if (draw_scene_change != DRAW_Z_PUSH)
 		{
@@ -333,7 +333,7 @@ void SceneTitle::KeyControl()
 		time_count=0;
 	}
 
-	if (GetInputKey()->IsKeyPushed(DIK_X))
+	if (UtilInput::IsKeyPushed(DIK_X))
 	{
 		GetDirectSound()->SoundPlayOnce(S_CANCEL);
 

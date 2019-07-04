@@ -1,6 +1,6 @@
 #include "Mission.h"
 #include "Library/Sound/DirectSound.h"
-#include "Library/Input/DirectInput.h"
+#include "Program/Util/UtilInput.h"
 
 C_Mission::C_Mission(C_Texture* m_texture,C_Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
@@ -850,7 +850,7 @@ void C_Mission::Mission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	if (GetInputKey()->IsKeyPushed(DIK_Z))
+	if (UtilInput::IsKeyPushedZ())
 	{
 		flag_time_cnt += 1;
 	}
@@ -885,7 +885,7 @@ void C_Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	if (GetInputKey()->IsKeyPushed(DIK_Z))
+	if (UtilInput::IsKeyPushedZ())
 	{
 		flag_time_cnt += 1;
 		if(flag_time_cnt > 2)

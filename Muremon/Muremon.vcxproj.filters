@@ -83,6 +83,9 @@
     <ClCompile Include="program\Scene\SceneBase.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="UtilInput.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -168,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="program\Scene\SceneBase.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilInput.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

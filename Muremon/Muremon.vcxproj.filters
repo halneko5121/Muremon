@@ -43,9 +43,6 @@
     <ClCompile Include="Program\Scene\Mission.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Scene\Prologue.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Scene\Ranking.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -129,9 +126,6 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Scene\Mission.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Scene\Prologue.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\Scene\Ranking.h">

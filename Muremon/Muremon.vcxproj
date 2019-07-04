@@ -36,7 +36,6 @@
     <ClCompile Include="program\Scene\GameRefresh.cpp" />
     <ClCompile Include="program\Scene\Logo.cpp" />
     <ClCompile Include="program\Scene\Mission.cpp" />
-    <ClCompile Include="program\Scene\Prologue.cpp" />
     <ClCompile Include="program\Scene\Ranking.cpp" />
     <ClCompile Include="program\Scene\Title.cpp" />
     <ClCompile Include="program\Scene\Tutorial.cpp" />
@@ -69,7 +68,6 @@
     <ClInclude Include="program\Scene\GameRefresh.h" />
     <ClInclude Include="program\Scene\Logo.h" />
     <ClInclude Include="program\Scene\Mission.h" />
-    <ClInclude Include="program\Scene\Prologue.h" />
     <ClInclude Include="program\Scene\Ranking.h" />
     <ClInclude Include="program\Scene\Title.h" />
     <ClInclude Include="program\Scene\Tutorial.h" />

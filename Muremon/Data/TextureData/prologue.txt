@@ -1,1 +1,0 @@
-Resource\\Graphics\\b.png

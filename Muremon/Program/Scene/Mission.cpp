@@ -912,19 +912,24 @@ void C_Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 
 void C_Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 {
-	if(time > 0){
+	if(time > 0)
+	{
 		key_state = key->KeyCheckGame();
 	}
-	else{
-		if(cnt_key_nikuman > cnt_key_noppo && cnt_key_nikuman > cnt_key_yoshitaro){
+	else
+	{
+		if(cnt_key_nikuman > cnt_key_noppo && cnt_key_nikuman > cnt_key_yoshitaro)
+		{
 			mission_state = MISSION_SEIKO;
 		}
-		else{
+		else
+		{
 			mission_state = MISSION_SIPPAI;
 		}
 	}
 	
-	if(key_state == KEY_SKY_2 || key_state == KEY_GROUND_2){
+	if (UtilInput::IsKeyPushedLineOne())
+	{
 		cnt_key_nikuman++;
 	}
 	time--;
@@ -932,19 +937,24 @@ void C_Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 
 void C_Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 {
-	if(time > 0){
+	if(time > 0)
+	{
 		key_state = key->KeyCheckGame();
 	}
-	else{
-		if(cnt_key_yoshitaro > cnt_key_nikuman && cnt_key_yoshitaro > cnt_key_noppo){
+	else
+	{
+		if(cnt_key_yoshitaro > cnt_key_nikuman && cnt_key_yoshitaro > cnt_key_noppo)
+		{
 			mission_state = MISSION_SEIKO;
 		}
-		else{
+		else
+		{
 			mission_state = MISSION_SIPPAI;
 		}
 	}
 	
-	if(key_state == KEY_SKY_1 || key_state == KEY_GROUND_1){
+	if (UtilInput::IsKeyPushedLineTwo())
+	{
 		cnt_key_yoshitaro++;
 	}
 	time--;
@@ -952,19 +962,24 @@ void C_Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！
 
 void C_Mission::Mission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 {
-	if(time > 0){
+	if(time > 0)
+	{
 		key_state = key->KeyCheckGame();
 	}
-	else{
-		if(cnt_key_noppo > cnt_key_nikuman && cnt_key_noppo > cnt_key_yoshitaro){
+	else
+	{
+		if(cnt_key_noppo > cnt_key_nikuman && cnt_key_noppo > cnt_key_yoshitaro)
+		{
 			mission_state = MISSION_SEIKO;
 		}
-		else{
+		else
+		{
 			mission_state = MISSION_SIPPAI;
 		}
 	}
 	
-	if(key_state == KEY_SKY_3 || key_state == KEY_GROUND_3){
+	if (UtilInput::IsKeyPushedLineThree())
+	{
 		cnt_key_noppo++;
 	}
 	time--;

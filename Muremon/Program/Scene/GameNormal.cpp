@@ -6,6 +6,7 @@
 //---------------------------------------------
 #include "GameNormal.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilBattle.h"
 
 POS_CC<float> boss_cc2 = { 600, 350 };
 
@@ -219,16 +220,24 @@ bool SceneGameNormal::Update()
 			mNoppo->SetFlagHit(false);
 		}
 
-		if(mKeyState == KEY_GROUND_2 || mKeyState == KEY_SKY_2){	//にくまん
+		// にくまん
+		if (UtilBattle::IsRunWeakGroundAttack() ||
+			UtilBattle::IsRunWeakSkyAttack())
+		{
 			mNikumanKeyCount++;
 		}
-		else if(mKeyState == KEY_GROUND_1 || mKeyState == KEY_SKY_1){	//よしたろう
+		// よしたろう
+		if (UtilBattle::IsRunMediumGroundAttack() ||
+			UtilBattle::IsRunMediumSkyAttack())
+		{
 			mYoshitaroKeyCount++;
 		}
-		else if(mKeyState == KEY_GROUND_3 || mKeyState == KEY_SKY_3){	//のっぽ
+		// のっぽ
+		if (UtilBattle::IsRunStrongGroundAttack() ||
+			UtilBattle::IsRunStrongSkyAttack())
+		{
 			mNoppoKeyCount++;
 		}
-
 		ReCover();
 
 		//if(GetAsyncKeyState(VK_RETURN)){	//エンターキーが押されたらタイトルに戻る

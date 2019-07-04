@@ -1,5 +1,6 @@
 #include "ActorNoppo.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilBattle.h"
 
 namespace
 {
@@ -91,8 +92,10 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 {
 	mRandSpeed = 0.f;
 
-	//きーのチェック:攻撃開始
-	if( (key == KEY_GROUND_3) || (key == KEY_SKY_3) ){
+	// 攻撃開始
+	if (UtilBattle::IsRunStrongGroundAttack() ||
+		UtilBattle::IsRunStrongSkyAttack())
+	{
 		if(mFlagTurn2){
 			mCharaData[mCharaNum]	= init_charadata_noppo;
 			mCountEffect[mCharaNum] = 0;
@@ -101,19 +104,20 @@ C_ActorNoppo::Control(int key, POS_CC<float> boss_cc, int sound_startnum, int re
 		mCharaData[mCharaNum]		 = SetAtk_Flag(key,mCharaData[mCharaNum]);
 		mCharaData[mCharaNum].speed	 = SetSpeed(key);
 
-		switch(key){
-		case KEY_GROUND_3:
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO,G_ATK_3_START_Y);
-			break;
-		case KEY_SKY_3:
-			s_atk_start_y			 = (float)(rand() % cRandY);		
-			rand_acc[mCharaNum]	 = (float)(rand() % cParaRandAcc		+ cParaRandAccMin);	
-			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX  + cParaRandMoveXMin);
-			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO,s_atk_start_y);
-			break;
+		if (UtilBattle::IsRunStrongGroundAttack())
+		{
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO, G_ATK_3_START_Y);
 		}
+		else if (UtilBattle::IsRunStrongSkyAttack())
+		{
+			s_atk_start_y = (float)(rand() % cRandY);
+			rand_acc[mCharaNum] = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO, s_atk_start_y);
+		}
+
 		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//最大数を超えたら1体目へ			
 		else mCharaNum++;																//2体目、3体目～
 	}

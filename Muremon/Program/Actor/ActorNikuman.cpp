@@ -1,5 +1,6 @@
 #include "ActorNikuman.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilBattle.h"
 
 namespace 
 {
@@ -84,8 +85,10 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 {
 	mRandSpeed = 0.f;
 
-	//きーのチェック:攻撃開始
-	if( (key == KEY_GROUND_2) || (key == KEY_SKY_2) ){
+	// 攻撃開始
+	if (UtilBattle::IsRunWeakGroundAttack() ||
+		UtilBattle::IsRunWeakSkyAttack())
+	{
 		if(mFlagTurn2){
 			mCharaData[mCharaNum]	  = cInitActorData;
 			mCountEffect[mCharaNum]	  = 0;
@@ -93,23 +96,24 @@ C_ActorNikuman::Control(int key,  POS_CC<float> boss_cc,int sound_startnum, int 
 		}
 		mCharaData[mCharaNum]		= SetAtk_Flag(key,mCharaData[mCharaNum]);
 
-		switch(key){
-		case KEY_GROUND_2:
-			rand_deg[mCharaNum]	 = (float)(rand() % cDegRand + cDegRandMin);	
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU,G_ATK_2_START_Y);
-			mCharaData[mCharaNum].speed   = SetSpeed(key);
-			mDegSpin[mCharaNum]			 = 0.f;
-			break;
-		case KEY_SKY_2:
-			s_atk_start_y			 = (float)(rand() % cRandY + cRandYMin);			
-			rand_acc[mCharaNum]	 = (float)(rand() % cParaRandAcc + cParaRandAccMin);	
-			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);	
-			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-
-			mCharaData[mCharaNum].speed   = SetSpeed(key);
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU,s_atk_start_y);
-			break;
+		if (UtilBattle::IsRunWeakGroundAttack())
+		{
+			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU, G_ATK_2_START_Y);
+			mCharaData[mCharaNum].speed = SetSpeed(key);
+			mDegSpin[mCharaNum] = 0.f;
 		}
+		else if (UtilBattle::IsRunWeakSkyAttack())
+		{
+			s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
+			rand_acc[mCharaNum] = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+
+			mCharaData[mCharaNum].speed = SetSpeed(key);
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU, s_atk_start_y);
+		}
+
 		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//最大数を超えたら1体目へ			
 		else mCharaNum++;																	//2体目、3体目～
 	}

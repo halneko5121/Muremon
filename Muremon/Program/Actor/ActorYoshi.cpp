@@ -1,5 +1,6 @@
 #include "ActorYoshi.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilBattle.h"
 
 namespace
 {
@@ -91,9 +92,12 @@ C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int r
 {
 	mRandSpeed = 0.f;
 
-	//きーのチェック:攻撃開始
-	if( (key == KEY_GROUND_1) || (key == KEY_SKY_1) ){
-		if(mFlagTurn2){
+	// 攻撃開始
+	if (UtilBattle::IsRunMediumGroundAttack() ||
+		UtilBattle::IsRunMediumSkyAttack())
+	{
+		if(mFlagTurn2)
+		{
 			mCharaData[mCharaNum]	= cInitActorData;
 			mCountEffect[mCharaNum] = 0;
 			init[mCharaNum] = true;
@@ -101,28 +105,27 @@ C_ActorYoshi::Control(int key,  POS_CC<float> boss_cc, int sound_startnum, int r
 		mCharaData[mCharaNum]		= SetAtk_Flag(key,mCharaData[mCharaNum]);
 		mCharaData[mCharaNum].speed  = SetSpeed(key);
 
-		switch(key){
-		case KEY_GROUND_1:
-			rand_deg[mCharaNum]	 = (float)(rand() % cDegRand + cDegRandMin);
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI,G_ATK_1_START_Y);
-			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-
-			break;
-		case KEY_SKY_1:
-			s_atk_start_y			 = (float)(rand() % cRandY + cRandYMin);
-			rand_acc[mCharaNum]	 = (float)(rand() % cParaRandAcc		+ cParaRandAccMin);	
-			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX  + cParaRandMoveXMin);	
-			mDegSpin[mCharaNum]  = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-			
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI,s_atk_start_y);
-			break;
+		if (UtilBattle::IsRunMediumGroundAttack())
+		{
+			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI, G_ATK_1_START_Y);
+			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 		}
+		else if (UtilBattle::IsRunMediumSkyAttack())
+		{
+			s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
+			rand_acc[mCharaNum] = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+
+			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI, s_atk_start_y);
+		}
+
 		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//最大数を超えたら1体目へ			
 		else mCharaNum++;																//2体目、3体目～
 	}
 
-
-	//キャラの動作(いちお100体分)
+	// キャラの動作(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		//当たり判定
 		if(!mCharaData[i].flag_death){

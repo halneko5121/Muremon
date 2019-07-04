@@ -1,4 +1,5 @@
 #include "ActorBase.h"
+#include "Program/Util/UtilBattle.h"
 
 namespace
 {
@@ -103,14 +104,16 @@ C_ActorBase::CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos)
 float
 C_ActorBase::SetSpeed(int key)
 {
-	switch(key){
-	case KEY_SKY_2://“÷‚Ü‚ñ‚ÌUŒ‚2‚ÍŒvZ•û–@‚ªˆá‚¤‚Ì‚Å
+	// “÷‚Ü‚ñ‚Ì‹ó’†UŒ‚‚ÍŒvZ•û–@‚ªˆá‚¤‚Ì‚Å
+	if (UtilBattle::IsRunWeakSkyAttack())
+	{
 		mRandSpeed = (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
-		break;
-	default:
-		mRandSpeed = (float)(rand() % SPEED_RAND) + SPEED_MIN;			
-		break;
 	}
+	else
+	{
+		mRandSpeed = (float)(rand() % SPEED_RAND) + SPEED_MIN;
+	}
+
 	return mRandSpeed;
 }
 
@@ -120,14 +123,15 @@ C_ActorBase::SetSpeed(int key)
 CHARADATA
 C_ActorBase::SetAtk_Flag(int key , CHARADATA set_charadata)
 {
-	switch(key){
-		case KEY_GROUND_1: case KEY_GROUND_2: case KEY_GROUND_3:
-			set_charadata.flag_atk1 = true;
-			break;
-		case KEY_SKY_1:	   case KEY_SKY_2:	  case KEY_SKY_3:
-			set_charadata.flag_atk2 = true;
-			break;
-	}	
+	if (UtilBattle::IsRunGroundAttack())
+	{
+		set_charadata.flag_atk1 = true;
+	}
+	else if (UtilBattle::IsRunSkyAttack())
+	{
+		set_charadata.flag_atk2 = true;
+	}
+
 	return set_charadata;
 }
 

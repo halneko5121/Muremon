@@ -6,6 +6,7 @@
 //---------------------------------------------
 #include "GameRefresh.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilBattle.h"
 
 POS_CC<float> boss_cc = { 600, 350 };
 
@@ -120,13 +121,22 @@ bool SceneGameRefresh::Update()
 			mNoppo->SetFlagHit(false);
 		}
 
-		if(mKeyState == KEY_GROUND_2 || mKeyState == KEY_SKY_2){
+		// ‚É‚­‚Ü‚ñ
+		if (UtilBattle::IsRunWeakGroundAttack() ||
+			UtilBattle::IsRunWeakSkyAttack())
+		{
 			mNikumanKeyCount++;
 		}
-		else if(mKeyState == KEY_GROUND_1 || mKeyState == KEY_SKY_1){
+		// ‚æ‚µ‚½‚ë‚¤
+		if (UtilBattle::IsRunMediumGroundAttack() ||
+			UtilBattle::IsRunMediumSkyAttack())
+		{
 			mYoshitaroKeyCount++;
 		}
-		else if(mKeyState == KEY_GROUND_3 || mKeyState == KEY_SKY_3){
+		// ‚Ì‚Á‚Û
+		if (UtilBattle::IsRunStrongGroundAttack() ||
+			UtilBattle::IsRunStrongSkyAttack())
+		{
 			mNoppoKeyCount++;
 		}
 

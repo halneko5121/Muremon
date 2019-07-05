@@ -7,6 +7,7 @@
  ******************************************************************/
 
 #include "FadeMgr.h"
+#include "Texture.h"
 #include "Vertex.h"
 
 FadeMgr* FadeMgr::mInstance = nullptr;
@@ -14,12 +15,15 @@ FadeMgr* FadeMgr::mInstance = nullptr;
  /**
   * @brief	コンストラクタ
   */
-FadeMgr::FadeMgr(Vertex* vertex)
-	: mVertex(vertex)
-	, mAlpha(0)
+FadeMgr::FadeMgr()
+	: mTexture(nullptr)
+	, mVertex(nullptr)
+	, mAlpha(255)
 	, mFadeSpeed(0)
 	, mState(cFadeState_None)
 {
+	mTexture = new Texture();
+	mVertex = new Vertex();
 }
 
 /**
@@ -27,6 +31,10 @@ FadeMgr::FadeMgr(Vertex* vertex)
  */
 FadeMgr::~FadeMgr()
 {
+	mTexture->AllReleaseTexture();
+	mVertex->AllReleaseRect();
+	APP_SAFE_DELETE(mTexture);
+	APP_SAFE_DELETE(mVertex);
 }
 
 /**
@@ -42,10 +50,10 @@ FadeMgr::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-FadeMgr::Create(Vertex* vertex)
+FadeMgr::Create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
-	mInstance = new FadeMgr(vertex);
+	mInstance = new FadeMgr();
 }
 
 /**
@@ -58,7 +66,18 @@ FadeMgr::Destroy()
 }
 
 /**
- * @brief	フェードイン
+ * @brief	初期化
+ */
+void
+FadeMgr::Init(LPDIRECT3DDEVICE9 device)
+{
+	mDevice = device;
+	mTexture->LoadTextureData("Library\\Data\\T_Fade.txt", mDevice); // 絵の読み込み
+	mVertex->LoadRect("Library\\Data\\R_Fade.txt");
+}
+
+/**
+ * @brief	更新
  */
 void
 FadeMgr::Update()
@@ -67,12 +86,20 @@ FadeMgr::Update()
 	{
 	case cFadeState_FadeIn:
 		mAlpha += mFadeSpeed;
-		if (mAlpha <= 0)	mAlpha = 0;
+		if (mAlpha <= 0)
+		{
+			mAlpha = 0;
+			mState = cFadeState_None;
+		}
 		break;
 
 	case cFadeState_FadeOut:
 		mAlpha += mFadeSpeed;
-		if (255 <= mAlpha)	mAlpha = 255;
+		if (255 <= mAlpha)
+		{
+			mAlpha = 255;
+			mState = cFadeState_None;
+		}
 		break;
 
 	default:
@@ -80,6 +107,17 @@ FadeMgr::Update()
 	}
 
 	mVertex->SetColor(mAlpha, 255, 255, 255);
+}
+
+/**
+ * @brief	描画
+ */
+void
+FadeMgr::Draw()
+{
+	mVertex->SetTextureData(mTexture->GetTextureData(0), mDevice);
+	mVertex->SetColor(mAlpha, 255, 255, 255);
+	mVertex->DrawF(400.f, 300.f, 0);
 }
 
 /**
@@ -103,19 +141,10 @@ FadeMgr::FadeOut()
 }
 
 /**
- * @brief	フェードイン中か
+ * @brief	フェードが終了したか？
  */
 bool
-FadeMgr::IsFadeIn()
+FadeMgr::IsFadeEnd()
 {
-	return (mState == cFadeState_FadeIn);
-}
-
-/**
- * @brief	フェードアウト中か
- */
-bool
-FadeMgr::IsFadeOut()
-{
-	return (mState == cFadeState_FadeOut);
+	return (mState == cFadeState_None);
 }

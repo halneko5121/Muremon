@@ -7,6 +7,9 @@
  *	管理者：三上
  ******************************************************************/
 
+#include "Library/Graphics/DirectGraphics.h"
+
+class Texture;
 class Vertex;
 
 class FadeMgr
@@ -15,7 +18,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	FadeMgr(Vertex* vertex);
+	FadeMgr();
 
 	/**
 	 * @brief	デストラクタ
@@ -30,7 +33,7 @@ public:
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void			Create(Vertex* vertex);
+	static void			Create();
 
 	/**
 	 * @brief	インスタンスの破棄
@@ -38,9 +41,19 @@ public:
 	static void			Destroy();
 
 	/**
+	 * @brief	初期化
+	 */
+	void				Init(LPDIRECT3DDEVICE9 device);
+
+	/**
 	 * @brief	更新
 	 */
 	void				Update();
+
+	/**
+	 * @brief	描画
+	 */
+	void				Draw();
 
 	/**
 	 * @brief	フェードイン
@@ -53,15 +66,9 @@ public:
 	void				FadeOut();
 
 	/**
-	 * @brief	フェードイン中か
+	 * @brief	フェードが終了したか？
 	 */
-	bool				IsFadeIn();
-
-	/**
-	 * @brief	フェードアウト中か
-	 */
-	bool				IsFadeOut();
-
+	bool				IsFadeEnd();
 
 private:
 	enum FadeState
@@ -73,7 +80,10 @@ private:
 
 private:
 	static FadeMgr*		mInstance;		// インスタンス
+	LPDIRECT3DDEVICE9	mDevice;		// デバイス
+	Texture*			mTexture;		// テクスチャ
 	Vertex*				mVertex;		// バーテックス
+
 	int					mAlpha;			// アルファ
 	int					mFadeSpeed;		// フェード速度
 	FadeState			mState;			// ステート

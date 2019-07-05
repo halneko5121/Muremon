@@ -10,8 +10,8 @@
 #include "Library/Graphics/DirectGraphics.h"
 #include "Library/Input/DirectInput.h"
 
-class C_DInputKey;
-class C_DInputMouse;
+class DirectInputKey;
+class DirectInputMouse;
 class C_DWaveSound;
 class Texture;
 class Vertex;

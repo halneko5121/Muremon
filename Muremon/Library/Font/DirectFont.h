@@ -21,13 +21,13 @@ enum DrawTextOption
 	cDrawTextOption_Tab,			// タブ
 };
 
-class C_DFont
+class DirectFont
 {
 public:
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static C_DFont*	GetInstance();
+	static DirectFont*	GetInstance();
 
 	/**
 	 * @brief	インスタンスの生成
@@ -97,7 +97,7 @@ public:
 	void DrawFont(LPSTR str, long pos_x, long pos_y, DWORD option);
 
 private:
-	static C_DFont*		mInstance;		// インスタンス
+	static DirectFont*		mInstance;		// インスタンス
     LPDIRECT3DDEVICE9   mFontDevice;	// 文字描画専用で使うデバイス
     LPD3DXFONT          mFont;			// DirectFontのインターフェース
     D3DXFONT_DESC		mFontDesc;		// フォント設定
@@ -105,4 +105,4 @@ private:
     D3DXVECTOR2			mFontSize;		// フォントサイズ
 };
 
-static C_DFont* GetDirectFont() { return C_DFont::GetInstance(); }
+static DirectFont* GetDirectFont() { return DirectFont::GetInstance(); }

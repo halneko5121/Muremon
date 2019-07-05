@@ -11,6 +11,7 @@
 #include "Library/Input/DirectInput.h"
 #include "Library/Graphics/Vertex.h"
 #include "Library/Sound/DirectSound.h"
+
 // 各シーンのinclude
 #include "Program/Scene/SceneLogo.h"
 #include "Program/Scene/SceneTitle.h"
@@ -27,9 +28,9 @@ C_GameMain::InitGameMain(void)
 {
 	mWindow			= new C_Window;
 	mGraphics		= DirectGraphics::Create();
-	C_DInputKey::Create();
-	C_DInputMouse::Create();
-	C_DFont::Create();
+	DirectInputKey::Create();
+	DirectInputMouse::Create();
+	DirectFont::Create();
 	C_DSound::Create();
 
 	// 最初のシーンを
@@ -181,8 +182,8 @@ C_GameMain::ReleaseGameMain(void)
 	APP_SAFE_DELETE(mScene);
 	DirectGraphics::Destroy();
 	mGraphics = nullptr;
-	C_DFont::Destroy();
-	C_DInputKey::Destroy();
+	DirectFont::Destroy();
+	DirectInputKey::Destroy();
 	APP_SAFE_DELETE(mWindow);
 }
 

@@ -11,11 +11,11 @@
 
 class C_Window;
 class SceneBase;
-class C_DInputKey;
-class C_DInputMouse;
+class DirectInputKey;
+class DirectInputMouse;
 class DirectGraphics;
 class C_Sprite;
-class C_DFont;
+class DirectFont;
 class C_DWaveSound;
 class C_DOggSound;
 namespace Dix {

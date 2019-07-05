@@ -12,7 +12,7 @@
 
 #define KEY_REVISION		(0x03FFFFF)
 
-C_DInputKey* C_DInputKey::mInstance = nullptr;
+DirectInputKey* DirectInputKey::mInstance = nullptr;
 
 namespace
 {
@@ -24,7 +24,7 @@ namespace
 /**
  * @brief	コンストラクタ
  */
-C_DInputKey::C_DInputKey(void)
+DirectInputKey::DirectInputKey(void)
 {
 	// DirectInputDeviceオブジェクト(キーボード)
 	mKeyBordDevice = nullptr;	
@@ -36,15 +36,15 @@ C_DInputKey::C_DInputKey(void)
 /**
  * @brief	デストラクタ
  */
-C_DInputKey::~C_DInputKey()
+DirectInputKey::~DirectInputKey()
 {
 }
 
 /**
  * @brief	インスタンスの取得
  */
-C_DInputKey*
-C_DInputKey::GetInstance()
+DirectInputKey*
+DirectInputKey::GetInstance()
 {
 	return mInstance;
 }
@@ -53,17 +53,17 @@ C_DInputKey::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-C_DInputKey::Create()
+DirectInputKey::Create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
-	mInstance = new C_DInputKey();
+	mInstance = new DirectInputKey();
 }
 
 /**
  * @brief	インスタンスの破棄
  */
 void
-C_DInputKey::Destroy()
+DirectInputKey::Destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }
@@ -74,7 +74,7 @@ C_DInputKey::Destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-C_DInputKey::Init(HWND window_handle)
+DirectInputKey::Init(HWND window_handle)
 {
 	// DirectInputオブジェクトの作成
 	if (FAILED(DirectInput8Create(
@@ -125,7 +125,7 @@ C_DInputKey::Init(HWND window_handle)
 }
 
 void
-C_DInputKey::Update()
+DirectInputKey::Update()
 {
 	KeyBordRefresh();
 }
@@ -134,7 +134,7 @@ C_DInputKey::Update()
  * @brief	開放処理
  */
 void
-C_DInputKey::ReleaseDirectInput()
+DirectInputKey::ReleaseDirectInput()
 {
 	// デバイスへのアクセス権を解放する
 	if(mKeyBordDevice)
@@ -153,7 +153,7 @@ C_DInputKey::ReleaseDirectInput()
  * @return	true	押されている   false:　押されていない
  */
 bool
-C_DInputKey::IsKeyDown(USHORT key)
+DirectInputKey::IsKeyDown(USHORT key)
 {
 	if(!mKeyBordDevice) return FALSE;
 
@@ -172,7 +172,7 @@ C_DInputKey::IsKeyDown(USHORT key)
  * @return	true	押された   false:　押されていない
  */
 bool
-C_DInputKey::IsKeyPushed(USHORT key)
+DirectInputKey::IsKeyPushed(USHORT key)
 {
 	// 現在押されていて かつ 直前に押されていない時TRUE
 	if( IsKeyDown(key) && !(mKeyStatePrev[key] & 0x80) ) return TRUE;
@@ -186,7 +186,7 @@ C_DInputKey::IsKeyPushed(USHORT key)
  * @return	true	離された   false:　離されていない
  */
 bool
-C_DInputKey::IsKeyReleased(USHORT key)
+DirectInputKey::IsKeyReleased(USHORT key)
 {
 	// 現在押されておらず かつ 直前に押されている時TRUE
 	if( !(IsKeyDown(key)) && (mKeyStatePrev[key] & 0x80) ) return TRUE;
@@ -199,7 +199,7 @@ C_DInputKey::IsKeyReleased(USHORT key)
  * @return	true　押された   false:　押されていない
  */
 bool
-C_DInputKey::IsAnyKeyDown()
+DirectInputKey::IsAnyKeyDown()
 {
 	for(int i = 0;i < MAX_KEYDATA;i++){
 		if(IsKeyDown(i)) return TRUE;
@@ -213,7 +213,7 @@ C_DInputKey::IsAnyKeyDown()
  * @return	true　押された   false:　押されていない
  */
 bool
-C_DInputKey::IsAnyKeyPushed()
+DirectInputKey::IsAnyKeyPushed()
 {
 	for (int i = 0;i < MAX_KEYDATA;i++) {
 		if (IsKeyPushed(i)) return TRUE;
@@ -226,7 +226,7 @@ C_DInputKey::IsAnyKeyPushed()
  * @brief	デバイス全体の情報更新
  */
 void
-C_DInputKey::KeyBordRefresh()
+DirectInputKey::KeyBordRefresh()
 {
 	static HRESULT h_result;
 
@@ -265,12 +265,12 @@ C_DInputKey::KeyBordRefresh()
 //		↓マウスの処理
 //////////////////////////////////////////////////////////////////////////////////////
 
-C_DInputMouse*	C_DInputMouse::mInstance = nullptr;
+DirectInputMouse*	DirectInputMouse::mInstance = nullptr;
 
 /**
  * @brief	コンストラクタ
  */
-C_DInputMouse::C_DInputMouse()
+DirectInputMouse::DirectInputMouse()
 {
 	// DirectInputDeviceオブジェクト(マウス)
 	mDirectInput		= nullptr;
@@ -292,15 +292,15 @@ C_DInputMouse::C_DInputMouse()
 /**
  * @brief	デストラクタ
  */
-C_DInputMouse::~C_DInputMouse()
+DirectInputMouse::~DirectInputMouse()
 {
 }
 
 /**
  * @brief	インスタンスの取得
  */
-C_DInputMouse*
-C_DInputMouse::GetInstance()
+DirectInputMouse*
+DirectInputMouse::GetInstance()
 {
 	return mInstance;
 }
@@ -309,17 +309,17 @@ C_DInputMouse::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-C_DInputMouse::Create()
+DirectInputMouse::Create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
-	mInstance = new C_DInputMouse();
+	mInstance = new DirectInputMouse();
 }
 
 /**
  * @brief	インスタンスの破棄
  */
 void
-C_DInputMouse::Destroy()
+DirectInputMouse::Destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }
@@ -330,7 +330,7 @@ C_DInputMouse::Destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-C_DInputMouse::Init(HWND window_handle)
+DirectInputMouse::Init(HWND window_handle)
 {
 	// DirectInputオブジェクトの作成
 	if (FAILED(DirectInput8Create(
@@ -388,7 +388,7 @@ C_DInputMouse::Init(HWND window_handle)
  * @brief	開放処理を行う
  */
 void
-C_DInputMouse::ReleaseDirectInput()
+DirectInputMouse::ReleaseDirectInput()
 {
 	// デバイスへのアクセス権を解放する
 	if(mMouseDevice)
@@ -407,7 +407,7 @@ C_DInputMouse::ReleaseDirectInput()
  * @brief	デバイス全体の情報更新(絶対値の場合)仮
  */
 void
-C_DInputMouse::MouseRefresh()
+DirectInputMouse::MouseRefresh()
 {
 	if(mMouseDevice == NULL){ return; }					// マウスがない場合は何もせず終わる
 			
@@ -427,7 +427,7 @@ C_DInputMouse::MouseRefresh()
  * @brief	マウスの情報更新(カーソル位置)
  */
 void
-C_DInputMouse::UpdateMouse()
+DirectInputMouse::UpdateMouse()
 {
 	GetCursorPos(mPosCursorWindow);					// 取得(スクリーン座標)
 	mPosCursorGame = mPosCursorWindow;				// ゲーム用に渡す
@@ -467,7 +467,7 @@ C_DInputMouse::UpdateMouse()
  * @return	0~7	各動作を判定し対応する値が返る
  */
 USHORT
-C_DInputMouse::CheckMouseAction()
+DirectInputMouse::CheckMouseAction()
 {
 	HRESULT h_result;
 
@@ -520,7 +520,7 @@ C_DInputMouse::CheckMouseAction()
  * @brief	現在のマウス情報を取得する
  */
 MouseData
-C_DInputMouse::GetMouseData()
+DirectInputMouse::GetMouseData()
 {
 	MouseRefresh();
 	return mMouseData; 
@@ -531,7 +531,7 @@ C_DInputMouse::GetMouseData()
  * @return	成功 TRUE		失敗 FALSE
  */
 bool
-C_DInputMouse::SetProperty()
+DirectInputMouse::SetProperty()
 {
 	DIPROPDWORD diprop;
 

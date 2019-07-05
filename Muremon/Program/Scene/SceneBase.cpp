@@ -10,6 +10,7 @@
 
 #include "Library/Graphics/Vertex.h"
 #include "Library/Graphics/Texture.h"
+#include "Library/Graphics/FadeMgr.h"
 
 /**
  * @brief	コンストラクタ
@@ -19,6 +20,7 @@ SceneBase::SceneBase()
     mSceneID	= cSceneName_Logo;    // 初期化
 	mVertex		= new Vertex();
 	mTexture	= new Texture();
+
 }
 
 /**

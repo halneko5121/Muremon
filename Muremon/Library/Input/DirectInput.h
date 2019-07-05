@@ -42,23 +42,23 @@ struct MouseData
 	bool    mIsReleaseCButton;	
 };
 
-class C_DInputKey
+class DirectInputKey
 {
 public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	C_DInputKey();
+	DirectInputKey();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	~C_DInputKey();
+	~DirectInputKey();
 
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static C_DInputKey*		GetInstance();
+	static DirectInputKey*		GetInstance();
 
 	/**
 	 * @brief	インスタンスの生成
@@ -122,7 +122,7 @@ private:
 	void					KeyBordRefresh();
 
 private:
-	static C_DInputKey*		mInstance;						// インスタンス
+	static DirectInputKey*		mInstance;						// インスタンス
 	LPDIRECTINPUT8			mDirectInput;					// DirectInputオブジェクト
 	LPDIRECTINPUTDEVICE8	mKeyBordDevice;					// DirectInputDeviceオブジェクト(キーボード)
 
@@ -131,27 +131,27 @@ private:
 	BYTE					mKeyStatePrev[MAX_KEYDATA];		// キー情報格納配列（1f前）
 };
 
-static C_DInputKey* GetInputKey() { return C_DInputKey::GetInstance(); }
+static DirectInputKey* GetInputKey() { return DirectInputKey::GetInstance(); }
 
 
 // マウスからの入力を扱うクラス(仮作成)
-class C_DInputMouse
+class DirectInputMouse
 {
 public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	C_DInputMouse();
+	DirectInputMouse();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	~C_DInputMouse();
+	~DirectInputMouse();
 
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static C_DInputMouse*	GetInstance();
+	static DirectInputMouse*	GetInstance();
 
 	/**
 	 * @brief	インスタンスの生成
@@ -204,7 +204,7 @@ private:
 	bool					SetProperty();
 
 private:
-	static C_DInputMouse*	mInstance;					// インスタンス
+	static DirectInputMouse*	mInstance;					// インスタンス
 
 	LPDIRECTINPUT8			mDirectInput;				// DirectInputオブジェクト
 	LPDIRECTINPUTDEVICE8	mMouseDevice;				// 入力デバイス
@@ -219,4 +219,4 @@ private:
 	MouseData				mMouseData;
 };
 
-static C_DInputMouse* GetInputMouse() { return C_DInputMouse::GetInstance(); }
+static DirectInputMouse* GetInputMouse() { return DirectInputMouse::GetInstance(); }

@@ -73,7 +73,7 @@ SceneGameNormal::~SceneGameNormal(void)
 {
 }
 
-void SceneGameNormal::Init()
+void SceneGameNormal::ImpleInit()
 {
 	mNiku	= new ActorNikuman(mVertex, mTexture);
 	mNoppo	= new ActorNoppo(mVertex, mTexture);

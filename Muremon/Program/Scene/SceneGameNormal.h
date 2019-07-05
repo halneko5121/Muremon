@@ -38,7 +38,7 @@ public:
 	SceneGameNormal();
 	~SceneGameNormal();
 
-	void Init() override;
+	void ImpleInit() override;
 	bool Update() override;
 	void Draw() override;
 	int End() override;

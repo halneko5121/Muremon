@@ -51,7 +51,8 @@ public:
 	/**
 	 * @brief	初期化処理
 	 */
-	virtual void Init() = 0;
+	void Init();
+	virtual void ImpleInit();
 
 	/**
 	 * @brief	更新処理
@@ -99,7 +100,7 @@ protected:
     DWORD               mSceneID;		// シーンの番号
 	LPDIRECT3DDEVICE9	mDevice;		// デバイス
 	Texture*			mTexture;
-	Vertex*			mVertex;
+	Vertex*				mVertex;
 
 	int					mAlpha;			// 各シーンのalpha値		
 	bool				mIsSceneChange;	// シーンが変わる時を知らせる

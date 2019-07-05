@@ -45,7 +45,7 @@ SceneGameRefresh::~SceneGameRefresh(void)
 {
 }
 
-void SceneGameRefresh::Init()
+void SceneGameRefresh::ImpleInit()
 {
 	mNiku	= new ActorNikuman(mVertex, mTexture);
 	mNoppo	= new ActorNoppo(mVertex, mTexture);

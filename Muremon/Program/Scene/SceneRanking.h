@@ -147,7 +147,7 @@ private:
 	bool ranking_flag;
 
 public:
-	void Init() override;
+	void ImpleInit() override;
 	void InitScene(int score);
 	bool Update() override;
 	void Draw() override;

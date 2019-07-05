@@ -33,7 +33,7 @@ private:
 	int alpha;	//アルファ値
 
 public:
-	void Init() override;
+	void ImpleInit() override;
 	bool Update() override;
 	void Draw() override;
 	int End() override;

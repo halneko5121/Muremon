@@ -59,7 +59,7 @@ private:
 	int alpha_count;	//アルファ値のカウント
 
 public:
-	void Init() override;
+	void ImpleInit() override;
 	bool Update() override;
 	void Draw() override;
 	int End() override;

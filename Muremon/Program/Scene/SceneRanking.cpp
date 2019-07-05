@@ -65,7 +65,8 @@ SceneRanking::~SceneRanking(void)
 {
 }
 
-void SceneRanking::Init()
+void
+SceneRanking::ImpleInit()
 {
 }
 

@@ -51,7 +51,7 @@ SceneTitle::~SceneTitle(void)
 {
 }
 
-void SceneTitle::Init()
+void SceneTitle::ImpleInit()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\title.txt");

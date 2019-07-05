@@ -28,7 +28,7 @@ SceneTutorial::~SceneTutorial(void)
 {
 }
 
-void SceneTutorial::Init()
+void SceneTutorial::ImpleInit()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\Tutorial.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\Tutorial.txt");

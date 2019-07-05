@@ -142,7 +142,7 @@ public:
 	ActorBoss(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
 	~ActorBoss(void);
 
-	void Init();		//‰Šú‰»
+	void ImpleInit();		//‰Šú‰»
 	
 	void BossControl(int play_mode);
 

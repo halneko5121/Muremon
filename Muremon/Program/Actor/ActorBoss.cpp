@@ -74,7 +74,7 @@ ActorBoss::~ActorBoss(void)
 {
 }
 
-void ActorBoss::Init()
+void ActorBoss::ImpleInit()
 {
 	//É{ÉX
 	boss_alpha_count=0;
@@ -204,7 +204,7 @@ void ActorBoss::BossControl(int play_mode)
 		{
 			lv_count++;
 		}else lv_count = 7;
-		Init();
+		ImpleInit();
 	}
 	
 	if(!boss_fall_flag)

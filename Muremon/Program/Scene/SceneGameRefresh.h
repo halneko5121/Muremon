@@ -19,7 +19,7 @@ public:
 	SceneGameRefresh();
 	~SceneGameRefresh();
 
-	void Init() override;
+	void ImpleInit() override;
 	bool Update() override;
 	void Draw() override;
 	int End() override;

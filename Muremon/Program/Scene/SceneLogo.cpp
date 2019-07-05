@@ -17,7 +17,7 @@ SceneLogo::~SceneLogo(void)
 {
 }
 
-void SceneLogo::Init()
+void SceneLogo::ImpleInit()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\logo.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\logo.txt");

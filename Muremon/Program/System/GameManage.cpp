@@ -10,6 +10,7 @@
 #include "Library/Font/DirectFont.h"
 #include "Library/Input/DirectInput.h"
 #include "Library/Graphics/Vertex.h"
+#include "Library/Graphics/FadeMgr.h"
 #include "Library/Sound/DirectSound.h"
 
 // 各シーンのinclude
@@ -32,6 +33,7 @@ C_GameMain::InitGameMain(void)
 	DirectInputMouse::Create();
 	DirectFont::Create();
 	DirectSound::Create();
+	FadeMgr::Create();
 
 	// 最初のシーンを
 	mScene = new SceneLogo();
@@ -108,6 +110,7 @@ C_GameMain::MsgLoop(void)
 
 	// 描画設定
 	mGraphics->SetRender();
+	GetFadeMgr()->Init(mGraphics->GetDevice());
 
 	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
 
@@ -136,7 +139,8 @@ C_GameMain::MsgLoop(void)
 			{
 				GetInputKey()->Update();
 				mGraphics->RenderStart(mBackground);
-				if(!mScene->RunScene())
+
+				if (!mScene->RunScene())
 				{
 					// シーン終了
 					mScore = mScene->End();
@@ -148,6 +152,8 @@ C_GameMain::MsgLoop(void)
 					// シーンが変わった時の処理(シーン切り替え)↓
 					ControlSequence();				
 				}
+//				GetFadeMgr()->Update();
+//				GetFadeMgr()->Draw();
 				mGraphics->RenderEnd();
 
 				oldTime = nowTime;
@@ -182,6 +188,7 @@ C_GameMain::ReleaseGameMain(void)
 	APP_SAFE_DELETE(mScene);
 	DirectGraphics::Destroy();
 	mGraphics = nullptr;
+	FadeMgr::Destroy();
 	DirectFont::Destroy();
 	DirectInputKey::Destroy();
 	APP_SAFE_DELETE(mWindow);

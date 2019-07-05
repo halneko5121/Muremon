@@ -127,7 +127,7 @@ private:
 
 	int cnt_move;
 public:
-	void Init() override;
+	void ImpleInit() override;
 	bool Update() override;
 	void Draw() override;
 	int End() override;

@@ -31,6 +31,25 @@ SceneBase::~SceneBase()
 }
 
 /**
+ * @brief	初期化処理
+ */
+void
+SceneBase::Init()
+{
+//	GetFadeMgr()->FadeIn();
+
+	ImpleInit();
+}
+
+/**
+ * @brief	オーバーライドされる前提の処理
+ */
+void
+SceneBase::ImpleInit()
+{
+}
+
+/**
  * @brief	実行処理
  */
 bool
@@ -38,6 +57,7 @@ SceneBase::RunScene()
 {
 	bool is_scene_change = Update();
 	Draw();
+
 	return is_scene_change;
 }
 

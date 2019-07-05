@@ -14,23 +14,23 @@
 #pragma comment (lib, "dxguid.lib")
 #pragma comment (lib, "winmm.lib")
 
-class C_DSound
+class DirectSound
 {
 public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	C_DSound();
+	DirectSound();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	~C_DSound();
+	~DirectSound();
 
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static C_DSound* GetInstance();
+	static DirectSound* GetInstance();
 
 	/**
 	 * @brief	インスタンスの生成
@@ -140,11 +140,11 @@ private:
 	enum { MAX_SOUND = 20 };								// 読み込めるサウンドの最大数
 
 private:
-	static C_DSound*		mInstance;
+	static DirectSound*		mInstance;
 	LPDIRECTSOUND8			mDirectSound;
 	LPDIRECTSOUNDBUFFER		mPrimaryBuffer;					// プライマリーバッファ
 	LPDIRECTSOUNDBUFFER		mSecondaryBuffer[MAX_SOUND];	// セカンダリバッファ
 	int						mMaxSound;
 };
 
-static C_DSound* GetDirectSound() { return C_DSound::GetInstance(); }
+static DirectSound* GetDirectSound() { return DirectSound::GetInstance(); }

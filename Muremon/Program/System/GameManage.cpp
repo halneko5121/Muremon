@@ -31,7 +31,7 @@ C_GameMain::InitGameMain(void)
 	DirectInputKey::Create();
 	DirectInputMouse::Create();
 	DirectFont::Create();
-	C_DSound::Create();
+	DirectSound::Create();
 
 	// Å‰‚ÌƒV[ƒ“‚ğ
 	mScene = new SceneLogo();

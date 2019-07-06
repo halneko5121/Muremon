@@ -26,9 +26,9 @@ namespace
 	};
 }
 
-SceneLogo::SceneLogo(void)
+SceneLogo::SceneLogo()
+	: mSceneChangeCount(0)
 {
-	mSceneChangeCount = 0;
 	mIsSceneChange = true;
 }
 

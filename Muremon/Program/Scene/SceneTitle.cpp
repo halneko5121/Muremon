@@ -11,83 +11,80 @@
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilInput.h"
 
-#define TITLE_ALPHA_INCREASE		(5)		//アルファ値の増加量
-#define	TITLE_MAX_ALPHA				(255)	//アルファ値の最大
-
 #define MENU_MAX		(3)		
 #define MENU_MAX_GAME	(2)
 
-#define BACK_SCENE_TIME	(1800)		//30秒
-
-//表示座標
-#define TITLE_BG_X		(400.f)
-#define TITLE_BG_Y		(300.f)
-#define ZPUSH_X			(400.f)
-#define ZPUSH_Y			(450.f)
-#define START_X			(400.f)
-#define START_Y			(340.f)
-#define RANKING_X		(400.f)
-#define RANKING_Y		(420.f)
-#define END_X			(400.f)
-#define END_Y			(500.f)
-#define NORMAL_X		(400.f)
-#define NORMAL_Y		(380.f)
-#define REFRESH_X		(400.f)
-#define REFRESH_Y		(460.f)
-#define TITLE_X			(400.f)
-#define TITLE_Y			(130.f)
-#define CURSOR_X		(260.f)
-#define CURSOR_Y		(340.f)
-#define CURSOR2_X		(280.f)
-#define CURSOR_Y2		(380.f)
-#define CURSOR_Y_REMOVE	( 80.f)
-
-enum TEXTURE_DATA_TITLE	//絵
+namespace
 {
-	T_TITLE_BG,		//タイトル背景
-	T_FONT,			//フォント
-};
+	// 表示座標
+	const float cDispTitleBgX = 400.f;
+	const float cDispTitleBgY = 300.f;
+	const float cDispZPushX = 400.f;
+	const float cDispZPushY = 450.f;
+	const float cDispStartX = 400.f;
+	const float cDispStartY = 340.f;
+	const float cDispRankingX = 400.f;
+	const float cDispRankingY = 420.f;
+	const float cDispGameEndX = 400.f;
+	const float cDispGameEndY = 500.f;
+	const float cDispGameNormalX = 400.f;
+	const float cDispGameNormalY = 380.f;
+	const float cDispGameRefreshX = 400.f;
+	const float cDispGameRefreshY = 460.f;
+	const float cDispGameTitleX = 400.f;
+	const float cDispGameTitleY = 130.f;
+	const float cDispCursorX = 260.f;
+	const float cDispCursorY = 340.f;
+	const float cDispCursor2X = 280.f;
+	const float cDispCursor2Y = 380.f;
+	const float cDispCursorYRemove = 80.f;
 
-enum RECT_DATA_TITLE	//矩形
-{
-	R_TITLE_BG,		//タイトル背景
-	R_ZPUSH,		//Ｚキーを押してね
-	R_START,		//すたーと
-	R_RANKING,		//ランキング
-	R_END,			//えんど
-	R_NORMAL,		//のーまるもーど
-	R_REFRESH,		//すっきりもーど
-	R_TUTORIAL_T,	//操作説明
-	R_TITLE,		//タイトル
-	R_CURSOR1,		//カーソル1
-	R_CURSOR2,		//カーソル2
-};
+	enum TEXTURE_DATA_TITLE	//絵
+	{
+		T_TITLE_BG,		//タイトル背景
+		T_FONT,			//フォント
+	};
 
-enum TITLE_DRAW_SCENE
-{
-	DRAW_Z_PUSH,
-	DRAW_MENU,
-	DRAW_GAME_MENU,
-};
+	enum RECT_DATA_TITLE	//矩形
+	{
+		R_TITLE_BG,		//タイトル背景
+		R_ZPUSH,		//Ｚキーを押してね
+		R_START,		//すたーと
+		R_RANKING,		//ランキング
+		R_END,			//えんど
+		R_NORMAL,		//のーまるもーど
+		R_REFRESH,		//すっきりもーど
+		R_TUTORIAL_T,	//操作説明
+		R_TITLE,		//タイトル
+		R_CURSOR1,		//カーソル1
+		R_CURSOR2,		//カーソル2
+	};
 
-enum MENU_SCENE
-{
-	G_START,		//スタート
-	G_RANKING,		//ランキング
-	G_END,			//終了
-};
+	enum TITLE_DRAW_SCENE
+	{
+		DRAW_Z_PUSH,
+		DRAW_MENU,
+		DRAW_GAME_MENU,
+	};
 
-enum GAME_MODE
-{
-	G_CLEARLY,	//すっきりモード
-	G_NORMAL,	//ノーマルモード
-	G_TUTORIAL
-};
+	enum MENU_SCENE
+	{
+		G_START,		//スタート
+		G_RANKING,		//ランキング
+		G_END,			//終了
+	};
 
+	enum GAME_MODE
+	{
+		G_CLEARLY,	//すっきりモード
+		G_NORMAL,	//ノーマルモード
+		G_TUTORIAL
+	};
+}
 
 SceneTitle::SceneTitle()
-	: cursor_posi(CURSOR_X, CURSOR_Y)
-	, title_posi(TITLE_X, -100.f)
+	: cursor_posi(cDispCursorX, cDispCursorY)
+	, title_posi(cDispGameTitleX, -100.f)
 	, time_count(0)
 	, alpha_z(0)
 	, draw_scene_change(DRAW_Z_PUSH)
@@ -147,7 +144,7 @@ bool SceneTitle::Update()
 void SceneTitle::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_TITLE_BG), mDevice);
-	mVertex->DrawF(TITLE_BG_X, TITLE_BG_Y, R_TITLE_BG);
+	mVertex->DrawF(cDispTitleBgX, cDispTitleBgY, R_TITLE_BG);
 
 	mVertex->SetTextureData(mTexture->GetTextureData(T_FONT), mDevice);
 	mVertex->DrawF(title_posi.x,title_posi.y,R_TITLE);
@@ -155,27 +152,27 @@ void SceneTitle::Draw()
 	if(draw_scene_change == DRAW_Z_PUSH)
 	{
 		mVertex->SetColor(alpha_z, 255, 255, 255);
-		mVertex->DrawF(ZPUSH_X, ZPUSH_Y, R_ZPUSH);
+		mVertex->DrawF(cDispZPushX, cDispZPushY, R_ZPUSH);
 	}
 	else if(draw_scene_change == DRAW_MENU)
 	{
-		mVertex->DrawF(START_X, START_Y, R_START);
-		mVertex->DrawF(RANKING_X, RANKING_Y, R_RANKING);
-		mVertex->DrawF(END_X,END_Y, R_END);
+		mVertex->DrawF(cDispStartX, cDispStartY, R_START);
+		mVertex->DrawF(cDispRankingX, cDispRankingY, R_RANKING);
+		mVertex->DrawF(cDispGameEndX,cDispGameEndY, R_END);
 	}
 	else
 	{
 		//モード選択(すっきり・のーまる・操作説明)
-		mVertex->DrawF(START_X, START_Y, R_REFRESH);
-		mVertex->DrawF(RANKING_X, RANKING_Y, R_NORMAL);
-		mVertex->DrawF(END_X,END_Y, R_TUTORIAL_T);
+		mVertex->DrawF(cDispStartX, cDispStartY, R_REFRESH);
+		mVertex->DrawF(cDispRankingX, cDispRankingY, R_NORMAL);
+		mVertex->DrawF(cDispGameEndX,cDispGameEndY, R_TUTORIAL_T);
 	}
 	
 	//カーソル
 	if(draw_scene_change != DRAW_Z_PUSH)
 	{
 		mVertex->DrawF(cursor_posi.x,cursor_posi.y,R_CURSOR1+anime_cursor%2);
-		mVertex->DrawF(cursor_posi.x + CURSOR2_X, cursor_posi.y, R_CURSOR1+anime_cursor%2);
+		mVertex->DrawF(cursor_posi.x + cDispCursor2X, cursor_posi.y, R_CURSOR1+anime_cursor%2);
 	}
 }
 
@@ -193,13 +190,13 @@ int SceneTitle::End()
 void SceneTitle::PosiDrawControl()
 {
 	//カーソル位置を計算
-	cursor_posi.y = CURSOR_Y + CURSOR_Y_REMOVE * flag_select;
+	cursor_posi.y = cDispCursorY + cDispCursorYRemove * flag_select;
 
 	//タイトル位置を計算
 	if(flag_draw == 7) { return ; }
 	if(flag_draw%2 == 0)
 	{
-		if(title_posi.y < TITLE_Y)
+		if(title_posi.y < cDispGameTitleY)
 		{
 			title_posi.y += 5.f;
 		}

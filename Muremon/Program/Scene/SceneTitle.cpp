@@ -80,6 +80,15 @@ namespace
 		G_NORMAL,	//ノーマルモード
 		G_TUTORIAL
 	};
+
+	enum State
+	{
+		cState_Idle,		// 待機
+		cState_Top,			// トップ画面
+		cState_MenuSelect,	// メニューセレクト画面
+		cState_GameSelect,	// ゲームセレクト画面
+		cState_Count
+	};
 }
 
 SceneTitle::SceneTitle()
@@ -95,6 +104,13 @@ SceneTitle::SceneTitle()
 	, mCountMove(0)
 {
 	mIsSceneChange = true;
+
+	mState.initialize(cState_Count, cState_Idle);
+	mState.registState(this, &SceneTitle::stateEnterIdle,		&SceneTitle::stateExeIdle,			nullptr, cState_Idle);
+	mState.registState(this, &SceneTitle::stateEnterTop,		&SceneTitle::stateExeTop,			nullptr, cState_Top);
+	mState.registState(this, &SceneTitle::stateEnterMenuSelect,	&SceneTitle::stateExeMenuSelect,	nullptr, cState_MenuSelect);
+	mState.registState(this, &SceneTitle::stateEnterGameSelect,	&SceneTitle::stateExeGameSelect,	nullptr, cState_GameSelect);
+	mState.changeState(cState_Idle);
 }
 
 SceneTitle::~SceneTitle()
@@ -107,27 +123,12 @@ void SceneTitle::ImpleInit()
 	mVertex->LoadRect("Data\\RectData\\title.txt");
 
 	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
+
+	mState.changeState(cState_Top);
 }
 
 bool SceneTitle::Update()
 {
-	if (!mIsZPush) 
-	{
-		mAlphaZPush += 5;
-		if (mAlphaZPush == 200)
-		{
-			mIsZPush = true;
-		}
-	}
-	else 
-	{
-		mAlphaZPush -= 5;
-		if (mAlphaZPush == 0)
-		{
-			mIsZPush = false;
-		}
-	}
-
 	PosiDrawControl();
 	KeyControl();
 
@@ -137,6 +138,8 @@ bool SceneTitle::Update()
 	{
 		mCursorAnime++;
 	}
+
+	mState.executeState();
 
 	return mIsSceneChange;
 }
@@ -228,127 +231,207 @@ void SceneTitle::KeyControl()
 		}
 	}
 
-	if(UtilInput::IsKeyPushed(DIK_Z))
-	{
-		GetDirectSound()->SoundPlayOnce(S_SE_OK);
-		// PUSH_Zが表示されている時にＺキーが押されたら
-		if(mDispItem == DRAW_Z_PUSH)
-		{
-			mDispItem = DRAW_MENU;
-		}
-		// メニューが表示されている時にＺキーが押されたら
-		else if(mDispItem == DRAW_MENU)
-		{
-			if(mCurrentMenuItem == G_START)
-			{
-				mDispItem = DRAW_GAME_MENU;
-				mCurrentMenuItem = 0;
-			}
-			else if(mCurrentMenuItem == G_RANKING)
-			{
-				mIsSceneChange = false;
-				mNextSceneIndex = cSceneName_Ranking;
-			}
-			else
-			{
-				PostQuitMessage(0);
-			}
-		}
-		//ゲームメニューが表示されている時にＺキーが押されたら
-		else
-		{
-			if(mCurrentMenuItem == G_CLEARLY)
-			{
-				//すっきりモードを開始させるようにフラグを変える
-				mNextSceneIndex = cSceneName_GameRefresh;
-			}
-			else if(mCurrentMenuItem == G_NORMAL)
-			{
-				//のーまるモードを開始させるようにフラグを変える
-				mNextSceneIndex = cSceneName_GameNormal;
-			}
-			else
-			{
-				mNextSceneIndex = cSceneName_Tutorial;
-			}
-			mIsSceneChange = false;
-		}
-		mTimeCount = 0;
-	}
-
-	// ↑キーが押されたら
 	if (UtilInput::IsKeyPushed(DIK_UP))
 	{
-		if (mDispItem != DRAW_Z_PUSH)
-		{
-			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
-		}
 		mCurrentMenuItem--;
-
-		if(mDispItem == DRAW_MENU)
-		{
-			if(mCurrentMenuItem < G_START)
-			{
-				mCurrentMenuItem = G_END;
-			}
-		}
-		else if(mDispItem == DRAW_GAME_MENU)
-		{
-			if(mCurrentMenuItem < G_CLEARLY)
-			{
-				mCurrentMenuItem = G_TUTORIAL;
-			}
-		}
-		else
-		{
-			mCurrentMenuItem++;
-		}
 		mTimeCount = 0;
 	}
 
-	// ↓キーが押されたら
 	if (UtilInput::IsKeyPushed(DIK_DOWN))
 	{
-		if (mDispItem != DRAW_Z_PUSH)
-		{
-			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
-		}
 		mCurrentMenuItem++;
+		mTimeCount = 0;
+	}
 
-		if(mDispItem == DRAW_MENU)
-		{
-			if(mCurrentMenuItem > G_END)
-			{
-				mCurrentMenuItem = G_START;
-			}
-		}
-		else if(mDispItem == DRAW_GAME_MENU)
-		{
-			if(mCurrentMenuItem > G_TUTORIAL)
-			{
-				mCurrentMenuItem = G_CLEARLY;
-			}
-		}
-		else{
-			mCurrentMenuItem--;
-		}
+	if (UtilInput::IsKeyPushed(DIK_Z))
+	{
+		GetDirectSound()->SoundPlayOnce(S_SE_OK);
 		mTimeCount = 0;
 	}
 
 	if (UtilInput::IsKeyPushed(DIK_X))
 	{
 		GetDirectSound()->SoundPlayOnce(S_CANCEL);
+		mTimeCount = 0;
+	}
+}
 
-		if(mDispItem == DRAW_MENU)
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+SceneTitle::stateEnterIdle()
+{
+}
+void
+SceneTitle::stateExeIdle()
+{
+}
+
+/**
+ * @brief ステート:Top
+ */
+void
+SceneTitle::stateEnterTop()
+{
+	mDispItem = DRAW_Z_PUSH;
+}
+void
+SceneTitle::stateExeTop()
+{
+	if (UtilInput::IsKeyPushed(DIK_DOWN))
+	{
+		mCurrentMenuItem--;
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_Z))
+	{
+		mDispItem = DRAW_MENU;
+		mState.changeState(cState_MenuSelect);
+		return;
+	}
+
+	if (!mIsZPush)
+	{
+		mAlphaZPush += 5;
+		if (mAlphaZPush == 200)
 		{
-			mDispItem = DRAW_Z_PUSH;
+			mIsZPush = true;
+		}
+	}
+	else
+	{
+		mAlphaZPush -= 5;
+		if (mAlphaZPush == 0)
+		{
+			mIsZPush = false;
+		}
+	}
+}
+
+/**
+ * @brief ステート:MenuSelect
+ */
+void
+SceneTitle::stateEnterMenuSelect()
+{
+}
+void
+SceneTitle::stateExeMenuSelect()
+{
+	if (UtilInput::IsKeyPushed(DIK_DOWN) ||
+		UtilInput::IsKeyPushed(DIK_UP))
+	{
+		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_UP))
+	{
+		if (mCurrentMenuItem < G_START)
+		{
+			mCurrentMenuItem = G_END;
+		}
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_DOWN))
+	{
+		if (mCurrentMenuItem > G_END)
+		{
 			mCurrentMenuItem = G_START;
 		}
-		else if(mDispItem == DRAW_GAME_MENU)
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_Z))
+	{
+		if (mCurrentMenuItem == G_START)
 		{
-			mDispItem = DRAW_MENU;
+			mDispItem = DRAW_GAME_MENU;
+			mCurrentMenuItem = 0;
+			mState.changeState(cState_GameSelect);
+			return;
+		}
+		else if (mCurrentMenuItem == G_RANKING)
+		{
+			mIsSceneChange = false;
+			mNextSceneIndex = cSceneName_Ranking;
+		}
+		else
+		{
+			PostQuitMessage(0);
+		}
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_X))
+	{
+		mDispItem = DRAW_Z_PUSH;
+		mCurrentMenuItem = G_START;
+		mState.changeState(cState_Top);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:GameSelect
+ */
+void
+SceneTitle::stateEnterGameSelect()
+{
+}
+void
+SceneTitle::stateExeGameSelect()
+{
+	if (UtilInput::IsKeyPushed(DIK_DOWN) ||
+		UtilInput::IsKeyPushed(DIK_UP))
+	{
+		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_UP))
+	{
+		if (mCurrentMenuItem < G_CLEARLY)
+		{
+			mCurrentMenuItem = G_TUTORIAL;
+		}
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_DOWN))
+	{
+		if (mCurrentMenuItem > G_TUTORIAL)
+		{
 			mCurrentMenuItem = G_CLEARLY;
 		}
-		mTimeCount = 0;
+	}
+
+	if (UtilInput::IsKeyPushed(DIK_Z))
+	{
+		//ゲームメニューが表示されている時にＺキーが押されたら
+		if (mCurrentMenuItem == G_CLEARLY)
+		{
+			//すっきりモードを開始させるようにフラグを変える
+			mNextSceneIndex = cSceneName_GameRefresh;
+		}
+		else if (mCurrentMenuItem == G_NORMAL)
+		{
+			//のーまるモードを開始させるようにフラグを変える
+			mNextSceneIndex = cSceneName_GameNormal;
+		}
+		else
+		{
+			mNextSceneIndex = cSceneName_Tutorial;
+		}
+		mIsSceneChange = false;
+	}
+
+
+	if (UtilInput::IsKeyPushed(DIK_X))
+	{
+		mDispItem = DRAW_MENU;
+		mCurrentMenuItem = G_CLEARLY;
+		mState.changeState(cState_MenuSelect);
+		return;
 	}
 }

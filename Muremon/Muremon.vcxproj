@@ -26,7 +26,7 @@
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
     <ClCompile Include="Program\Mission\Mission.cpp" />
-    <ClCompile Include="Program\System\GameManage.cpp" />
+    <ClCompile Include="Program\System\GameMain.cpp" />
     <ClCompile Include="Program\main.cpp" />
     <ClCompile Include="Program\Scene\SceneBase.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
@@ -60,7 +60,7 @@
     <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Program\DefineGame.h" />
     <ClInclude Include="Program\Mission\Mission.h" />
-    <ClInclude Include="Program\System\GameManage.h" />
+    <ClInclude Include="Program\System\GameMain.h" />
     <ClInclude Include="Program\main.h" />
     <ClInclude Include="Program\Scene\SceneBase.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />

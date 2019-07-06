@@ -8,7 +8,7 @@
 
 #include <crtdbg.h> //メモリーリークチェック
 #include "main.h"
-#include "System/GameManage.h"
+#include "System/GameMain.h"
 
 /**
  * @brief	メイン(ここからプログラムがスタート)

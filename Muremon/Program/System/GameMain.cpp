@@ -1,12 +1,12 @@
  /******************************************************************
-  *	@file	GameManage.cpp
-  *	@brief	ゲーム全体の管理を行う
+  *	@file	GameMain.cpp
+  *	@brief	ゲームメイン
   *
   *	製作者：三上
   *	管理者：三上
   ******************************************************************/
 
-#include "GameManage.h"
+#include "GameMain.h"
 #include "Library/Font/DirectFont.h"
 #include "Library/Input/DirectInput.h"
 #include "Library/Graphics/Vertex.h"

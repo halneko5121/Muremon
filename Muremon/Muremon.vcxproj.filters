@@ -77,9 +77,6 @@
     <ClCompile Include="Program\Scene\SceneTutorial.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Program\System\GameManage.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Mission\Mission.cpp">
       <Filter>Mission</Filter>
     </ClCompile>
@@ -88,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="Library\StateMachine.cpp">
       <Filter>Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\System\GameMain.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,9 +169,6 @@
     <ClInclude Include="Program\Scene\SceneTutorial.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Program\System\GameManage.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="Program\Mission\Mission.h">
       <Filter>Mission</Filter>
     </ClInclude>
@@ -180,6 +177,9 @@
     </ClInclude>
     <ClInclude Include="Library\StateMachine.h">
       <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\System\GameMain.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

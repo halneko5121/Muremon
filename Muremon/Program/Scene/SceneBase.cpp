@@ -20,7 +20,6 @@ SceneBase::SceneBase()
     mSceneID	= cSceneName_Logo;    // èâä˙âª
 	mVertex		= new Vertex();
 	mTexture	= new Texture();
-
 }
 
 /**
@@ -28,6 +27,8 @@ SceneBase::SceneBase()
  */
 SceneBase::~SceneBase()
 {
+	APP_SAFE_DELETE(mVertex);
+	APP_SAFE_DELETE(mTexture);
 }
 
 /**
@@ -54,8 +55,6 @@ bool
 SceneBase::RunScene()
 {
 	bool is_scene_change = Update();
-	Draw();
-
 	return is_scene_change;
 }
 

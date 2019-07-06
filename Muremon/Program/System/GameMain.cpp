@@ -48,6 +48,7 @@ GameMain::InitGameMain(void)
 
 	// 最初のシーンを
 	mScene = new SceneLogo();
+
 	mScore = 0;
 
 	mState.initialize(cState_Count, cState_Init);
@@ -274,6 +275,8 @@ GameMain::stateExeInit()
 		mState.changeState(cState_Run);
 		return;
 	}
+
+	mScene->Draw();
 }
 
 /**
@@ -282,15 +285,13 @@ GameMain::stateExeInit()
 void
 GameMain::stateEnterRun()
 {
-
+	mScene->Draw();
 }
 void
 GameMain::stateExeRun()
 {
 	if (!mScene->RunScene())
 	{
-		// シーン終了
-		mScore = mScene->End();
 		// ロゴが終わったらクリア時の色を白にする
 		if (mScene->GetSceneID() == cSceneName_Title)
 		{
@@ -307,6 +308,8 @@ GameMain::stateExeRun()
 		mState.changeState(cState_End);
 		return;
 	}
+
+	mScene->Draw();
 }
 
 /**
@@ -316,14 +319,18 @@ void
 GameMain::stateEnterEnd()
 {
 	GetFadeMgr()->FadeOut();
+	mScene->Draw();
 }
 void
 GameMain::stateExeEnd()
 {
 	if (GetFadeMgr()->IsFadeEnd())
 	{
+		// シーン終了
+		mScore = mScene->End();
 		mState.changeState(cState_Init);
 		return;
 	}
-}
 
+	mScene->Draw();
+}

@@ -51,15 +51,19 @@ bool SceneTitle::Update()
 {
 	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 
-	if (!flag_z) {
+	if (!flag_z) 
+	{
 		alpha_z += 5;
-		if (alpha_z == 200) {
+		if (alpha_z == 200)
+		{
 			flag_z = true;
 		}
 	}
-	else {
+	else 
+	{
 		alpha_z -= 5;
-		if (alpha_z == 0) {
+		if (alpha_z == 0)
+		{
 			flag_z = false;
 		}
 	}
@@ -80,31 +84,35 @@ bool SceneTitle::Update()
 void SceneTitle::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_TITLE_BG), mDevice);
-	mVertex->DrawF(TITLE_BG_X,TITLE_BG_Y,R_TITLE_BG);
+	mVertex->DrawF(TITLE_BG_X, TITLE_BG_Y, R_TITLE_BG);
 
 	mVertex->SetTextureData(mTexture->GetTextureData(T_FONT), mDevice);
 	mVertex->DrawF(title_posi.x,title_posi.y,R_TITLE);
 	
-	if(draw_scene_change == DRAW_Z_PUSH){
-		mVertex->SetColor(alpha_z,255,255,255);
-		mVertex->DrawF(ZPUSH_X,ZPUSH_Y,R_ZPUSH);
+	if(draw_scene_change == DRAW_Z_PUSH)
+	{
+		mVertex->SetColor(alpha_z, 255, 255, 255);
+		mVertex->DrawF(ZPUSH_X, ZPUSH_Y, R_ZPUSH);
 	}
-	else if(draw_scene_change == DRAW_MENU){
-		mVertex->DrawF(START_X,START_Y,R_START);
-		mVertex->DrawF(RANKING_X,RANKING_Y,R_RANKING);
-		mVertex->DrawF(END_X,END_Y,R_END);
+	else if(draw_scene_change == DRAW_MENU)
+	{
+		mVertex->DrawF(START_X, START_Y, R_START);
+		mVertex->DrawF(RANKING_X, RANKING_Y, R_RANKING);
+		mVertex->DrawF(END_X,END_Y, R_END);
 	}
-	else{
+	else
+	{
 		//モード選択(すっきり・のーまる・操作説明)
-		mVertex->DrawF(START_X,START_Y,R_REFRESH);
-		mVertex->DrawF(RANKING_X,RANKING_Y,R_NORMAL);
-		mVertex->DrawF(END_X,END_Y,R_TUTORIAL_T);
+		mVertex->DrawF(START_X, START_Y, R_REFRESH);
+		mVertex->DrawF(RANKING_X, RANKING_Y, R_NORMAL);
+		mVertex->DrawF(END_X,END_Y, R_TUTORIAL_T);
 	}
 	
 	//カーソル
-	if(draw_scene_change != DRAW_Z_PUSH){
+	if(draw_scene_change != DRAW_Z_PUSH)
+	{
 		mVertex->DrawF(cursor_posi.x,cursor_posi.y,R_CURSOR1+anime_cursor%2);
-		mVertex->DrawF(cursor_posi.x + CURSOR2_X,cursor_posi.y,R_CURSOR1+anime_cursor%2);
+		mVertex->DrawF(cursor_posi.x + CURSOR2_X, cursor_posi.y, R_CURSOR1+anime_cursor%2);
 	}
 }
 
@@ -126,17 +134,22 @@ void SceneTitle::PosiDrawControl()
 
 	//タイトル位置を計算
 	if(flag_draw == 7) { return ; }
-	if(flag_draw%2 == 0){
-		if(title_posi.y < TITLE_Y){
+	if(flag_draw%2 == 0)
+	{
+		if(title_posi.y < TITLE_Y)
+		{
 			title_posi.y += 5.f;
 		}
-		else{
+		else
+		{
 			flag_draw++;
 		}
 	}
-	else if(flag_draw%2 == 1){
+	else if(flag_draw%2 == 1)
+	{
 		title_posi.y -= 5.f;
-		if(title_posi.y == 70.f + 20.f * cnt_move){
+		if(title_posi.y == 70.f + 20.f * cnt_move)
+		{
 			flag_draw++;
 			cnt_move++;
 		}
@@ -158,32 +171,44 @@ void SceneTitle::KeyControl()
 	if(UtilInput::IsKeyPushed(DIK_Z))
 	{
 		GetDirectSound()->SoundPlayOnce(S_SE_OK);
-		if(draw_scene_change == DRAW_Z_PUSH){		//PUSH_Zが表示されている時にＺキーが押されたら
+		// PUSH_Zが表示されている時にＺキーが押されたら
+		if(draw_scene_change == DRAW_Z_PUSH)
+		{
 			draw_scene_change = DRAW_MENU;
 		}
-		else if(draw_scene_change == DRAW_MENU){	//メニューが表示されている時にＺキーが押されたら
-			if(flag_select == G_START){
+		// メニューが表示されている時にＺキーが押されたら
+		else if(draw_scene_change == DRAW_MENU)
+		{
+			if(flag_select == G_START)
+			{
 				draw_scene_change = DRAW_GAME_MENU;
 				flag_select = 0;
 			}
-			else if(flag_select == G_RANKING){
+			else if(flag_select == G_RANKING)
+			{
 				mIsSceneChange = false;
 				flag_scene_change = cSceneName_Ranking;
 			}
-			else{
+			else
+			{
 				PostQuitMessage(0);
 			}
 		}
-		else{										//ゲームメニューが表示されている時にＺキーが押されたら
-			if(flag_select == G_CLEARLY){
+		//ゲームメニューが表示されている時にＺキーが押されたら
+		else
+		{
+			if(flag_select == G_CLEARLY)
+			{
 				//すっきりモードを開始させるようにフラグを変える
 				flag_scene_change = cSceneName_GameRefresh;
 			}
-			else if(flag_select == G_NORMAL){
+			else if(flag_select == G_NORMAL)
+			{
 				//のーまるモードを開始させるようにフラグを変える
 				flag_scene_change = cSceneName_GameNormal;
 			}
-			else{
+			else
+			{
 				flag_scene_change = cSceneName_Tutorial;
 			}
 			mIsSceneChange = false;
@@ -214,10 +239,11 @@ void SceneTitle::KeyControl()
 				flag_select = G_TUTORIAL;
 			}
 		}
-		else{
+		else
+		{
 			flag_select++;
 		}
-		time_count=0;
+		time_count = 0;
 	}
 
 	// ↓キーが押されたら
@@ -246,7 +272,7 @@ void SceneTitle::KeyControl()
 		else{
 			flag_select--;
 		}
-		time_count=0;
+		time_count = 0;
 	}
 
 	if (UtilInput::IsKeyPushed(DIK_X))
@@ -263,6 +289,6 @@ void SceneTitle::KeyControl()
 			draw_scene_change = DRAW_MENU;
 			flag_select = G_CLEARLY;
 		}
-		time_count=0;
+		time_count = 0;
 	}
 }

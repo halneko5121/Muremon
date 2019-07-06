@@ -80,11 +80,9 @@ bool SceneTitle::Update()
 void SceneTitle::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_TITLE_BG), mDevice);
-	mVertex->SetColor(255, 255, 255, 255);
 	mVertex->DrawF(TITLE_BG_X,TITLE_BG_Y,R_TITLE_BG);
 
 	mVertex->SetTextureData(mTexture->GetTextureData(T_FONT), mDevice);
-	mVertex->SetColor(255,255,255,255);
 	mVertex->DrawF(title_posi.x,title_posi.y,R_TITLE);
 	
 	if(draw_scene_change == DRAW_Z_PUSH){
@@ -92,21 +90,18 @@ void SceneTitle::Draw()
 		mVertex->DrawF(ZPUSH_X,ZPUSH_Y,R_ZPUSH);
 	}
 	else if(draw_scene_change == DRAW_MENU){
-		mVertex->SetColor(255,255,255,255);
 		mVertex->DrawF(START_X,START_Y,R_START);
 		mVertex->DrawF(RANKING_X,RANKING_Y,R_RANKING);
 		mVertex->DrawF(END_X,END_Y,R_END);
 	}
 	else{
 		//モード選択(すっきり・のーまる・操作説明)
-		mVertex->SetColor(255,255,255,255);
 		mVertex->DrawF(START_X,START_Y,R_REFRESH);
 		mVertex->DrawF(RANKING_X,RANKING_Y,R_NORMAL);
 		mVertex->DrawF(END_X,END_Y,R_TUTORIAL_T);
 	}
 	
 	//カーソル
-	mVertex->SetColor(255,255,255,255);
 	if(draw_scene_change != DRAW_Z_PUSH){
 		mVertex->DrawF(cursor_posi.x,cursor_posi.y,R_CURSOR1+anime_cursor%2);
 		mVertex->DrawF(cursor_posi.x + CURSOR2_X,cursor_posi.y,R_CURSOR1+anime_cursor%2);

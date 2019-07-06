@@ -57,7 +57,6 @@ bool SceneLogo::Update()
 void SceneLogo::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(T_LOGO), mDevice);
-	mVertex->SetColor(255,255,255,255);
 	mVertex->DrawF(400.f,300.f,R_LOGO);
 }
 

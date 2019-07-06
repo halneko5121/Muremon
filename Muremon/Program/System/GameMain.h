@@ -8,6 +8,7 @@
  ******************************************************************/
 
 #include "Library/Window/Window.h"
+#include "Library/StateMachine.h"
 
 class C_Window;
 class SceneBase;
@@ -57,10 +58,22 @@ public:
 	void ControlSequence();
 
 private:
-	C_Window*			mWindow;		// ウィンドウクラスへのポインタ
-	SceneBase*		mScene;			// シーンクラスへのポインタ
-	DirectGraphics*		mGraphics;		// グラフィッククラスへのポインタ
-	char**				mSoundText;
-	DWORD				mBackground;
-	int					mScore;
+	// ステート関数
+	void stateEnterInit();
+	void stateExeInit();
+
+	void stateEnterRun();
+	void stateExeRun();
+
+	void stateEnterEnd();
+	void stateExeEnd();
+
+private:
+	StateMachine<GameMain>	mState;			// ステート
+	C_Window*				mWindow;		// ウィンドウクラスへのポインタ
+	SceneBase*				mScene;			// シーンクラスへのポインタ
+	DirectGraphics*			mGraphics;		// グラフィッククラスへのポインタ
+	char**					mSoundText;
+	DWORD					mBackground;
+	int						mScore;
 };

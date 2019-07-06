@@ -21,6 +21,17 @@
 #include "Program/Scene/SceneGameNormal.h"
 #include "Program/Scene/SceneRanking.h"
 
+namespace
+{
+	enum State
+	{
+		cState_Init,
+		cState_Run,
+		cState_End,
+		cState_Count,
+	};
+}
+
  /**
   * @brief	ゲームで使うメンバの初期化
   */
@@ -38,6 +49,11 @@ GameMain::InitGameMain(void)
 	// 最初のシーンを
 	mScene = new SceneLogo();
 	mScore = 0;
+
+	mState.initialize(cState_Count, cState_Init);
+	mState.registState(this, &GameMain::stateEnterInit,	&GameMain::stateExeInit,	nullptr, cState_Init);
+	mState.registState(this, &GameMain::stateEnterRun,	&GameMain::stateExeRun,		nullptr, cState_Run);
+	mState.registState(this, &GameMain::stateEnterEnd,	&GameMain::stateExeEnd,		nullptr, cState_End);
 }
 
 /**
@@ -115,8 +131,7 @@ GameMain::MsgLoop(void)
 	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
 
 	// 最初のシーンの初期化
-	mScene->SetScene(mGraphics->GetDevice());
-	mScene->Init();
+	mState.changeState(cState_Init);
 
 	srand((unsigned int)time(NULL));
 
@@ -139,21 +154,11 @@ GameMain::MsgLoop(void)
 			{
 				GetInputKey()->Update();
 				mGraphics->RenderStart(mBackground);
+				GetFadeMgr()->Update();
 
-				if (!mScene->RunScene())
-				{
-					// シーン終了
-					mScore = mScene->End();
-					// ロゴが終わったらクリア時の色を白にする
-					if(mScene->GetSceneID() == cSceneName_Title) mBackground = D3DCOLOR_XRGB(0xFF,0xFF,0xFF);
-					// タイトルが終わったらクリア時の色を黒にする
-					if(mScene->GetSceneID() == cSceneName_Prologue) mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);
+				mState.executeState();
 
-					// シーンが変わった時の処理(シーン切り替え)↓
-					ControlSequence();				
-				}
-//				GetFadeMgr()->Update();
-//				GetFadeMgr()->Draw();
+				GetFadeMgr()->Draw();
 				mGraphics->RenderEnd();
 
 				oldTime = nowTime;
@@ -243,3 +248,73 @@ GameMain::ControlSequence(void)
 		break;
     }
 }
+
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Init
+ */
+void
+GameMain::stateEnterInit()
+{
+	GetFadeMgr()->FadeIn();
+
+	// シーン切り替え
+	ControlSequence();
+}
+void
+GameMain::stateExeInit()
+{
+	if (GetFadeMgr()->IsFadeEnd())
+	{
+		mState.changeState(cState_Run);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:Run
+ */
+void
+GameMain::stateEnterRun()
+{
+
+}
+void
+GameMain::stateExeRun()
+{
+	if (!mScene->RunScene())
+	{
+		// シーン終了
+		mScore = mScene->End();
+		// ロゴが終わったらクリア時の色を白にする
+		if (mScene->GetSceneID() == cSceneName_Title) mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
+		// タイトルが終わったらクリア時の色を黒にする
+		if (mScene->GetSceneID() == cSceneName_Prologue) mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
+
+		mState.changeState(cState_End);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:End
+ */
+void
+GameMain::stateEnterEnd()
+{
+	GetFadeMgr()->FadeOut();
+}
+void
+GameMain::stateExeEnd()
+{
+	if (GetFadeMgr()->IsFadeEnd())
+	{
+		mState.changeState(cState_Init);
+		return;
+	}
+}
+

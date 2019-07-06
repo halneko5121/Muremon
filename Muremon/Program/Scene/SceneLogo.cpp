@@ -32,7 +32,7 @@ SceneLogo::SceneLogo()
 	mIsSceneChange = true;
 }
 
-SceneLogo::~SceneLogo(void)
+SceneLogo::~SceneLogo()
 {
 }
 

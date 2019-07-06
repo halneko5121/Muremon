@@ -8,36 +8,22 @@
 #include "Library/Sound/DirectSound.h"
 #include "Program/Util/UtilInput.h"
 
-SceneTitle::SceneTitle(void)
+SceneTitle::SceneTitle()
+	: cursor_posi(CURSOR_X, CURSOR_Y)
+	, title_posi(TITLE_X, -100.f)
+	, time_count(0)
+	, alpha_z(0)
+	, draw_scene_change(DRAW_Z_PUSH)
+	, flag_scene_change(0)
+	, anime_cursor(0)
+	, flag_z(false)
+	, flag_draw(0)
+	, cnt_move(0)
 {
-	cursor_posi.x = CURSOR_X;
-	cursor_posi.y = CURSOR_Y;
-
-	title_posi.x = TITLE_X;
-	title_posi.y = -100.f;
-
-	time_count = 0;	//ロゴのタイムカウント
-
-	alpha_z = 0;
-
-	draw_scene_change = DRAW_Z_PUSH;
-
-	flag_select = G_START;
-
 	mIsSceneChange = true;
-
-	flag_scene_change = 0;
-
-	anime_cursor = 0;
-
-	flag_z = false;
-
-	flag_draw = 0;
-
-	cnt_move = 0;
 }
 
-SceneTitle::~SceneTitle(void)
+SceneTitle::~SceneTitle()
 {
 }
 

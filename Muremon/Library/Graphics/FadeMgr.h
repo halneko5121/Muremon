@@ -70,6 +70,11 @@ public:
 	 */
 	bool				IsFadeEnd();
 
+	/**
+	 * @brief	カラーのセット
+	 */
+	void				SetColor(int r, int g, int b);
+
 private:
 	enum FadeState
 	{
@@ -85,6 +90,9 @@ private:
 	Vertex*				mVertex;		// バーテックス
 
 	int					mAlpha;			// アルファ
+	int					mColorR;		// カラー(R)
+	int					mColorG;		// カラー(R)
+	int					mColorB;		// カラー(R)
 	int					mFadeSpeed;		// フェード速度
 	FadeState			mState;			// ステート
 };

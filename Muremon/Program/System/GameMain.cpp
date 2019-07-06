@@ -127,6 +127,7 @@ GameMain::MsgLoop(void)
 	// 描画設定
 	mGraphics->SetRender();
 	GetFadeMgr()->Init(mGraphics->GetDevice());
+	GetFadeMgr()->SetColor(0, 0, 0);
 
 	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
 
@@ -291,9 +292,17 @@ GameMain::stateExeRun()
 		// シーン終了
 		mScore = mScene->End();
 		// ロゴが終わったらクリア時の色を白にする
-		if (mScene->GetSceneID() == cSceneName_Title) mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
+		if (mScene->GetSceneID() == cSceneName_Title)
+		{
+			mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
+			GetFadeMgr()->SetColor(255, 255, 255);
+		}
 		// タイトルが終わったらクリア時の色を黒にする
-		if (mScene->GetSceneID() == cSceneName_Prologue) mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
+		if (mScene->GetSceneID() == cSceneName_Prologue)
+		{
+			mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
+			GetFadeMgr()->SetColor(0, 0, 0);
+		}
 
 		mState.changeState(cState_End);
 		return;

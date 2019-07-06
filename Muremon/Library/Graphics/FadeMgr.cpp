@@ -19,6 +19,9 @@ FadeMgr::FadeMgr()
 	: mTexture(nullptr)
 	, mVertex(nullptr)
 	, mAlpha(255)
+	, mColorR(255)
+	, mColorG(255)
+	, mColorB(255)
 	, mFadeSpeed(0)
 	, mState(cFadeState_None)
 {
@@ -105,8 +108,6 @@ FadeMgr::Update()
 	default:
 		break;
 	}
-
-	mVertex->SetColor(mAlpha, 255, 255, 255);
 }
 
 /**
@@ -116,7 +117,7 @@ void
 FadeMgr::Draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(0), mDevice);
-	mVertex->SetColor(mAlpha, 255, 255, 255);
+	mVertex->SetColor(mAlpha, mColorR, mColorG, mColorB);
 	mVertex->DrawF(400.f, 300.f, 0);
 }
 
@@ -147,4 +148,15 @@ bool
 FadeMgr::IsFadeEnd()
 {
 	return (mState == cFadeState_None);
+}
+
+/**
+ * @brief	カラーのセット
+ */
+void
+FadeMgr::SetColor(int r, int g, int b)
+{
+	mColorR = r;
+	mColorG = g;
+	mColorB = b;
 }

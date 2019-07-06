@@ -18,11 +18,11 @@
 #define APP_SAFE_DELETE(p)				{if(p){delete(p);		(p) = nullptr;} }
 
 #ifdef _DEBUG
-#define	APP_PRINT(format, ...)								\
-		{													\
-			char temp[MAX_PATH];							\
-			sprintf_s(temp, MAX_PATH, format, __VA_ARGS__);	\
-			OutputDebugString(temp);						\
+#define	APP_PRINT(format, ...)							\
+		{												\
+			char temp[256];								\
+			sprintf_s(temp, 256, format, __VA_ARGS__);	\
+			OutputDebugString(temp);					\
 		}										
 #define APP_PRINT_NL(format, ...)		{ APP_PRINT(format, __VA_ARGS__); OutputDebugString("\n"); }
 #else

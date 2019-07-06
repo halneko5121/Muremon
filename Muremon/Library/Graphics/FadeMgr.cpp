@@ -128,7 +128,7 @@ void
 FadeMgr::FadeIn()
 {
 	mState = cFadeState_FadeIn;
-	mFadeSpeed = -5;
+	mFadeSpeed = -6;
 }
 
 /**
@@ -138,7 +138,7 @@ void
 FadeMgr::FadeOut()
 {
 	mState = cFadeState_FadeOut;
-	mFadeSpeed = 5;
+	mFadeSpeed = 6;
 }
 
 /**

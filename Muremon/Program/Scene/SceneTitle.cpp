@@ -105,12 +105,12 @@ void SceneTitle::ImpleInit()
 {
 	mTexture->LoadTextureData("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\title.txt");
+
+	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
 }
 
 bool SceneTitle::Update()
 {
-	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
-
 	if (!flag_z) 
 	{
 		alpha_z += 5;
@@ -133,7 +133,7 @@ bool SceneTitle::Update()
 
 	time_count++;
 
-	if(time_count % 16 == 15)
+	if(time_count % 16 == 0)
 	{
 		anime_cursor++;
 	}
@@ -171,8 +171,8 @@ void SceneTitle::Draw()
 	//ƒJ[ƒ\ƒ‹
 	if(draw_scene_change != DRAW_Z_PUSH)
 	{
-		mVertex->DrawF(cursor_posi.x,cursor_posi.y,R_CURSOR1+anime_cursor%2);
-		mVertex->DrawF(cursor_posi.x + cDispCursor2X, cursor_posi.y, R_CURSOR1+anime_cursor%2);
+		mVertex->DrawF(cursor_posi.x, cursor_posi.y, (R_CURSOR1 + (anime_cursor % 2)));
+		mVertex->DrawF(cursor_posi.x + cDispCursor2X, cursor_posi.y, (R_CURSOR1 + (anime_cursor % 2)));
 	}
 }
 

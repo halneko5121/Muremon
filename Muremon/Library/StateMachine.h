@@ -282,10 +282,55 @@ private:
 	enum { cMaxRegistState = 30 };
 
 private:
-	void				changeState_(int state_index);
-	void				enterState_();
-	void				exeState_();
-	void				exitState_(int next_state_index);
+
+	/**
+	 * @brief	ステートの変更
+	 */
+	void
+	changeState_(int state_index)
+	{
+		mPrevStateIndex = mCurrentStateIndex;
+		mPrevStateCounter = mCurrentStateCounter;
+		mCurrentStateIndex = state_index;
+		mCurrentStateCounter = 0;
+		mIsChangeStateInExe = true;
+	}
+
+	/**
+	 * @brief	ステートの開始
+	 */
+	void
+	enterState_()
+	{
+		if (mDelegate[mCurrentStateIndex] != nullptr)
+		{
+			mDelegate[mCurrentStateIndex]->enter();
+		}
+	}
+
+	/**
+	 * @brief	ステートの実行
+	 */
+	void
+	exeState_()
+	{
+		if (mDelegate[mCurrentStateIndex] != nullptr)
+		{
+			mDelegate[mCurrentStateIndex]->exe();
+		}
+	}
+
+	/**
+	 * @brief	ステートの終了
+	 */
+	void
+	exitState_(int next_state_index)
+	{
+		if (mDelegate[mCurrentStateIndex] != nullptr)
+		{
+			mDelegate[mCurrentStateIndex]->exit(next_state_index);
+		}
+	}
 
 private:
 	int					mMaxStateNum;					// 最大ステート数

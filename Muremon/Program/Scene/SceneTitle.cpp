@@ -83,16 +83,16 @@ namespace
 }
 
 SceneTitle::SceneTitle()
-	: cursor_posi(cDispCursorX, cDispCursorY)
-	, title_posi(cDispGameTitleX, -100.f)
-	, time_count(0)
-	, alpha_z(0)
-	, draw_scene_change(DRAW_Z_PUSH)
-	, flag_scene_change(0)
-	, anime_cursor(0)
-	, flag_z(false)
-	, flag_draw(0)
-	, cnt_move(0)
+	: mCursorPos(cDispCursorX, cDispCursorY)
+	, mTitlePos(cDispGameTitleX, -100.f)
+	, mTimeCount(0)
+	, mAlphaZPush(0)
+	, mDispItem(DRAW_Z_PUSH)
+	, mNextSceneIndex(0)
+	, mCursorAnime(0)
+	, mIsZPush(false)
+	, mDrawCount(0)
+	, mCountMove(0)
 {
 	mIsSceneChange = true;
 }
@@ -111,31 +111,31 @@ void SceneTitle::ImpleInit()
 
 bool SceneTitle::Update()
 {
-	if (!flag_z) 
+	if (!mIsZPush) 
 	{
-		alpha_z += 5;
-		if (alpha_z == 200)
+		mAlphaZPush += 5;
+		if (mAlphaZPush == 200)
 		{
-			flag_z = true;
+			mIsZPush = true;
 		}
 	}
 	else 
 	{
-		alpha_z -= 5;
-		if (alpha_z == 0)
+		mAlphaZPush -= 5;
+		if (mAlphaZPush == 0)
 		{
-			flag_z = false;
+			mIsZPush = false;
 		}
 	}
 
 	PosiDrawControl();
 	KeyControl();
 
-	time_count++;
+	mTimeCount++;
 
-	if(time_count % 16 == 0)
+	if(mTimeCount % 16 == 0)
 	{
-		anime_cursor++;
+		mCursorAnime++;
 	}
 
 	return mIsSceneChange;
@@ -147,14 +147,14 @@ void SceneTitle::Draw()
 	mVertex->DrawF(cDispTitleBgX, cDispTitleBgY, R_TITLE_BG);
 
 	mVertex->SetTextureData(mTexture->GetTextureData(T_FONT), mDevice);
-	mVertex->DrawF(title_posi.x,title_posi.y,R_TITLE);
+	mVertex->DrawF(mTitlePos.x,mTitlePos.y,R_TITLE);
 	
-	if(draw_scene_change == DRAW_Z_PUSH)
+	if(mDispItem == DRAW_Z_PUSH)
 	{
-		mVertex->SetColor(alpha_z, 255, 255, 255);
+		mVertex->SetColor(mAlphaZPush, 255, 255, 255);
 		mVertex->DrawF(cDispZPushX, cDispZPushY, R_ZPUSH);
 	}
-	else if(draw_scene_change == DRAW_MENU)
+	else if(mDispItem == DRAW_MENU)
 	{
 		mVertex->DrawF(cDispStartX, cDispStartY, R_START);
 		mVertex->DrawF(cDispRankingX, cDispRankingY, R_RANKING);
@@ -169,16 +169,16 @@ void SceneTitle::Draw()
 	}
 	
 	//カーソル
-	if(draw_scene_change != DRAW_Z_PUSH)
+	if(mDispItem != DRAW_Z_PUSH)
 	{
-		mVertex->DrawF(cursor_posi.x, cursor_posi.y, (R_CURSOR1 + (anime_cursor % 2)));
-		mVertex->DrawF(cursor_posi.x + cDispCursor2X, cursor_posi.y, (R_CURSOR1 + (anime_cursor % 2)));
+		mVertex->DrawF(mCursorPos.x, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
+		mVertex->DrawF(mCursorPos.x + cDispCursor2X, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
 	}
 }
 
 int SceneTitle::End()
 {
-	ChangeScene(flag_scene_change);
+	ChangeScene(mNextSceneIndex);
 	GetDirectSound()->SoundPouse(S_BGM_TITLE);
 
 	mTexture->AllReleaseTexture();
@@ -190,28 +190,28 @@ int SceneTitle::End()
 void SceneTitle::PosiDrawControl()
 {
 	//カーソル位置を計算
-	cursor_posi.y = cDispCursorY + cDispCursorYRemove * flag_select;
+	mCursorPos.y = cDispCursorY + cDispCursorYRemove * mCurrentMenuItem;
 
 	//タイトル位置を計算
-	if(flag_draw == 7) { return ; }
-	if(flag_draw%2 == 0)
+	if(mDrawCount == 7) { return ; }
+	if(mDrawCount%2 == 0)
 	{
-		if(title_posi.y < cDispGameTitleY)
+		if(mTitlePos.y < cDispGameTitleY)
 		{
-			title_posi.y += 5.f;
+			mTitlePos.y += 5.f;
 		}
 		else
 		{
-			flag_draw++;
+			mDrawCount++;
 		}
 	}
-	else if(flag_draw%2 == 1)
+	else if(mDrawCount%2 == 1)
 	{
-		title_posi.y -= 5.f;
-		if(title_posi.y == 70.f + 20.f * cnt_move)
+		mTitlePos.y -= 5.f;
+		if(mTitlePos.y == 70.f + 20.f * mCountMove)
 		{
-			flag_draw++;
-			cnt_move++;
+			mDrawCount++;
+			mCountMove++;
 		}
 	}
 }
@@ -232,22 +232,22 @@ void SceneTitle::KeyControl()
 	{
 		GetDirectSound()->SoundPlayOnce(S_SE_OK);
 		// PUSH_Zが表示されている時にＺキーが押されたら
-		if(draw_scene_change == DRAW_Z_PUSH)
+		if(mDispItem == DRAW_Z_PUSH)
 		{
-			draw_scene_change = DRAW_MENU;
+			mDispItem = DRAW_MENU;
 		}
 		// メニューが表示されている時にＺキーが押されたら
-		else if(draw_scene_change == DRAW_MENU)
+		else if(mDispItem == DRAW_MENU)
 		{
-			if(flag_select == G_START)
+			if(mCurrentMenuItem == G_START)
 			{
-				draw_scene_change = DRAW_GAME_MENU;
-				flag_select = 0;
+				mDispItem = DRAW_GAME_MENU;
+				mCurrentMenuItem = 0;
 			}
-			else if(flag_select == G_RANKING)
+			else if(mCurrentMenuItem == G_RANKING)
 			{
 				mIsSceneChange = false;
-				flag_scene_change = cSceneName_Ranking;
+				mNextSceneIndex = cSceneName_Ranking;
 			}
 			else
 			{
@@ -257,98 +257,98 @@ void SceneTitle::KeyControl()
 		//ゲームメニューが表示されている時にＺキーが押されたら
 		else
 		{
-			if(flag_select == G_CLEARLY)
+			if(mCurrentMenuItem == G_CLEARLY)
 			{
 				//すっきりモードを開始させるようにフラグを変える
-				flag_scene_change = cSceneName_GameRefresh;
+				mNextSceneIndex = cSceneName_GameRefresh;
 			}
-			else if(flag_select == G_NORMAL)
+			else if(mCurrentMenuItem == G_NORMAL)
 			{
 				//のーまるモードを開始させるようにフラグを変える
-				flag_scene_change = cSceneName_GameNormal;
+				mNextSceneIndex = cSceneName_GameNormal;
 			}
 			else
 			{
-				flag_scene_change = cSceneName_Tutorial;
+				mNextSceneIndex = cSceneName_Tutorial;
 			}
 			mIsSceneChange = false;
 		}
-		time_count = 0;
+		mTimeCount = 0;
 	}
 
 	// ↑キーが押されたら
 	if (UtilInput::IsKeyPushed(DIK_UP))
 	{
-		if (draw_scene_change != DRAW_Z_PUSH)
+		if (mDispItem != DRAW_Z_PUSH)
 		{
 			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		}
-		flag_select--;
+		mCurrentMenuItem--;
 
-		if(draw_scene_change == DRAW_MENU)
+		if(mDispItem == DRAW_MENU)
 		{
-			if(flag_select < G_START)
+			if(mCurrentMenuItem < G_START)
 			{
-				flag_select = G_END;
+				mCurrentMenuItem = G_END;
 			}
 		}
-		else if(draw_scene_change == DRAW_GAME_MENU)
+		else if(mDispItem == DRAW_GAME_MENU)
 		{
-			if(flag_select < G_CLEARLY)
+			if(mCurrentMenuItem < G_CLEARLY)
 			{
-				flag_select = G_TUTORIAL;
+				mCurrentMenuItem = G_TUTORIAL;
 			}
 		}
 		else
 		{
-			flag_select++;
+			mCurrentMenuItem++;
 		}
-		time_count = 0;
+		mTimeCount = 0;
 	}
 
 	// ↓キーが押されたら
 	if (UtilInput::IsKeyPushed(DIK_DOWN))
 	{
-		if (draw_scene_change != DRAW_Z_PUSH)
+		if (mDispItem != DRAW_Z_PUSH)
 		{
 			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
 		}
-		flag_select++;
+		mCurrentMenuItem++;
 
-		if(draw_scene_change == DRAW_MENU)
+		if(mDispItem == DRAW_MENU)
 		{
-			if(flag_select > G_END)
+			if(mCurrentMenuItem > G_END)
 			{
-				flag_select = G_START;
+				mCurrentMenuItem = G_START;
 			}
 		}
-		else if(draw_scene_change == DRAW_GAME_MENU)
+		else if(mDispItem == DRAW_GAME_MENU)
 		{
-			if(flag_select > G_TUTORIAL)
+			if(mCurrentMenuItem > G_TUTORIAL)
 			{
-				flag_select = G_CLEARLY;
+				mCurrentMenuItem = G_CLEARLY;
 			}
 		}
 		else{
-			flag_select--;
+			mCurrentMenuItem--;
 		}
-		time_count = 0;
+		mTimeCount = 0;
 	}
 
 	if (UtilInput::IsKeyPushed(DIK_X))
 	{
 		GetDirectSound()->SoundPlayOnce(S_CANCEL);
 
-		if(draw_scene_change == DRAW_MENU)
+		if(mDispItem == DRAW_MENU)
 		{
-			draw_scene_change = DRAW_Z_PUSH;
-			flag_select = G_START;
+			mDispItem = DRAW_Z_PUSH;
+			mCurrentMenuItem = G_START;
 		}
-		else if(draw_scene_change == DRAW_GAME_MENU)
+		else if(mDispItem == DRAW_GAME_MENU)
 		{
-			draw_scene_change = DRAW_MENU;
-			flag_select = G_CLEARLY;
+			mDispItem = DRAW_MENU;
+			mCurrentMenuItem = G_CLEARLY;
 		}
-		time_count = 0;
+		mTimeCount = 0;
 	}
 }

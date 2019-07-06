@@ -12,37 +12,29 @@
 
 class SceneTitle : public SceneBase
 {
-private:
-	D3DXVECTOR2 cursor_posi;
-	D3DXVECTOR2 title_posi;
-
-	int time_count;			//ロゴのタイムカウント
-
-	int alpha_z;			//
-
-	int draw_scene_change;	//ロゴ内のグラフィックの変化を知らせる。
-
-	int flag_select;		//カーソルが選択しているものを判別。
-
-	int flag_scene_change;	//どのシーンに変わるかを判断
-
-	unsigned int anime_cursor;	//カーソルアニメーション
-
-	bool flag_z;
-
-	int flag_draw;
-
-	int cnt_move;
 public:
+	SceneTitle();
+	~SceneTitle();
+
 	void ImpleInit() override;
 	bool Update() override;
 	void Draw() override;
 	int End() override;
 
 	void PosiDrawControl();
-
 	void KeyControl();
 
-	SceneTitle();
-	~SceneTitle();
+private:
+	D3DXVECTOR2 mCursorPos;
+	D3DXVECTOR2 mTitlePos;
+
+	int mTimeCount;				// ロゴのタイムカウント
+	int mAlphaZPush;			//
+	int mDispItem;				// グラフィックの変化を知らせる。
+	int mCurrentMenuItem;		// カーソルが選択しているものを判別。
+	int mNextSceneIndex;		// 次のシーン番号
+	int mCursorAnime;			// カーソルアニメーション
+	bool mIsZPush;
+	int mDrawCount;
+	int mCountMove;
 };

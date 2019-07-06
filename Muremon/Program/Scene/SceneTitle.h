@@ -85,14 +85,6 @@ enum GAME_MODE
 	G_TUTORIAL
 };
 
-enum TITLE_FADE_MODE
-{
-	TITLE_FADE_IN,		//フェードイン
-	TITLE_FADE_OUT0,	//フェードアウト(ロゴ)
-	TITLE_FADE_OUT1,	//フェードアウト(ランキング)
-	TITLE_FADE_OUT2,	//フェードアウト(エンド)
-};
-
 class SceneTitle : public SceneBase
 {
 private:
@@ -101,27 +93,17 @@ private:
 
 	int time_count;			//ロゴのタイムカウント
 
-	int alpha;				//アルファ値
-
 	int alpha_z;			//
 
 	int draw_scene_change;	//ロゴ内のグラフィックの変化を知らせる。
 
 	int flag_select;		//カーソルが選択しているものを判別。
 
-	bool start_flag;
-
-	int flag_fade;			//どのフェード処理を使うか判断。
-
-	int alpha_count;
-
 	int flag_scene_change;	//どのシーンに変わるかを判断
 
 	unsigned int anime_cursor;	//カーソルアニメーション
 
 	bool flag_z;
-
-	bool flag_fade_in;
 
 	int flag_draw;
 
@@ -135,12 +117,6 @@ public:
 	void PosiDrawControl();
 
 	void KeyControl();
-
-	void FadeControl();
-
-	void FadeIn();
-
-	void FadeOut();
 
 	SceneTitle();
 	~SceneTitle();

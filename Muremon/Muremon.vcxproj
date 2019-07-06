@@ -18,6 +18,7 @@
     <ClCompile Include="Library\Graphics\DirectGraphics.cpp" />
     <ClCompile Include="Library\Graphics\Texture.cpp" />
     <ClCompile Include="Library\Graphics\Vertex.cpp" />
+    <ClCompile Include="Library\StateMachine.cpp" />
     <ClCompile Include="Library\Window\Window.cpp" />
     <ClCompile Include="Program\Actor\ActorBoss.cpp" />
     <ClCompile Include="Program\Actor\ActorBase.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="Library\Graphics\DirectGraphics.h" />
     <ClInclude Include="Library\Graphics\Texture.h" />
     <ClInclude Include="Library\Graphics\Vertex.h" />
+    <ClInclude Include="Library\StateMachine.h" />
     <ClInclude Include="Library\Window\Window.h" />
     <ClInclude Include="Program\Actor\ActorBoss.h" />
     <ClInclude Include="Program\Actor\ActorBase.h" />

@@ -86,6 +86,9 @@
     <ClCompile Include="Library\Graphics\FadeMgr.cpp">
       <Filter>Library\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Library\StateMachine.cpp">
+      <Filter>Library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -174,6 +177,9 @@
     </ClInclude>
     <ClInclude Include="Library\Graphics\FadeMgr.h">
       <Filter>Library\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\StateMachine.h">
+      <Filter>Library</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

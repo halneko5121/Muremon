@@ -143,7 +143,6 @@ void SceneTitle::Draw()
 int SceneTitle::End()
 {
 	ChangeScene(flag_scene_change);
-
 	GetDirectSound()->SoundPouse(S_BGM_TITLE);
 
 	mTexture->AllReleaseTexture();

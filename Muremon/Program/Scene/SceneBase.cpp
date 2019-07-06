@@ -36,8 +36,6 @@ SceneBase::~SceneBase()
 void
 SceneBase::Init()
 {
-//	GetFadeMgr()->FadeIn();
-
 	ImpleInit();
 }
 

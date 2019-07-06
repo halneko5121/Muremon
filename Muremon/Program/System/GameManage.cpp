@@ -25,7 +25,7 @@
   * @brief	ゲームで使うメンバの初期化
   */
 void
-C_GameMain::InitGameMain(void)
+GameMain::InitGameMain(void)
 {
 	mWindow			= new C_Window;
 	mGraphics		= DirectGraphics::Create();
@@ -49,7 +49,7 @@ C_GameMain::InitGameMain(void)
  * @return  int         メッセージループを返す
  */
 int WINAPI
-C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
+GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
 {
 	InitGameMain();
 	mWindow->InitWindow(hInstance);	// ウィンドウ初期化関数
@@ -97,7 +97,7 @@ C_GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine 
  * @return  メッセージパラメータ
  */
 int
-C_GameMain::MsgLoop(void)
+GameMain::MsgLoop(void)
 {
 	// 初期化
 	MSG msg;
@@ -179,7 +179,7 @@ C_GameMain::MsgLoop(void)
  * @brief ゲームで使うメンバの開放処理
  */
 void
-C_GameMain::ReleaseGameMain(void)
+GameMain::ReleaseGameMain(void)
 {
     // 開放
 	mScene->End();
@@ -198,7 +198,7 @@ C_GameMain::ReleaseGameMain(void)
  * @brief シーケンスの管理を行う
  */
 void
-C_GameMain::ControlSequence(void)
+GameMain::ControlSequence(void)
 {
 	// シーンIDによって分岐
 	switch(mScene->GetSceneID()){

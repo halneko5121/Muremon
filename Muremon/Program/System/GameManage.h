@@ -22,7 +22,7 @@ namespace Dix {
 	class C_PCMPlayer;
 }
 
-class C_GameMain
+class GameMain
 {
 public:
 	/**
@@ -58,7 +58,7 @@ public:
 
 private:
 	C_Window*			mWindow;		// ウィンドウクラスへのポインタ
-	SceneBase*			mScene;			// シーンクラスへのポインタ
+	SceneBase*		mScene;			// シーンクラスへのポインタ
 	DirectGraphics*		mGraphics;		// グラフィッククラスへのポインタ
 	char**				mSoundText;
 	DWORD				mBackground;

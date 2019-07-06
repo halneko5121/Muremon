@@ -1,14 +1,34 @@
-//---------------------------------------------
-//
-//      ロゴ
-//			作成者:	平野
-//
-//---------------------------------------------
+/******************************************************************
+ *	@file	SceneLogo.cpp
+ *	@brief	ロゴシーン
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
+
 #include "SceneLogo.h"
+
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
+
+namespace
+{
+	const int cSceneChangeCount = 129;
+
+	enum TEXTURE_DATA_LOGO
+	{
+		T_LOGO,
+	};
+
+	enum RECT_DATA_LOGO
+	{
+		R_LOGO,
+	};
+}
 
 SceneLogo::SceneLogo(void)
 {
-	time_count = 0;
+	mSceneChangeCount = 0;
 	mIsSceneChange = true;
 }
 
@@ -24,9 +44,9 @@ void SceneLogo::ImpleInit()
 
 bool SceneLogo::Update()
 {
-	time_count++;
+	mSceneChangeCount++;
 
-	if (time_count == ALPHADWINDLITIME)
+	if (mSceneChangeCount == cSceneChangeCount)
 	{
 		mIsSceneChange = false;
 	}

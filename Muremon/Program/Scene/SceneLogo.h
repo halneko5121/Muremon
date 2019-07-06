@@ -12,7 +12,6 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 
-#define MAXALPHATIME		(51)
 #define ALPHADWINDLITIME	(129)
 
 enum TEXTURE_DATA_LOGO
@@ -30,15 +29,11 @@ class SceneLogo : public SceneBase
 private:
 	int time_count;	//ロゴのタイムカウント
 
-	int alpha;	//アルファ値
-
 public:
 	void ImpleInit() override;
 	bool Update() override;
 	void Draw() override;
 	int End() override;
-
-	void FadeControl();	//フェード処理
 
 	SceneLogo();
 	~SceneLogo();

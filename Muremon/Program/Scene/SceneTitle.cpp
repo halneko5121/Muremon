@@ -5,8 +5,85 @@
 //
 //---------------------------------------------
 #include "SceneTitle.h"
+
 #include "Library/Sound/DirectSound.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilInput.h"
+
+#define TITLE_ALPHA_INCREASE		(5)		//アルファ値の増加量
+#define	TITLE_MAX_ALPHA				(255)	//アルファ値の最大
+
+#define MENU_MAX		(3)		
+#define MENU_MAX_GAME	(2)
+
+#define BACK_SCENE_TIME	(1800)		//30秒
+
+//表示座標
+#define TITLE_BG_X		(400.f)
+#define TITLE_BG_Y		(300.f)
+#define ZPUSH_X			(400.f)
+#define ZPUSH_Y			(450.f)
+#define START_X			(400.f)
+#define START_Y			(340.f)
+#define RANKING_X		(400.f)
+#define RANKING_Y		(420.f)
+#define END_X			(400.f)
+#define END_Y			(500.f)
+#define NORMAL_X		(400.f)
+#define NORMAL_Y		(380.f)
+#define REFRESH_X		(400.f)
+#define REFRESH_Y		(460.f)
+#define TITLE_X			(400.f)
+#define TITLE_Y			(130.f)
+#define CURSOR_X		(260.f)
+#define CURSOR_Y		(340.f)
+#define CURSOR2_X		(280.f)
+#define CURSOR_Y2		(380.f)
+#define CURSOR_Y_REMOVE	( 80.f)
+
+enum TEXTURE_DATA_TITLE	//絵
+{
+	T_TITLE_BG,		//タイトル背景
+	T_FONT,			//フォント
+};
+
+enum RECT_DATA_TITLE	//矩形
+{
+	R_TITLE_BG,		//タイトル背景
+	R_ZPUSH,		//Ｚキーを押してね
+	R_START,		//すたーと
+	R_RANKING,		//ランキング
+	R_END,			//えんど
+	R_NORMAL,		//のーまるもーど
+	R_REFRESH,		//すっきりもーど
+	R_TUTORIAL_T,	//操作説明
+	R_TITLE,		//タイトル
+	R_CURSOR1,		//カーソル1
+	R_CURSOR2,		//カーソル2
+};
+
+enum TITLE_DRAW_SCENE
+{
+	DRAW_Z_PUSH,
+	DRAW_MENU,
+	DRAW_GAME_MENU,
+};
+
+enum MENU_SCENE
+{
+	G_START,		//スタート
+	G_RANKING,		//ランキング
+	G_END,			//終了
+};
+
+enum GAME_MODE
+{
+	G_CLEARLY,	//すっきりモード
+	G_NORMAL,	//ノーマルモード
+	G_TUTORIAL
+};
+
 
 SceneTitle::SceneTitle()
 	: cursor_posi(CURSOR_X, CURSOR_Y)

@@ -27,7 +27,7 @@ F_RECT rect_pos_e = {DRAW_E_RAD_X,DRAW_E_RAD_Y,DRAW_E_RAD_X,DRAW_E_RAD_Y};
  */
 ActorBase::ActorBase(void)
 {
-	mOrbit	 = new C_OrbitCalculation();
+	mOrbit	 = new OrbitCalculation();
 }
 
 /**

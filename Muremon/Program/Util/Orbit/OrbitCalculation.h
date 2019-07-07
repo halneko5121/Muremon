@@ -32,18 +32,15 @@
 #define RADIUS_HIT_X_NOPPO				(50.f)				
 #define RADIUS_HIT_Y_NOPPO				(100.f)				
 
-/*================================
-		Class
-=================================*/
-class C_OrbitCalculation
+class OrbitCalculation
 {
 public:
 
-	C_OrbitCalculation(void);
-	~C_OrbitCalculation(void);
+	OrbitCalculation(void);
+	~OrbitCalculation(void);
 
 public:
-	C_OrbitWave*		mWave;
-	C_OrbitRebound*		mRebound;
-	C_OrbitParadora*	mParabora;
+	OrbitWave*		mWave;
+	OrbitRebound*		mRebound;
+	OrbitParabora*	mParabora;
 };

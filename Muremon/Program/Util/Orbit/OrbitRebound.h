@@ -10,11 +10,11 @@
 
 #include "Program/Define.h"
 
-class C_OrbitRebound
+class OrbitRebound
 {
 public:
-	C_OrbitRebound(void);
-	~C_OrbitRebound(void);
+	OrbitRebound(void);
+	~OrbitRebound(void);
 
 	/************************************************************************************
 	*	–ğŠ„	F’µ‚Ë•Ô‚èˆ—(120`150)												*

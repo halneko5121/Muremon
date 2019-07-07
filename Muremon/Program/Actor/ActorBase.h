@@ -165,7 +165,7 @@ public:
 	bool				isHitCheck() { return mIsHitCheck; }
 
 protected:
-	C_OrbitCalculation*	mOrbit;
+	OrbitCalculation*	mOrbit;
 
 	Texture*			mTexture;
 	Vertex*				mVertex;

@@ -1,12 +1,12 @@
 #include "OrbitCalculation.h"
 
-C_OrbitCalculation::C_OrbitCalculation(void)
+OrbitCalculation::OrbitCalculation(void)
 {
-	mParabora	= new C_OrbitParadora();
-	mRebound	= new C_OrbitRebound();
-	mWave		= new C_OrbitWave();
+	mParabora	= new OrbitParabora();
+	mRebound	= new OrbitRebound();
+	mWave		= new OrbitWave();
 }
 
-C_OrbitCalculation::~C_OrbitCalculation(void)
+OrbitCalculation::~OrbitCalculation(void)
 {
 }

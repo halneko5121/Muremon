@@ -1,14 +1,14 @@
 #include "OrbitParadora.h"
 
-C_OrbitParadora::C_OrbitParadora(void)
+OrbitParabora::OrbitParabora(void)
 {
 }
 
-C_OrbitParadora::~C_OrbitParadora(void)
+OrbitParabora::~OrbitParabora(void)
 {
 }
 
-POS_CC<float> C_OrbitParadora::orbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc,int chara_num)
+POS_CC<float> OrbitParabora::orbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc,int chara_num)
 {
 	static int time[MAX_VALLUE_PLAYER] = {0};
 

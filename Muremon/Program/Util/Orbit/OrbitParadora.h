@@ -10,11 +10,11 @@
 
 #include "Program/Define.h"
 
-class C_OrbitParadora
+class OrbitParabora
 {
 public:
-	C_OrbitParadora(void);
-	~C_OrbitParadora(void);
+	OrbitParabora(void);
+	~OrbitParabora(void);
 
 	/****************************************************************************************************
 	*	–ğŠ„	F•ú•¨üˆ—																			*

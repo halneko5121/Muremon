@@ -29,7 +29,7 @@ enum WAVE_MODE
 /*================================
 		Class
 =================================*/
-class C_OrbitWave
+class OrbitWave
 {
 private:
 	int amplitude;
@@ -90,6 +90,6 @@ public:
 	********************************************************************************************/
 	POS_CC<float> orbitSinWave(float limit_x, POS_CC<float> draw_cc ,int chara_num);
 
-	C_OrbitWave(void);
-	~C_OrbitWave(void);
+	OrbitWave(void);
+	~OrbitWave(void);
 };

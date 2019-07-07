@@ -13,6 +13,21 @@
 
 class SceneTutorial : public SceneBase
 {
+public:
+	SceneTutorial();
+	~SceneTutorial();
+
+	void		impleInit() override;
+	bool		update() override;
+	void		draw() override;
+	int			end() override;
+
+	void		updateInput();		// キー操作
+	void		updateDrawPos();	// 描画位置などを決める
+	void		fadeControl();		// フェードコントロール		
+	void		fadeIn();			// フェードイン
+	void		fadeOut();			// フェードアウト
+
 private:
 
 	int flag_draw_state;	//描画しているものを知らせる
@@ -25,19 +40,4 @@ private:
 	int alpha;	//アルファ値
 
 	int alpha_count;	//アルファ値のカウント
-
-public:
-	void		impleInit() override;
-	bool		update() override;
-	void		draw() override;
-	int			end() override;
-
-	void		updateInput();		//キー操作
-	void		updateDrawPos();	//描画位置などを決める
-	void		fadeControl();		//フェードコントロール		
-	void		fadeIn();			//フェードイン
-	void		fadeOut();			//フェードアウト
-
-	SceneTutorial();
-	~SceneTutorial();
 };

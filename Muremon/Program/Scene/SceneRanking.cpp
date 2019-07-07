@@ -81,7 +81,7 @@ void SceneRanking::InitScene(int score)
 	RankCheck();
 }
 
-bool SceneRanking::Update()
+bool SceneRanking::update()
 {
 	UtilSound::playLoop(S_BGM_TITLE);
 

@@ -70,7 +70,7 @@ public:
 	int GetCntKeyNoppo()		{ return cnt_key_noppo; };
 
 
-	void Init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo);
+	void init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo);
 
 	int Control();
 

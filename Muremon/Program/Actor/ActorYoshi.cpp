@@ -76,7 +76,7 @@ ActorYoshi::~ActorYoshi(void)
  * @brief èâä˙âª
  */
 void
-ActorYoshi::Init()											
+ActorYoshi::init()											
 {
 	mOrbit->pWave->InitWave(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
@@ -101,7 +101,7 @@ ActorYoshi::Init()
 
 		pos_effectfont[i].x	= pos_effectfont[i].y =	rand_acc[i] = rand_move_x[i] = mDegSpin[i] = draw_deg[i] = 0.f;
 		mCountEffect[i]				= 0;
-		init[i]							= true;
+		mInit[i]							= true;
 	}
 }
 
@@ -109,7 +109,7 @@ ActorYoshi::Init()
  * @brief çXêV
  */
 void
-ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
+ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
 {
 	mRandSpeed = 0.f;
 
@@ -121,7 +121,7 @@ ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		{
 			mCharaData[mCharaNum]	= cInitActorData;
 			mCountEffect[mCharaNum] = 0;
-			init[mCharaNum] = true;
+			mInit[mCharaNum] = true;
 		}
 		mCharaData[mCharaNum]		= SetAtk_Flag(mCharaData[mCharaNum]);
 		mCharaData[mCharaNum].speed  = SetSpeed();
@@ -297,9 +297,9 @@ void
 ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)						//éÄñSèàóù
 {
 
-	if(init[mCharaNum]){
+	if(mInit[mCharaNum]){
 		if(mCharaData[mCharaNum].animetion != 0) mCharaData[mCharaNum].animetion = 0;
-		init[mCharaNum] = false;
+		mInit[mCharaNum] = false;
 	}
 	if(mCharaData[mCharaNum].flag_atk1){
 		if(!mCharaData[mCharaNum].flag_death_next){

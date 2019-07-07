@@ -51,11 +51,11 @@ void SceneGameRefresh::ImpleInit()
 	mNoppo	= new ActorNoppo(mVertex, mTexture);
 	mYoshi	= new ActorYoshi(mVertex, mTexture);
 
-	mNiku->Init();
-	mNoppo->Init();
-	mYoshi->Init();
+	mNiku->init();
+	mNoppo->init();
+	mYoshi->init();
 	
-	//mBoss->Init();
+	//mBoss->init();
 
 	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
 
@@ -63,7 +63,7 @@ void SceneGameRefresh::ImpleInit()
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 }
 
-bool SceneGameRefresh::Update()
+bool SceneGameRefresh::update()
 {
 	if(mSameState == G_START_SCENE){
 		UtilSound::playOnce(S_GAME_START);
@@ -76,11 +76,11 @@ bool SceneGameRefresh::Update()
 	
 		UtilSound::playLoop(S_BGM_BATTLE);
 
-		mNiku->Update(boss_cc, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
+		mNiku->update(boss_cc, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
-		mYoshi->Update(boss_cc, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
+		mYoshi->update(boss_cc, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
 
-		mNoppo->Update(boss_cc, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
+		mNoppo->update(boss_cc, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
 	
 		mIsHitNiku  = mNiku->GetFlagHit();//‚ ‚½‚Á‚½‚Æ‚¢‚¤ƒtƒ‰ƒO‚ª‹A‚Á‚Ä‚«‚Ü‚·
 		

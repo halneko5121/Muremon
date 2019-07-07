@@ -43,12 +43,12 @@ public:
 	/**
 	 * @brief	‰Šú‰»
 	 */
-	void				Init(LPDIRECT3DDEVICE9 device);
+	void				init(LPDIRECT3DDEVICE9 device);
 
 	/**
 	 * @brief	XV
 	 */
-	void				Update();
+	void				update();
 
 	/**
 	 * @brief	•`‰æ

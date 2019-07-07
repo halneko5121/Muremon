@@ -79,9 +79,9 @@ void SceneGameNormal::ImpleInit()
 	mNoppo	= new ActorNoppo(mVertex, mTexture);
 	mYoshi	= new ActorYoshi(mVertex, mTexture);
 
-	mNiku->Init();
-	mNoppo->Init();
-	mYoshi->Init();
+	mNiku->init();
+	mNoppo->init();
+	mYoshi->init();
 
 	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
 
@@ -91,7 +91,7 @@ void SceneGameNormal::ImpleInit()
 	mMission = new Mission(mTexture, mVertex, mDevice);
 }
 
-bool SceneGameNormal::Update()
+bool SceneGameNormal::update()
 {
 	if(mGameState == G_START_SCENE){
 		UtilSound::playOnce(S_GAME_START);
@@ -131,7 +131,7 @@ bool SceneGameNormal::Update()
 		if(mMissionGage >= MISSION_GAGE_MAX){
 			if(!mIsInit){
 				UtilSound::playOnce(S_OSIRASE);
-				mMission->Init(mNikumanKeyCount,mYoshitaroKeyCount,mNoppoKeyCount);
+				mMission->init(mNikumanKeyCount,mYoshitaroKeyCount,mNoppoKeyCount);
 				mIsInit = true;
 			}
 			if(mMissionStateKeep < MISSION_OUGI){
@@ -170,11 +170,11 @@ bool SceneGameNormal::Update()
 
 		UtilSound::playLoop(S_BGM_BATTLE);
 
-		mNiku->Update(boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
+		mNiku->update(boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
-		mYoshi->Update(boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
+		mYoshi->update(boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
 
-		mNoppo->Update(boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
+		mNoppo->update(boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
 
 		mTime -= 1;
 

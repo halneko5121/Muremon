@@ -35,7 +35,7 @@ void SceneTutorial::ImpleInit()
 	mVertex->LoadRect("Data\\RectData\\Tutorial.txt");
 }
 
-bool SceneTutorial::Update()
+bool SceneTutorial::update()
 {
 	UtilSound::playOnce(S_BGM_TITLE);
 
@@ -117,11 +117,11 @@ void SceneTutorial::FadeOut()
 
 void SceneTutorial::KeyControl()
 {
-	if (UtilInput::IsKeyPushed(DIK_Z))
+	if (UtilInput::isKeyPushed(DIK_Z))
 	{
 		mIsSceneChange = false;
 	}
-	else if (UtilInput::IsKeyPushed(DIK_LEFT))
+	else if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_NORMAL){
@@ -132,7 +132,7 @@ void SceneTutorial::KeyControl()
 		}
 		slide_state = 1;
 	}
-	else if (UtilInput::IsKeyPushed(DIK_RIGHT))
+	else if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_REFRESH){

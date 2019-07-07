@@ -35,7 +35,7 @@ SceneBase::~SceneBase()
  * @brief	‰Šú‰»ˆ—
  */
 void
-SceneBase::Init()
+SceneBase::init()
 {
 	ImpleInit();
 }
@@ -54,7 +54,7 @@ SceneBase::ImpleInit()
 bool
 SceneBase::RunScene()
 {
-	bool is_scene_change = Update();
+	bool is_scene_change = update();
 	return is_scene_change;
 }
 

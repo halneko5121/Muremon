@@ -80,13 +80,13 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 
 	// Šeƒ‰ƒCƒuƒ‰ƒŠ‚Ì‰Šú‰»
 	// DirectInput‰Šú‰»
-	if(FAILED(GetInputKey()->Init(mWindow->GetHwnd())))
+	if(FAILED(GetInputKey()->init(mWindow->GetHwnd())))
 	{
 		MessageBox(NULL, TEXT("DirectInput‚Ì‰Šú‰»‚ÉŽ¸”s"), NULL, MB_OK);
 		return 0;
 	}
 
-	if(FAILED(GetInputMouse()->Init(mWindow->GetHwnd())))
+	if(FAILED(GetInputMouse()->init(mWindow->GetHwnd())))
 	{
 		MessageBox(NULL, TEXT("DirectInput‚Ì‰Šú‰»‚ÉŽ¸”s"), NULL, MB_OK);
 		return 0;
@@ -134,7 +134,7 @@ GameMain::MsgLoop(void)
 
 	// •`‰æÝ’è
 	mGraphics->SetRender();
-	GetFadeMgr()->Init(mGraphics->GetDevice());
+	GetFadeMgr()->init(mGraphics->GetDevice());
 	GetFadeMgr()->SetColor(0, 0, 0);
 
 	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
@@ -161,9 +161,9 @@ GameMain::MsgLoop(void)
 
 			if(nowTime - oldTime >= 1000/60)
 			{
-				GetInputKey()->Update();
+				GetInputKey()->update();
 				mGraphics->RenderStart(mBackground);
-				GetFadeMgr()->Update();
+				GetFadeMgr()->update();
 
 				mState.executeState();
 
@@ -198,7 +198,7 @@ GameMain::ReleaseGameMain(void)
     // ŠJ•ú
 	mScene->End();
 
-	GetInputKey()->ReleaseDirectInput();
+	GetInputKey()->releaseDirectInput();
 	APP_SAFE_DELETE(mScene);
 	DirectGraphics::destroy();
 	mGraphics = nullptr;
@@ -220,31 +220,31 @@ GameMain::ControlSequence(void)
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneLogo();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->Init();
+		mScene->init();
 		break;
     case cSceneName_Title:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTitle();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->Init();
+		mScene->init();
 		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTutorial();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->Init();
+		mScene->init();
 		break;
 	case cSceneName_GameRefresh:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneGameRefresh();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->Init();
+		mScene->init();
 		break;
 	case cSceneName_GameNormal:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneGameNormal();
 		mScene->SetScene(mGraphics->GetDevice());
-		mScene->Init();
+		mScene->init();
 		break;
 	case cSceneName_Ranking:
 		APP_SAFE_DELETE(mScene);

@@ -72,7 +72,7 @@ FadeMgr::destroy()
  * @brief	‰Šú‰»
  */
 void
-FadeMgr::Init(LPDIRECT3DDEVICE9 device)
+FadeMgr::init(LPDIRECT3DDEVICE9 device)
 {
 	mDevice = device;
 	mTexture->LoadTextureData("Library\\Data\\T_Fade.txt", mDevice); // ŠG‚Ì“Ç‚İ‚İ
@@ -83,7 +83,7 @@ FadeMgr::Init(LPDIRECT3DDEVICE9 device)
  * @brief	XV
  */
 void
-FadeMgr::Update()
+FadeMgr::update()
 {
 	switch (mState)
 	{

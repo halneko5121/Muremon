@@ -62,53 +62,53 @@ public:
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void				create();
+	static void					create();
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void				destroy();
+	static void					destroy();
 
 	/**
 	 * @brief	初期化関数
 	 * @param	window_handle    ウィンドウハンドル
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT					Init(HWND window_handle);
+	HRESULT						init(HWND window_handle);
 
 	/**
 	 * @brief	更新
 	 */
-	void					Update();
+	void						update();
 
 	/**
 	 * @brief	開放処理を行う
 	 */
-	void					ReleaseDirectInput();
+	void						releaseDirectInput();
 
 	/**
 	 * @brief	指定のキーの入力判定(押されているかどうか)
 	 * @param	key		キーの状態
 	 */
-	bool					IsKeyDown(USHORT key);
+	bool						isKeyDown(USHORT key);
 
 	/**
 	 * @brief	指定のキーが瞬間的に押されたか
 	 * @param	key		キーの状態
 	 */
-	bool					IsKeyPushed(USHORT key);
+	bool						isKeyPushed(USHORT key);
 
 	/**
 	 * @brief	指定のキーが離されたかどうか
 	 * @param	key		キーの状態
 	 */
-	bool					IsKeyReleased(USHORT key);
+	bool						isKeyReleased(USHORT key);
 
 	/**
 	 * @brief	いずれかのキーが押されたか
 	 */
-	bool					IsAnyKeyDown();
-	bool					IsAnyKeyPushed();
+	bool						isAnyKeyDown();
+	bool						isAnyKeyPushed();
 
 
 private:
@@ -118,16 +118,16 @@ private:
 	/**
 	 * @brief	デバイス全体の情報更新
 	 */
-	void					KeyBordRefresh();
+	void						KeyBordRefresh();
 
 private:
 	static DirectInputKey*		mInstance;						// インスタンス
-	LPDIRECTINPUT8			mDirectInput;					// DirectInputオブジェクト
-	LPDIRECTINPUTDEVICE8	mKeyBordDevice;					// DirectInputDeviceオブジェクト(キーボード)
+	LPDIRECTINPUT8				mDirectInput;					// DirectInputオブジェクト
+	LPDIRECTINPUTDEVICE8		mKeyBordDevice;					// DirectInputDeviceオブジェクト(キーボード)
 
-	HWND                    mWindowHandle;					// ウィンドウハンドルへのポインタ
-	BYTE					mKeyState[MAX_KEYDATA];			// キー情報格納配列
-	BYTE					mKeyStatePrev[MAX_KEYDATA];		// キー情報格納配列（1f前）
+	HWND						mWindowHandle;					// ウィンドウハンドルへのポインタ
+	BYTE						mKeyState[MAX_KEYDATA];			// キー情報格納配列
+	BYTE						mKeyStatePrev[MAX_KEYDATA];		// キー情報格納配列（1f前）
 };
 
 static DirectInputKey* GetInputKey() { return DirectInputKey::getInstance(); }
@@ -155,68 +155,68 @@ public:
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void				create(const SIZE& size, const POINT& pos, const SIZE& cursor_size);
+	static void					create(const SIZE& size, const POINT& pos, const SIZE& cursor_size);
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void				destroy();
+	static void					destroy();
 
 	/**
 	 * @brief	初期化
 	 * @param	window_handle    ウィンドウハンドル
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT					Init(HWND window_handle);
+	HRESULT						init(HWND window_handle);
 
 	/**
 	 * @brief	開放処理を行う
 	 */
-	void					ReleaseDirectInput(void);
+	void						releaseDirectMouse();
 
 	/**
 	 * @brief	デバイス全体の情報更新(絶対値の場合)仮
 	 */
-	void					MouseRefresh();
+	void						refresh();
 
 	/**
 	 * @brief	マウスの情報更新(カーソル位置)
 	 */
-	void					UpdateMouse();
+	void						update();
 
 	/**
 	 * @brief	マウスの動作をチェックする
 	 * @return	0~7	各動作を判定し対応する値が返る
 	 */
-	USHORT					CheckMouseAction();
+	USHORT						checkMouseAction();
 
 	/**
 	 * @brief	現在のマウス情報を取得する
 	 */
-	MouseData				GetMouseData();
+	MouseData					getMouseData() const;
 
 private:
 	/**
 	 * @brief	デバイスの設定(軸モードの設定)
 	 * @return	成功 TRUE		失敗 FALSE
 	 */
-	bool					SetProperty();
+	bool						SetProperty();
 
 private:
 	static DirectInputMouse*	mInstance;				// インスタンス
 
-	LPDIRECTINPUT8			mDirectInput;				// DirectInputオブジェクト
-	LPDIRECTINPUTDEVICE8	mMouseDevice;				// 入力デバイス
-	HWND					mWindowHandle;				// ウィンドウハンドルへのポインタ
-	DIMOUSESTATE2			mMouseState;				// マウス情報格納
-	DIMOUSESTATE2			mMouseStatePrev;			// マウス情報格納（1f前）
-	SIZE					mCursorSize;				// マウスカーソルサイズ
+	LPDIRECTINPUT8				mDirectInput;				// DirectInputオブジェクト
+	LPDIRECTINPUTDEVICE8		mMouseDevice;				// 入力デバイス
+	HWND						mWindowHandle;				// ウィンドウハンドルへのポインタ
+	DIMOUSESTATE2				mMouseState;				// マウス情報格納
+	DIMOUSESTATE2				mMouseStatePrev;			// マウス情報格納（1f前）
+	SIZE						mCursorSize;				// マウスカーソルサイズ
 	
 	// 座標取得用
-	LPPOINT					mPosCursorWindow;
-	LPPOINT					mPosCursorGame;			
-	RECT					mGameSize;
-	MouseData				mMouseData;
+	LPPOINT						mPosCursorWindow;
+	LPPOINT						mPosCursorGame;			
+	RECT						mGameSize;
+	MouseData					mMouseData;
 };
 
 static DirectInputMouse* GetInputMouse() { return DirectInputMouse::getInstance(); }

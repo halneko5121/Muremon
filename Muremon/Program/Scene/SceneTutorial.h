@@ -60,7 +60,7 @@ private:
 
 public:
 	void ImpleInit() override;
-	bool Update() override;
+	bool update() override;
 	void Draw() override;
 	int End() override;
 

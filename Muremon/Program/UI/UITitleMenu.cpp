@@ -130,32 +130,32 @@ UITitleMenu::update()
 	// ÇﬂÇ¡ÇøÇ·è„â∫âüÇ≥ÇÍÇƒÇ‡à·òaä¥Ç…Ç»Ç¢ÇÊÇ§Ç…
 	if (UtilSound::isPlaySound(S_SE_CURSOR_MOVE))
 	{
-		if (UtilInput::IsKeyDown(DIK_UP) ||
-			UtilInput::IsKeyDown(DIK_DOWN))
+		if (UtilInput::isKeyDown(DIK_UP) ||
+			UtilInput::isKeyDown(DIK_DOWN))
 		{
 			UtilSound::stop(S_SE_CURSOR_MOVE);
 		}
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_UP))
+	if (UtilInput::isKeyPushed(DIK_UP))
 	{
 		mCurrentMenuItem--;
 		mTimeCount = 0;
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_DOWN))
+	if (UtilInput::isKeyPushed(DIK_DOWN))
 	{
 		mCurrentMenuItem++;
 		mTimeCount = 0;
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_Z))
+	if (UtilInput::isKeyPushed(DIK_Z))
 	{
 		UtilSound::playOnce(S_SE_OK);
 		mTimeCount = 0;
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_X))
+	if (UtilInput::isKeyPushed(DIK_X))
 	{
 		UtilSound::playOnce(S_CANCEL);
 		mTimeCount = 0;
@@ -212,7 +212,7 @@ UITitleMenu::isDecideMenuSelectGame() const
 {
 	if (!mState.isEqual(cState_MenuSelect)) return false;
 	if (mCurrentMenuItem != G_START)		return false;
-	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+	if (!UtilInput::isKeyPushed(DIK_Z))		return false;
 
 	return true;
 
@@ -226,7 +226,7 @@ UITitleMenu::isDecideMenuSelectRanking() const
 {
 	if (!mState.isEqual(cState_MenuSelect)) return false;
 	if (mCurrentMenuItem != G_RANKING)		return false;
-	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+	if (!UtilInput::isKeyPushed(DIK_Z))		return false;
 
 	return true;
 }
@@ -239,7 +239,7 @@ UITitleMenu::isDecideMenuSelectExit() const
 {
 	if (!mState.isEqual(cState_MenuSelect)) return false;
 	if (mCurrentMenuItem != G_END)			return false;
-	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+	if (!UtilInput::isKeyPushed(DIK_Z))		return false;
 
 	return true;
 }
@@ -252,7 +252,7 @@ UITitleMenu::isDecideGameSelectRefresh() const
 {
 	if (!mState.isEqual(cState_GameSelect)) return false;
 	if (mCurrentMenuItem != G_CLEARLY)		return false;
-	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+	if (!UtilInput::isKeyPushed(DIK_Z))		return false;
 
 	return true;
 }
@@ -265,7 +265,7 @@ UITitleMenu::isDecideGameSelectNormal() const
 {
 	if (!mState.isEqual(cState_GameSelect)) return false;
 	if (mCurrentMenuItem != G_NORMAL)		return false;
-	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+	if (!UtilInput::isKeyPushed(DIK_Z))		return false;
 
 	return true;
 }
@@ -278,7 +278,7 @@ UITitleMenu::isDecideGameSelectTutorial() const
 {
 	if (!mState.isEqual(cState_GameSelect)) return false;
 	if (mCurrentMenuItem != G_TUTORIAL)		return false;
-	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+	if (!UtilInput::isKeyPushed(DIK_Z))		return false;
 
 	return true;
 }
@@ -309,12 +309,12 @@ UITitleMenu::stateEnterTop()
 void
 UITitleMenu::stateExeTop()
 {
-	if (UtilInput::IsKeyPushed(DIK_DOWN))
+	if (UtilInput::isKeyPushed(DIK_DOWN))
 	{
 		mCurrentMenuItem--;
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_Z))
+	if (UtilInput::isKeyPushed(DIK_Z))
 	{
 		mState.changeState(cState_MenuSelect);
 		return;
@@ -348,13 +348,13 @@ UITitleMenu::stateEnterMenuSelect()
 void
 UITitleMenu::stateExeMenuSelect()
 {
-	if (UtilInput::IsKeyPushed(DIK_DOWN) ||
-		UtilInput::IsKeyPushed(DIK_UP))
+	if (UtilInput::isKeyPushed(DIK_DOWN) ||
+		UtilInput::isKeyPushed(DIK_UP))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_UP))
+	if (UtilInput::isKeyPushed(DIK_UP))
 	{
 		if (mCurrentMenuItem < G_START)
 		{
@@ -362,7 +362,7 @@ UITitleMenu::stateExeMenuSelect()
 		}
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_DOWN))
+	if (UtilInput::isKeyPushed(DIK_DOWN))
 	{
 		if (mCurrentMenuItem > G_END)
 		{
@@ -370,7 +370,7 @@ UITitleMenu::stateExeMenuSelect()
 		}
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_Z))
+	if (UtilInput::isKeyPushed(DIK_Z))
 	{
 		if (mCurrentMenuItem == G_START)
 		{
@@ -380,7 +380,7 @@ UITitleMenu::stateExeMenuSelect()
 		}
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_X))
+	if (UtilInput::isKeyPushed(DIK_X))
 	{
 		mCurrentMenuItem = G_START;
 		mState.changeState(cState_Top);
@@ -398,13 +398,13 @@ UITitleMenu::stateEnterGameSelect()
 void
 UITitleMenu::stateExeGameSelect()
 {
-	if (UtilInput::IsKeyPushed(DIK_DOWN) ||
-		UtilInput::IsKeyPushed(DIK_UP))
+	if (UtilInput::isKeyPushed(DIK_DOWN) ||
+		UtilInput::isKeyPushed(DIK_UP))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_UP))
+	if (UtilInput::isKeyPushed(DIK_UP))
 	{
 		if (mCurrentMenuItem < G_CLEARLY)
 		{
@@ -412,7 +412,7 @@ UITitleMenu::stateExeGameSelect()
 		}
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_DOWN))
+	if (UtilInput::isKeyPushed(DIK_DOWN))
 	{
 		if (mCurrentMenuItem > G_TUTORIAL)
 		{
@@ -420,7 +420,7 @@ UITitleMenu::stateExeGameSelect()
 		}
 	}
 
-	if (UtilInput::IsKeyPushed(DIK_X))
+	if (UtilInput::isKeyPushed(DIK_X))
 	{
 		mCurrentMenuItem = G_CLEARLY;
 		mState.changeState(cState_MenuSelect);

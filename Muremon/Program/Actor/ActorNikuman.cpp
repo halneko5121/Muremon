@@ -64,7 +64,7 @@ ActorNikuman::~ActorNikuman(void)
  * @brief 初期化
  */
 void
-ActorNikuman::Init()								
+ActorNikuman::init()								
 {
 	//praivate変数
 	s_atk_start_y = 0.f;
@@ -95,7 +95,7 @@ ActorNikuman::Init()
  * @brief 更新
  */
 void
-ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
+ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
 {
 	mRandSpeed = 0.f;
 

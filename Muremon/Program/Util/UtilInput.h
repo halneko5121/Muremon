@@ -93,8 +93,8 @@ namespace UtilInput
 
 namespace UtilInput
 {
-	bool		IsKeyPushed(unsigned short key);
-	bool		IsAnyKeyPushed();
+	bool		isKeyPushed(unsigned short key);
+	bool		isAnyKeyPushed();
 	bool		IsKeyPushedDecide();
 	bool		IsKeyPushedReturn();
 	bool		IsKeyPushedLineOne();
@@ -103,7 +103,7 @@ namespace UtilInput
 	bool		IsKeyPushedOdd();
 	bool		IsKeyPushedEven();
 
-	bool		IsKeyDown(unsigned short key);
-	bool		IsAnyKeyDown();
-	bool		IsKeyReleased(unsigned short key);
+	bool		isKeyDown(unsigned short key);
+	bool		isAnyKeyDown();
+	bool		isKeyReleased(unsigned short key);
 }

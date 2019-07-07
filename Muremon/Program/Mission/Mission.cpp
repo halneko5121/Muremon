@@ -103,7 +103,7 @@ Mission::~Mission(void)
 {
 }
 
-void Mission::Init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
+void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 {
 	mission_no	= 0;
 	key_state	= 0;
@@ -275,7 +275,7 @@ void Mission::Mission1()	//『10秒以内に100回連打せよ！！』
 		return;
 	}
 
-	if (UtilInput::IsAnyKeyPushed())
+	if (UtilInput::isAnyKeyPushed())
 	{
 		key_cnt++;
 	}
@@ -291,7 +291,7 @@ void Mission::Mission2()	//『10秒間でちょうど50回連打せよ！！』
 		return;
 	}
 	
-	if (UtilInput::IsAnyKeyPushed())
+	if (UtilInput::isAnyKeyPushed())
 	{
 		key_cnt++;
 	}
@@ -307,7 +307,7 @@ void Mission::Mission3()	//『10秒間でちょうど100回連打せよ！！』
 		return;
 	}
 	
-	if (UtilInput::IsAnyKeyPushed())
+	if (UtilInput::isAnyKeyPushed())
 	{
 		key_cnt++;
 	}
@@ -323,7 +323,7 @@ void Mission::Mission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 		return;
 	}
 	
-	if (UtilInput::IsKeyPushed(UtilInput::cKey_N))
+	if (UtilInput::isKeyPushed(UtilInput::cKey_N))
 	{
 		if (success_type_count == 1 || success_type_count == 7)
 		{
@@ -336,49 +336,49 @@ void Mission::Mission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 		switch (success_type_count)
 		{
 		case 1:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 2:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 3:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 4:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 		case 5:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_M)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_M)) success_type_count++;
 			break;
 		case 6:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 7:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 8:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 9:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 10:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 11:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 		case 12:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_G)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_G)) success_type_count++;
 			break;
 		case 13:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
 			break;
 		case 14:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 15:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		default:
 			break;
@@ -401,72 +401,72 @@ void Mission::Mission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 		switch (success_type_count)
 		{
 		case 1:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 2:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 3:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 4:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 		case 5:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_M)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_M)) success_type_count++;
 			break;
 		case 6:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 7:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 8:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 9:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 10:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
 			break;
 
 		case 11:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
 			break;
 		case 12:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 13:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 14:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
 			break;
 		case 15:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 16:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 17:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 18:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 19:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_J)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_J)) success_type_count++;
 			break;
 		case 20:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 
 		case 21:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 22:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 		default:
 			break;
@@ -489,53 +489,53 @@ void Mission::Mission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 		switch (success_type_count)
 		{
 		case 1:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_Y)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_Y)) success_type_count++;
 			break;
 		case 2:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 3:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
 			break;
 		case 4:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 5:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 6:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 7:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
 			break;
 		case 8:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 9:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) success_type_count++;
 			break;
 		case 10:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 
 		case 11:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 		case 12:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 13:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 14:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 15:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_C)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_C)) success_type_count++;
 			break;
 		case 16:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		default:
 			break;
@@ -558,59 +558,59 @@ void Mission::Mission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 		switch (success_type_count)
 		{
 		case 1:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_Y)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_Y)) success_type_count++;
 			break;
 		case 2:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 3:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
 			break;
 		case 4:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 5:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 6:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		case 7:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
 			break;
 		case 8:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 9:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) success_type_count++;
 			break;
 		case 10:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 
 		case 11:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
 			break;
 		case 12:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
 			break;
 		case 13:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 14:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
 			break;
 		case 15:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) success_type_count++;
 			break;
 		case 16:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 17:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 18:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		default:
 			break;
@@ -633,47 +633,47 @@ void Mission::Mission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 		switch (success_type_count)
 		{
 		case 1:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 2:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 3:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 		case 4:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 		case 5:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 6:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 7:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 8:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 9:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
 			break;
 		case 10:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 
 		case 11:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 		case 12:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
 			break;
 		case 13:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 14:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		default:
 			break;
@@ -696,62 +696,62 @@ void Mission::Mission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 		switch (success_type_count)
 		{
 		case 1:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
 			break;
 		case 2:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 3:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 		case 4:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 		case 5:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 6:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_B)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_B)) success_type_count++;
 			break;
 		case 7:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 8:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 9:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 		case 10:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
 			break;
 
 		case 11:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 12:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
 			break;
 		case 13:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
 			break;
 		case 14:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
 			break;
 		case 15:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
 			break;
 		case 16:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
 			break;
 		case 17:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
 			break;
 		case 18:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
 			break;
 		case 19:
-			if (UtilInput::IsKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
 			break;
 		default:
 			break;

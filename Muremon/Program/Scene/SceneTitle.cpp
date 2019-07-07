@@ -71,7 +71,7 @@ void SceneTitle::ImpleInit()
 	mUITitleMenu->init(mTexture, mVertex);
 }
 
-bool SceneTitle::Update()
+bool SceneTitle::update()
 {
 	PosiDrawControl();
 	ChangeSceneControl();

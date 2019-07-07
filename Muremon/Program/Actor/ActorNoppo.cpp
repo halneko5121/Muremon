@@ -70,7 +70,7 @@ ActorNoppo::~ActorNoppo(void)
  * @brief 初期化
  */
 void
-ActorNoppo::Init()											
+ActorNoppo::init()											
 {
 	mOrbit->pWave->InitWave(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
@@ -97,7 +97,7 @@ ActorNoppo::Init()
 
 		pos_effectfont[i].x				= pos_effectfont[i].y = mDegSpin[i] = 0.f;
 		mCountEffect[i]				= 0;
-		init[i]							= true;
+		mInit[i]							= true;
 	}
 }
 
@@ -105,7 +105,7 @@ ActorNoppo::Init()
  * @brief 更新
  */
 void
-ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
+ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
 {
 	mRandSpeed = 0.f;
 
@@ -116,7 +116,7 @@ ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		if(mFlagTurn2){
 			mCharaData[mCharaNum]	= init_charadata_noppo;
 			mCountEffect[mCharaNum] = 0;
-			init[mCharaNum] = true;
+			mInit[mCharaNum] = true;
 		}
 		mCharaData[mCharaNum]		 = SetAtk_Flag(mCharaData[mCharaNum]);
 		mCharaData[mCharaNum].speed	 = SetSpeed();
@@ -309,9 +309,9 @@ ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)		
 {
 	static int wait_count[MAX_VALLUE_PLAYER] = {0};
 
-	if(init[mCharaNum]){
+	if(mInit[mCharaNum]){
 		if(mCharaData[mCharaNum].animetion != 0) mCharaData[mCharaNum].animetion = 0;
-		init[mCharaNum] = false;
+		mInit[mCharaNum] = false;
 	}
 
 	if(mCharaData[mCharaNum].flag_atk1){

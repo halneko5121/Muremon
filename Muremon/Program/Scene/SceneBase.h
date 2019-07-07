@@ -51,14 +51,14 @@ public:
 	/**
 	 * @brief	初期化処理
 	 */
-	void Init();
+	void init();
 	virtual void ImpleInit();
 
 	/**
 	 * @brief	更新処理
 	 * @return	シーン終了か
 	 */
-	virtual bool Update() = 0;
+	virtual bool update() = 0;
 
 	/**
 	 * @brief	描画処理

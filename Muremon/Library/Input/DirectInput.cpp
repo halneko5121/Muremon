@@ -74,7 +74,7 @@ DirectInputKey::destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectInputKey::Init(HWND window_handle)
+DirectInputKey::init(HWND window_handle)
 {
 	// DirectInputオブジェクトの作成
 	if (FAILED(DirectInput8Create(
@@ -125,7 +125,7 @@ DirectInputKey::Init(HWND window_handle)
 }
 
 void
-DirectInputKey::Update()
+DirectInputKey::update()
 {
 	KeyBordRefresh();
 }
@@ -134,7 +134,7 @@ DirectInputKey::Update()
  * @brief	開放処理
  */
 void
-DirectInputKey::ReleaseDirectInput()
+DirectInputKey::releaseDirectInput()
 {
 	// デバイスへのアクセス権を解放する
 	if(mKeyBordDevice)
@@ -153,7 +153,7 @@ DirectInputKey::ReleaseDirectInput()
  * @return	true	押されている   false:　押されていない
  */
 bool
-DirectInputKey::IsKeyDown(USHORT key)
+DirectInputKey::isKeyDown(USHORT key)
 {
 	if(!mKeyBordDevice) return FALSE;
 
@@ -172,10 +172,10 @@ DirectInputKey::IsKeyDown(USHORT key)
  * @return	true	押された   false:　押されていない
  */
 bool
-DirectInputKey::IsKeyPushed(USHORT key)
+DirectInputKey::isKeyPushed(USHORT key)
 {
 	// 現在押されていて かつ 直前に押されていない時TRUE
-	if( IsKeyDown(key) && !(mKeyStatePrev[key] & 0x80) ) return TRUE;
+	if( isKeyDown(key) && !(mKeyStatePrev[key] & 0x80) ) return TRUE;
 
 	return FALSE;
 }
@@ -186,10 +186,10 @@ DirectInputKey::IsKeyPushed(USHORT key)
  * @return	true	離された   false:　離されていない
  */
 bool
-DirectInputKey::IsKeyReleased(USHORT key)
+DirectInputKey::isKeyReleased(USHORT key)
 {
 	// 現在押されておらず かつ 直前に押されている時TRUE
-	if( !(IsKeyDown(key)) && (mKeyStatePrev[key] & 0x80) ) return TRUE;
+	if( !(isKeyDown(key)) && (mKeyStatePrev[key] & 0x80) ) return TRUE;
 
 	return FALSE;
 }
@@ -199,10 +199,10 @@ DirectInputKey::IsKeyReleased(USHORT key)
  * @return	true　押された   false:　押されていない
  */
 bool
-DirectInputKey::IsAnyKeyDown()
+DirectInputKey::isAnyKeyDown()
 {
 	for(int i = 0;i < MAX_KEYDATA;i++){
-		if(IsKeyDown(i)) return TRUE;
+		if(isKeyDown(i)) return TRUE;
 	}
 
 	return FALSE;
@@ -213,10 +213,10 @@ DirectInputKey::IsAnyKeyDown()
  * @return	true　押された   false:　押されていない
  */
 bool
-DirectInputKey::IsAnyKeyPushed()
+DirectInputKey::isAnyKeyPushed()
 {
 	for (int i = 0;i < MAX_KEYDATA;i++) {
-		if (IsKeyPushed(i)) return TRUE;
+		if (isKeyPushed(i)) return TRUE;
 	}
 
 	return FALSE;
@@ -331,7 +331,7 @@ DirectInputMouse::destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectInputMouse::Init(HWND window_handle)
+DirectInputMouse::init(HWND window_handle)
 {
 	// DirectInputオブジェクトの作成
 	if (FAILED(DirectInput8Create(
@@ -389,7 +389,7 @@ DirectInputMouse::Init(HWND window_handle)
  * @brief	開放処理を行う
  */
 void
-DirectInputMouse::ReleaseDirectInput()
+DirectInputMouse::releaseDirectMouse()
 {
 	// デバイスへのアクセス権を解放する
 	if(mMouseDevice)
@@ -408,7 +408,7 @@ DirectInputMouse::ReleaseDirectInput()
  * @brief	デバイス全体の情報更新(絶対値の場合)仮
  */
 void
-DirectInputMouse::MouseRefresh()
+DirectInputMouse::refresh()
 {
 	if(mMouseDevice == NULL){ return; }					// マウスがない場合は何もせず終わる
 			
@@ -421,14 +421,14 @@ DirectInputMouse::MouseRefresh()
 	// データを取得
 	mMouseDevice->GetDeviceState(sizeof(DIMOUSESTATE2), &mMouseState);
 
-	UpdateMouse();										// 情報更新(カーソル位置)
+	update();										// 情報更新(カーソル位置)
 }
 
 /**
  * @brief	マウスの情報更新(カーソル位置)
  */
 void
-DirectInputMouse::UpdateMouse()
+DirectInputMouse::update()
 {
 	GetCursorPos(mPosCursorWindow);					// 取得(スクリーン座標)
 	mPosCursorGame = mPosCursorWindow;				// ゲーム用に渡す
@@ -468,7 +468,7 @@ DirectInputMouse::UpdateMouse()
  * @return	0~7	各動作を判定し対応する値が返る
  */
 USHORT
-DirectInputMouse::CheckMouseAction()
+DirectInputMouse::checkMouseAction()
 {
 	HRESULT h_result;
 
@@ -521,9 +521,8 @@ DirectInputMouse::CheckMouseAction()
  * @brief	現在のマウス情報を取得する
  */
 MouseData
-DirectInputMouse::GetMouseData()
+DirectInputMouse::getMouseData() const
 {
-	MouseRefresh();
 	return mMouseData; 
 }
 

@@ -198,12 +198,12 @@ GameMain::ReleaseGameMain(void)
     // ŠJ•ú
 	mScene->End();
 
-	GetInputKey()->releaseDirectInput();
 	APP_SAFE_DELETE(mScene);
 	DirectGraphics::destroy();
 	mGraphics = nullptr;
 	FadeMgr::destroy();
 	DirectFont::destroy();
+	GetInputKey()->release();
 	DirectInputKey::destroy();
 	APP_SAFE_DELETE(mWindow);
 }

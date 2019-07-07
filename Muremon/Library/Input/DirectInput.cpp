@@ -134,7 +134,7 @@ DirectInputKey::update()
  * @brief	開放処理
  */
 void
-DirectInputKey::releaseDirectInput()
+DirectInputKey::release()
 {
 	// デバイスへのアクセス権を解放する
 	if(mKeyBordDevice)
@@ -373,7 +373,7 @@ DirectInputMouse::init(HWND window_handle)
 	}
 
 	// 軸モードを設定
-	if (!SetProperty()) {
+	if (!setProperty()) {
 		E_FAIL;
 	}
 
@@ -389,7 +389,7 @@ DirectInputMouse::init(HWND window_handle)
  * @brief	開放処理を行う
  */
 void
-DirectInputMouse::releaseDirectMouse()
+DirectInputMouse::release()
 {
 	// デバイスへのアクセス権を解放する
 	if(mMouseDevice)
@@ -531,7 +531,7 @@ DirectInputMouse::getMouseData() const
  * @return	成功 TRUE		失敗 FALSE
  */
 bool
-DirectInputMouse::SetProperty()
+DirectInputMouse::setProperty()
 {
 	DIPROPDWORD diprop;
 

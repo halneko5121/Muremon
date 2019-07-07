@@ -29,29 +29,29 @@ public:
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static DirectSound* getInstance();
+	static DirectSound*		getInstance();
 
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void create();
+	static void				create();
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void destroy();
+	static void				destroy();
 
 	/**
 	 * @brief	初期化
 	 * @param	window_handle    ウィンドウハンドル
 	 * @return	true:成功   false:失敗
 	 */
-	bool InitDSound(HWND window_handle);
+	bool					InitDSound(HWND window_handle);
 
 	/**
 	 * @brief	開放処理
 	 */
-	void UnInitDSound();
+	void					UnInitDSound();
 
 	/**
 	 * @brief	音楽データ読み込み

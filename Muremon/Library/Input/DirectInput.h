@@ -84,7 +84,7 @@ public:
 	/**
 	 * @brief	開放処理を行う
 	 */
-	void						releaseDirectInput();
+	void						release();
 
 	/**
 	 * @brief	指定のキーの入力判定(押されているかどうか)
@@ -172,7 +172,7 @@ public:
 	/**
 	 * @brief	開放処理を行う
 	 */
-	void						releaseDirectMouse();
+	void						release();
 
 	/**
 	 * @brief	マウスの情報更新(カーソル位置)

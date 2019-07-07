@@ -68,7 +68,7 @@ void SceneTitle::impleInit()
 
 	UtilSound::playLoop(S_BGM_TITLE);
 
-	mUITitleMenu->init(mTexture, mVertex);
+	mUITitleMenu->init(mDevice);
 }
 
 bool SceneTitle::update()

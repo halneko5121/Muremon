@@ -18,7 +18,7 @@ class UITitleMenu
 public:
 	UITitleMenu();
 	~UITitleMenu();
-	void	init(Texture* texture, Vertex* vertex);
+	void	init(LPDIRECT3DDEVICE9 device);
 	void	update();
 	void	draw();
 
@@ -50,6 +50,7 @@ private:
 	StateMachine<UITitleMenu>	mState;					// ステート
 	Texture*					mTexture;				// テクスチャ
 	Vertex*						mVertex;				// バーテックス
+	LPDIRECT3DDEVICE9			mDevice;				// デバイス
 	D3DXVECTOR2					mCursorPos;				// カーソル位置
 	int							mCurrentMenuItem;		// カーソルが選択しているものを判別。
 	int							mAlphaZPush;			// Zpush 用のアルファ

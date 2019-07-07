@@ -39,6 +39,12 @@ namespace
 	const float cDispCursor2Y = 380.f;
 	const float cDispCursorYRemove = 80.f;
 
+	enum TEXTURE_DATA_TITLE	//ŠG
+	{
+		T_TITLE_BG,		//ƒ^ƒCƒgƒ‹”wŒi
+		T_FONT,			//ƒtƒHƒ“ƒg
+	};
+
 	enum RECT_DATA_TITLE	//‹éŒ`
 	{
 		R_TITLE_BG,		//ƒ^ƒCƒgƒ‹”wŒi
@@ -91,6 +97,9 @@ UITitleMenu::UITitleMenu()
 	, mCursorAnime(0)
 	, mIsZPush(false)
 {
+	mTexture = new Texture();
+	mVertex = new Vertex();
+
 	mState.initialize(cState_Count, cState_Idle);
 	mState.registState(this, &UITitleMenu::stateEnterIdle,		 &UITitleMenu::stateExeIdle,		nullptr, cState_Idle);
 	mState.registState(this, &UITitleMenu::stateEnterTop,		 &UITitleMenu::stateExeTop,			nullptr, cState_Top);
@@ -110,10 +119,11 @@ UITitleMenu::~UITitleMenu()
  * @brief	‰Šú‰»
  */
 void
-UITitleMenu::init(Texture* texture, Vertex* vertex)
+UITitleMenu::init(LPDIRECT3DDEVICE9 device)
 {
-	mVertex = vertex;
-	mTexture = texture;
+	mDevice = device;
+	mTexture->load("Data\\TextureData\\title.txt", mDevice); // ŠG‚Ì“Ç‚Ýž‚Ý
+	mVertex->load("Data\\RectData\\title.txt");
 
 	mState.changeState(cState_Top);
 }
@@ -178,6 +188,8 @@ UITitleMenu::update()
 void
 UITitleMenu::draw()
 {
+	mVertex->setTextureData(mTexture->getTextureData(T_FONT), mDevice);
+
 	if (mState.isEqual(cState_Top))
 	{
 		mVertex->setColor(mAlphaZPush, 255, 255, 255);

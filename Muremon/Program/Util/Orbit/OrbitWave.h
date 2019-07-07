@@ -17,12 +17,9 @@ enum WAVE_MODE
 
 class OrbitWave
 {
-private:
-	int amplitude;
-	int cycle;
-	float speed_x;
-	int mode;
 public:
+	OrbitWave(void);
+	~OrbitWave(void);
 
 	/********************************************************************************************
 	*	役割	：初期化																		*
@@ -41,28 +38,28 @@ public:
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	void setAmplitude(int set_amplitude) { amplitude = set_amplitude; }
+	void setAmplitude(int set_amplitude) { mAmplitude = set_amplitude; }
 
 	/********************************************************************************************
 	*	役割	：周期の変更(多きければ大きい程周期が短く)										*
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	void setCycle(int set_cycle)		 { cycle	 = set_cycle; }
+	void setCycle(int set_cycle)		 { mCycle	 = set_cycle; }
 	
 	/********************************************************************************************
 	*	役割	：進む速さ																		*
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	void setSpeed(float set_speed_x)		 { speed_x	 = set_speed_x; }
+	void setSpeed(float set_speed_x)		 { mSpeedX	 = set_speed_x; }
 	
 	/********************************************************************************************
 	*	役割	：モード変更																	*
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	void setMode(int set_mode)			 { mode	 = set_mode; }
+	void setMode(int set_mode)			 { mMode	 = set_mode; }
 
 	/********************************************************************************************
 	*	役割	：正弦波処理																	*
@@ -76,6 +73,9 @@ public:
 	********************************************************************************************/
 	POS_CC<float> orbitSinWave(float limit_x, POS_CC<float> draw_cc ,int chara_num);
 
-	OrbitWave(void);
-	~OrbitWave(void);
+private:
+	int		mAmplitude;
+	int		mCycle;
+	float	mSpeedX;
+	int		mMode;
 };

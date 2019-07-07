@@ -33,7 +33,7 @@ DirectSound::~DirectSound()
  * @brief インスンタンスの取得
  */
 DirectSound*
-DirectSound::GetInstance()
+DirectSound::getInstance()
 {
 	return mInstance;
 }
@@ -42,7 +42,7 @@ DirectSound::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-DirectSound::Create()
+DirectSound::create()
 {
 	mInstance = new DirectSound();
 }
@@ -51,7 +51,7 @@ DirectSound::Create()
  * @brief	インスタンスの破棄
  */
 void
-DirectSound::Destroy()
+DirectSound::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }

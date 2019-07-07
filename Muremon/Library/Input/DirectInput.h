@@ -57,17 +57,17 @@ public:
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static DirectInputKey*		GetInstance();
+	static DirectInputKey*		getInstance();
 
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void				Create();
+	static void				create();
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void				Destroy();
+	static void				destroy();
 
 	/**
 	 * @brief	初期化関数
@@ -130,7 +130,7 @@ private:
 	BYTE					mKeyStatePrev[MAX_KEYDATA];		// キー情報格納配列（1f前）
 };
 
-static DirectInputKey* GetInputKey() { return DirectInputKey::GetInstance(); }
+static DirectInputKey* GetInputKey() { return DirectInputKey::getInstance(); }
 
 
 // マウスからの入力を扱うクラス(仮作成)
@@ -150,17 +150,17 @@ public:
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static DirectInputMouse*	GetInstance();
+	static DirectInputMouse*	getInstance();
 
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void				Create(const SIZE& size, const POINT& pos, const SIZE& cursor_size);
+	static void				create(const SIZE& size, const POINT& pos, const SIZE& cursor_size);
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void				Destroy();
+	static void				destroy();
 
 	/**
 	 * @brief	初期化
@@ -219,4 +219,4 @@ private:
 	MouseData				mMouseData;
 };
 
-static DirectInputMouse* GetInputMouse() { return DirectInputMouse::GetInstance(); }
+static DirectInputMouse* GetInputMouse() { return DirectInputMouse::getInstance(); }

@@ -41,15 +41,15 @@ void
 GameMain::InitGameMain(void)
 {
 	mWindow			= new C_Window;
-	mGraphics		= DirectGraphics::Create();
-	DirectInputKey::Create();
+	mGraphics		= DirectGraphics::create();
+	DirectInputKey::create();
 	SIZE window_size = { cWindowWidth, cWindowHeight };
 	POINT window_pos = { cWindowPosX, cWindowPosY };
 	SIZE cursor_size = { cCursorWidth, cCursorHeight };
-	DirectInputMouse::Create(window_size, window_pos, cursor_size);
-	DirectFont::Create();
-	DirectSound::Create();
-	FadeMgr::Create();
+	DirectInputMouse::create(window_size, window_pos, cursor_size);
+	DirectFont::create();
+	DirectSound::create();
+	FadeMgr::create();
 
 	// Å‰‚ÌƒV[ƒ“‚ð
 	mScene = new SceneLogo();
@@ -100,7 +100,7 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	}
 
 	// DirectFont‰Šú‰»
-	if(FAILED(GetDirectFont()->InitDFont(mGraphics->GetDevice())))
+	if(FAILED(GetDirectFont()->initDirectFont(mGraphics->GetDevice())))
 	{
 		MessageBox(NULL, TEXT("DirectFont‚Ì‰Šú‰»‚ÉŽ¸”s"), NULL, MB_OK);
 		return 0;
@@ -177,7 +177,7 @@ GameMain::MsgLoop(void)
 			static DWORD oldTime2 = timeGetTime();
 			DWORD nowTime2 = timeGetTime();
 			if(nowTime2 - oldTime2 >= 1000){
-				GetDirectFont()->DrawFont("a",750,550);
+				GetDirectFont()->draw("a",750,550);
 				cnt = 0;
 				oldTime2 = nowTime2;
 			}
@@ -200,11 +200,11 @@ GameMain::ReleaseGameMain(void)
 
 	GetInputKey()->ReleaseDirectInput();
 	APP_SAFE_DELETE(mScene);
-	DirectGraphics::Destroy();
+	DirectGraphics::destroy();
 	mGraphics = nullptr;
-	FadeMgr::Destroy();
-	DirectFont::Destroy();
-	DirectInputKey::Destroy();
+	FadeMgr::destroy();
+	DirectFont::destroy();
+	DirectInputKey::destroy();
 	APP_SAFE_DELETE(mWindow);
 }
 

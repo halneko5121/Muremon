@@ -30,12 +30,12 @@ public:
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static DirectGraphics*	Create();
+	static DirectGraphics*	create();
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void			Destroy();
+	static void			destroy();
 
 	/**
 	 * @brief	初期化

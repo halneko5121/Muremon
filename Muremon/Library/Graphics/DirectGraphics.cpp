@@ -30,7 +30,7 @@ DirectGraphics::~DirectGraphics()
  * @brief	インスタンスの生成
  */
 DirectGraphics*
-DirectGraphics::Create()
+DirectGraphics::create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
 	mInstance = new DirectGraphics();
@@ -41,7 +41,7 @@ DirectGraphics::Create()
  * @brief	インスタンスの破棄
  */
 void
-DirectGraphics::Destroy()
+DirectGraphics::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }

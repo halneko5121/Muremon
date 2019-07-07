@@ -28,17 +28,17 @@ public:
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static FadeMgr*		GetInstance();
+	static FadeMgr*		getInstance();
 
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void			Create();
+	static void			create();
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void			Destroy();
+	static void			destroy();
 
 	/**
 	 * @brief	初期化
@@ -97,4 +97,4 @@ private:
 	FadeState			mState;			// ステート
 };
 
-static FadeMgr* GetFadeMgr() { return FadeMgr::GetInstance(); }
+static FadeMgr* GetFadeMgr() { return FadeMgr::getInstance(); }

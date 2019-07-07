@@ -44,7 +44,7 @@ FadeMgr::~FadeMgr()
  * @brief	インスタンスの取得
  */
 FadeMgr*
-FadeMgr::GetInstance()
+FadeMgr::getInstance()
 {
 	return mInstance;
 }
@@ -53,7 +53,7 @@ FadeMgr::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-FadeMgr::Create()
+FadeMgr::create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
 	mInstance = new FadeMgr();
@@ -63,7 +63,7 @@ FadeMgr::Create()
  * @brief	インスタンスの破棄
  */
 void
-FadeMgr::Destroy()
+FadeMgr::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }

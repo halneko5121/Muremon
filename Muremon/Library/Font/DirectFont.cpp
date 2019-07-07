@@ -21,7 +21,7 @@ DirectFont* DirectFont::mInstance = nullptr;
  * @brief	インスタンスの取得
  */
 DirectFont*
-DirectFont::GetInstance()
+DirectFont::getInstance()
 {
 	return mInstance;
 }
@@ -30,7 +30,7 @@ DirectFont::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-DirectFont::Create()
+DirectFont::create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
 	mInstance = new DirectFont();
@@ -40,7 +40,7 @@ DirectFont::Create()
  * @brief	インスタンスの破棄
  */
 void
-DirectFont::Destroy()
+DirectFont::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }
@@ -51,7 +51,7 @@ DirectFont::Destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectFont::InitDFont(LPDIRECT3DDEVICE9 device)
+DirectFont::initDirectFont(LPDIRECT3DDEVICE9 device)
 {
     // デバイスセット
     mFontDevice = device;
@@ -89,7 +89,7 @@ DirectFont::InitDFont(LPDIRECT3DDEVICE9 device)
  * @param	blue    青の値
  */
 void
-DirectFont::ChangeFontColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
+DirectFont::setFontColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
 {
     mFontColor = D3DCOLOR_ARGB(alpha , red , green , blue);
 }
@@ -99,7 +99,7 @@ DirectFont::ChangeFontColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3D
  * @param	size	大きさ指定(幅・高さ)
  */
 void
-DirectFont::ChangeFontSize(D3DXVECTOR2 size)
+DirectFont::setFontSize(D3DXVECTOR2 size)
 {
     // フォントサイズ指定
 	if (size == NULL)
@@ -129,7 +129,7 @@ DirectFont::ChangeFontSize(D3DXVECTOR2 size)
  * @return  なし
  */
 void
-DirectFont::ChangeFontName(LPCSTR fontname)
+DirectFont::setFontName(LPCSTR fontname)
 {
 //#ifdef	_DEBUG
 	lstrcpy(mFontDesc.FaceName,fontname);						
@@ -155,7 +155,7 @@ DirectFont::ChangeFontName(LPCSTR fontname)
  * @param	font_weight(1～1000まで指定可能)
  */
 void
-DirectFont::ChangeWeight(UINT font_weight)
+DirectFont::setWeight(UINT font_weight)
 {
 	// 文字の太さ(1～1000まで指定可能)
 	APP_ASSERT_MESSAGE(font_weight <= 1000, "文字の太さは1000以下になるようにして下さい");
@@ -173,7 +173,7 @@ DirectFont::ChangeWeight(UINT font_weight)
  * @param	is_italic	斜体ならtrue／しないならfalse
  */
 void
-DirectFont::ChangeItalic(bool is_italic)
+DirectFont::setItalic(bool is_italic)
 {
 	mFontDesc.Italic = is_italic;
 
@@ -192,9 +192,9 @@ DirectFont::ChangeItalic(bool is_italic)
  * @param	option　DrawTextのuFormatオプション
  */
 void
-DirectFont::DrawFont(LPSTR str , long pos_x, long pos_y)
+DirectFont::draw(LPSTR str , long pos_x, long pos_y)
 {
-	DrawFont(str, pos_x, pos_y, DT_LEFT);
+	draw(str, pos_x, pos_y, DT_LEFT);
 }
 
 /**
@@ -205,7 +205,7 @@ DirectFont::DrawFont(LPSTR str , long pos_x, long pos_y)
  * @param	option　DrawTextのuFormatオプション
  */
 void
-DirectFont::DrawFont(LPSTR str , long pos_x, long pos_y, DWORD option)
+DirectFont::draw(LPSTR str , long pos_x, long pos_y, DWORD option)
 {
     // 表示位置を設定
 	RECT l_rect = { pos_x, pos_y, CW_USEDEFAULT, CW_USEDEFAULT};

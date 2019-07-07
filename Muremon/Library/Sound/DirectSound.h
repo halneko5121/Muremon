@@ -29,17 +29,17 @@ public:
 	/**
 	 * @brief	インスタンスの取得
 	 */
-	static DirectSound* GetInstance();
+	static DirectSound* getInstance();
 
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void Create();
+	static void create();
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void Destroy();
+	static void destroy();
 
 	/**
 	 * @brief	初期化
@@ -146,4 +146,4 @@ private:
 	int						mMaxSound;
 };
 
-static DirectSound* GetDirectSound() { return DirectSound::GetInstance(); }
+static DirectSound* GetDirectSound() { return DirectSound::getInstance(); }

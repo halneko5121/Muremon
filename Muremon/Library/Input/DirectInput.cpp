@@ -44,7 +44,7 @@ DirectInputKey::~DirectInputKey()
  * @brief	インスタンスの取得
  */
 DirectInputKey*
-DirectInputKey::GetInstance()
+DirectInputKey::getInstance()
 {
 	return mInstance;
 }
@@ -53,7 +53,7 @@ DirectInputKey::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-DirectInputKey::Create()
+DirectInputKey::create()
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
 	mInstance = new DirectInputKey();
@@ -63,7 +63,7 @@ DirectInputKey::Create()
  * @brief	インスタンスの破棄
  */
 void
-DirectInputKey::Destroy()
+DirectInputKey::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }
@@ -301,7 +301,7 @@ DirectInputMouse::~DirectInputMouse()
  * @brief	インスタンスの取得
  */
 DirectInputMouse*
-DirectInputMouse::GetInstance()
+DirectInputMouse::getInstance()
 {
 	return mInstance;
 }
@@ -310,7 +310,7 @@ DirectInputMouse::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-DirectInputMouse::Create(const SIZE& size, const POINT& pos, const SIZE& cursor_size)
+DirectInputMouse::create(const SIZE& size, const POINT& pos, const SIZE& cursor_size)
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
 	mInstance = new DirectInputMouse(size, pos, cursor_size);
@@ -320,7 +320,7 @@ DirectInputMouse::Create(const SIZE& size, const POINT& pos, const SIZE& cursor_
  * @brief	インスタンスの破棄
  */
 void
-DirectInputMouse::Destroy()
+DirectInputMouse::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }

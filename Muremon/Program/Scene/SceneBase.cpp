@@ -10,7 +10,6 @@
 
 #include "Library/Graphics/Vertex.h"
 #include "Library/Graphics/Texture.h"
-#include "Library/Graphics/FadeMgr.h"
 
 /**
  * @brief	コンストラクタ

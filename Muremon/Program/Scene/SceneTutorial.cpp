@@ -7,6 +7,7 @@
 #include "SceneTutorial.h"
 #include "Library/Sound/DirectSound.h"
 #include "Program/Util/UtilInput.h"
+#include "Program/DefineGame.h"
 
 SceneTutorial::SceneTutorial(void)
 {

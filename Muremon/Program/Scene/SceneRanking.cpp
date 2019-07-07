@@ -6,6 +6,7 @@
 //---------------------------------------------
 #include "SceneRanking.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/DefineGame.h"
 
 FILE *fp;
 struct RANK data[5];

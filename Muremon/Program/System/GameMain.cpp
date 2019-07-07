@@ -43,7 +43,10 @@ GameMain::InitGameMain(void)
 	mWindow			= new C_Window;
 	mGraphics		= DirectGraphics::Create();
 	DirectInputKey::Create();
-	DirectInputMouse::Create();
+	SIZE window_size = { cWindowWidth, cWindowHeight };
+	POINT window_pos = { cWindowPosX, cWindowPosY };
+	SIZE cursor_size = { cCursorWidth, cCursorHeight };
+	DirectInputMouse::Create(window_size, window_pos, cursor_size);
 	DirectFont::Create();
 	DirectSound::Create();
 	FadeMgr::Create();

@@ -19,8 +19,8 @@ const int cWindowPosY = 100;
 const int cWindowPosX = 220;
 
 // ゲーム用カーソルのサイズ
-const int CURSOR_HEIGHT = 20;
-const int CURSOR_WIDE = 20;
+const int cCursorHeight = 20;
+const int cCursorWidth = 20;
 
 #define G_ALPHA_INCREASE			(15)
 #define G_MAX_ALPHA					(255)

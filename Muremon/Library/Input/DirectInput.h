@@ -10,7 +10,6 @@
 #define KEY_REVISION		(0x03FFFFF)
 
 #include <dinput.h>
-#include "Program/Define.h"
 
 #pragma comment( lib, "dinput8.lib" )
 #pragma comment( lib, "dxguid.lib" )
@@ -141,7 +140,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	DirectInputMouse();
+	DirectInputMouse(const SIZE& size, const POINT& pos, const SIZE& cursor_size);
 
 	/**
 	 * @brief	デストラクタ
@@ -156,7 +155,7 @@ public:
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void				Create();
+	static void				Create(const SIZE& size, const POINT& pos, const SIZE& cursor_size);
 
 	/**
 	 * @brief	インスタンスの破棄
@@ -204,14 +203,15 @@ private:
 	bool					SetProperty();
 
 private:
-	static DirectInputMouse*	mInstance;					// インスタンス
+	static DirectInputMouse*	mInstance;				// インスタンス
 
 	LPDIRECTINPUT8			mDirectInput;				// DirectInputオブジェクト
 	LPDIRECTINPUTDEVICE8	mMouseDevice;				// 入力デバイス
 	HWND					mWindowHandle;				// ウィンドウハンドルへのポインタ
 	DIMOUSESTATE2			mMouseState;				// マウス情報格納
 	DIMOUSESTATE2			mMouseStatePrev;			// マウス情報格納（1f前）
-
+	SIZE					mCursorSize;				// マウスカーソルサイズ
+	
 	// 座標取得用
 	LPPOINT					mPosCursorWindow;
 	LPPOINT					mPosCursorGame;			

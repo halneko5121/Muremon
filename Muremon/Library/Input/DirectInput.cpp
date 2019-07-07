@@ -270,19 +270,20 @@ DirectInputMouse*	DirectInputMouse::mInstance = nullptr;
 /**
  * @brief	コンストラクタ
  */
-DirectInputMouse::DirectInputMouse()
+DirectInputMouse::DirectInputMouse(const SIZE& size, const POINT& pos, const SIZE& cursor_size)
 {
 	// DirectInputDeviceオブジェクト(マウス)
 	mDirectInput		= nullptr;
 	mMouseDevice		= nullptr;
 	mPosCursorWindow	= new POINT();
 	mPosCursorGame		= new POINT();
+	mCursorSize			= cursor_size;
 
 	ZeroMemory(&mMouseState, sizeof(DIMOUSESTATE2));
 	ZeroMemory(&mMouseStatePrev, sizeof(DIMOUSESTATE2));
 
-	SetRect(&mGameSize, 0, 0, cWindowWidth, cWindowHeight);
-	SetCursorPos( (cWindowPosX + cBarX),(cWindowPosY + cBarY) );	
+	SetRect(&mGameSize, 0, 0, size.cx, size.cy);
+	SetCursorPos( (pos.x + cBarX),(pos.y + cBarY) );
 
 	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
 	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
@@ -309,10 +310,10 @@ DirectInputMouse::GetInstance()
  * @brief	インスタンスの生成
  */
 void
-DirectInputMouse::Create()
+DirectInputMouse::Create(const SIZE& size, const POINT& pos, const SIZE& cursor_size)
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
-	mInstance = new DirectInputMouse();
+	mInstance = new DirectInputMouse(size, pos, cursor_size);
 }
 
 /**
@@ -433,9 +434,10 @@ DirectInputMouse::UpdateMouse()
 	mPosCursorGame = mPosCursorWindow;				// ゲーム用に渡す
 	ScreenToClient(mWindowHandle,mPosCursorGame);	// スクリーン座標をクライアント座標に変換
 
+	SetRect(&mMouseData.mImageRect, mPosCursorWindow->x, mPosCursorWindow->y,
+		(mPosCursorWindow->x + mCursorSize.cx), (mPosCursorWindow->y + mCursorSize.cy));
+
 #ifdef _WINDOW_MODE_
-	SetRect(&mMouseData.mImageRect,mPosCursorGame->x,mPosCursorGame->y,
-		(mPosCursorGame->x + CURSOR_WIDE),(mPosCursorGame->y + CURSOR_HEIGHT));
 	// ゲーム画面外へ行かせない(Game用カーソルなどある場合に有効か？)
 	if (mMouseData.mImageRect.left		< mGameSize.left)	mMouseData.mImageRect.left		= mGameSize.left;
 	if (mMouseData.mImageRect.top		< mGameSize.top)	mMouseData.mImageRect.top		= mGameSize.top;
@@ -443,7 +445,6 @@ DirectInputMouse::UpdateMouse()
 	if (mMouseData.mImageRect.bottom	> mGameSize.bottom)	mMouseData.mImageRect.bottom	= mGameSize.bottom; 
 #else
 	//フルスクリーンなら気にしなくてよい
-	SetRect(&mMouseData.mImageRect, mPosCursorWindow->x, mPosCursorWindow->y, (mPosCursorWindow->x + CURSOR_WIDE), (mPosCursorWindow->y + CURSOR_HEIGHT));
 #endif
 
 	// マウスの各ボタンが押されているか調べる

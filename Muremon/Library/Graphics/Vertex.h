@@ -27,20 +27,20 @@ public:
 	 * @param	pTexture	テクスチャデータ
 	 * @param	pD3dDevice  デバイス
 	 */
-	void	SetTextureData(LPDIRECT3DTEXTURE9* texture, LPDIRECT3DDEVICE9 d3d_device);
+	void	setTextureData(LPDIRECT3DTEXTURE9* texture, LPDIRECT3DDEVICE9 d3d_device);
 
 	/**
 	 * @brief	テクスチャの拡大・縮小率を指定
 	 * @param	scale_x    横幅の拡大率:
 	 * @param	scale_y    縦幅の拡大率
 	 */
-	void	SetScale(float scale_x, float scale_y);
+	void	setScale(float scale_x, float scale_y);
 
 	/**
 	 * @brief	テクスチャの回転角度を指定
 	 * @param	angle		回転させる角度
 	 */
-	void	SetAngle(float degree);
+	void	setAngle(float degree);
 
 	/**
 	 * @brief	テクスチャの色指定
@@ -49,8 +49,8 @@ public:
 	 * @param	green	緑の値
 	 * @param	blue	青の値
 	 */
-	void	SetColor(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue);
-	void	SetColor2(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue, int Num);	// 仮作成
+	void	setColor(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue);
+	void	setColor2(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue, int Num);	// 仮作成
 
 	/**
 	 * @brief	フェードイン処理
@@ -58,7 +58,7 @@ public:
 	 * @param	texture_alpha	テクスチャのalpha値
 	 * @return	アルファ値
 	 */
-	int		FadeIn(int fade_speed, int texture_alpha);
+	int		fadeIn(int fade_speed, int texture_alpha);
 
 	/**
 	 * @brief	フェードアウト処理
@@ -66,12 +66,12 @@ public:
 	 * @param	texture_alpha	テクスチャのalpha値
 	 * @return	アルファ値
 	 */
-	int		FadeOut(int fade_speed, int texture_alpha);
+	int		fadeOut(int fade_speed, int texture_alpha);
 
 	/**
 	 * @brief	テクスチャの矩形を指定
 	 */
-	void	SetTextureRect(long left, long top, long right, long bottom);
+	void	setTextureRect(long left, long top, long right, long bottom);
 
 	/**
 	 * @brief	テクスチャの描画を行う
@@ -79,23 +79,23 @@ public:
 	 * @param	y			Y座標
 	 * @param	rect_num	登録されている矩形のNo
 	 */
-	void	Draw(float x, float y);
-	void	DrawLT(float x, float y); // マウスカーソル用仮作成
-	void	DrawRB(float x, float y); // マウスカーソル用仮作成
-	void	DrawCB(float x, float y); // 中心の下から
-	void	DrawF(float x, float y, int rect_num);
+	void	draw(float x, float y);
+	void	drawLT(float x, float y); // マウスカーソル用仮作成
+	void	drawRB(float x, float y); // マウスカーソル用仮作成
+	void	drawCB(float x, float y); // 中心の下から
+	void	drawF(float x, float y, int rect_num);
 
 	/**
 	 * @brief	矩形をtxtデータから読み込む
 	 * @param	file_name		txtファイル名
 	 * @return	ロードが成功したか失敗したか
 	 */
-	bool	LoadRect(char* file_name);
+	bool	load(char* file_name);
 
 	/**
 	 * @brief	矩形データを開放
 	 */
-	void	AllReleaseRect();
+	void	release();
 
 private:
 	int					mTextureWidth;		// 横幅

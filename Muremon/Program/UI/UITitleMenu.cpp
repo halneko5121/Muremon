@@ -180,27 +180,27 @@ UITitleMenu::draw()
 {
 	if (mState.isEqual(cState_Top))
 	{
-		mVertex->SetColor(mAlphaZPush, 255, 255, 255);
-		mVertex->DrawF(cDispZPushX, cDispZPushY, R_ZPUSH);
+		mVertex->setColor(mAlphaZPush, 255, 255, 255);
+		mVertex->drawF(cDispZPushX, cDispZPushY, R_ZPUSH);
 	}
 	else if (mState.isEqual(cState_MenuSelect))
 	{
-		mVertex->DrawF(cDispStartX, cDispStartY, R_START);
-		mVertex->DrawF(cDispRankingX, cDispRankingY, R_RANKING);
-		mVertex->DrawF(cDispGameEndX, cDispGameEndY, R_END);
+		mVertex->drawF(cDispStartX, cDispStartY, R_START);
+		mVertex->drawF(cDispRankingX, cDispRankingY, R_RANKING);
+		mVertex->drawF(cDispGameEndX, cDispGameEndY, R_END);
 	}
 	else if (mState.isEqual(cState_GameSelect))
 	{
-		mVertex->DrawF(cDispStartX, cDispStartY, R_REFRESH);
-		mVertex->DrawF(cDispRankingX, cDispRankingY, R_NORMAL);
-		mVertex->DrawF(cDispGameEndX, cDispGameEndY, R_TUTORIAL_T);
+		mVertex->drawF(cDispStartX, cDispStartY, R_REFRESH);
+		mVertex->drawF(cDispRankingX, cDispRankingY, R_NORMAL);
+		mVertex->drawF(cDispGameEndX, cDispGameEndY, R_TUTORIAL_T);
 	}
 
 	//ƒJ[ƒ\ƒ‹
 	if (!mState.isEqual(cState_Top))
 	{
-		mVertex->DrawF(mCursorPos.x, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
-		mVertex->DrawF(mCursorPos.x + cDispCursor2X, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
+		mVertex->drawF(mCursorPos.x, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
+		mVertex->drawF(mCursorPos.x + cDispCursor2X, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
 	}
 }
 

@@ -32,7 +32,7 @@ SceneTutorial::~SceneTutorial(void)
 void SceneTutorial::ImpleInit()
 {
 	mTexture->load("Data\\TextureData\\Tutorial.txt", mDevice);		//ŠG‚Ì“Ç‚İ‚İ
-	mVertex->LoadRect("Data\\RectData\\Tutorial.txt");
+	mVertex->load("Data\\RectData\\Tutorial.txt");
 }
 
 bool SceneTutorial::update()
@@ -48,24 +48,24 @@ bool SceneTutorial::update()
 
 void SceneTutorial::Draw()
 {
-	mVertex->SetTextureData(mTexture->getTextureData(T_TUTORIAL1), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL1), mDevice);
 
 	//mVertex->SetColor(alpha,255,255,255);
 
-	mVertex->DrawF(tutorial[TR_REFRESH].x,tutorial[TR_REFRESH].y,R_TUTORIAL1);
+	mVertex->drawF(tutorial[TR_REFRESH].x,tutorial[TR_REFRESH].y,R_TUTORIAL1);
 
-	mVertex->SetTextureData(mTexture->getTextureData(T_TUTORIAL2), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL2), mDevice);
 
 	//mVertex->SetColor(alpha,255,255,255);
 
-	mVertex->DrawF(tutorial[TR_NORMAL].x,tutorial[TR_NORMAL].y,R_TUTORIAL2);
+	mVertex->drawF(tutorial[TR_NORMAL].x,tutorial[TR_NORMAL].y,R_TUTORIAL2);
 }
 
 int SceneTutorial::End()
 {
 	ChangeScene(cSceneName_Title);
 	mTexture->release();
-	mVertex->AllReleaseRect();
+	mVertex->release();
 
 	return 0;
 }

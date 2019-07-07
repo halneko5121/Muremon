@@ -86,7 +86,7 @@ void SceneGameNormal::ImpleInit()
 	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
 
 	mTexture->load("Data\\TextureData\\gamenormal.txt", mDevice);		//絵の読み込み
-	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
+	mVertex->load("Data\\RectData\\gamenormal.txt");
 
 	mMission = new Mission(mTexture, mVertex, mDevice);
 }
@@ -287,25 +287,25 @@ bool SceneGameNormal::update()
 
 void SceneGameNormal::Draw()
 {
-	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
 
 	if(mAlpha - 55 < 0){
-		mVertex->SetColor(0,255,255,255);
+		mVertex->setColor(0,255,255,255);
 	}
 	else{
-		mVertex->SetColor(mAlpha - 55,255,255,255);
+		mVertex->setColor(mAlpha - 55,255,255,255);
 	}
 
-	mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_BG);
+	mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
 
-	mVertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
+	mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
 	if(mGameState == G_START_SCENE){
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
 
-		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_START);	//ゲームスタート
+		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_START);	//ゲームスタート
 	}
 	else if(mGameState == G_GAME_SCENE){
 
@@ -315,36 +315,36 @@ void SceneGameNormal::Draw()
 
 		HitEffectDraw();
 		//キャラ達
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
 		mNoppo->Draw(R_NOPPO_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
 		mYoshi->Draw(R_YOSHI_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
 		mNiku->Draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 		mNoppo->DrawEffectFont(R_NOPPO_PETI);
 		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
 		mNiku->DrawEffectFont(R_NIKU_BETYA);
 	}
 	else if(mGameState == G_GAME_OVER){
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
-		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
 		if(mIsSound){
 			UtilSound::playOnce(S_OVER);
 			mIsSound = false;
 		}
 	}
 	else if(mGameState == G_GAME_CLEAR){
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
-		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
 		if(mIsSound){
 			UtilSound::playOnce(S_G_CLEAR);
 			mIsSound = false;
@@ -358,43 +358,43 @@ void SceneGameNormal::Draw()
 		DrawMissionNegative();
 	}
 
-	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-	mVertex->SetColor(mAlpha,255,255,255);
+	mVertex->setColor(mAlpha,255,255,255);
 
-	mVertex->DrawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
+	mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
 
-	mVertex->DrawF(G_SCORE_X,G_SCORE_Y,R_SCORE);		//すこあ
+	mVertex->drawF(G_SCORE_X,G_SCORE_Y,R_SCORE);		//すこあ
 
 	DrawNumS();
 
-	mVertex->DrawF(G_TIME_X,G_TIME_Y,R_TIME);		//たいむ
+	mVertex->drawF(G_TIME_X,G_TIME_Y,R_TIME);		//たいむ
 
 	DrawNumT();
 
-	mVertex->DrawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//にくまん顔
-	mVertex->DrawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//よしたろう顔
-	mVertex->DrawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//のっぽ顔
+	mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//にくまん顔
+	mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//よしたろう顔
+	mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//のっぽ顔
 
 	DrawNum();
 
-	mVertex->DrawF(G_MISSION_X,G_MISSION_Y,R_MISSION_GAGE);	//みっしょんげ～じ
-	mVertex->DrawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_IN);	//みっしょんゲージ
+	mVertex->drawF(G_MISSION_X,G_MISSION_Y,R_MISSION_GAGE);	//みっしょんげ～じ
+	mVertex->drawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_IN);	//みっしょんゲージ
 
 	DrawGageMission();
 
-	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-	mVertex->DrawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_FRAME);	//みっしょんゲージ枠
+	mVertex->drawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_FRAME);	//みっしょんゲージ枠
 
-	mVertex->DrawF(G_HP_X,G_HP_Y,R_HP);	//しゃっくの体力
-	mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
+	mVertex->drawF(G_HP_X,G_HP_Y,R_HP);	//しゃっくの体力
+	mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 
 	DrawGageHp();
 
-	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-	mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
+	mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 
 	if(mMissionGage >= MISSION_GAGE_MAX){
 		mMission->Draw();
@@ -409,7 +409,7 @@ int SceneGameNormal::End()
 	UtilSound::stop(S_BGM_BATTLE);
 
 	mTexture->release();
-	mVertex->AllReleaseRect();
+	mVertex->release();
 	delete mMission;
 
 	return mScore;
@@ -486,7 +486,7 @@ void SceneGameNormal::DrawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NIKUMAN_Y,R_0 + num%10);
+		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_NIKUMAN_Y,R_0 + num%10);
 	}
 	//よしたろう
 	for(int i = 0;i < 4;i++){
@@ -494,7 +494,7 @@ void SceneGameNormal::DrawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = num / 10;
 		}
-		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_YOSHITARO_Y,R_0 + num%10);
+		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_YOSHITARO_Y,R_0 + num%10);
 	}
 	//のっぽ
 	for(int i = 0;i < 4;i++){
@@ -502,7 +502,7 @@ void SceneGameNormal::DrawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NOPPO_Y,R_0 + num%10);
+		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_NOPPO_Y,R_0 + num%10);
 	}
 }
 
@@ -514,7 +514,7 @@ void SceneGameNormal::DrawNumS()
 		for(int j = 1; j < 9 - i;j++){
 			num = num / 10;
 		}
-		mVertex->DrawF(G_SCORENUM_X + 20.f * i,G_SCORENUM_Y,R_0 + num%10);
+		mVertex->drawF(G_SCORENUM_X + 20.f * i,G_SCORENUM_Y,R_0 + num%10);
 	}
 }
 
@@ -543,14 +543,14 @@ void SceneGameNormal::DrawNumT()
 				}
 			}
 			if(i == 0 || i == 3){
-				mVertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%6);
+				mVertex->drawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%6);
 			}
 			else{
-				mVertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%10);
+				mVertex->drawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_0 + num%10);
 			}
 		}
 		else{
-			mVertex->DrawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_SEMICORON);
+			mVertex->drawF(G_TIMENUM_X + 20.f * i,G_TIMENUM_Y,R_SEMICORON);
 		}
 	}
 }
@@ -559,28 +559,28 @@ void SceneGameNormal::DrawGageHp()
 {
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
-	mVertex->SetScale(num,1.f);
+	mVertex->setScale(num,1.f);
 
-	mVertex->SetColor(mAlpha,200,30,30);
+	mVertex->setColor(mAlpha,200,30,30);
 	
-	mVertex->DrawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
+	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
 void SceneGameNormal::HitEffectDraw()
 {
-	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
-	mVertex->SetColor(mHitEffectAlpha,255,255,255);
-	mVertex->DrawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
+	mVertex->setColor(mHitEffectAlpha,255,255,255);
+	mVertex->drawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 void SceneGameNormal::DrawGageMission()
 {
 	float num = (float)mMissionGage / (float)MISSION_GAGE_MAX;
 
-	mVertex->SetScale(num,1.f);
+	mVertex->setScale(num,1.f);
 
-	mVertex->SetColor(mAlpha,30,30,200);
+	mVertex->setColor(mAlpha,30,30,200);
 	
-	mVertex->DrawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
+	mVertex->drawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
 }
 
 void SceneGameNormal::ControlMissionOugi()
@@ -632,17 +632,17 @@ void SceneGameNormal::ControlMissionOugi()
 
 void SceneGameNormal::DrawMissionOugi()
 {
-	mVertex->SetTextureData(mTexture->getTextureData(T_MISSION), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
 
-	mVertex->SetColor(mAlphaFont,255,255,255);
+	mVertex->setColor(mAlphaFont,255,255,255);
 
-	mVertex->DrawF(400.f,300.f,R_MISSION_OSIRASE);
+	mVertex->drawF(400.f,300.f,R_MISSION_OSIRASE);
 
-	mVertex->DrawF(400.f,300.f,R_OUGI_FONT);
+	mVertex->drawF(400.f,300.f,R_OUGI_FONT);
 
-	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 
-	mVertex->DrawF(mWavePos.x,mWavePos.y,R_OUGI);
+	mVertex->drawF(mWavePos.x,mWavePos.y,R_OUGI);
 }
 
 void SceneGameNormal::ControlMissionNegative()
@@ -689,13 +689,13 @@ void SceneGameNormal::ControlMissionNegative()
 
 void SceneGameNormal::DrawMissionNegative()
 {
-	mVertex->SetTextureData(mTexture->getTextureData(T_MISSION), mDevice);
+	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
 
-	mVertex->SetColor(mAlphaFont,255,255,255);
+	mVertex->setColor(mAlphaFont,255,255,255);
 
-	mVertex->DrawF(400.f,300.f,R_MISSION_OSIRASE);
+	mVertex->drawF(400.f,300.f,R_MISSION_OSIRASE);
 
-	mVertex->DrawF(400.f,300.f,R_NEGATIVE1 + mNegativeState - 1);
+	mVertex->drawF(400.f,300.f,R_NEGATIVE1 + mNegativeState - 1);
 }
 
 void SceneGameNormal::NegativeSelect()

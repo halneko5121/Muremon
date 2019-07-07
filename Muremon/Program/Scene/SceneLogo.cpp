@@ -39,7 +39,7 @@ SceneLogo::~SceneLogo()
 void SceneLogo::ImpleInit()
 {
 	mTexture->load("Data\\TextureData\\logo.txt", mDevice);		//ŠG‚Ì“Ç‚İ‚İ
-	mVertex->LoadRect("Data\\RectData\\logo.txt");
+	mVertex->load("Data\\RectData\\logo.txt");
 }
 
 bool SceneLogo::update()
@@ -56,15 +56,15 @@ bool SceneLogo::update()
 
 void SceneLogo::Draw()
 {
-	mVertex->SetTextureData(mTexture->getTextureData(T_LOGO), mDevice);
-	mVertex->DrawF(400.f,300.f,R_LOGO);
+	mVertex->setTextureData(mTexture->getTextureData(T_LOGO), mDevice);
+	mVertex->drawF(400.f,300.f,R_LOGO);
 }
 
 int SceneLogo::End()
 {
 	ChangeScene(cSceneName_Title);
 	mTexture->release();
-	mVertex->AllReleaseRect();
+	mVertex->release();
 
 	return 0;
 }

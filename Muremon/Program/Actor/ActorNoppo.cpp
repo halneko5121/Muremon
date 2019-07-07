@@ -253,8 +253,8 @@ ActorNoppo::DrawEffectFont(int rect_startnum)
 			if(mCountEffect[i]++ < FONT_DELETE){
 				if(mCharaData[i].flag_atk1)		rect_change = 0; 
 				else if(mCharaData[i].flag_atk2)	rect_change = 1;
-				mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-				mVertex->DrawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum + rect_change);
+				mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+				mVertex->drawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum + rect_change);
 			}
 		}
 	}
@@ -269,23 +269,23 @@ ActorNoppo::Draw(int rect_startnum)
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		if(mCharaData[i].flag_atk1){
-			mVertex->SetAngle(0.f);
+			mVertex->setAngle(0.f);
 			if(mCharaData[i].flag_deathfade){
-				mCharaData[i].alpha = mVertex->FadeOut((10.f/60.f),mCharaData[i].alpha);
-				mVertex->SetColor((D3DCOLOR)mCharaData[i].alpha,MAX_RGB,MAX_RGB,MAX_RGB);
+				mCharaData[i].alpha = mVertex->fadeOut((10.f/60.f),mCharaData[i].alpha);
+				mVertex->setColor((D3DCOLOR)mCharaData[i].alpha,MAX_RGB,MAX_RGB,MAX_RGB);
 			}
 			else{
-				mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-				mVertex->DrawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y,(rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
+				mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+				mVertex->drawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y,(rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
 			}
 		}
 		else if(mCharaData[i].flag_atk2){
 			if(mCharaData[i].flag_hit){
-				mVertex->SetAngle(mDegSpin[i] += mDegSpin[i]);
+				mVertex->setAngle(mDegSpin[i] += mDegSpin[i]);
 			}
-			else mVertex->SetAngle(0.f);
-			mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			mVertex->DrawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y,(rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
+			else mVertex->setAngle(0.f);
+			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+			mVertex->drawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y,(rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
 		}
 	}
 }

@@ -250,7 +250,7 @@ ActorYoshi::DrawEffectFont(int rect_startnum)
 			if(mCountEffect[i]++ < FONT_DELETE){
 				if(mCharaData[i].flag_atk1)		rect_change = 0; 
 				else if(mCharaData[i].flag_atk2)	rect_change = 1;
-				mVertex->DrawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum + rect_change);
+				mVertex->drawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum + rect_change);
 			}
 		}
 	}
@@ -265,17 +265,17 @@ ActorYoshi::Draw(int rect_startnum)
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		if(mCharaData[i].flag_atk1){
-			mVertex->SetAngle(0.f);
+			mVertex->setAngle(0.f);
 		}
 		else if(mCharaData[i].flag_atk2){
 			if(mCharaData[i].flag_death_next){
-				mVertex->SetAngle(mDegSpin[i] += mDegSpin[i]);
+				mVertex->setAngle(mDegSpin[i] += mDegSpin[i]);
 			}
 			else {
-				mVertex->SetAngle(0.f);
+				mVertex->setAngle(0.f);
 			}
 		}
-		mVertex->DrawF(mCharaData[i].draw_cc.x, mCharaData[i].draw_cc.y, (rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion));
+		mVertex->drawF(mCharaData[i].draw_cc.x, mCharaData[i].draw_cc.y, (rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion));
 	}
 }
 

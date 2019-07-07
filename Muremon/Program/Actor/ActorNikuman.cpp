@@ -219,8 +219,8 @@ ActorNikuman::DrawEffectFont(int rect_startnum)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		if(mCharaData[i].flag_hit){
 			if(mCountEffect[i]++ < FONT_DELETE){
-				mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-				mVertex->DrawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum);
+				mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+				mVertex->drawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum);
 			}
 		}
 	}
@@ -234,9 +234,9 @@ ActorNikuman::Draw(int rect_startnum)
 {
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
-		mVertex->SetAngle(draw_deg[i] += mDegSpin[i]);
-		mVertex->SetColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-		mVertex->DrawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y, (rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
+		mVertex->setAngle(draw_deg[i] += mDegSpin[i]);
+		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+		mVertex->drawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y, (rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
 	}
 }
 

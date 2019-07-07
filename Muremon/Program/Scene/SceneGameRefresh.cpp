@@ -60,7 +60,7 @@ void SceneGameRefresh::ImpleInit()
 	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
 
 	mTexture->load("Data\\TextureData\\gamenormal.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
+	mVertex->load("Data\\RectData\\gamenormal.txt");
 }
 
 bool SceneGameRefresh::update()
@@ -170,46 +170,46 @@ bool SceneGameRefresh::update()
 void SceneGameRefresh::Draw()
 {
 	if(mSameState == G_START_SCENE){
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
 
-		mVertex->SetColor(mAlpha,255,255,255);
+		mVertex->setColor(mAlpha,255,255,255);
 
-		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_BG);
+		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
 
-		mVertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
+		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetColor(mAlpha,255,255,255);
+		mVertex->setColor(mAlpha,255,255,255);
 
-		mVertex->DrawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ƒXƒe[ƒ^ƒX˜g•`‰æ
+		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ƒXƒe[ƒ^ƒX˜g•`‰æ
 
-		mVertex->DrawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);				//‚É‚­‚Ü‚ñŠç
-		mVertex->DrawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);			//‚æ‚µ‚½‚ë‚¤Šç
-		mVertex->DrawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);					//‚Ì‚Á‚ÛŠç
+		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);				//‚É‚­‚Ü‚ñŠç
+		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);			//‚æ‚µ‚½‚ë‚¤Šç
+		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);					//‚Ì‚Á‚ÛŠç
 
 		DrawNum();
 
-		mVertex->DrawF(G_HP_X,G_HP_Y,R_HP);								//‚µ‚á‚Á‚­‚Ì‘Ì—Í
-		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);						//‘Ì—ÍƒQ[ƒW
+		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);								//‚µ‚á‚Á‚­‚Ì‘Ì—Í
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);						//‘Ì—ÍƒQ[ƒW
 
 		DrawGageHp();
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);					//‘Ì—ÍƒQ[ƒW˜g
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);					//‘Ì—ÍƒQ[ƒW˜g
 
-		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
-		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_START);						//ƒQ[ƒ€ƒXƒ^[ƒg
+		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_START);						//ƒQ[ƒ€ƒXƒ^[ƒg
 	}
 	else if(mSameState == G_GAME_SCENE){
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
 
-		mVertex->SetColor(mAlpha,255,255,255);
+		mVertex->setColor(mAlpha,255,255,255);
 
-		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_BG);	//”wŒi
+		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//”wŒi
 
-		mVertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//Šø
+		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//Šø
 
 		mBoss->BossDraw();
 		mBoss->FallDraw();
@@ -219,46 +219,46 @@ void SceneGameRefresh::Draw()
 
 		HitEffectDraw();
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetColor(mAlpha,255,255,255);
+		mVertex->setColor(mAlpha,255,255,255);
 
-		mVertex->DrawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ƒXƒe[ƒ^ƒX˜g•`‰æ
+		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ƒXƒe[ƒ^ƒX˜g•`‰æ
 
-		mVertex->DrawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//‚É‚­‚Ü‚ñŠç
-		mVertex->DrawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//‚æ‚µ‚½‚ë‚¤Šç
-		mVertex->DrawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//‚Ì‚Á‚ÛŠç
+		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//‚É‚­‚Ü‚ñŠç
+		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//‚æ‚µ‚½‚ë‚¤Šç
+		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//‚Ì‚Á‚ÛŠç
 
 		DrawNum();
 
-		mVertex->DrawF(G_HP_X,G_HP_Y,R_HP);	//‚µ‚á‚Á‚­‚Ì‘Ì—Í
-		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
+		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);	//‚µ‚á‚Á‚­‚Ì‘Ì—Í
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
 
 		DrawGageHp();
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
 
 		//ƒLƒƒƒ‰’B
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
 		mNoppo->Draw(R_NOPPO_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
 		mYoshi->Draw(R_YOSHI_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
 		mNiku->Draw(R_NIKU_G_ATK1);
 
 		//ƒGƒtƒFƒNƒgƒtƒHƒ“ƒg—Þ
-		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
+		mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 		mNoppo->DrawEffectFont(R_NOPPO_PETI);
 		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
 		mNiku->DrawEffectFont(R_NIKU_BETYA);
 
-		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
 	}
 }
 
@@ -270,7 +270,7 @@ int SceneGameRefresh::End()
 	UtilSound::stop(S_BGM_BATTLE);
 
 	mTexture->release();
-	mVertex->AllReleaseRect();
+	mVertex->release();
 
 	return 0;
 }
@@ -341,7 +341,7 @@ void SceneGameRefresh::DrawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NIKUMAN_Y,R_0 + num%10);
+		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_NIKUMAN_Y,R_0 + num%10);
 	}
 	//‚æ‚µ‚½‚ë‚¤
 	for(int i = 0;i < 4;i++){
@@ -349,7 +349,7 @@ void SceneGameRefresh::DrawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_YOSHITARO_Y,R_0 + num%10);
+		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_YOSHITARO_Y,R_0 + num%10);
 	}
 	//‚Ì‚Á‚Û
 	for(int i = 0;i < 4;i++){
@@ -357,7 +357,7 @@ void SceneGameRefresh::DrawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->DrawF(G_PUSHNUM + 20.f * i,G_F_NOPPO_Y,R_0 + num%10);
+		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_NOPPO_Y,R_0 + num%10);
 	}
 }
 
@@ -365,18 +365,18 @@ void SceneGameRefresh::DrawGageHp()
 {
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
-	mVertex->SetScale(num,1.f);
+	mVertex->setScale(num,1.f);
 
-	mVertex->SetColor(mAlpha,255,0,0);
+	mVertex->setColor(mAlpha,255,0,0);
 	
-	mVertex->DrawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
+	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
 }
 
 void SceneGameRefresh::HitEffectDraw()
 {
-	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
-	mVertex->SetColor(mHitEffectAlpha,255,255,255);
-	mVertex->DrawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
+	mVertex->setColor(mHitEffectAlpha,255,255,255);
+	mVertex->drawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 
 void SceneGameRefresh::HitFlagInit()

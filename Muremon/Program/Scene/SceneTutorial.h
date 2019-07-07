@@ -28,18 +28,26 @@ private:
 	void			stateEnterIdle();
 	void			stateExeIdle();
 
+	void			stateEnterRefreshSlide();
+	void			stateExeRefreshSlide();
+
 	void			stateEnterRefresh();
 	void			stateExeRefresh();
 
+	void			stateEnterNormalSlide();
+	void			stateExeNormalSlide();
+
 	void			stateEnterNormal();
 	void			stateExeNormal();
+
+	void			stateEnterEndSlide();
+	void			stateExeEndSlide();
 
 	void			stateEnterEnd();
 	void			stateExeEnd();
 
 private:
-	StateMachine<SceneTutorial>	mState;				// ステート
-	int							mDrawState;			// 描画しているものを知らせる
+	StateMachine<SceneTutorial>	mState;			// ステート
 	int							mSlideState;
 	D3DXVECTOR2					mTutorial[2];
 };

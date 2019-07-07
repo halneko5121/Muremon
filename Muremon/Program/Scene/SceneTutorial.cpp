@@ -49,18 +49,20 @@ namespace
 
 	enum State
 	{
-		cState_Idle,		// 待機
-		cState_Refresh,		// すっきり
-		cState_Normal,		// ノーマル
-		cState_End,			// 終了
+		cState_Idle,			// 待機
+		cState_RefreshSlide,	// すっきりスライド中
+		cState_Refresh,			// すっきり
+		cState_NormalSlide,		// ノーマルスライド中
+		cState_Normal,			// ノーマル
+		cState_EndSlide,		// 終了スライド中
+		cState_End,				// 終了
 		cState_Count
 	};
 }
 
 SceneTutorial::SceneTutorial()
 {
-	mDrawState = TR_REFRESH;
-	mSlideState = 0;
+	mSlideState = 2;
 
 	mTutorial[TR_REFRESH].y = mTutorial[TR_NORMAL].y = cTrY;
 	mTutorial[TR_REFRESH].x = mTutorial[TR_NORMAL].x  = cTrRightX;
@@ -68,10 +70,13 @@ SceneTutorial::SceneTutorial()
 	mIsSceneChange = true;
 
 	mState.initialize(cState_Count, cState_Idle);
-	mState.registState(this, &SceneTutorial::stateEnterIdle,	&SceneTutorial::stateExeIdle,		nullptr, cState_Idle);
-	mState.registState(this, &SceneTutorial::stateEnterRefresh,	&SceneTutorial::stateExeRefresh,	nullptr, cState_Refresh);
-	mState.registState(this, &SceneTutorial::stateEnterNormal,	&SceneTutorial::stateExeNormal,		nullptr, cState_Normal);
-	mState.registState(this, &SceneTutorial::stateEnterEnd,		&SceneTutorial::stateExeEnd,		nullptr, cState_End);
+	mState.registState(this, &SceneTutorial::stateEnterIdle,			&SceneTutorial::stateExeIdle,			nullptr, cState_Idle);
+	mState.registState(this, &SceneTutorial::stateEnterRefreshSlide,	&SceneTutorial::stateExeRefreshSlide,	nullptr, cState_RefreshSlide);
+	mState.registState(this, &SceneTutorial::stateEnterRefresh,			&SceneTutorial::stateExeRefresh,		nullptr, cState_Refresh);
+	mState.registState(this, &SceneTutorial::stateEnterNormalSlide,		&SceneTutorial::stateExeNormalSlide,	nullptr, cState_NormalSlide);
+	mState.registState(this, &SceneTutorial::stateEnterNormal,			&SceneTutorial::stateExeNormal,			nullptr, cState_Normal);
+	mState.registState(this, &SceneTutorial::stateEnterEndSlide,		&SceneTutorial::stateExeEndSlide,		nullptr, cState_EndSlide);
+	mState.registState(this, &SceneTutorial::stateEnterEnd,				&SceneTutorial::stateExeEnd,			nullptr, cState_End);
 	mState.changeState(cState_Idle);
 }
 
@@ -83,7 +88,7 @@ void SceneTutorial::impleInit()
 {
 	mTexture->load("Data\\TextureData\\Tutorial.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\Tutorial.txt");
-	mState.changeState(cState_Refresh);
+	mState.changeState(cState_RefreshSlide);
 }
 
 bool SceneTutorial::update()
@@ -122,12 +127,10 @@ void SceneTutorial::updateInput()
 	else if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-		mSlideState = 1;
 	}
 	else if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-		mSlideState = 2;
 	}
 }
 
@@ -148,6 +151,28 @@ SceneTutorial::stateExeIdle()
 }
 
 /**
+ * @brief ステート:RefreshSlide
+ */
+void
+SceneTutorial::stateEnterRefreshSlide()
+{
+
+}
+
+void
+SceneTutorial::stateExeRefreshSlide()
+{
+	if (mTutorial[TR_REFRESH].x != cTrCenterX)
+	{
+		mTutorial[TR_REFRESH].x -= 10.f;
+	}
+	else
+	{
+		mState.changeState(cState_Refresh);
+	}
+}
+
+/**
  * @brief ステート:Refresh
  */
 void
@@ -157,6 +182,26 @@ SceneTutorial::stateEnterRefresh()
 void
 SceneTutorial::stateExeRefresh()
 {
+	if (UtilInput::isKeyPushed(DIK_RIGHT))
+	{
+		mState.changeState(cState_NormalSlide);
+		mSlideState = 2;
+		return;
+	}
+}
+
+/**
+ * @brief ステート:NormalSlide
+ */
+void
+SceneTutorial::stateEnterNormalSlide()
+{
+}
+
+void
+SceneTutorial::stateExeNormalSlide()
+{
+	// 左へ移動している
 	if (mSlideState == 1)
 	{
 		if (mTutorial[TR_REFRESH].x != cTrCenterX)
@@ -164,21 +209,25 @@ SceneTutorial::stateExeRefresh()
 			mTutorial[TR_REFRESH].x += 10.f;
 			mTutorial[TR_NORMAL].x += 10.f;
 		}
-	}
-	else
-	{
-		if (mTutorial[TR_REFRESH].x != cTrCenterX)
+		else
 		{
+			mState.changeState(cState_Refresh);
+		}
+	}
+	// 右へ移動している
+	else if (mSlideState == 2)
+	{
+		if (mTutorial[TR_NORMAL].x != cTrCenterX)
+		{
+			mTutorial[TR_NORMAL].x -= 10.f;
 			mTutorial[TR_REFRESH].x -= 10.f;
+		}
+		else
+		{
+			mState.changeState(cState_Normal);
 		}
 	}
 
-	if (UtilInput::isKeyPushed(DIK_RIGHT))
-	{
-		mDrawState = TR_NORMAL;
-		mState.changeState(cState_Normal);
-		return;
-	}
 }
 
 /**
@@ -191,34 +240,55 @@ SceneTutorial::stateEnterNormal()
 void
 SceneTutorial::stateExeNormal()
 {
-	if (mSlideState == 1)
-	{
-		if (mTutorial[TR_NORMAL].x != cTrCenterX)
-		{
-			mTutorial[TR_NORMAL].x += 10.f;
-		}
-	}
-	else
-	{
-		if (mTutorial[TR_NORMAL].x != cTrCenterX)
-		{
-			mTutorial[TR_NORMAL].x -= 10.f;
-			mTutorial[TR_REFRESH].x -= 10.f;
-		}
-	}
-
 	if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
-		mDrawState = TR_REFRESH;
-		mState.changeState(cState_Refresh);
+		mState.changeState(cState_NormalSlide);
+		mSlideState = 1;
 		return;
 	}
 
 	if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
-		mDrawState = TR_END;
-		mState.changeState(cState_End);
+		mState.changeState(cState_EndSlide);
+		mSlideState = 2;
 		return;
+	}
+}
+
+/**
+ * @brief ステート:EndSlide
+ */
+void
+SceneTutorial::stateEnterEndSlide()
+{
+}
+
+void
+SceneTutorial::stateExeEndSlide()
+{
+	// 左へ移動している
+	if (mSlideState == 1)
+	{
+		if (mTutorial[TR_REFRESH].x != cTrCenterX)
+		{
+			mTutorial[TR_REFRESH].x += 10.f;
+			mTutorial[TR_NORMAL].x += 10.f;
+		}
+		else
+		{
+			mState.changeState(cState_End);
+		}
+	}
+	// 右へ移動している
+	else if (mSlideState == 2)
+	{
+		mTutorial[TR_REFRESH].x -= 10.f;
+		mTutorial[TR_NORMAL].x -= 10.f;
+
+		if (mTutorial[TR_NORMAL].x <= -400)
+		{
+			mState.changeState(cState_End);
+		}
 	}
 }
 
@@ -228,23 +298,9 @@ SceneTutorial::stateExeNormal()
 void
 SceneTutorial::stateEnterEnd()
 {
+	mIsSceneChange = false;
 }
 void
 SceneTutorial::stateExeEnd()
 {
-	if (mTutorial[TR_NORMAL].x != cTrLeftX)
-	{
-		mTutorial[TR_NORMAL].x -= 10.f;
-	}
-	else
-	{
-		mIsSceneChange = false;
-	}
-
-	if (UtilInput::isKeyPushed(DIK_LEFT))
-	{
-		mDrawState = TR_NORMAL;
-		mState.changeState(cState_Normal);
-		return;
-	}
 }

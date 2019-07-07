@@ -18,9 +18,9 @@ class UITitleMenu
 public:
 	UITitleMenu();
 	~UITitleMenu();
-	void	Init(Texture* texture, Vertex* vertex);
-	void	Update();
-	void	Draw();
+	void	init(Texture* texture, Vertex* vertex);
+	void	update();
+	void	draw();
 
 	// メニューセレクト
 	bool	isDecideMenuSelectGame() const;

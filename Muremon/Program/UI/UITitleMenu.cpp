@@ -118,7 +118,7 @@ UITitleMenu::~UITitleMenu()
  * @brief	初期化
  */
 void
-UITitleMenu::Init(Texture* texture, Vertex* vertex)
+UITitleMenu::init(Texture* texture, Vertex* vertex)
 {
 	mVertex = vertex;
 	mTexture = texture;
@@ -130,7 +130,7 @@ UITitleMenu::Init(Texture* texture, Vertex* vertex)
  * @brief	更新
  */
 void
-UITitleMenu::Update()
+UITitleMenu::update()
 {
 	//カーソル位置を計算
 	mCursorPos.y = cDispCursorY + cDispCursorYRemove * mCurrentMenuItem;
@@ -184,7 +184,7 @@ UITitleMenu::Update()
  * @brief	描画
  */
 void
-UITitleMenu::Draw()
+UITitleMenu::draw()
 {
 	if (mDispItem == DRAW_Z_PUSH)
 	{

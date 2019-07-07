@@ -67,12 +67,13 @@ SceneRanking::~SceneRanking(void)
 }
 
 void
-SceneRanking::ImpleInit()
+SceneRanking::impleInit()
 {
 }
 
-void SceneRanking::InitScene(int score)
+void SceneRanking::init(LPDIRECT3DDEVICE9 apDev, int score)
 {
+	mDevice = apDev;
 	add_score = score;
 
 	mTexture->load("Data\\TextureData\\ranking.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
@@ -178,7 +179,7 @@ void SceneRanking::KeyControl()
 	//}
 }
 
-void SceneRanking::Draw()
+void SceneRanking::draw()
 {
 	RankBackGround();
 	RankPlaceDraw();
@@ -187,9 +188,9 @@ void SceneRanking::Draw()
 	ZKeyDraw();
 }
 
-int SceneRanking::End()
+int SceneRanking::end()
 {
-	ChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneName_Title);
 	mTexture->release();
 	mVertex->release();
 

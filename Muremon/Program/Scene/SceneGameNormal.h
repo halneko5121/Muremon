@@ -38,10 +38,10 @@ public:
 	SceneGameNormal();
 	~SceneGameNormal();
 
-	void ImpleInit() override;
+	void impleInit() override;
 	bool update() override;
-	void Draw() override;
-	int End() override;
+	void draw() override;
+	int end() override;
 
 	void DrawNum();		//連打数
 	void DrawNumS();	//スコア

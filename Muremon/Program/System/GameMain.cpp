@@ -196,7 +196,7 @@ void
 GameMain::release(void)
 {
     // 開放
-	mScene->End();
+	mScene->end();
 
 	APP_SAFE_DELETE(mScene);
 	DirectGraphics::destroy();
@@ -217,42 +217,36 @@ void
 GameMain::controlSequence(void)
 {
 	// シーンIDによって分岐
-	switch(mScene->GetSceneID()){
+	switch(mScene->getSceneID()){
 	case cSceneName_Logo:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneLogo();
-		mScene->SetScene(mGraphics->getDevice());
-		mScene->init();
+		mScene->init(mGraphics->getDevice());
 		break;
     case cSceneName_Title:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTitle();
-		mScene->SetScene(mGraphics->getDevice());
-		mScene->init();
+		mScene->init(mGraphics->getDevice());
 		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTutorial();
-		mScene->SetScene(mGraphics->getDevice());
-		mScene->init();
+		mScene->init(mGraphics->getDevice());
 		break;
 	case cSceneName_GameRefresh:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneGameRefresh();
-		mScene->SetScene(mGraphics->getDevice());
-		mScene->init();
+		mScene->init(mGraphics->getDevice());
 		break;
 	case cSceneName_GameNormal:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneGameNormal();
-		mScene->SetScene(mGraphics->getDevice());
-		mScene->init();
+		mScene->init(mGraphics->getDevice());
 		break;
 	case cSceneName_Ranking:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneRanking();
-		mScene->SetScene(mGraphics->getDevice());
-		dynamic_cast<SceneRanking*>(mScene)->InitScene(mScore);
+		dynamic_cast<SceneRanking*>(mScene)->init(mGraphics->getDevice(), mScore);
 		break;
 	case cSceneName_GameEnd:
 		PostQuitMessage(0);
@@ -285,7 +279,7 @@ GameMain::stateExeInit()
 		return;
 	}
 
-	mScene->Draw();
+	mScene->draw();
 }
 
 /**
@@ -294,21 +288,21 @@ GameMain::stateExeInit()
 void
 GameMain::stateEnterRun()
 {
-	mScene->Draw();
+	mScene->draw();
 }
 void
 GameMain::stateExeRun()
 {
-	if (!mScene->RunScene())
+	if (!mScene->runScene())
 	{
 		// ロゴが終わったらクリア時の色を白にする
-		if (mScene->GetSceneID() == cSceneName_Title)
+		if (mScene->getSceneID() == cSceneName_Title)
 		{
 			mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
 			GetFadeMgr()->setColor(255, 255, 255);
 		}
 		// タイトルが終わったらクリア時の色を黒にする
-		if (mScene->GetSceneID() == cSceneName_Prologue)
+		if (mScene->getSceneID() == cSceneName_Prologue)
 		{
 			mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
 			GetFadeMgr()->setColor(0, 0, 0);
@@ -318,7 +312,7 @@ GameMain::stateExeRun()
 		return;
 	}
 
-	mScene->Draw();
+	mScene->draw();
 }
 
 /**
@@ -328,7 +322,7 @@ void
 GameMain::stateEnterEnd()
 {
 	GetFadeMgr()->fadeOut();
-	mScene->Draw();
+	mScene->draw();
 }
 void
 GameMain::stateExeEnd()
@@ -336,10 +330,10 @@ GameMain::stateExeEnd()
 	if (GetFadeMgr()->isFadeEnd())
 	{
 		// シーン終了
-		mScore = mScene->End();
+		mScore = mScene->end();
 		mState.changeState(cState_Init);
 		return;
 	}
 
-	mScene->Draw();
+	mScene->draw();
 }

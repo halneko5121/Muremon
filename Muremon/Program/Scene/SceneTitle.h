@@ -18,10 +18,10 @@ public:
 	SceneTitle();
 	~SceneTitle();
 
-	void ImpleInit() override;
+	void impleInit() override;
 	bool update() override;
-	void Draw() override;
-	int End() override;
+	void draw() override;
+	int end() override;
 
 	void PosiDrawControl();
 	void ChangeSceneControl();

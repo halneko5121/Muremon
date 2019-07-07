@@ -51,50 +51,44 @@ public:
 	/**
 	 * @brief	初期化処理
 	 */
-	void init();
-	virtual void ImpleInit();
+	void			init(LPDIRECT3DDEVICE9 apDev);
+	virtual void	impleInit();
 
 	/**
 	 * @brief	更新処理
 	 * @return	シーン終了か
 	 */
-	virtual bool update() = 0;
+	virtual bool	update() = 0;
 
 	/**
 	 * @brief	描画処理
 	 */
-	virtual void Draw() = 0;
+	virtual void	draw() = 0;
 
 	/**
 	 * @brief	終了処理
 	 */
-	virtual int End() = 0;
+	virtual int		end() = 0;
 
 	/*-		共通関数	-*/
 
 	/**
 	 * @brief	実行処理
 	 */
-	bool RunScene();
+	bool			runScene();
 
 	/**
-	 * @brief	設定処理
-	 * @param	apDev		デバイス
-	 */
-	void SetScene(LPDIRECT3DDEVICE9 apDev);
-
-	/**
-	 * @brief	シーンの変更を行う
+	 * @brief	シーン変更リクエストを行う
 	 * @param	nextID		次のシーンの番号
 	 */
-	void ChangeScene(DWORD next_id);
+	void			requestChangeScene(DWORD next_id);
 
 	//-情報取得関数-
 
 	/**
 	 * @brief	シーン番号の取得
 	 */
-	DWORD GetSceneID();
+	DWORD			getSceneID();
 
 protected:
     DWORD               mSceneID;		// シーンの番号

@@ -73,7 +73,7 @@ SceneGameNormal::~SceneGameNormal(void)
 {
 }
 
-void SceneGameNormal::ImpleInit()
+void SceneGameNormal::impleInit()
 {
 	mNiku	= new ActorNikuman(mVertex, mTexture);
 	mNoppo	= new ActorNoppo(mVertex, mTexture);
@@ -285,7 +285,7 @@ bool SceneGameNormal::update()
 	return mIsSceneChange;
 }
 
-void SceneGameNormal::Draw()
+void SceneGameNormal::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
 
@@ -401,10 +401,10 @@ void SceneGameNormal::Draw()
 	}
 }
 
-int SceneGameNormal::End()
+int SceneGameNormal::end()
 {
 	//ゲームオーバーの場合
-	ChangeScene(cSceneName_Ranking);
+	requestChangeScene(cSceneName_Ranking);
 
 	UtilSound::stop(S_BGM_BATTLE);
 

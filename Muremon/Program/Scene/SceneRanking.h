@@ -147,11 +147,11 @@ private:
 	bool ranking_flag;
 
 public:
-	void ImpleInit() override;
-	void InitScene(int score);
+	void impleInit() override;
+	void init(LPDIRECT3DDEVICE9 apDev, int score);
 	bool update() override;
-	void Draw() override;
-	int End() override;
+	void draw() override;
+	int end() override;
 
 	void FadeControl();		
 

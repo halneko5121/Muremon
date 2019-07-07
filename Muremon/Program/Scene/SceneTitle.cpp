@@ -61,7 +61,7 @@ SceneTitle::~SceneTitle()
 {
 }
 
-void SceneTitle::ImpleInit()
+void SceneTitle::impleInit()
 {
 	mTexture->load("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->load("Data\\RectData\\title.txt");
@@ -80,7 +80,7 @@ bool SceneTitle::update()
 	return mIsSceneChange;
 }
 
-void SceneTitle::Draw()
+void SceneTitle::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_TITLE_BG), mDevice);
 	mVertex->drawF(cDispTitleBgX, cDispTitleBgY, R_TITLE_BG);
@@ -91,9 +91,9 @@ void SceneTitle::Draw()
 	mUITitleMenu->draw();
 }
 
-int SceneTitle::End()
+int SceneTitle::end()
 {
-	ChangeScene(mNextSceneIndex);
+	requestChangeScene(mNextSceneIndex);
 	UtilSound::pause(S_BGM_TITLE);
 
 	mTexture->release();

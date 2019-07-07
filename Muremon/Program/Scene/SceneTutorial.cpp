@@ -29,7 +29,7 @@ SceneTutorial::~SceneTutorial(void)
 {
 }
 
-void SceneTutorial::ImpleInit()
+void SceneTutorial::impleInit()
 {
 	mTexture->load("Data\\TextureData\\Tutorial.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->load("Data\\RectData\\Tutorial.txt");
@@ -46,7 +46,7 @@ bool SceneTutorial::update()
 	return mIsSceneChange;
 }
 
-void SceneTutorial::Draw()
+void SceneTutorial::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL1), mDevice);
 
@@ -61,9 +61,9 @@ void SceneTutorial::Draw()
 	mVertex->drawF(tutorial[TR_NORMAL].x,tutorial[TR_NORMAL].y,R_TUTORIAL2);
 }
 
-int SceneTutorial::End()
+int SceneTutorial::end()
 {
-	ChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneName_Title);
 	mTexture->release();
 	mVertex->release();
 

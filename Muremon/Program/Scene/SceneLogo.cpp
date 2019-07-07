@@ -36,7 +36,7 @@ SceneLogo::~SceneLogo()
 {
 }
 
-void SceneLogo::ImpleInit()
+void SceneLogo::impleInit()
 {
 	mTexture->load("Data\\TextureData\\logo.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->load("Data\\RectData\\logo.txt");
@@ -54,15 +54,15 @@ bool SceneLogo::update()
 	return mIsSceneChange;
 }
 
-void SceneLogo::Draw()
+void SceneLogo::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_LOGO), mDevice);
 	mVertex->drawF(400.f,300.f,R_LOGO);
 }
 
-int SceneLogo::End()
+int SceneLogo::end()
 {
-	ChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneName_Title);
 	mTexture->release();
 	mVertex->release();
 

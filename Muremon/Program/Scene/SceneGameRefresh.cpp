@@ -45,7 +45,7 @@ SceneGameRefresh::~SceneGameRefresh(void)
 {
 }
 
-void SceneGameRefresh::ImpleInit()
+void SceneGameRefresh::impleInit()
 {
 	mNiku	= new ActorNikuman(mVertex, mTexture);
 	mNoppo	= new ActorNoppo(mVertex, mTexture);
@@ -167,7 +167,7 @@ bool SceneGameRefresh::update()
 	return mIsSceneChange;
 }
 
-void SceneGameRefresh::Draw()
+void SceneGameRefresh::draw()
 {
 	if(mSameState == G_START_SCENE){
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
@@ -262,10 +262,10 @@ void SceneGameRefresh::Draw()
 	}
 }
 
-int SceneGameRefresh::End()
+int SceneGameRefresh::end()
 {
 	//ƒ^ƒCƒgƒ‹‚Ö
-	ChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneName_Title);
 
 	UtilSound::stop(S_BGM_BATTLE);
 

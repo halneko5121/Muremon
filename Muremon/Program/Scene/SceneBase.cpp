@@ -35,16 +35,22 @@ SceneBase::~SceneBase()
  * @brief	初期化処理
  */
 void
-SceneBase::init()
+SceneBase::init(LPDIRECT3DDEVICE9 apDev)
 {
-	ImpleInit();
+	mDevice = apDev;		// デバイスセット
+
+	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
+	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
+	mMouseData.mIsDownRButton = mMouseData.mIsPushRButton = mMouseData.mIsReleaseRButton = false;
+
+	impleInit();
 }
 
 /**
  * @brief	オーバーライドされる前提の処理
  */
 void
-SceneBase::ImpleInit()
+SceneBase::impleInit()
 {
 }
 
@@ -52,24 +58,10 @@ SceneBase::ImpleInit()
  * @brief	実行処理
  */
 bool
-SceneBase::RunScene()
+SceneBase::runScene()
 {
 	bool is_scene_change = update();
 	return is_scene_change;
-}
-
-/**
- * @brief	設定処理
- * @param	apDev		デバイス
- */
-void
-SceneBase::SetScene(LPDIRECT3DDEVICE9 apDev)
-{
-	mDevice		= apDev;		// デバイスセット
-
-	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
-	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
-	mMouseData.mIsDownRButton = mMouseData.mIsPushRButton = mMouseData.mIsReleaseRButton = false;
 }
 
 /**
@@ -77,7 +69,7 @@ SceneBase::SetScene(LPDIRECT3DDEVICE9 apDev)
  * @param	nextID		次のシーンの番号
  */
 void
-SceneBase::ChangeScene(DWORD next_id)
+SceneBase::requestChangeScene(DWORD next_id)
 {
     mSceneID = next_id;
 }
@@ -86,7 +78,7 @@ SceneBase::ChangeScene(DWORD next_id)
  * @brief	シーン番号の取得
  */
 DWORD
-SceneBase::GetSceneID()
+SceneBase::getSceneID()
 {
 	return mSceneID;
 }

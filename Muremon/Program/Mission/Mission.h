@@ -65,59 +65,59 @@ private:
 
 	int cnt_key_noppo;		//のっぽの押されたキーの数をカウント
 public:
-	int GetCntKeyNikuman()		{ return cnt_key_nikuman; };
-	int GetCntKeyYoshitaro()	{ return cnt_key_yoshitaro; };
-	int GetCntKeyNoppo()		{ return cnt_key_noppo; };
+	int		getCountKeyNikuman()		{ return cnt_key_nikuman; };
+	int		getCountKeyYoshitaro()	{ return cnt_key_yoshitaro; };
+	int		getCountKeyNoppo()		{ return cnt_key_noppo; };
 
 
-	void init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo);
+	void	init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo);
 
-	int Control();
+	int		update();
 
-	void Draw();
+	void	draw();
 
-	void FadeIn();
+	void	fadeIn();
 
-	void FadeOut();
+	void	fadeOut();
 
-	void DrawNumT();		//時間を表示
+	void	drawTime();		//時間を表示
 
-	void DrawCombo();
+	void	drawCombo();
 
-	void MissionSelect();	//みっしょんを決めたり初期化したり
+	void	missionSelect();	//みっしょんを決めたり初期化したり
 
-	void MissionControl();
-	void MissionControlD();
+	void	updateMission();
+	void	updateMissionD();
 
-	void Mission1();	//『10秒以内に100回連打せよ！！』
-	void Mission2();	//『10秒間でちょうど50回連打せよ！！』
-	void Mission3();	//『10秒間でちょうど100回連打せよ！！』
-	void Mission4();	//『「NIKUMANTOTUGEKI」と入力せよ！！』
-	void Mission5();	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
-	void Mission6();	//『「YOSITAROHIPATACK」と入力せよ！！』
-	void Mission7();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
-	void Mission8();	//『「NOPPOKOKEPPETI」と入力せよ！！』
-	void Mission9();	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
-	void Mission10();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
-	void Mission11();	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
-	void Mission12();	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
-	void Mission13();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
-	void Mission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
+	void	updateMission1();	//『10秒以内に100回連打せよ！！』
+	void	updateMission2();	//『10秒間でちょうど50回連打せよ！！』
+	void	updateMission3();	//『10秒間でちょうど100回連打せよ！！』
+	void	updateMission4();	//『「NIKUMANTOTUGEKI」と入力せよ！！』
+	void	updateMission5();	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
+	void	updateMission6();	//『「YOSITAROHIPATACK」と入力せよ！！』
+	void	updateMission7();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
+	void	updateMission8();	//『「NOPPOKOKEPPETI」と入力せよ！！』
+	void	updateMission9();	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
+	void	updateMission10();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
+	void	updateMission11();	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
+	void	updateMission12();	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
+	void	updateMission13();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
+	void	updateMission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	void Mission1D();	//『10秒以内に100回連打せよ！！』
-	void Mission2D();	//『10秒間でちょうど50回連打せよ！！』
-	void Mission3D();	//『10秒間でちょうど100回連打せよ！！』
-	void Mission4D();	//『「NIKUMANTOTUGEKI」と入力せよ！！』
-	void Mission5D();	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
-	void Mission6D();	//『「YOSITAROHIPATACK」と入力せよ！！』
-	void Mission7D();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
-	void Mission8D();	//『「NOPPOKOKEPPETI」と入力せよ！！』
-	void Mission9D();	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
-	void Mission10D();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
-	void Mission11D();	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
-	void Mission12D();	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
-	void Mission13D();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
-	void Mission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
+	void	updateMission1D();	//『10秒以内に100回連打せよ！！』
+	void	updateMission2D();	//『10秒間でちょうど50回連打せよ！！』
+	void	updateMission3D();	//『10秒間でちょうど100回連打せよ！！』
+	void	updateMission4D();	//『「NIKUMANTOTUGEKI」と入力せよ！！』
+	void	updateMission5D();	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
+	void	updateMission6D();	//『「YOSITAROHIPATACK」と入力せよ！！』
+	void	updateMission7D();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
+	void	updateMission8D();	//『「NOPPOKOKEPPETI」と入力せよ！！』
+	void	updateMission9D();	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
+	void	updateMission10D();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
+	void	updateMission11D();	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
+	void	updateMission12D();	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
+	void	updateMission13D();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
+	void	updateMission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
 	Mission(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
 	~Mission(void);

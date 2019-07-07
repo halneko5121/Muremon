@@ -135,15 +135,15 @@ bool SceneGameNormal::update()
 				mIsInit = true;
 			}
 			if(mMissionStateKeep < MISSION_OUGI){
-				mMissionStateKeep = mMission->Control();
-				if(mNikumanKeyCount != mMission->GetCntKeyNikuman()){
-					mNikumanKeyCount = mMission->GetCntKeyNikuman();
+				mMissionStateKeep = mMission->update();
+				if(mNikumanKeyCount != mMission->getCountKeyNikuman()){
+					mNikumanKeyCount = mMission->getCountKeyNikuman();
 				}
-				if(mYoshitaroKeyCount != mMission->GetCntKeyYoshitaro()){
-					mYoshitaroKeyCount = mMission->GetCntKeyYoshitaro();
+				if(mYoshitaroKeyCount != mMission->getCountKeyYoshitaro()){
+					mYoshitaroKeyCount = mMission->getCountKeyYoshitaro();
 				}
-				if(mNoppoKeyCount != mMission->GetCntKeyNoppo()){
-					mNoppoKeyCount = mMission->GetCntKeyNoppo();
+				if(mNoppoKeyCount != mMission->getCountKeyNoppo()){
+					mNoppoKeyCount = mMission->getCountKeyNoppo();
 				}
 			}
 			else if(mMissionStateKeep == MISSION_OUGI){
@@ -397,7 +397,7 @@ void SceneGameNormal::Draw()
 	mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
 
 	if(mMissionGage >= MISSION_GAGE_MAX){
-		mMission->Draw();
+		mMission->draw();
 	}
 }
 

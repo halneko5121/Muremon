@@ -137,13 +137,13 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	cnt_key_noppo		= cnt_noppo;		//のっぽの押されたキーの数をカウント
 }
 
-int Mission::Control()
+int Mission::update()
 {
 	if(mission_state == MISSION_START){
-		MissionSelect();
+		missionSelect();
 		//位置を計算
 		if(flag_draw == 7){
-			FadeIn();
+			fadeIn();
 			return mission_state;
 		}
 		if(flag_draw%2 == 0){
@@ -167,7 +167,7 @@ int Mission::Control()
 			UtilSound::playOnce(S_OSIRASE);
 			flag_sound = false;
 		}
-		MissionControl();
+		updateMission();
 	}
 	else{
 		if(mission_state == MISSION_SEIKO){
@@ -182,12 +182,12 @@ int Mission::Control()
 				flag_sound2 = false;
 			}
 		}
-		FadeOut();
+		fadeOut();
 	}
 	return mission_state;
 }
 
-void Mission::Draw()
+void Mission::draw()
 {
 	vertex->setTextureData(texture->getTextureData(T_MISSION),pDevice);
 
@@ -210,63 +210,63 @@ void Mission::Draw()
 	}
 
 	if(mission_state == MISSION_MIDDLE){
-		MissionControlD();
+		updateMissionD();
 	}
 	else{
 	}
 }
 
-void Mission::MissionControl()
+void Mission::updateMission()
 {
 	switch(mission_no)
 	{
 	case MISSION_1:
-		Mission1();
+		updateMission1();
 		break;
 	case MISSION_2:
-		Mission2();
+		updateMission2();
 		break;
 	case MISSION_3:
-		Mission3();
+		updateMission3();
 		break;
 	case MISSION_4:
-		Mission4();
+		updateMission4();
 		break;
 	case MISSION_5:
-		Mission5();
+		updateMission5();
 		break;
 	case MISSION_6:
-		Mission6();
+		updateMission6();
 		break;
 	case MISSION_7:
-		Mission7();
+		updateMission7();
 		break;
 	case MISSION_8:
-		Mission8();
+		updateMission8();
 		break;
 	case MISSION_9:
-		Mission9();
+		updateMission9();
 		break;
 	case MISSION_10:
-		Mission10();
+		updateMission10();
 		break;
 	case MISSION_11:
-		Mission11();
+		updateMission11();
 		break;
 	case MISSION_12:
-		Mission12();
+		updateMission12();
 		break;
 	case MISSION_13:
-		Mission13();
+		updateMission13();
 		break;
 	case MISSION_14:
-		Mission14();
+		updateMission14();
 		break;
 	}
 	//time++;
 }
 
-void Mission::Mission1()	//『10秒以内に100回連打せよ！！』
+void Mission::updateMission1()	//『10秒以内に100回連打せよ！！』
 {
 	if (time <= 0)
 	{
@@ -282,7 +282,7 @@ void Mission::Mission1()	//『10秒以内に100回連打せよ！！』
 	time--;
 }
 
-void Mission::Mission2()	//『10秒間でちょうど50回連打せよ！！』
+void Mission::updateMission2()	//『10秒間でちょうど50回連打せよ！！』
 {
 	if (time <= 0)
 	{
@@ -298,7 +298,7 @@ void Mission::Mission2()	//『10秒間でちょうど50回連打せよ！！』
 	time--;
 }
 
-void Mission::Mission3()	//『10秒間でちょうど100回連打せよ！！』
+void Mission::updateMission3()	//『10秒間でちょうど100回連打せよ！！』
 {
 	if(time <= 0)
 	{
@@ -314,7 +314,7 @@ void Mission::Mission3()	//『10秒間でちょうど100回連打せよ！！』
 	time--;
 }
 
-void Mission::Mission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
+void Mission::updateMission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	if(time <= 0)
 	{
@@ -387,7 +387,7 @@ void Mission::Mission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 	time--;
 }
 
-void Mission::Mission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
+void Mission::updateMission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	if (time <= 0)
 	{
@@ -475,7 +475,7 @@ void Mission::Mission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 	time--;
 }
 
-void Mission::Mission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
+void Mission::updateMission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	if (time <= 0)
 	{
@@ -544,7 +544,7 @@ void Mission::Mission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 	time--;
 }
 
-void Mission::Mission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
+void Mission::updateMission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	if (time <= 0)
 	{
@@ -619,7 +619,7 @@ void Mission::Mission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 	time--;
 }
 
-void Mission::Mission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
+void Mission::updateMission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	if (time <= 0)
 	{
@@ -682,7 +682,7 @@ void Mission::Mission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 	time--;
 }
 
-void Mission::Mission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
+void Mission::updateMission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	if (time <= 0)
 	{
@@ -760,7 +760,7 @@ void Mission::Mission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 	time--;
 }
 
-void Mission::Mission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void Mission::updateMission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(flag_time_cnt == 0){
 		time = 0;
@@ -795,7 +795,7 @@ void Mission::Mission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	}
 }
 
-void Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void Mission::updateMission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(flag_time_cnt == 0){
 		time = 0;
@@ -837,7 +837,7 @@ void Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	}
 }
 
-void Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
+void Mission::updateMission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 {
 	if (time <= 0)
 	{
@@ -859,7 +859,7 @@ void Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 	time--;
 }
 
-void Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
+void Mission::updateMission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 {
 	if (time <= 0)
 	{
@@ -881,7 +881,7 @@ void Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	time--;
 }
 
-void Mission::Mission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
+void Mission::updateMission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 {
 	if(time <= 0)
 	{
@@ -903,128 +903,128 @@ void Mission::Mission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 	time--;
 }
 
-void Mission::MissionControlD()
+void Mission::updateMissionD()
 {
 	switch(mission_no)
 	{
 	case MISSION_1:
-		Mission1D();
+		updateMission1D();
 		break;
 	case MISSION_2:
-		Mission2D();
+		updateMission2D();
 		break;
 	case MISSION_3:
-		Mission3D();
+		updateMission3D();
 		break;
 	case MISSION_4:
-		Mission4D();
+		updateMission4D();
 		break;
 	case MISSION_5:
-		Mission5D();
+		updateMission5D();
 		break;
 	case MISSION_6:
-		Mission6D();
+		updateMission6D();
 		break;
 	case MISSION_7:
-		Mission7D();
+		updateMission7D();
 		break;
 	case MISSION_8:
-		Mission8D();
+		updateMission8D();
 		break;
 	case MISSION_9:
-		Mission9D();
+		updateMission9D();
 		break;
 	case MISSION_10:
-		Mission10D();
+		updateMission10D();
 		break;
 	case MISSION_11:
-		Mission11D();
+		updateMission11D();
 		break;
 	case MISSION_12:
-		Mission12D();
+		updateMission12D();
 		break;
 	case MISSION_13:
-		Mission13D();
+		updateMission13D();
 		break;
 	case MISSION_14:
-		Mission14D();
+		updateMission14D();
 		break;
 	}
 }
 
-void Mission::Mission1D()	//『10秒以内に100回連打せよ！！』
+void Mission::updateMission1D()	//『10秒以内に100回連打せよ！！』
 {
-	DrawNumT();
-	DrawCombo();
+	drawTime();
+	drawCombo();
 }
 
-void Mission::Mission2D()	//『10秒間でちょうど50回連打せよ！！』
+void Mission::updateMission2D()	//『10秒間でちょうど50回連打せよ！！』
 {
-	DrawNumT();
-	DrawCombo();
+	drawTime();
+	drawCombo();
 }
 
-void Mission::Mission3D()	//『10秒間でちょうど100回連打せよ！！』
+void Mission::updateMission3D()	//『10秒間でちょうど100回連打せよ！！』
 {
-	DrawNumT();
-	DrawCombo();
+	drawTime();
+	drawCombo();
 }
 
-void Mission::Mission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
+void Mission::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
-	DrawNumT();
+	drawTime();
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(125.f + 29.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
-void Mission::Mission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
+void Mission::updateMission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
-	DrawNumT();
+	drawTime();
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(76.f + 28.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
-void Mission::Mission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
+void Mission::updateMission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
-	DrawNumT();
+	drawTime();
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(118.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
-void Mission::Mission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
+void Mission::updateMission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
-	DrawNumT();
+	drawTime();
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(108.f + 28.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
-void Mission::Mission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
+void Mission::updateMission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
-	DrawNumT();
+	drawTime();
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(131.f + 30.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
-void Mission::Mission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
+void Mission::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
-	DrawNumT();
+	drawTime();
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(96.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
-void Mission::Mission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void Mission::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(flag_time_cnt == 0){
 		vertex->drawF(mission_start.x,mission_start.y,R_MISSION_HASSEI);
@@ -1035,7 +1035,7 @@ void Mission::Mission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	//DrawNumT();		//デバッグ用
 }
 
-void Mission::Mission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void Mission::updateMission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(flag_time_cnt == 0){
 		vertex->drawF(mission_start.x,mission_start.y,R_MISSION_HASSEI);
@@ -1046,22 +1046,22 @@ void Mission::Mission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	//DrawNumT();		//デバッグ用
 }
 
-void Mission::Mission12D()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
+void Mission::updateMission12D()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 {
-	DrawNumT();
+	drawTime();
 }
 
-void Mission::Mission13D()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
+void Mission::updateMission13D()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 {
-	DrawNumT();
+	drawTime();
 }
 
-void Mission::Mission14D()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
+void Mission::updateMission14D()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 {
-	DrawNumT();
+	drawTime();
 }
 
-void Mission::FadeIn()
+void Mission::fadeIn()
 {
 	if(alpha == MISSION_ALPHA_MAX){
 		mission_state = MISSION_MIDDLE;
@@ -1076,7 +1076,7 @@ void Mission::FadeIn()
 	}
 }
 
-void Mission::FadeOut()
+void Mission::fadeOut()
 {
 	if(alpha == 0){
 		if(mission_state == MISSION_SEIKO){
@@ -1094,7 +1094,7 @@ void Mission::FadeOut()
 	}
 }
 
-void Mission::MissionSelect()
+void Mission::missionSelect()
 {
 	if(flag_init) { return ; }
 	else{
@@ -1156,7 +1156,7 @@ void Mission::MissionSelect()
 	}
 }
 
-void Mission::DrawNumT()
+void Mission::drawTime()
 {
 	//タイム
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
@@ -1174,7 +1174,7 @@ void Mission::DrawNumT()
 	}
 }
 
-void Mission::DrawCombo()
+void Mission::drawCombo()
 {
 	//コンボ
 	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);

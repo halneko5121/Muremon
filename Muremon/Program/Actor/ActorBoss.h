@@ -149,12 +149,4 @@ public:
 	void BossDraw();	//ボスを描画
 
 	void FallDraw();
-
-	void FadeIn();	//フェードイン
-
-	void FadeOut();	//フェードアウト
-
-	void FadeControl();	//フェードコントロール
-
-	//void Sound();
 };

@@ -97,7 +97,7 @@ public:
 	void DrawFont(LPSTR str, long pos_x, long pos_y, DWORD option);
 
 private:
-	static DirectFont*		mInstance;		// インスタンス
+	static DirectFont*	mInstance;		// インスタンス
     LPDIRECT3DDEVICE9   mFontDevice;	// 文字描画専用で使うデバイス
     LPD3DXFONT          mFont;			// DirectFontのインターフェース
     D3DXFONT_DESC		mFontDesc;		// フォント設定

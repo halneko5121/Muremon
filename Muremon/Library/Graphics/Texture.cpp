@@ -33,7 +33,7 @@ bool
 Texture::LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
 {
 	FILE *fp;							// ファイルポインタ
-	char load_file_name[MAX_STRING];	// カウント+読み込み用
+	char load_file_name[256];			// カウント+読み込み用
 	fopen_s(&fp, file_name, "r");		// ファイルオープン
 
 	// エラー処理

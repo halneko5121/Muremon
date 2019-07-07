@@ -390,15 +390,6 @@ UITitleMenu::stateExeMenuSelect()
 			mState.changeState(cState_GameSelect);
 			return;
 		}
-		else if (mCurrentMenuItem == G_RANKING)
-		{
-//			mIsSceneChange = false;
-//			mNextSceneIndex = cSceneName_Ranking;
-		}
-		else
-		{
-			PostQuitMessage(0);
-		}
 	}
 
 	if (UtilInput::IsKeyPushed(DIK_X))
@@ -441,27 +432,6 @@ UITitleMenu::stateExeGameSelect()
 			mCurrentMenuItem = G_CLEARLY;
 		}
 	}
-
-	if (UtilInput::IsKeyPushed(DIK_Z))
-	{
-		//ゲームメニューが表示されている時にＺキーが押されたら
-		if (mCurrentMenuItem == G_CLEARLY)
-		{
-			//すっきりモードを開始させるようにフラグを変える
-//			mNextSceneIndex = cSceneName_GameRefresh;
-		}
-		else if (mCurrentMenuItem == G_NORMAL)
-		{
-			//のーまるモードを開始させるようにフラグを変える
-//			mNextSceneIndex = cSceneName_GameNormal;
-		}
-		else
-		{
-//			mNextSceneIndex = cSceneName_Tutorial;
-		}
-//		mIsSceneChange = false;
-	}
-
 
 	if (UtilInput::IsKeyPushed(DIK_X))
 	{

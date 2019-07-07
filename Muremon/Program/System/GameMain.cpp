@@ -135,7 +135,7 @@ GameMain::MsgLoop(void)
 	// 描画設定
 	mGraphics->initRender();
 	GetFadeMgr()->init(mGraphics->getDevice());
-	GetFadeMgr()->SetColor(0, 0, 0);
+	GetFadeMgr()->setColor(0, 0, 0);
 
 	GetDirectSound()->load("Data\\sound_data.txt");
 
@@ -167,7 +167,7 @@ GameMain::MsgLoop(void)
 
 				mState.executeState();
 
-				GetFadeMgr()->Draw();
+				GetFadeMgr()->draw();
 				mGraphics->renderEnd();
 
 				oldTime = nowTime;
@@ -271,7 +271,7 @@ GameMain::ControlSequence(void)
 void
 GameMain::stateEnterInit()
 {
-	GetFadeMgr()->FadeIn();
+	GetFadeMgr()->fadeIn();
 
 	// シーン切り替え
 	ControlSequence();
@@ -279,7 +279,7 @@ GameMain::stateEnterInit()
 void
 GameMain::stateExeInit()
 {
-	if (GetFadeMgr()->IsFadeEnd())
+	if (GetFadeMgr()->isFadeEnd())
 	{
 		mState.changeState(cState_Run);
 		return;
@@ -305,13 +305,13 @@ GameMain::stateExeRun()
 		if (mScene->GetSceneID() == cSceneName_Title)
 		{
 			mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
-			GetFadeMgr()->SetColor(255, 255, 255);
+			GetFadeMgr()->setColor(255, 255, 255);
 		}
 		// タイトルが終わったらクリア時の色を黒にする
 		if (mScene->GetSceneID() == cSceneName_Prologue)
 		{
 			mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
-			GetFadeMgr()->SetColor(0, 0, 0);
+			GetFadeMgr()->setColor(0, 0, 0);
 		}
 
 		mState.changeState(cState_End);
@@ -327,13 +327,13 @@ GameMain::stateExeRun()
 void
 GameMain::stateEnterEnd()
 {
-	GetFadeMgr()->FadeOut();
+	GetFadeMgr()->fadeOut();
 	mScene->Draw();
 }
 void
 GameMain::stateExeEnd()
 {
-	if (GetFadeMgr()->IsFadeEnd())
+	if (GetFadeMgr()->isFadeEnd())
 	{
 		// シーン終了
 		mScore = mScene->End();

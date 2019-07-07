@@ -53,27 +53,27 @@ public:
 	/**
 	 * @brief	描画
 	 */
-	void				Draw();
+	void				draw();
 
 	/**
 	 * @brief	フェードイン
 	 */
-	void				FadeIn();
+	void				fadeIn();
 
 	/**
 	 * @brief	フェードアウト
 	 */
-	void				FadeOut();
+	void				fadeOut();
 
 	/**
 	 * @brief	フェードが終了したか？
 	 */
-	bool				IsFadeEnd();
+	bool				isFadeEnd();
 
 	/**
 	 * @brief	カラーのセット
 	 */
-	void				SetColor(int r, int g, int b);
+	void				setColor(int r, int g, int b);
 
 private:
 	enum FadeState

@@ -114,7 +114,7 @@ FadeMgr::update()
  * @brief	描画
  */
 void
-FadeMgr::Draw()
+FadeMgr::draw()
 {
 	mVertex->SetTextureData(mTexture->GetTextureData(0), mDevice);
 	mVertex->SetColor(mAlpha, mColorR, mColorG, mColorB);
@@ -125,7 +125,7 @@ FadeMgr::Draw()
  * @brief	フェードイン
  */
 void
-FadeMgr::FadeIn()
+FadeMgr::fadeIn()
 {
 	mState = cFadeState_FadeIn;
 	mFadeSpeed = -6;
@@ -135,7 +135,7 @@ FadeMgr::FadeIn()
  * @brief	フェードアウト
  */
 void
-FadeMgr::FadeOut()
+FadeMgr::fadeOut()
 {
 	mState = cFadeState_FadeOut;
 	mFadeSpeed = 6;
@@ -145,7 +145,7 @@ FadeMgr::FadeOut()
  * @brief	フェードが終了したか？
  */
 bool
-FadeMgr::IsFadeEnd()
+FadeMgr::isFadeEnd()
 {
 	return (mState == cFadeState_None);
 }
@@ -154,7 +154,7 @@ FadeMgr::IsFadeEnd()
  * @brief	カラーのセット
  */
 void
-FadeMgr::SetColor(int r, int g, int b)
+FadeMgr::setColor(int r, int g, int b)
 {
 	mColorR = r;
 	mColorG = g;

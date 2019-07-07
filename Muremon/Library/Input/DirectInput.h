@@ -175,11 +175,6 @@ public:
 	void						releaseDirectMouse();
 
 	/**
-	 * @brief	デバイス全体の情報更新(絶対値の場合)仮
-	 */
-	void						refresh();
-
-	/**
 	 * @brief	マウスの情報更新(カーソル位置)
 	 */
 	void						update();
@@ -197,10 +192,15 @@ public:
 
 private:
 	/**
+	 * @brief	デバイス全体の情報更新(絶対値の場合)仮
+	 */
+	void						refresh();
+
+	/**
 	 * @brief	デバイスの設定(軸モードの設定)
 	 * @return	成功 TRUE		失敗 FALSE
 	 */
-	bool						SetProperty();
+	bool						setProperty();
 
 private:
 	static DirectInputMouse*	mInstance;				// インスタンス

@@ -34,25 +34,25 @@ public:
 
 private:
 	// ステート関数
-	void stateEnterIdle();
-	void stateExeIdle();
+	void	stateEnterIdle();
+	void	stateExeIdle();
 
-	void stateEnterTop();
-	void stateExeTop();
+	void	stateEnterTop();
+	void	stateExeTop();
 
-	void stateEnterMenuSelect();
-	void stateExeMenuSelect();
+	void	stateEnterMenuSelect();
+	void	stateExeMenuSelect();
 
-	void stateEnterGameSelect();
-	void stateExeGameSelect();
+	void	stateEnterGameSelect();
+	void	stateExeGameSelect();
 
 private:
 	StateMachine<UITitleMenu>	mState;					// ステート
-	Texture*					mTexture;
-	Vertex*						mVertex;
-	D3DXVECTOR2					mCursorPos;
+	Texture*					mTexture;				// テクスチャ
+	Vertex*						mVertex;				// バーテックス
+	D3DXVECTOR2					mCursorPos;				// カーソル位置
 	int							mCurrentMenuItem;		// カーソルが選択しているものを判別。
-	int							mAlphaZPush;
+	int							mAlphaZPush;			// Zpush 用のアルファ
 	int							mTimeCount;				// ロゴのタイムカウント
 	int							mCursorAnime;			// カーソルアニメーション
 	bool						mIsZPush;

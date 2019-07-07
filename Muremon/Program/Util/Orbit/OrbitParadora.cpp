@@ -8,7 +8,7 @@ C_OrbitParadora::~C_OrbitParadora(void)
 {
 }
 
-POS_CC<float> C_OrbitParadora::OrbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc,int chara_num)
+POS_CC<float> C_OrbitParadora::orbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc,int chara_num)
 {
 	static int time[MAX_VALLUE_PLAYER] = {0};
 

@@ -274,7 +274,7 @@ ActorNikuman::deathControl(int mCharaNum , int sound_num, int rect_startnum)			/
 		mCharaData[mCharaNum].draw_cc  = mOrbit->pRebound->orbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);
 	}
 	else if(mCharaData[mCharaNum].flag_atk2){
-		mCharaData[mCharaNum].draw_cc  = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);	
+		mCharaData[mCharaNum].draw_cc  = mOrbit->pParadora->orbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);	
 	}
 
 	if( (mCharaData[mCharaNum].draw_cc.y < -RADIUS_NIKU) || (mCharaData[mCharaNum].draw_cc.y > cWindowHeight + RADIUS_NIKU) ){

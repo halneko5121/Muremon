@@ -332,7 +332,7 @@ ActorNoppo::deathControl(int mCharaNum, int sound_startnum ,int rect_startnum)		
 		mCharaData[mCharaNum].animetion = 0;																	//•`‰æ‚ðŒÅ’è
 		mCharaData[mCharaNum].rect_num  = ANIME_S_ATK2_NOPPO;
 
-		mCharaData[mCharaNum].draw_cc   = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
+		mCharaData[mCharaNum].draw_cc   = mOrbit->pParadora->orbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
 	}	
 	if(mCharaData[mCharaNum].flag_deathfade){
 		if(mCharaData[mCharaNum].alpha <= 0){

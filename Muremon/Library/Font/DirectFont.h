@@ -32,19 +32,19 @@ public:
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void		create();
+	static void			create();
 
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void		destroy();
+	static void			destroy();
 
 	/**
 	 * @brief	初期化を行う(メンバ初期化)
 	 * @param	device    デバイス
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT initDirectFont(LPDIRECT3DDEVICE9 device);
+	HRESULT				initDirectFont(LPDIRECT3DDEVICE9 device);
 
 	/**
 	 * @brief	フォントの色設定
@@ -53,31 +53,31 @@ public:
 	 * @param	green   緑の値
 	 * @param	blue    青の値
 	 */
-	void setFontColor(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue);
+	void				setFontColor(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue);
 
 	/**
 	 * @brief	フォントサイズ設定
 	 * @param	size	大きさ指定(幅・高さ)
 	 */
-	void setFontSize(D3DXVECTOR2 size);
+	void				setFontSize(D3DXVECTOR2 size);
 
 	/**
 	 * @brief	フォント設定
 	 * @param	fontname	フォント名
 	 */
-	void setFontName(LPCSTR fontname);
+	void				setFontName(LPCSTR fontname);
 
 	/**
 	 * @brief	文字の太さの設定
 	 * @param	font_weight(1～1000まで指定可能)
 	 */
-	void setWeight(UINT font_weight);
+	void				setWeight(UINT font_weight);
 
 	/**
 	 * @brief	斜体・通常設定
 	 * @param	is_italic	斜体ならtrue／しないならfalse
 	 */
-	void setItalic(bool is_italic);
+	void				setItalic(bool is_italic);
 
 	/**
 	 * @brief	文字の描画
@@ -85,7 +85,7 @@ public:
 	 * @param	pos_x	X座標
 	 * @param	pos_y	Y座標
 	 */
-	void draw(LPSTR str, long pos_x, long pos_y);
+	void				draw(LPSTR str, long pos_x, long pos_y);
 
 	/**
 	 * @brief	文字の描画(uFormatの設定をしたい場合)
@@ -94,7 +94,7 @@ public:
 	 * @param	pos_y	Y座標
 	 * @param	option　DrawTextのuFormatオプション
 	 */
-	void draw(LPSTR str, long pos_x, long pos_y, DWORD option);
+	void				draw(LPSTR str, long pos_x, long pos_y, DWORD option);
 
 private:
 	static DirectFont*	mInstance;		// インスタンス

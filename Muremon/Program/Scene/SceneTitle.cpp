@@ -96,7 +96,11 @@ void SceneTitle::draw()
 int SceneTitle::end()
 {
 	requestChangeScene(mNextSceneIndex);
-	UtilSound::pause(S_BGM_TITLE);
+	if (mNextSceneIndex == cSceneName_GameNormal ||
+		mNextSceneIndex == cSceneName_GameRefresh)
+	{
+		UtilSound::stop(S_BGM_TITLE);
+	}
 
 	mTexture->release();
 	mVertex->release();

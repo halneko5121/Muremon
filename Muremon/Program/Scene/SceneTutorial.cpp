@@ -45,23 +45,18 @@ namespace
 	};
 }
 
-SceneTutorial::SceneTutorial(void)
+SceneTutorial::SceneTutorial()
 {
 	mDrawState = TR_REFRESH;
 	mSlideState = 0;
 
 	mTutorial[TR_REFRESH].y = mTutorial[TR_NORMAL].y = cTrY;
-
 	mTutorial[TR_REFRESH].x = mTutorial[TR_NORMAL].x  = cTrRightX;
-
-	mAlpha=0;
-	mAlphaCount=0;
-	mFadeFlag=TR_FADE_IN;
 
 	mIsSceneChange = true;
 }
 
-SceneTutorial::~SceneTutorial(void)
+SceneTutorial::~SceneTutorial()
 {
 }
 
@@ -73,8 +68,6 @@ void SceneTutorial::impleInit()
 
 bool SceneTutorial::update()
 {
-	UtilSound::playOnce(S_BGM_TITLE);
-
 	updateInput();
 
 	updateDrawPos();
@@ -85,15 +78,9 @@ bool SceneTutorial::update()
 void SceneTutorial::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL1), mDevice);
-
-	//mVertex->SetColor(alpha,255,255,255);
-
 	mVertex->drawF(mTutorial[TR_REFRESH].x,mTutorial[TR_REFRESH].y,R_TUTORIAL1);
 
 	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL2), mDevice);
-
-	//mVertex->SetColor(alpha,255,255,255);
-
 	mVertex->drawF(mTutorial[TR_NORMAL].x,mTutorial[TR_NORMAL].y,R_TUTORIAL2);
 }
 
@@ -106,51 +93,6 @@ int SceneTutorial::end()
 	return 0;
 }
 
-void SceneTutorial::fadeControl()
-{
-	switch(mFadeFlag)
-	{
-		case TR_FADE_IN:
-			fadeIn();
-			if(mAlpha == 255) mFadeFlag=TR_USUALLY;
-			break;
-		case TR_USUALLY:
-			break;
-		case TR_FADE_OUT:
-			fadeOut();
-			if(mAlpha == 0)	//シーン移行、ゲームスタート
-			break;
-	}
-}
-
-void SceneTutorial::fadeIn()
-{
-	if(mAlphaCount++>1)
-	{
-		mAlpha += 5;
-		mAlphaCount = 0;
-	}
-	if(mAlpha > 255)
-	{
-		mAlpha = 255;
-		mAlphaCount = 0;
-	}
-}
-
-void SceneTutorial::fadeOut()
-{
-	if(mAlphaCount++>1)
-	{
-		mAlpha -= 5;
-		mAlphaCount = 0;
-	}
-	if(mAlpha < 0)
-	{
-		mAlpha = 0;
-		mAlphaCount = 0;
-	}
-}
-
 void SceneTutorial::updateInput()
 {
 	if (UtilInput::isKeyPushed(DIK_Z))
@@ -160,10 +102,12 @@ void SceneTutorial::updateInput()
 	else if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-		if(mDrawState == TR_NORMAL){
+		if(mDrawState == TR_NORMAL)
+		{
 			mDrawState = TR_REFRESH;
 		}
-		else if(mDrawState == TR_END){
+		else if(mDrawState == TR_END)
+		{
 			mDrawState = TR_NORMAL;
 		}
 		mSlideState = 1;
@@ -171,10 +115,12 @@ void SceneTutorial::updateInput()
 	else if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-		if(mDrawState == TR_REFRESH){
+		if(mDrawState == TR_REFRESH)
+		{
 			mDrawState = TR_NORMAL;
 		}
-		else if(mDrawState == TR_NORMAL){
+		else if(mDrawState == TR_NORMAL)
+		{
 			mDrawState = TR_END;
 		}
 		mSlideState = 2;
@@ -195,7 +141,8 @@ void SceneTutorial::updateDrawPos()
 		}
 		else
 		{
-			if(mTutorial[TR_REFRESH].x != cTrCenterX){
+			if(mTutorial[TR_REFRESH].x != cTrCenterX)
+			{
 				mTutorial[TR_REFRESH].x -= 10.f;
 			}
 		}
@@ -224,7 +171,8 @@ void SceneTutorial::updateDrawPos()
 		{
 			mTutorial[TR_NORMAL].x -= 10.f;
 		}
-		else{
+		else
+		{
 			mIsSceneChange = false;
 		}
 	}

@@ -7,11 +7,13 @@
   ******************************************************************/
 
 #include "GameMain.h"
+
 #include "Library/Font/DirectFont.h"
 #include "Library/Input/DirectInput.h"
 #include "Library/Graphics/Vertex.h"
 #include "Library/Graphics/FadeMgr.h"
 #include "Library/Sound/DirectSound.h"
+#include "Program/DefineGame.h"
 
 // 各シーンのinclude
 #include "Program/Scene/SceneLogo.h"
@@ -69,7 +71,9 @@ int WINAPI
 GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
 {
 	InitGameMain();
-	mWindow->InitWindow(hInstance);	// ウィンドウ初期化関数
+
+	// ウィンドウ初期化関数
+	mWindow->InitWindow(hInstance, cWindowWidth, cWindowHeight, cWindowPosX, cWindowPosY);
 
 	// 各ライブラリの初期化
 	// DirectInput初期化
@@ -86,7 +90,7 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	}
 
 	// DirectGraphics初期化
-	if(FAILED(mGraphics->InitDGraphics(mWindow, mWindow->GetHwnd(), GAMESIZE_WIDE, GAMESIZE_HEIGHT)))
+	if(FAILED(mGraphics->InitDGraphics(mWindow, mWindow->GetHwnd(), cWindowWidth, cWindowHeight)))
 	{
 		MessageBox(NULL, TEXT("DirectGraphicsの初期化に失敗"), NULL, MB_OK);
 		return 0;

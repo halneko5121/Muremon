@@ -26,9 +26,13 @@
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
     <ClCompile Include="Program\Mission\Mission.cpp" />
+    <ClCompile Include="Program\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Program\System\GameMain.cpp" />
     <ClCompile Include="Program\main.cpp" />
     <ClCompile Include="Program\Scene\SceneBase.cpp" />
+    <ClCompile Include="Program\UI\UITitleMenu.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
@@ -60,9 +64,11 @@
     <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Program\DefineGame.h" />
     <ClInclude Include="Program\Mission\Mission.h" />
+    <ClInclude Include="Program\stdafx.h" />
     <ClInclude Include="Program\System\GameMain.h" />
     <ClInclude Include="Program\main.h" />
     <ClInclude Include="Program\Scene\SceneBase.h" />
+    <ClInclude Include="Program\UI\UITitleMenu.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />
@@ -126,10 +132,11 @@
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader />
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <ForcedIncludeFiles>Program/Define.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>Program/stdafx.h</ForcedIncludeFiles>
+      <PrecompiledHeaderFile>Program/stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

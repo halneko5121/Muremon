@@ -89,6 +89,10 @@
     <ClCompile Include="Program\System\GameMain.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Program\UI\UITitleMenu.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -181,6 +185,10 @@
     <ClInclude Include="Program\System\GameMain.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="Program\UI\UITitleMenu.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -218,6 +226,9 @@
     </Filter>
     <Filter Include="Mission">
       <UniqueIdentifier>{221fa471-355c-4d3a-9e22-dabdb17e166a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{4e2ecc62-2ab1-4323-9d0d-e83f46dd5c4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

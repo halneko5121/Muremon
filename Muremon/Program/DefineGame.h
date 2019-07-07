@@ -8,14 +8,16 @@
 //---------------------------------------------
 #pragma once
 
-const int GAMESIZE_HEIGHT = 600;
-const int GAMESIZE_WIDE = 800;
-const float GAMESIZE_CENTER_X = (GAMESIZE_WIDE / 2.f);
-const float GAMESIZE_CENTER_Y = (GAMESIZE_HEIGHT / 2.f);
+// Windowの大きさ
+const int cWindowHeight = 600;
+const int cWindowWidth = 800;
+const float cWindowCenterX = (cWindowWidth / 2.f);
+const float cWindowCenterY = (cWindowHeight / 2.f);
 
 // Windowを表示する位置
-const int WINDOW_TOP = 100;
-const int WINDOW_LEFT = 220;
+const int cWindowPosY = 100;
+const int cWindowPosX = 220;
+
 // ゲーム用カーソルのサイズ
 const int CURSOR_HEIGHT = 20;
 const int CURSOR_WIDE = 20;
@@ -81,7 +83,32 @@ const int CURSOR_WIDE = 20;
 
 #define BOSS_WIN_POSITOIN	(450)
 
-//順番変更↓三上3/26
+enum SOUND_DATA
+{
+	S_BGM_TITLE,		//タイトルBGM
+	S_SE_CURSOR_MOVE,	//カーソル移動音
+	S_SE_OK,			//決定音
+	S_CANCEL,			//キャンセル
+	S_BGM_BATTLE,		//バトルBGM
+	S_GAME_START,		//ゲームスタート
+	S_SAIREN,			//危険
+	S_OSIRASE,			//ミッション開始
+	S_NAMI,				//奥義
+	S_M_CLEAR,			//ミッションクリア
+	S_DEAD,				//しゃっく　死んだ時
+	S_NIKUMAN,			//肉まん　攻撃が当たった時
+	S_YOSHI_HIP,		//吉太郎　地上攻撃が当たった時
+	S_YOSHI_HUSEN,		//吉太郎　空中攻撃が当たった時
+	S_NOPPO_KOKE,		//のっぽ　こけた時
+	S_NOPPO_PETI,		//のっぽ　頭の長いのが当たった時
+	S_NOPPO_GANMEN,		//のっぽ　空中攻撃が当たった時
+	S_OVER,				//ゲームオーバー
+	S_G_CLEAR,			//ゲームクリア
+	S_M_OVER,			//ゲームオーバー
+
+	MAX_SOUND_DATA,
+};
+
 enum TEXTURE_DATA_GAME
 {
 	T_GAME_BG,
@@ -95,7 +122,6 @@ enum TEXTURE_DATA_GAME
 	T_RANKING,
 };
 
-//順番変更↓三上3/26
 enum RECT_DATA_GAME
 {
 	R_GAME_BG,			//背景
@@ -252,9 +278,9 @@ enum PLAY_MODE
 	PLAY_NORMAL,
 };
 
-//enum CHARA
-//{
-//	NIKUMAN,
-//	YOSHITARO,
-//	NOPPO,
-//};
+enum CHARA_ID
+{
+	ID_YOSHI,
+	ID_NIKUMAN,
+	ID_NOPPO,
+};

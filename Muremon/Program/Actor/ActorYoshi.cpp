@@ -52,7 +52,7 @@ namespace
 		//各フラグ
 		false, false, false, false, false, false, false, false,
 		// 中心座標
-		(-RADIUS_YOSHI),(GAMESIZE_WIDE + 50.f + RADIUS_YOSHI),
+		(-RADIUS_YOSHI),(cWindowWidth + 50.f + RADIUS_YOSHI),
 	};
 }
 
@@ -175,13 +175,13 @@ ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			}
 
 			if(mCharaData[i].flag_atk1){
-				if(mCharaData[i].draw_cc.x - RADIUS_YOSHI < GAMESIZE_WIDE){
+				if(mCharaData[i].draw_cc.x - RADIUS_YOSHI < cWindowWidth){
 					mCharaData[i].draw_cc	 = CharaAttack_1(i);
 					mCharaData[i].animetion = SetAnimetion(ANIME_G_ATK4_YOSHI,mCharaData[i].animetion,NULL,i);
 				}
 			}
 			else if(mCharaData[i].flag_atk2){
-				if(mCharaData[i].draw_cc.x - RADIUS_YOSHI < GAMESIZE_WIDE){
+				if(mCharaData[i].draw_cc.x - RADIUS_YOSHI < cWindowWidth){
 					mOrbit->pWave->SetSpeed(mCharaData[i].speed);
 					mCharaData[i].draw_cc	 = CharaAttack_2(i);
 					mCharaData[i].animetion = SetAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_YOSHI,i);
@@ -193,8 +193,8 @@ ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		//当たった後の処理
 		if(mCharaData[i].flag_hit){
 			//中心座標が画面外なら死亡
-			if( (mCharaData[i].draw_cc.x < -RADIUS_YOSHI) || (mCharaData[i].draw_cc.x > GAMESIZE_WIDE + RADIUS_YOSHI) &&
-				(mCharaData[i].draw_cc.y < -RADIUS_YOSHI) || (mCharaData[i].draw_cc.y > GAMESIZE_HEGHT + RADIUS_YOSHI) ){
+			if( (mCharaData[i].draw_cc.x < -RADIUS_YOSHI) || (mCharaData[i].draw_cc.x > cWindowWidth + RADIUS_YOSHI) &&
+				(mCharaData[i].draw_cc.y < -RADIUS_YOSHI) || (mCharaData[i].draw_cc.y > cWindowHeight + RADIUS_YOSHI) ){
 					mCharaData[i].flag_death = true;
 			}
 			
@@ -330,7 +330,7 @@ ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)						/
 		}
 	}
 
-	if( (mCharaData[mCharaNum].draw_cc.y < -RADIUS_YOSHI) || (mCharaData[mCharaNum].draw_cc.y > GAMESIZE_HEGHT + RADIUS_YOSHI) ){
+	if( (mCharaData[mCharaNum].draw_cc.y < -RADIUS_YOSHI) || (mCharaData[mCharaNum].draw_cc.y > cWindowHeight + RADIUS_YOSHI) ){
 		mCharaData[mCharaNum].flag_atk1  = mCharaData[mCharaNum].flag_atk2  = false;
 		mCharaData[mCharaNum].flag_death = mCharaData[mCharaNum].flag_hit	  = false;
 		mCharaData[mCharaNum].flag_death_next = false;

@@ -147,13 +147,13 @@ ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 			}
 
 			if(mCharaData[i].flag_atk1){
-				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < GAMESIZE_WIDE){
+				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < cWindowWidth){
 					mCharaData[i].animetion = SetAnimetion(ANIME_G_ATK4_NIKU,mCharaData[i].animetion,NULL,i);
 					mCharaData[i].draw_cc	 = CharaAttack_1(i);
 				}
 			}
 			else if(mCharaData[i].flag_atk2){
-				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < GAMESIZE_WIDE){
+				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < cWindowWidth){
 					mCharaData[i].animetion = SetAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_NIKU,i );
 					mCharaData[i].draw_cc	 = CharaAttack_2(i,boss_cc);
 				}
@@ -165,8 +165,8 @@ ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 		//“–‚½‚Á‚½Œã‚Ìˆ—
 		if(mCharaData[i].flag_hit){
 			//’†SÀ•W‚ª‰æ–ÊŠO‚È‚ç€–S
-			if( (mCharaData[i].draw_cc.x < -RADIUS_NIKU)  || (mCharaData[i].draw_cc.x > GAMESIZE_WIDE  + RADIUS_NIKU) &&
-				(mCharaData[i].draw_cc.y < -RADIUS_NIKU) || (mCharaData[i].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NIKU) ){
+			if( (mCharaData[i].draw_cc.x < -RADIUS_NIKU)  || (mCharaData[i].draw_cc.x > cWindowWidth  + RADIUS_NIKU) &&
+				(mCharaData[i].draw_cc.y < -RADIUS_NIKU) || (mCharaData[i].draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
 					mCharaData[i].flag_death = true;
 			}
 
@@ -277,7 +277,7 @@ ActorNikuman::DeathControl(int mCharaNum , int sound_num, int rect_startnum)			/
 		mCharaData[mCharaNum].draw_cc  = mOrbit->pParadora->OrbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);	
 	}
 
-	if( (mCharaData[mCharaNum].draw_cc.y < -RADIUS_NIKU) || (mCharaData[mCharaNum].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NIKU) ){
+	if( (mCharaData[mCharaNum].draw_cc.y < -RADIUS_NIKU) || (mCharaData[mCharaNum].draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
 		mCharaData[mCharaNum].flag_atk1  = false;
 		mCharaData[mCharaNum].flag_atk2  = false;
 		mCharaData[mCharaNum].flag_death = false;

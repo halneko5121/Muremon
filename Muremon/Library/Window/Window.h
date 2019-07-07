@@ -27,13 +27,13 @@ public:
 	 * @param	hInst   インスタンスハンドル
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT InitWindow(HINSTANCE hInst);
+	HRESULT InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y);
 
 	/**
 	 * @brief	生成
 	 * @return	true:成功   false:失敗
 	 */
-	bool WindowCreate();
+	bool WindowCreate(int width, int height, int pos_x, int pos_y);
 
 	/**
 	 * @brief	ウィンドウクラス独自のウィンドウプロシージャ

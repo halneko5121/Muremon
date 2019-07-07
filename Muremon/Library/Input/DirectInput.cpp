@@ -281,8 +281,8 @@ DirectInputMouse::DirectInputMouse()
 	ZeroMemory(&mMouseState, sizeof(DIMOUSESTATE2));
 	ZeroMemory(&mMouseStatePrev, sizeof(DIMOUSESTATE2));
 
-	SetRect(&mGameSize, 0, 0, GAMESIZE_WIDE, GAMESIZE_HEIGHT);
-	SetCursorPos( (WINDOW_LEFT + cBarX),(WINDOW_TOP + cBarY) );	
+	SetRect(&mGameSize, 0, 0, cWindowWidth, cWindowHeight);
+	SetCursorPos( (cWindowPosX + cBarX),(cWindowPosY + cBarY) );	
 
 	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
 	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;

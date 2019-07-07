@@ -10,7 +10,7 @@ namespace
 	const int cParaRandMoveX = -15;									// 移動量				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = GAMESIZE_HEGHT + RADIUS_NOPPO + 50;	// 放物線の最終座標
+	const float cParaLimitY = cWindowHeight + RADIUS_NOPPO + 50;	// 放物線の最終座標
 
 	// 波処理関係
 	const int cWaveAmplit = 20;										// 振幅(上下に動く幅)					
@@ -46,7 +46,7 @@ namespace
 		// 各フラグ
 		false, false, false, false, false, false, false, false,
 		// 中心座標
-		(-RADIUS_NOPPO), (GAMESIZE_WIDE + 50.f + RADIUS_NOPPO),
+		(-RADIUS_NOPPO), (cWindowWidth + 50.f + RADIUS_NOPPO),
 	};
 }
 
@@ -178,13 +178,13 @@ ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 
 			//攻撃処理(xが画面外じゃなければ処理)
 			if(mCharaData[i].flag_atk1){
-				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < GAMESIZE_WIDE){
+				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < cWindowWidth){
 					mCharaData[i].draw_cc	 = CharaAttack_1(i);
 					mCharaData[i].animetion = SetAnimetion(ANIME_G_ATK4_NOPPO,mCharaData[i].animetion,NULL,i);
 				}
 			}
 			else if(mCharaData[i].flag_atk2){
-				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < GAMESIZE_WIDE){
+				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < cWindowWidth){
 					mOrbit->pWave->SetSpeed(mCharaData[i].speed);
 					mCharaData[i].draw_cc	 = CharaAttack_2(i);
 					mCharaData[i].animetion = SetAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO),mCharaData[i].animetion,ANIME_S_ATK1_NOPPO,i);
@@ -196,8 +196,8 @@ ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		//当たった後の処理
 		if(mCharaData[i].flag_hit){
 			//画面外なら死亡
-			if( (mCharaData[i].draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData[i].draw_cc.x > GAMESIZE_WIDE  + RADIUS_NOPPO + 50) &&
-				(mCharaData[i].draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData[i].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NOPPO + 50) ){
+			if( (mCharaData[i].draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData[i].draw_cc.x > cWindowWidth  + RADIUS_NOPPO + 50) &&
+				(mCharaData[i].draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData[i].draw_cc.y > cWindowHeight + RADIUS_NOPPO + 50) ){
 					mCharaData[mCharaNum].flag_death = true;
 			}
 
@@ -342,7 +342,7 @@ ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)		
 		}
 	}
 
-	if( (mCharaData[mCharaNum].draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData[mCharaNum].draw_cc.y > GAMESIZE_HEGHT + RADIUS_NOPPO + 30) ){
+	if( (mCharaData[mCharaNum].draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData[mCharaNum].draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30) ){
 		mCharaData[mCharaNum].flag_atk1  = mCharaData[mCharaNum].flag_atk2 = false;
 		mCharaData[mCharaNum].flag_death = mCharaData[mCharaNum].flag_hit  = false;
 	}

@@ -21,7 +21,7 @@
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-C_Window::InitWindow(HINSTANCE hInst)
+C_Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
 {
 	// ハンドルを渡す
 	mHInstance = hInst;
@@ -48,7 +48,7 @@ C_Window::InitWindow(HINSTANCE hInst)
 	}
 
 	// ウィンドウ生成
-	if(!WindowCreate())
+	if(!WindowCreate(width, height, pos_x, pos_y))
 	{
 		MessageBox(NULL, TEXT("ウィンドウの生成に失敗しました"), NULL, MB_OK);
 		return E_FAIL;
@@ -65,7 +65,7 @@ C_Window::InitWindow(HINSTANCE hInst)
  * @return	true:成功   false:失敗
  */
 bool
-C_Window::WindowCreate()
+C_Window::WindowCreate(int width, int height, int pos_x, int pos_y)
 {
 	// 0でうめる
 	ZeroMemory(&mWindowSize , sizeof(RECT));
@@ -84,9 +84,9 @@ C_Window::WindowCreate()
 	{
 		// サイズセット
 		mWindowSize.top		= 0;
-		mWindowSize.left		= 0;
-		mWindowSize.right	= GAMESIZE_WIDE;
-		mWindowSize.bottom	= GAMESIZE_HEIGHT;
+		mWindowSize.left	= 0;
+		mWindowSize.right	= width;
+		mWindowSize.bottom	= height;
 		AdjustWindowRect(&mWindowSize , WINDOW_STYLE_W , false);		//サイズを合わせる関数
 
 		mWindowSize.right	= mWindowSize.right - mWindowSize.left;	//ウィンドウの幅計算
@@ -95,15 +95,15 @@ C_Window::WindowCreate()
 		mWindowSize.top		= 0;
 
 		// ウィンドウの位置を画面中央に置く
-		mWindowSize.top	= GetSystemMetrics(SM_CYSCREEN) / 2 - WINDOW_HEIGHT / 2;
-		mWindowSize.left = GetSystemMetrics(SM_CXSCREEN) / 2 - WINDOW_WIDTH;
+		mWindowSize.top	= GetSystemMetrics(SM_CYSCREEN) / 2 - height / 2;
+		mWindowSize.left = GetSystemMetrics(SM_CXSCREEN) / 2 - width;
 
 		mWindowHandle = CreateWindowEx(
 			0,											// 拡張ウィンドウスタイル
 			CLASS_NAME,									// ウィンドウクラス名
 			WINDOW_NAME,								// ウィンドウ名
 			WINDOW_STYLE_W,								// ウィンドウスタイル
-			WINDOW_LEFT,WINDOW_TOP,						// ウィンドウ表示位置
+			pos_x, pos_y,								// ウィンドウ表示位置
 			mWindowSize.right , mWindowSize.bottom,		// ウィンドウ幅
 			NULL,										// 親ウィンドウのハンドル
 			NULL,										// メニューハンドルまたは、子ウィンドウID

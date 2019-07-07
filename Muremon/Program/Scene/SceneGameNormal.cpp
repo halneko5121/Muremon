@@ -147,10 +147,10 @@ bool SceneGameNormal::update()
 				}
 			}
 			else if(mMissionStateKeep == MISSION_OUGI){
-				ControlMissionOugi();
+				updateMissionOugi();
 			}
 			else if(mMissionStateKeep == MISSION_NEGATIVE){
-				ControlMissionNegative();
+				updateMissionNegative();
 			}
 			else if(mMissionStateKeep == MISSION_END){
 				mNegativeState = NO_NEGATIVE;
@@ -235,7 +235,7 @@ bool SceneGameNormal::update()
 		{
 			mNoppoKeyCount++;
 		}
-		ReCover();
+		recover();
 
 		//if(GetAsyncKeyState(VK_RETURN)){	//エンターキーが押されたらタイトルに戻る
 		//	mIsSceneChange = false;
@@ -313,7 +313,7 @@ void SceneGameNormal::draw()
 
 		mBoss->fallDraw();
 
-		HitEffectDraw();
+		drawHitEffect();
 		//キャラ達
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
@@ -352,10 +352,10 @@ void SceneGameNormal::draw()
 	}
 
 	if(mMissionStateKeep == MISSION_OUGI){
-		DrawMissionOugi();
+		drawMissionOugi();
 	}
 	else if(mMissionStateKeep == MISSION_NEGATIVE){
-		DrawMissionNegative();
+		drawMissionNegative();
 	}
 
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
@@ -366,22 +366,22 @@ void SceneGameNormal::draw()
 
 	mVertex->drawF(G_SCORE_X,G_SCORE_Y,R_SCORE);		//すこあ
 
-	DrawNumS();
+	drawScore();
 
 	mVertex->drawF(G_TIME_X,G_TIME_Y,R_TIME);		//たいむ
 
-	DrawNumT();
+	drawTime();
 
 	mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//にくまん顔
 	mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//よしたろう顔
 	mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//のっぽ顔
 
-	DrawNum();
+	drawKeyCount();
 
 	mVertex->drawF(G_MISSION_X,G_MISSION_Y,R_MISSION_GAGE);	//みっしょんげ～じ
 	mVertex->drawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_IN);	//みっしょんゲージ
 
-	DrawGageMission();
+	drawMissionGuage();
 
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
@@ -390,7 +390,7 @@ void SceneGameNormal::draw()
 	mVertex->drawF(G_HP_X,G_HP_Y,R_HP);	//しゃっくの体力
 	mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 
-	DrawGageHp();
+	drawHpGauge();
 
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
@@ -478,7 +478,7 @@ void SceneGameNormal::fadeOut()
 	}
 }
 
-void SceneGameNormal::DrawNum()
+void SceneGameNormal::drawKeyCount()
 {
 	//にくまん
 	for(int i = 0;i < 4;i++){
@@ -506,7 +506,7 @@ void SceneGameNormal::DrawNum()
 	}
 }
 
-void SceneGameNormal::DrawNumS()
+void SceneGameNormal::drawScore()
 {
 	//スコア
 	for(int i = 0;i < 9;i++){
@@ -518,7 +518,7 @@ void SceneGameNormal::DrawNumS()
 	}
 }
 
-void SceneGameNormal::DrawNumT()
+void SceneGameNormal::drawTime()
 {
 	//タイム
 	for(int i = 0;i < 5;i++){
@@ -555,7 +555,7 @@ void SceneGameNormal::DrawNumT()
 	}
 }
 
-void SceneGameNormal::DrawGageHp()
+void SceneGameNormal::drawHpGauge()
 {
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
@@ -566,13 +566,13 @@ void SceneGameNormal::DrawGageHp()
 	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
-void SceneGameNormal::HitEffectDraw()
+void SceneGameNormal::drawHitEffect()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
 	mVertex->drawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
-void SceneGameNormal::DrawGageMission()
+void SceneGameNormal::drawMissionGuage()
 {
 	float num = (float)mMissionGage / (float)MISSION_GAGE_MAX;
 
@@ -583,7 +583,7 @@ void SceneGameNormal::DrawGageMission()
 	mVertex->drawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
 }
 
-void SceneGameNormal::ControlMissionOugi()
+void SceneGameNormal::updateMissionOugi()
 {
 	if(mTimeCount >= 0 && 60 > mTimeCount){
 		mAlphaFont += 5;
@@ -621,7 +621,7 @@ void SceneGameNormal::ControlMissionOugi()
 	}
 	if(mTimeCount > 630){
 		mBoss->boss_life -= 7000;
-		ReCover();
+		recover();
 		mMissionStateKeep = MISSION_END;
 		mWavePos.x = WAVE_INIT_X;
 		mWavePos.y = WAVE_INIT_Y;
@@ -630,7 +630,7 @@ void SceneGameNormal::ControlMissionOugi()
 	mTimeCount++;
 }
 
-void SceneGameNormal::DrawMissionOugi()
+void SceneGameNormal::drawMissionOugi()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
 
@@ -645,9 +645,9 @@ void SceneGameNormal::DrawMissionOugi()
 	mVertex->drawF(mWavePos.x,mWavePos.y,R_OUGI);
 }
 
-void SceneGameNormal::ControlMissionNegative()
+void SceneGameNormal::updateMissionNegative()
 {
-	NegativeSelect();
+	selectNegative();
 
 	mNegativeState = SLIDE_IN;
 
@@ -687,7 +687,7 @@ void SceneGameNormal::ControlMissionNegative()
 	mTimeCount++;
 }
 
-void SceneGameNormal::DrawMissionNegative()
+void SceneGameNormal::drawMissionNegative()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
 
@@ -698,7 +698,7 @@ void SceneGameNormal::DrawMissionNegative()
 	mVertex->drawF(400.f,300.f,R_NEGATIVE1 + mNegativeState - 1);
 }
 
-void SceneGameNormal::NegativeSelect()
+void SceneGameNormal::selectNegative()
 {
 	if(mNegativeState != 0){
 		return ;
@@ -720,7 +720,7 @@ void SceneGameNormal::NegativeSelect()
 	}
 }
 
-void SceneGameNormal::ReCover()
+void SceneGameNormal::recover()
 {
 	if(mBoss->boss_life <= 0){
 		mNegativeDamege = 1;

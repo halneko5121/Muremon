@@ -13,7 +13,7 @@
  * @brief	地上攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunGroundAttack()
+UtilBattle::isRunGroundAttack()
 {
 	return (UtilInput::IsKeyPushedOdd());
 }
@@ -22,7 +22,7 @@ UtilBattle::IsRunGroundAttack()
  * @brief	空中攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunSkyAttack()
+UtilBattle::isRunSkyAttack()
 {
 	return (UtilInput::IsKeyPushedEven());
 }
@@ -31,52 +31,52 @@ UtilBattle::IsRunSkyAttack()
  * @brief	地上「弱」攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunWeakGroundAttack()
+UtilBattle::isRunWeakGroundAttack()
 {
-	return (IsRunGroundAttack() && UtilInput::IsKeyPushedLineTwo());
+	return (isRunGroundAttack() && UtilInput::IsKeyPushedLineTwo());
 }
 
 /**
  * @brief	空中「弱」攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunWeakSkyAttack()
+UtilBattle::isRunWeakSkyAttack()
 {
-	return (IsRunSkyAttack() && UtilInput::IsKeyPushedLineTwo());
+	return (isRunSkyAttack() && UtilInput::IsKeyPushedLineTwo());
 }
 
 /**
  * @brief	地上「中」攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunMediumGroundAttack()
+UtilBattle::isRunMediumGroundAttack()
 {
-	return (IsRunGroundAttack() && UtilInput::IsKeyPushedLineOne());
+	return (isRunGroundAttack() && UtilInput::IsKeyPushedLineOne());
 }
 
 /**
  * @brief	空中「中」攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunMediumSkyAttack()
+UtilBattle::isRunMediumSkyAttack()
 {
-	return (IsRunSkyAttack() && UtilInput::IsKeyPushedLineOne());
+	return (isRunSkyAttack() && UtilInput::IsKeyPushedLineOne());
 }
 
 /**
  * @brief	地上「強」攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunStrongGroundAttack()
+UtilBattle::isRunStrongGroundAttack()
 {
-	return (IsRunGroundAttack() && UtilInput::IsKeyPushedLineThree());
+	return (isRunGroundAttack() && UtilInput::IsKeyPushedLineThree());
 }
 
 /**
  * @brief	空中「強」攻撃が実行されたか？
  */
 bool
-UtilBattle::IsRunStrongSkyAttack()
+UtilBattle::isRunStrongSkyAttack()
 {
-	return (IsRunSkyAttack() && UtilInput::IsKeyPushedLineThree());
+	return (isRunSkyAttack() && UtilInput::IsKeyPushedLineThree());
 }

@@ -100,8 +100,8 @@ ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 	mRandSpeed = 0.f;
 
 	// çUåÇäJén
-	if (UtilBattle::IsRunWeakGroundAttack() ||
-		UtilBattle::IsRunWeakSkyAttack())
+	if (UtilBattle::isRunWeakGroundAttack() ||
+		UtilBattle::isRunWeakSkyAttack())
 	{
 		if(mFlagTurn2){
 			mCharaData[mCharaNum]	  = cInitActorData;
@@ -110,14 +110,14 @@ ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 		}
 		mCharaData[mCharaNum]		= SetAtk_Flag(mCharaData[mCharaNum]);
 
-		if (UtilBattle::IsRunWeakGroundAttack())
+		if (UtilBattle::isRunWeakGroundAttack())
 		{
 			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU, G_ATK_2_START_Y);
 			mCharaData[mCharaNum].speed = SetSpeed();
 			mDegSpin[mCharaNum] = 0.f;
 		}
-		else if (UtilBattle::IsRunWeakSkyAttack())
+		else if (UtilBattle::isRunWeakSkyAttack())
 		{
 			s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
 			rand_acc[mCharaNum] = (float)(rand() % cParaRandAcc + cParaRandAccMin);

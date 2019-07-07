@@ -114,8 +114,8 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 	mRandSpeed = 0.f;
 
 	// çUåÇäJén
-	if (UtilBattle::IsRunMediumGroundAttack() ||
-		UtilBattle::IsRunMediumSkyAttack())
+	if (UtilBattle::isRunMediumGroundAttack() ||
+		UtilBattle::isRunMediumSkyAttack())
 	{
 		if(mFlagTurn2)
 		{
@@ -126,13 +126,13 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		mCharaData[mCharaNum]		= SetAtk_Flag(mCharaData[mCharaNum]);
 		mCharaData[mCharaNum].speed  = SetSpeed();
 
-		if (UtilBattle::IsRunMediumGroundAttack())
+		if (UtilBattle::isRunMediumGroundAttack())
 		{
 			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI, G_ATK_1_START_Y);
 			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 		}
-		else if (UtilBattle::IsRunMediumSkyAttack())
+		else if (UtilBattle::isRunMediumSkyAttack())
 		{
 			s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
 			rand_acc[mCharaNum] = (float)(rand() % cParaRandAcc + cParaRandAccMin);

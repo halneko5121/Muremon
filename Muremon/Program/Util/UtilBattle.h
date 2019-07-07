@@ -9,15 +9,15 @@
 
 namespace UtilBattle
 {
-	bool		IsRunGroundAttack();
-	bool		IsRunSkyAttack();
+	bool		isRunGroundAttack();
+	bool		isRunSkyAttack();
 
-	bool		IsRunWeakGroundAttack();
-	bool		IsRunWeakSkyAttack();
+	bool		isRunWeakGroundAttack();
+	bool		isRunWeakSkyAttack();
 
-	bool		IsRunMediumGroundAttack();
-	bool		IsRunMediumSkyAttack();
+	bool		isRunMediumGroundAttack();
+	bool		isRunMediumSkyAttack();
 
-	bool		IsRunStrongGroundAttack();
-	bool		IsRunStrongSkyAttack();
+	bool		isRunStrongGroundAttack();
+	bool		isRunStrongSkyAttack();
 }

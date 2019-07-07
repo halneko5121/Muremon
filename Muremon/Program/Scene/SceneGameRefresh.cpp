@@ -116,20 +116,20 @@ bool SceneGameRefresh::update()
 		}
 
 		// ‚É‚­‚Ü‚ñ
-		if (UtilBattle::IsRunWeakGroundAttack() ||
-			UtilBattle::IsRunWeakSkyAttack())
+		if (UtilBattle::isRunWeakGroundAttack() ||
+			UtilBattle::isRunWeakSkyAttack())
 		{
 			mNikumanKeyCount++;
 		}
 		// ‚æ‚µ‚½‚ë‚¤
-		if (UtilBattle::IsRunMediumGroundAttack() ||
-			UtilBattle::IsRunMediumSkyAttack())
+		if (UtilBattle::isRunMediumGroundAttack() ||
+			UtilBattle::isRunMediumSkyAttack())
 		{
 			mYoshitaroKeyCount++;
 		}
 		// ‚Ì‚Á‚Û
-		if (UtilBattle::IsRunStrongGroundAttack() ||
-			UtilBattle::IsRunStrongSkyAttack())
+		if (UtilBattle::isRunStrongGroundAttack() ||
+			UtilBattle::isRunStrongSkyAttack())
 		{
 			mNoppoKeyCount++;
 		}

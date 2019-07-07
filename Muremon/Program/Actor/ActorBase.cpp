@@ -105,7 +105,7 @@ float
 ActorBase::SetSpeed()
 {
 	// “÷‚Ü‚ñ‚Ì‹ó’†UŒ‚‚ÍŒvZ•û–@‚ªˆá‚¤‚Ì‚Å
-	if (UtilBattle::IsRunWeakSkyAttack())
+	if (UtilBattle::isRunWeakSkyAttack())
 	{
 		mRandSpeed = (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
 	}
@@ -123,11 +123,11 @@ ActorBase::SetSpeed()
 CHARADATA
 ActorBase::SetAtk_Flag(CHARADATA set_charadata)
 {
-	if (UtilBattle::IsRunGroundAttack())
+	if (UtilBattle::isRunGroundAttack())
 	{
 		set_charadata.flag_atk1 = true;
 	}
-	else if (UtilBattle::IsRunSkyAttack())
+	else if (UtilBattle::isRunSkyAttack())
 	{
 		set_charadata.flag_atk2 = true;
 	}

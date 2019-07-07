@@ -110,8 +110,8 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 	mRandSpeed = 0.f;
 
 	// çUåÇäJén
-	if (UtilBattle::IsRunStrongGroundAttack() ||
-		UtilBattle::IsRunStrongSkyAttack())
+	if (UtilBattle::isRunStrongGroundAttack() ||
+		UtilBattle::isRunStrongSkyAttack())
 	{
 		if(mFlagTurn2){
 			mCharaData[mCharaNum]	= init_charadata_noppo;
@@ -121,11 +121,11 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		mCharaData[mCharaNum]		 = SetAtk_Flag(mCharaData[mCharaNum]);
 		mCharaData[mCharaNum].speed	 = SetSpeed();
 
-		if (UtilBattle::IsRunStrongGroundAttack())
+		if (UtilBattle::isRunStrongGroundAttack())
 		{
 			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO, G_ATK_3_START_Y);
 		}
-		else if (UtilBattle::IsRunStrongSkyAttack())
+		else if (UtilBattle::isRunStrongSkyAttack())
 		{
 			s_atk_start_y = (float)(rand() % cRandY);
 			rand_acc[mCharaNum] = (float)(rand() % cParaRandAcc + cParaRandAccMin);

@@ -135,7 +135,7 @@ DirectGraphics::changeWindowSize(Window *wind, HWND hWnd, int client_size_x, int
 }
 
 /**
- * @brief	•`‰æİ’è
+ * @brief	•`‰æ‰Šúİ’è
  */
 void
 DirectGraphics::initRender()

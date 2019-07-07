@@ -162,11 +162,9 @@ SceneTutorial::stateEnterRefreshSlide()
 void
 SceneTutorial::stateExeRefreshSlide()
 {
-	if (mTutorial[TR_REFRESH].x != cTrCenterX)
-	{
-		mTutorial[TR_REFRESH].x -= 10.f;
-	}
-	else
+	mTutorial[TR_REFRESH].x -= 10.f;
+
+	if (mTutorial[TR_REFRESH].x <= cTrCenterX)
 	{
 		mState.changeState(cState_Refresh);
 	}
@@ -204,12 +202,10 @@ SceneTutorial::stateExeNormalSlide()
 	// ¶‚ÖˆÚ“®‚µ‚Ä‚¢‚é
 	if (mSlideState == 1)
 	{
-		if (mTutorial[TR_REFRESH].x != cTrCenterX)
-		{
-			mTutorial[TR_REFRESH].x += 10.f;
-			mTutorial[TR_NORMAL].x += 10.f;
-		}
-		else
+		mTutorial[TR_REFRESH].x += 10.f;
+		mTutorial[TR_NORMAL].x += 10.f;
+
+		if (cTrCenterX <= mTutorial[TR_REFRESH].x)
 		{
 			mState.changeState(cState_Refresh);
 		}
@@ -217,12 +213,10 @@ SceneTutorial::stateExeNormalSlide()
 	// ‰E‚ÖˆÚ“®‚µ‚Ä‚¢‚é
 	else if (mSlideState == 2)
 	{
-		if (mTutorial[TR_NORMAL].x != cTrCenterX)
-		{
-			mTutorial[TR_NORMAL].x -= 10.f;
-			mTutorial[TR_REFRESH].x -= 10.f;
-		}
-		else
+		mTutorial[TR_NORMAL].x -= 10.f;
+		mTutorial[TR_REFRESH].x -= 10.f;
+
+		if (mTutorial[TR_NORMAL].x <= cTrCenterX)
 		{
 			mState.changeState(cState_Normal);
 		}
@@ -269,12 +263,10 @@ SceneTutorial::stateExeEndSlide()
 	// ¶‚ÖˆÚ“®‚µ‚Ä‚¢‚é
 	if (mSlideState == 1)
 	{
-		if (mTutorial[TR_REFRESH].x != cTrCenterX)
-		{
-			mTutorial[TR_REFRESH].x += 10.f;
-			mTutorial[TR_NORMAL].x += 10.f;
-		}
-		else
+		mTutorial[TR_REFRESH].x += 10.f;
+		mTutorial[TR_NORMAL].x += 10.f;
+
+		if (cTrCenterX <= mTutorial[TR_REFRESH].x)
 		{
 			mState.changeState(cState_End);
 		}
@@ -285,7 +277,7 @@ SceneTutorial::stateExeEndSlide()
 		mTutorial[TR_REFRESH].x -= 10.f;
 		mTutorial[TR_NORMAL].x -= 10.f;
 
-		if (mTutorial[TR_NORMAL].x <= -400)
+		if (mTutorial[TR_NORMAL].x <= -cTrCenterX)
 		{
 			mState.changeState(cState_End);
 		}

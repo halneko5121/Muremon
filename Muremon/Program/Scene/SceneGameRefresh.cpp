@@ -82,11 +82,11 @@ bool SceneGameRefresh::update()
 
 		mNoppo->update(boss_cc, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
 	
-		mIsHitNiku  = mNiku->GetFlagHit();//あたったというフラグが帰ってきます
+		mIsHitNiku  = mNiku->isHitCheck();//あたったというフラグが帰ってきます
 		
-		mIsHitYoshi = mYoshi->GetFlagHit();//これをつかってダメージなどを
+		mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
 
-		mIsHitNoppo = mNoppo->GetFlagHit();//反映させてください
+		mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
 
 		if(mIsHitNiku)
 		{
@@ -94,7 +94,7 @@ bool SceneGameRefresh::update()
 			mBoss->boss_life-=NIKUMAN_DAMAGE;
 			mIsHitEffect = true;
 			mCharaAtkY = mNiku->m_chara_y;
-			mNiku->SetFlagHit(false);
+			mNiku->setIsHitCheck(false);
 		}
 
 		if(mIsHitYoshi)
@@ -103,7 +103,7 @@ bool SceneGameRefresh::update()
 			mBoss->boss_life-=YOSHITARO_DAMAGE;
 			mIsHitEffect = true;
 			mCharaAtkY = mYoshi->m_chara_y;
-			mYoshi->SetFlagHit(false);
+			mYoshi->setIsHitCheck(false);
 		}
 
 		if(mIsHitNoppo)
@@ -112,7 +112,7 @@ bool SceneGameRefresh::update()
 			mBoss->boss_life-=NOPPO_DAMAGE;
 			mIsHitEffect = true;
 			mCharaAtkY = mNoppo->m_chara_y;
-			mNoppo->SetFlagHit(false);
+			mNoppo->setIsHitCheck(false);
 		}
 
 		// にくまん
@@ -139,7 +139,7 @@ bool SceneGameRefresh::update()
 		}
 
 		//mBoss->RefreshControl();
-		mBoss->BossControl(PLAY_REFRESH);
+		mBoss->control(PLAY_REFRESH);
 
 		if(!mBoss->boss_fall_flag)
 		{
@@ -211,8 +211,8 @@ void SceneGameRefresh::Draw()
 
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//旗
 
-		mBoss->BossDraw();
-		mBoss->FallDraw();
+		mBoss->draw();
+		mBoss->fallDraw();
 
 		//BossDraw();
 		//BossNoFontDraw();
@@ -244,19 +244,19 @@ void SceneGameRefresh::Draw()
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
-		mNoppo->Draw(R_NOPPO_G_ATK1);
+		mNoppo->draw(R_NOPPO_G_ATK1);
 
 		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
-		mYoshi->Draw(R_YOSHI_G_ATK1);
+		mYoshi->draw(R_YOSHI_G_ATK1);
 
 		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
-		mNiku->Draw(R_NIKU_G_ATK1);
+		mNiku->draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
-		mNoppo->DrawEffectFont(R_NOPPO_PETI);
-		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
-		mNiku->DrawEffectFont(R_NIKU_BETYA);
+		mNoppo->drawEffectFont(R_NOPPO_PETI);
+		mYoshi->drawEffectFont(R_YOSHI_BOYO);
+		mNiku->drawEffectFont(R_NIKU_BETYA);
 
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 	}

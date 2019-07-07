@@ -71,7 +71,7 @@ ActorNikuman::init()
 	//protected•Ï”
 	mRandSpeed	 = 0.f;
 	mDelay		 = mMaxAnimetion = mCharaNum = 0;
-	mFlagTurn2 = mSetHitCheck  = false;
+	mFlagTurn2 = mIsHitCheck  = false;
 
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		//\‘¢‘Ì
@@ -108,13 +108,13 @@ ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 			mCountEffect[mCharaNum]	  = 0;
 			mDegSpin[mCharaNum]		  = 0.f;
 		}
-		mCharaData[mCharaNum]		= SetAtk_Flag(mCharaData[mCharaNum]);
+		mCharaData[mCharaNum]		= setAtkFlag(mCharaData[mCharaNum]);
 
 		if (UtilBattle::isRunWeakGroundAttack())
 		{
 			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU, G_ATK_2_START_Y);
-			mCharaData[mCharaNum].speed = SetSpeed();
+			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_NIKU, G_ATK_2_START_Y);
+			mCharaData[mCharaNum].speed = setSpeed();
 			mDegSpin[mCharaNum] = 0.f;
 		}
 		else if (UtilBattle::isRunWeakSkyAttack())
@@ -124,8 +124,8 @@ ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-			mCharaData[mCharaNum].speed = SetSpeed();
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NIKU, s_atk_start_y);
+			mCharaData[mCharaNum].speed = setSpeed();
+			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_NIKU, s_atk_start_y);
 		}
 
 		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//Å‘å”‚ğ’´‚¦‚½‚ç1‘Ì–Ú‚Ö			
@@ -137,29 +137,29 @@ ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 		//“–‚½‚è”»’è
 		if(!mCharaData[i].flag_death){
 			if(!boss_death){
-				if(HitCheck(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
+				if(isHit(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
 					UtilSound::playOnce(S_NIKUMAN);
 					mCharaData[i].flag_hit		= true;
 					mCharaData[i].flag_death	= true;	
-					SetFlagHit(true);
+					setIsHitCheck(true);
 					m_chara_y = mCharaData[i].draw_cc.y;
 				}
 			}
 
 			if(mCharaData[i].flag_atk1){
 				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < cWindowWidth){
-					mCharaData[i].animetion = SetAnimetion(ANIME_G_ATK4_NIKU,mCharaData[i].animetion,NULL,i);
-					mCharaData[i].draw_cc	 = CharaAttack_1(i);
+					mCharaData[i].animetion = setAnimetion(ANIME_G_ATK4_NIKU,mCharaData[i].animetion,NULL,i);
+					mCharaData[i].draw_cc	 = updateAttack1(i);
 				}
 			}
 			else if(mCharaData[i].flag_atk2){
 				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < cWindowWidth){
-					mCharaData[i].animetion = SetAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_NIKU,i );
-					mCharaData[i].draw_cc	 = CharaAttack_2(i,boss_cc);
+					mCharaData[i].animetion = setAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_NIKU,i );
+					mCharaData[i].draw_cc	 = updateAttack2(i,boss_cc);
 				}
 			}
 		}
-		else DeathControl(i,sound_startnum,rect_startnum);
+		else deathControl(i,sound_startnum,rect_startnum);
 
 
 		//“–‚½‚Á‚½Œã‚Ìˆ—
@@ -172,13 +172,13 @@ ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 
 			if(!mCharaData[i].flag_effectfont){
 				if(mCountEffect[i]++ < FONT_SET){
-					pos_effectfont[i] = SetE_Font(mCharaData[i].draw_cc,RADIUS_NIKU,POS_HITFONT_X);
+					pos_effectfont[i] = setEffectFont(mCharaData[i].draw_cc,RADIUS_NIKU,POS_HITFONT_X);
 					mCharaData[i].flag_effectfont	= true;
 				}	
 			}
 			else{
 				if(mCountEffect[i]++ < FONT_DELETE){
-					pos_effectfont[i] = EffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
+					pos_effectfont[i] = setEffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
 				}
 				else{ mCharaData[i].flag_effectfont = false; mCountEffect[i] = 0;}
 			}
@@ -191,7 +191,7 @@ ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
  * @brief ƒAƒjƒİ’è
  */
 int
-ActorNikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int mCharaNum)
+ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num, int mCharaNum)
 {
 	static int delay = 0;
 
@@ -213,7 +213,7 @@ ActorNikuman::SetAnimetion(int max_animetion, int anime_count ,int rect_num, int
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-ActorNikuman::DrawEffectFont(int rect_startnum)
+ActorNikuman::drawEffectFont(int rect_startnum)
 {
 	//ƒtƒHƒ“ƒgƒGƒtƒFƒNƒg‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -230,7 +230,7 @@ ActorNikuman::DrawEffectFont(int rect_startnum)
  * @brief •`‰æˆ—
  */
 void
-ActorNikuman::Draw(int rect_startnum)
+ActorNikuman::draw(int rect_startnum)
 {
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -244,7 +244,7 @@ ActorNikuman::Draw(int rect_startnum)
  * @brief UŒ‚ˆ—
  */
 POS_CC<float>
-ActorNikuman::CharaAttack_2(int mCharaNum, POS_CC<float> boss_cc)		//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
+ActorNikuman::updateAttack2(int mCharaNum, POS_CC<float> boss_cc)		//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
 {
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
@@ -265,10 +265,10 @@ ActorNikuman::CharaAttack_2(int mCharaNum, POS_CC<float> boss_cc)		//ƒL[“ü—Í‚É‚
  * @brief €–Sˆ—
  */
 void
-ActorNikuman::DeathControl(int mCharaNum , int sound_num, int rect_startnum)			//€–Sˆ—
+ActorNikuman::deathControl(int mCharaNum , int sound_num, int rect_startnum)			//€–Sˆ—
 {
 	mCharaData[mCharaNum].animetion = 0;
-	mCharaData[mCharaNum].animetion	= SetAnimetion(NULL,mCharaData[mCharaNum].animetion,ANIME_DEATH_NIKU,mCharaNum);
+	mCharaData[mCharaNum].animetion	= setAnimetion(NULL,mCharaData[mCharaNum].animetion,ANIME_DEATH_NIKU,mCharaNum);
 
 	if(mCharaData[mCharaNum].flag_atk1){
 		mCharaData[mCharaNum].draw_cc  = mOrbit->pRebound->OrbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);

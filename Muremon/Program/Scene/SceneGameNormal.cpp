@@ -178,11 +178,11 @@ bool SceneGameNormal::update()
 
 		mTime -= 1;
 
-		mIsHitNiku  = mNiku->GetFlagHit();//あたったというフラグが帰ってきます
+		mIsHitNiku  = mNiku->isHitCheck();//あたったというフラグが帰ってきます
 
-		mIsHitYoshi = mYoshi->GetFlagHit();//これをつかってダメージなどを
+		mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
 
-		mIsHitNoppo = mNoppo->GetFlagHit();//反映させてください
+		mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
 
 		if(mIsHitNiku)
 		{
@@ -192,7 +192,7 @@ bool SceneGameNormal::update()
 			mScore += NIKUMAN_SCORE;
 			mIsHitEffect = true;
 			mCharaAtkY = mNiku->m_chara_y;
-			mNiku->SetFlagHit(false);
+			mNiku->setIsHitCheck(false);
 		}
 
 		if(mIsHitYoshi)
@@ -203,7 +203,7 @@ bool SceneGameNormal::update()
 			mScore += YOSHITARO_SCORE;
 			mIsHitEffect = true;
 			mCharaAtkY = mYoshi->m_chara_y;
-			mYoshi->SetFlagHit(false);
+			mYoshi->setIsHitCheck(false);
 		}
 
 		if(mIsHitNoppo)
@@ -214,7 +214,7 @@ bool SceneGameNormal::update()
 			mScore += YOSHITARO_SCORE;
 			mIsHitEffect = true;
 			mCharaAtkY = mNoppo->m_chara_y;
-			mNoppo->SetFlagHit(false);
+			mNoppo->setIsHitCheck(false);
 		}
 
 		// にくまん
@@ -242,7 +242,7 @@ bool SceneGameNormal::update()
 		//}
 		
 		//mBoss->NormalControl();
-		mBoss->BossControl(PLAY_NORMAL);
+		mBoss->control(PLAY_NORMAL);
 
 		//ゲームオーバー条件
 		if(mBoss->boss_win_flag)
@@ -309,28 +309,28 @@ void SceneGameNormal::Draw()
 	}
 	else if(mGameState == G_GAME_SCENE){
 
-		mBoss->BossDraw();
+		mBoss->draw();
 
-		mBoss->FallDraw();
+		mBoss->fallDraw();
 
 		HitEffectDraw();
 		//キャラ達
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
-		mNoppo->Draw(R_NOPPO_G_ATK1);
+		mNoppo->draw(R_NOPPO_G_ATK1);
 
 		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
-		mYoshi->Draw(R_YOSHI_G_ATK1);
+		mYoshi->draw(R_YOSHI_G_ATK1);
 
 		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
-		mNiku->Draw(R_NIKU_G_ATK1);
+		mNiku->draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
-		mNoppo->DrawEffectFont(R_NOPPO_PETI);
-		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
-		mNiku->DrawEffectFont(R_NIKU_BETYA);
+		mNoppo->drawEffectFont(R_NOPPO_PETI);
+		mYoshi->drawEffectFont(R_YOSHI_BOYO);
+		mNiku->drawEffectFont(R_NIKU_BETYA);
 	}
 	else if(mGameState == G_GAME_OVER){
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);

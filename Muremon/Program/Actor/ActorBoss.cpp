@@ -74,7 +74,7 @@ ActorBoss::~ActorBoss(void)
 {
 }
 
-void ActorBoss::ImpleInit()
+void ActorBoss::impleInit()
 {
 	//ボス
 	boss_alpha_count=0;
@@ -140,7 +140,7 @@ void ActorBoss::ImpleInit()
 	boss_fall_flag=false;
 }
 
-void ActorBoss::BossControl(int play_mode)
+void ActorBoss::control(int play_mode)
 {
 	//ボスの移動コントロール
 	if(boss_move_flag)
@@ -204,7 +204,7 @@ void ActorBoss::BossControl(int play_mode)
 		{
 			lv_count++;
 		}else lv_count = 7;
-		ImpleInit();
+		impleInit();
 	}
 	
 	if(!boss_fall_flag)
@@ -339,14 +339,14 @@ void ActorBoss::BossControl(int play_mode)
 	}
 }
 
-void ActorBoss::BossDraw()
+void ActorBoss::draw()
 {
 	vertex->setTextureData(texture->getTextureData(T_CAHRA_BOSS),pDevice);
 	vertex->setColor(boss_alpha,255,255,255);
 	vertex->drawF(boss_move_x + damage_x,boss_move_y + damage_y,boss_rect_data);
 }
 
-void ActorBoss::FallDraw()
+void ActorBoss::fallDraw()
 {
 	vertex->setTextureData(texture->getTextureData(T_GAME_EFFECT),pDevice);
 	vertex->setColor(no_font_alpha,255,255,255);

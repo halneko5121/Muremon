@@ -80,7 +80,7 @@ ActorNoppo::init()
 	//protected変数
 	mRandSpeed  = 0.f;
 	mDelay		 = mMaxAnimetion = mCharaNum = 0;
-	mFlagTurn2 = mSetHitCheck  = false;
+	mFlagTurn2 = mIsHitCheck  = false;
 
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		//構造体
@@ -118,12 +118,12 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			mCountEffect[mCharaNum] = 0;
 			mInit[mCharaNum] = true;
 		}
-		mCharaData[mCharaNum]		 = SetAtk_Flag(mCharaData[mCharaNum]);
-		mCharaData[mCharaNum].speed	 = SetSpeed();
+		mCharaData[mCharaNum]		 = setAtkFlag(mCharaData[mCharaNum]);
+		mCharaData[mCharaNum].speed	 = setSpeed();
 
 		if (UtilBattle::isRunStrongGroundAttack())
 		{
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO, G_ATK_3_START_Y);
+			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_NOPPO, G_ATK_3_START_Y);
 		}
 		else if (UtilBattle::isRunStrongSkyAttack())
 		{
@@ -132,7 +132,7 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_NOPPO, s_atk_start_y);
+			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_NOPPO, s_atk_start_y);
 		}
 
 		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//最大数を超えたら1体目へ			
@@ -144,10 +144,10 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		//当たり判定
 		if(!mCharaData[i].flag_death){
 			if(!boss_death){
-				if(HitCheck(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
+				if(isHit(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
 					mCharaData[i].flag_hit		= true;
 					mCharaData[i].flag_death	= true;	
-					SetFlagHit(true);
+					setIsHitCheck(true);
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
@@ -179,19 +179,19 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			//攻撃処理(xが画面外じゃなければ処理)
 			if(mCharaData[i].flag_atk1){
 				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < cWindowWidth){
-					mCharaData[i].draw_cc	 = CharaAttack_1(i);
-					mCharaData[i].animetion = SetAnimetion(ANIME_G_ATK4_NOPPO,mCharaData[i].animetion,NULL,i);
+					mCharaData[i].draw_cc	 = updateAttack1(i);
+					mCharaData[i].animetion = setAnimetion(ANIME_G_ATK4_NOPPO,mCharaData[i].animetion,NULL,i);
 				}
 			}
 			else if(mCharaData[i].flag_atk2){
 				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < cWindowWidth){
 					mOrbit->pWave->SetSpeed(mCharaData[i].speed);
-					mCharaData[i].draw_cc	 = CharaAttack_2(i);
-					mCharaData[i].animetion = SetAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO),mCharaData[i].animetion,ANIME_S_ATK1_NOPPO,i);
+					mCharaData[i].draw_cc	 = updateAttack2(i);
+					mCharaData[i].animetion = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO),mCharaData[i].animetion,ANIME_S_ATK1_NOPPO,i);
 				}
 			}
 		}
-		else DeathControl(i,sound_startnum,rect_startnum);
+		else deathControl(i,sound_startnum,rect_startnum);
 
 		//当たった後の処理
 		if(mCharaData[i].flag_hit){
@@ -203,13 +203,13 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 
 			if(!mCharaData[i].flag_effectfont){
 				if(mCountEffect[i]++ < FONT_SET){
-					pos_effectfont[i] = SetE_Font(mCharaData[i].draw_cc, RADIUS_NOPPO,POS_HITFONT_X);
+					pos_effectfont[i] = setEffectFont(mCharaData[i].draw_cc, RADIUS_NOPPO,POS_HITFONT_X);
 					mCharaData[i].flag_effectfont	= true;
 				}	
 			}
 			else{
 				if(mCountEffect[i]++ < FONT_DELETE){
-					pos_effectfont[i] = EffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
+					pos_effectfont[i] = setEffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
 				}
 				else{ mCharaData[i].flag_effectfont = false; mCountEffect[i] = 0;}
 			}
@@ -221,7 +221,7 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
  * @brief アニメ設定
  */
 int
-ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int mCharaNum)
+ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num,int mCharaNum)
 {
 	static int delay = 0;
 
@@ -243,7 +243,7 @@ ActorNoppo::SetAnimetion(int max_animetion, int anime_count ,int rect_num,int mC
  * @brief フォントの描画処理
  */
 void
-ActorNoppo::DrawEffectFont(int rect_startnum)
+ActorNoppo::drawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -264,7 +264,7 @@ ActorNoppo::DrawEffectFont(int rect_startnum)
  * @brief 描画処理
  */
 void
-ActorNoppo::Draw(int rect_startnum)
+ActorNoppo::draw(int rect_startnum)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -294,7 +294,7 @@ ActorNoppo::Draw(int rect_startnum)
  * @brief 攻撃処理
  */
 POS_CC<float>
-ActorNoppo::CharaAttack_2(int mCharaNum)																//キー入力による動作その2
+ActorNoppo::updateAttack2(int mCharaNum)																//キー入力による動作その2
 {
 	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
@@ -305,7 +305,7 @@ ActorNoppo::CharaAttack_2(int mCharaNum)																//キー入力による動作その
  * @brief 死亡処理
  */
 void
-ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)							//死亡処理
+ActorNoppo::deathControl(int mCharaNum, int sound_startnum ,int rect_startnum)							//死亡処理
 {
 	static int wait_count[MAX_VALLUE_PLAYER] = {0};
 
@@ -316,7 +316,7 @@ ActorNoppo::DeathControl(int mCharaNum, int sound_startnum ,int rect_startnum)		
 
 	if(mCharaData[mCharaNum].flag_atk1){
 		if(!mCharaData[mCharaNum].flag_death_next){
-			mCharaData[mCharaNum].animetion = SetAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO),mCharaData[mCharaNum].animetion,ANIME_MOTION1_NOPPO,mCharaNum);
+			mCharaData[mCharaNum].animetion = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO),mCharaData[mCharaNum].animetion,ANIME_MOTION1_NOPPO,mCharaNum);
 			if(mCharaData[mCharaNum].animetion == 2) mCharaData[mCharaNum].flag_death_next = true;
 		}
 		else{

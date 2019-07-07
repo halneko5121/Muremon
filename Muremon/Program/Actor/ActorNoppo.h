@@ -14,14 +14,14 @@ public:
 	ActorNoppo(Vertex *vertex, Texture  *texture);
 	~ActorNoppo(void);
 
-	POS_CC<float>	CharaAttack_2(int m_chara_num);
-	void			DeathControl(int m_chara_num, int sound_startnum, int rect_startnum);
+	POS_CC<float>	updateAttack2(int m_chara_num);
+	void			deathControl(int m_chara_num, int sound_startnum, int rect_startnum);
 
 	void			init() override;
 	void			update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death) override;
-	void			Draw(int rect_startnum) override;
-	void			DrawEffectFont(int rect_startnum) override;
-	int				SetAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) override;
+	void			draw(int rect_startnum) override;
+	void			drawEffectFont(int rect_startnum) override;
+	int				setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) override;
 
 private:
 	float			alpha;

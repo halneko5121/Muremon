@@ -84,13 +84,13 @@ public:
 	virtual ~ActorBase(void);
 
 	float				m_chara_y;
-	virtual void		DeathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;
+	virtual void		deathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;
 	virtual void		init() = 0;
 	virtual void		update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool both_death) = 0;
 	//描画
-	virtual void		Draw(int rect_num) = 0;
-	virtual void		DrawEffectFont(int rect_startnum) = 0;
-	virtual int			SetAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) = 0;
+	virtual void		draw(int rect_num) = 0;
+	virtual void		drawEffectFont(int rect_startnum) = 0;
+	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) = 0;
 
 	//共通する処理
 	/************************************************************************************
@@ -98,7 +98,7 @@ public:
 	*	関数名	：float SetSpeed();														*
 	*	戻り値	：float m_randspeed			移動スピード								*
 	************************************************************************************/
-	float	SetSpeed();
+	float				setSpeed();
 
 	/************************************************************************************
 	*	役割	：攻撃開始位置を設定													*
@@ -106,14 +106,14 @@ public:
 	*	引数	：float	start_x,start_y		開始座標									*
 	*	戻り値	：中心座標																*
 	************************************************************************************/
-	POS_CC<float> SetAtk_Pos(float start_x, float start_y);
+	POS_CC<float>		setAtkPos(float start_x, float start_y);
 
 	/************************************************************************************
 	*	役割	：押されたキーによって攻撃開始フラグをONにする							*
 	*	関数名	：CHARADATA SetAtk(int key , CHARADATA set_charadata);					*
 	*	戻り値	：キャラデータ(フラグの状態)											*
 	************************************************************************************/
-	CHARADATA SetAtk_Flag(CHARADATA set_charadata);
+	CHARADATA			setAtkFlag(CHARADATA set_charadata);
 
 	/************************************************************************************
 	*	役割	：エフェクトフォント(『ぱん！』とか)の位置を設定						*
@@ -123,7 +123,7 @@ public:
 	*			：float range_font														*
 	*	戻り値	：中心座標																*
 	************************************************************************************/
-	POS_CC<float> SetE_Font(POS_CC<float> font_cc, float chara_radius, float range_font);
+	POS_CC<float>		setEffectFont(POS_CC<float> font_cc, float chara_radius, float range_font);
 
 	/************************************************************************************
 	*	役割	：上下左右に小刻みに揺らす												*
@@ -132,7 +132,7 @@ public:
 	*			：POS_CC<float> font_cc					中心座標						*
 	*	戻り値	：中心座標																*
 	************************************************************************************/
-	POS_CC<float> EffectShake(float change_x, float change_y, POS_CC<float> font_cc);
+	POS_CC<float>		setEffectShake(float change_x, float change_y, POS_CC<float> font_cc);
 
 	/************************************************************************************
 	*	役割	：キャラの攻撃移動処理1　(キーその１の処理)								*
@@ -140,7 +140,7 @@ public:
 	*	引数	：int  m_chara_num			キャラの『何体目か』						*
 	*	戻り値	：中心座標																*
 	************************************************************************************/
-	POS_CC<float> CharaAttack_1(int m_chara_num);
+	POS_CC<float>		updateAttack1(int m_chara_num);
 
 	/************************************************************************************
 	*	役割	：キャラ達とbossの当たり判定											*
@@ -149,7 +149,7 @@ public:
 	*			：int m_chara_num							キャラの何体目か			*
 	*	戻り値	：敵と当たったかどうかのフラグ											*
 	************************************************************************************/
-	bool HitCheck(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int m_chara_num);
+	bool				isHit(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int m_chara_num);
 
 	/************************************************************************************
 	*	役割	：中心座標から矩形を逆算												*
@@ -158,11 +158,11 @@ public:
 	*			：F_RECT　rect_pos			矩形情報(各半径情報)						*
 	*	戻り値	：与えた中心座標からrect_posの値を与えたtop,bottom,left,right			*
 	************************************************************************************/
-	F_RECT CalculateBack_Rect(POS_CC<float> draw_cc, F_RECT rect_pos);
+	F_RECT				calculateBackRect(POS_CC<float> draw_cc, F_RECT rect_pos);
 
-	void SetFlagHit(bool hitcheck) { mSetHitCheck = hitcheck; }
+	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }
 
-	bool GetFlagHit() { return mSetHitCheck; }
+	bool				isHitCheck() { return mIsHitCheck; }
 
 protected:
 	C_OrbitCalculation*	mOrbit;
@@ -180,5 +180,5 @@ protected:
 	int					mMaxAnimetion;
 
 	bool				mFlagTurn2;								//二週目のフラグ
-	bool				mSetHitCheck;
+	bool				mIsHitCheck;
 };

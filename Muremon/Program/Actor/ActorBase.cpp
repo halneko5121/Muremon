@@ -41,7 +41,7 @@ ActorBase::~ActorBase(void)
  * @brief 攻撃処理
  */
 POS_CC<float>
-ActorBase::CharaAttack_1(int mCharaNum)
+ActorBase::updateAttack1(int mCharaNum)
 {
 	mCharaData[mCharaNum].draw_cc.x += mCharaData[mCharaNum].speed;			//右に移動
 
@@ -52,7 +52,7 @@ ActorBase::CharaAttack_1(int mCharaNum)
  * @brief 衝突チェック
  */
 bool
-ActorBase::HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id)
+ActorBase::isHit(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id)
 {
 	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
 	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
@@ -68,8 +68,8 @@ ActorBase::HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_
 		if(draw_cc_p.y < 0) return FALSE;	break;
 	}
 
-	check_rect_p = CalculateBack_Rect(draw_cc_p,rect_pos_p[chara_id]);			
-	check_rect_e = CalculateBack_Rect(draw_cc_e,rect_pos_e);									
+	check_rect_p = calculateBackRect(draw_cc_p,rect_pos_p[chara_id]);			
+	check_rect_e = calculateBackRect(draw_cc_e,rect_pos_e);									
 
 	//まず円の当たり判定
 //	if( (pow( (draw_cc_e.x - draw_cc_p.x),2) + pow( (draw_cc_e.y - draw_cc_p.y),2)) <= pow((rect_pos_p[chara_id].top + DRAW_E_RAD_X),2) ){
@@ -87,7 +87,7 @@ ActorBase::HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_
  * @brief 四隅を計算
  */
 F_RECT
-ActorBase::CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos)
+ActorBase::calculateBackRect(POS_CC<float> draw_cc , F_RECT rect_pos)
 {
 	// 中心座標からそれぞれ絵の半径を加・減算 
 	rect_pos.left		= (draw_cc.x - rect_pos.left);
@@ -102,7 +102,7 @@ ActorBase::CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos)
  * @brief スピードの設定
  */
 float
-ActorBase::SetSpeed()
+ActorBase::setSpeed()
 {
 	// 肉まんの空中攻撃は計算方法が違うので
 	if (UtilBattle::isRunWeakSkyAttack())
@@ -121,7 +121,7 @@ ActorBase::SetSpeed()
  * @brief 攻撃フラグの設定
  */
 CHARADATA
-ActorBase::SetAtk_Flag(CHARADATA set_charadata)
+ActorBase::setAtkFlag(CHARADATA set_charadata)
 {
 	if (UtilBattle::isRunGroundAttack())
 	{
@@ -139,7 +139,7 @@ ActorBase::SetAtk_Flag(CHARADATA set_charadata)
  * @brief 位置の設定
  */
 POS_CC<float>
-ActorBase::SetAtk_Pos(float start_x, float start_y)
+ActorBase::setAtkPos(float start_x, float start_y)
 {
 	POS_CC<float> draw_cc = {0.f,0.f};
 
@@ -153,7 +153,7 @@ ActorBase::SetAtk_Pos(float start_x, float start_y)
  * @brief フォント位置の設定
  */
 POS_CC<float>
-ActorBase::SetE_Font(POS_CC<float> font_cc ,float chara_radius, float range_font)
+ActorBase::setEffectFont(POS_CC<float> font_cc ,float chara_radius, float range_font)
 {
 	POS_CC<float> pos_effectfont = { 0.f	,0.f };
 
@@ -168,7 +168,7 @@ ActorBase::SetE_Font(POS_CC<float> font_cc ,float chara_radius, float range_font
  * @brief シェイク効果
  */
 POS_CC<float>
-ActorBase::EffectShake(float change_x ,float change_y, POS_CC<float> font_cc)
+ActorBase::setEffectShake(float change_x ,float change_y, POS_CC<float> font_cc)
 {
 	static float shake_x	,shake_y	= 0.f; 
 	static bool  flag_shake_right,flag_shake_down = false; 

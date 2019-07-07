@@ -85,7 +85,7 @@ ActorYoshi::init()
 	//protected変数
 	mRandSpeed	 = 0.f;
 	mDelay		 = mMaxAnimetion = mCharaNum = 0;
-	mFlagTurn2 = mSetHitCheck  = false;
+	mFlagTurn2 = mIsHitCheck  = false;
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		//構造体
 		mCharaData[i].flag_atk1		= mCharaData[i].flag_atk2		 = false;
@@ -123,13 +123,13 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			mCountEffect[mCharaNum] = 0;
 			mInit[mCharaNum] = true;
 		}
-		mCharaData[mCharaNum]		= SetAtk_Flag(mCharaData[mCharaNum]);
-		mCharaData[mCharaNum].speed  = SetSpeed();
+		mCharaData[mCharaNum]		= setAtkFlag(mCharaData[mCharaNum]);
+		mCharaData[mCharaNum].speed  = setSpeed();
 
 		if (UtilBattle::isRunMediumGroundAttack())
 		{
 			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI, G_ATK_1_START_Y);
+			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_YOSHI, G_ATK_1_START_Y);
 			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 		}
 		else if (UtilBattle::isRunMediumSkyAttack())
@@ -139,7 +139,7 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-			mCharaData[mCharaNum].draw_cc = SetAtk_Pos(RADIUS_YOSHI, s_atk_start_y);
+			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_YOSHI, s_atk_start_y);
 		}
 
 		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//最大数を超えたら1体目へ			
@@ -151,10 +151,10 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 		//当たり判定
 		if(!mCharaData[i].flag_death){
 			if(!boss_death){
-				if(HitCheck(mCharaData[i].draw_cc,boss_cc,ID_YOSHI)){
+				if(isHit(mCharaData[i].draw_cc,boss_cc,ID_YOSHI)){
 					mCharaData[i].flag_hit		= true;
 					mCharaData[i].flag_death	= true;
-					SetFlagHit(true);
+					setIsHitCheck(true);
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
@@ -176,19 +176,19 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 
 			if(mCharaData[i].flag_atk1){
 				if(mCharaData[i].draw_cc.x - RADIUS_YOSHI < cWindowWidth){
-					mCharaData[i].draw_cc	 = CharaAttack_1(i);
-					mCharaData[i].animetion = SetAnimetion(ANIME_G_ATK4_YOSHI,mCharaData[i].animetion,NULL,i);
+					mCharaData[i].draw_cc	 = updateAttack1(i);
+					mCharaData[i].animetion = setAnimetion(ANIME_G_ATK4_YOSHI,mCharaData[i].animetion,NULL,i);
 				}
 			}
 			else if(mCharaData[i].flag_atk2){
 				if(mCharaData[i].draw_cc.x - RADIUS_YOSHI < cWindowWidth){
 					mOrbit->pWave->SetSpeed(mCharaData[i].speed);
-					mCharaData[i].draw_cc	 = CharaAttack_2(i);
-					mCharaData[i].animetion = SetAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_YOSHI,i);
+					mCharaData[i].draw_cc	 = updateAttack2(i);
+					mCharaData[i].animetion = setAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_YOSHI,i);
 				}
 			}
 		}
-		else DeathControl(i,sound_startnum,rect_startnum);
+		else deathControl(i,sound_startnum,rect_startnum);
 
 		//当たった後の処理
 		if(mCharaData[i].flag_hit){
@@ -200,13 +200,13 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			
 			if(!mCharaData[i].flag_effectfont){
 				if(mCountEffect[i]++ < FONT_SET){
-					pos_effectfont[i] = SetE_Font(mCharaData[i].draw_cc, RADIUS_YOSHI,POS_HITFONT_X);
+					pos_effectfont[i] = setEffectFont(mCharaData[i].draw_cc, RADIUS_YOSHI,POS_HITFONT_X);
 					mCharaData[i].flag_effectfont	= true;
 				}	
 			}
 			else{
 				if(mCountEffect[i]++ < FONT_DELETE){
-					pos_effectfont[i] = EffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
+					pos_effectfont[i] = setEffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
 				}
 				else{ mCharaData[i].flag_effectfont = false; mCountEffect[i] = 0;}
 			}
@@ -218,7 +218,7 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
  * @brief アニメ設定
  */
 int
-ActorYoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,int mCharaNum)
+ActorYoshi::setAnimetion(int max_animetion, int anime_count ,int rect_num ,int mCharaNum)
 {
 	static int delay = 0;
 
@@ -240,7 +240,7 @@ ActorYoshi::SetAnimetion(int max_animetion, int anime_count ,int rect_num ,int m
  * @brief フォントの描画処理
  */
 void
-ActorYoshi::DrawEffectFont(int rect_startnum)
+ActorYoshi::drawEffectFont(int rect_startnum)
 {
 	int rect_change = 0;
 
@@ -260,7 +260,7 @@ ActorYoshi::DrawEffectFont(int rect_startnum)
  * @brief 描画処理
  */
 void
-ActorYoshi::Draw(int rect_startnum)
+ActorYoshi::draw(int rect_startnum)
 {
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -283,7 +283,7 @@ ActorYoshi::Draw(int rect_startnum)
  * @brief 攻撃処理
  */
 POS_CC<float>
-ActorYoshi::CharaAttack_2(int mCharaNum)														//キー入力による動作その2
+ActorYoshi::updateAttack2(int mCharaNum)														//キー入力による動作その2
 {
 	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->OrbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
@@ -294,7 +294,7 @@ ActorYoshi::CharaAttack_2(int mCharaNum)														//キー入力による動作その2
  * @brief 死亡処理
  */
 void
-ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)						//死亡処理
+ActorYoshi::deathControl(int mCharaNum, int sound_num, int rect_startnum)						//死亡処理
 {
 
 	if(mInit[mCharaNum]){
@@ -303,7 +303,7 @@ ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)						/
 	}
 	if(mCharaData[mCharaNum].flag_atk1){
 		if(!mCharaData[mCharaNum].flag_death_next){
-			mCharaData[mCharaNum].animetion = SetAnimetion((ANIME_MOTION3_YOSHI - ANIME_G_ATK4_YOSHI),mCharaData[mCharaNum].animetion,ANIME_MOTION1_YOSHI,mCharaNum);
+			mCharaData[mCharaNum].animetion = setAnimetion((ANIME_MOTION3_YOSHI - ANIME_G_ATK4_YOSHI),mCharaData[mCharaNum].animetion,ANIME_MOTION1_YOSHI,mCharaNum);
 			if(mCharaData[mCharaNum].animetion == 3){
 				mCharaData[mCharaNum].flag_death_next = true;
 			}
@@ -317,7 +317,7 @@ ActorYoshi::DeathControl(int mCharaNum, int sound_num, int rect_startnum)						/
 	}
 	else if(mCharaData[mCharaNum].flag_atk2){
 		if(!mCharaData[mCharaNum].flag_death_next){
-			mCharaData[mCharaNum].animetion = SetAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI),mCharaData[mCharaNum].animetion,ANIME_S_ATK2_YOSHI,mCharaNum);
+			mCharaData[mCharaNum].animetion = setAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI),mCharaData[mCharaNum].animetion,ANIME_S_ATK2_YOSHI,mCharaNum);
 			if(mCharaData[mCharaNum].animetion == 3){
 				mCharaData[mCharaNum].flag_death_next = true;
 			}

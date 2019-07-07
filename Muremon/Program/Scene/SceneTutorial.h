@@ -21,8 +21,6 @@ public:
 	void			draw() override;
 	int				end() override;
 
-	void			updateInput();					// キー操作
-
 private:
 	// ステート関数
 	void			stateEnterIdle();
@@ -49,5 +47,5 @@ private:
 private:
 	StateMachine<SceneTutorial>	mState;			// ステート
 	int							mSlideState;
-	D3DXVECTOR2					mTutorial[2];
+	D3DXVECTOR2					mTexturePos[2];
 };

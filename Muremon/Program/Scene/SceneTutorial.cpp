@@ -17,9 +17,8 @@
 namespace
 {
 	const float cTrRightX = 1200.f;
+	const float cTrRightY = 300.f;
 	const float cTrCenterX = 400.f;
-	const float cTrLeftX = -400.f;
-	const float cTrY = 300.f;
 
 	enum TEXTURE_DATA_TUTORIAL
 	{
@@ -31,13 +30,6 @@ namespace
 	{
 		R_TUTORIAL1,
 		R_TUTORIAL2,
-	};
-
-	enum TUTORIAL_FADE_MODE
-	{
-		TR_FADE_IN,		//フェードイン
-		TR_USUALLY,		//通常
-		TR_FADE_OUT,	//フェードアウト
 	};
 
 	enum TUTORIAL_MODE
@@ -64,8 +56,8 @@ SceneTutorial::SceneTutorial()
 {
 	mSlideState = 2;
 
-	mTutorial[TR_REFRESH].y = mTutorial[TR_NORMAL].y = cTrY;
-	mTutorial[TR_REFRESH].x = mTutorial[TR_NORMAL].x  = cTrRightX;
+	mTexturePos[TR_REFRESH].y = mTexturePos[TR_NORMAL].y = cTrRightY;
+	mTexturePos[TR_REFRESH].x = mTexturePos[TR_NORMAL].x  = cTrRightX;
 
 	mIsSceneChange = true;
 
@@ -93,9 +85,12 @@ void SceneTutorial::impleInit()
 
 bool SceneTutorial::update()
 {
-	updateInput();
-
 	mState.executeState();
+
+	if (UtilInput::isKeyPushed(DIK_Z))
+	{
+		mIsSceneChange = false;
+	}
 
 	return mIsSceneChange;
 }
@@ -103,10 +98,10 @@ bool SceneTutorial::update()
 void SceneTutorial::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL1), mDevice);
-	mVertex->drawF(mTutorial[TR_REFRESH].x,mTutorial[TR_REFRESH].y,R_TUTORIAL1);
+	mVertex->drawF(mTexturePos[TR_REFRESH].x,mTexturePos[TR_REFRESH].y,R_TUTORIAL1);
 
 	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL2), mDevice);
-	mVertex->drawF(mTutorial[TR_NORMAL].x,mTutorial[TR_NORMAL].y,R_TUTORIAL2);
+	mVertex->drawF(mTexturePos[TR_NORMAL].x,mTexturePos[TR_NORMAL].y,R_TUTORIAL2);
 }
 
 int SceneTutorial::end()
@@ -116,22 +111,6 @@ int SceneTutorial::end()
 	mVertex->release();
 
 	return 0;
-}
-
-void SceneTutorial::updateInput()
-{
-	if (UtilInput::isKeyPushed(DIK_Z))
-	{
-		mIsSceneChange = false;
-	}
-	else if (UtilInput::isKeyPushed(DIK_LEFT))
-	{
-		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-	}
-	else if (UtilInput::isKeyPushed(DIK_RIGHT))
-	{
-		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-	}
 }
 
 // -----------------------------------------------------------------
@@ -162,9 +141,9 @@ SceneTutorial::stateEnterRefreshSlide()
 void
 SceneTutorial::stateExeRefreshSlide()
 {
-	mTutorial[TR_REFRESH].x -= 10.f;
+	mTexturePos[TR_REFRESH].x -= 10.f;
 
-	if (mTutorial[TR_REFRESH].x <= cTrCenterX)
+	if (mTexturePos[TR_REFRESH].x <= cTrCenterX)
 	{
 		mState.changeState(cState_Refresh);
 	}
@@ -182,6 +161,7 @@ SceneTutorial::stateExeRefresh()
 {
 	if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
+		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		mState.changeState(cState_NormalSlide);
 		mSlideState = 2;
 		return;
@@ -202,10 +182,10 @@ SceneTutorial::stateExeNormalSlide()
 	// 左へ移動している
 	if (mSlideState == 1)
 	{
-		mTutorial[TR_REFRESH].x += 10.f;
-		mTutorial[TR_NORMAL].x += 10.f;
+		mTexturePos[TR_REFRESH].x += 10.f;
+		mTexturePos[TR_NORMAL].x += 10.f;
 
-		if (cTrCenterX <= mTutorial[TR_REFRESH].x)
+		if (cTrCenterX <= mTexturePos[TR_REFRESH].x)
 		{
 			mState.changeState(cState_Refresh);
 		}
@@ -213,10 +193,10 @@ SceneTutorial::stateExeNormalSlide()
 	// 右へ移動している
 	else if (mSlideState == 2)
 	{
-		mTutorial[TR_NORMAL].x -= 10.f;
-		mTutorial[TR_REFRESH].x -= 10.f;
+		mTexturePos[TR_NORMAL].x -= 10.f;
+		mTexturePos[TR_REFRESH].x -= 10.f;
 
-		if (mTutorial[TR_NORMAL].x <= cTrCenterX)
+		if (mTexturePos[TR_NORMAL].x <= cTrCenterX)
 		{
 			mState.changeState(cState_Normal);
 		}
@@ -236,6 +216,7 @@ SceneTutorial::stateExeNormal()
 {
 	if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
+		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		mState.changeState(cState_NormalSlide);
 		mSlideState = 1;
 		return;
@@ -243,6 +224,7 @@ SceneTutorial::stateExeNormal()
 
 	if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
+		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		mState.changeState(cState_EndSlide);
 		mSlideState = 2;
 		return;
@@ -263,10 +245,10 @@ SceneTutorial::stateExeEndSlide()
 	// 左へ移動している
 	if (mSlideState == 1)
 	{
-		mTutorial[TR_REFRESH].x += 10.f;
-		mTutorial[TR_NORMAL].x += 10.f;
+		mTexturePos[TR_REFRESH].x += 10.f;
+		mTexturePos[TR_NORMAL].x += 10.f;
 
-		if (cTrCenterX <= mTutorial[TR_REFRESH].x)
+		if (cTrCenterX <= mTexturePos[TR_REFRESH].x)
 		{
 			mState.changeState(cState_End);
 		}
@@ -274,10 +256,10 @@ SceneTutorial::stateExeEndSlide()
 	// 右へ移動している
 	else if (mSlideState == 2)
 	{
-		mTutorial[TR_REFRESH].x -= 10.f;
-		mTutorial[TR_NORMAL].x -= 10.f;
+		mTexturePos[TR_REFRESH].x -= 10.f;
+		mTexturePos[TR_NORMAL].x -= 10.f;
 
-		if (mTutorial[TR_NORMAL].x <= -cTrCenterX)
+		if (mTexturePos[TR_NORMAL].x <= -cTrCenterX)
 		{
 			mState.changeState(cState_End);
 		}

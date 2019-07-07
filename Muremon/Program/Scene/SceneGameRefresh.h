@@ -19,26 +19,26 @@ public:
 	SceneGameRefresh();
 	~SceneGameRefresh();
 
-	void impleInit() override;
-	bool update() override;
-	void draw() override;
-	int end() override;
+	void				impleInit() override;
+	bool				update() override;
+	void				draw() override;
+	int					end() override;
 
-	void DrawNum();
-	void DrawGageHp();
+	void				drawNum();
+	void				drawHpGauge();
 
-	void fadeControl();		//フェードコントロール		
-	void fadeIn();			//フェードイン
-	void fadeOut();			//フェードアウト
+	void				fadeControl();		//フェードコントロール		
+	void				fadeIn();			//フェードイン
+	void				fadeOut();			//フェードアウト
 
-	void HitFlagInit();
-	void HitEffectDraw();
+	void				initHitFlag();
+	void				drawHitEffect();
 
 private:
 	ActorNikuman*		mNiku;
-	ActorNoppo*		mNoppo;
-	ActorYoshi*		mYoshi;
-	ActorBoss*		mBoss;
+	ActorNoppo*			mNoppo;
+	ActorYoshi*			mYoshi;
+	ActorBoss*			mBoss;
 
 private:
 	int					mAlpha;				// アルファ値

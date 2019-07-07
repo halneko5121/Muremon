@@ -188,12 +188,12 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);			//‚æ‚µ‚½‚ë‚¤Šç
 		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);					//‚Ì‚Á‚ÛŠç
 
-		DrawNum();
+		drawNum();
 
 		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);								//‚µ‚á‚Á‚­‚Ì‘Ì—Í
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);						//‘Ì—ÍƒQ[ƒW
 
-		DrawGageHp();
+		drawHpGauge();
 
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
@@ -217,7 +217,7 @@ void SceneGameRefresh::draw()
 		//BossDraw();
 		//BossNoFontDraw();
 
-		HitEffectDraw();
+		drawHitEffect();
 
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
@@ -229,12 +229,12 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//‚æ‚µ‚½‚ë‚¤Šç
 		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//‚Ì‚Á‚ÛŠç
 
-		DrawNum();
+		drawNum();
 
 		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);	//‚µ‚á‚Á‚­‚Ì‘Ì—Í
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
 
-		DrawGageHp();
+		drawHpGauge();
 
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
@@ -333,7 +333,7 @@ void SceneGameRefresh::fadeOut()
 	}
 }
 
-void SceneGameRefresh::DrawNum()
+void SceneGameRefresh::drawNum()
 {
 	//‚É‚­‚Ü‚ñ
 	for(int i = 0;i < 4;i++){
@@ -361,7 +361,7 @@ void SceneGameRefresh::DrawNum()
 	}
 }
 
-void SceneGameRefresh::DrawGageHp()
+void SceneGameRefresh::drawHpGauge()
 {
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
@@ -372,14 +372,14 @@ void SceneGameRefresh::DrawGageHp()
 	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
 }
 
-void SceneGameRefresh::HitEffectDraw()
+void SceneGameRefresh::drawHitEffect()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
 	mVertex->drawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 
-void SceneGameRefresh::HitFlagInit()
+void SceneGameRefresh::initHitFlag()
 {
 	mIsHitNiku = false;
 

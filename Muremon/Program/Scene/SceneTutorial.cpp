@@ -90,8 +90,6 @@ bool SceneTutorial::update()
 {
 	updateInput();
 
-	updateDrawPos();
-
 	mState.executeState();
 
 	return mIsSceneChange;
@@ -133,57 +131,6 @@ void SceneTutorial::updateInput()
 	}
 }
 
-void SceneTutorial::updateDrawPos()
-{
-	if(mDrawState == TR_REFRESH)
-	{
-		if (mSlideState == 1)
-		{
-			if(mTutorial[TR_REFRESH].x != cTrCenterX)
-			{
-				mTutorial[TR_REFRESH].x += 10.f;
-				mTutorial[TR_NORMAL].x += 10.f;
-			}
-		}
-		else
-		{
-			if(mTutorial[TR_REFRESH].x != cTrCenterX)
-			{
-				mTutorial[TR_REFRESH].x -= 10.f;
-			}
-		}
-	}
-	else if(mDrawState == TR_NORMAL)
-	{
-		if (mSlideState == 1)
-		{
-			if(mTutorial[TR_NORMAL].x != cTrCenterX)
-			{
-				mTutorial[TR_NORMAL].x += 10.f;
-			}
-		}
-		else
-		{
-			if(mTutorial[TR_NORMAL].x != cTrCenterX)
-			{
-				mTutorial[TR_NORMAL].x -= 10.f;
-				mTutorial[TR_REFRESH].x -= 10.f;
-			}
-		}
-	}
-	else if(mDrawState == TR_END)
-	{
-		if(mTutorial[TR_NORMAL].x != cTrLeftX)
-		{
-			mTutorial[TR_NORMAL].x -= 10.f;
-		}
-		else
-		{
-			mIsSceneChange = false;
-		}
-	}
-}
-
 // -----------------------------------------------------------------
 // ステート関数
 // -----------------------------------------------------------------
@@ -210,6 +157,22 @@ SceneTutorial::stateEnterRefresh()
 void
 SceneTutorial::stateExeRefresh()
 {
+	if (mSlideState == 1)
+	{
+		if (mTutorial[TR_REFRESH].x != cTrCenterX)
+		{
+			mTutorial[TR_REFRESH].x += 10.f;
+			mTutorial[TR_NORMAL].x += 10.f;
+		}
+	}
+	else
+	{
+		if (mTutorial[TR_REFRESH].x != cTrCenterX)
+		{
+			mTutorial[TR_REFRESH].x -= 10.f;
+		}
+	}
+
 	if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
 		mDrawState = TR_NORMAL;
@@ -228,6 +191,22 @@ SceneTutorial::stateEnterNormal()
 void
 SceneTutorial::stateExeNormal()
 {
+	if (mSlideState == 1)
+	{
+		if (mTutorial[TR_NORMAL].x != cTrCenterX)
+		{
+			mTutorial[TR_NORMAL].x += 10.f;
+		}
+	}
+	else
+	{
+		if (mTutorial[TR_NORMAL].x != cTrCenterX)
+		{
+			mTutorial[TR_NORMAL].x -= 10.f;
+			mTutorial[TR_REFRESH].x -= 10.f;
+		}
+	}
+
 	if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
 		mDrawState = TR_REFRESH;
@@ -253,6 +232,15 @@ SceneTutorial::stateEnterEnd()
 void
 SceneTutorial::stateExeEnd()
 {
+	if (mTutorial[TR_NORMAL].x != cTrLeftX)
+	{
+		mTutorial[TR_NORMAL].x -= 10.f;
+	}
+	else
+	{
+		mIsSceneChange = false;
+	}
+
 	if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
 		mDrawState = TR_NORMAL;

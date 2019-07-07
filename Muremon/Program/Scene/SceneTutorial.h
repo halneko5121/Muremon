@@ -22,7 +22,6 @@ public:
 	int				end() override;
 
 	void			updateInput();					// キー操作
-	void			updateDrawPos();				// 描画位置などを決める
 
 private:
 	// ステート関数

@@ -10,7 +10,11 @@
 #include <time.h>
 #include <stdio.h>
 #include <tchar.h>
+#include <math.h>
+#include <d3dx9math.h>
 
+#define RAD								(D3DX_PI/180.0f)	// 角度からラジアンを求める
+#define DEG								(180.0f/D3DX_PI)	// ラジアンから角度を求める
 
 #define APP_SAFE_RELEASE(p)				{if(p){(p)->Release();	(p) = nullptr;} }
 #define APP_SAFE_DELETE_ARRAY(p)		{if(p){delete[](p);		(p) = nullptr;} }

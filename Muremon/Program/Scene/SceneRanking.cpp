@@ -78,21 +78,21 @@ void SceneRanking::init(LPDIRECT3DDEVICE9 apDev, int score)
 
 	mTexture->load("Data\\TextureData\\ranking.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\ranking.txt");
-	RankLoad();
-	RankCheck();
+	loadRanking();
+	checkRanking();
 }
 
 bool SceneRanking::update()
 {
 	UtilSound::playLoop(S_BGM_TITLE);
 
-	fadeControl();
-	RankControl(rank);
-	KeyControl();
+	updateFade();
+	updateRanking(rank);
+	updateInput();
 	return mIsSceneChange;
 }
 
-void SceneRanking::RankControl(int rank)
+void SceneRanking::updateRanking(int rank)
 {
 	name_blink=true;
 	name_alpha_down=true;
@@ -142,14 +142,14 @@ void SceneRanking::RankControl(int rank)
 				{
 					name_blink=false;
 					write_flag=true;
-					if(write_flag) RankWrite();
+					if(write_flag) writeRanking();
 				}
 			}
 		}
 	}
 }
 
-void SceneRanking::KeyControl()
+void SceneRanking::updateInput()
 {
 	if(z_key_flag)
 	{
@@ -181,11 +181,11 @@ void SceneRanking::KeyControl()
 
 void SceneRanking::draw()
 {
-	RankBackGround();
-	RankPlaceDraw();
-	RankNameDraw();
-	RankScoreDraw();
-	ZKeyDraw();
+	drawBackGround();
+	drawRankingPlace();
+	drawRankingName();
+	drawRankingScore();
+	drawZKey();
 }
 
 int SceneRanking::end()
@@ -197,14 +197,14 @@ int SceneRanking::end()
 	return 0;
 }
 
-void SceneRanking::RankBackGround()
+void SceneRanking::drawBackGround()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_RANKING_BG), mDevice);
 	mVertex->setColor(alpha,255,255,255);
 	mVertex->drawF(400.f,300.f,R_RANKING_BG);
 }
 
-void SceneRanking::RankPlaceDraw()
+void SceneRanking::drawRankingPlace()
 {
 	for(int i=0;i<5;i++)
 	{
@@ -215,7 +215,7 @@ void SceneRanking::RankPlaceDraw()
 	}
 }
 
-void SceneRanking::RankNameDraw()
+void SceneRanking::drawRankingName()
 {
 	for(int j=0;j<5;j++)
 	{
@@ -229,7 +229,7 @@ void SceneRanking::RankNameDraw()
 	}
 }
 
-void SceneRanking::RankScoreDraw()
+void SceneRanking::drawRankingScore()
 {
 	int j=0;
 
@@ -252,7 +252,7 @@ void SceneRanking::RankScoreDraw()
 	}
 }
 
-void SceneRanking::RankLoad()
+void SceneRanking::loadRanking()
 {
 	fopen_s(&fp,"Data\\rankingdata.txt","r");		//ファイルを開く
 
@@ -271,7 +271,7 @@ void SceneRanking::RankLoad()
 	newdata.score = add_score;	//プレイしたスコア
 }
 
-void SceneRanking::RankWrite()
+void SceneRanking::writeRanking()
 {
 	fopen_s(&fp, "Data\\rankingdata.txt", "w");
 
@@ -285,7 +285,7 @@ void SceneRanking::RankWrite()
 	z_key_flag = true;
 }
 
-void SceneRanking::fadeControl()
+void SceneRanking::updateFade()
 {
 	switch(fade_flag)
 	{
@@ -335,7 +335,7 @@ void SceneRanking::fadeOut()
 	}
 }
 
-void SceneRanking::RankCheck()
+void SceneRanking::checkRanking()
 {
 	//ランクインしてるかチェックする
 	for(int i = 0; i < 5 ;i++){
@@ -347,12 +347,12 @@ void SceneRanking::RankCheck()
 	//ランクインしていればRankChengeへ
 	if(rank != -1)
 	{
-		RankChenge(rank);
+		sortRanking(rank);
 	}
 	else z_key_flag = true;
 }
 
-void SceneRanking::RankChenge(int get)
+void SceneRanking::sortRanking(int get)
 {
 	//ランクインした順位からずれていく
 	if (get < 5) {
@@ -367,7 +367,7 @@ void SceneRanking::RankChenge(int get)
 	}
 }
 
-void SceneRanking::RankInit()
+void SceneRanking::initRanking()
 {
 	rank=-1;
 
@@ -383,7 +383,7 @@ void SceneRanking::RankInit()
 	write_flag=false;
 }
 
-void SceneRanking::ZKeyDraw()
+void SceneRanking::drawZKey()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
 	mVertex->setColor(z_alpha,255,255,255);

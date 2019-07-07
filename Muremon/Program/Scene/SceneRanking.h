@@ -93,6 +93,36 @@ enum RECT_DATA_RANKING
 
 class SceneRanking : public SceneBase
 {
+public:
+	SceneRanking(void);
+	~SceneRanking(void);
+
+	void		impleInit() override;
+	void		init(LPDIRECT3DDEVICE9 apDev, int score);
+	bool		update() override;
+	void		draw() override;
+	int			end() override;
+
+private:
+	void		updateFade();
+	void		fadeIn();					// フェードイン
+	void		fadeOut();					// フェードアウト
+
+	void		updateRanking(int rank);	// ランクインした時、名前をを入力する
+	void		sortRanking(int get);		// スコアの並び替え
+	void		loadRanking();				// データの読み込み
+	void		writeRanking();				// データの書き込み
+
+	void		drawBackGround();			// ランキング背景
+	void		drawRankingPlace();			// ランキング位置
+	void		drawRankingName();			// ランキング名前
+	void		drawRankingScore();			// ランキングスコア
+
+	void		checkRanking();
+	void		initRanking();
+	void		updateInput();
+	void		drawZKey();
+
 private:
 	int time_count;	//描画するタイムカウント
 
@@ -145,44 +175,4 @@ private:
 	int z_alpha;
 
 	bool ranking_flag;
-
-public:
-	void impleInit() override;
-	void init(LPDIRECT3DDEVICE9 apDev, int score);
-	bool update() override;
-	void draw() override;
-	int end() override;
-
-	void fadeControl();		
-
-	void fadeIn();			//フェードイン
-
-	void fadeOut();			//フェードアウト
-
-	void RankControl(int rank);	//ランクインした時、名前をを入力する
-
-	void RankChenge(int get);	//スコアの並び替え
-
-	void RankLoad();			//データの読み込み
-
-	void RankWrite();		//データの書き込み
-
-	void RankBackGround();	//ランキング背景
-
-	void RankPlaceDraw();	//ランキング順位
-
-	void RankNameDraw();	//ランキング名前
-
-	void RankScoreDraw();	//ランキングスコア
-
-	void RankCheck();
-
-	void RankInit();
-
-	void KeyControl();
-
-	void ZKeyDraw();
-
-	SceneRanking(void);
-	~SceneRanking(void);
 };

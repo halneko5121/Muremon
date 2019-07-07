@@ -777,7 +777,7 @@ void Mission::Mission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	if (UtilInput::IsKeyPushedDecide())
+	if (UtilInput::isKeyPushedDecide())
 	{
 		flag_time_cnt += 1;
 	}
@@ -812,7 +812,7 @@ void Mission::Mission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 			}
 		}
 	}
-	if (UtilInput::IsKeyPushedDecide())
+	if (UtilInput::isKeyPushedDecide())
 	{
 		flag_time_cnt += 1;
 		if(flag_time_cnt > 2)
@@ -852,7 +852,7 @@ void Mission::Mission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 		return;
 	}
 
-	if (UtilInput::IsKeyPushedLineOne())
+	if (UtilInput::isKeyPushedLineOne())
 	{
 		cnt_key_nikuman++;
 	}
@@ -874,7 +874,7 @@ void Mission::Mission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 		return;
 	}
 	
-	if (UtilInput::IsKeyPushedLineOne())
+	if (UtilInput::isKeyPushedLineOne())
 	{
 		cnt_key_yoshitaro++;
 	}
@@ -896,7 +896,7 @@ void Mission::Mission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 		return;
 	}
 	
-	if (UtilInput::IsKeyPushedLineThree())
+	if (UtilInput::isKeyPushedLineThree())
 	{
 		cnt_key_noppo++;
 	}

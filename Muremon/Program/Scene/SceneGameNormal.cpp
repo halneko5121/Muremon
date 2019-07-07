@@ -112,7 +112,7 @@ bool SceneGameNormal::update()
 			}
 		}
 
-		if (UtilInput::IsKeyPushedReturn())
+		if (UtilInput::isKeyPushedReturn())
 		{
 			if(mIsPose){
 				mIsPose = false;

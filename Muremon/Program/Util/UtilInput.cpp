@@ -31,7 +31,7 @@ UtilInput::isAnyKeyPushed()
  * @brief	決定キーが瞬間的に押されたか
  */
 bool
-UtilInput::IsKeyPushedDecide()
+UtilInput::isKeyPushedDecide()
 {
 	return GetInputKey()->isKeyPushed(cKey_Z);
 }
@@ -40,7 +40,7 @@ UtilInput::IsKeyPushedDecide()
  * @brief	RETUNRキーが瞬間的に押されたか
  */
 bool
-UtilInput::IsKeyPushedReturn()
+UtilInput::isKeyPushedReturn()
 {
 	return GetInputKey()->isKeyPushed(cKey_Return);
 }
@@ -49,7 +49,7 @@ UtilInput::IsKeyPushedReturn()
  * @brief	一段目のキーが瞬間的に押されたか
  */
 bool
-UtilInput::IsKeyPushedLineOne()
+UtilInput::isKeyPushedLineOne()
 {
 	if (GetInputKey()->isKeyPushed(cKey_Q))				return true;
 	if (GetInputKey()->isKeyPushed(cKey_W))				return true;
@@ -72,7 +72,7 @@ UtilInput::IsKeyPushedLineOne()
  * @brief	ニ段目のキーが瞬間的に押されたか
  */
 bool
-UtilInput::IsKeyPushedLineTwo()
+UtilInput::isKeyPushedLineTwo()
 {
 	if (GetInputKey()->isKeyPushed(cKey_A))				return true;
 	if (GetInputKey()->isKeyPushed(cKey_S))				return true;
@@ -96,7 +96,7 @@ UtilInput::IsKeyPushedLineTwo()
  * @brief	三段目のキーが瞬間的に押されたか
  */
 bool
-UtilInput::IsKeyPushedLineThree()
+UtilInput::isKeyPushedLineThree()
 {
 	if (GetInputKey()->isKeyPushed(cKey_Z))				return true;
 	if (GetInputKey()->isKeyPushed(cKey_X))				return true;
@@ -118,7 +118,7 @@ UtilInput::IsKeyPushedLineThree()
  * @brief	奇数のキーが瞬間的に押されたか
  */
 bool
-UtilInput::IsKeyPushedOdd()
+UtilInput::isKeyPushedOdd()
 {
 	if (GetInputKey()->isKeyPushed(cKey_Q))				return true;
 	if (GetInputKey()->isKeyPushed(cKey_A))				return true;
@@ -151,7 +151,7 @@ UtilInput::IsKeyPushedOdd()
  * @brief	偶数のキーが瞬間的に押されたか
  */
 bool
-UtilInput::IsKeyPushedEven()
+UtilInput::isKeyPushedEven()
 {
 	if (GetInputKey()->isKeyPushed(cKey_W))				return true;
 	if (GetInputKey()->isKeyPushed(cKey_S))				return true;

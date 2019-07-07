@@ -15,7 +15,7 @@
 bool
 UtilBattle::isRunGroundAttack()
 {
-	return (UtilInput::IsKeyPushedOdd());
+	return (UtilInput::isKeyPushedOdd());
 }
 
 /**
@@ -24,7 +24,7 @@ UtilBattle::isRunGroundAttack()
 bool
 UtilBattle::isRunSkyAttack()
 {
-	return (UtilInput::IsKeyPushedEven());
+	return (UtilInput::isKeyPushedEven());
 }
 
 /**
@@ -33,7 +33,7 @@ UtilBattle::isRunSkyAttack()
 bool
 UtilBattle::isRunWeakGroundAttack()
 {
-	return (isRunGroundAttack() && UtilInput::IsKeyPushedLineTwo());
+	return (isRunGroundAttack() && UtilInput::isKeyPushedLineTwo());
 }
 
 /**
@@ -42,7 +42,7 @@ UtilBattle::isRunWeakGroundAttack()
 bool
 UtilBattle::isRunWeakSkyAttack()
 {
-	return (isRunSkyAttack() && UtilInput::IsKeyPushedLineTwo());
+	return (isRunSkyAttack() && UtilInput::isKeyPushedLineTwo());
 }
 
 /**
@@ -51,7 +51,7 @@ UtilBattle::isRunWeakSkyAttack()
 bool
 UtilBattle::isRunMediumGroundAttack()
 {
-	return (isRunGroundAttack() && UtilInput::IsKeyPushedLineOne());
+	return (isRunGroundAttack() && UtilInput::isKeyPushedLineOne());
 }
 
 /**
@@ -60,7 +60,7 @@ UtilBattle::isRunMediumGroundAttack()
 bool
 UtilBattle::isRunMediumSkyAttack()
 {
-	return (isRunSkyAttack() && UtilInput::IsKeyPushedLineOne());
+	return (isRunSkyAttack() && UtilInput::isKeyPushedLineOne());
 }
 
 /**
@@ -69,7 +69,7 @@ UtilBattle::isRunMediumSkyAttack()
 bool
 UtilBattle::isRunStrongGroundAttack()
 {
-	return (isRunGroundAttack() && UtilInput::IsKeyPushedLineThree());
+	return (isRunGroundAttack() && UtilInput::isKeyPushedLineThree());
 }
 
 /**
@@ -78,5 +78,5 @@ UtilBattle::isRunStrongGroundAttack()
 bool
 UtilBattle::isRunStrongSkyAttack()
 {
-	return (isRunSkyAttack() && UtilInput::IsKeyPushedLineThree());
+	return (isRunSkyAttack() && UtilInput::isKeyPushedLineThree());
 }

@@ -84,7 +84,7 @@ namespace
 UITitleMenu::UITitleMenu()
 	: mTexture(nullptr)
 	, mVertex(nullptr)
-	, mCursorPos(0, 0)
+	, mCursorPos(cDispCursorX, cDispCursorY)
 	, mCurrentMenuItem(0)
 	, mAlphaZPush(0)
 	, mTimeCount(0)

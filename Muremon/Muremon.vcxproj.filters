@@ -93,6 +93,9 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Program\stdafx.cpp" />
+    <ClCompile Include="Program\Util\UtilSound.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -189,6 +192,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Program\stdafx.h" />
+    <ClInclude Include="Program\Util\UtilSound.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

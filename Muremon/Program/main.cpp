@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, in
 	// インスタンス生成
 	GameMain game_main;
 
-	int l_return = game_main.WinMain(hInstance,hPrevInst,lpCmdLine,nShowCmd);
+	int l_return = game_main.winMain(hInstance,hPrevInst,lpCmdLine,nShowCmd);
 
 	// 現在のメモリリーク状態がわかる
 	_CrtDumpMemoryLeaks();

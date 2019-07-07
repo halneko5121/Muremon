@@ -29,7 +29,7 @@ public:
 	/**
 	 * @brief	ゲームで使うメンバの初期化
 	 */
-    void InitGameMain();
+    void		init();
 
 	/**
      * @brief	メイン関数												
@@ -39,38 +39,38 @@ public:
 	 * @param	nShowCmd    その命令がいくつあるのか
      * @return  int         メッセージループを返す						
 	 */
-	int WINAPI WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd);
+	int WINAPI	winMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd);
 
 	/**
 	 * @brief	ゲーム内ループ関数
      * @return  メッセージパラメータ
 	 */
-	int MsgLoop();
+	int			msgLoop();
 
 	/**
      * @brief ゲームで使うメンバの開放処理
 	 */
-    void ReleaseGameMain();
+    void		release();
 
 	/**
      * @brief シーケンスの管理を行う
 	 */
-	void ControlSequence();
+	void		controlSequence();
 
 private:
 	// ステート関数
-	void stateEnterInit();
-	void stateExeInit();
+	void		 stateEnterInit();
+	void		 stateExeInit();
 
-	void stateEnterRun();
-	void stateExeRun();
+	void		 stateEnterRun();
+	void		 stateExeRun();
 
-	void stateEnterEnd();
-	void stateExeEnd();
+	void		 stateEnterEnd();
+	void		 stateExeEnd();
 
 private:
 	StateMachine<GameMain>	mState;			// ステート
-	Window*				mWindow;		// ウィンドウクラスへのポインタ
+	Window*					mWindow;		// ウィンドウクラスへのポインタ
 	SceneBase*				mScene;			// シーンクラスへのポインタ
 	DirectGraphics*			mGraphics;		// グラフィッククラスへのポインタ
 	char**					mSoundText;

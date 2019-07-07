@@ -38,7 +38,7 @@ namespace
   * @brief	ゲームで使うメンバの初期化
   */
 void
-GameMain::InitGameMain(void)
+GameMain::init(void)
 {
 	mWindow			= new Window;
 	mGraphics		= DirectGraphics::create();
@@ -71,9 +71,9 @@ GameMain::InitGameMain(void)
  * @return  int         メッセージループを返す
  */
 int WINAPI
-GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
+GameMain::winMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , int nShowCmd)
 {
-	InitGameMain();
+	init();
 
 	// ウィンドウ初期化関数
 	mWindow->init(hInstance, cWindowWidth, cWindowHeight, cWindowPosX, cWindowPosY);
@@ -113,7 +113,7 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 		return 0;
 	}
 
-	return MsgLoop();
+	return msgLoop();
 }
 	
 /**
@@ -121,7 +121,7 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
  * @return  メッセージパラメータ
  */
 int
-GameMain::MsgLoop(void)
+GameMain::msgLoop(void)
 {
 	// 初期化
 	MSG msg;
@@ -184,7 +184,7 @@ GameMain::MsgLoop(void)
 		}
 	}
 
-	ReleaseGameMain();  
+	release();  
 
 	return (int)msg.wParam;
 }
@@ -193,7 +193,7 @@ GameMain::MsgLoop(void)
  * @brief ゲームで使うメンバの開放処理
  */
 void
-GameMain::ReleaseGameMain(void)
+GameMain::release(void)
 {
     // 開放
 	mScene->End();
@@ -214,7 +214,7 @@ GameMain::ReleaseGameMain(void)
  * @brief シーケンスの管理を行う
  */
 void
-GameMain::ControlSequence(void)
+GameMain::controlSequence(void)
 {
 	// シーンIDによって分岐
 	switch(mScene->GetSceneID()){
@@ -274,7 +274,7 @@ GameMain::stateEnterInit()
 	GetFadeMgr()->fadeIn();
 
 	// シーン切り替え
-	ControlSequence();
+	controlSequence();
 }
 void
 GameMain::stateExeInit()

@@ -8,6 +8,7 @@
  ******************************************************************/
 
 #include "Program/Scene/SceneBase.h"
+#include "Library/StateMachine.h"
 
 class SceneTutorial : public SceneBase
 {
@@ -20,11 +21,26 @@ public:
 	void			draw() override;
 	int				end() override;
 
-	void			updateInput();		// キー操作
-	void			updateDrawPos();	// 描画位置などを決める
+	void			updateInput();					// キー操作
+	void			updateDrawPos();				// 描画位置などを決める
 
 private:
-	int				mDrawState;			// 描画しているものを知らせる
-	int				mSlideState;
-	D3DXVECTOR2		mTutorial[2];
+	// ステート関数
+	void			stateEnterIdle();
+	void			stateExeIdle();
+
+	void			stateEnterRefresh();
+	void			stateExeRefresh();
+
+	void			stateEnterNormal();
+	void			stateExeNormal();
+
+	void			stateEnterEnd();
+	void			stateExeEnd();
+
+private:
+	StateMachine<SceneTutorial>	mState;				// ステート
+	int							mDrawState;			// 描画しているものを知らせる
+	int							mSlideState;
+	D3DXVECTOR2					mTutorial[2];
 };

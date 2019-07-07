@@ -46,6 +46,15 @@ namespace
 		TR_NORMAL,
 		TR_END,
 	};
+
+	enum State
+	{
+		cState_Idle,		// 待機
+		cState_Refresh,		// すっきり
+		cState_Normal,		// ノーマル
+		cState_End,			// 終了
+		cState_Count
+	};
 }
 
 SceneTutorial::SceneTutorial()
@@ -57,6 +66,13 @@ SceneTutorial::SceneTutorial()
 	mTutorial[TR_REFRESH].x = mTutorial[TR_NORMAL].x  = cTrRightX;
 
 	mIsSceneChange = true;
+
+	mState.initialize(cState_Count, cState_Idle);
+	mState.registState(this, &SceneTutorial::stateEnterIdle,	&SceneTutorial::stateExeIdle,		nullptr, cState_Idle);
+	mState.registState(this, &SceneTutorial::stateEnterRefresh,	&SceneTutorial::stateExeRefresh,	nullptr, cState_Refresh);
+	mState.registState(this, &SceneTutorial::stateEnterNormal,	&SceneTutorial::stateExeNormal,		nullptr, cState_Normal);
+	mState.registState(this, &SceneTutorial::stateEnterEnd,		&SceneTutorial::stateExeEnd,		nullptr, cState_End);
+	mState.changeState(cState_Idle);
 }
 
 SceneTutorial::~SceneTutorial()
@@ -67,6 +83,7 @@ void SceneTutorial::impleInit()
 {
 	mTexture->load("Data\\TextureData\\Tutorial.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\Tutorial.txt");
+	mState.changeState(cState_Refresh);
 }
 
 bool SceneTutorial::update()
@@ -74,6 +91,8 @@ bool SceneTutorial::update()
 	updateInput();
 
 	updateDrawPos();
+
+	mState.executeState();
 
 	return mIsSceneChange;
 }
@@ -105,27 +124,11 @@ void SceneTutorial::updateInput()
 	else if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-		if(mDrawState == TR_NORMAL)
-		{
-			mDrawState = TR_REFRESH;
-		}
-		else if(mDrawState == TR_END)
-		{
-			mDrawState = TR_NORMAL;
-		}
 		mSlideState = 1;
 	}
 	else if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
-		if(mDrawState == TR_REFRESH)
-		{
-			mDrawState = TR_NORMAL;
-		}
-		else if(mDrawState == TR_NORMAL)
-		{
-			mDrawState = TR_END;
-		}
 		mSlideState = 2;
 	}
 }
@@ -178,5 +181,82 @@ void SceneTutorial::updateDrawPos()
 		{
 			mIsSceneChange = false;
 		}
+	}
+}
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+SceneTutorial::stateEnterIdle()
+{
+}
+void
+SceneTutorial::stateExeIdle()
+{
+}
+
+/**
+ * @brief ステート:Refresh
+ */
+void
+SceneTutorial::stateEnterRefresh()
+{
+}
+void
+SceneTutorial::stateExeRefresh()
+{
+	if (UtilInput::isKeyPushed(DIK_RIGHT))
+	{
+		mDrawState = TR_NORMAL;
+		mState.changeState(cState_Normal);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:Normal
+ */
+void
+SceneTutorial::stateEnterNormal()
+{
+}
+void
+SceneTutorial::stateExeNormal()
+{
+	if (UtilInput::isKeyPushed(DIK_LEFT))
+	{
+		mDrawState = TR_REFRESH;
+		mState.changeState(cState_Refresh);
+		return;
+	}
+
+	if (UtilInput::isKeyPushed(DIK_RIGHT))
+	{
+		mDrawState = TR_END;
+		mState.changeState(cState_End);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:End
+ */
+void
+SceneTutorial::stateEnterEnd()
+{
+}
+void
+SceneTutorial::stateExeEnd()
+{
+	if (UtilInput::isKeyPushed(DIK_LEFT))
+	{
+		mDrawState = TR_NORMAL;
+		mState.changeState(cState_Normal);
+		return;
 	}
 }

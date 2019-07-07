@@ -17,6 +17,7 @@
 #define G_ALPHA_INCREASE	(15)
 #define GAME_GROUND			(500.f)	//ゲーム中の地面に当たる所
 #define MAX_VALLUE_PLAYER	(80)	//キャラ一匹につきの総数
+#define GRAVITY 			(0.98f)				//重力加速度
 
 template <class T>
 struct POS_CC{

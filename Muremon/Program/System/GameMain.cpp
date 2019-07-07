@@ -203,6 +203,8 @@ GameMain::ReleaseGameMain(void)
 	mGraphics = nullptr;
 	FadeMgr::destroy();
 	DirectFont::destroy();
+	GetInputMouse()->release();
+	DirectInputMouse::destroy();
 	GetInputKey()->release();
 	DirectInputKey::destroy();
 	APP_SAFE_DELETE(mWindow);

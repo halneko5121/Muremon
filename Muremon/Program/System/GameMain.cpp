@@ -100,7 +100,7 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	}
 
 	// DirectFont‰Šú‰»
-	if(FAILED(GetDirectFont()->initDirectFont(mGraphics->getDevice())))
+	if(FAILED(GetDirectFont()->init(mGraphics->getDevice())))
 	{
 		MessageBox(NULL, TEXT("DirectFont‚Ì‰Šú‰»‚É¸”s"), NULL, MB_OK);
 		return 0;

@@ -44,7 +44,7 @@ public:
 	 * @param	device    デバイス
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT				initDirectFont(LPDIRECT3DDEVICE9 device);
+	HRESULT				init(LPDIRECT3DDEVICE9 device);
 
 	/**
 	 * @brief	フォントの色設定

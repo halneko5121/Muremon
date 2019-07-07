@@ -51,7 +51,7 @@ DirectFont::destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectFont::initDirectFont(LPDIRECT3DDEVICE9 device)
+DirectFont::init(LPDIRECT3DDEVICE9 device)
 {
     // デバイスセット
     mFontDevice = device;

@@ -1,22 +1,58 @@
-//---------------------------------------------
-//
-//      操作説明
-//			作成者:	平野
-//
-//---------------------------------------------
+/******************************************************************
+ *	@file	SceneTutorial.cpp
+ *	@brief	チュートリアルシーン
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
+
 #include "SceneTutorial.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/DefineGame.h"
+
+namespace
+{
+	const float cTrRightX = 1200.f;
+	const float cTrCenterX = 400.f;
+	const float cTrLeftX = -400.f;
+	const float cTrY = 300.f;
+
+	enum TEXTURE_DATA_TUTORIAL
+	{
+		T_TUTORIAL1,
+		T_TUTORIAL2,
+	};
+
+	enum RECT_DATA_TUTORIAL
+	{
+		R_TUTORIAL1,
+		R_TUTORIAL2,
+	};
+
+	enum TUTORIAL_FADE_MODE
+	{
+		TR_FADE_IN,		//フェードイン
+		TR_USUALLY,		//通常
+		TR_FADE_OUT,	//フェードアウト
+	};
+
+	enum TUTORIAL_MODE
+	{
+		TR_REFRESH,
+		TR_NORMAL,
+		TR_END,
+	};
+}
 
 SceneTutorial::SceneTutorial(void)
 {
 	flag_draw_state = TR_REFRESH;
 	slide_state = 0;
 
-	tutorial[TR_REFRESH].y = tutorial[TR_NORMAL].y = TR_Y;
+	tutorial[TR_REFRESH].y = tutorial[TR_NORMAL].y = cTrY;
 
-	tutorial[TR_REFRESH].x = tutorial[TR_NORMAL].x  = TR_RIGHT_X;
+	tutorial[TR_REFRESH].x = tutorial[TR_NORMAL].x  = cTrRightX;
 
 	alpha=0;
 	alpha_count=0;
@@ -151,7 +187,7 @@ void SceneTutorial::updateDrawPos()
 	{
 		if (slide_state == 1)
 		{
-			if(tutorial[TR_REFRESH].x != TR_CENTER_X)
+			if(tutorial[TR_REFRESH].x != cTrCenterX)
 			{
 				tutorial[TR_REFRESH].x += 10.f;
 				tutorial[TR_NORMAL].x += 10.f;
@@ -159,7 +195,7 @@ void SceneTutorial::updateDrawPos()
 		}
 		else
 		{
-			if(tutorial[TR_REFRESH].x != TR_CENTER_X){
+			if(tutorial[TR_REFRESH].x != cTrCenterX){
 				tutorial[TR_REFRESH].x -= 10.f;
 			}
 		}
@@ -168,14 +204,14 @@ void SceneTutorial::updateDrawPos()
 	{
 		if (slide_state == 1)
 		{
-			if(tutorial[TR_NORMAL].x != TR_CENTER_X)
+			if(tutorial[TR_NORMAL].x != cTrCenterX)
 			{
 				tutorial[TR_NORMAL].x += 10.f;
 			}
 		}
 		else
 		{
-			if(tutorial[TR_NORMAL].x != TR_CENTER_X)
+			if(tutorial[TR_NORMAL].x != cTrCenterX)
 			{
 				tutorial[TR_NORMAL].x -= 10.f;
 				tutorial[TR_REFRESH].x -= 10.f;
@@ -184,7 +220,7 @@ void SceneTutorial::updateDrawPos()
 	}
 	else if(flag_draw_state == TR_END)
 	{
-		if(tutorial[TR_NORMAL].x != TR_LEFT_X)
+		if(tutorial[TR_NORMAL].x != cTrLeftX)
 		{
 			tutorial[TR_NORMAL].x -= 10.f;
 		}

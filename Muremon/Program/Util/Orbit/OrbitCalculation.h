@@ -8,20 +8,9 @@
  *													by	éOè„Å@òj					*
  ************************************************************************************/
 
-/*================================
-		Include
-=================================*/
-#include <math.h>
-#include <d3dx9math.h>
-#include <Time.h>
-
 #include"OrbitWave.h"
 #include"OrbitRebound.h"
 #include"OrbitParadora.h"
-
-/*================================
-		Define
-=================================*/
 
 #define RADIUS_NIKU						(37.5f)				//ÉLÉÉÉâÇÃîºåa
 #define RADIUS_YOSHI					(76.5f)				//ÉLÉÉÉâÇÃîºåa
@@ -35,12 +24,11 @@
 class OrbitCalculation
 {
 public:
-
 	OrbitCalculation(void);
 	~OrbitCalculation(void);
 
 public:
-	OrbitWave*		mWave;
+	OrbitWave*			mWave;
 	OrbitRebound*		mRebound;
-	OrbitParabora*	mParabora;
+	OrbitParabora*		mParabora;
 };

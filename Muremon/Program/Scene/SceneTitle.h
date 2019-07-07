@@ -18,13 +18,13 @@ public:
 	SceneTitle();
 	~SceneTitle();
 
-	void impleInit() override;
-	bool update() override;
-	void draw() override;
-	int end() override;
+	void			impleInit() override;
+	bool			update() override;
+	void			draw() override;
+	int				end() override;
 
-	void PosiDrawControl();
-	void ChangeSceneControl();
+	void			updateDrawPos();
+	void			updateCheckSceneChange();
 
 private:
 	UITitleMenu*	mUITitleMenu;			// タイトルメニューUI

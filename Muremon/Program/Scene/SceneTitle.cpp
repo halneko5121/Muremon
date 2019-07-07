@@ -73,8 +73,8 @@ void SceneTitle::impleInit()
 
 bool SceneTitle::update()
 {
-	PosiDrawControl();
-	ChangeSceneControl();
+	updateDrawPos();
+	updateCheckSceneChange();
 	mUITitleMenu->update();
 
 	return mIsSceneChange;
@@ -102,7 +102,7 @@ int SceneTitle::end()
 	return 0;
 }
 
-void SceneTitle::PosiDrawControl()
+void SceneTitle::updateDrawPos()
 {
 	//タイトル位置を計算
 	if(mDrawCount == 7) { return ; }
@@ -128,7 +128,7 @@ void SceneTitle::PosiDrawControl()
 	}
 }
 
-void SceneTitle::ChangeSceneControl()
+void SceneTitle::updateCheckSceneChange()
 {
 	// メニューセレクト
 	if (mUITitleMenu->isDecideMenuSelectRanking())

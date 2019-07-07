@@ -131,7 +131,7 @@ DirectGraphics::InitDGraphics(Window *wind, HWND hWnd, const int clientSizeX, co
 void
 DirectGraphics::ChangeWindowSize(Window *wind, HWND hWnd, int clientSizeX , int clientSizeY)
 {	
-	if(wind->IsWindowMode()){
+	if(wind->isWindowMode()){
 		mD3dPresentParam.Windowed = true;					//ウィンドウの場合
 		SetWindowLong(hWnd, GWL_USERDATA, (WS_OVERLAPPEDWINDOW | WS_VISIBLE) );
 	}else{

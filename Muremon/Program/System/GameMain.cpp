@@ -76,24 +76,24 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	InitGameMain();
 
 	// ウィンドウ初期化関数
-	mWindow->InitWindow(hInstance, cWindowWidth, cWindowHeight, cWindowPosX, cWindowPosY);
+	mWindow->init(hInstance, cWindowWidth, cWindowHeight, cWindowPosX, cWindowPosY);
 
 	// 各ライブラリの初期化
 	// DirectInput初期化
-	if(FAILED(GetInputKey()->init(mWindow->GetHwnd())))
+	if(FAILED(GetInputKey()->init(mWindow->getWindowHandle())))
 	{
 		MessageBox(NULL, TEXT("DirectInputの初期化に失敗"), NULL, MB_OK);
 		return 0;
 	}
 
-	if(FAILED(GetInputMouse()->init(mWindow->GetHwnd())))
+	if(FAILED(GetInputMouse()->init(mWindow->getWindowHandle())))
 	{
 		MessageBox(NULL, TEXT("DirectInputの初期化に失敗"), NULL, MB_OK);
 		return 0;
 	}
 
 	// DirectGraphics初期化
-	if(FAILED(mGraphics->InitDGraphics(mWindow, mWindow->GetHwnd(), cWindowWidth, cWindowHeight)))
+	if(FAILED(mGraphics->InitDGraphics(mWindow, mWindow->getWindowHandle(), cWindowWidth, cWindowHeight)))
 	{
 		MessageBox(NULL, TEXT("DirectGraphicsの初期化に失敗"), NULL, MB_OK);
 		return 0;
@@ -107,7 +107,7 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	}
 
 	// DirectSound初期化
-	if(FAILED(GetDirectSound()->init(mWindow->GetHwnd())))
+	if(FAILED(GetDirectSound()->init(mWindow->getWindowHandle())))
 	{
 		MessageBox(NULL, TEXT("DirectSoundの初期化に失敗"), NULL, MB_OK);
 		return 0;

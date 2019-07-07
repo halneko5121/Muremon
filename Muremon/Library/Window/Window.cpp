@@ -21,7 +21,7 @@
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
+Window::init(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
 {
 	// ハンドルを渡す
 	mHInstance = hInst;
@@ -34,7 +34,7 @@ Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
 
 	wcex.cbSize			= sizeof(WNDCLASSEX);					// 構造体のサイズ
 	wcex.style			= CS_HREDRAW | CS_VREDRAW;				// ウィンドウのスタイル
-	wcex.lpfnWndProc	= WindowProc;							// メッセージ処理関数に登録
+	wcex.lpfnWndProc	= windowProc;							// メッセージ処理関数に登録
 	wcex.hInstance		= mHInstance;							// インスタンスへのハンドル
     wcex.hIcon			= LoadIcon(NULL , IDI_APPLICATION);		// LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON1));					//アイコン
 	wcex.hCursor		= LoadCursor(NULL , IDC_ARROW);			// マウスカーソル
@@ -48,7 +48,7 @@ Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
 	}
 
 	// ウィンドウ生成
-	if(!WindowCreate(width, height, pos_x, pos_y))
+	if(!create(width, height, pos_x, pos_y))
 	{
 		MessageBox(NULL, TEXT("ウィンドウの生成に失敗しました"), NULL, MB_OK);
 		return E_FAIL;
@@ -65,7 +65,7 @@ Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
  * @return	true:成功   false:失敗
  */
 bool
-Window::WindowCreate(int width, int height, int pos_x, int pos_y)
+Window::create(int width, int height, int pos_x, int pos_y)
 {
 	// 0でうめる
 	ZeroMemory(&mWindowSize , sizeof(RECT));
@@ -157,14 +157,14 @@ Window::WindowCreate(int width, int height, int pos_x, int pos_y)
  * @return	ウィンドウプロシージャに渡す
  */
 LRESULT CALLBACK
-Window::WindowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam)
+Window::windowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam)
 {
 	// thisポインタをセット
 	Window *p_window = (Window*)GetWindowLong(hWnd, GWL_USERDATA);
 	if(p_window != NULL)
 	{
 		// ウィンドウプロシージャ本体を呼び出す
-		return p_window->WndProc(hWnd, uMsg, wParam, lParam);
+		return p_window->baseWindowProc(hWnd, uMsg, wParam, lParam);
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
@@ -178,7 +178,7 @@ Window::WindowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam)
  * @return	ウィンドウ初期化時に渡す
  */
 LRESULT
-Window::WndProc(HWND hWnd , UINT iMsg , WPARAM wParam , LPARAM lParam)
+Window::baseWindowProc(HWND hWnd , UINT iMsg , WPARAM wParam , LPARAM lParam)
 {
 	DWORD size_change = 0;
 

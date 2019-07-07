@@ -27,14 +27,36 @@ public:
 	 * @param	hInst   インスタンスハンドル
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y);
+	HRESULT					init(HINSTANCE hInst, int width, int height, int pos_x, int pos_y);
 
 	/**
 	 * @brief	生成
 	 * @return	true:成功   false:失敗
 	 */
-	bool WindowCreate(int width, int height, int pos_x, int pos_y);
+	bool					create(int width, int height, int pos_x, int pos_y);
 
+	/*-情報取得関数-*/
+	/**
+	 * @brief	インスタンスハンドル取得
+	 */
+	HINSTANCE				getInstanceHandle()		{ return mHInstance; }
+
+	/**
+	 * @brief	ウィンドウハンドル取得
+	 */
+	HWND					getWindowHandle()		{ return mWindowHandle; }
+
+	/**
+	 * @brief	ウィンドウサイズ取得
+	 */
+	RECT					getWindowSize()			{ return mWindowSize; }
+
+	/**
+	 * @brief	ウィンドウモードか
+	 */
+	bool					isWindowMode()			{ return mWindowMode; }
+
+private:
 	/**
 	 * @brief	ウィンドウクラス独自のウィンドウプロシージャ
 	 * @param	hWnd    ウィンドウハンドル
@@ -43,8 +65,8 @@ public:
 	 * @param	lParam  パラメータ
 	 * @return	ウィンドウプロシージャに渡す
 	 */
-	static LRESULT CALLBACK WindowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam);
-	
+	static LRESULT CALLBACK	windowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
 	/**
 	 * @brief	共通のウィンドウプロシージャ
 	 * @param	hWnd    ウィンドウハンドル
@@ -53,32 +75,11 @@ public:
 	 * @param	lParam  パラメータ
 	 * @return	ウィンドウ初期化時に渡す
 	 */
-	LRESULT WndProc(HWND hWnd , UINT iMsg , WPARAM wParam , LPARAM lParam);
-
-	/*-情報取得関数-*/
-	/**
-	 * @brief	インスタンスハンドル取得
-	 */
-	HINSTANCE GetHinst()	{ return mHInstance; }
-
-	/**
-	 * @brief	ウィンドウハンドル取得
-	 */
-	HWND GetHwnd()			{ return mWindowHandle; }
-
-	/**
-	 * @brief	ウィンドウサイズ取得
-	 */
-	RECT GetWindowSize()	{ return mWindowSize; }
-
-	/**
-	 * @brief	ウィンドウモードか
-	 */
-	bool IsWindowMode()		{ return mWindowMode; }
+	LRESULT					baseWindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam);
 
 private:
-	HINSTANCE	mHInstance;			// インスタンスハンドル
-	HWND		mWindowHandle;		// ウィンドウハンドル
-	RECT		mWindowSize;		// ウィンドウサイズ
-	bool		mWindowMode;		// ウィンドウモード
+	HINSTANCE				mHInstance;			// インスタンスハンドル
+	HWND					mWindowHandle;		// ウィンドウハンドル
+	RECT					mWindowSize;		// ウィンドウサイズ
+	bool					mWindowMode;		// ウィンドウモード
 };

@@ -6,10 +6,10 @@
 //---------------------------------------------
 #include "SceneTitle.h"
 
-#include "Library/Sound/DirectSound.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilSound.h"
 
 #define MENU_MAX		(3)		
 #define MENU_MAX_GAME	(2)
@@ -122,7 +122,7 @@ void SceneTitle::ImpleInit()
 	mTexture->LoadTextureData("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\title.txt");
 
-	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
+	UtilSound::playLoop(S_BGM_TITLE);
 
 	mState.changeState(cState_Top);
 }
@@ -182,7 +182,7 @@ void SceneTitle::Draw()
 int SceneTitle::End()
 {
 	ChangeScene(mNextSceneIndex);
-	GetDirectSound()->SoundPouse(S_BGM_TITLE);
+	UtilSound::pause(S_BGM_TITLE);
 
 	mTexture->AllReleaseTexture();
 	mVertex->AllReleaseRect();
@@ -222,12 +222,12 @@ void SceneTitle::PosiDrawControl()
 void SceneTitle::KeyControl()
 {
 	// ‚ß‚Á‚¿‚áã‰º‰Ÿ‚³‚ê‚Ä‚àˆá˜aŠ´‚É‚È‚¢‚æ‚¤‚É
-	if(GetDirectSound()->IsPlaySound(S_SE_CURSOR_MOVE))
+	if(UtilSound::isPlaySound(S_SE_CURSOR_MOVE))
 	{
 		if (UtilInput::IsKeyDown(DIK_UP) ||
 			UtilInput::IsKeyDown(DIK_DOWN))
 		{
-			GetDirectSound()->SoundStop(S_SE_CURSOR_MOVE);
+			UtilSound::stop(S_SE_CURSOR_MOVE);
 		}
 	}
 
@@ -245,13 +245,13 @@ void SceneTitle::KeyControl()
 
 	if (UtilInput::IsKeyPushed(DIK_Z))
 	{
-		GetDirectSound()->SoundPlayOnce(S_SE_OK);
+		UtilSound::playOnce(S_SE_OK);
 		mTimeCount = 0;
 	}
 
 	if (UtilInput::IsKeyPushed(DIK_X))
 	{
-		GetDirectSound()->SoundPlayOnce(S_CANCEL);
+		UtilSound::playOnce(S_CANCEL);
 		mTimeCount = 0;
 	}
 }
@@ -326,7 +326,7 @@ SceneTitle::stateExeMenuSelect()
 	if (UtilInput::IsKeyPushed(DIK_DOWN) ||
 		UtilInput::IsKeyPushed(DIK_UP))
 	{
-		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 	}
 
 	if (UtilInput::IsKeyPushed(DIK_UP))
@@ -387,7 +387,7 @@ SceneTitle::stateExeGameSelect()
 	if (UtilInput::IsKeyPushed(DIK_DOWN) ||
 		UtilInput::IsKeyPushed(DIK_UP))
 	{
-		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 	}
 
 	if (UtilInput::IsKeyPushed(DIK_UP))

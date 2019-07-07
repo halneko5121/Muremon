@@ -6,7 +6,7 @@
 //---------------------------------------------
 #include "SceneGameNormal.h"
 
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilBattle.h"
 
@@ -94,7 +94,7 @@ void SceneGameNormal::ImpleInit()
 bool SceneGameNormal::Update()
 {
 	if(mGameState == G_START_SCENE){
-		GetDirectSound()->SoundPlayOnce(S_GAME_START);
+		UtilSound::playOnce(S_GAME_START);
 		FadeControl();
 	}
 	else if(mGameState == G_GAME_SCENE){
@@ -104,11 +104,11 @@ bool SceneGameNormal::Update()
 
 		if(mGameState != G_GAME_OVER){
 			if((boss_cc2.x - 150) < 500){
-				GetDirectSound()->SoundPlayLoop(S_SAIREN);
+				UtilSound::playLoop(S_SAIREN);
 			}
 			else
 			{
-				GetDirectSound()->SoundStop(S_SAIREN);
+				UtilSound::stop(S_SAIREN);
 			}
 		}
 
@@ -130,7 +130,7 @@ bool SceneGameNormal::Update()
 		//mMissionGage = 5000;
 		if(mMissionGage >= MISSION_GAGE_MAX){
 			if(!mIsInit){
-				GetDirectSound()->SoundPlayOnce(S_OSIRASE);
+				UtilSound::playOnce(S_OSIRASE);
 				mMission->Init(mNikumanKeyCount,mYoshitaroKeyCount,mNoppoKeyCount);
 				mIsInit = true;
 			}
@@ -168,7 +168,7 @@ bool SceneGameNormal::Update()
 			return mIsSceneChange;
 		}
 
-		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
+		UtilSound::playLoop(S_BGM_BATTLE);
 
 		mNiku->Update(boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
@@ -249,7 +249,7 @@ bool SceneGameNormal::Update()
 		{
 			mGameState = G_GAME_OVER;
 			mFlagFadeStart = 0;
-			GetDirectSound()->SoundStop(S_SAIREN);
+			UtilSound::stop(S_SAIREN);
 			return mIsSceneChange;
 		}
 
@@ -337,7 +337,7 @@ void SceneGameNormal::Draw()
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
 		if(mIsSound){
-			GetDirectSound()->SoundPlayOnce(S_OVER);
+			UtilSound::playOnce(S_OVER);
 			mIsSound = false;
 		}
 	}
@@ -346,7 +346,7 @@ void SceneGameNormal::Draw()
 		mVertex->SetColor(mAlpha - mStartAlpha,255,255,255);
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
 		if(mIsSound){
-			GetDirectSound()->SoundPlayOnce(S_G_CLEAR);
+			UtilSound::playOnce(S_G_CLEAR);
 			mIsSound = false;
 		}
 	}
@@ -406,7 +406,7 @@ int SceneGameNormal::End()
 	//ゲームオーバーの場合
 	ChangeScene(cSceneName_Ranking);
 
-	GetDirectSound()->SoundStop(S_BGM_BATTLE);
+	UtilSound::stop(S_BGM_BATTLE);
 
 	mTexture->AllReleaseTexture();
 	mVertex->AllReleaseRect();
@@ -602,7 +602,7 @@ void SceneGameNormal::ControlMissionOugi()
 	}
 	else if(mTimeCount >= 180 && 210 > mTimeCount){
 		if(mTimeCount == 180){
-			GetDirectSound()->SoundPlayOnce(S_NAMI);
+			UtilSound::playOnce(S_NAMI);
 		}
 	}
 	else if(mTimeCount >= 210 && 420 > mTimeCount){		//波を動かす(3.5sec)

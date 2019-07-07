@@ -5,7 +5,7 @@
 //
 //---------------------------------------------
 #include "SceneRanking.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/DefineGame.h"
 
 FILE *fp;
@@ -83,7 +83,7 @@ void SceneRanking::InitScene(int score)
 
 bool SceneRanking::Update()
 {
-	GetDirectSound()->SoundPlayLoop(S_BGM_TITLE);
+	UtilSound::playLoop(S_BGM_TITLE);
 
 	FadeControl();
 	RankControl(rank);
@@ -99,7 +99,7 @@ void SceneRanking::RankControl(int rank)
 	{
 		if(GetAsyncKeyState(i))
 		{
-			GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+			UtilSound::playOnce(S_SE_CURSOR_MOVE);
 			key_no = i - 'A';
 			keep_key[flag] = key_no;
 			//newdata.name[flag] = key;
@@ -132,7 +132,7 @@ void SceneRanking::RankControl(int rank)
 		{
 			if(GetAsyncKeyState(VK_RETURN))
 			{
-				GetDirectSound()->SoundPlayOnce(S_SE_OK);
+				UtilSound::playOnce(S_SE_OK);
 				name_alpha[rank][flag]=255;
 				flag++;
 				deray = 0;

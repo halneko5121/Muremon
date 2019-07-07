@@ -1,5 +1,5 @@
 #include "Mission.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 
 #define TEN_SECOND	(600)
@@ -164,7 +164,7 @@ int Mission::Control()
 	}
 	else if(mission_state == MISSION_MIDDLE){
 		if(flag_sound){
-			GetDirectSound()->SoundPlayOnce(S_OSIRASE);
+			UtilSound::playOnce(S_OSIRASE);
 			flag_sound = false;
 		}
 		MissionControl();
@@ -172,13 +172,13 @@ int Mission::Control()
 	else{
 		if(mission_state == MISSION_SEIKO){
 			if(flag_sound2){
-				GetDirectSound()->SoundPlayOnce(S_M_CLEAR);
+				UtilSound::playOnce(S_M_CLEAR);
 				flag_sound = false;
 			}
 		}
 		else if(mission_state == MISSION_SIPPAI){
 			if(flag_sound2){
-				GetDirectSound()->SoundPlayOnce(S_M_OVER);
+				UtilSound::playOnce(S_M_OVER);
 				flag_sound2 = false;
 			}
 		}

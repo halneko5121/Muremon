@@ -1,5 +1,5 @@
 #include "ActorYoshi.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 
 namespace
@@ -158,18 +158,18 @@ ActorYoshi::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
-						if (GetDirectSound()->IsPlaySound(S_YOSHI_HIP))
+						if (UtilSound::isPlaySound(S_YOSHI_HIP))
 						{
-							GetDirectSound()->SoundStop(S_YOSHI_HIP);
+							UtilSound::stop(S_YOSHI_HIP);
 						}
-						GetDirectSound()->SoundPlayOnce(S_YOSHI_HIP);
+						UtilSound::playOnce(S_YOSHI_HIP);
 					}
 					if(mCharaData[i].flag_atk2){
-						if (GetDirectSound()->IsPlaySound(S_YOSHI_HUSEN))
+						if (UtilSound::isPlaySound(S_YOSHI_HUSEN))
 						{
-							GetDirectSound()->SoundStop(S_YOSHI_HUSEN);
+							UtilSound::stop(S_YOSHI_HUSEN);
 						}
-						GetDirectSound()->SoundPlayOnce(S_YOSHI_HUSEN);
+						UtilSound::playOnce(S_YOSHI_HUSEN);
 					}
 				}
 			}

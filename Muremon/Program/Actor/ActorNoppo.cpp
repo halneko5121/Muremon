@@ -1,5 +1,5 @@
 #include "ActorNoppo.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 
 namespace
@@ -151,27 +151,27 @@ ActorNoppo::Update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
-						if (GetDirectSound()->IsPlaySound(S_NOPPO_KOKE))
+						if (UtilSound::isPlaySound(S_NOPPO_KOKE))
 						{
-							GetDirectSound()->SoundStop(S_NOPPO_KOKE);
+							UtilSound::stop(S_NOPPO_KOKE);
 						}
-						GetDirectSound()->SoundPlayOnce(S_NOPPO_KOKE);
-						if( (GetDirectSound()->IsPlaySound(S_NOPPO_PETI)) &&
-							(GetDirectSound()->IsPlaySound(S_NOPPO_KOKE)) ) 
+						UtilSound::playOnce(S_NOPPO_KOKE);
+						if( (UtilSound::isPlaySound(S_NOPPO_PETI)) &&
+							(UtilSound::isPlaySound(S_NOPPO_KOKE)) ) 
 						{
-							GetDirectSound()->SoundStop(S_NOPPO_PETI);
+							UtilSound::stop(S_NOPPO_PETI);
 						}
-						if (GetDirectSound()->IsPlaySound(S_NOPPO_KOKE))
+						if (UtilSound::isPlaySound(S_NOPPO_KOKE))
 						{
-							GetDirectSound()->SoundPlayOnce((S_NOPPO_PETI));
+							UtilSound::playOnce((S_NOPPO_PETI));
 						}
 					}
 					if(mCharaData[i].flag_atk2){
-						if (GetDirectSound()->IsPlaySound(S_NOPPO_GANMEN))
+						if (UtilSound::isPlaySound(S_NOPPO_GANMEN))
 						{
-							GetDirectSound()->SoundStop(S_NOPPO_GANMEN);
+							UtilSound::stop(S_NOPPO_GANMEN);
 						}
-						GetDirectSound()->SoundPlayOnce(S_NOPPO_GANMEN);
+						UtilSound::playOnce(S_NOPPO_GANMEN);
 					}
 				}
 			}

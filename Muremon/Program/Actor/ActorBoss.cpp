@@ -1,5 +1,5 @@
 #include "ActorBoss.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 
 ActorBoss::ActorBoss(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
@@ -257,7 +257,7 @@ void ActorBoss::BossControl(int play_mode)
 
 		if (boss_fadeout_time == BOSS_FALL_TIME)
 		{
-			GetDirectSound()->SoundPlayOnce(S_DEAD);
+			UtilSound::playOnce(S_DEAD);
 		}
 
 		//「No～」のフェードインアウト

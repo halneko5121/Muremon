@@ -5,7 +5,7 @@
 //
 //---------------------------------------------
 #include "SceneGameRefresh.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 
 POS_CC<float> boss_cc = { 600, 350 };
@@ -66,7 +66,7 @@ void SceneGameRefresh::ImpleInit()
 bool SceneGameRefresh::Update()
 {
 	if(mSameState == G_START_SCENE){
-		GetDirectSound()->SoundPlayOnce(S_GAME_START);
+		UtilSound::playOnce(S_GAME_START);
 		FadeControl();
 	}
 	else if(mSameState == G_GAME_SCENE){
@@ -74,7 +74,7 @@ bool SceneGameRefresh::Update()
 		boss_cc.x =	mBoss->boss_move_x;
 		boss_cc.y = mBoss->boss_move_y;
 	
-		GetDirectSound()->SoundPlayLoop(S_BGM_BATTLE);
+		UtilSound::playLoop(S_BGM_BATTLE);
 
 		mNiku->Update(boss_cc, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
 
@@ -267,7 +267,7 @@ int SceneGameRefresh::End()
 	//ƒ^ƒCƒgƒ‹‚Ö
 	ChangeScene(cSceneName_Title);
 
-	GetDirectSound()->SoundStop(S_BGM_BATTLE);
+	UtilSound::stop(S_BGM_BATTLE);
 
 	mTexture->AllReleaseTexture();
 	mVertex->AllReleaseRect();

@@ -5,7 +5,7 @@
 //
 //---------------------------------------------
 #include "SceneTutorial.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/DefineGame.h"
 
@@ -37,7 +37,7 @@ void SceneTutorial::ImpleInit()
 
 bool SceneTutorial::Update()
 {
-	GetDirectSound()->SoundPlayOnce(S_BGM_TITLE);
+	UtilSound::playOnce(S_BGM_TITLE);
 
 	KeyControl();
 
@@ -123,7 +123,7 @@ void SceneTutorial::KeyControl()
 	}
 	else if (UtilInput::IsKeyPushed(DIK_LEFT))
 	{
-		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_NORMAL){
 			flag_draw_state = TR_REFRESH;
 		}
@@ -134,7 +134,7 @@ void SceneTutorial::KeyControl()
 	}
 	else if (UtilInput::IsKeyPushed(DIK_RIGHT))
 	{
-		GetDirectSound()->SoundPlayOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		if(flag_draw_state == TR_REFRESH){
 			flag_draw_state = TR_NORMAL;
 		}

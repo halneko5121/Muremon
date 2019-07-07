@@ -1,5 +1,5 @@
 #include "ActorNikuman.h"
-#include "Library/Sound/DirectSound.h"
+#include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 
 namespace 
@@ -138,7 +138,7 @@ ActorNikuman::Update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum
 		if(!mCharaData[i].flag_death){
 			if(!boss_death){
 				if(HitCheck(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
-					GetDirectSound()->SoundPlayOnce(S_NIKUMAN);
+					UtilSound::playOnce(S_NIKUMAN);
 					mCharaData[i].flag_hit		= true;
 					mCharaData[i].flag_death	= true;	
 					SetFlagHit(true);

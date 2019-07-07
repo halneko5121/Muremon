@@ -56,9 +56,9 @@ public:
 	void DrawMissionNegative();		// ミッション失敗時の処理
 
 	void ReCover();					// ミッション失敗で下がったものを元に戻す
-	void FadeControl();				// フェードコントロール		
-	void FadeIn();					// フェードイン
-	void FadeOut();					// フェードアウト
+	void fadeControl();				// フェードコントロール		
+	void fadeIn();					// フェードイン
+	void fadeOut();					// フェードアウト
 	void HitEffectDraw();
 
 private:

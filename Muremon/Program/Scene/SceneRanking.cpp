@@ -86,7 +86,7 @@ bool SceneRanking::update()
 {
 	UtilSound::playLoop(S_BGM_TITLE);
 
-	FadeControl();
+	fadeControl();
 	RankControl(rank);
 	KeyControl();
 	return mIsSceneChange;
@@ -285,12 +285,12 @@ void SceneRanking::RankWrite()
 	z_key_flag = true;
 }
 
-void SceneRanking::FadeControl()
+void SceneRanking::fadeControl()
 {
 	switch(fade_flag)
 	{
 		case RANK_FADE_IN:
-			FadeIn();
+			fadeIn();
 			if(alpha==255) fade_flag=RANK_USUALLY;
 			break;
 		case RANK_USUALLY:
@@ -299,13 +299,13 @@ void SceneRanking::FadeControl()
 			alpha_count=0;
 			break;
 		case RANK_FADE_OUT:
-			FadeOut();
+			fadeOut();
 			if(alpha==0) mIsSceneChange = false;
 			break;
 	}
 }
 
-void SceneRanking::FadeIn()
+void SceneRanking::fadeIn()
 {
 	if(alpha_count++>1)
 	{
@@ -321,7 +321,7 @@ void SceneRanking::FadeIn()
 
 }
 
-void SceneRanking::FadeOut()
+void SceneRanking::fadeOut()
 {
 	if(alpha_count++>1)
 	{

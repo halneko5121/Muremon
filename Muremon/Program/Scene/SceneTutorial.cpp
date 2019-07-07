@@ -39,9 +39,9 @@ bool SceneTutorial::update()
 {
 	UtilSound::playOnce(S_BGM_TITLE);
 
-	KeyControl();
+	updateInput();
 
-	DrawPosi();
+	updateDrawPos();
 
 	return mIsSceneChange;
 }
@@ -70,24 +70,24 @@ int SceneTutorial::end()
 	return 0;
 }
 
-void SceneTutorial::FadeControl()
+void SceneTutorial::fadeControl()
 {
 	switch(fade_flag)
 	{
 		case TR_FADE_IN:
-			FadeIn();
+			fadeIn();
 			if(alpha == 255) fade_flag=TR_USUALLY;
 			break;
 		case TR_USUALLY:
 			break;
 		case TR_FADE_OUT:
-			FadeOut();
+			fadeOut();
 			if(alpha == 0)	//シーン移行、ゲームスタート
 			break;
 	}
 }
 
-void SceneTutorial::FadeIn()
+void SceneTutorial::fadeIn()
 {
 	if(alpha_count++>1)
 	{
@@ -101,7 +101,7 @@ void SceneTutorial::FadeIn()
 	}
 }
 
-void SceneTutorial::FadeOut()
+void SceneTutorial::fadeOut()
 {
 	if(alpha_count++>1)
 	{
@@ -115,7 +115,7 @@ void SceneTutorial::FadeOut()
 	}
 }
 
-void SceneTutorial::KeyControl()
+void SceneTutorial::updateInput()
 {
 	if (UtilInput::isKeyPushed(DIK_Z))
 	{
@@ -145,7 +145,7 @@ void SceneTutorial::KeyControl()
 	}
 }
 
-void SceneTutorial::DrawPosi()
+void SceneTutorial::updateDrawPos()
 {
 	if(flag_draw_state == TR_REFRESH)
 	{

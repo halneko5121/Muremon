@@ -59,20 +59,16 @@ private:
 	int alpha_count;	//アルファ値のカウント
 
 public:
-	void impleInit() override;
-	bool update() override;
-	void draw() override;
-	int end() override;
+	void		impleInit() override;
+	bool		update() override;
+	void		draw() override;
+	int			end() override;
 
-	void KeyControl();		//キー操作
-
-	void DrawPosi();		//描画位置などを決める
-
-	void FadeControl();		//フェードコントロール		
-
-	void FadeIn();			//フェードイン
-
-	void FadeOut();			//フェードアウト
+	void		updateInput();		//キー操作
+	void		updateDrawPos();	//描画位置などを決める
+	void		fadeControl();		//フェードコントロール		
+	void		fadeIn();			//フェードイン
+	void		fadeOut();			//フェードアウト
 
 	SceneTutorial();
 	~SceneTutorial();

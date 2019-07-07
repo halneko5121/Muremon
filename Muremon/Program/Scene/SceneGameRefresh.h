@@ -27,9 +27,9 @@ public:
 	void DrawNum();
 	void DrawGageHp();
 
-	void FadeControl();		//フェードコントロール		
-	void FadeIn();			//フェードイン
-	void FadeOut();			//フェードアウト
+	void fadeControl();		//フェードコントロール		
+	void fadeIn();			//フェードイン
+	void fadeOut();			//フェードアウト
 
 	void HitFlagInit();
 	void HitEffectDraw();

@@ -67,7 +67,7 @@ bool SceneGameRefresh::update()
 {
 	if(mSameState == G_START_SCENE){
 		UtilSound::playOnce(S_GAME_START);
-		FadeControl();
+		fadeControl();
 	}
 	else if(mSameState == G_GAME_SCENE){
 
@@ -275,20 +275,20 @@ int SceneGameRefresh::end()
 	return 0;
 }
 
-void SceneGameRefresh::FadeControl()
+void SceneGameRefresh::fadeControl()
 {
 	switch(mFlagFade)
 	{
 	case GS_FADE_IN:
-		FadeIn();
+		fadeIn();
 		break;
 	case GS_USUALLY:
-		FadeOut();
+		fadeOut();
 		break;
 	}
 }
 
-void SceneGameRefresh::FadeIn()
+void SceneGameRefresh::fadeIn()
 {
 	if(mFlagFadeStart > 60){
 		mStartAlpha += G_ALPHA_INCREASE - 10;
@@ -323,7 +323,7 @@ void SceneGameRefresh::FadeIn()
 	}
 }
 
-void SceneGameRefresh::FadeOut()
+void SceneGameRefresh::fadeOut()
 {
 	if(mAlpha == 0) { return ; }
 	else if(mAlphaCount++ > 1){

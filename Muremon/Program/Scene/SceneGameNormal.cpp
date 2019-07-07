@@ -95,7 +95,7 @@ bool SceneGameNormal::update()
 {
 	if(mGameState == G_START_SCENE){
 		UtilSound::playOnce(S_GAME_START);
-		FadeControl();
+		fadeControl();
 	}
 	else if(mGameState == G_GAME_SCENE){
 
@@ -276,10 +276,10 @@ bool SceneGameNormal::update()
 		}
 	}
 	else if(mGameState == G_GAME_OVER){
-		FadeControl();
+		fadeControl();
 	}
 	else if(mGameState == G_GAME_CLEAR){
-		FadeControl();
+		fadeControl();
 	}
 
 	return mIsSceneChange;
@@ -415,20 +415,20 @@ int SceneGameNormal::end()
 	return mScore;
 }
 
-void SceneGameNormal::FadeControl()
+void SceneGameNormal::fadeControl()
 {
 	switch(mFlagFade)
 	{
 	case GS_FADE_IN:
-		FadeIn();
+		fadeIn();
 		break;
 	case GS_USUALLY:
-		FadeOut();
+		fadeOut();
 		break;
 	}
 }
 
-void SceneGameNormal::FadeIn()
+void SceneGameNormal::fadeIn()
 {
 	if(mFlagFadeStart > 60){
 		mStartAlpha += G_ALPHA_INCREASE - 10;
@@ -468,7 +468,7 @@ void SceneGameNormal::FadeIn()
 	}
 }
 
-void SceneGameNormal::FadeOut()
+void SceneGameNormal::fadeOut()
 {
 	if(mAlpha == 0) { return ; }
 	else if(mAlphaCount++ > 1){

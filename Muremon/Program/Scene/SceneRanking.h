@@ -153,11 +153,11 @@ public:
 	void draw() override;
 	int end() override;
 
-	void FadeControl();		
+	void fadeControl();		
 
-	void FadeIn();			//フェードイン
+	void fadeIn();			//フェードイン
 
-	void FadeOut();			//フェードアウト
+	void fadeOut();			//フェードアウト
 
 	void RankControl(int rank);	//ランクインした時、名前をを入力する
 

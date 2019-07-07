@@ -54,7 +54,7 @@ UtilSound::stop(short id)
  * @brief	指定IDのサウンドが再生中か
  */
 bool
-UtilSound::isPlaySound(short id)
+UtilSound::isPlaying(short id)
 {
 	return GetDirectSound()->isPlaying(id);
 }

@@ -39,6 +39,6 @@ namespace UtilSound
 	void playLoop(short id);
 	void pause(short id);
 	void stop(short id);
-	bool isPlaySound(short id);
+	bool isPlaying(short id);
 	void setVolume(short volume, short id);
 }

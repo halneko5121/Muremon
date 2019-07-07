@@ -128,7 +128,7 @@ UITitleMenu::update()
 	mCursorPos.y = cDispCursorY + cDispCursorYRemove * mCurrentMenuItem;
 
 	// ÇﬂÇ¡ÇøÇ·è„â∫âüÇ≥ÇÍÇƒÇ‡à·òaä¥Ç…Ç»Ç¢ÇÊÇ§Ç…
-	if (UtilSound::isPlaySound(S_SE_CURSOR_MOVE))
+	if (UtilSound::isPlaying(S_SE_CURSOR_MOVE))
 	{
 		if (UtilInput::isKeyDown(DIK_UP) ||
 			UtilInput::isKeyDown(DIK_DOWN))

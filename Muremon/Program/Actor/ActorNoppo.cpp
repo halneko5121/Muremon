@@ -151,23 +151,23 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
-						if (UtilSound::isPlaySound(S_NOPPO_KOKE))
+						if (UtilSound::isPlaying(S_NOPPO_KOKE))
 						{
 							UtilSound::stop(S_NOPPO_KOKE);
 						}
 						UtilSound::playOnce(S_NOPPO_KOKE);
-						if( (UtilSound::isPlaySound(S_NOPPO_PETI)) &&
-							(UtilSound::isPlaySound(S_NOPPO_KOKE)) ) 
+						if( (UtilSound::isPlaying(S_NOPPO_PETI)) &&
+							(UtilSound::isPlaying(S_NOPPO_KOKE)) ) 
 						{
 							UtilSound::stop(S_NOPPO_PETI);
 						}
-						if (UtilSound::isPlaySound(S_NOPPO_KOKE))
+						if (UtilSound::isPlaying(S_NOPPO_KOKE))
 						{
 							UtilSound::playOnce((S_NOPPO_PETI));
 						}
 					}
 					if(mCharaData[i].flag_atk2){
-						if (UtilSound::isPlaySound(S_NOPPO_GANMEN))
+						if (UtilSound::isPlaying(S_NOPPO_GANMEN))
 						{
 							UtilSound::stop(S_NOPPO_GANMEN);
 						}

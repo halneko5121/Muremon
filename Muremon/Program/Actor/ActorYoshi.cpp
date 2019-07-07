@@ -158,14 +158,14 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 					m_chara_y = mCharaData[i].draw_cc.y;
 
 					if(mCharaData[i].flag_atk1){
-						if (UtilSound::isPlaySound(S_YOSHI_HIP))
+						if (UtilSound::isPlaying(S_YOSHI_HIP))
 						{
 							UtilSound::stop(S_YOSHI_HIP);
 						}
 						UtilSound::playOnce(S_YOSHI_HIP);
 					}
 					if(mCharaData[i].flag_atk2){
-						if (UtilSound::isPlaySound(S_YOSHI_HUSEN))
+						if (UtilSound::isPlaying(S_YOSHI_HUSEN))
 						{
 							UtilSound::stop(S_YOSHI_HUSEN);
 						}

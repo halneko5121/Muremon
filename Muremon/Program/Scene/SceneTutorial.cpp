@@ -7,6 +7,9 @@
  ******************************************************************/
 
 #include "SceneTutorial.h"
+
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/DefineGame.h"

@@ -8,8 +8,6 @@
  ******************************************************************/
 
 #include "Program/Scene/SceneBase.h"
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 
 class SceneTutorial : public SceneBase
 {

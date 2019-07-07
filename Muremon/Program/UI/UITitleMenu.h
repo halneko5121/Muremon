@@ -21,7 +21,16 @@ public:
 	void	Init(Texture* texture, Vertex* vertex);
 	void	Update();
 	void	Draw();
-	int		CurrentSelectIndex();
+
+	// メニューセレクト
+	bool	isDecideMenuSelectGame() const;
+	bool	isDecideMenuSelectRanking() const;
+	bool	isDecideMenuSelectExit() const;
+
+	// ゲームセレクト
+	bool	isDecideGameSelectRefresh() const;
+	bool	isDecideGameSelectNormal() const;
+	bool	isDecideGameSelectTutorial() const;
 
 private:
 	// ステート関数

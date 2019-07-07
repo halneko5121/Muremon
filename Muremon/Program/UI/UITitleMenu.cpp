@@ -213,6 +213,85 @@ UITitleMenu::Draw()
 	}
 }
 
+/**
+ * @brief	メニューセレクト：「スタート」が選択されたか
+ */
+bool
+UITitleMenu::isDecideMenuSelectGame() const
+{
+	if (!mState.isEqual(cState_MenuSelect)) return false;
+	if (mCurrentMenuItem != G_START)		return false;
+	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+
+	return true;
+
+}
+
+/**
+ * @brief	メニューセレクト：「ランキング」が選択されたか
+ */
+bool
+UITitleMenu::isDecideMenuSelectRanking() const
+{
+	if (!mState.isEqual(cState_MenuSelect)) return false;
+	if (mCurrentMenuItem != G_RANKING)		return false;
+	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+
+	return true;
+}
+
+/**
+ * @brief	メニューセレクト：「終了」が選択されたか
+ */
+bool
+UITitleMenu::isDecideMenuSelectExit() const
+{
+	if (!mState.isEqual(cState_MenuSelect)) return false;
+	if (mCurrentMenuItem != G_END)			return false;
+	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+
+	return true;
+}
+
+/**
+ * @brief	ゲームセレクト：「すっきり」が選択されたか
+ */
+bool
+UITitleMenu::isDecideGameSelectRefresh() const
+{
+	if (!mState.isEqual(cState_GameSelect)) return false;
+	if (mCurrentMenuItem != G_CLEARLY)		return false;
+	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+
+	return true;
+}
+
+/**
+ * @brief	ゲームセレクト：「ノーマル」が選択されたか
+ */
+bool
+UITitleMenu::isDecideGameSelectNormal() const
+{
+	if (!mState.isEqual(cState_GameSelect)) return false;
+	if (mCurrentMenuItem != G_NORMAL)		return false;
+	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+
+	return true;
+}
+
+/**
+ * @brief	ゲームセレクト：「チュートリアル」が選択されたか
+ */
+bool
+UITitleMenu::isDecideGameSelectTutorial() const
+{
+	if (!mState.isEqual(cState_GameSelect)) return false;
+	if (mCurrentMenuItem != G_TUTORIAL)		return false;
+	if (!UtilInput::IsKeyPushed(DIK_Z))		return false;
+
+	return true;
+}
+
 // -----------------------------------------------------------------
 // ステート関数
 // -----------------------------------------------------------------

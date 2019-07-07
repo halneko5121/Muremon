@@ -78,7 +78,7 @@ ActorYoshi::~ActorYoshi(void)
 void
 ActorYoshi::init()											
 {
-	mOrbit->pWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
+	mOrbit->mWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
 	//praivateïœêî
 	s_atk_start_y = 0.f;
@@ -182,7 +182,7 @@ ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			}
 			else if(mCharaData[i].flag_atk2){
 				if(mCharaData[i].draw_cc.x - RADIUS_YOSHI < cWindowWidth){
-					mOrbit->pWave->setSpeed(mCharaData[i].speed);
+					mOrbit->mWave->setSpeed(mCharaData[i].speed);
 					mCharaData[i].draw_cc	 = updateAttack2(i);
 					mCharaData[i].animetion = setAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_YOSHI,i);
 				}
@@ -285,7 +285,7 @@ ActorYoshi::draw(int rect_startnum)
 POS_CC<float>
 ActorYoshi::updateAttack2(int mCharaNum)														//ÉLÅ[ì¸óÕÇ…ÇÊÇÈìÆçÏÇªÇÃ2
 {
-	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->orbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
+	mCharaData[mCharaNum].draw_cc = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
 	return mCharaData[mCharaNum].draw_cc;
 }
@@ -312,7 +312,7 @@ ActorYoshi::deathControl(int mCharaNum, int sound_num, int rect_startnum)						/
 			mCharaData[mCharaNum].animetion = 0;																//ï`âÊÇå≈íË
 			mCharaData[mCharaNum].rect_num  = ANIME_DEATH_YOSHI;
 	
-			mCharaData[mCharaNum].draw_cc	 = mOrbit->pRebound->orbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);
+			mCharaData[mCharaNum].draw_cc	 = mOrbit->mRebound->orbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);
 		}
 	}
 	else if(mCharaData[mCharaNum].flag_atk2){
@@ -326,7 +326,7 @@ ActorYoshi::deathControl(int mCharaNum, int sound_num, int rect_startnum)						/
 			mCharaData[mCharaNum].animetion = 0;																//ï`âÊÇå≈íË
 			mCharaData[mCharaNum].rect_num  = ANIME_DEATH_YOSHI;
 
-			mCharaData[mCharaNum].draw_cc	 = mOrbit->pParadora->orbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
+			mCharaData[mCharaNum].draw_cc	 = mOrbit->mParabora->orbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
 		}
 	}
 

@@ -72,7 +72,7 @@ ActorNoppo::~ActorNoppo(void)
 void
 ActorNoppo::init()											
 {
-	mOrbit->pWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
+	mOrbit->mWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
 	//praivateïœêî
 	alpha			= MAX_ALPHA;
@@ -185,7 +185,7 @@ ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,
 			}
 			else if(mCharaData[i].flag_atk2){
 				if(mCharaData[i].draw_cc.x - RADIUS_NOPPO < cWindowWidth){
-					mOrbit->pWave->setSpeed(mCharaData[i].speed);
+					mOrbit->mWave->setSpeed(mCharaData[i].speed);
 					mCharaData[i].draw_cc	 = updateAttack2(i);
 					mCharaData[i].animetion = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO),mCharaData[i].animetion,ANIME_S_ATK1_NOPPO,i);
 				}
@@ -296,7 +296,7 @@ ActorNoppo::draw(int rect_startnum)
 POS_CC<float>
 ActorNoppo::updateAttack2(int mCharaNum)																//ÉLÅ[ì¸óÕÇ…ÇÊÇÈìÆçÏÇªÇÃ2
 {
-	mCharaData[mCharaNum].draw_cc = mOrbit->pWave->orbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
+	mCharaData[mCharaNum].draw_cc = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData[mCharaNum].draw_cc,mCharaNum);
 
 	return mCharaData[mCharaNum].draw_cc;
 }
@@ -332,7 +332,7 @@ ActorNoppo::deathControl(int mCharaNum, int sound_startnum ,int rect_startnum)		
 		mCharaData[mCharaNum].animetion = 0;																	//ï`âÊÇå≈íË
 		mCharaData[mCharaNum].rect_num  = ANIME_S_ATK2_NOPPO;
 
-		mCharaData[mCharaNum].draw_cc   = mOrbit->pParadora->orbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
+		mCharaData[mCharaNum].draw_cc   = mOrbit->mParabora->orbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);
 	}	
 	if(mCharaData[mCharaNum].flag_deathfade){
 		if(mCharaData[mCharaNum].alpha <= 0){

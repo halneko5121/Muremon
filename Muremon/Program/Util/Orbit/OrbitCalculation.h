@@ -38,12 +38,12 @@
 class C_OrbitCalculation
 {
 public:
-	C_OrbitWave			*pWave;
-	C_OrbitRebound		*pRebound;
-	C_OrbitParadora		*pParadora;
-
-public:
 
 	C_OrbitCalculation(void);
 	~C_OrbitCalculation(void);
+
+public:
+	C_OrbitWave*		mWave;
+	C_OrbitRebound*		mRebound;
+	C_OrbitParadora*	mParabora;
 };

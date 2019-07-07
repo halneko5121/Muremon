@@ -2,9 +2,9 @@
 
 C_OrbitCalculation::C_OrbitCalculation(void)
 {
-	pParadora	= new C_OrbitParadora();
-	pRebound	= new C_OrbitRebound();
-	pWave		= new C_OrbitWave();
+	mParabora	= new C_OrbitParadora();
+	mRebound	= new C_OrbitRebound();
+	mWave		= new C_OrbitWave();
 }
 
 C_OrbitCalculation::~C_OrbitCalculation(void)

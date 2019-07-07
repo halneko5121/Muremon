@@ -8,7 +8,7 @@ C_OrbitWave::~C_OrbitWave(void)
 {
 }
 
-void C_OrbitWave::InitWave(int set_amplitude, int set_cycle, float set_speed_x, int set_mode)
+void C_OrbitWave::init(int set_amplitude, int set_cycle, float set_speed_x, int set_mode)
 {
 	amplitude	= set_amplitude;
 	cycle		= set_cycle;
@@ -16,7 +16,7 @@ void C_OrbitWave::InitWave(int set_amplitude, int set_cycle, float set_speed_x, 
 	mode		= set_mode;
 }
 
-POS_CC<float> C_OrbitWave::OrbitSinWave(float limit_x, POS_CC<float> draw_cc, int chara_num)
+POS_CC<float> C_OrbitWave::orbitSinWave(float limit_x, POS_CC<float> draw_cc, int chara_num)
 {
 	static int   time1[MAX_VALLUE_PLAYER]  = {0};
 	static int	 time2[MAX_VALLUE_PLAYER]  = {0};

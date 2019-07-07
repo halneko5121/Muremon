@@ -312,7 +312,7 @@ ActorYoshi::deathControl(int mCharaNum, int sound_num, int rect_startnum)						/
 			mCharaData[mCharaNum].animetion = 0;																//•`‰æ‚ðŒÅ’è
 			mCharaData[mCharaNum].rect_num  = ANIME_DEATH_YOSHI;
 	
-			mCharaData[mCharaNum].draw_cc	 = mOrbit->pRebound->OrbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);
+			mCharaData[mCharaNum].draw_cc	 = mOrbit->pRebound->orbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);
 		}
 	}
 	else if(mCharaData[mCharaNum].flag_atk2){

@@ -29,6 +29,8 @@
 class C_OrbitRebound
 {
 public:
+	C_OrbitRebound(void);
+	~C_OrbitRebound(void);
 
 	/************************************************************************************
 	*	役割	：跳ね返り処理(120～150)												*
@@ -39,9 +41,5 @@ public:
 	*	作成日	：2009年 3月 20日														*
 	*	更新日	：	年	月	 日							by	三上　亘					*
 	************************************************************************************/
-	POS_CC<float> OrbitRebound(float deg, float radius, POS_CC<float> draw_cc);
-
-
-	C_OrbitRebound(void);
-	~C_OrbitRebound(void);
+	POS_CC<float> orbitRebound(float deg, float radius, POS_CC<float> draw_cc);
 };

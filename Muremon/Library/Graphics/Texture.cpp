@@ -30,7 +30,7 @@ Texture::~Texture()
  * @return	true:読み込み成功   false:読み込み失敗
  */
 bool
-Texture::LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
+Texture::load(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
 {
 	FILE *fp;							// ファイルポインタ
 	char load_file_name[256];			// カウント+読み込み用
@@ -93,7 +93,7 @@ Texture::LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
  * @brief	テクスチャデータを全て開放する
  */
 void
-Texture::AllReleaseTexture()
+Texture::release()
 {
 	mLoadedTextureCount = 0;			// 全体数を初期化しておく
 	APP_SAFE_DELETE_ARRAY(mTexture);	// 開放処理

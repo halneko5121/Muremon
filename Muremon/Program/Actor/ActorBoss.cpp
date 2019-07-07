@@ -341,14 +341,14 @@ void ActorBoss::BossControl(int play_mode)
 
 void ActorBoss::BossDraw()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_CAHRA_BOSS),pDevice);
+	vertex->SetTextureData(texture->getTextureData(T_CAHRA_BOSS),pDevice);
 	vertex->SetColor(boss_alpha,255,255,255);
 	vertex->DrawF(boss_move_x + damage_x,boss_move_y + damage_y,boss_rect_data);
 }
 
 void ActorBoss::FallDraw()
 {
-	vertex->SetTextureData(texture->GetTextureData(T_GAME_EFFECT),pDevice);
+	vertex->SetTextureData(texture->getTextureData(T_GAME_EFFECT),pDevice);
 	vertex->SetColor(no_font_alpha,255,255,255);
 	vertex->DrawF(boss_move_x - NO_POSITION_X - effect_font,NO_POSITION_Y - effect_font,R_BOSS_EFFECT);
 }

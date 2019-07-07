@@ -63,7 +63,7 @@ SceneTitle::~SceneTitle()
 
 void SceneTitle::ImpleInit()
 {
-	mTexture->LoadTextureData("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
+	mTexture->load("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Data\\RectData\\title.txt");
 
 	UtilSound::playLoop(S_BGM_TITLE);
@@ -82,10 +82,10 @@ bool SceneTitle::update()
 
 void SceneTitle::Draw()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(T_TITLE_BG), mDevice);
+	mVertex->SetTextureData(mTexture->getTextureData(T_TITLE_BG), mDevice);
 	mVertex->DrawF(cDispTitleBgX, cDispTitleBgY, R_TITLE_BG);
 
-	mVertex->SetTextureData(mTexture->GetTextureData(T_FONT), mDevice);
+	mVertex->SetTextureData(mTexture->getTextureData(T_FONT), mDevice);
 	mVertex->DrawF(mTitlePos.x,mTitlePos.y,R_TITLE);
 
 	mUITitleMenu->draw();
@@ -96,7 +96,7 @@ int SceneTitle::End()
 	ChangeScene(mNextSceneIndex);
 	UtilSound::pause(S_BGM_TITLE);
 
-	mTexture->AllReleaseTexture();
+	mTexture->release();
 	mVertex->AllReleaseRect();
 
 	return 0;

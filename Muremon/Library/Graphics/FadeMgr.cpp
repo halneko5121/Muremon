@@ -34,7 +34,7 @@ FadeMgr::FadeMgr()
  */
 FadeMgr::~FadeMgr()
 {
-	mTexture->AllReleaseTexture();
+	mTexture->release();
 	mVertex->AllReleaseRect();
 	APP_SAFE_DELETE(mTexture);
 	APP_SAFE_DELETE(mVertex);
@@ -75,7 +75,7 @@ void
 FadeMgr::init(LPDIRECT3DDEVICE9 device)
 {
 	mDevice = device;
-	mTexture->LoadTextureData("Library\\Data\\T_Fade.txt", mDevice); // ŠG‚Ì“Ç‚Ýž‚Ý
+	mTexture->load("Library\\Data\\T_Fade.txt", mDevice); // ŠG‚Ì“Ç‚Ýž‚Ý
 	mVertex->LoadRect("Library\\Data\\R_Fade.txt");
 }
 
@@ -116,7 +116,7 @@ FadeMgr::update()
 void
 FadeMgr::draw()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(0), mDevice);
+	mVertex->SetTextureData(mTexture->getTextureData(0), mDevice);
 	mVertex->SetColor(mAlpha, mColorR, mColorG, mColorB);
 	mVertex->DrawF(400.f, 300.f, 0);
 }

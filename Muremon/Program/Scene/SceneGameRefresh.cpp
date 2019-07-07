@@ -59,7 +59,7 @@ void SceneGameRefresh::ImpleInit()
 
 	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
 
-	mTexture->LoadTextureData("Data\\TextureData\\gamenormal.txt", mDevice);		//絵の読み込み
+	mTexture->load("Data\\TextureData\\gamenormal.txt", mDevice);		//絵の読み込み
 	mVertex->LoadRect("Data\\RectData\\gamenormal.txt");
 }
 
@@ -170,7 +170,7 @@ bool SceneGameRefresh::update()
 void SceneGameRefresh::Draw()
 {
 	if(mSameState == G_START_SCENE){
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -178,7 +178,7 @@ void SceneGameRefresh::Draw()
 
 		mVertex->DrawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -195,7 +195,7 @@ void SceneGameRefresh::Draw()
 
 		DrawGageHp();
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);					//体力ゲージ枠
 
@@ -203,7 +203,7 @@ void SceneGameRefresh::Draw()
 		mVertex->DrawF(G_BG_X,G_BG_Y,R_GAME_START);						//ゲームスタート
 	}
 	else if(mSameState == G_GAME_SCENE){
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_BG), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -219,7 +219,7 @@ void SceneGameRefresh::Draw()
 
 		HitEffectDraw();
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->SetColor(mAlpha,255,255,255);
 
@@ -236,24 +236,24 @@ void SceneGameRefresh::Draw()
 
 		DrawGageHp();
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
 		mVertex->DrawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 
 		//キャラ達
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_FONT), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NOPPO), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
 		mNoppo->Draw(R_NOPPO_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_YOSHI), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
 		mYoshi->Draw(R_YOSHI_G_ATK1);
 
-		mVertex->SetTextureData(mTexture->GetTextureData(T_CAHRA_NIKU), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
 		mNiku->Draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
-		mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
+		mVertex->SetTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 		mNoppo->DrawEffectFont(R_NOPPO_PETI);
 		mYoshi->DrawEffectFont(R_YOSHI_BOYO);
 		mNiku->DrawEffectFont(R_NIKU_BETYA);
@@ -269,7 +269,7 @@ int SceneGameRefresh::End()
 
 	UtilSound::stop(S_BGM_BATTLE);
 
-	mTexture->AllReleaseTexture();
+	mTexture->release();
 	mVertex->AllReleaseRect();
 
 	return 0;
@@ -374,7 +374,7 @@ void SceneGameRefresh::DrawGageHp()
 
 void SceneGameRefresh::HitEffectDraw()
 {
-	mVertex->SetTextureData(mTexture->GetTextureData(T_GAME_EFFECT), mDevice);
+	mVertex->SetTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->SetColor(mHitEffectAlpha,255,255,255);
 	mVertex->DrawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }

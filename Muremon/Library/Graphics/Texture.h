@@ -28,12 +28,12 @@ public:
 	 * @param	pDevice     デバイス
 	 * @return	true:読み込み成功   false:読み込み失敗
 	 */
-	bool					LoadTextureData(LPCSTR file_name, LPDIRECT3DDEVICE9 device);
+	bool					load(LPCSTR file_name, LPDIRECT3DDEVICE9 device);
 
 	/**
 	 * @brief	テクスチャデータを全て開放する
 	 */
-	void					AllReleaseTexture();
+	void					release();
 
 	//-情報取得関数-
 
@@ -42,8 +42,8 @@ public:
 	 * @param	num 番号
 	 * @return	テクスチャ
 	 */
-	LPDIRECT3DTEXTURE9*		GetTextureData(DWORD num) { return &(mTexture[num]); }
-	LPDIRECT3DTEXTURE9		GetTextureDataPtr(DWORD num) { return mTexture[num]; }
+	LPDIRECT3DTEXTURE9*		getTextureData(DWORD num) { return &(mTexture[num]); }
+	LPDIRECT3DTEXTURE9		getTextureDataPtr(DWORD num) { return mTexture[num]; }
 
 private:
 	LPDIRECT3DTEXTURE9*		mTexture;				// テクスチャ

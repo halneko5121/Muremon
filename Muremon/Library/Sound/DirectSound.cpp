@@ -62,7 +62,7 @@ DirectSound::destroy()
  * @return	true:成功   false:失敗
  */
 bool
-DirectSound::InitDSound(HWND window_handle)
+DirectSound::init(HWND window_handle)
 {
 	// IDirectSound8インターフェイスの取得
 	if(FAILED(DirectSoundCreate8(NULL,&mDirectSound, NULL)))
@@ -75,7 +75,7 @@ DirectSound::InitDSound(HWND window_handle)
 		return false;
 	}
 	// プライマリバッファの作成
-	if(!CreatePrimaryBuffer())
+	if(!createPrimaryBuffer())
 	{
 		return false;
 	}
@@ -87,11 +87,11 @@ DirectSound::InitDSound(HWND window_handle)
  * @brief	開放処理
  */
 void
-DirectSound::UnInitDSound()
+DirectSound::release()
 {
 	for(short i = 0 ; i < (short)mMaxSound ; i++)
 	{
-		SoundStop(i);
+		stop(i);
 		SAFE_RELEASE(mSecondaryBuffer[i]);
 	}
 	SAFE_RELEASE(mPrimaryBuffer);
@@ -104,7 +104,7 @@ DirectSound::UnInitDSound()
  * @return	true:成功   false:失敗
  */
 bool
-DirectSound::LoadSoundData(LPTSTR file_name)
+DirectSound::load(LPTSTR file_name)
 {
 	FILE *fp;						// ファイルポインタ
 	char countFile[128];			// カウント+読み込み用
@@ -131,7 +131,7 @@ DirectSound::LoadSoundData(LPTSTR file_name)
 	for(int i = 0;i < mMaxSound;i++)
 	{
 		fscanf_s(fp,"%s\n", countFile, sizeof(countFile));
-		LoadSound(countFile, i);
+		loadAndRegist(countFile, i);
 	}
 
 	// エラー処理
@@ -151,7 +151,7 @@ DirectSound::LoadSoundData(LPTSTR file_name)
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectSound::LoadSound(LPTSTR file_name, short id)
+DirectSound::loadAndRegist(LPTSTR file_name, short id)
 {
 	if(id >= MAX_SOUND)
 	{
@@ -235,7 +235,7 @@ DirectSound::LoadSound(LPTSTR file_name, short id)
 		SAFE_DELETE_ARRAY(lpBuffer);		//念のため
 		return E_FAIL;
 	}
-	if(FAILED(CreateSecondaryBuffer(wfex, lpBuffer, ckInfo.cksize, id)))
+	if(FAILED(createSecondaryBuffer(wfex, lpBuffer, ckInfo.cksize, id)))
 	{
 		MessageBox(NULL,TEXT("セカンダリバッファ作成失敗"),TEXT("DSound"),MB_OK);
 		return E_FAIL;
@@ -252,9 +252,9 @@ DirectSound::LoadSound(LPTSTR file_name, short id)
  * @param	id		サウンドのID
  */
 void
-DirectSound::SoundPlayOnce(short id)
+DirectSound::playOnce(short id)
 {
-	SoundPlayImple(false, id);
+	playImple(false, id);
 }
 
 /**
@@ -262,9 +262,9 @@ DirectSound::SoundPlayOnce(short id)
  * @param	id		サウンドのID
  */
 void
-DirectSound::SoundPlayLoop(short id)
+DirectSound::playLoop(short id)
 {
-	SoundPlayImple(true, id);
+	playImple(true, id);
 }
 
 /**
@@ -272,9 +272,9 @@ DirectSound::SoundPlayLoop(short id)
  * @param	id		サウンドのID
  */
 void
-DirectSound::SoundPouse(short id)
+DirectSound::pause(short id)
 {
-	SoundStopImple(true, id);
+	stopImple(true, id);
 }
 
 /**
@@ -282,16 +282,16 @@ DirectSound::SoundPouse(short id)
  * @param	id		サウンドのID
  */
 void
-DirectSound::SoundStop(short id)
+DirectSound::stop(short id)
 {
-	SoundStopImple(false, id);
+	stopImple(false, id);
 }
 
 /**
  * @brief	指定IDのサウンドが再生中か
  */
 bool
-DirectSound::IsPlaySound(short id)
+DirectSound::isPlaying(short id)
 {
 	if(id >= MAX_SOUND)
 	{
@@ -315,7 +315,7 @@ DirectSound::IsPlaySound(short id)
  * @param	id			サウンドのID
  */
 void
-DirectSound::SetVolume(short volume, short id)
+DirectSound::setVolume(short volume, short id)
 {
 	if(id >= MAX_SOUND)
 	{
@@ -342,7 +342,7 @@ DirectSound::SetVolume(short volume, short id)
  * @return	true:成功   false:失敗
  */
 bool
-DirectSound::CreatePrimaryBuffer()
+DirectSound::createPrimaryBuffer()
 {
 	// DSBUFFERDESC構造体を設定
 	DSBUFFERDESC	dsbd;
@@ -385,7 +385,7 @@ DirectSound::CreatePrimaryBuffer()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectSound::CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id)
+DirectSound::createSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id)
 {
 	HRESULT				hr;
 	DSBUFFERDESC		dsbd;
@@ -422,13 +422,13 @@ DirectSound::CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwB
  * @param	id		サウンドのID
  */
 void
-DirectSound::SoundPlayImple(bool loop, short id)
+DirectSound::playImple(bool loop, short id)
 {
 	if (id >= MAX_SOUND)
 	{
 		return;
 	}
-	if (IsPlaySound(id))
+	if (isPlaying(id))
 	{
 		return;
 	}
@@ -445,7 +445,7 @@ DirectSound::SoundPlayImple(bool loop, short id)
  * @param	id			サウンドのID
  */
 void
-DirectSound::SoundStopImple(bool is_pouse, short id)
+DirectSound::stopImple(bool is_pouse, short id)
 {
 	if (id >= MAX_SOUND)
 	{

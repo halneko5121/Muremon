@@ -17,7 +17,7 @@
 void
 UtilSound::playOnce(short id)
 {
-	GetDirectSound()->SoundPlayOnce(id);
+	GetDirectSound()->playOnce(id);
 }
 
 /**
@@ -27,7 +27,7 @@ UtilSound::playOnce(short id)
 void
 UtilSound::playLoop(short id)
 {
-	GetDirectSound()->SoundPlayLoop(id);
+	GetDirectSound()->playLoop(id);
 }
 
 /**
@@ -37,7 +37,7 @@ UtilSound::playLoop(short id)
 void
 UtilSound::pause(short id)
 {
-	GetDirectSound()->SoundPouse(id);
+	GetDirectSound()->pause(id);
 }
 
 /**
@@ -47,7 +47,7 @@ UtilSound::pause(short id)
 void
 UtilSound::stop(short id)
 {
-	GetDirectSound()->SoundStop(id);
+	GetDirectSound()->stop(id);
 }
 
 /**
@@ -56,7 +56,7 @@ UtilSound::stop(short id)
 bool
 UtilSound::isPlaySound(short id)
 {
-	return GetDirectSound()->IsPlaySound(id);
+	return GetDirectSound()->isPlaying(id);
 }
 
 /**
@@ -67,5 +67,5 @@ UtilSound::isPlaySound(short id)
 void
 UtilSound::setVolume(short volume, short id)
 {
-	GetDirectSound()->SetVolume(volume, id);
+	GetDirectSound()->setVolume(volume, id);
 }

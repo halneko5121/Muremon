@@ -46,70 +46,70 @@ public:
 	 * @param	window_handle    ウィンドウハンドル
 	 * @return	true:成功   false:失敗
 	 */
-	bool					InitDSound(HWND window_handle);
+	bool					init(HWND window_handle);
 
 	/**
 	 * @brief	開放処理
 	 */
-	void					UnInitDSound();
+	void					release();
 
 	/**
 	 * @brief	音楽データ読み込み
 	 * @param	file_name	ファイル名
 	 * @return	true:成功   false:失敗
 	 */
-	bool LoadSoundData(LPTSTR file_name);
-
-	/**
-	 * @brief	音楽データ読み込み
-	 * @param	file_name	ファイル名
-	 * @param	id			登録するサウンドのID
-	 * @return	S_OK:成功   E_FAIL:失敗
-	 */
-	HRESULT LoadSound(LPTSTR file_name, short id);
+	bool					load(LPTSTR file_name);
 
 	/**
 	 * @brief	ワンス再生
 	 * @param	id		サウンドのID
 	 */
-	void SoundPlayOnce(short id);
+	void					playOnce(short id);
 
 	/**
 	 * @brief	ループ再生
 	 * @param	id		サウンドのID
 	 */
-	void SoundPlayLoop(short id);
+	void					playLoop(short id);
 
 	/**
 	 * @brief	一時停止
 	 * @param	id			サウンドのID
 	 */
-	void SoundPouse(short id);
+	void					pause(short id);
 
 	/**
 	 * @brief	停止
 	 * @param	id			サウンドのID
 	 */
-	void SoundStop(short id);
+	void					stop(short id);
 
 	/**
 	 * @brief	指定IDのサウンドが再生中か
 	 */
-	bool IsPlaySound(short id);
+	bool					isPlaying(short id);
 
 	/**
 	 * @brief	ボリューム設定
 	 * @param	volume		ボリュームの値（「０(最大ボリューム)」～「－１００００(最小ボリューム)」）
 	 * @param	id			サウンドのID
 	 */
-	void SetVolume(short volume, short id);
+	void					setVolume(short volume, short id);
 
 private:
+	/**
+	 * @brief	音楽データ読み込み＆登録
+	 * @param	file_name	ファイル名
+	 * @param	id			登録するサウンドのID
+	 * @return	S_OK:成功   E_FAIL:失敗
+	 */
+	HRESULT					loadAndRegist(LPTSTR file_name, short id);
+
 	/**
 	 * @brief	プライマリバッファの作成
 	 * @return	true:成功   false:失敗
 	 */
-	bool CreatePrimaryBuffer();
+	bool					createPrimaryBuffer();
 
 	/**
 	 * @brief	セカンダリバッファの作成
@@ -119,21 +119,21 @@ private:
 	 * @param	id				サウンドID
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT CreateSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id);
+	HRESULT					createSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id);
 
 	/**
 	 * @brief	再生
 	 * @param	loop	ループするか
 	 * @param	id		サウンドのID
 	 */
-	void SoundPlayImple(bool loop, short id);
+	void					playImple(bool loop, short id);
 
 	/**
 	 * @brief	停止
 	 * @param	is_pouse	一時停止か
 	 * @param	id			サウンドのID
 	 */
-	void SoundStopImple(bool is_pouse, short id);
+	void					stopImple(bool is_pouse, short id);
 
 private:
 	enum { MAX_SOUND = 20 };								// 読み込めるサウンドの最大数

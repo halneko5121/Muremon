@@ -107,7 +107,7 @@ GameMain::WinMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	}
 
 	// DirectSound‰Šú‰»
-	if(FAILED(GetDirectSound()->InitDSound(mWindow->GetHwnd())))
+	if(FAILED(GetDirectSound()->init(mWindow->GetHwnd())))
 	{
 		MessageBox(NULL, TEXT("DirectSound‚Ì‰Šú‰»‚É¸”s"), NULL, MB_OK);
 		return 0;
@@ -137,7 +137,7 @@ GameMain::MsgLoop(void)
 	GetFadeMgr()->init(mGraphics->GetDevice());
 	GetFadeMgr()->SetColor(0, 0, 0);
 
-	GetDirectSound()->LoadSoundData("Data\\sound_data.txt");
+	GetDirectSound()->load("Data\\sound_data.txt");
 
 	// Å‰‚ÌƒV[ƒ“‚Ì‰Šú‰»
 	mState.changeState(cState_Init);

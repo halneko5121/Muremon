@@ -40,7 +40,7 @@ namespace
 void
 GameMain::InitGameMain(void)
 {
-	mWindow			= new C_Window;
+	mWindow			= new Window;
 	mGraphics		= DirectGraphics::create();
 	DirectInputKey::create();
 	SIZE window_size = { cWindowWidth, cWindowHeight };

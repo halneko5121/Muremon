@@ -54,7 +54,7 @@ DirectGraphics::destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectGraphics::InitDGraphics(C_Window *wind, HWND hWnd, const int clientSizeX, const int clientSizeY)
+DirectGraphics::InitDGraphics(Window *wind, HWND hWnd, const int clientSizeX, const int clientSizeY)
 {
 	D3DDISPLAYMODE	d3ddm;
 
@@ -129,7 +129,7 @@ DirectGraphics::InitDGraphics(C_Window *wind, HWND hWnd, const int clientSizeX, 
  * @brief	ウインドウ・サイズの変更処理
  */
 void
-DirectGraphics::ChangeWindowSize(C_Window *wind, HWND hWnd, int clientSizeX , int clientSizeY)
+DirectGraphics::ChangeWindowSize(Window *wind, HWND hWnd, int clientSizeX , int clientSizeY)
 {	
 	if(wind->IsWindowMode()){
 		mD3dPresentParam.Windowed = true;					//ウィンドウの場合

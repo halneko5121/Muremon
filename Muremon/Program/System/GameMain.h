@@ -10,7 +10,7 @@
 #include "Library/Window/Window.h"
 #include "Library/StateMachine.h"
 
-class C_Window;
+class Window;
 class SceneBase;
 class DirectInputKey;
 class DirectInputMouse;
@@ -70,7 +70,7 @@ private:
 
 private:
 	StateMachine<GameMain>	mState;			// ステート
-	C_Window*				mWindow;		// ウィンドウクラスへのポインタ
+	Window*				mWindow;		// ウィンドウクラスへのポインタ
 	SceneBase*				mScene;			// シーンクラスへのポインタ
 	DirectGraphics*			mGraphics;		// グラフィッククラスへのポインタ
 	char**					mSoundText;

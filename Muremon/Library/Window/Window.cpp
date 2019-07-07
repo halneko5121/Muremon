@@ -21,7 +21,7 @@
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-C_Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
+Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_y)
 {
 	// ハンドルを渡す
 	mHInstance = hInst;
@@ -65,7 +65,7 @@ C_Window::InitWindow(HINSTANCE hInst, int width, int height, int pos_x, int pos_
  * @return	true:成功   false:失敗
  */
 bool
-C_Window::WindowCreate(int width, int height, int pos_x, int pos_y)
+Window::WindowCreate(int width, int height, int pos_x, int pos_y)
 {
 	// 0でうめる
 	ZeroMemory(&mWindowSize , sizeof(RECT));
@@ -157,10 +157,10 @@ C_Window::WindowCreate(int width, int height, int pos_x, int pos_y)
  * @return	ウィンドウプロシージャに渡す
  */
 LRESULT CALLBACK
-C_Window::WindowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam)
+Window::WindowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam)
 {
 	// thisポインタをセット
-	C_Window *p_window = (C_Window*)GetWindowLong(hWnd, GWL_USERDATA);
+	Window *p_window = (Window*)GetWindowLong(hWnd, GWL_USERDATA);
 	if(p_window != NULL)
 	{
 		// ウィンドウプロシージャ本体を呼び出す
@@ -178,7 +178,7 @@ C_Window::WindowProc(HWND hWnd , UINT uMsg , WPARAM wParam , LPARAM lParam)
  * @return	ウィンドウ初期化時に渡す
  */
 LRESULT
-C_Window::WndProc(HWND hWnd , UINT iMsg , WPARAM wParam , LPARAM lParam)
+Window::WndProc(HWND hWnd , UINT iMsg , WPARAM wParam , LPARAM lParam)
 {
 	DWORD size_change = 0;
 

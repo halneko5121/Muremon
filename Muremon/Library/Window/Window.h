@@ -19,7 +19,7 @@
 #pragma comment( lib, "d3dx9.lib" )
 #endif
 
-class C_Window
+class Window
 {
 public:
 	/**

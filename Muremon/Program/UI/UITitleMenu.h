@@ -55,6 +55,5 @@ private:
 	int							mAlphaZPush;
 	int							mTimeCount;				// ロゴのタイムカウント
 	int							mCursorAnime;			// カーソルアニメーション
-	int							mDispItem;				// グラフィックの変化を知らせる。
 	bool						mIsZPush;
 };

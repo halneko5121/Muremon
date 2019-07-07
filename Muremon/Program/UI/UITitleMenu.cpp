@@ -54,13 +54,6 @@ namespace
 		R_CURSOR2,		//カーソル2
 	};
 
-	enum TITLE_DRAW_SCENE
-	{
-		DRAW_Z_PUSH,
-		DRAW_MENU,
-		DRAW_GAME_MENU,
-	};
-
 	enum MENU_SCENE
 	{
 		G_START,		//スタート
@@ -96,7 +89,6 @@ UITitleMenu::UITitleMenu()
 	, mAlphaZPush(0)
 	, mTimeCount(0)
 	, mCursorAnime(0)
-	, mDispItem(DRAW_Z_PUSH)
 	, mIsZPush(false)
 {
 	mState.initialize(cState_Count, cState_Idle);
@@ -186,27 +178,26 @@ UITitleMenu::update()
 void
 UITitleMenu::draw()
 {
-	if (mDispItem == DRAW_Z_PUSH)
+	if (mState.isEqual(cState_Top))
 	{
 		mVertex->SetColor(mAlphaZPush, 255, 255, 255);
 		mVertex->DrawF(cDispZPushX, cDispZPushY, R_ZPUSH);
 	}
-	else if (mDispItem == DRAW_MENU)
+	else if (mState.isEqual(cState_MenuSelect))
 	{
 		mVertex->DrawF(cDispStartX, cDispStartY, R_START);
 		mVertex->DrawF(cDispRankingX, cDispRankingY, R_RANKING);
 		mVertex->DrawF(cDispGameEndX, cDispGameEndY, R_END);
 	}
-	else
+	else if (mState.isEqual(cState_GameSelect))
 	{
-		//モード選択(すっきり・のーまる・操作説明)
 		mVertex->DrawF(cDispStartX, cDispStartY, R_REFRESH);
 		mVertex->DrawF(cDispRankingX, cDispRankingY, R_NORMAL);
 		mVertex->DrawF(cDispGameEndX, cDispGameEndY, R_TUTORIAL_T);
 	}
 
 	//カーソル
-	if (mDispItem != DRAW_Z_PUSH)
+	if (!mState.isEqual(cState_Top))
 	{
 		mVertex->DrawF(mCursorPos.x, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
 		mVertex->DrawF(mCursorPos.x + cDispCursor2X, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
@@ -314,7 +305,6 @@ UITitleMenu::stateExeIdle()
 void
 UITitleMenu::stateEnterTop()
 {
-	mDispItem = DRAW_Z_PUSH;
 }
 void
 UITitleMenu::stateExeTop()
@@ -326,7 +316,6 @@ UITitleMenu::stateExeTop()
 
 	if (UtilInput::IsKeyPushed(DIK_Z))
 	{
-		mDispItem = DRAW_MENU;
 		mState.changeState(cState_MenuSelect);
 		return;
 	}
@@ -385,7 +374,6 @@ UITitleMenu::stateExeMenuSelect()
 	{
 		if (mCurrentMenuItem == G_START)
 		{
-			mDispItem = DRAW_GAME_MENU;
 			mCurrentMenuItem = 0;
 			mState.changeState(cState_GameSelect);
 			return;
@@ -394,7 +382,6 @@ UITitleMenu::stateExeMenuSelect()
 
 	if (UtilInput::IsKeyPushed(DIK_X))
 	{
-		mDispItem = DRAW_Z_PUSH;
 		mCurrentMenuItem = G_START;
 		mState.changeState(cState_Top);
 		return;
@@ -435,7 +422,6 @@ UITitleMenu::stateExeGameSelect()
 
 	if (UtilInput::IsKeyPushed(DIK_X))
 	{
-		mDispItem = DRAW_MENU;
 		mCurrentMenuItem = G_CLEARLY;
 		mState.changeState(cState_MenuSelect);
 		return;

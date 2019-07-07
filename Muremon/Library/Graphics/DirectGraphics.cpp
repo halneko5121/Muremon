@@ -54,18 +54,20 @@ DirectGraphics::destroy()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectGraphics::InitDGraphics(Window *wind, HWND hWnd, const int clientSizeX, const int clientSizeY)
+DirectGraphics::init(Window *wind, HWND hWnd, const int client_size_x, const int client_size_y)
 {
 	D3DDISPLAYMODE	d3ddm;
 
 	// Direct3D9オブジェクトの生成(インターフェイスの取得)
-	if((mD3d = Direct3DCreate9(D3D_SDK_VERSION)) == NULL){
+	if((mD3d = Direct3DCreate9(D3D_SDK_VERSION)) == NULL)
+	{
 		MessageBox(NULL, TEXT("Direct3D9インターフェイスの取得失敗"), NULL, MB_OK);
 		return E_FAIL;
 	}
 
 	// 現在のディスプレイモードを取得
-	if(FAILED(mD3d->GetAdapterDisplayMode(D3DADAPTER_DEFAULT , &d3ddm))){
+	if(FAILED(mD3d->GetAdapterDisplayMode(D3DADAPTER_DEFAULT , &d3ddm)))
+	{
 		MessageBox(NULL, TEXT("ディスプレイモード取得失敗"), NULL, MB_OK);
 		return E_FAIL;
 	}
@@ -74,7 +76,7 @@ DirectGraphics::InitDGraphics(Window *wind, HWND hWnd, const int clientSizeX, co
 	ZeroMemory(&mD3dPresentParam , sizeof(D3DPRESENT_PARAMETERS));
 	
 	// 現在のウィンドウモードを判断
-	ChangeWindowSize(wind, hWnd, clientSizeX ,clientSizeY);
+	changeWindowSize(wind, hWnd, client_size_x ,client_size_y);
 
 	// デバイスの動作を設定
 	mD3dPresentParam.BackBufferCount			= 1;							// バックバッファーの数
@@ -106,21 +108,6 @@ DirectGraphics::InitDGraphics(Window *wind, HWND hWnd, const int clientSizeX, co
 			}
 		}
 	}
-	
-	//// ビューポートの設定
-	//D3DVIEWPORT9 vp;
-	//vp.X		= 0;
-	//vp.Y		= 0;
-	//vp.Width	= pD3dpp.BackBufferWidth;
-	//vp.Height	= pD3dpp.BackBufferHeight;
-	//vp.MinZ		= 0.0f;
-	//vp.MaxZ		= 1.0f;
-	//hr = pDevice->SetViewport(&vp);
-
-	/*if (FAILED(hr)){
-		MessageBox(NULL, TEXT("ビューポートの設定に失敗しました"), NULL, MB_OK);
-		return E_FAIL;
-	}*/
 
 	return S_OK;
 }
@@ -129,15 +116,19 @@ DirectGraphics::InitDGraphics(Window *wind, HWND hWnd, const int clientSizeX, co
  * @brief	ウインドウ・サイズの変更処理
  */
 void
-DirectGraphics::ChangeWindowSize(Window *wind, HWND hWnd, int clientSizeX , int clientSizeY)
+DirectGraphics::changeWindowSize(Window *wind, HWND hWnd, int client_size_x, int client_size_y)
 {	
-	if(wind->isWindowMode()){
-		mD3dPresentParam.Windowed = true;					//ウィンドウの場合
+	if(wind->isWindowMode())
+	{
+		// ウィンドウの場合
+		mD3dPresentParam.Windowed = true;
 		SetWindowLong(hWnd, GWL_USERDATA, (WS_OVERLAPPEDWINDOW | WS_VISIBLE) );
-	}else{
-		mD3dPresentParam.Windowed			= false;		//フルスクリーン
-		mD3dPresentParam.BackBufferWidth	= clientSizeX;	//クライアントサイズ（幅）
-		mD3dPresentParam.BackBufferHeight	= clientSizeY;	//クライアントサイズ（高さ）
+	}
+	else
+	{
+		mD3dPresentParam.Windowed			= false;			// フルスクリーン
+		mD3dPresentParam.BackBufferWidth	= client_size_x;	// クライアントサイズ（幅）
+		mD3dPresentParam.BackBufferHeight	= client_size_y;	// クライアントサイズ（高さ）
 
 		SetWindowLong(hWnd, GWL_USERDATA, (WS_POPUP | WS_VISIBLE) );
 	}
@@ -147,7 +138,7 @@ DirectGraphics::ChangeWindowSize(Window *wind, HWND hWnd, int clientSizeX , int 
  * @brief	描画設定
  */
 void
-DirectGraphics::SetRender()
+DirectGraphics::initRender()
 {
 	// アルファブレンディング
 	mDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
@@ -170,7 +161,7 @@ DirectGraphics::SetRender()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectGraphics::RenderStart(DWORD background)
+DirectGraphics::renderStart(DWORD background)
 {
 	// ビューポートと深度バッファのクリアとステンシルバッファの削除(シーンのクリア)
 	if(FAILED(mDevice->Clear(
@@ -192,7 +183,7 @@ DirectGraphics::RenderStart(DWORD background)
  * @brief	描画終了
  */
 void
-DirectGraphics::RenderEnd()
+DirectGraphics::renderEnd()
 {
 	// 描画終了
 	mDevice->EndScene();
@@ -209,7 +200,7 @@ DirectGraphics::RenderEnd()
  * @brief	開放処理
  */
 void
-DirectGraphics::ReleaseDGraphics()
+DirectGraphics::release()
 {
 	// LPDIRECT3DDEVICE9(デバイスオブジェクト)の開放
 	APP_SAFE_RELEASE(mDevice);

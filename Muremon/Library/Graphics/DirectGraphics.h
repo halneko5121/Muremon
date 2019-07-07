@@ -35,52 +35,55 @@ public:
 	/**
 	 * @brief	インスタンスの破棄
 	 */
-	static void			destroy();
+	static void				destroy();
 
 	/**
 	 * @brief	初期化
 	 * @param	hWnd            ウィンドウハンドル
-	 * @param	clientSizeX     クライアントサイズ(横幅)
-	 * @param	clientSizeY     クライアントサイズ(縦幅)
+	 * @param	client_size_x	クライアントサイズ(横幅)
+	 * @param	client_size_y	クライアントサイズ(縦幅)
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT				InitDGraphics(Window *wind, HWND hWnd, const int clientSizeX, const int clientSizeY);
+	HRESULT					init(Window *wind, HWND hWnd, const int client_size_x, const int client_size_y);
 
 	/**
 	 * @brief	ウインドウ・サイズの変更処理
+	 * @param	hWnd            ウィンドウハンドル
+	 * @param	client_size_x	クライアントサイズ(横幅)
+	 * @param	client_size_y	クライアントサイズ(縦幅)
 	 */
-	void				ChangeWindowSize(Window *wind, HWND hWnd, int clientSizeX, int clientSizeY);
+	void					changeWindowSize(Window *wind, HWND hWnd, int client_size_x, int client_size_y);
 
 	/**
-	 * @brief	描画設定
+	 * @brief	描画初期設定
 	 */
-	void				SetRender();
+	void					initRender();
 
 	/**
 	 * @brief	描画開始
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT				RenderStart(DWORD background);
+	HRESULT					renderStart(DWORD background);
 
 	/**
 	 * @brief	描画終了
 	 */
-	void				RenderEnd();
+	void					renderEnd();
 
 	/**
 	 * @brief	開放処理
 	 */
-	void				ReleaseDGraphics();
+	void					release();
 
 	//-情報取得関数-
 
 	/**
 	 * @brief	デバイスの取得
 	 */
-	LPDIRECT3DDEVICE9	GetDevice() { return mDevice;	}
+	LPDIRECT3DDEVICE9		getDevice() { return mDevice;	}
 
 private:
-	static DirectGraphics*		mInstance;				// インスタンス
+	static DirectGraphics*	mInstance;				// インスタンス
 	LPDIRECT3D9				mD3d;					// IDirect3D9インターフェイスへのポインタ
 	LPDIRECT3DDEVICE9		mDevice;				// IDirect3DDevice9インターフェイスへのポインタ
 	D3DPRESENT_PARAMETERS	mD3dPresentParam;		// デバイスのプレゼンテーションパラメータ

@@ -35,13 +35,21 @@ SceneLogo::~SceneLogo()
 {
 }
 
-void SceneLogo::impleInit()
+/**
+ * @brief	初期化
+ */
+void
+SceneLogo::impleInit()
 {
 	mTexture->load("Data\\TextureData\\logo.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\logo.txt");
 }
 
-void SceneLogo::update()
+/**
+ * @brief	更新
+ */
+void
+SceneLogo::update()
 {
 	mSceneChangeCount++;
 
@@ -51,13 +59,21 @@ void SceneLogo::update()
 	}
 }
 
-void SceneLogo::draw()
+/**
+ * @brief	描画
+ */
+void
+SceneLogo::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_LOGO), mDevice);
 	mVertex->drawF(400.f,300.f,R_LOGO);
 }
 
-void SceneLogo::end()
+/**
+ * @brief	シーン終了
+ */
+void
+SceneLogo::end()
 {
 	requestChangeScene(cSceneName_Title);
 	mTexture->release();

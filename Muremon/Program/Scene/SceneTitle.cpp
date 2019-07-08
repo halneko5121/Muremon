@@ -62,7 +62,11 @@ SceneTitle::~SceneTitle()
 {
 }
 
-void SceneTitle::impleInit()
+/**
+ * @brief	初期化
+ */
+void
+SceneTitle::impleInit()
 {
 	mTexture->load("Data\\TextureData\\title.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\title.txt");
@@ -72,14 +76,22 @@ void SceneTitle::impleInit()
 	mUITitleMenu->init(mDevice);
 }
 
-void SceneTitle::update()
+/**
+ * @brief	更新
+ */
+void
+SceneTitle::update()
 {
 	updateDrawPos();
-	updateCheckSceneChange();
+	checkSceneChange();
 	mUITitleMenu->update();
 }
 
-void SceneTitle::draw()
+/**
+ * @brief	描画
+ */
+void
+SceneTitle::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_TITLE_BG), mDevice);
 	mVertex->drawF(cDispTitleBgX, cDispTitleBgY, R_TITLE_BG);
@@ -90,7 +102,11 @@ void SceneTitle::draw()
 	mUITitleMenu->draw();
 }
 
-void SceneTitle::end()
+/**
+ * @brief	シーン終了
+ */
+void
+SceneTitle::end()
 {
 	requestChangeScene(mNextSceneIndex);
 	if (mNextSceneIndex == cSceneName_GameNormal ||
@@ -103,7 +119,11 @@ void SceneTitle::end()
 	mVertex->release();
 }
 
-void SceneTitle::updateDrawPos()
+/**
+ * @brief	描画位置の更新
+ */
+void
+SceneTitle::updateDrawPos()
 {
 	//タイトル位置を計算
 	if(mDrawCount == 7) { return ; }
@@ -129,7 +149,10 @@ void SceneTitle::updateDrawPos()
 	}
 }
 
-void SceneTitle::updateCheckSceneChange()
+/**
+ * @brief	シーン変更チェック
+ */
+void SceneTitle::checkSceneChange()
 {
 	// メニューセレクト
 	if (mUITitleMenu->isDecideMenuSelectRanking())

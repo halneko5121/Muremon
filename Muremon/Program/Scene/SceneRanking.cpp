@@ -93,6 +93,9 @@ SceneRanking::~SceneRanking()
 {
 }
 
+/**
+ * @brief	初期化
+ */
 void
 SceneRanking::impleInit()
 {
@@ -115,12 +118,20 @@ SceneRanking::impleInit()
 	}
 }
 
-void SceneRanking::update()
+/**
+ * @brief	更新
+ */
+void
+SceneRanking::update()
 {
 	updateRanking(mRankingNo);
 }
 
-void SceneRanking::updateRanking(int rank)
+/**
+ * @brief	ランキングの更新
+ */
+void
+SceneRanking::updateRanking(int rank)
 {
 	// ランクインしていない時
 	if (rank == -1)
@@ -177,7 +188,11 @@ void SceneRanking::updateRanking(int rank)
 	}
 }
 
-void SceneRanking::draw()
+/**
+ * @brief	描画
+ */
+void
+SceneRanking::draw()
 {
 	drawBackGround();
 	drawRankingPlace();
@@ -185,21 +200,33 @@ void SceneRanking::draw()
 	drawRankingScore();
 }
 
-void SceneRanking::end()
+/**
+ * @brief	シーン終了
+ */
+void
+SceneRanking::end()
 {
 	requestChangeScene(cSceneName_Title);
 	mTexture->release();
 	mVertex->release();
 }
 
-void SceneRanking::drawBackGround()
+/**
+ * @brief	背景の描画
+ */
+void
+SceneRanking::drawBackGround()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_RANKING_BG), mDevice);
 	mVertex->setColor(255,255,255,255);
 	mVertex->drawF(400.f,300.f,R_RANKING_BG);
 }
 
-void SceneRanking::drawRankingPlace()
+/**
+ * @brief	順位の描画
+ */
+void
+SceneRanking::drawRankingPlace()
 {
 	for(int i=0;i<5;i++)
 	{
@@ -210,7 +237,11 @@ void SceneRanking::drawRankingPlace()
 	}
 }
 
-void SceneRanking::drawRankingName()
+/**
+ * @brief	名前の描画
+ */
+void
+SceneRanking::drawRankingName()
 {
 	for(int j=0;j<5;j++)
 	{
@@ -223,7 +254,11 @@ void SceneRanking::drawRankingName()
 	}
 }
 
-void SceneRanking::drawRankingScore()
+/**
+ * @brief	スコアの描画
+ */
+void
+SceneRanking::drawRankingScore()
 {
 	int j=0;
 
@@ -246,7 +281,11 @@ void SceneRanking::drawRankingScore()
 	}
 }
 
-void SceneRanking::loadRanking()
+/**
+ * @brief	ランキングの読み込み
+ */
+void
+SceneRanking::loadRanking()
 {
 	FILE *fp;
 	fopen_s(&fp, "Data\\rankingdata.txt", "r");		//ファイルを開く
@@ -264,7 +303,11 @@ void SceneRanking::loadRanking()
 	fclose(fp);
 }
 
-void SceneRanking::writeRanking()
+/**
+ * @brief	ランキングの書き込み
+ */
+void
+SceneRanking::writeRanking()
 {
 	FILE *fp;
 	fopen_s(&fp, "Data\\rankingdata.txt", "w");
@@ -294,6 +337,9 @@ SceneRanking::checkRankingIn()
 	return ranking_num;
 }
 
+/**
+ * @brief	ランキングのソート
+ */
 void SceneRanking::sortRanking(int new_rank)
 {
 	// ランクインした順位からずれていく

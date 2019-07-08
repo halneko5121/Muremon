@@ -74,14 +74,22 @@ SceneTutorial::~SceneTutorial()
 {
 }
 
-void SceneTutorial::impleInit()
+/**
+ * @brief	初期化
+ */
+void
+SceneTutorial::impleInit()
 {
 	mTexture->load("Data\\TextureData\\Tutorial.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\Tutorial.txt");
 	mState.changeState(cState_RefreshSlide);
 }
 
-void SceneTutorial::update()
+/**
+ * @brief	更新
+ */
+void
+SceneTutorial::update()
 {
 	mState.executeState();
 
@@ -91,7 +99,11 @@ void SceneTutorial::update()
 	}
 }
 
-void SceneTutorial::draw()
+/**
+ * @brief	描画
+ */
+void
+SceneTutorial::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL1), mDevice);
 	mVertex->drawF(mTexturePos[TR_REFRESH].x,mTexturePos[TR_REFRESH].y,R_TUTORIAL1);
@@ -100,7 +112,11 @@ void SceneTutorial::draw()
 	mVertex->drawF(mTexturePos[TR_NORMAL].x,mTexturePos[TR_NORMAL].y,R_TUTORIAL2);
 }
 
-void SceneTutorial::end()
+/**
+ * @brief	シーン終了
+ */
+void
+SceneTutorial::end()
 {
 	requestChangeScene(cSceneName_Title);
 	mTexture->release();

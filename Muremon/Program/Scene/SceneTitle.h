@@ -23,7 +23,7 @@ public:
 	void			end() override;
 
 	void			updateDrawPos();
-	void			updateCheckSceneChange();
+	void			checkSceneChange();
 
 private:
 	UITitleMenu*	mUITitleMenu;			// タイトルメニューUI

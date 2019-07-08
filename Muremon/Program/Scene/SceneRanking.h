@@ -41,49 +41,31 @@ private:
 	void		updateInput();
 
 private:
-	int time_count;	//描画するタイムカウント
+	int		mTimeCount;					// 描画するタイムカウント
+	int		mRank;						// ランクインしているか
+	int		mFadeFlag;					// フェードするフラグ
+	int		mAlpha;						// アルファ値
+	int		mFontAlpha;
+	int		mAlphaCount;				// アルファカウント
+	int		mFlag;
+	int		mKeyNo;
+	int		mIn;
+	int		mDelay;
 
-	int rank;	//ランクインしているか
+	int		mNaameAlpha[5][3];
+	int		mNameRed[5][3];
+	int		mNameBlue[5][3];
+	int		mNameGreen[5][3];
+	char	mKeepKey[3];
 
-	int fade_flag;	//フェードするフラグ
+	bool	mIsWrite;
 
-	int alpha;	//アルファ値
+	int		mNameFontAlpha;
+	bool	mIsNameBlink;
+	bool	mIsNameAlphaDown;
 
-	int font_alpha;
-
-	int alpha_count;	//アルファカウント
-
-	int flag;
-
-	int key_no;
-
-	int in;
-
-	int deray;
-
-	int name_alpha[5][3];
-
-	int name_red[5][3];
-
-	int name_bule[5][3];
-
-	int name_green[5][3];
-
-	char keep_key[3];
-
-	bool write_flag;
-
-	int name_font_alpha;
-
-	bool name_blink;
-
-	bool name_alpha_down;
-
-	int key_state;
-
-	bool rank_draw_flag;
-
-	int add_score;
-
-	bool ranking_flag;
+	int		mKeyState;
+	bool	mIsDrawRank;
+	int		mAddScore;
+	bool	mIsRanking;
 };

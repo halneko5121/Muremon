@@ -93,44 +93,44 @@ SceneRanking::SceneRanking(void)
 {
 	mIsSceneChange = true;
 
-	fade_flag=RANK_FADE_IN;
+	mFadeFlag=RANK_FADE_IN;
 
-	alpha=0;
+	mAlpha=0;
 
-	font_alpha=0;
+	mFontAlpha=0;
 
-	alpha_count=0;
+	mAlphaCount=0;
 
-	time_count = 0;
+	mTimeCount = 0;
 
-	rank=-1;
+	mRank=-1;
 
-	key_no = 0;
+	mKeyNo = 0;
 
-	flag = 0;
-	in = 0;
-	deray = 0;
-	keep_key[3]=0;
+	mFlag = 0;
+	mIn = 0;
+	mDelay = 0;
+	mKeepKey[3]=0;
 
-	write_flag=false;
+	mIsWrite=false;
 	
 	//sum_score=50000000;
 
-	add_score=0;
+	mAddScore=0;
 
-	key_state = 0;
+	mKeyState = 0;
 
 	for(int j=0;j<5;j++){
 		for(int i=0;i<3;i++){
-			name_alpha[j][i]=255;
+			mNaameAlpha[j][i]=255;
 		}
 	}
 
-	name_blink=false;
+	mIsNameBlink=false;
 
-	name_alpha_down=false;
+	mIsNameAlphaDown=false;
 
-	ranking_flag=false;
+	mIsRanking=false;
 }
 
 SceneRanking::~SceneRanking(void)
@@ -145,7 +145,7 @@ SceneRanking::impleInit()
 void SceneRanking::init(LPDIRECT3DDEVICE9 apDev, int score)
 {
 	mDevice = apDev;
-	add_score = score;
+	mAddScore = score;
 
 	mTexture->load("Data\\TextureData\\ranking.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\ranking.txt");
@@ -158,62 +158,62 @@ bool SceneRanking::update()
 	UtilSound::playLoop(S_BGM_TITLE);
 
 	updateFade();
-	updateRanking(rank);
+	updateRanking(mRank);
 	updateInput();
 	return mIsSceneChange;
 }
 
 void SceneRanking::updateRanking(int rank)
 {
-	name_blink=true;
-	name_alpha_down=true;
+	mIsNameBlink=true;
+	mIsNameAlphaDown=true;
 	for(int i = 'A'; i <= 'Z'; i++)
 	{
 		if(GetAsyncKeyState(i))
 		{
 			UtilSound::playOnce(S_SE_CURSOR_MOVE);
-			key_no = i - 'A';
-			keep_key[flag] = key_no;
+			mKeyNo = i - 'A';
+			mKeepKey[mFlag] = mKeyNo;
 			//newdata.name[flag] = key;
-			data[rank].name[flag] = key_no;
+			data[rank].name[mFlag] = mKeyNo;
 			break;
 		}
 	}
 
-	if(key_no != -1 && flag < 3)
+	if(mKeyNo != -1 && mFlag < 3)
 	{
-		in = 1;
+		mIn = 1;
 	}
 
-	if(in)
+	if(mIn)
 	{
-		if(name_blink)
+		if(mIsNameBlink)
 		{
-			if(name_alpha_down)
+			if(mIsNameAlphaDown)
 			{
-				name_alpha[rank][flag]-=5;
-				if(name_alpha[rank][flag]==0) name_alpha_down = false;
+				mNaameAlpha[rank][mFlag]-=5;
+				if(mNaameAlpha[rank][mFlag]==0) mIsNameAlphaDown = false;
 			}else{
-				name_alpha[rank][flag]+=5;
-				if(name_alpha[rank][flag]=255) name_alpha_down = true;
+				mNaameAlpha[rank][mFlag]+=5;
+				if(mNaameAlpha[rank][mFlag]=255) mIsNameAlphaDown = true;
 			}
 		}
-		else name_alpha[5][3]=255;
+		else mNaameAlpha[5][3]=255;
 
-		if(deray++ > 3)
+		if(mDelay++ > 3)
 		{
 			if(GetAsyncKeyState(VK_RETURN))
 			{
 				UtilSound::playOnce(S_SE_OK);
-				name_alpha[rank][flag]=255;
-				flag++;
-				deray = 0;
-				in = 0;
-				if(flag==3)
+				mNaameAlpha[rank][mFlag]=255;
+				mFlag++;
+				mDelay = 0;
+				mIn = 0;
+				if(mFlag==3)
 				{
-					name_blink=false;
-					write_flag=true;
-					if(write_flag) writeRanking();
+					mIsNameBlink=false;
+					mIsWrite=true;
+					if(mIsWrite) writeRanking();
 				}
 			}
 		}
@@ -224,7 +224,7 @@ void SceneRanking::updateInput()
 {
 	if(GetAsyncKeyState(VK_RETURN))
 	{
-		fade_flag = RANK_FADE_OUT;
+		mFadeFlag = RANK_FADE_OUT;
 	}
 }
 
@@ -248,7 +248,7 @@ int SceneRanking::end()
 void SceneRanking::drawBackGround()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_RANKING_BG), mDevice);
-	mVertex->setColor(alpha,255,255,255);
+	mVertex->setColor(mAlpha,255,255,255);
 	mVertex->drawF(400.f,300.f,R_RANKING_BG);
 }
 
@@ -257,7 +257,7 @@ void SceneRanking::drawRankingPlace()
 	for(int i=0;i<5;i++)
 	{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
-			mVertex->setColor(alpha,255,255,255);
+			mVertex->setColor(mAlpha,255,255,255);
 			mVertex->drawF((float)PLACE_POSITION_X,(float)POSITION_Y + i * DISLOCATE_Y,R_FONT_1 + i);
 			mVertex->drawF((float)DOT_X,(float)POSITION_Y+i * DISLOCATE_Y,R_FONT_DOT);
 	}
@@ -270,8 +270,8 @@ void SceneRanking::drawRankingName()
 		for(int i=0;i<3;i++)
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
-			if(fade_flag==RANK_USUALLY)	mVertex->setColor(name_alpha[j][i],255,255,255);
-			else mVertex->setColor(alpha,255,255,255);
+			if(mFadeFlag==RANK_USUALLY)	mVertex->setColor(mNaameAlpha[j][i],255,255,255);
+			else mVertex->setColor(mAlpha,255,255,255);
 			mVertex->drawF((float)NAME_POSITION_X+i*DISLOCATE_X,(float)POSITION_Y+j*DISLOCATE_Y,R_FONT_A + data[j].name[i]);
 		}
 	}
@@ -294,7 +294,7 @@ void SceneRanking::drawRankingScore()
 		for(int j = figure ; j > 0 ; j--)
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
-			mVertex->setColor(alpha,255,255,255);
+			mVertex->setColor(mAlpha,255,255,255);
 			mVertex->drawF((float)SCORE_POSITION_X+(9-j)*DISLOCATE_X,(float)POSITION_Y+i*DISLOCATE_Y,R_FONT_0 + num[9-j]);
 		}
 	}
@@ -316,7 +316,7 @@ void SceneRanking::loadRanking()
 	}
 	fclose(fp);
 	newdata.name[0] = newdata.name[1] = newdata.name[2] = 0;		//プレイしたnameの初期化
-	newdata.score = add_score;	//プレイしたスコア
+	newdata.score = mAddScore;	//プレイしたスコア
 }
 
 void SceneRanking::writeRanking()
@@ -328,57 +328,57 @@ void SceneRanking::writeRanking()
 		fprintf(fp,"%d,%d,%d,%d\n",data[i].name[0],data[i].name[1],data[i].name[2],data[i].score);
 	}
 	fclose(fp);
-	write_flag=false;
+	mIsWrite=false;
 	//RankInit();
 }
 
 void SceneRanking::updateFade()
 {
-	switch(fade_flag)
+	switch(mFadeFlag)
 	{
 		case RANK_FADE_IN:
 			fadeIn();
-			if(alpha==255) fade_flag=RANK_USUALLY;
+			if(mAlpha==255) mFadeFlag=RANK_USUALLY;
 			break;
 		case RANK_USUALLY:
-			name_alpha[5][3]=255;
-			alpha=255;
-			alpha_count=0;
+			mNaameAlpha[5][3]=255;
+			mAlpha=255;
+			mAlphaCount=0;
 			break;
 		case RANK_FADE_OUT:
 			fadeOut();
-			if(alpha==0) mIsSceneChange = false;
+			if(mAlpha==0) mIsSceneChange = false;
 			break;
 	}
 }
 
 void SceneRanking::fadeIn()
 {
-	if(alpha_count++>1)
+	if(mAlphaCount++>1)
 	{
-		alpha+=5;
-		alpha_count=0;
+		mAlpha+=5;
+		mAlphaCount=0;
 	}
 
-	if(alpha>255)
+	if(mAlpha>255)
 	{
-		alpha=255;
-		alpha_count=0;
+		mAlpha=255;
+		mAlphaCount=0;
 	}
 
 }
 
 void SceneRanking::fadeOut()
 {
-	if(alpha_count++>1)
+	if(mAlphaCount++>1)
 	{
-		alpha-=5;
-		alpha_count=0;
+		mAlpha-=5;
+		mAlphaCount=0;
 	}
-	if(alpha<0)
+	if(mAlpha<0)
 	{
-		alpha=0;
-		alpha_count=0;
+		mAlpha=0;
+		mAlphaCount=0;
 	}
 }
 
@@ -387,14 +387,14 @@ void SceneRanking::checkRanking()
 	//ランクインしてるかチェックする
 	for(int i = 0; i < 5 ;i++){
 		if(data[i].score < newdata.score) {
-			rank = i;
+			mRank = i;
 			break;
 		}
 	}
 	//ランクインしていればRankChengeへ
-	if(rank != -1)
+	if(mRank != -1)
 	{
-		sortRanking(rank);
+		sortRanking(mRank);
 	}
 }
 
@@ -415,16 +415,16 @@ void SceneRanking::sortRanking(int get)
 
 void SceneRanking::initRanking()
 {
-	rank=-1;
+	mRank=-1;
 
-	key_no = -1;
+	mKeyNo = -1;
 
-	flag = 0;
-	in = 0;
-	deray = 0;
-	keep_key[3]=0;
+	mFlag = 0;
+	mIn = 0;
+	mDelay = 0;
+	mKeepKey[3]=0;
 	
-	name_alpha[5][3]=255;
+	mNaameAlpha[5][3]=255;
 
-	write_flag=false;
+	mIsWrite=false;
 }

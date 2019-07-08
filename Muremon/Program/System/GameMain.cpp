@@ -297,7 +297,7 @@ GameMain::stateExeRun()
 {
 	mScene->update();
 
-	if (!mScene->isSceneEnd())
+	if (mScene->isSceneEnd())
 	{
 		// ロゴが終わったらクリア時の色を白にする
 		if (mScene->getSceneID() == cSceneName_Title)

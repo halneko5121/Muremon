@@ -55,7 +55,7 @@ SceneTitle::SceneTitle()
 	, mDrawCount(0)
 	, mCountMove(0)
 {
-	mIsSceneEnd = true;
+	mIsSceneEnd = false;
 	mUITitleMenu = new UITitleMenu();
 }
 
@@ -135,7 +135,7 @@ void SceneTitle::updateCheckSceneChange()
 	// メニューセレクト
 	if (mUITitleMenu->isDecideMenuSelectRanking())
 	{
-		mIsSceneEnd = false;
+		mIsSceneEnd = true;
 		mNextSceneIndex = cSceneName_Ranking;
 		return;
 	}
@@ -148,19 +148,19 @@ void SceneTitle::updateCheckSceneChange()
 	// ゲームセレクト
 	if (mUITitleMenu->isDecideGameSelectRefresh())
 	{
-		mIsSceneEnd = false;
+		mIsSceneEnd = true;
 		mNextSceneIndex = cSceneName_GameRefresh;
 		return;
 	}
 	if (mUITitleMenu->isDecideGameSelectNormal())
 	{
-		mIsSceneEnd = false;
+		mIsSceneEnd = true;
 		mNextSceneIndex = cSceneName_GameNormal;
 		return;
 	}
 	if (mUITitleMenu->isDecideGameSelectTutorial())
 	{
-		mIsSceneEnd = false;
+		mIsSceneEnd = true;
 		mNextSceneIndex = cSceneName_Tutorial;
 		return;
 	}

@@ -37,7 +37,7 @@ SceneGameNormal::SceneGameNormal(void)
 
 	mIsInit = false;
 
-	mIsSceneEnd = true;
+	mIsSceneEnd = false;
 
 	mMissionGage = 0;
 
@@ -436,7 +436,7 @@ void SceneGameNormal::fadeIn()
 				mGameState = G_GAME_SCENE;
 			}
 			else if(mGameState == G_GAME_OVER || mGameState == G_GAME_CLEAR){
-				mIsSceneEnd = false;
+				mIsSceneEnd = true;
 			}
 		}
 		return ;

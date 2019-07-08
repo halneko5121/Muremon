@@ -8,28 +8,12 @@
 #pragma once
 
 #include "Program/Scene/SceneBase.h"
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
-#include "Program/Mission/Mission.h"
-#include "Program/Actor/ActorBoss.h"
-#include "Program/Actor/Actornikuman.h"
-#include "Program/Actor/ActorNoppo.h"
-#include "Program/Actor/ActorYoshi.h"
-#include "Program/DefineGame.h"
 
-#define NEGATIVE_PAR1	(40)
-#define NEGATIVE_PAR2	(60)
-#define NEGATIVE_PAR3	(70)
-#define NEGATIVE_PAR4	(100)
-
-enum NEGATIVE_DATA
-{
-	NO_NEGATIVE,
-	SPEED_UP,
-	RECOVER,
-	SLIDE_IN,
-	ATTACK_DOWN,
-};
+class Mission;
+class ActorBoss;
+class ActorNikuman;
+class ActorNoppo;
+class ActorYoshi;
 
 class SceneGameNormal : public SceneBase
 {

@@ -7,14 +7,36 @@
  ******************************************************************/
 #include "SceneGameNormal.h"
 
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilScore.h"
+#include "Program/Mission/Mission.h"
+#include "Program/Actor/ActorBoss.h"
+#include "Program/Actor/Actornikuman.h"
+#include "Program/Actor/ActorNoppo.h"
+#include "Program/Actor/ActorYoshi.h"
+#include "Program/DefineGame.h"
+
+#define NEGATIVE_PAR1	(40)
+#define NEGATIVE_PAR2	(60)
+#define NEGATIVE_PAR3	(70)
+#define NEGATIVE_PAR4	(100)
+
+enum NEGATIVE_DATA
+{
+	NO_NEGATIVE,
+	SPEED_UP,
+	RECOVER,
+	SLIDE_IN,
+	ATTACK_DOWN,
+};
 
 POS_CC<float> boss_cc2 = { 600, 350 };
 
-SceneGameNormal::SceneGameNormal(void)
+SceneGameNormal::SceneGameNormal()
 {
 	mIsPose = false;
 
@@ -67,7 +89,7 @@ SceneGameNormal::SceneGameNormal(void)
 	mNegativeDamege = 1;
 }
 
-SceneGameNormal::~SceneGameNormal(void)
+SceneGameNormal::~SceneGameNormal()
 {
 }
 

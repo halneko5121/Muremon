@@ -15,8 +15,6 @@ POS_CC<float> boss_cc2 = { 600, 350 };
 
 SceneGameNormal::SceneGameNormal(void)
 {
-	UtilScore::setScore(0);
-
 	mIsPose = false;
 
 	mTime = TIME_LIMIT;

@@ -228,6 +228,7 @@ GameMain::controlSequence(void)
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTitle();
 		mScene->init(mGraphics->getDevice());
+		GetGameScore()->setScore(0);
 		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);

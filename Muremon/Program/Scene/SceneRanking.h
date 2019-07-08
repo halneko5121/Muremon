@@ -22,17 +22,14 @@ public:
 
 private:
 	void		updateRanking(int rank);	// ランクインした時、名前をを入力する
-	void		sortRanking(int get);		// スコアの並び替え
 	void		loadRanking();				// データの読み込み
 	void		writeRanking();				// データの書き込み
+	void		sortRanking(int new_rank);	// スコアの並び替え
 
 	void		drawBackGround();			// ランキング背景
 	void		drawRankingPlace();			// ランキング位置
 	void		drawRankingName();			// ランキング名前
 	void		drawRankingScore();			// ランキングスコア
-
-	void		checkRanking();
-	void		initRanking();
 
 private:
 	int			mRankingNo;					// ランキング順位
@@ -40,6 +37,5 @@ private:
 	int			mInputKey;					// 入力したキー
 
 	int			mNameAlpha[5][3];
-	char		mRankingName[3];
 	bool		mIsNameAlphaDown;
 };

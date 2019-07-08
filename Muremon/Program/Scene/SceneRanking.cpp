@@ -81,6 +81,24 @@ namespace
 
 	struct RANK data[5];
 	struct RANK newdata;				//名前とスコアの初期化のため
+
+	/**
+	 * ランクインしてるかチェックする
+	 */
+	int
+	checkRankingIn()
+	{
+		int ranking_num = -1;
+		for (int i = 0; i < 5;i++)
+		{
+			if (data[i].score < newdata.score) {
+				ranking_num = i;
+				break;
+			}
+		}
+
+		return ranking_num;
+	}
 }
 
 SceneRanking::SceneRanking()
@@ -93,13 +111,10 @@ SceneRanking::SceneRanking()
 
 	mInputIndex = 0;
 
-	for (int i = 0;i < 3;i++)
+	for(int j=0;j<5;j++)
 	{
-		mRankingName[i] = 0;
-	}
-
-	for(int j=0;j<5;j++){
-		for(int i=0;i<3;i++){
+		for(int i=0;i<3;i++)
+		{
 			mNameAlpha[j][i]=255;
 		}
 	}
@@ -117,7 +132,13 @@ SceneRanking::impleInit()
 	mTexture->load("Data\\TextureData\\ranking.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\ranking.txt");
 	loadRanking();
-	checkRanking();
+	mRankingNo = checkRankingIn();
+
+	// ランクインしていればRankChengeへ
+	if (mRankingNo != -1)
+	{
+		sortRanking(mRankingNo);
+	}
 }
 
 bool SceneRanking::update()
@@ -160,7 +181,6 @@ void SceneRanking::updateRanking(int rank)
 		{
 			UtilSound::playOnce(S_SE_CURSOR_MOVE);
 			mInputKey = i - 'A';
-			mRankingName[mInputIndex] = mInputKey;
 			data[rank].name[mInputIndex] = mInputKey;
 			break;
 		}
@@ -258,17 +278,17 @@ void SceneRanking::drawRankingScore()
 void SceneRanking::loadRanking()
 {
 	FILE *fp;
-	fopen_s(&fp,"Data\\rankingdata.txt","r");		//ファイルを開く
+	fopen_s(&fp, "Data\\rankingdata.txt", "r");		//ファイルを開く
 
-	if(fp == NULL)					//ファイルがなかった場合
+	if (fp == NULL)					//ファイルがなかった場合
 	{
-		MessageBox(NULL,"ファイルを開けませんでした","エラー",NULL);	//赤の文字のところを表示
+		MessageBox(NULL, "ファイルを開けませんでした", "エラー", NULL);	//赤の文字のところを表示
 		return;
 	}
 
-	for(int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		fscanf(fp,"%hhd,%hhd,%hhd,%d\n",&data[i].name[0],&data[i].name[1],&data[i].name[2],&data[i].score);
+		fscanf(fp, "%hhd,%hhd,%hhd,%d\n", &data[i].name[0], &data[i].name[1], &data[i].name[2], &data[i].score);
 	}
 	fclose(fp);
 	newdata.name[0] = newdata.name[1] = newdata.name[2] = 0;	// プレイしたnameの初期化
@@ -285,48 +305,22 @@ void SceneRanking::writeRanking()
 		fprintf(fp,"%d,%d,%d,%d\n",data[i].name[0],data[i].name[1],data[i].name[2],data[i].score);
 	}
 	fclose(fp);
-	//RankInit();
 }
 
-void SceneRanking::checkRanking()
+void SceneRanking::sortRanking(int new_rank)
 {
-	//ランクインしてるかチェックする
-	for(int i = 0; i < 5 ;i++){
-		if(data[i].score < newdata.score) {
-			mRankingNo = i;
-			break;
-		}
-	}
-	//ランクインしていればRankChengeへ
-	if(mRankingNo != -1)
+	// ランクインした順位からずれていく
+	if (new_rank < 5)
 	{
-		sortRanking(mRankingNo);
-	}
-}
-
-void SceneRanking::sortRanking(int get)
-{
-	//ランクインした順位からずれていく
-	if (get < 5) {
-		for (int j = 4 ; j > get ; j--) {
+		for (int j = 4 ; j > new_rank; j--)
+		{
 			data[j] = data[j-1];
-			}
-		//ランクインしたところにプレイしたデータを入れる
-		data[get].name[0]=newdata.name[0];
-		data[get].name[1]=newdata.name[1];
-		data[get].name[2]=newdata.name[2];
-		data[get].score = newdata.score;
+		}
+
+		// ランクインしたところにプレイしたデータを入れる
+		data[new_rank].name[0]=newdata.name[0];
+		data[new_rank].name[1]=newdata.name[1];
+		data[new_rank].name[2]=newdata.name[2];
+		data[new_rank].score = newdata.score;
 	}
-}
-
-void SceneRanking::initRanking()
-{
-	mRankingNo=-1;
-
-	mInputKey = -1;
-
-	mInputIndex = 0;
-	mRankingName[3]=0;
-	
-	mNameAlpha[5][3]=255;
 }

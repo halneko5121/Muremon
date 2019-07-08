@@ -11,6 +11,7 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
+#include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilScore.h"
 #include "Program/DefineGame.h"
 
@@ -126,12 +127,22 @@ bool SceneRanking::update()
 	UtilSound::playLoop(S_BGM_TITLE);
 
 	updateRanking(mRankingNo);
-	updateInput();
 	return mIsSceneChange;
 }
 
 void SceneRanking::updateRanking(int rank)
 {
+	// ランクインしていない時
+	if (mRankingNo == -1)
+	{
+		if (UtilInput::isKeyPushedReturn())
+		{
+			UtilSound::playOnce(S_SE_OK);
+			mIsSceneChange = false;
+		}
+		return;
+	}
+
 	mIsNameBlink=true;
 	mIsNameAlphaDown=true;
 	// キー入力に連動して
@@ -181,17 +192,10 @@ void SceneRanking::updateRanking(int rank)
 					mIsNameBlink=false;
 					mIsWrite=true;
 					if(mIsWrite) writeRanking();
+					mIsSceneChange = false;
 				}
 			}
 		}
-	}
-}
-
-void SceneRanking::updateInput()
-{
-	if(GetAsyncKeyState(VK_RETURN))
-	{
-		mIsSceneChange = false;
 	}
 }
 

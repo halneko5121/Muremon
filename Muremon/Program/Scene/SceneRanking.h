@@ -33,7 +33,6 @@ private:
 
 	void		checkRanking();
 	void		initRanking();
-	void		updateInput();
 
 private:
 	int			mRankingNo;					// ƒ‰ƒ“ƒLƒ“ƒO‡ˆÊ

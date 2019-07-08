@@ -55,7 +55,6 @@ SceneTitle::SceneTitle()
 	, mDrawCount(0)
 	, mCountMove(0)
 {
-	mIsSceneEnd = false;
 	mUITitleMenu = new UITitleMenu();
 }
 

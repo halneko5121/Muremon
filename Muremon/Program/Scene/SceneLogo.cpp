@@ -29,7 +29,6 @@ namespace
 SceneLogo::SceneLogo()
 	: mSceneChangeCount(0)
 {
-	mIsSceneEnd = false;
 }
 
 SceneLogo::~SceneLogo()

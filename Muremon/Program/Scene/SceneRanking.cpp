@@ -76,8 +76,6 @@ namespace
 
 SceneRanking::SceneRanking()
 {
-	mIsSceneEnd = false;
-
 	mRankingNo=-1;
 
 	mInputKey = 0;

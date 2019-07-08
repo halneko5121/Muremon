@@ -37,8 +37,6 @@ SceneGameNormal::SceneGameNormal(void)
 
 	mIsInit = false;
 
-	mIsSceneEnd = false;
-
 	mMissionGage = 0;
 
 	mIsRed = false;

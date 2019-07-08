@@ -26,8 +26,6 @@ SceneGameRefresh::SceneGameRefresh(void)
 
 	mFlagFadeIn = false;
 
-	mIsSceneEnd = false;
-
 	mHitEffectAlpha = 0;
 	mIsHitEffect = false;
 	mHitEffectTime = 0;

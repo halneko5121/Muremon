@@ -59,8 +59,6 @@ SceneTutorial::SceneTutorial()
 	mTexturePos[TR_REFRESH].y = mTexturePos[TR_NORMAL].y = cTrRightY;
 	mTexturePos[TR_REFRESH].x = mTexturePos[TR_NORMAL].x  = cTrRightX;
 
-	mIsSceneEnd = false;
-
 	mState.initialize(cState_Count, cState_Idle);
 	mState.registState(this, &SceneTutorial::stateEnterIdle,			&SceneTutorial::stateExeIdle,			nullptr, cState_Idle);
 	mState.registState(this, &SceneTutorial::stateEnterRefreshSlide,	&SceneTutorial::stateExeRefreshSlide,	nullptr, cState_RefreshSlide);

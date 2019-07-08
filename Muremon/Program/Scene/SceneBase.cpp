@@ -15,10 +15,15 @@
  * @brief	コンストラクタ
  */
 SceneBase::SceneBase()
+	: mSceneID(cSceneName_Logo)
+	, mDevice(nullptr)
+	, mTexture(nullptr)
+	, mVertex(nullptr)
+	, mAlpha(255)
+	, mIsSceneEnd(false)
 {
-    mSceneID	= cSceneName_Logo;    // 初期化
+	mTexture = new Texture();
 	mVertex		= new Vertex();
-	mTexture	= new Texture();
 }
 
 /**

@@ -37,18 +37,18 @@ private:
 	void		updateInput();
 
 private:
-	int		mRank;						// ランクインしているか
-	int		mFlag;
-	int		mKeyNo;
-	int		mIn;
-	int		mDelay;
+	int			mRank;						// ランクインしているか
+	int			mFlag;
+	int			mKeyNo;
+	int			mIn;
+	int			mDelay;
 
-	int		mNameAlpha[5][3];
-	char	mKeepKey[3];
+	int			mNameAlpha[5][3];
+	char		mKeepKey[3];
 
-	bool	mIsWrite;
+	bool		mIsWrite;
 
-	bool	mIsNameBlink;
-	bool	mIsNameAlphaDown;
-	int		mAddScore;
+	bool		mIsNameBlink;
+	bool		mIsNameAlphaDown;
+	int			mAddScore;
 };

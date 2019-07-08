@@ -75,22 +75,18 @@ namespace
 }
 
 SceneRanking::SceneRanking()
+	: mRankingNo(-1)
+	, mInputKey(0)
+	, mInputIndex(0)
+	, mIsNameAlphaDown(false)
 {
-	mRankingNo=-1;
-
-	mInputKey = 0;
-
-	mInputIndex = 0;
-
-	for(int j=0;j<5;j++)
+	for (int j = 0; j < 5; j++)
 	{
-		for(int i=0;i<3;i++)
+		for (int i = 0; i < 3; i++)
 		{
-			mNameAlpha[j][i]=255;
+			mNameAlpha[j][i] = 255;
 		}
 	}
-
-	mIsNameAlphaDown=false;
 }
 
 SceneRanking::~SceneRanking()

@@ -7,8 +7,8 @@
  *	管理者：三上
  ******************************************************************/
 
-#include "Program/Scene/SceneBase.h"
 #include "Library/StateMachine.h"
+#include "Program/Scene/SceneBase.h"
 
 class ActorNikuman;
 class ActorNoppo;
@@ -65,7 +65,7 @@ private:
 	StateMachine<SceneGameRefresh>	mState;	// ステート
 
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
-	int					mSameState;			// ゲームの状態(スタート・すっきりゲーム)
+	int					mGameState;			// ゲームの状態(スタート・すっきりゲーム)
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
 	int					mNoppoKeyCount;		// のっぽの押されたキーの数をカウント

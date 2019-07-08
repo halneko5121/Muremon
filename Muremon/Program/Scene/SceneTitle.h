@@ -20,7 +20,7 @@ public:
 	void			impleInit() override;
 	bool			update() override;
 	void			draw() override;
-	int				end() override;
+	void			end() override;
 
 	void			updateDrawPos();
 	void			updateCheckSceneChange();

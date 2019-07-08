@@ -262,7 +262,7 @@ void SceneGameRefresh::draw()
 	}
 }
 
-int SceneGameRefresh::end()
+void SceneGameRefresh::end()
 {
 	//ƒ^ƒCƒgƒ‹‚Ö
 	requestChangeScene(cSceneName_Title);
@@ -271,8 +271,6 @@ int SceneGameRefresh::end()
 
 	mTexture->release();
 	mVertex->release();
-
-	return 0;
 }
 
 void SceneGameRefresh::fadeControl()

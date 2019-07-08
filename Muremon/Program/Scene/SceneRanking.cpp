@@ -202,13 +202,11 @@ void SceneRanking::draw()
 	drawRankingScore();
 }
 
-int SceneRanking::end()
+void SceneRanking::end()
 {
 	requestChangeScene(cSceneName_Title);
 	mTexture->release();
 	mVertex->release();
-
-	return 0;
 }
 
 void SceneRanking::drawBackGround()

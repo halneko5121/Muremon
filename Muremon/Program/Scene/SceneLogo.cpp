@@ -60,12 +60,11 @@ void SceneLogo::draw()
 	mVertex->drawF(400.f,300.f,R_LOGO);
 }
 
-int SceneLogo::end()
+void SceneLogo::end()
 {
 	requestChangeScene(cSceneName_Title);
 	mTexture->release();
 	mVertex->release();
 
-	return 0;
 }
 

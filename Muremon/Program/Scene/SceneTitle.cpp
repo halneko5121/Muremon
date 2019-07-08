@@ -93,7 +93,7 @@ void SceneTitle::draw()
 	mUITitleMenu->draw();
 }
 
-int SceneTitle::end()
+void SceneTitle::end()
 {
 	requestChangeScene(mNextSceneIndex);
 	if (mNextSceneIndex == cSceneName_GameNormal ||
@@ -104,8 +104,6 @@ int SceneTitle::end()
 
 	mTexture->release();
 	mVertex->release();
-
-	return 0;
 }
 
 void SceneTitle::updateDrawPos()

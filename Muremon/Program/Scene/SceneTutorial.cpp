@@ -104,13 +104,11 @@ void SceneTutorial::draw()
 	mVertex->drawF(mTexturePos[TR_NORMAL].x,mTexturePos[TR_NORMAL].y,R_TUTORIAL2);
 }
 
-int SceneTutorial::end()
+void SceneTutorial::end()
 {
 	requestChangeScene(cSceneName_Title);
 	mTexture->release();
 	mVertex->release();
-
-	return 0;
 }
 
 // -----------------------------------------------------------------

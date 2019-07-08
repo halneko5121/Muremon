@@ -19,7 +19,7 @@ public:
 	void			impleInit() override;
 	bool			update() override;
 	void			draw() override;
-	int				end() override;
+	void			end() override;
 
 private:
 	// ステート関数

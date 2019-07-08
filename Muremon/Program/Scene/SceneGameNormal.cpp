@@ -403,7 +403,7 @@ void SceneGameNormal::draw()
 	}
 }
 
-int SceneGameNormal::end()
+void SceneGameNormal::end()
 {
 	//ゲームオーバーの場合
 	requestChangeScene(cSceneName_Ranking);
@@ -413,8 +413,6 @@ int SceneGameNormal::end()
 	mTexture->release();
 	mVertex->release();
 	delete mMission;
-
-	return 0;
 }
 
 void SceneGameNormal::fadeControl()

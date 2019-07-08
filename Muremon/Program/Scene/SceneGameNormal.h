@@ -41,7 +41,7 @@ public:
 	void				impleInit() override;
 	bool				update() override;
 	void				draw() override;
-	int					end() override;
+	void				end() override;
 
 	void				drawKeyCount();				// 連打数
 	void				drawScore();				// スコア

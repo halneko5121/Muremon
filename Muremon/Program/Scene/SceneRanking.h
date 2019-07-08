@@ -18,7 +18,7 @@ public:
 	void		impleInit() override;
 	bool		update() override;
 	void		draw() override;
-	int			end() override;
+	void		end() override;
 
 private:
 	void		updateRanking(int rank);	// ランクインした時、名前をを入力する

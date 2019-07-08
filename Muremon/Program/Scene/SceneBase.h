@@ -68,7 +68,7 @@ public:
 	/**
 	 * @brief	I—¹ˆ—
 	 */
-	virtual int			end() = 0;
+	virtual void		end() = 0;
 
 	/*-		‹¤’ÊŠÖ”	-*/
 

@@ -15,11 +15,10 @@
  * @brief	コンストラクタ
  */
 SceneBase::SceneBase()
-	: mSceneID(cSceneName_Logo)
+	: mChangeSceneID(cSceneName_Logo)
 	, mDevice(nullptr)
 	, mTexture(nullptr)
 	, mVertex(nullptr)
-	, mAlpha(255)
 	, mIsSceneEnd(false)
 {
 	mTexture = new Texture();
@@ -73,16 +72,16 @@ SceneBase::update()
 void
 SceneBase::requestChangeScene(DWORD next_id)
 {
-    mSceneID = next_id;
+    mChangeSceneID = next_id;
 }
 
 /**
  * @brief	シーン番号の取得
  */
 DWORD
-SceneBase::getSceneID()
+SceneBase::getChangeSceneID()
 {
-	return mSceneID;
+	return mChangeSceneID;
 }
 
 /**

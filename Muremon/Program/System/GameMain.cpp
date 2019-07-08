@@ -218,7 +218,7 @@ void
 GameMain::controlSequence(void)
 {
 	// シーンIDによって分岐
-	switch(mScene->getSceneID()){
+	switch(mScene->getChangeSceneID()){
 	case cSceneName_Logo:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneLogo();
@@ -300,13 +300,13 @@ GameMain::stateExeRun()
 	if (mScene->isSceneEnd())
 	{
 		// ロゴが終わったらクリア時の色を白にする
-		if (mScene->getSceneID() == cSceneName_Title)
+		if (mScene->getChangeSceneID() == cSceneName_Title)
 		{
 			mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
 			GetFadeMgr()->setColor(255, 255, 255);
 		}
 		// タイトルが終わったらクリア時の色を黒にする
-		if (mScene->getSceneID() == cSceneName_Prologue)
+		if (mScene->getChangeSceneID() == cSceneName_Prologue)
 		{
 			mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
 			GetFadeMgr()->setColor(0, 0, 0);

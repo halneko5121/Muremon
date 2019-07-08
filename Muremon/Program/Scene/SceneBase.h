@@ -56,7 +56,6 @@ public:
 
 	/**
 	 * @brief	更新処理
-	 * @return	シーン終了か
 	 */
 	virtual void		update();
 
@@ -70,21 +69,16 @@ public:
 	 */
 	virtual void		end() = 0;
 
-	/*-		共通関数	-*/
-
-	/**
 	/**
 	 * @brief	シーン変更リクエストを行う
 	 * @param	nextID		次のシーンの番号
 	 */
 	void				requestChangeScene(DWORD next_id);
 
-	//-情報取得関数-
-
 	/**
-	 * @brief	シーン番号の取得
+	 * @brief	変更するシーン番号の取得
 	 */
-	DWORD				getSceneID();
+	DWORD				getChangeSceneID();
 
 	/**
 	 * @brief	シーン終了か
@@ -92,12 +86,10 @@ public:
 	bool				isSceneEnd() const;
 
 protected:
-    DWORD               mSceneID;		// シーンの番号
-	LPDIRECT3DDEVICE9	mDevice;		// デバイス
-	Texture*			mTexture;
-	Vertex*				mVertex;
-
-	int					mAlpha;			// 各シーンのalpha値		
-	bool				mIsSceneEnd;	// シーンが変わる時を知らせる
-	MouseData			mMouseData;		// マウス情報
+    DWORD               mChangeSceneID;		// 変更するシーン番号
+	LPDIRECT3DDEVICE9	mDevice;			// デバイス
+	Texture*			mTexture;			// テクスチャ
+	Vertex*				mVertex;			// バーテックス
+	bool				mIsSceneEnd;		// シーン終了か
+	MouseData			mMouseData;			// マウス情報
 };

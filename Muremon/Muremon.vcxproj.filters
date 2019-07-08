@@ -99,6 +99,9 @@
     <ClCompile Include="Program\System\GameScore.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Util\UtilScore.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -200,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="Program\System\GameScore.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Util\UtilScore.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

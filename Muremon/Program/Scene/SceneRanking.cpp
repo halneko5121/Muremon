@@ -86,14 +86,14 @@ SceneRanking::SceneRanking()
 {
 	mIsSceneChange = true;
 
-	mRank=-1;
+	mRankingNo=-1;
 
-	mKeyNo = 0;
+	mInputKey = 0;
 
-	mFlag = 0;
+	mInputIndex = 0;
 	mIsIn = false;
 	mDelay = 0;
-	mKeepKey[3]=0;
+	mRankingName[3]=0;
 
 	mIsWrite=false;
 
@@ -125,7 +125,7 @@ bool SceneRanking::update()
 {
 	UtilSound::playLoop(S_BGM_TITLE);
 
-	updateRanking(mRank);
+	updateRanking(mRankingNo);
 	updateInput();
 	return mIsSceneChange;
 }
@@ -134,19 +134,20 @@ void SceneRanking::updateRanking(int rank)
 {
 	mIsNameBlink=true;
 	mIsNameAlphaDown=true;
+	// キー入力に連動して
 	for(int i = 'A'; i <= 'Z'; i++)
 	{
 		if(GetAsyncKeyState(i))
 		{
 			UtilSound::playOnce(S_SE_CURSOR_MOVE);
-			mKeyNo = i - 'A';
-			mKeepKey[mFlag] = mKeyNo;
-			data[rank].name[mFlag] = mKeyNo;
+			mInputKey = i - 'A';
+			mRankingName[mInputIndex] = mInputKey;
+			data[rank].name[mInputIndex] = mInputKey;
 			break;
 		}
 	}
 
-	if(mKeyNo != -1 && mFlag < 3)
+	if(mInputKey != -1 && mInputIndex < 3)
 	{
 		mIsIn = true;
 	}
@@ -157,11 +158,11 @@ void SceneRanking::updateRanking(int rank)
 		{
 			if(mIsNameAlphaDown)
 			{
-				mNameAlpha[rank][mFlag]-=5;
-				if(mNameAlpha[rank][mFlag]==0) mIsNameAlphaDown = false;
+				mNameAlpha[rank][mInputIndex]-=5;
+				if(mNameAlpha[rank][mInputIndex]==0) mIsNameAlphaDown = false;
 			}else{
-				mNameAlpha[rank][mFlag]+=5;
-				if(mNameAlpha[rank][mFlag]=255) mIsNameAlphaDown = true;
+				mNameAlpha[rank][mInputIndex]+=5;
+				if(mNameAlpha[rank][mInputIndex]=255) mIsNameAlphaDown = true;
 			}
 		}
 		else mNameAlpha[5][3]=255;
@@ -171,11 +172,11 @@ void SceneRanking::updateRanking(int rank)
 			if(GetAsyncKeyState(VK_RETURN))
 			{
 				UtilSound::playOnce(S_SE_OK);
-				mNameAlpha[rank][mFlag]=255;
-				mFlag++;
+				mNameAlpha[rank][mInputIndex]=255;
+				mInputIndex++;
 				mDelay = 0;
 				mIsIn = false;
-				if(mFlag==3)
+				if(mInputIndex==3)
 				{
 					mIsNameBlink=false;
 					mIsWrite=true;
@@ -302,14 +303,14 @@ void SceneRanking::checkRanking()
 	//ランクインしてるかチェックする
 	for(int i = 0; i < 5 ;i++){
 		if(data[i].score < newdata.score) {
-			mRank = i;
+			mRankingNo = i;
 			break;
 		}
 	}
 	//ランクインしていればRankChengeへ
-	if(mRank != -1)
+	if(mRankingNo != -1)
 	{
-		sortRanking(mRank);
+		sortRanking(mRankingNo);
 	}
 }
 
@@ -330,14 +331,14 @@ void SceneRanking::sortRanking(int get)
 
 void SceneRanking::initRanking()
 {
-	mRank=-1;
+	mRankingNo=-1;
 
-	mKeyNo = -1;
+	mInputKey = -1;
 
-	mFlag = 0;
+	mInputIndex = 0;
 	mIsIn = false;
 	mDelay = 0;
-	mKeepKey[3]=0;
+	mRankingName[3]=0;
 	
 	mNameAlpha[5][3]=255;
 

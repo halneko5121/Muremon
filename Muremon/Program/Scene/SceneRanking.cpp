@@ -123,8 +123,6 @@ SceneRanking::impleInit()
 
 bool SceneRanking::update()
 {
-	UtilSound::playLoop(S_BGM_TITLE);
-
 	updateRanking(mRankingNo);
 	return mIsSceneChange;
 }
@@ -132,7 +130,7 @@ bool SceneRanking::update()
 void SceneRanking::updateRanking(int rank)
 {
 	// ƒ‰ƒ“ƒNƒCƒ“‚µ‚Ä‚¢‚È‚¢Žž
-	if (mRankingNo == -1)
+	if (rank == -1)
 	{
 		if (UtilInput::isKeyPushedReturn())
 		{

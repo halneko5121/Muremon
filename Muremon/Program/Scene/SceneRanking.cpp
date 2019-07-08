@@ -86,10 +86,6 @@ SceneRanking::SceneRanking(void)
 {
 	mIsSceneChange = true;
 
-	mFontAlpha=0;
-
-	mTimeCount = 0;
-
 	mRank=-1;
 
 	mKeyNo = 0;
@@ -100,12 +96,7 @@ SceneRanking::SceneRanking(void)
 	mKeepKey[3]=0;
 
 	mIsWrite=false;
-	
-	//sum_score=50000000;
-
 	mAddScore=0;
-
-	mKeyState = 0;
 
 	for(int j=0;j<5;j++){
 		for(int i=0;i<3;i++){
@@ -116,8 +107,6 @@ SceneRanking::SceneRanking(void)
 	mIsNameBlink=false;
 
 	mIsNameAlphaDown=false;
-
-	mIsRanking=false;
 }
 
 SceneRanking::~SceneRanking(void)
@@ -160,7 +149,6 @@ void SceneRanking::updateRanking(int rank)
 			UtilSound::playOnce(S_SE_CURSOR_MOVE);
 			mKeyNo = i - 'A';
 			mKeepKey[mFlag] = mKeyNo;
-			//newdata.name[flag] = key;
 			data[rank].name[mFlag] = mKeyNo;
 			break;
 		}

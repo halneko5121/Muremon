@@ -37,28 +37,18 @@ private:
 	void		updateInput();
 
 private:
-	int		mTimeCount;					// 描画するタイムカウント
 	int		mRank;						// ランクインしているか
-	int		mFontAlpha;
 	int		mFlag;
 	int		mKeyNo;
 	int		mIn;
 	int		mDelay;
 
 	int		mNameAlpha[5][3];
-	int		mNameRed[5][3];
-	int		mNameBlue[5][3];
-	int		mNameGreen[5][3];
 	char	mKeepKey[3];
 
 	bool	mIsWrite;
 
-	int		mNameFontAlpha;
 	bool	mIsNameBlink;
 	bool	mIsNameAlphaDown;
-
-	int		mKeyState;
-	bool	mIsDrawRank;
 	int		mAddScore;
-	bool	mIsRanking;
 };

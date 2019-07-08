@@ -93,18 +93,13 @@ SceneRanking::SceneRanking()
 
 	mInputIndex = 0;
 	mIsIn = false;
-	mDelay = 0;
 	mRankingName[3]=0;
-
-	mIsWrite=false;
 
 	for(int j=0;j<5;j++){
 		for(int i=0;i<3;i++){
 			mNameAlpha[j][i]=255;
 		}
 	}
-
-	mIsNameBlink=false;
 
 	mIsNameAlphaDown=false;
 }
@@ -143,9 +138,7 @@ void SceneRanking::updateRanking(int rank)
 		return;
 	}
 
-	mIsNameBlink=true;
-	mIsNameAlphaDown=true;
-	// キー入力に連動して
+	// キー入力に連動する
 	for(int i = 'A'; i <= 'Z'; i++)
 	{
 		if(GetAsyncKeyState(i))
@@ -163,38 +156,36 @@ void SceneRanking::updateRanking(int rank)
 		mIsIn = true;
 	}
 
-	if(mIsIn)
+	if (mInputIndex == 3)
 	{
-		if(mIsNameBlink)
+		if (UtilInput::isKeyPushedReturn())
 		{
-			if(mIsNameAlphaDown)
-			{
-				mNameAlpha[rank][mInputIndex]-=5;
-				if(mNameAlpha[rank][mInputIndex]==0) mIsNameAlphaDown = false;
-			}else{
-				mNameAlpha[rank][mInputIndex]+=5;
-				if(mNameAlpha[rank][mInputIndex]=255) mIsNameAlphaDown = true;
-			}
+			UtilSound::playOnce(S_SE_OK);
+			writeRanking();
+			mIsSceneChange = false;
 		}
-		else mNameAlpha[5][3]=255;
+		return;
+	}
 
-		if(mDelay++ > 3)
+	if (mIsIn)
+	{
+		if (mIsNameAlphaDown)
 		{
-			if(GetAsyncKeyState(VK_RETURN))
-			{
-				UtilSound::playOnce(S_SE_OK);
-				mNameAlpha[rank][mInputIndex]=255;
-				mInputIndex++;
-				mDelay = 0;
-				mIsIn = false;
-				if(mInputIndex==3)
-				{
-					mIsNameBlink=false;
-					mIsWrite=true;
-					if(mIsWrite) writeRanking();
-					mIsSceneChange = false;
-				}
-			}
+			mNameAlpha[rank][mInputIndex] -= 5;
+			if (mNameAlpha[rank][mInputIndex] == 0) mIsNameAlphaDown = false;
+		}
+		else {
+			mNameAlpha[rank][mInputIndex] += 5;
+			if (mNameAlpha[rank][mInputIndex] = 255) mIsNameAlphaDown = true;
+		}
+
+		if (UtilInput::isKeyPushedReturn())
+		{
+			UtilSound::playOnce(S_SE_OK);
+			mNameAlpha[rank][mInputIndex] = 255;
+			mInputIndex++;
+			mIsNameBlink = false;
+			mIsIn = false;
 		}
 	}
 }
@@ -298,7 +289,6 @@ void SceneRanking::writeRanking()
 		fprintf(fp,"%d,%d,%d,%d\n",data[i].name[0],data[i].name[1],data[i].name[2],data[i].score);
 	}
 	fclose(fp);
-	mIsWrite=false;
 	//RankInit();
 }
 
@@ -341,10 +331,7 @@ void SceneRanking::initRanking()
 
 	mInputIndex = 0;
 	mIsIn = false;
-	mDelay = 0;
 	mRankingName[3]=0;
 	
 	mNameAlpha[5][3]=255;
-
-	mIsWrite=false;
 }

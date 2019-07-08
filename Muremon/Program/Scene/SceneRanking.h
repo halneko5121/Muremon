@@ -39,12 +39,9 @@ private:
 	int			mInputIndex;				// 入力するランキングネームのインデックス
 	int			mInputKey;					// 入力したキー
 	bool		mIsIn;
-	int			mDelay;
 
 	int			mNameAlpha[5][3];
 	char		mRankingName[3];
-
-	bool		mIsWrite;
 
 	bool		mIsNameBlink;
 	bool		mIsNameAlphaDown;

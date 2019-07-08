@@ -16,6 +16,7 @@ DirectGraphics* DirectGraphics::mInstance = nullptr;
 DirectGraphics::DirectGraphics()
 	: mD3d(nullptr)
 	, mDevice(nullptr)
+	, mD3dPresentParam()
 {
 }
 

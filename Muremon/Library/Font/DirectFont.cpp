@@ -18,6 +18,26 @@ namespace
 DirectFont* DirectFont::mInstance = nullptr;
 
 /**
+ * @brief	コンストラクタ
+ */
+DirectFont::DirectFont()
+	: mFontDevice(nullptr)
+	, mFont(nullptr)
+	, mFontDesc()
+	, mFontColor(0)
+	, mFontSize(10, 10)
+{
+}
+
+/**
+ * @brief	デストラクタ
+ */
+DirectFont::~DirectFont()
+{
+
+}
+
+/**
  * @brief	インスタンスの取得
  */
 DirectFont*

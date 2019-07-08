@@ -23,8 +23,21 @@ typedef struct _CUSTOM_VERTEX
  * @brief	コンストラクタ
  */
 Vertex::Vertex()
+	: mTextureWidth(0)
+	, mTextureHeight(0)
+	, mTextureU(0)
+	, mTextureV(0)
+	, mScaleX(1.0f)
+	, mScaleY(1.0f)
+	, mDegree(0.0f)
+	, mLoadedRectCount(0)
+	, mColor(255)
+	, mRectPosition()
+	, mRectPosition2(nullptr)
+	, mDevice(nullptr)
+	, mTexture(nullptr)
+	, mAlpha(255)
 {
-
 }
 
 /**

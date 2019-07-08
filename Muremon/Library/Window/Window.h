@@ -23,6 +23,16 @@ class Window
 {
 public:
 	/**
+	 * @brief	コンストラクタ
+	 */
+	Window();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~Window();
+
+	/**
 	 * @brief	初期設定
 	 * @param	hInst   インスタンスハンドル
 	 * @return	S_OK:成功   E_FAIL:失敗

@@ -12,7 +12,8 @@
  * @brief	コンストラクタ
  */
 Texture::Texture()
-	: mLoadedTextureCount(0)
+	: mTexture(nullptr)
+	, mLoadedTextureCount(0)
 {
 }
 

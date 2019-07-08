@@ -25,10 +25,10 @@ namespace
  * @brief	コンストラクタ
  */
 DirectInputKey::DirectInputKey(void)
+	: mDirectInput(nullptr)
+	, mKeyBordDevice(nullptr)
+	, mWindowHandle(nullptr)
 {
-	// DirectInputDeviceオブジェクト(キーボード)
-	mKeyBordDevice = nullptr;	
-
 	ZeroMemory(&mKeyStatePrev,	MAX_KEYDATA);
 	ZeroMemory(&mKeyState,		MAX_KEYDATA);
 }

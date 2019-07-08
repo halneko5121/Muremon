@@ -18,8 +18,14 @@ DirectSound* DirectSound::mInstance = nullptr;
  * @brief	コンストラクタ
  */
 DirectSound::DirectSound()
-	: mMaxSound(0)
+	: mDirectSound(nullptr)
+	, mPrimaryBuffer(nullptr)
+	, mMaxSound()
 {
+	for (int i = 0; i < MAX_SOUND; i++)
+	{
+		mSecondaryBuffer[i] = nullptr;
+	}
 }
 
 /**

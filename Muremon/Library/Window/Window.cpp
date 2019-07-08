@@ -15,6 +15,25 @@
 #define CLASS_NAME			TEXT("My Class")			// クラスネーム
 #define WINDOW_NAME			TEXT("NewGame")				// ウィンドウネーム
 
+ /**
+  * @brief	コンストラクタ
+  */
+Window::Window()
+	: mHInstance(nullptr)
+	, mWindowHandle(nullptr)
+	, mWindowSize()
+	, mWindowMode(true)
+{
+}
+
+/**
+ * @brief	デストラクタ
+ */
+Window::~Window()
+{
+
+}
+
 /**
  * @brief	初期設定
  * @param	hInst   インスタンスハンドル

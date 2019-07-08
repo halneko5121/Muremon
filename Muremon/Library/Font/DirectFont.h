@@ -25,6 +25,16 @@ class DirectFont
 {
 public:
 	/**
+	 * @brief	コンストラクタ
+	 */
+	DirectFont();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~DirectFont();
+
+	/**
 	 * @brief	インスタンスの取得
 	 */
 	static DirectFont*	getInstance();

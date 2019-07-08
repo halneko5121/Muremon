@@ -23,6 +23,10 @@ public:
 		, mPrevStateCounter(0)
 		, mIsChangeStateInExe(false)
 	{
+		for (int i = 0; i < cMaxRegistState; i++)
+		{
+			mDelegate[i] = nullptr;
+		}
 	}
 
 	/**

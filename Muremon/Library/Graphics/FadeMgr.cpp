@@ -16,7 +16,8 @@ FadeMgr* FadeMgr::mInstance = nullptr;
   * @brief	コンストラクタ
   */
 FadeMgr::FadeMgr()
-	: mTexture(nullptr)
+	: mDevice(nullptr)
+	, mTexture(nullptr)
 	, mVertex(nullptr)
 	, mAlpha(255)
 	, mColorR(255)

@@ -16,7 +16,6 @@ public:
 	~SceneRanking(void);
 
 	void		impleInit() override;
-	void		init(LPDIRECT3DDEVICE9 apDev, int score);
 	bool		update() override;
 	void		draw() override;
 	int			end() override;
@@ -50,5 +49,4 @@ private:
 
 	bool		mIsNameBlink;
 	bool		mIsNameAlphaDown;
-	int			mAddScore;
 };

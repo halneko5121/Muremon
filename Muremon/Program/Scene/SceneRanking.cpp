@@ -11,6 +11,7 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
+#include "Program/Util/UtilScore.h"
 #include "Program/DefineGame.h"
 
 namespace
@@ -95,7 +96,6 @@ SceneRanking::SceneRanking(void)
 	mKeepKey[3]=0;
 
 	mIsWrite=false;
-	mAddScore=0;
 
 	for(int j=0;j<5;j++){
 		for(int i=0;i<3;i++){
@@ -115,13 +115,6 @@ SceneRanking::~SceneRanking(void)
 void
 SceneRanking::impleInit()
 {
-}
-
-void SceneRanking::init(LPDIRECT3DDEVICE9 apDev, int score)
-{
-	mDevice = apDev;
-	mAddScore = score;
-
 	mTexture->load("Data\\TextureData\\ranking.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\ranking.txt");
 	loadRanking();
@@ -288,8 +281,8 @@ void SceneRanking::loadRanking()
 		fscanf(fp,"%hhd,%hhd,%hhd,%d\n",&data[i].name[0],&data[i].name[1],&data[i].name[2],&data[i].score);
 	}
 	fclose(fp);
-	newdata.name[0] = newdata.name[1] = newdata.name[2] = 0;		//プレイしたnameの初期化
-	newdata.score = mAddScore;	//プレイしたスコア
+	newdata.name[0] = newdata.name[1] = newdata.name[2] = 0;	// プレイしたnameの初期化
+	newdata.score = UtilScore::getScore();						// プレイしたスコア
 }
 
 void SceneRanking::writeRanking()

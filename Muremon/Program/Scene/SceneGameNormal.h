@@ -71,7 +71,6 @@ private:
 
 	int					mTime;				// 時間をはかる
 	bool				mIsPose;			// ポーズをしているかしていないか
-	int					mScore;
 	int					mAlpha;				// アルファ値
 	int					mAlphaCount;		// アルファのディレイ
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分

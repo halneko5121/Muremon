@@ -75,5 +75,4 @@ private:
 	DirectGraphics*			mGraphics;		// グラフィッククラスへのポインタ
 	char**					mSoundText;
 	DWORD					mBackground;
-	int						mScore;
 };

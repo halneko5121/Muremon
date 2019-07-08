@@ -56,8 +56,6 @@ GameMain::init(void)
 	// 最初のシーンを
 	mScene = new SceneLogo();
 
-	mScore = 0;
-
 	mState.initialize(cState_Count, cState_Init);
 	mState.registState(this, &GameMain::stateEnterInit,	&GameMain::stateExeInit,	nullptr, cState_Init);
 	mState.registState(this, &GameMain::stateEnterRun,	&GameMain::stateExeRun,		nullptr, cState_Run);
@@ -249,7 +247,7 @@ GameMain::controlSequence(void)
 	case cSceneName_Ranking:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneRanking();
-		dynamic_cast<SceneRanking*>(mScene)->init(mGraphics->getDevice(), mScore);
+		mScene->init(mGraphics->getDevice());
 		break;
 	case cSceneName_GameEnd:
 		PostQuitMessage(0);
@@ -333,7 +331,7 @@ GameMain::stateExeEnd()
 	if (GetFadeMgr()->isFadeEnd())
 	{
 		// シーン終了
-		mScore = mScene->end();
+		mScene->end();
 		mState.changeState(cState_Init);
 		return;
 	}

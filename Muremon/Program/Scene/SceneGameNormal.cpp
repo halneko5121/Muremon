@@ -9,12 +9,13 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilBattle.h"
+#include "Program/Util/UtilScore.h"
 
 POS_CC<float> boss_cc2 = { 600, 350 };
 
 SceneGameNormal::SceneGameNormal(void)
 {
-	mScore = 0;
+	UtilScore::setScore(0);
 
 	mIsPose = false;
 
@@ -189,7 +190,8 @@ bool SceneGameNormal::update()
 			mBoss->hit_count++;
 			mBoss->boss_life -= NIKUMAN_DAMAGE / mNegativeDamege;
 			mMissionGage += NIKUMAN_GAGE;
-			mScore += NIKUMAN_SCORE;
+
+			UtilScore::addScore(NIKUMAN_SCORE);
 			mIsHitEffect = true;
 			mCharaAtkY = mNiku->m_chara_y;
 			mNiku->setIsHitCheck(false);
@@ -200,7 +202,7 @@ bool SceneGameNormal::update()
 			mBoss->hit_count++;
 			mBoss->boss_life -= YOSHITARO_DAMAGE / mNegativeDamege;
 			mMissionGage += YOSHITARO_GAGE;
-			mScore += YOSHITARO_SCORE;
+			UtilScore::addScore(YOSHITARO_SCORE);
 			mIsHitEffect = true;
 			mCharaAtkY = mYoshi->m_chara_y;
 			mYoshi->setIsHitCheck(false);
@@ -211,7 +213,7 @@ bool SceneGameNormal::update()
 			mBoss->hit_count++;
 			mBoss->boss_life -= NOPPO_DAMAGE / mNegativeDamege;
 			mMissionGage += NOPPO_GAGE;
-			mScore += YOSHITARO_SCORE;
+			UtilScore::addScore(NOPPO_SCORE);
 			mIsHitEffect = true;
 			mCharaAtkY = mNoppo->m_chara_y;
 			mNoppo->setIsHitCheck(false);
@@ -412,7 +414,7 @@ int SceneGameNormal::end()
 	mVertex->release();
 	delete mMission;
 
-	return mScore;
+	return 0;
 }
 
 void SceneGameNormal::fadeControl()
@@ -510,7 +512,7 @@ void SceneGameNormal::drawScore()
 {
 	//ÉXÉRÉA
 	for(int i = 0;i < 9;i++){
-		int num = mScore;
+		int num = UtilScore::getScore();
 		for(int j = 1; j < 9 - i;j++){
 			num = num / 10;
 		}
@@ -625,7 +627,7 @@ void SceneGameNormal::updateMissionOugi()
 		mMissionStateKeep = MISSION_END;
 		mWavePos.x = WAVE_INIT_X;
 		mWavePos.y = WAVE_INIT_Y;
-		mScore+=MISSION_CLEAR_SCORE;
+		UtilScore::addScore(MISSION_CLEAR_SCORE);
 	}
 	mTimeCount++;
 }

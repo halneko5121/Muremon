@@ -52,7 +52,7 @@ private:
 	int		mIn;
 	int		mDelay;
 
-	int		mNaameAlpha[5][3];
+	int		mNameAlpha[5][3];
 	int		mNameRed[5][3];
 	int		mNameBlue[5][3];
 	int		mNameGreen[5][3];

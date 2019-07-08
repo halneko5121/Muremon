@@ -14,6 +14,7 @@ GameScore* GameScore::mInstance = nullptr;
  * @brief	コンストラクタ
  */
 GameScore::GameScore()
+	: mScore(0)
 {
 }
 

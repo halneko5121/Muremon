@@ -66,7 +66,6 @@ private:
 
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mSameState;			// ゲームの状態(スタート・すっきりゲーム)
-	int					mKeyState;			// キーの状態
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
 	int					mNoppoKeyCount;		// のっぽの押されたキーの数をカウント

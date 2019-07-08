@@ -95,11 +95,7 @@ SceneRanking::SceneRanking(void)
 
 	mFadeFlag=RANK_FADE_IN;
 
-	mAlpha=0;
-
 	mFontAlpha=0;
-
-	mAlphaCount=0;
 
 	mTimeCount = 0;
 
@@ -122,7 +118,7 @@ SceneRanking::SceneRanking(void)
 
 	for(int j=0;j<5;j++){
 		for(int i=0;i<3;i++){
-			mNaameAlpha[j][i]=255;
+			mNameAlpha[j][i]=255;
 		}
 	}
 
@@ -191,21 +187,21 @@ void SceneRanking::updateRanking(int rank)
 		{
 			if(mIsNameAlphaDown)
 			{
-				mNaameAlpha[rank][mFlag]-=5;
-				if(mNaameAlpha[rank][mFlag]==0) mIsNameAlphaDown = false;
+				mNameAlpha[rank][mFlag]-=5;
+				if(mNameAlpha[rank][mFlag]==0) mIsNameAlphaDown = false;
 			}else{
-				mNaameAlpha[rank][mFlag]+=5;
-				if(mNaameAlpha[rank][mFlag]=255) mIsNameAlphaDown = true;
+				mNameAlpha[rank][mFlag]+=5;
+				if(mNameAlpha[rank][mFlag]=255) mIsNameAlphaDown = true;
 			}
 		}
-		else mNaameAlpha[5][3]=255;
+		else mNameAlpha[5][3]=255;
 
 		if(mDelay++ > 3)
 		{
 			if(GetAsyncKeyState(VK_RETURN))
 			{
 				UtilSound::playOnce(S_SE_OK);
-				mNaameAlpha[rank][mFlag]=255;
+				mNameAlpha[rank][mFlag]=255;
 				mFlag++;
 				mDelay = 0;
 				mIn = 0;
@@ -248,7 +244,7 @@ int SceneRanking::end()
 void SceneRanking::drawBackGround()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_RANKING_BG), mDevice);
-	mVertex->setColor(mAlpha,255,255,255);
+	mVertex->setColor(255,255,255,255);
 	mVertex->drawF(400.f,300.f,R_RANKING_BG);
 }
 
@@ -257,7 +253,7 @@ void SceneRanking::drawRankingPlace()
 	for(int i=0;i<5;i++)
 	{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
-			mVertex->setColor(mAlpha,255,255,255);
+			mVertex->setColor(255,255,255,255);
 			mVertex->drawF((float)PLACE_POSITION_X,(float)POSITION_Y + i * DISLOCATE_Y,R_FONT_1 + i);
 			mVertex->drawF((float)DOT_X,(float)POSITION_Y+i * DISLOCATE_Y,R_FONT_DOT);
 	}
@@ -270,8 +266,8 @@ void SceneRanking::drawRankingName()
 		for(int i=0;i<3;i++)
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
-			if(mFadeFlag==RANK_USUALLY)	mVertex->setColor(mNaameAlpha[j][i],255,255,255);
-			else mVertex->setColor(mAlpha,255,255,255);
+			if(mFadeFlag==RANK_USUALLY)	mVertex->setColor(mNameAlpha[j][i],255,255,255);
+			else mVertex->setColor(255,255,255,255);
 			mVertex->drawF((float)NAME_POSITION_X+i*DISLOCATE_X,(float)POSITION_Y+j*DISLOCATE_Y,R_FONT_A + data[j].name[i]);
 		}
 	}
@@ -294,7 +290,7 @@ void SceneRanking::drawRankingScore()
 		for(int j = figure ; j > 0 ; j--)
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
-			mVertex->setColor(mAlpha,255,255,255);
+			mVertex->setColor(255,255,255,255);
 			mVertex->drawF((float)SCORE_POSITION_X+(9-j)*DISLOCATE_X,(float)POSITION_Y+i*DISLOCATE_Y,R_FONT_0 + num[9-j]);
 		}
 	}
@@ -337,48 +333,14 @@ void SceneRanking::updateFade()
 	switch(mFadeFlag)
 	{
 		case RANK_FADE_IN:
-			fadeIn();
-			if(mAlpha==255) mFadeFlag=RANK_USUALLY;
+			mFadeFlag=RANK_USUALLY;
 			break;
 		case RANK_USUALLY:
-			mNaameAlpha[5][3]=255;
-			mAlpha=255;
-			mAlphaCount=0;
+			mNameAlpha[5][3]=255;
 			break;
 		case RANK_FADE_OUT:
-			fadeOut();
-			if(mAlpha==0) mIsSceneChange = false;
+			mIsSceneChange = false;
 			break;
-	}
-}
-
-void SceneRanking::fadeIn()
-{
-	if(mAlphaCount++>1)
-	{
-		mAlpha+=5;
-		mAlphaCount=0;
-	}
-
-	if(mAlpha>255)
-	{
-		mAlpha=255;
-		mAlphaCount=0;
-	}
-
-}
-
-void SceneRanking::fadeOut()
-{
-	if(mAlphaCount++>1)
-	{
-		mAlpha-=5;
-		mAlphaCount=0;
-	}
-	if(mAlpha<0)
-	{
-		mAlpha=0;
-		mAlphaCount=0;
 	}
 }
 
@@ -424,7 +386,7 @@ void SceneRanking::initRanking()
 	mDelay = 0;
 	mKeepKey[3]=0;
 	
-	mNaameAlpha[5][3]=255;
+	mNameAlpha[5][3]=255;
 
 	mIsWrite=false;
 }

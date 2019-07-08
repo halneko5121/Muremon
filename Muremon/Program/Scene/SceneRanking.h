@@ -23,8 +23,6 @@ public:
 
 private:
 	void		updateFade();
-	void		fadeIn();					// フェードイン
-	void		fadeOut();					// フェードアウト
 
 	void		updateRanking(int rank);	// ランクインした時、名前をを入力する
 	void		sortRanking(int get);		// スコアの並び替え
@@ -44,9 +42,7 @@ private:
 	int		mTimeCount;					// 描画するタイムカウント
 	int		mRank;						// ランクインしているか
 	int		mFadeFlag;					// フェードするフラグ
-	int		mAlpha;						// アルファ値
 	int		mFontAlpha;
-	int		mAlphaCount;				// アルファカウント
 	int		mFlag;
 	int		mKeyNo;
 	int		mIn;

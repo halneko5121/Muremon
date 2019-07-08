@@ -83,7 +83,7 @@ void SceneTutorial::impleInit()
 	mState.changeState(cState_RefreshSlide);
 }
 
-bool SceneTutorial::update()
+void SceneTutorial::update()
 {
 	mState.executeState();
 
@@ -91,8 +91,6 @@ bool SceneTutorial::update()
 	{
 		mIsSceneEnd = false;
 	}
-
-	return mIsSceneEnd;
 }
 
 void SceneTutorial::draw()

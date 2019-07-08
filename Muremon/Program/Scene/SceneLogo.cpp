@@ -42,7 +42,7 @@ void SceneLogo::impleInit()
 	mVertex->load("Data\\RectData\\logo.txt");
 }
 
-bool SceneLogo::update()
+void SceneLogo::update()
 {
 	mSceneChangeCount++;
 
@@ -50,8 +50,6 @@ bool SceneLogo::update()
 	{
 		mIsSceneEnd = false;
 	}
-
-	return mIsSceneEnd;
 }
 
 void SceneLogo::draw()

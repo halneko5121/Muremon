@@ -56,11 +56,9 @@ SceneBase::impleInit()
 /**
  * @brief	実行処理
  */
-bool
-SceneBase::runScene()
+void
+SceneBase::update()
 {
-	bool is_scene_change = update();
-	return is_scene_change;
 }
 
 /**
@@ -80,4 +78,13 @@ DWORD
 SceneBase::getSceneID()
 {
 	return mSceneID;
+}
+
+/**
+ * @brief	シーン終了か
+ */
+bool
+SceneBase::isSceneEnd() const
+{
+	return mIsSceneEnd;
 }

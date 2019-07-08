@@ -58,7 +58,7 @@ public:
 	 * @brief	更新処理
 	 * @return	シーン終了か
 	 */
-	virtual bool		update() = 0;
+	virtual void		update();
 
 	/**
 	 * @brief	描画処理
@@ -73,10 +73,6 @@ public:
 	/*-		共通関数	-*/
 
 	/**
-	 * @brief	実行処理
-	 */
-	bool				runScene();
-
 	/**
 	 * @brief	シーン変更リクエストを行う
 	 * @param	nextID		次のシーンの番号
@@ -89,6 +85,11 @@ public:
 	 * @brief	シーン番号の取得
 	 */
 	DWORD				getSceneID();
+
+	/**
+	 * @brief	シーン終了か
+	 */
+	bool				isSceneEnd() const;
 
 protected:
     DWORD               mSceneID;		// シーンの番号

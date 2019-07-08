@@ -73,13 +73,11 @@ void SceneTitle::impleInit()
 	mUITitleMenu->init(mDevice);
 }
 
-bool SceneTitle::update()
+void SceneTitle::update()
 {
 	updateDrawPos();
 	updateCheckSceneChange();
 	mUITitleMenu->update();
-
-	return mIsSceneEnd;
 }
 
 void SceneTitle::draw()

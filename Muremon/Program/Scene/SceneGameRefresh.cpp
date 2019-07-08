@@ -63,7 +63,7 @@ void SceneGameRefresh::impleInit()
 	mVertex->load("Data\\RectData\\gamenormal.txt");
 }
 
-bool SceneGameRefresh::update()
+void SceneGameRefresh::update()
 {
 	if(mSameState == G_START_SCENE){
 		UtilSound::playOnce(S_GAME_START);
@@ -163,8 +163,6 @@ bool SceneGameRefresh::update()
 			mHitEffectAlpha=0;
 		}
 	}
-
-	return mIsSceneEnd;
 }
 
 void SceneGameRefresh::draw()

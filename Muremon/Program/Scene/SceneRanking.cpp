@@ -121,10 +121,9 @@ SceneRanking::impleInit()
 	}
 }
 
-bool SceneRanking::update()
+void SceneRanking::update()
 {
 	updateRanking(mRankingNo);
-	return mIsSceneEnd;
 }
 
 void SceneRanking::updateRanking(int rank)

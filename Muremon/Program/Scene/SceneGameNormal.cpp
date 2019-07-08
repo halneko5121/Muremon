@@ -90,7 +90,7 @@ void SceneGameNormal::impleInit()
 	mMission = new Mission(mTexture, mVertex, mDevice);
 }
 
-bool SceneGameNormal::update()
+void SceneGameNormal::update()
 {
 	if(mGameState == G_START_SCENE){
 		UtilSound::playOnce(S_GAME_START);
@@ -122,7 +122,7 @@ bool SceneGameNormal::update()
 		}
 
 		if(mIsPose){
-			return mIsSceneEnd;
+			return;
 		}
 
 		//ミッションが起動する段階までいったら
@@ -158,13 +158,13 @@ bool SceneGameNormal::update()
 				mMissionGage = 0;
 				mIsInit = false;
 			}
-			return mIsSceneEnd;
+			return;
 		}
 
 		if(mTime == 0){
 			mGameState = G_GAME_CLEAR;
 			mFlagFadeStart = 0;
-			return mIsSceneEnd;
+			return;
 		}
 
 		UtilSound::playLoop(S_BGM_BATTLE);
@@ -250,7 +250,7 @@ bool SceneGameNormal::update()
 			mGameState = G_GAME_OVER;
 			mFlagFadeStart = 0;
 			UtilSound::stop(S_SAIREN);
-			return mIsSceneEnd;
+			return;
 		}
 
 		if(!mBoss->boss_fall_flag)
@@ -282,7 +282,7 @@ bool SceneGameNormal::update()
 		fadeControl();
 	}
 
-	return mIsSceneEnd;
+	return;
 }
 
 void SceneGameNormal::draw()

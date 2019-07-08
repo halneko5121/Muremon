@@ -12,8 +12,8 @@
 class SceneRanking : public SceneBase
 {
 public:
-	SceneRanking(void);
-	~SceneRanking(void);
+	SceneRanking();
+	~SceneRanking();
 
 	void		impleInit() override;
 	bool		update() override;
@@ -39,7 +39,7 @@ private:
 	int			mRank;						// ƒ‰ƒ“ƒNƒCƒ“‚µ‚Ä‚¢‚é‚©
 	int			mFlag;
 	int			mKeyNo;
-	int			mIn;
+	bool		mIsIn;
 	int			mDelay;
 
 	int			mNameAlpha[5][3];

@@ -82,7 +82,7 @@ namespace
 	struct RANK newdata;				//名前とスコアの初期化のため
 }
 
-SceneRanking::SceneRanking(void)
+SceneRanking::SceneRanking()
 {
 	mIsSceneChange = true;
 
@@ -91,7 +91,7 @@ SceneRanking::SceneRanking(void)
 	mKeyNo = 0;
 
 	mFlag = 0;
-	mIn = 0;
+	mIsIn = false;
 	mDelay = 0;
 	mKeepKey[3]=0;
 
@@ -108,7 +108,7 @@ SceneRanking::SceneRanking(void)
 	mIsNameAlphaDown=false;
 }
 
-SceneRanking::~SceneRanking(void)
+SceneRanking::~SceneRanking()
 {
 }
 
@@ -148,10 +148,10 @@ void SceneRanking::updateRanking(int rank)
 
 	if(mKeyNo != -1 && mFlag < 3)
 	{
-		mIn = 1;
+		mIsIn = true;
 	}
 
-	if(mIn)
+	if(mIsIn)
 	{
 		if(mIsNameBlink)
 		{
@@ -174,7 +174,7 @@ void SceneRanking::updateRanking(int rank)
 				mNameAlpha[rank][mFlag]=255;
 				mFlag++;
 				mDelay = 0;
-				mIn = 0;
+				mIsIn = false;
 				if(mFlag==3)
 				{
 					mIsNameBlink=false;
@@ -335,7 +335,7 @@ void SceneRanking::initRanking()
 	mKeyNo = -1;
 
 	mFlag = 0;
-	mIn = 0;
+	mIsIn = false;
 	mDelay = 0;
 	mKeepKey[3]=0;
 	

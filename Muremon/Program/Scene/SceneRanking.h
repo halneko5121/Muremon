@@ -38,11 +38,8 @@ private:
 	int			mRankingNo;					// ランキング順位
 	int			mInputIndex;				// 入力するランキングネームのインデックス
 	int			mInputKey;					// 入力したキー
-	bool		mIsIn;
 
 	int			mNameAlpha[5][3];
 	char		mRankingName[3];
-
-	bool		mIsNameBlink;
 	bool		mIsNameAlphaDown;
 };

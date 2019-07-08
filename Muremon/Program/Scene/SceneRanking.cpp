@@ -92,8 +92,11 @@ SceneRanking::SceneRanking()
 	mInputKey = 0;
 
 	mInputIndex = 0;
-	mIsIn = false;
-	mRankingName[3]=0;
+
+	for (int i = 0;i < 3;i++)
+	{
+		mRankingName[i] = 0;
+	}
 
 	for(int j=0;j<5;j++){
 		for(int i=0;i<3;i++){
@@ -138,6 +141,18 @@ void SceneRanking::updateRanking(int rank)
 		return;
 	}
 
+	// 入力完了
+	if (mInputIndex == 3)
+	{
+		if (UtilInput::isKeyPushedReturn())
+		{
+			UtilSound::playOnce(S_SE_OK);
+			writeRanking();
+			mIsSceneChange = false;
+		}
+		return;
+	}
+
 	// キー入力に連動する
 	for(int i = 'A'; i <= 'Z'; i++)
 	{
@@ -151,42 +166,23 @@ void SceneRanking::updateRanking(int rank)
 		}
 	}
 
-	if(mInputKey != -1 && mInputIndex < 3)
+	// ブリンク
+	if (mIsNameAlphaDown)
 	{
-		mIsIn = true;
+		mNameAlpha[rank][mInputIndex] -= 5;
+		if (mNameAlpha[rank][mInputIndex] == 0) mIsNameAlphaDown = false;
+	}
+	else 
+	{
+		mNameAlpha[rank][mInputIndex] += 5;
+		if (mNameAlpha[rank][mInputIndex] = 255) mIsNameAlphaDown = true;
 	}
 
-	if (mInputIndex == 3)
+	if (UtilInput::isKeyPushedReturn())
 	{
-		if (UtilInput::isKeyPushedReturn())
-		{
-			UtilSound::playOnce(S_SE_OK);
-			writeRanking();
-			mIsSceneChange = false;
-		}
-		return;
-	}
-
-	if (mIsIn)
-	{
-		if (mIsNameAlphaDown)
-		{
-			mNameAlpha[rank][mInputIndex] -= 5;
-			if (mNameAlpha[rank][mInputIndex] == 0) mIsNameAlphaDown = false;
-		}
-		else {
-			mNameAlpha[rank][mInputIndex] += 5;
-			if (mNameAlpha[rank][mInputIndex] = 255) mIsNameAlphaDown = true;
-		}
-
-		if (UtilInput::isKeyPushedReturn())
-		{
-			UtilSound::playOnce(S_SE_OK);
-			mNameAlpha[rank][mInputIndex] = 255;
-			mInputIndex++;
-			mIsNameBlink = false;
-			mIsIn = false;
-		}
+		UtilSound::playOnce(S_SE_OK);
+		mNameAlpha[rank][mInputIndex] = 255;
+		mInputIndex++;
 	}
 }
 
@@ -330,7 +326,6 @@ void SceneRanking::initRanking()
 	mInputKey = -1;
 
 	mInputIndex = 0;
-	mIsIn = false;
 	mRankingName[3]=0;
 	
 	mNameAlpha[5][3]=255;

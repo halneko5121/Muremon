@@ -77,7 +77,6 @@ namespace
 		R_FONT_DOT,
 	};
 
-	FILE *fp;
 	struct RANK data[5];
 	struct RANK newdata;				//名前とスコアの初期化のため
 }
@@ -275,6 +274,7 @@ void SceneRanking::drawRankingScore()
 
 void SceneRanking::loadRanking()
 {
+	FILE *fp;
 	fopen_s(&fp,"Data\\rankingdata.txt","r");		//ファイルを開く
 
 	if(fp == NULL)					//ファイルがなかった場合
@@ -294,6 +294,7 @@ void SceneRanking::loadRanking()
 
 void SceneRanking::writeRanking()
 {
+	FILE *fp;
 	fopen_s(&fp, "Data\\rankingdata.txt", "w");
 
 	for(int i = 0; i < 5; i++)

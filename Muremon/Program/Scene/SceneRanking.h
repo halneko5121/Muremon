@@ -39,7 +39,6 @@ private:
 	void		checkRanking();
 	void		initRanking();
 	void		updateInput();
-	void		drawZKey();
 
 private:
 	int time_count;	//描画するタイムカウント
@@ -85,12 +84,6 @@ private:
 	bool rank_draw_flag;
 
 	int add_score;
-
-	bool z_key_flag;
-
-	bool z_alpha_up;
-
-	int z_alpha;
 
 	bool ranking_flag;
 };

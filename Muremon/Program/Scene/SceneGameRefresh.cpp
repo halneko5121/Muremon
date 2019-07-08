@@ -7,8 +7,16 @@
  ******************************************************************/
 
 #include "SceneGameRefresh.h"
+
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
+#include "Program/DefineGame.h"
+#include "Program/Actor/ActorBoss.h"
+#include "Program/Actor/Actornikuman.h"
+#include "Program/Actor/ActorNoppo.h"
+#include "Program/Actor/ActorYoshi.h"
 
 namespace
 {

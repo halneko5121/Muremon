@@ -8,14 +8,12 @@
  ******************************************************************/
 
 #include "Program/Scene/SceneBase.h"
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Library/StateMachine.h"
-#include "Program/Actor/ActorBoss.h"
-#include "Program/Actor/Actornikuman.h"
-#include "Program/Actor/ActorNoppo.h"
-#include "Program/Actor/ActorYoshi.h"
-#include "Program/DefineGame.h"
+
+class ActorNikuman;
+class ActorNoppo;
+class ActorYoshi;
+class ActorBoss;
 
 class SceneGameRefresh : public SceneBase
 {

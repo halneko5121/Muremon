@@ -20,8 +20,8 @@ namespace
 	const int cPlacePosX = 50;			// 順位のフォントXの中心位置
 	const int cDotX = 100;
 	const int cScorePosX = 350;			// スコアのXの中心位置
-	const int xDislocateX = 50;			// Xの位置をずらす(但し、同じ値でずらさないと意味がない)
-	const int xDislocateY = 100;		// Yの位置をずらす(但し、同じ値でずらさないと意味がない)
+	const int cDislocateX = 50;			// Xの位置をずらす(但し、同じ値でずらさないと意味がない)
+	const int cDislocateY = 100;		// Yの位置をずらす(但し、同じ値でずらさないと意味がない)
 
 	struct RANK
 	{
@@ -231,8 +231,8 @@ void SceneRanking::drawRankingPlace()
 	{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
 			mVertex->setColor(255,255,255,255);
-			mVertex->drawF((float)cPlacePosX,(float)cNamePosY + i * xDislocateY,R_FONT_1 + i);
-			mVertex->drawF((float)cDotX,(float)cNamePosY+i * xDislocateY,R_FONT_DOT);
+			mVertex->drawF((float)cPlacePosX,(float)cNamePosY + i * cDislocateY,R_FONT_1 + i);
+			mVertex->drawF((float)cDotX,(float)cNamePosY+i * cDislocateY,R_FONT_DOT);
 	}
 }
 
@@ -244,7 +244,7 @@ void SceneRanking::drawRankingName()
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
 			mVertex->setColor(mNameAlpha[j][i],255,255,255);
-			mVertex->drawF((float)cNamePosX+i*xDislocateX,(float)cNamePosY+j*xDislocateY,R_FONT_A + data[j].name[i]);
+			mVertex->drawF((float)cNamePosX+i*cDislocateX,(float)cNamePosY+j*cDislocateY,R_FONT_A + data[j].name[i]);
 		}
 	}
 }
@@ -267,7 +267,7 @@ void SceneRanking::drawRankingScore()
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
 			mVertex->setColor(255,255,255,255);
-			mVertex->drawF((float)cScorePosX+(9-j)*xDislocateX,(float)cNamePosY+i*xDislocateY,R_FONT_0 + num[9-j]);
+			mVertex->drawF((float)cScorePosX+(9-j)*cDislocateX,(float)cNamePosY+i*cDislocateY,R_FONT_0 + num[9-j]);
 		}
 	}
 }

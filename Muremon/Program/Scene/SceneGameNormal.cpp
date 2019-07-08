@@ -20,21 +20,24 @@
 #include "Program/Actor/ActorYoshi.h"
 #include "Program/DefineGame.h"
 
-#define NEGATIVE_PAR1	(40)
-#define NEGATIVE_PAR2	(60)
-#define NEGATIVE_PAR3	(70)
-#define NEGATIVE_PAR4	(100)
-
-enum NEGATIVE_DATA
+namespace
 {
-	NO_NEGATIVE,
-	SPEED_UP,
-	RECOVER,
-	SLIDE_IN,
-	ATTACK_DOWN,
-};
+	const int cNegativePar1 = 40;
+	const int cNegativePar2 = 60;
+	const int cNegativePar3 = 70;
+	const int cNegativePar4 = 100;
 
-POS_CC<float> boss_cc2 = { 600, 350 };
+	enum NEGATIVE_DATA
+	{
+		NO_NEGATIVE,
+		SPEED_UP,
+		RECOVER,
+		SLIDE_IN,
+		ATTACK_DOWN,
+	};
+
+	POS_CC<float> boss_cc2 = { 600, 350 };
+}
 
 SceneGameNormal::SceneGameNormal()
 {
@@ -725,16 +728,16 @@ void SceneGameNormal::selectNegative()
 
 	mNegativeState = rand()%100+1;
 
-	if(mNegativeState > 0 && mNegativeState <= NEGATIVE_PAR1){
+	if(mNegativeState > 0 && mNegativeState <= cNegativePar1){
 		mNegativeState = SPEED_UP;
 	}
-	else if(mNegativeState > NEGATIVE_PAR1 && mNegativeState <= NEGATIVE_PAR2){
+	else if(mNegativeState > cNegativePar1 && mNegativeState <= cNegativePar2){
 		mNegativeState = RECOVER;
 	}
-	else if(mNegativeState > NEGATIVE_PAR2 && mNegativeState <= NEGATIVE_PAR3){
+	else if(mNegativeState > cNegativePar2 && mNegativeState <= cNegativePar3){
 		mNegativeState = SLIDE_IN;
 	}
-	else if(mNegativeState > NEGATIVE_PAR3 && mNegativeState <= NEGATIVE_PAR4){
+	else if(mNegativeState > cNegativePar3 && mNegativeState <= cNegativePar4){
 		mNegativeState = ATTACK_DOWN;
 	}
 }

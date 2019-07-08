@@ -59,7 +59,7 @@ SceneTutorial::SceneTutorial()
 	mTexturePos[TR_REFRESH].y = mTexturePos[TR_NORMAL].y = cTrRightY;
 	mTexturePos[TR_REFRESH].x = mTexturePos[TR_NORMAL].x  = cTrRightX;
 
-	mIsSceneChange = true;
+	mIsSceneEnd = true;
 
 	mState.initialize(cState_Count, cState_Idle);
 	mState.registState(this, &SceneTutorial::stateEnterIdle,			&SceneTutorial::stateExeIdle,			nullptr, cState_Idle);
@@ -89,10 +89,10 @@ bool SceneTutorial::update()
 
 	if (UtilInput::isKeyPushed(DIK_Z))
 	{
-		mIsSceneChange = false;
+		mIsSceneEnd = false;
 	}
 
-	return mIsSceneChange;
+	return mIsSceneEnd;
 }
 
 void SceneTutorial::draw()
@@ -270,7 +270,7 @@ SceneTutorial::stateExeEndSlide()
 void
 SceneTutorial::stateEnterEnd()
 {
-	mIsSceneChange = false;
+	mIsSceneEnd = false;
 }
 void
 SceneTutorial::stateExeEnd()

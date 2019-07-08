@@ -76,7 +76,7 @@ namespace
 
 SceneRanking::SceneRanking()
 {
-	mIsSceneChange = true;
+	mIsSceneEnd = true;
 
 	mRankingNo=-1;
 
@@ -124,7 +124,7 @@ SceneRanking::impleInit()
 bool SceneRanking::update()
 {
 	updateRanking(mRankingNo);
-	return mIsSceneChange;
+	return mIsSceneEnd;
 }
 
 void SceneRanking::updateRanking(int rank)
@@ -135,7 +135,7 @@ void SceneRanking::updateRanking(int rank)
 		if (UtilInput::isKeyPushedReturn())
 		{
 			UtilSound::playOnce(S_SE_OK);
-			mIsSceneChange = false;
+			mIsSceneEnd = false;
 		}
 		return;
 	}
@@ -147,7 +147,7 @@ void SceneRanking::updateRanking(int rank)
 		{
 			UtilSound::playOnce(S_SE_OK);
 			writeRanking();
-			mIsSceneChange = false;
+			mIsSceneEnd = false;
 		}
 		return;
 	}

@@ -29,7 +29,7 @@ namespace
 SceneLogo::SceneLogo()
 	: mSceneChangeCount(0)
 {
-	mIsSceneChange = true;
+	mIsSceneEnd = true;
 }
 
 SceneLogo::~SceneLogo()
@@ -48,10 +48,10 @@ bool SceneLogo::update()
 
 	if (mSceneChangeCount == cSceneChangeCount)
 	{
-		mIsSceneChange = false;
+		mIsSceneEnd = false;
 	}
 
-	return mIsSceneChange;
+	return mIsSceneEnd;
 }
 
 void SceneLogo::draw()

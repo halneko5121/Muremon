@@ -97,6 +97,6 @@ protected:
 	Vertex*				mVertex;
 
 	int					mAlpha;			// 各シーンのalpha値		
-	bool				mIsSceneChange;	// シーンが変わる時を知らせる
+	bool				mIsSceneEnd;	// シーンが変わる時を知らせる
 	MouseData			mMouseData;		// マウス情報
 };

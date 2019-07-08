@@ -26,7 +26,7 @@ SceneGameRefresh::SceneGameRefresh(void)
 
 	mFlagFadeIn = false;
 
-	mIsSceneChange = true;
+	mIsSceneEnd = true;
 
 	mHitEffectAlpha = 0;
 	mIsHitEffect = false;
@@ -135,7 +135,7 @@ bool SceneGameRefresh::update()
 		}
 
 		if(GetAsyncKeyState(VK_RETURN)){	//エンターキーが押されたらタイトルに戻る
-			mIsSceneChange = false;
+			mIsSceneEnd = false;
 		}
 
 		//mBoss->RefreshControl();
@@ -164,7 +164,7 @@ bool SceneGameRefresh::update()
 		}
 	}
 
-	return mIsSceneChange;
+	return mIsSceneEnd;
 }
 
 void SceneGameRefresh::draw()

@@ -25,12 +25,6 @@ namespace
 	const int cDislocateX = 50;			// Xの位置をずらす(但し、同じ値でずらさないと意味がない)
 	const int cDislocateY = 100;		// Yの位置をずらす(但し、同じ値でずらさないと意味がない)
 
-	struct RANK
-	{
-		char name[3];
-		int score;
-	};
-
 	enum TEXTURE_DATA_RANKING
 	{
 		T_RANKING_BG,
@@ -78,27 +72,6 @@ namespace
 		R_FONT_9,
 		R_FONT_DOT,
 	};
-
-	struct RANK data[5];
-	struct RANK newdata;				//名前とスコアの初期化のため
-
-	/**
-	 * ランクインしてるかチェックする
-	 */
-	int
-	checkRankingIn()
-	{
-		int ranking_num = -1;
-		for (int i = 0; i < 5;i++)
-		{
-			if (data[i].score < newdata.score) {
-				ranking_num = i;
-				break;
-			}
-		}
-
-		return ranking_num;
-	}
 }
 
 SceneRanking::SceneRanking()
@@ -131,6 +104,13 @@ SceneRanking::impleInit()
 {
 	mTexture->load("Data\\TextureData\\ranking.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\ranking.txt");
+
+	// プレイしたnameの初期化
+	mRankNewData.mName[0] = mRankNewData.mName[1] = mRankNewData.mName[2] = 0;
+
+	// プレイしたスコアの初期化
+	mRankNewData.mScore = UtilScore::getScore();
+
 	loadRanking();
 	mRankingNo = checkRankingIn();
 
@@ -181,7 +161,7 @@ void SceneRanking::updateRanking(int rank)
 		{
 			UtilSound::playOnce(S_SE_CURSOR_MOVE);
 			mInputKey = i - 'A';
-			data[rank].name[mInputIndex] = mInputKey;
+			mRankData[rank].mName[mInputIndex] = mInputKey;
 			break;
 		}
 	}
@@ -247,7 +227,7 @@ void SceneRanking::drawRankingName()
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
 			mVertex->setColor(mNameAlpha[j][i],255,255,255);
-			mVertex->drawF((float)cNamePosX+i*cDislocateX,(float)cNamePosY+j*cDislocateY,R_FONT_A + data[j].name[i]);
+			mVertex->drawF((float)cNamePosX+i*cDislocateX,(float)cNamePosY+j*cDislocateY,R_FONT_A + mRankData[j].mName[i]);
 		}
 	}
 }
@@ -261,10 +241,10 @@ void SceneRanking::drawRankingScore()
 		int num[9]={0};
 		int figure=0;
 
-		figure = (int)log10((double)data[i].score) + 1;	//スコアの桁を計算する
-		for(int j = figure ; j > 0 ; j--)															//桁ごとの数字算出
+		figure = (int)log10((double)mRankData[i].mScore) + 1;	// スコアの桁を計算する
+		for(int j = figure ; j > 0 ; j--)						// 桁ごとの数字算出
 		{
-			num[9-j] = data[i].score/ (int)pow((double)10,j - 1) - data[i].score / (int)pow((double)10,j) * 10;
+			num[9-j] = mRankData[i].mScore / (int)pow((double)10,j - 1) - mRankData[i].mScore / (int)pow((double)10,j) * 10;
 		}
 		for(int j = figure ; j > 0 ; j--)
 		{
@@ -288,11 +268,9 @@ void SceneRanking::loadRanking()
 
 	for (int i = 0; i < 5; i++)
 	{
-		fscanf(fp, "%hhd,%hhd,%hhd,%d\n", &data[i].name[0], &data[i].name[1], &data[i].name[2], &data[i].score);
+		fscanf(fp, "%hhd,%hhd,%hhd,%d\n", &mRankData[i].mName[0], &mRankData[i].mName[1], &mRankData[i].mName[2], &mRankData[i].mScore);
 	}
 	fclose(fp);
-	newdata.name[0] = newdata.name[1] = newdata.name[2] = 0;	// プレイしたnameの初期化
-	newdata.score = UtilScore::getScore();						// プレイしたスコア
 }
 
 void SceneRanking::writeRanking()
@@ -302,9 +280,27 @@ void SceneRanking::writeRanking()
 
 	for(int i = 0; i < 5; i++)
 	{
-		fprintf(fp,"%d,%d,%d,%d\n",data[i].name[0],data[i].name[1],data[i].name[2],data[i].score);
+		fprintf(fp,"%d,%d,%d,%d\n",mRankData[i].mName[0],mRankData[i].mName[1],mRankData[i].mName[2],mRankData[i].mScore);
 	}
 	fclose(fp);
+}
+
+/**
+ * ランクインしてるかチェックする
+ */
+int
+SceneRanking::checkRankingIn()
+{
+	int ranking_num = -1;
+	for (int i = 0; i < 5;i++)
+	{
+		if (mRankData[i].mScore < mRankNewData.mScore) {
+			ranking_num = i;
+			break;
+		}
+	}
+
+	return ranking_num;
 }
 
 void SceneRanking::sortRanking(int new_rank)
@@ -314,13 +310,13 @@ void SceneRanking::sortRanking(int new_rank)
 	{
 		for (int j = 4 ; j > new_rank; j--)
 		{
-			data[j] = data[j-1];
+			mRankData[j] = mRankData[j-1];
 		}
 
 		// ランクインしたところにプレイしたデータを入れる
-		data[new_rank].name[0]=newdata.name[0];
-		data[new_rank].name[1]=newdata.name[1];
-		data[new_rank].name[2]=newdata.name[2];
-		data[new_rank].score = newdata.score;
+		mRankData[new_rank].mName[0] = mRankNewData.mName[0];
+		mRankData[new_rank].mName[1] = mRankNewData.mName[1];
+		mRankData[new_rank].mName[2] = mRankNewData.mName[2];
+		mRankData[new_rank].mScore	 = mRankNewData.mScore;
 	}
 }

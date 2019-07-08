@@ -21,9 +21,17 @@ public:
 	void		end() override;
 
 private:
+	struct RankingData
+	{
+		char	mName[3];	// 名前
+		int		mScore;		// スコア
+	};
+
+private:
 	void		updateRanking(int rank);	// ランクインした時、名前をを入力する
 	void		loadRanking();				// データの読み込み
 	void		writeRanking();				// データの書き込み
+	int			checkRankingIn();			// ランクインしてるかチェック
 	void		sortRanking(int new_rank);	// スコアの並び替え
 
 	void		drawBackGround();			// ランキング背景
@@ -32,6 +40,9 @@ private:
 	void		drawRankingScore();			// ランキングスコア
 
 private:
+	RankingData mRankData[5];
+	RankingData mRankNewData;				// 名前とスコアの初期化のため
+
 	int			mRankingNo;					// ランキング順位
 	int			mInputIndex;				// 入力するランキングネームのインデックス
 	int			mInputKey;					// 入力したキー

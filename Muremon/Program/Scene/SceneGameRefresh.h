@@ -34,26 +34,26 @@ public:
 
 private:
 	// ステート関数
-	void			stateEnterIdle();
-	void			stateExeIdle();
+	void				stateEnterIdle();
+	void				stateExeIdle();
 
-	void			stateEnterReadyFadeIn();
-	void			stateExeReadyFadeIn();
+	void				stateEnterReadyFadeIn();
+	void				stateExeReadyFadeIn();
 
-	void			stateEnterReady();
-	void			stateExeReady();
+	void				stateEnterReady();
+	void				stateExeReady();
 
-	void			stateEnterReadyFadeOut();
-	void			stateExeReadyFadeOut();
+	void				stateEnterReadyFadeOut();
+	void				stateExeReadyFadeOut();
 
-	void			stateEnterGame();
-	void			stateExeGame();
+	void				stateEnterGame();
+	void				stateExeGame();
 
-	void			stateEnterGameOver();
-	void			stateExeGameOver();
+	void				stateEnterGameOver();
+	void				stateExeGameOver();
 
-	void			stateEnterGameClear();
-	void			stateExeGameClear();
+	void				stateEnterGameClear();
+	void				stateExeGameClear();
 
 private:
 	ActorNikuman*		mNiku;
@@ -62,7 +62,7 @@ private:
 	ActorBoss*			mBoss;
 
 private:
-	StateMachine<SceneGameRefresh>	mState;			// ステート
+	StateMachine<SceneGameRefresh>	mState;	// ステート
 
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mSameState;			// ゲームの状態(スタート・すっきりゲーム)

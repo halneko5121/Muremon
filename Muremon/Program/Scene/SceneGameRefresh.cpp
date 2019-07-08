@@ -36,7 +36,11 @@ namespace
 }
 
 SceneGameRefresh::SceneGameRefresh()
-	: mStartAlpha(0)
+	: mNiku(nullptr)
+	, mNoppo(nullptr)
+	, mYoshi(nullptr)
+	, mBoss(nullptr)
+	, mStartAlpha(0)
 	, mSameState(G_START_SCENE)
 	, mNikumanKeyCount(0)
 	, mYoshitaroKeyCount(0)

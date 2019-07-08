@@ -205,7 +205,7 @@ public:
 	 * @brief	ステートが切り替わってから最初のフレームか
 	 */
 	bool
-	isStateCountFirst()
+	isStateCountFirst() const
 	{
 		return (getStateCount() == 0);
 	}

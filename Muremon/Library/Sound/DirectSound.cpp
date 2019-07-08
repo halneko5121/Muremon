@@ -291,7 +291,7 @@ DirectSound::stop(short id)
  * @brief	指定IDのサウンドが再生中か
  */
 bool
-DirectSound::isPlaying(short id)
+DirectSound::isPlaying(short id) const
 {
 	if(id >= MAX_SOUND)
 	{

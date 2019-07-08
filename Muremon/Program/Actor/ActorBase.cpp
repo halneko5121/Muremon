@@ -52,7 +52,7 @@ ActorBase::updateAttack1(int mCharaNum)
  * @brief 衝突チェック
  */
 bool
-ActorBase::isHit(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id)
+ActorBase::isHit(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id) const
 {
 	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
 	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
@@ -87,7 +87,7 @@ ActorBase::isHit(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id)
  * @brief 四隅を計算
  */
 F_RECT
-ActorBase::calculateBackRect(POS_CC<float> draw_cc , F_RECT rect_pos)
+ActorBase::calculateBackRect(POS_CC<float> draw_cc , F_RECT rect_pos) const
 {
 	// 中心座標からそれぞれ絵の半径を加・減算 
 	rect_pos.left		= (draw_cc.x - rect_pos.left);

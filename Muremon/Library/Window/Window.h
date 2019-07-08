@@ -39,22 +39,22 @@ public:
 	/**
 	 * @brief	インスタンスハンドル取得
 	 */
-	HINSTANCE				getInstanceHandle()		{ return mHInstance; }
+	HINSTANCE				getInstanceHandle() const	{ return mHInstance; }
 
 	/**
 	 * @brief	ウィンドウハンドル取得
 	 */
-	HWND					getWindowHandle()		{ return mWindowHandle; }
+	HWND					getWindowHandle() const		{ return mWindowHandle; }
 
 	/**
 	 * @brief	ウィンドウサイズ取得
 	 */
-	RECT					getWindowSize()			{ return mWindowSize; }
+	RECT					getWindowSize() const		{ return mWindowSize; }
 
 	/**
 	 * @brief	ウィンドウモードか
 	 */
-	bool					isWindowMode()			{ return mWindowMode; }
+	bool					isWindowMode() const		{ return mWindowMode; }
 
 private:
 	/**

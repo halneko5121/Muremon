@@ -68,7 +68,7 @@ public:
 	/**
 	 * @brief	フェードが終了したか？
 	 */
-	bool				isFadeEnd();
+	bool				isFadeEnd() const;
 
 	/**
 	 * @brief	カラーのセット

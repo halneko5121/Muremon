@@ -145,7 +145,7 @@ FadeMgr::fadeOut()
  * @brief	フェードが終了したか？
  */
 bool
-FadeMgr::isFadeEnd()
+FadeMgr::isFadeEnd() const
 {
 	return (mState == cFadeState_None);
 }

@@ -87,7 +87,7 @@ public:
 	/**
 	 * @brief	指定IDのサウンドが再生中か
 	 */
-	bool					isPlaying(short id);
+	bool					isPlaying(short id) const;
 
 	/**
 	 * @brief	ボリューム設定

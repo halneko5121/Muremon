@@ -153,7 +153,7 @@ DirectInputKey::release()
  * @return	true	押されている   false:　押されていない
  */
 bool
-DirectInputKey::isKeyDown(USHORT key)
+DirectInputKey::isKeyDown(USHORT key) const
 {
 	if(!mKeyBordDevice) return FALSE;
 
@@ -172,7 +172,7 @@ DirectInputKey::isKeyDown(USHORT key)
  * @return	true	押された   false:　押されていない
  */
 bool
-DirectInputKey::isKeyPushed(USHORT key)
+DirectInputKey::isKeyPushed(USHORT key) const
 {
 	// 現在押されていて かつ 直前に押されていない時TRUE
 	if( isKeyDown(key) && !(mKeyStatePrev[key] & 0x80) ) return TRUE;
@@ -186,7 +186,7 @@ DirectInputKey::isKeyPushed(USHORT key)
  * @return	true	離された   false:　離されていない
  */
 bool
-DirectInputKey::isKeyReleased(USHORT key)
+DirectInputKey::isKeyReleased(USHORT key) const
 {
 	// 現在押されておらず かつ 直前に押されている時TRUE
 	if( !(isKeyDown(key)) && (mKeyStatePrev[key] & 0x80) ) return TRUE;
@@ -199,7 +199,7 @@ DirectInputKey::isKeyReleased(USHORT key)
  * @return	true　押された   false:　押されていない
  */
 bool
-DirectInputKey::isAnyKeyDown()
+DirectInputKey::isAnyKeyDown() const
 {
 	for(int i = 0;i < MAX_KEYDATA;i++){
 		if(isKeyDown(i)) return TRUE;
@@ -213,7 +213,7 @@ DirectInputKey::isAnyKeyDown()
  * @return	true　押された   false:　押されていない
  */
 bool
-DirectInputKey::isAnyKeyPushed()
+DirectInputKey::isAnyKeyPushed() const
 {
 	for (int i = 0;i < MAX_KEYDATA;i++) {
 		if (isKeyPushed(i)) return TRUE;

@@ -149,7 +149,7 @@ public:
 	*			：int m_chara_num							キャラの何体目か			*
 	*	戻り値	：敵と当たったかどうかのフラグ											*
 	************************************************************************************/
-	bool				isHit(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int m_chara_num);
+	bool				isHit(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int m_chara_num) const;
 
 	/************************************************************************************
 	*	役割	：中心座標から矩形を逆算												*
@@ -158,11 +158,11 @@ public:
 	*			：F_RECT　rect_pos			矩形情報(各半径情報)						*
 	*	戻り値	：与えた中心座標からrect_posの値を与えたtop,bottom,left,right			*
 	************************************************************************************/
-	F_RECT				calculateBackRect(POS_CC<float> draw_cc, F_RECT rect_pos);
+	F_RECT				calculateBackRect(POS_CC<float> draw_cc, F_RECT rect_pos) const;
 
 	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }
 
-	bool				isHitCheck() { return mIsHitCheck; }
+	bool				isHitCheck() const { return mIsHitCheck; }
 
 protected:
 	OrbitCalculation*	mOrbit;

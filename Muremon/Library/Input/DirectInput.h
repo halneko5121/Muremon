@@ -90,25 +90,25 @@ public:
 	 * @brief	指定のキーの入力判定(押されているかどうか)
 	 * @param	key		キーの状態
 	 */
-	bool						isKeyDown(USHORT key);
+	bool						isKeyDown(USHORT key) const;
 
 	/**
 	 * @brief	指定のキーが瞬間的に押されたか
 	 * @param	key		キーの状態
 	 */
-	bool						isKeyPushed(USHORT key);
+	bool						isKeyPushed(USHORT key) const;
 
 	/**
 	 * @brief	指定のキーが離されたかどうか
 	 * @param	key		キーの状態
 	 */
-	bool						isKeyReleased(USHORT key);
+	bool						isKeyReleased(USHORT key) const;
 
 	/**
 	 * @brief	いずれかのキーが押されたか
 	 */
-	bool						isAnyKeyDown();
-	bool						isAnyKeyPushed();
+	bool						isAnyKeyDown() const;
+	bool						isAnyKeyPushed() const;
 
 
 private:

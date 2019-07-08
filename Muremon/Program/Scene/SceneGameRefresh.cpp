@@ -35,26 +35,20 @@ namespace
 	};
 }
 
-SceneGameRefresh::SceneGameRefresh(void)
+SceneGameRefresh::SceneGameRefresh()
+	: mStartAlpha(0)
+	, mSameState(G_START_SCENE)
+	, mNikumanKeyCount(0)
+	, mYoshitaroKeyCount(0)
+	, mNoppoKeyCount(0)
+	, mIsHitNiku(false)
+	, mIsHitYoshi(false)
+	, mIsHitNoppo(false)
+	, mIsHitEffect(false)
+	, mHitEffectAlpha(0)
+	, mHitEffectTime(0)
+	, mCharaAtkY(0)
 {
-	mStartAlpha = 0;	//アルファ値
-
-	mSameState = G_START_SCENE;
-
-	mNikumanKeyCount = mYoshitaroKeyCount = mNoppoKeyCount = 0;
-
-	mHitEffectAlpha = 0;
-	mIsHitEffect = false;
-	mHitEffectTime = 0;
-
-	mIsHitNiku = false;
-
-	mIsHitYoshi = false;
-
-	mIsHitNoppo = false;
-
-	mCharaAtkY = 0;
-
 	mState.initialize(cState_Count, cState_Idle);
 	mState.registState(this, &SceneGameRefresh::stateEnterIdle,			&SceneGameRefresh::stateExeIdle,		nullptr, cState_Idle);
 	mState.registState(this, &SceneGameRefresh::stateEnterReadyFadeIn,	&SceneGameRefresh::stateExeReadyFadeIn, nullptr, cState_ReadyFadeIn);

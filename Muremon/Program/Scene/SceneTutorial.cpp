@@ -53,9 +53,9 @@ namespace
 }
 
 SceneTutorial::SceneTutorial()
+	: mState()
+	, mSlideState(2)
 {
-	mSlideState = 2;
-
 	mTexturePos[TR_REFRESH].y = mTexturePos[TR_NORMAL].y = cTrRightY;
 	mTexturePos[TR_REFRESH].x = mTexturePos[TR_NORMAL].x  = cTrRightX;
 

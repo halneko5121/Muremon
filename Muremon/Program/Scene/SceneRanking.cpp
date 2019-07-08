@@ -75,9 +75,10 @@ namespace
 }
 
 SceneRanking::SceneRanking()
-	: mRankingNo(-1)
-	, mInputKey(0)
+	: mRankNewData()
+	, mRankingNo(-1)
 	, mInputIndex(0)
+	, mInputKey(0)
 	, mIsNameAlphaDown(false)
 {
 	for (int j = 0; j < 5; j++)

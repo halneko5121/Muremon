@@ -20,6 +20,7 @@ SceneBase::SceneBase()
 	, mTexture(nullptr)
 	, mVertex(nullptr)
 	, mIsSceneEnd(false)
+	, mMouseData()
 {
 	mTexture = new Texture();
 	mVertex		= new Vertex();

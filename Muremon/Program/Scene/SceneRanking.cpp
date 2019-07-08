@@ -29,13 +29,6 @@ namespace
 		int score;
 	};
 
-	enum RANK_FADE_MODE
-	{
-		RANK_FADE_IN,
-		RANK_USUALLY,
-		RANK_FADE_OUT,
-	};
-
 	enum TEXTURE_DATA_RANKING
 	{
 		T_RANKING_BG,
@@ -92,8 +85,6 @@ namespace
 SceneRanking::SceneRanking(void)
 {
 	mIsSceneChange = true;
-
-	mFadeFlag=RANK_FADE_IN;
 
 	mFontAlpha=0;
 
@@ -153,7 +144,6 @@ bool SceneRanking::update()
 {
 	UtilSound::playLoop(S_BGM_TITLE);
 
-	updateFade();
 	updateRanking(mRank);
 	updateInput();
 	return mIsSceneChange;
@@ -220,7 +210,7 @@ void SceneRanking::updateInput()
 {
 	if(GetAsyncKeyState(VK_RETURN))
 	{
-		mFadeFlag = RANK_FADE_OUT;
+		mIsSceneChange = false;
 	}
 }
 
@@ -266,8 +256,7 @@ void SceneRanking::drawRankingName()
 		for(int i=0;i<3;i++)
 		{
 			mVertex->setTextureData(mTexture->getTextureData(T_RANKING_FONT), mDevice);
-			if(mFadeFlag==RANK_USUALLY)	mVertex->setColor(mNameAlpha[j][i],255,255,255);
-			else mVertex->setColor(255,255,255,255);
+			mVertex->setColor(mNameAlpha[j][i],255,255,255);
 			mVertex->drawF((float)NAME_POSITION_X+i*DISLOCATE_X,(float)POSITION_Y+j*DISLOCATE_Y,R_FONT_A + data[j].name[i]);
 		}
 	}
@@ -326,22 +315,6 @@ void SceneRanking::writeRanking()
 	fclose(fp);
 	mIsWrite=false;
 	//RankInit();
-}
-
-void SceneRanking::updateFade()
-{
-	switch(mFadeFlag)
-	{
-		case RANK_FADE_IN:
-			mFadeFlag=RANK_USUALLY;
-			break;
-		case RANK_USUALLY:
-			mNameAlpha[5][3]=255;
-			break;
-		case RANK_FADE_OUT:
-			mIsSceneChange = false;
-			break;
-	}
 }
 
 void SceneRanking::checkRanking()

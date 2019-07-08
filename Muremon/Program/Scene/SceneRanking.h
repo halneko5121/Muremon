@@ -22,8 +22,6 @@ public:
 	int			end() override;
 
 private:
-	void		updateFade();
-
 	void		updateRanking(int rank);	// ランクインした時、名前をを入力する
 	void		sortRanking(int get);		// スコアの並び替え
 	void		loadRanking();				// データの読み込み
@@ -41,7 +39,6 @@ private:
 private:
 	int		mTimeCount;					// 描画するタイムカウント
 	int		mRank;						// ランクインしているか
-	int		mFadeFlag;					// フェードするフラグ
 	int		mFontAlpha;
 	int		mFlag;
 	int		mKeyNo;

@@ -27,6 +27,16 @@ class GameMain
 {
 public:
 	/**
+	 * @brief	コンストラクタ
+	 */
+	GameMain();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~GameMain();
+
+	/**
 	 * @brief	ゲームで使うメンバの初期化
 	 */
     void		init();

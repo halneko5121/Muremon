@@ -35,6 +35,26 @@ namespace
 	};
 }
 
+/**
+ * @brief	コンストラクタ
+ */
+GameMain::GameMain()
+	: mState()
+	, mWindow(nullptr)
+	, mScene(nullptr)
+	, mGraphics(nullptr)
+	, mSoundText(nullptr)
+	, mBackground(255)
+{
+}
+
+/**
+ * @brief	デストラクタ
+ */
+GameMain::~GameMain()
+{
+}
+
  /**
   * @brief	ゲームで使うメンバの初期化
   */

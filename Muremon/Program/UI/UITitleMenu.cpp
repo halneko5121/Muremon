@@ -88,8 +88,10 @@ namespace
  * @brief	コンストラクタ
  */
 UITitleMenu::UITitleMenu()
-	: mTexture(nullptr)
+	: mState()
+	, mTexture(nullptr)
 	, mVertex(nullptr)
+	, mDevice(nullptr)
 	, mCursorPos(cDispCursorX, cDispCursorY)
 	, mCurrentMenuItem(0)
 	, mAlphaZPush(0)

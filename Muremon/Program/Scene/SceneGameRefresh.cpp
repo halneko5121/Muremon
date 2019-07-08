@@ -10,23 +10,30 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 
-POS_CC<float> boss_cc = { 600, 350 };
+namespace
+{
+	POS_CC<float> boss_cc = { 600, 350 };
+
+	enum State
+	{
+		cState_Idle,			// 待機
+		cState_ReadyFadeIn,		// 準備フェードイン
+		cState_Ready,			// 準備
+		cState_ReadyFadeOut,	// 準備フェードアウト
+		cState_Game,			// ゲーム中
+		cState_GameOver,		// ゲームオーバー
+		cState_GameClear,		// ゲームクリア
+		cState_Count
+	};
+}
 
 SceneGameRefresh::SceneGameRefresh(void)
 {
-	mStartAlpha = mAlpha = 0;	//アルファ値
-
-	mAlphaCount = 0;
-
-	mFlagFade = GS_FADE_IN;
+	mStartAlpha = 0;	//アルファ値
 
 	mSameState = G_START_SCENE;
 
 	mNikumanKeyCount = mYoshitaroKeyCount = mNoppoKeyCount = 0;
-
-	mFlagFadeStart = 0;
-
-	mFlagFadeIn = false;
 
 	mHitEffectAlpha = 0;
 	mIsHitEffect = false;
@@ -39,6 +46,16 @@ SceneGameRefresh::SceneGameRefresh(void)
 	mIsHitNoppo = false;
 
 	mCharaAtkY = 0;
+
+	mState.initialize(cState_Count, cState_Idle);
+	mState.registState(this, &SceneGameRefresh::stateEnterIdle,			&SceneGameRefresh::stateExeIdle,		nullptr, cState_Idle);
+	mState.registState(this, &SceneGameRefresh::stateEnterReadyFadeIn,	&SceneGameRefresh::stateExeReadyFadeIn, nullptr, cState_ReadyFadeIn);
+	mState.registState(this, &SceneGameRefresh::stateEnterReady,		&SceneGameRefresh::stateExeReady,		nullptr, cState_Ready);
+	mState.registState(this, &SceneGameRefresh::stateEnterReadyFadeOut,	&SceneGameRefresh::stateExeReadyFadeOut,nullptr, cState_ReadyFadeOut);
+	mState.registState(this, &SceneGameRefresh::stateEnterGame,			&SceneGameRefresh::stateExeGame,		nullptr, cState_Game);
+	mState.registState(this, &SceneGameRefresh::stateEnterGameOver,		&SceneGameRefresh::stateExeGameOver,	nullptr, cState_GameOver);
+	mState.registState(this, &SceneGameRefresh::stateEnterGameClear,	&SceneGameRefresh::stateExeGameClear,	nullptr, cState_GameClear);
+	mState.changeState(cState_Idle);
 }
 
 SceneGameRefresh::~SceneGameRefresh(void)
@@ -54,134 +71,31 @@ void SceneGameRefresh::impleInit()
 	mNiku->init();
 	mNoppo->init();
 	mYoshi->init();
-	
-	//mBoss->init();
 
 	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
 
 	mTexture->load("Data\\TextureData\\gamenormal.txt", mDevice);		//絵の読み込み
 	mVertex->load("Data\\RectData\\gamenormal.txt");
+
+	mState.changeState(cState_ReadyFadeIn);
 }
 
 void SceneGameRefresh::update()
 {
-	if(mSameState == G_START_SCENE){
-		UtilSound::playOnce(S_GAME_START);
-		fadeControl();
-	}
-	else if(mSameState == G_GAME_SCENE){
-
-		boss_cc.x =	mBoss->boss_move_x;
-		boss_cc.y = mBoss->boss_move_y;
-	
-		UtilSound::playLoop(S_BGM_BATTLE);
-
-		mNiku->update(boss_cc, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
-
-		mYoshi->update(boss_cc, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
-
-		mNoppo->update(boss_cc, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
-	
-		mIsHitNiku  = mNiku->isHitCheck();//あたったというフラグが帰ってきます
-		
-		mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
-
-		mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
-
-		if(mIsHitNiku)
-		{
-			mBoss->hit_count++;
-			mBoss->boss_life-=NIKUMAN_DAMAGE;
-			mIsHitEffect = true;
-			mCharaAtkY = mNiku->m_chara_y;
-			mNiku->setIsHitCheck(false);
-		}
-
-		if(mIsHitYoshi)
-		{
-			mBoss->hit_count++;
-			mBoss->boss_life-=YOSHITARO_DAMAGE;
-			mIsHitEffect = true;
-			mCharaAtkY = mYoshi->m_chara_y;
-			mYoshi->setIsHitCheck(false);
-		}
-
-		if(mIsHitNoppo)
-		{
-			mBoss->hit_count++;
-			mBoss->boss_life-=NOPPO_DAMAGE;
-			mIsHitEffect = true;
-			mCharaAtkY = mNoppo->m_chara_y;
-			mNoppo->setIsHitCheck(false);
-		}
-
-		// にくまん
-		if (UtilBattle::isRunWeakGroundAttack() ||
-			UtilBattle::isRunWeakSkyAttack())
-		{
-			mNikumanKeyCount++;
-		}
-		// よしたろう
-		if (UtilBattle::isRunMediumGroundAttack() ||
-			UtilBattle::isRunMediumSkyAttack())
-		{
-			mYoshitaroKeyCount++;
-		}
-		// のっぽ
-		if (UtilBattle::isRunStrongGroundAttack() ||
-			UtilBattle::isRunStrongSkyAttack())
-		{
-			mNoppoKeyCount++;
-		}
-
-		if(GetAsyncKeyState(VK_RETURN)){	//エンターキーが押されたらタイトルに戻る
-			mIsSceneEnd = true;
-		}
-
-		//mBoss->RefreshControl();
-		mBoss->control(PLAY_REFRESH);
-
-		if(!mBoss->boss_fall_flag)
-		{
-			if(mIsHitEffect) 
-			{
-				mHitEffectAlpha = 255;
-				mHitEffectTime++;
-				if(mHitEffectTime == 1)
-				{
-					mIsHitEffect=false;
-					mHitEffectTime=0;
-				}		
-			}
-			else{
-					mHitEffectAlpha = 0;
-					mHitEffectTime = 0;
-			}
-		}
-		else{
-			mIsHitEffect = false;
-			mHitEffectAlpha=0;
-		}
-	}
+	mState.executeState();
 }
 
 void SceneGameRefresh::draw()
 {
 	if(mSameState == G_START_SCENE){
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
-
-		mVertex->setColor(mAlpha,255,255,255);
-
+		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
-
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-
-		mVertex->setColor(mAlpha,255,255,255);
-
+		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
-
 		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);				//にくまん顔
 		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);			//よしたろう顔
 		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);					//のっぽ顔
@@ -189,40 +103,34 @@ void SceneGameRefresh::draw()
 		drawNum();
 
 		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);								//しゃっくの体力
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);						//体力ゲージ
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);					//体力ゲージ
 
 		drawHpGauge();
 
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);					//体力ゲージ枠
+		// 体力ゲージ枠
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);
 
-		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
-		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_START);						//ゲームスタート
+		// ゲームスタート
+		mVertex->setColor(mStartAlpha,255,255,255);
+		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_START);
 	}
 	else if(mSameState == G_GAME_SCENE){
+
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
-
-		mVertex->setColor(mAlpha,255,255,255);
-
+		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//背景
-
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//旗
 
 		mBoss->draw();
 		mBoss->fallDraw();
 
-		//BossDraw();
-		//BossNoFontDraw();
-
 		drawHitEffect();
 
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-
-		mVertex->setColor(mAlpha,255,255,255);
-
+		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
-
 		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//にくまん顔
 		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//よしたろう顔
 		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//のっぽ顔
@@ -271,64 +179,6 @@ void SceneGameRefresh::end()
 	mVertex->release();
 }
 
-void SceneGameRefresh::fadeControl()
-{
-	switch(mFlagFade)
-	{
-	case GS_FADE_IN:
-		fadeIn();
-		break;
-	case GS_USUALLY:
-		fadeOut();
-		break;
-	}
-}
-
-void SceneGameRefresh::fadeIn()
-{
-	if(mFlagFadeStart > 60){
-		mStartAlpha += G_ALPHA_INCREASE - 10;
-		if(mStartAlpha > 255){
-			mStartAlpha = 255;
-			mSameState = G_GAME_SCENE;
-		}
-		return ;
-	}
-	else if(mFlagFadeStart >= 1){
-		mFlagFadeStart++;
-		return ;
-	}
-
-	if(mFlagFadeIn){
-		mStartAlpha -= G_ALPHA_INCREASE - 10;
-		if(mStartAlpha < 0){
-			mStartAlpha = 0;
-			mFlagFadeStart = 1;
-			//サウンド鳴らす予定
-		}
-		return ; 
-	}
-	else if(mAlphaCount++ > 1){
-		mAlpha += G_ALPHA_INCREASE;
-		if(mAlpha > G_MAX_ALPHA){
-			mAlpha = G_MAX_ALPHA;
-			mFlagFadeIn = true;
-		}
-		mAlphaCount = 0;
-		mStartAlpha = mAlpha;
-	}
-}
-
-void SceneGameRefresh::fadeOut()
-{
-	if(mAlpha == 0) { return ; }
-	else if(mAlphaCount++ > 1){
-		mAlpha -= G_ALPHA_INCREASE;
-		if(mAlpha < 0) { mAlpha = 0; }
-		mAlphaCount = 0;
-	}
-}
-
 void SceneGameRefresh::drawNum()
 {
 	//にくまん
@@ -362,9 +212,7 @@ void SceneGameRefresh::drawHpGauge()
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
 	mVertex->setScale(num,1.f);
-
-	mVertex->setColor(mAlpha,255,0,0);
-	
+	mVertex->setColor(255,255,0,0);
 	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
@@ -382,4 +230,204 @@ void SceneGameRefresh::initHitFlag()
 	mIsHitYoshi = false;
 
 	mIsHitNoppo = false;
+}
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+SceneGameRefresh::stateEnterIdle()
+{
+}
+void
+SceneGameRefresh::stateExeIdle()
+{
+}
+
+/**
+ * @brief ステート:ReadyFadeIn
+ */
+void
+SceneGameRefresh::stateEnterReadyFadeIn()
+{
+	UtilSound::playOnce(S_GAME_START);
+}
+void
+SceneGameRefresh::stateExeReadyFadeIn()
+{
+	mStartAlpha += (G_ALPHA_INCREASE - 5);
+	if (mStartAlpha >= G_MAX_ALPHA)
+	{
+		mStartAlpha = G_MAX_ALPHA;
+		mState.changeState(cState_Ready);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:Ready
+ */
+void
+SceneGameRefresh::stateEnterReady()
+{
+}
+void
+SceneGameRefresh::stateExeReady()
+{
+	if (60 < mState.getStateCount())
+	{
+		mState.changeState(cState_ReadyFadeOut);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:ReadyFadeOut
+ */
+void
+SceneGameRefresh::stateEnterReadyFadeOut()
+{
+}
+void
+SceneGameRefresh::stateExeReadyFadeOut()
+{
+	mStartAlpha -= (G_ALPHA_INCREASE - 10);
+	if (mStartAlpha < 0)
+	{
+		mStartAlpha = 0;
+		mSameState = G_GAME_SCENE;
+		mState.changeState(cState_Game);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:Game
+ */
+void
+SceneGameRefresh::stateEnterGame()
+{
+}
+void
+SceneGameRefresh::stateExeGame()
+{
+	boss_cc.x = mBoss->boss_move_x;
+	boss_cc.y = mBoss->boss_move_y;
+
+	UtilSound::playLoop(S_BGM_BATTLE);
+
+	mNiku->update(boss_cc, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->boss_fall_flag);
+
+	mYoshi->update(boss_cc, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->boss_fall_flag);
+
+	mNoppo->update(boss_cc, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->boss_fall_flag);
+
+	mIsHitNiku = mNiku->isHitCheck();//あたったというフラグが帰ってきます
+
+	mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
+
+	mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
+
+	if (mIsHitNiku)
+	{
+		mBoss->hit_count++;
+		mBoss->boss_life -= NIKUMAN_DAMAGE;
+		mIsHitEffect = true;
+		mCharaAtkY = mNiku->m_chara_y;
+		mNiku->setIsHitCheck(false);
+	}
+
+	if (mIsHitYoshi)
+	{
+		mBoss->hit_count++;
+		mBoss->boss_life -= YOSHITARO_DAMAGE;
+		mIsHitEffect = true;
+		mCharaAtkY = mYoshi->m_chara_y;
+		mYoshi->setIsHitCheck(false);
+	}
+
+	if (mIsHitNoppo)
+	{
+		mBoss->hit_count++;
+		mBoss->boss_life -= NOPPO_DAMAGE;
+		mIsHitEffect = true;
+		mCharaAtkY = mNoppo->m_chara_y;
+		mNoppo->setIsHitCheck(false);
+	}
+
+	// にくまん
+	if (UtilBattle::isRunWeakGroundAttack() ||
+		UtilBattle::isRunWeakSkyAttack())
+	{
+		mNikumanKeyCount++;
+	}
+	// よしたろう
+	if (UtilBattle::isRunMediumGroundAttack() ||
+		UtilBattle::isRunMediumSkyAttack())
+	{
+		mYoshitaroKeyCount++;
+	}
+	// のっぽ
+	if (UtilBattle::isRunStrongGroundAttack() ||
+		UtilBattle::isRunStrongSkyAttack())
+	{
+		mNoppoKeyCount++;
+	}
+
+	if (GetAsyncKeyState(VK_RETURN)) {	//エンターキーが押されたらタイトルに戻る
+		mIsSceneEnd = true;
+	}
+
+	mBoss->control(PLAY_REFRESH);
+
+	if (!mBoss->boss_fall_flag)
+	{
+		if (mIsHitEffect)
+		{
+			mHitEffectAlpha = 255;
+			mHitEffectTime++;
+			if (mHitEffectTime == 1)
+			{
+				mIsHitEffect = false;
+				mHitEffectTime = 0;
+			}
+		}
+		else {
+			mHitEffectAlpha = 0;
+			mHitEffectTime = 0;
+		}
+	}
+	else 
+	{
+		mIsHitEffect = false;
+		mHitEffectAlpha = 0;
+	}
+}
+
+/**
+ * @brief ステート:GameOver
+ */
+void
+SceneGameRefresh::stateEnterGameOver()
+{
+}
+void
+SceneGameRefresh::stateExeGameOver()
+{
+}
+
+/**
+ * @brief ステート:GameClear
+ */
+void
+SceneGameRefresh::stateEnterGameClear()
+{
+}
+void
+SceneGameRefresh::stateExeGameClear()
+{
 }

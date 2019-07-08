@@ -10,6 +10,7 @@
 #include "Program/Scene/SceneBase.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
+#include "Library/StateMachine.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"
@@ -30,12 +31,31 @@ public:
 	void				drawNum();
 	void				drawHpGauge();
 
-	void				fadeControl();		//フェードコントロール		
-	void				fadeIn();			//フェードイン
-	void				fadeOut();			//フェードアウト
-
 	void				initHitFlag();
 	void				drawHitEffect();
+
+private:
+	// ステート関数
+	void			stateEnterIdle();
+	void			stateExeIdle();
+
+	void			stateEnterReadyFadeIn();
+	void			stateExeReadyFadeIn();
+
+	void			stateEnterReady();
+	void			stateExeReady();
+
+	void			stateEnterReadyFadeOut();
+	void			stateExeReadyFadeOut();
+
+	void			stateEnterGame();
+	void			stateExeGame();
+
+	void			stateEnterGameOver();
+	void			stateExeGameOver();
+
+	void			stateEnterGameClear();
+	void			stateExeGameClear();
 
 private:
 	ActorNikuman*		mNiku;
@@ -44,13 +64,10 @@ private:
 	ActorBoss*			mBoss;
 
 private:
-	int					mAlpha;				// アルファ値
-	int					mAlphaCount;		// アルファのディレイ
+	StateMachine<SceneGameRefresh>	mState;			// ステート
+
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mSameState;			// ゲームの状態(スタート・すっきりゲーム)
-	int					mFlagFade;			// フェードインアウトなどの段階を知らせる
-	int					mFlagFadeStart;		// げ～むすた～とのフェードイン・フェードアウトを知らせるのに使用
-	bool				mFlagFadeIn;		// フェードインが終わった状態かを知らせる
 	int					mKeyState;			// キーの状態
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント

@@ -67,7 +67,7 @@ SceneGameNormal::SceneGameNormal()
 
 	mIsInit = false;
 
-	mMissionGage = 0;
+	mMissionGauge = 0;
 
 	mHitEffectAlpha = 0;
 	mIsHitEffect = false;
@@ -223,7 +223,7 @@ void SceneGameNormal::draw()
 
 	mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
 
-	if(mMissionGage >= MISSION_GAGE_MAX){
+	if(mMissionGauge >= MISSION_GAGE_MAX){
 		mMission->draw();
 	}
 }
@@ -332,7 +332,7 @@ void SceneGameNormal::drawHitEffect()
 }
 void SceneGameNormal::drawMissionGuage()
 {
-	float num = (float)mMissionGage / (float)MISSION_GAGE_MAX;
+	float num = (float)mMissionGauge / (float)MISSION_GAGE_MAX;
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,30,30,200);
@@ -595,7 +595,7 @@ SceneGameNormal::stateExeGame()
 	}
 
 	//ƒ~ƒbƒVƒ‡ƒ“‚ª‹N“®‚·‚é’iŠK‚Ü‚Å‚¢‚Á‚½‚ç
-	if (mMissionGage >= MISSION_GAGE_MAX) {
+	if (mMissionGauge >= MISSION_GAGE_MAX) {
 		if (!mIsInit) {
 			UtilSound::playOnce(S_OSIRASE);
 			mMission->init(mNikumanKeyCount, mYoshitaroKeyCount, mNoppoKeyCount);
@@ -623,7 +623,7 @@ SceneGameNormal::stateExeGame()
 			mNegativeState = NO_NEGATIVE;
 			mTimeCount = 0;
 			mMissionStateKeep = 0;
-			mMissionGage = 0;
+			mMissionGauge = 0;
 			mIsInit = false;
 		}
 		return;
@@ -653,7 +653,7 @@ SceneGameNormal::stateExeGame()
 	{
 		mBoss->hit_count++;
 		mBoss->boss_life -= NIKUMAN_DAMAGE / mNegativeDamege;
-		mMissionGage += NIKUMAN_GAGE;
+		mMissionGauge += NIKUMAN_GAGE;
 
 		UtilScore::addScore(NIKUMAN_SCORE);
 		mIsHitEffect = true;
@@ -665,7 +665,7 @@ SceneGameNormal::stateExeGame()
 	{
 		mBoss->hit_count++;
 		mBoss->boss_life -= YOSHITARO_DAMAGE / mNegativeDamege;
-		mMissionGage += YOSHITARO_GAGE;
+		mMissionGauge += YOSHITARO_GAGE;
 		UtilScore::addScore(YOSHITARO_SCORE);
 		mIsHitEffect = true;
 		mCharaAtkY = mYoshi->m_chara_y;
@@ -676,7 +676,7 @@ SceneGameNormal::stateExeGame()
 	{
 		mBoss->hit_count++;
 		mBoss->boss_life -= NOPPO_DAMAGE / mNegativeDamege;
-		mMissionGage += NOPPO_GAGE;
+		mMissionGauge += NOPPO_GAGE;
 		UtilScore::addScore(NOPPO_SCORE);
 		mIsHitEffect = true;
 		mCharaAtkY = mNoppo->m_chara_y;

@@ -84,7 +84,7 @@ private:
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
 	int					mNoppoKeyCount;		// のっぽの押されたキーの数をカウント
 	bool				mIsInit;			// 初期化したかどうか
-	int					mMissionGage;		// 必殺ゲージ
+	int					mMissionGauge;		// 必殺ゲージ
 	bool				mIsHitNiku;
 	bool				mIsHitYoshi;
 	bool				mIsHitNoppo;

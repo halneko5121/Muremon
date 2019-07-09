@@ -100,8 +100,6 @@ private:
 	int					mAlphaFont;
 	int					mTimeCount;
 
-	int					mSpeedX;
-
 	D3DXVECTOR2			mWavePos;
 
 	// NEGATIVE‚ÅŽg—p

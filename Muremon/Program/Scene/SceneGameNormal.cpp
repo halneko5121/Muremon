@@ -37,6 +37,18 @@ namespace
 	};
 
 	POS_CC<float> boss_cc2 = { 600, 350 };
+
+	enum State
+	{
+		cState_Idle,			// 待機
+		cState_ReadyFadeIn,		// 準備フェードイン
+		cState_Ready,			// 準備
+		cState_ReadyFadeOut,	// 準備フェードアウト
+		cState_Game,			// ゲーム中
+		cState_GameOver,		// ゲームオーバー
+		cState_GameClear,		// ゲームクリア
+		cState_Count
+	};
 }
 
 SceneGameNormal::SceneGameNormal()
@@ -45,21 +57,13 @@ SceneGameNormal::SceneGameNormal()
 
 	mTime = TIME_LIMIT;
 
-	mStartAlpha = mAlpha = 0;	//アルファ値
-
-	mAlphaCount = 0;
-
-	mFlagFade = GS_FADE_IN;
+	mStartAlpha = 0;	// アルファ値
 
 	mGameState = G_START_SCENE;
 
 	mNikumanKeyCount = mYoshitaroKeyCount = mNoppoKeyCount = 0;
 
 	mMissionStateKeep = 0;
-
-	mFlagFadeStart = 0;
-
-	mIsFadeIn = false;
 
 	mIsInit = false;
 
@@ -79,8 +83,6 @@ SceneGameNormal::SceneGameNormal()
 
 	mCharaAtkY = 0;
 
-	mIsSound = true;
-
 	//奥義
 	mAlphaFont = 0;
 	mTimeCount = 0;
@@ -90,6 +92,16 @@ SceneGameNormal::SceneGameNormal()
 	//NEGATIVE
 	mNegativeState = NO_NEGATIVE;
 	mNegativeDamege = 1;
+
+	mState.initialize(cState_Count, cState_Idle);
+	mState.registState(this, &SceneGameNormal::stateEnterIdle,			&SceneGameNormal::stateExeIdle,			nullptr, cState_Idle);
+	mState.registState(this, &SceneGameNormal::stateEnterReadyFadeIn,	&SceneGameNormal::stateExeReadyFadeIn,	nullptr, cState_ReadyFadeIn);
+	mState.registState(this, &SceneGameNormal::stateEnterReady,			&SceneGameNormal::stateExeReady,		nullptr, cState_Ready);
+	mState.registState(this, &SceneGameNormal::stateEnterReadyFadeOut,	&SceneGameNormal::stateExeReadyFadeOut, nullptr, cState_ReadyFadeOut);
+	mState.registState(this, &SceneGameNormal::stateEnterGame,			&SceneGameNormal::stateExeGame,			nullptr, cState_Game);
+	mState.registState(this, &SceneGameNormal::stateEnterGameOver,		&SceneGameNormal::stateExeGameOver,		nullptr, cState_GameOver);
+	mState.registState(this, &SceneGameNormal::stateEnterGameClear,		&SceneGameNormal::stateExeGameClear,	nullptr, cState_GameClear);
+	mState.changeState(cState_Idle);
 }
 
 SceneGameNormal::~SceneGameNormal()
@@ -112,222 +124,26 @@ void SceneGameNormal::impleInit()
 	mVertex->load("Data\\RectData\\gamenormal.txt");
 
 	mMission = new Mission(mTexture, mVertex, mDevice);
+
+	mState.changeState(cState_ReadyFadeIn);
 }
 
 void SceneGameNormal::update()
 {
-	if(mGameState == G_START_SCENE){
-		UtilSound::playOnce(S_GAME_START);
-		fadeControl();
-	}
-	else if(mGameState == G_GAME_SCENE){
-
-		boss_cc2.x = mBoss->boss_move_x;
-		boss_cc2.y = mBoss->boss_move_y;
-
-		if(mGameState != G_GAME_OVER){
-			if((boss_cc2.x - 150) < 500){
-				UtilSound::playLoop(S_SAIREN);
-			}
-			else
-			{
-				UtilSound::stop(S_SAIREN);
-			}
-		}
-
-		if (UtilInput::isKeyPushedReturn())
-		{
-			if(mIsPose){
-				mIsPose = false;
-			}
-			else{
-				mIsPose = true;
-			}
-		}
-
-		if(mIsPose){
-			return;
-		}
-
-		//ミッションが起動する段階までいったら
-		//mMissionGage = 5000;
-		if(mMissionGage >= MISSION_GAGE_MAX){
-			if(!mIsInit){
-				UtilSound::playOnce(S_OSIRASE);
-				mMission->init(mNikumanKeyCount,mYoshitaroKeyCount,mNoppoKeyCount);
-				mIsInit = true;
-			}
-			if(mMissionStateKeep < MISSION_OUGI){
-				mMissionStateKeep = mMission->update();
-				if(mNikumanKeyCount != mMission->getCountKeyNikuman()){
-					mNikumanKeyCount = mMission->getCountKeyNikuman();
-				}
-				if(mYoshitaroKeyCount != mMission->getCountKeyYoshitaro()){
-					mYoshitaroKeyCount = mMission->getCountKeyYoshitaro();
-				}
-				if(mNoppoKeyCount != mMission->getCountKeyNoppo()){
-					mNoppoKeyCount = mMission->getCountKeyNoppo();
-				}
-			}
-			else if(mMissionStateKeep == MISSION_OUGI){
-				updateMissionOugi();
-			}
-			else if(mMissionStateKeep == MISSION_NEGATIVE){
-				updateMissionNegative();
-			}
-			else if(mMissionStateKeep == MISSION_END){
-				mNegativeState = NO_NEGATIVE;
-				mTimeCount = 0;
-				mMissionStateKeep = 0;
-				mMissionGage = 0;
-				mIsInit = false;
-			}
-			return;
-		}
-
-		if(mTime == 0){
-			mGameState = G_GAME_CLEAR;
-			mFlagFadeStart = 0;
-			return;
-		}
-
-		UtilSound::playLoop(S_BGM_BATTLE);
-
-		mNiku->update(boss_cc2, S_NIKUMAN,R_NIKU_G_ATK1,mBoss->boss_fall_flag);
-
-		mYoshi->update(boss_cc2, S_YOSHI_HIP,R_YOSHI_G_ATK1,mBoss->boss_fall_flag);
-
-		mNoppo->update(boss_cc2, S_NOPPO_KOKE,R_NOPPO_G_ATK1,mBoss->boss_fall_flag);
-
-		mTime -= 1;
-
-		mIsHitNiku  = mNiku->isHitCheck();//あたったというフラグが帰ってきます
-
-		mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
-
-		mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
-
-		if(mIsHitNiku)
-		{
-			mBoss->hit_count++;
-			mBoss->boss_life -= NIKUMAN_DAMAGE / mNegativeDamege;
-			mMissionGage += NIKUMAN_GAGE;
-
-			UtilScore::addScore(NIKUMAN_SCORE);
-			mIsHitEffect = true;
-			mCharaAtkY = mNiku->m_chara_y;
-			mNiku->setIsHitCheck(false);
-		}
-
-		if(mIsHitYoshi)
-		{
-			mBoss->hit_count++;
-			mBoss->boss_life -= YOSHITARO_DAMAGE / mNegativeDamege;
-			mMissionGage += YOSHITARO_GAGE;
-			UtilScore::addScore(YOSHITARO_SCORE);
-			mIsHitEffect = true;
-			mCharaAtkY = mYoshi->m_chara_y;
-			mYoshi->setIsHitCheck(false);
-		}
-
-		if(mIsHitNoppo)
-		{
-			mBoss->hit_count++;
-			mBoss->boss_life -= NOPPO_DAMAGE / mNegativeDamege;
-			mMissionGage += NOPPO_GAGE;
-			UtilScore::addScore(NOPPO_SCORE);
-			mIsHitEffect = true;
-			mCharaAtkY = mNoppo->m_chara_y;
-			mNoppo->setIsHitCheck(false);
-		}
-
-		// にくまん
-		if (UtilBattle::isRunWeakGroundAttack() ||
-			UtilBattle::isRunWeakSkyAttack())
-		{
-			mNikumanKeyCount++;
-		}
-		// よしたろう
-		if (UtilBattle::isRunMediumGroundAttack() ||
-			UtilBattle::isRunMediumSkyAttack())
-		{
-			mYoshitaroKeyCount++;
-		}
-		// のっぽ
-		if (UtilBattle::isRunStrongGroundAttack() ||
-			UtilBattle::isRunStrongSkyAttack())
-		{
-			mNoppoKeyCount++;
-		}
-		recover();
-
-		//if(GetAsyncKeyState(VK_RETURN)){	//エンターキーが押されたらタイトルに戻る
-		//	mIsSceneChange = false;
-		//}
-		
-		//mBoss->NormalControl();
-		mBoss->control(PLAY_NORMAL);
-
-		//ゲームオーバー条件
-		if(mBoss->boss_win_flag)
-		{
-			mGameState = G_GAME_OVER;
-			mFlagFadeStart = 0;
-			UtilSound::stop(S_SAIREN);
-			return;
-		}
-
-		if(!mBoss->boss_fall_flag)
-		{
-			if(mIsHitEffect) 
-			{
-				mHitEffectAlpha = 255;
-				mHitEffectTime++;
-				if(mHitEffectTime == 1)
-				{
-					mIsHitEffect=false;
-					mHitEffectTime=0;
-				}		
-			}
-			else{
-					mHitEffectAlpha = 0;
-					mHitEffectTime = 0;
-			}
-		}
-		else{
-			mIsHitEffect = false;
-			mHitEffectAlpha=0;
-		}
-	}
-	else if(mGameState == G_GAME_OVER){
-		fadeControl();
-	}
-	else if(mGameState == G_GAME_CLEAR){
-		fadeControl();
-	}
-
-	return;
+	mState.executeState();
 }
 
 void SceneGameNormal::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
-
-	if(mAlpha - 55 < 0){
-		mVertex->setColor(0,255,255,255);
-	}
-	else{
-		mVertex->setColor(mAlpha - 55,255,255,255);
-	}
-
+	mVertex->setColor(255, 255, 255, 255);
 	mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
-
 	mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
 	if(mGameState == G_START_SCENE){
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->setColor(mStartAlpha,255,255,255);
 
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_START);	//ゲームスタート
 	}
@@ -358,21 +174,13 @@ void SceneGameNormal::draw()
 	}
 	else if(mGameState == G_GAME_OVER){
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
-		if(mIsSound){
-			UtilSound::playOnce(S_OVER);
-			mIsSound = false;
-		}
 	}
 	else if(mGameState == G_GAME_CLEAR){
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-		mVertex->setColor(mAlpha - mStartAlpha,255,255,255);
+		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
-		if(mIsSound){
-			UtilSound::playOnce(S_G_CLEAR);
-			mIsSound = false;
-		}
 	}
 
 	if(mMissionStateKeep == MISSION_OUGI){
@@ -383,11 +191,8 @@ void SceneGameNormal::draw()
 	}
 
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-
-	mVertex->setColor(mAlpha,255,255,255);
-
+	mVertex->setColor(255,255,255,255);
 	mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
-
 	mVertex->drawF(G_SCORE_X,G_SCORE_Y,R_SCORE);		//すこあ
 
 	drawScore();
@@ -430,74 +235,9 @@ void SceneGameNormal::end()
 	//ゲームオーバーの場合
 	requestChangeScene(cSceneName_Ranking);
 
-	UtilSound::stop(S_BGM_BATTLE);
-
 	mTexture->release();
 	mVertex->release();
 	delete mMission;
-}
-
-void SceneGameNormal::fadeControl()
-{
-	switch(mFlagFade)
-	{
-	case GS_FADE_IN:
-		fadeIn();
-		break;
-	case GS_USUALLY:
-		fadeOut();
-		break;
-	}
-}
-
-void SceneGameNormal::fadeIn()
-{
-	if(mFlagFadeStart > 60){
-		mStartAlpha += G_ALPHA_INCREASE - 10;
-		if(mStartAlpha > 255){
-			mStartAlpha = 255;
-			if(mGameState == G_START_SCENE){
-				mGameState = G_GAME_SCENE;
-			}
-			else if(mGameState == G_GAME_OVER || mGameState == G_GAME_CLEAR){
-				mIsSceneEnd = true;
-			}
-		}
-		return ;
-	}
-	else if(mFlagFadeStart >= 1){
-		mFlagFadeStart++;
-		return ;
-	}
-
-	if(mIsFadeIn){
-		mStartAlpha -= G_ALPHA_INCREASE - 10;
-		if(mStartAlpha < 0){
-			mStartAlpha = 0;
-			mFlagFadeStart = 1;
-			//サウンド鳴らす予定
-		}
-		return ; 
-	}
-	else if(mAlphaCount++ > 1){
-		mAlpha += G_ALPHA_INCREASE;
-		if(mAlpha > G_MAX_ALPHA){
-			mAlpha = G_MAX_ALPHA;
-			mIsFadeIn = true;
-		}
-		mAlphaCount = 0;
-		mStartAlpha = mAlpha;
-	}
-}
-
-void SceneGameNormal::fadeOut()
-{
-	if(mAlpha == 0) { return ; }
-	else if(mAlphaCount++ > 1){
-		mAlpha -= G_ALPHA_INCREASE;
-		if(mAlpha < 0) { mAlpha = 0; }
-		mAlphaCount = 0;
-	}
 }
 
 void SceneGameNormal::drawKeyCount()
@@ -582,9 +322,7 @@ void SceneGameNormal::drawHpGauge()
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
 	mVertex->setScale(num,1.f);
-
-	mVertex->setColor(mAlpha,200,30,30);
-	
+	mVertex->setColor(255,200,30,30);
 	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
@@ -599,9 +337,7 @@ void SceneGameNormal::drawMissionGuage()
 	float num = (float)mMissionGage / (float)MISSION_GAGE_MAX;
 
 	mVertex->setScale(num,1.f);
-
-	mVertex->setColor(mAlpha,30,30,200);
-	
+	mVertex->setColor(255,30,30,200);
 	mVertex->drawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
 }
 
@@ -746,5 +482,297 @@ void SceneGameNormal::recover()
 {
 	if(mBoss->boss_life <= 0){
 		mNegativeDamege = 1;
+	}
+}
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+SceneGameNormal::stateEnterIdle()
+{
+}
+void
+SceneGameNormal::stateExeIdle()
+{
+}
+
+/**
+ * @brief ステート:ReadyFadeIn
+ */
+void
+SceneGameNormal::stateEnterReadyFadeIn()
+{
+	UtilSound::playOnce(S_GAME_START);
+}
+void
+SceneGameNormal::stateExeReadyFadeIn()
+{
+	mStartAlpha += (G_ALPHA_INCREASE - 5);
+	if (mStartAlpha >= G_MAX_ALPHA)
+	{
+		mStartAlpha = G_MAX_ALPHA;
+		mState.changeState(cState_Ready);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:Ready
+ */
+void
+SceneGameNormal::stateEnterReady()
+{
+}
+void
+SceneGameNormal::stateExeReady()
+{
+	if (60 < mState.getStateCount())
+	{
+		mState.changeState(cState_ReadyFadeOut);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:ReadyFadeOut
+ */
+void
+SceneGameNormal::stateEnterReadyFadeOut()
+{
+}
+void
+SceneGameNormal::stateExeReadyFadeOut()
+{
+	mStartAlpha -= (G_ALPHA_INCREASE - 10);
+	if (mStartAlpha < 0)
+	{
+		mStartAlpha = 0;
+		mGameState = G_GAME_SCENE;
+		mState.changeState(cState_Game);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:Game
+ */
+void
+SceneGameNormal::stateEnterGame()
+{
+	UtilSound::playLoop(S_BGM_BATTLE);
+}
+void
+SceneGameNormal::stateExeGame()
+{
+	boss_cc2.x = mBoss->boss_move_x;
+	boss_cc2.y = mBoss->boss_move_y;
+
+	if (mGameState != G_GAME_OVER) {
+		if ((boss_cc2.x - 150) < 500) {
+			UtilSound::playLoop(S_SAIREN);
+		}
+		else
+		{
+			UtilSound::stop(S_SAIREN);
+		}
+	}
+
+	if (UtilInput::isKeyPushedReturn())
+	{
+		if (mIsPose) {
+			mIsPose = false;
+		}
+		else {
+			mIsPose = true;
+		}
+	}
+
+	if (mIsPose) {
+		return;
+	}
+
+	//ミッションが起動する段階までいったら
+	if (mMissionGage >= MISSION_GAGE_MAX) {
+		if (!mIsInit) {
+			UtilSound::playOnce(S_OSIRASE);
+			mMission->init(mNikumanKeyCount, mYoshitaroKeyCount, mNoppoKeyCount);
+			mIsInit = true;
+		}
+		if (mMissionStateKeep < MISSION_OUGI) {
+			mMissionStateKeep = mMission->update();
+			if (mNikumanKeyCount != mMission->getCountKeyNikuman()) {
+				mNikumanKeyCount = mMission->getCountKeyNikuman();
+			}
+			if (mYoshitaroKeyCount != mMission->getCountKeyYoshitaro()) {
+				mYoshitaroKeyCount = mMission->getCountKeyYoshitaro();
+			}
+			if (mNoppoKeyCount != mMission->getCountKeyNoppo()) {
+				mNoppoKeyCount = mMission->getCountKeyNoppo();
+			}
+		}
+		else if (mMissionStateKeep == MISSION_OUGI) {
+			updateMissionOugi();
+		}
+		else if (mMissionStateKeep == MISSION_NEGATIVE) {
+			updateMissionNegative();
+		}
+		else if (mMissionStateKeep == MISSION_END) {
+			mNegativeState = NO_NEGATIVE;
+			mTimeCount = 0;
+			mMissionStateKeep = 0;
+			mMissionGage = 0;
+			mIsInit = false;
+		}
+		return;
+	}
+
+	if (mTime == 0)
+	{
+		mState.changeState(cState_GameClear);
+		return;
+	}
+
+	mNiku->update(boss_cc2, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->boss_fall_flag);
+
+	mYoshi->update(boss_cc2, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->boss_fall_flag);
+
+	mNoppo->update(boss_cc2, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->boss_fall_flag);
+
+	mTime -= 1;
+
+	mIsHitNiku = mNiku->isHitCheck();//あたったというフラグが帰ってきます
+
+	mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
+
+	mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
+
+	if (mIsHitNiku)
+	{
+		mBoss->hit_count++;
+		mBoss->boss_life -= NIKUMAN_DAMAGE / mNegativeDamege;
+		mMissionGage += NIKUMAN_GAGE;
+
+		UtilScore::addScore(NIKUMAN_SCORE);
+		mIsHitEffect = true;
+		mCharaAtkY = mNiku->m_chara_y;
+		mNiku->setIsHitCheck(false);
+	}
+
+	if (mIsHitYoshi)
+	{
+		mBoss->hit_count++;
+		mBoss->boss_life -= YOSHITARO_DAMAGE / mNegativeDamege;
+		mMissionGage += YOSHITARO_GAGE;
+		UtilScore::addScore(YOSHITARO_SCORE);
+		mIsHitEffect = true;
+		mCharaAtkY = mYoshi->m_chara_y;
+		mYoshi->setIsHitCheck(false);
+	}
+
+	if (mIsHitNoppo)
+	{
+		mBoss->hit_count++;
+		mBoss->boss_life -= NOPPO_DAMAGE / mNegativeDamege;
+		mMissionGage += NOPPO_GAGE;
+		UtilScore::addScore(NOPPO_SCORE);
+		mIsHitEffect = true;
+		mCharaAtkY = mNoppo->m_chara_y;
+		mNoppo->setIsHitCheck(false);
+	}
+
+	// にくまん
+	if (UtilBattle::isRunWeakGroundAttack() ||
+		UtilBattle::isRunWeakSkyAttack())
+	{
+		mNikumanKeyCount++;
+	}
+	// よしたろう
+	if (UtilBattle::isRunMediumGroundAttack() ||
+		UtilBattle::isRunMediumSkyAttack())
+	{
+		mYoshitaroKeyCount++;
+	}
+	// のっぽ
+	if (UtilBattle::isRunStrongGroundAttack() ||
+		UtilBattle::isRunStrongSkyAttack())
+	{
+		mNoppoKeyCount++;
+	}
+	recover();
+
+	mBoss->control(PLAY_NORMAL);
+
+	//ゲームオーバー条件
+	if (mBoss->boss_win_flag)
+	{
+		mState.changeState(cState_GameOver);
+		return;
+	}
+
+	if (!mBoss->boss_fall_flag)
+	{
+		if (mIsHitEffect)
+		{
+			mHitEffectAlpha = 255;
+			mHitEffectTime++;
+			if (mHitEffectTime == 1)
+			{
+				mIsHitEffect = false;
+				mHitEffectTime = 0;
+			}
+		}
+		else {
+			mHitEffectAlpha = 0;
+			mHitEffectTime = 0;
+		}
+	}
+	else {
+		mIsHitEffect = false;
+		mHitEffectAlpha = 0;
+	}
+}
+
+/**
+ * @brief ステート:GameOver
+ */
+void
+SceneGameNormal::stateEnterGameOver()
+{
+	mGameState = G_GAME_OVER;
+	UtilSound::stop(S_SAIREN);
+	UtilSound::stop(S_BGM_BATTLE);
+	UtilSound::playOnce(S_OVER);
+}
+void
+SceneGameNormal::stateExeGameOver()
+{
+	if (120 < mState.getStateCount())
+	{
+		mIsSceneEnd = true;
+	}
+}
+
+/**
+ * @brief ステート:GameClear
+ */
+void
+SceneGameNormal::stateEnterGameClear()
+{
+	mGameState = G_GAME_CLEAR;
+	UtilSound::stop(S_SAIREN);
+	UtilSound::stop(S_BGM_BATTLE);
+	UtilSound::playOnce(S_G_CLEAR);
+}
+void
+SceneGameNormal::stateExeGameClear()
+{
+	if (180 < mState.getStateCount())
+	{
+		mIsSceneEnd = true;
 	}
 }

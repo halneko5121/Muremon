@@ -7,6 +7,7 @@
  ******************************************************************/
 #pragma once
 
+#include "Library/StateMachine.h"
 #include "Program/Scene/SceneBase.h"
 
 class Mission;
@@ -39,12 +40,34 @@ public:
 	void				drawMissionNegative();		// ミッション失敗時の処理
 
 	void				recover();					// ミッション失敗で下がったものを元に戻す
-	void				fadeControl();				// フェードコントロール		
-	void				fadeIn();					// フェードイン
-	void				fadeOut();					// フェードアウト
 	void				drawHitEffect();
 
 private:
+	// ステート関数
+	void				stateEnterIdle();
+	void				stateExeIdle();
+
+	void				stateEnterReadyFadeIn();
+	void				stateExeReadyFadeIn();
+
+	void				stateEnterReady();
+	void				stateExeReady();
+
+	void				stateEnterReadyFadeOut();
+	void				stateExeReadyFadeOut();
+
+	void				stateEnterGame();
+	void				stateExeGame();
+
+	void				stateEnterGameOver();
+	void				stateExeGameOver();
+
+	void				stateEnterGameClear();
+	void				stateExeGameClear();
+
+private:
+	StateMachine<SceneGameNormal>	mState;	// ステート
+
 	Mission*			mMission;
 	ActorBoss*			mBoss;
 
@@ -54,13 +77,8 @@ private:
 
 	int					mTime;				// 時間をはかる
 	bool				mIsPose;			// ポーズをしているかしていないか
-	int					mAlpha;				// アルファ値
-	int					mAlphaCount;		// アルファのディレイ
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mGameState;			// ゲームの状態(スタート・すっきりゲーム)
-	int					mFlagFade;			// フェードインアウトなどの段階を知らせる
-	int					mFlagFadeStart;		// げ～むすた～とのフェードイン・フェードアウトを知らせるのに使用
-	bool				mIsFadeIn;			// フェードインが終わった状態かを知らせる
 	int					mMissionStateKeep;	// ミッションの状態をキープ
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
@@ -78,7 +96,6 @@ private:
 	int					mHitEffectTime;
 
 	float				mCharaAtkY;
-	bool				mIsSound;
 
 	// 奥義内で使用
 	int					mAlphaFont;

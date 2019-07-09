@@ -36,7 +36,8 @@ namespace
 }
 
 SceneGameRefresh::SceneGameRefresh()
-	: mNiku(nullptr)
+	: mState()
+	, mNiku(nullptr)
 	, mNoppo(nullptr)
 	, mYoshi(nullptr)
 	, mBoss(nullptr)

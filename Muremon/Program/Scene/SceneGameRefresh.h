@@ -56,13 +56,12 @@ private:
 	void				stateExeGameClear();
 
 private:
+	StateMachine<SceneGameRefresh>	mState;	// ステート
+
 	ActorNikuman*		mNiku;
 	ActorNoppo*			mNoppo;
 	ActorYoshi*			mYoshi;
 	ActorBoss*			mBoss;
-
-private:
-	StateMachine<SceneGameRefresh>	mState;	// ステート
 
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mGameState;			// ゲームの状態(スタート・すっきりゲーム)

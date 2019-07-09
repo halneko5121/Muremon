@@ -52,7 +52,8 @@ namespace
 }
 
 SceneGameNormal::SceneGameNormal()
-	: mMission(nullptr)
+	: mState()
+	, mMission(nullptr)
 	, mBoss(nullptr)
 	, mNiku(nullptr)
 	, mNoppo(nullptr)

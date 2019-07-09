@@ -69,8 +69,6 @@ SceneGameNormal::SceneGameNormal()
 
 	mMissionGage = 0;
 
-	mIsRed = false;
-
 	mHitEffectAlpha = 0;
 	mIsHitEffect = false;
 	mHitEffectTime = 0;

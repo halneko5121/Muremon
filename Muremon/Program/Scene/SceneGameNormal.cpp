@@ -52,45 +52,34 @@ namespace
 }
 
 SceneGameNormal::SceneGameNormal()
+	: mMission(nullptr)
+	, mBoss(nullptr)
+	, mNiku(nullptr)
+	, mNoppo(nullptr)
+	, mYoshi(nullptr)
+	, mTime(TIME_LIMIT)
+	, mIsPose(false)
+	, mStartAlpha(0)
+	, mGameState(G_START_SCENE)
+	, mMissionStateKeep(0)
+	, mNikumanKeyCount(0)
+	, mYoshitaroKeyCount(0)
+	, mNoppoKeyCount(0)
+	, mIsInit(false)
+	, mMissionGauge(0)
+	, mIsHitNiku(false)
+	, mIsHitYoshi(false)
+	, mIsHitNoppo(false)
+	, mIsHitEffect(false)
+	, mHitEffectAlpha(0)
+	, mHitEffectTime(0)
+	, mCharaAtkY(0)
+	, mAlphaFont(0)
+	, mTimeCount(0)
+	, mWavePos(WAVE_INIT_X, WAVE_INIT_Y)
+	, mNegativeState(NO_NEGATIVE)
+	, mNegativeDamege(1)
 {
-	mIsPose = false;
-
-	mTime = TIME_LIMIT;
-
-	mStartAlpha = 0;	// アルファ値
-
-	mGameState = G_START_SCENE;
-
-	mNikumanKeyCount = mYoshitaroKeyCount = mNoppoKeyCount = 0;
-
-	mMissionStateKeep = 0;
-
-	mIsInit = false;
-
-	mMissionGauge = 0;
-
-	mHitEffectAlpha = 0;
-	mIsHitEffect = false;
-	mHitEffectTime = 0;
-
-	mIsHitNiku = false;
-
-	mIsHitYoshi = false;
-
-	mIsHitNoppo = false;
-
-	mCharaAtkY = 0;
-
-	//奥義
-	mAlphaFont = 0;
-	mTimeCount = 0;
-	mWavePos.x = WAVE_INIT_X;
-	mWavePos.y = WAVE_INIT_Y;
-
-	//NEGATIVE
-	mNegativeState = NO_NEGATIVE;
-	mNegativeDamege = 1;
-
 	mState.initialize(cState_Count, cState_Idle);
 	mState.registState(this, &SceneGameNormal::stateEnterIdle,			&SceneGameNormal::stateExeIdle,			nullptr, cState_Idle);
 	mState.registState(this, &SceneGameNormal::stateEnterReadyFadeIn,	&SceneGameNormal::stateExeReadyFadeIn,	nullptr, cState_ReadyFadeIn);

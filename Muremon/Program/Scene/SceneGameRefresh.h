@@ -26,13 +26,13 @@ public:
 	void				draw() override;
 	void				end() override;
 
+private:
 	void				drawNum();
 	void				drawHpGauge();
 
 	void				initHitFlag();
 	void				drawHitEffect();
 
-private:
 	// ステート関数
 	void				stateEnterIdle();
 	void				stateExeIdle();

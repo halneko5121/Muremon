@@ -27,6 +27,7 @@ public:
 	void				draw() override;
 	void				end() override;
 
+private:
 	void				drawKeyCount();				// 連打数
 	void				drawScore();				// スコア
 	void				drawTime();					// タイム

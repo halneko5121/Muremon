@@ -22,6 +22,7 @@ public:
 	void			draw() override;
 	void			end() override;
 
+private:
 	void			updateDrawPos();
 	void			checkSceneChange();
 

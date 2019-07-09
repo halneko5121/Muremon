@@ -65,17 +65,18 @@ private:
 
 	int cnt_key_noppo;		//のっぽの押されたキーの数をカウント
 public:
+	Mission(Texture* m_texture, Vertex* m_vertex, LPDIRECT3DDEVICE9 apDev);
+	~Mission(void);
+
 	int		getCountKeyNikuman()		{ return cnt_key_nikuman; };
 	int		getCountKeyYoshitaro()	{ return cnt_key_yoshitaro; };
 	int		getCountKeyNoppo()		{ return cnt_key_noppo; };
 
-
 	void	init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo);
-
 	int		update();
-
 	void	draw();
 
+private:
 	void	fadeIn();
 
 	void	fadeOut();
@@ -119,6 +120,4 @@ public:
 	void	updateMission13D();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void	updateMission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	Mission(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
-	~Mission(void);
 };

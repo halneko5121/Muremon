@@ -118,7 +118,7 @@ private:
 	/**
 	 * @brief	デバイス全体の情報更新
 	 */
-	void						KeyBordRefresh();
+	void						keyBordRefresh();
 
 private:
 	static DirectInputKey*		mInstance;						// インスタンス

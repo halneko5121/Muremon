@@ -127,7 +127,7 @@ DirectInputKey::init(HWND window_handle)
 void
 DirectInputKey::update()
 {
-	KeyBordRefresh();
+	keyBordRefresh();
 }
 
 /**
@@ -226,7 +226,7 @@ DirectInputKey::isAnyKeyPushed() const
  * @brief	デバイス全体の情報更新
  */
 void
-DirectInputKey::KeyBordRefresh()
+DirectInputKey::keyBordRefresh()
 {
 	static HRESULT h_result;
 

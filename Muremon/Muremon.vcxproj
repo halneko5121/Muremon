@@ -46,6 +46,7 @@
     <ClCompile Include="Program\Scene\SceneTitle.cpp" />
     <ClCompile Include="Program\Scene\SceneTutorial.cpp" />
     <ClCompile Include="Program\Util\UtilBattle.cpp" />
+    <ClCompile Include="Program\Util\UtilGraphics.cpp" />
     <ClCompile Include="Program\Util\UtilInput.cpp" />
     <ClCompile Include="Program\Util\UtilScore.cpp" />
     <ClCompile Include="Program\Util\UtilSound.cpp" />
@@ -86,6 +87,7 @@
     <ClInclude Include="Program\Scene\SceneTitle.h" />
     <ClInclude Include="Program\Scene\SceneTutorial.h" />
     <ClInclude Include="Program\Util\UtilBattle.h" />
+    <ClInclude Include="Program\Util\UtilGraphics.h" />
     <ClInclude Include="Program\Util\UtilInput.h" />
     <ClInclude Include="Program\Util\UtilScore.h" />
     <ClInclude Include="Program\Util\UtilSound.h" />

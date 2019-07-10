@@ -94,4 +94,4 @@ private:
 	D3DPRESENT_PARAMETERS	mD3dPresentParam;		// デバイスのプレゼンテーションパラメータ
 };
 
-static LPDIRECT3DDEVICE9 GetGraphicsDevice() { return DirectGraphics::getInstance()->getDevice(); }
+static DirectGraphics* GetDirectGraphics() { return DirectGraphics::getInstance(); }

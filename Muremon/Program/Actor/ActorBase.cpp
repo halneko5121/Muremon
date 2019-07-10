@@ -10,6 +10,7 @@
 
 #include "Library/Graphics/DirectGraphics.h"
 #include "Program/Util/UtilBattle.h"
+#include "Program/Util/UtilGraphics.h"
 
 namespace
 {
@@ -41,7 +42,7 @@ ActorBase::ActorBase()
 	mTexture = new Texture();
 	mVertex = new Vertex();
 
-	mTexture->load("Data\\TextureData\\actor.txt", GetGraphicsDevice());
+	mTexture->load("Data\\TextureData\\actor.txt", UtilGraphics::getGraphicsDevice());
 	mVertex->load("Data\\RectData\\actor.txt");
 }
 

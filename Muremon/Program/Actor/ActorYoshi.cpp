@@ -1,6 +1,8 @@
 #include "ActorYoshi.h"
+
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
+#include "Program/Util/UtilGraphics.h"
 
 namespace
 {
@@ -240,7 +242,7 @@ ActorYoshi::setAnimetion(int max_animetion, int anime_count ,int rect_num ,int m
 void
 ActorYoshi::drawEffectFont(int rect_startnum)
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), GetGraphicsDevice());
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 
 	int rect_change = 0;
 
@@ -262,7 +264,7 @@ ActorYoshi::drawEffectFont(int rect_startnum)
 void
 ActorYoshi::draw(int rect_startnum)
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), GetGraphicsDevice());
+	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
 
 	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){

@@ -1,6 +1,8 @@
 #include "ActorNikuman.h"
+
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
+#include "Program/Util/UtilGraphics.h"
 
 namespace 
 {
@@ -213,7 +215,7 @@ ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num, int
 void
 ActorNikuman::drawEffectFont(int rect_startnum)
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), GetGraphicsDevice());
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 
 	//フォントエフェクトの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
@@ -232,7 +234,7 @@ ActorNikuman::drawEffectFont(int rect_startnum)
 void
 ActorNikuman::draw(int rect_startnum)
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NIKU), GetGraphicsDevice());
+	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){

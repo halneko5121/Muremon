@@ -90,7 +90,7 @@ public:
 	 * @param	file_name		txtファイル名
 	 * @return	ロードが成功したか失敗したか
 	 */
-	bool	load(char* file_name);
+	bool	load(const char* file_name);
 
 	/**
 	 * @brief	矩形データを開放

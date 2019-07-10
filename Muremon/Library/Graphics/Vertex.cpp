@@ -454,7 +454,7 @@ Vertex::drawF(float x, float y, int rect_num)
  * @return	ロードが成功したか失敗したか
  */
 bool
-Vertex::load(char *file_name)
+Vertex::load(const char *file_name)
 {
 	mLoadedRectCount = 0;
 	FILE *fp;							// ファイルポインタ

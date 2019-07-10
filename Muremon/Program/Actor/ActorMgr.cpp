@@ -82,3 +82,18 @@ ActorMgr::createActor(ActorId id)
 	return actor;
 }
 
+/**
+ * @brief	アクターの初期化
+ */
+void
+ActorMgr::init()
+{
+	ActorIterator it_begin = mActorList.begin();
+	ActorIterator it_end = mActorList.end();
+	for (ActorIterator it = it_begin; it != it_end; it++)
+	{
+		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
+		actor->init();
+	}
+}
+

@@ -44,8 +44,14 @@ public:
 	 */
 	ActorBase*			createActor(ActorId id);
 
+	/**
+	 * @brief	アクターの初期化
+	 */
+	void				init();
+
 private:
 	typedef std::vector<ActorBase*>	ActorList;
+	typedef std::vector<ActorBase*>::iterator ActorIterator;
 
 private:
 	static ActorMgr*	mInstance;		// インスタンス

@@ -28,6 +28,11 @@ public:
 	~DirectGraphics();
 
 	/**
+	 * @brief	インスタンスの取得
+	 */
+	static DirectGraphics*	getInstance();
+
+	/**
 	 * @brief	インスタンスの生成
 	 */
 	static DirectGraphics*	create();
@@ -88,3 +93,5 @@ private:
 	LPDIRECT3DDEVICE9		mDevice;				// IDirect3DDevice9インターフェイスへのポインタ
 	D3DPRESENT_PARAMETERS	mD3dPresentParam;		// デバイスのプレゼンテーションパラメータ
 };
+
+static LPDIRECT3DDEVICE9 GetGraphicsDevice() { return DirectGraphics::getInstance()->getDevice(); }

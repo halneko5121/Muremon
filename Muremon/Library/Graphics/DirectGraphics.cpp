@@ -28,6 +28,15 @@ DirectGraphics::~DirectGraphics()
 }
 
 /**
+ * @brief	インスタンスの取得
+ */
+DirectGraphics*
+DirectGraphics::getInstance()
+{
+	return mInstance;
+}
+
+/**
  * @brief	インスタンスの生成
  */
 DirectGraphics*

@@ -346,3 +346,43 @@ private:
 	bool				mIsChangeStateInExe;			// execute() 内部で changeState() を呼び出したか
 	Delegate<OWNER>*	mDelegate[cMaxRegistState];		// デリゲート配列
 };
+
+// ステート関数宣言
+#define DECLAR_STATE_FUNC1(func_name)					\
+	void	state##func_name()							\
+
+#define DECLAR_STATE_FUNC2(func_name)					\
+	void	stateEnter##func_name();					\
+	void	state##func_name()							\
+
+#define DECLAR_STATE_FUNC3(func_name)					\
+	void	stateEnter##func_name();					\
+	void	state##func_name();							\
+	void	stateExit##func_name(int next_stat_index)	\
+
+// ステート関数登録
+#define REGIST_STATE_FUNC1(owner_type, state_obj, func_name, state_index)	\
+	state_obj.registState(this,												\
+						  nullptr,											\
+						  &owner_type::state##func_name,					\
+						  nullptr,											\
+						  state_index)										\
+
+#define REGIST_STATE_FUNC2(owner_type, state_obj, func_name, state_index)	\
+	state_obj.registState(this,												\
+						  &owner_type::stateEnter##func_name,				\
+						  &owner_type::state##func_name,					\
+						  nullptr,											\
+						  state_index)										\
+
+#define REGIST_STATE_FUNC3(owner_type, state_obj, func_name, state_index)	\
+	state_obj.registState(this,												\
+						  &owner_type::stateEnter##func_name,				\
+						  &owner_type::state##func_name,					\
+						  &owner_type::stateExit##func_name,				\
+						  state_index)										\
+
+
+
+
+

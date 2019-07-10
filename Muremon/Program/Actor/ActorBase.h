@@ -112,10 +112,10 @@ public:
 
 	/**
 	 * @brief	攻撃フラグの設定
-	 * @param	start_x	開始位置
 	 * @return	キャラデータ(フラグの状態)
 	 */
-	CHARADATA			setAtkFlag(CHARADATA set_charadata);
+	void				setGroundAtkFlag();
+	void				setSkyAtkFlag();
 
 	/**
 	 * @brief エフェクトフォント位置の設定

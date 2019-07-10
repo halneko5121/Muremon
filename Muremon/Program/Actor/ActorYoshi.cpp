@@ -86,7 +86,6 @@ ActorYoshi::init()
 	//praivateïœêî
 	s_atk_start_y = 0.f;
 	//protectedïœêî
-	mRandSpeed	 = 0.f;
 	mDelay		 = mMaxAnimetion = 0;
 	mFlagTurn2 = mIsHitCheck  = false;
 
@@ -104,7 +103,6 @@ ActorYoshi::init()
 
 	pos_effectfont.x		= pos_effectfont.y =	rand_acc = rand_move_x = mDegSpin = draw_deg = 0.f;
 	mCountEffect			= 0;
-	mInit					= true;
 }
 
 /**
@@ -113,6 +111,25 @@ ActorYoshi::init()
 void
 ActorYoshi::runImple()
 {
+	mCountEffect = 0;
+	mCharaData.speed = setSpeed();
+	mCharaData.animetion = 0;
+
+	if (mCharaData.flag_atk1)
+	{
+		rand_deg = (float)(rand() % cDegRand + cDegRandMin);
+		mCharaData.draw_cc = setAtkPos(RADIUS_YOSHI, G_ATK_1_START_Y);
+		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+	}
+	else if (mCharaData.flag_atk2)
+	{
+		s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
+		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+
+		mCharaData.draw_cc = setAtkPos(RADIUS_YOSHI, s_atk_start_y);
+	}
 }
 
 /**
@@ -121,56 +138,28 @@ ActorYoshi::runImple()
 void
 ActorYoshi::update(POS_CC<float> boss_cc, bool boss_death)
 {
-	mRandSpeed = 0.f;
-
-	// çUåÇäJén
-	if (UtilBattle::isRunMediumGroundAttack() ||
-		UtilBattle::isRunMediumSkyAttack())
-	{
-		if(mFlagTurn2)
-		{
-			mCharaData	= cInitActorData;
-			mCountEffect = 0;
-			mInit = true;
-		}
-		mCharaData		= setAtkFlag(mCharaData);
-		mCharaData.speed  = setSpeed();
-
-		if (UtilBattle::isRunMediumGroundAttack())
-		{
-			rand_deg = (float)(rand() % cDegRand + cDegRandMin);
-			mCharaData.draw_cc = setAtkPos(RADIUS_YOSHI, G_ATK_1_START_Y);
-			mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-		}
-		else if (UtilBattle::isRunMediumSkyAttack())
-		{
-			s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
-			rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-			rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-			mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-
-			mCharaData.draw_cc = setAtkPos(RADIUS_YOSHI, s_atk_start_y);
-		}
-	}
-
-	// ÉLÉÉÉâÇÃìÆçÏ(Ç¢ÇøÇ®100ëÃï™)
 	//ìñÇΩÇËîªíË
-	if(!mCharaData.flag_death){
-		if(!boss_death){
-			if(isHit(mCharaData.draw_cc,boss_cc,ID_YOSHI)){
+	if(!mCharaData.flag_death)
+	{
+		if(!boss_death)
+		{
+			if(isHit(mCharaData.draw_cc,boss_cc,ID_YOSHI))
+			{
 				mCharaData.flag_hit		= true;
 				mCharaData.flag_death	= true;
 				setIsHitCheck(true);
 				m_chara_y = mCharaData.draw_cc.y;
 
-				if(mCharaData.flag_atk1){
+				if(mCharaData.flag_atk1)
+				{
 					if (UtilSound::isPlaying(S_YOSHI_HIP))
 					{
 						UtilSound::stop(S_YOSHI_HIP);
 					}
 					UtilSound::playOnce(S_YOSHI_HIP);
 				}
-				if(mCharaData.flag_atk2){
+				if(mCharaData.flag_atk2)
+				{
 					if (UtilSound::isPlaying(S_YOSHI_HUSEN))
 					{
 						UtilSound::stop(S_YOSHI_HUSEN);
@@ -180,21 +169,28 @@ ActorYoshi::update(POS_CC<float> boss_cc, bool boss_death)
 			}
 		}
 
-		if(mCharaData.flag_atk1){
-			if(mCharaData.draw_cc.x - RADIUS_YOSHI < cWindowWidth){
+		if(mCharaData.flag_atk1)
+		{
+			if(mCharaData.draw_cc.x - RADIUS_YOSHI < cWindowWidth)
+			{
 				mCharaData.draw_cc	 = updateAttack1();
 				mCharaData.animetion = setAnimetion(ANIME_G_ATK4_YOSHI,mCharaData.animetion,NULL);
 			}
 		}
-		else if(mCharaData.flag_atk2){
-			if(mCharaData.draw_cc.x - RADIUS_YOSHI < cWindowWidth){
+		else if(mCharaData.flag_atk2)
+		{
+			if(mCharaData.draw_cc.x - RADIUS_YOSHI < cWindowWidth)
+			{
 				mOrbit->mWave->setSpeed(mCharaData.speed);
 				mCharaData.draw_cc	 = updateAttack2();
 				mCharaData.animetion = setAnimetion(NULL,mCharaData.animetion,ANIME_S_ATK1_YOSHI);
 			}
 		}
 	}
-	else deathControl(mSoundStartNum,mRectStartNum);
+	else
+	{
+		deathControl(mSoundStartNum, mRectStartNum);
+	}
 
 	//ìñÇΩÇ¡ÇΩå„ÇÃèàóù
 	if(mCharaData.flag_hit){
@@ -303,33 +299,38 @@ ActorYoshi::updateAttack2()														//ÉLÅ[ì¸óÕÇ…ÇÊÇÈìÆçÏÇªÇÃ2
 void
 ActorYoshi::deathControl(int sound_num, int rect_startnum)
 {
+//	if(mCharaData.animetion != 0) mCharaData.animetion = 0;
 
-	if(mInit){
-		if(mCharaData.animetion != 0) mCharaData.animetion = 0;
-		mInit = false;
-	}
-	if(mCharaData.flag_atk1){
-		if(!mCharaData.flag_death_next){
+	if(mCharaData.flag_atk1)
+	{
+		if(!mCharaData.flag_death_next)
+		{
 			mCharaData.animetion = setAnimetion((ANIME_MOTION3_YOSHI - ANIME_G_ATK4_YOSHI),mCharaData.animetion,ANIME_MOTION1_YOSHI);
-			if(mCharaData.animetion == 3){
+			if(mCharaData.animetion == 3)
+			{
 				mCharaData.flag_death_next = true;
 			}
 		}
-		if(mCharaData.flag_death_next){
+		if(mCharaData.flag_death_next)
+		{
 			mCharaData.animetion = 0;																//ï`âÊÇå≈íË
 			mCharaData.rect_num  = ANIME_DEATH_YOSHI;
 	
 			mCharaData.draw_cc	 = mOrbit->mRebound->orbitRebound(rand_deg,mCharaData.speed,mCharaData.draw_cc);
 		}
 	}
-	else if(mCharaData.flag_atk2){
-		if(!mCharaData.flag_death_next){
+	else if(mCharaData.flag_atk2)
+	{
+		if(!mCharaData.flag_death_next)
+		{
 			mCharaData.animetion = setAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI),mCharaData.animetion,ANIME_S_ATK2_YOSHI);
-			if(mCharaData.animetion == 3){
+			if(mCharaData.animetion == 3)
+			{
 				mCharaData.flag_death_next = true;
 			}
 		}
-		if(mCharaData.flag_death_next){
+		if(mCharaData.flag_death_next)
+		{
 			mCharaData.animetion = 0;																//ï`âÊÇå≈íË
 			mCharaData.rect_num  = ANIME_DEATH_YOSHI;
 
@@ -337,7 +338,8 @@ ActorYoshi::deathControl(int sound_num, int rect_startnum)
 		}
 	}
 
-	if( (mCharaData.draw_cc.y < -RADIUS_YOSHI) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_YOSHI) ){
+	if( (mCharaData.draw_cc.y < -RADIUS_YOSHI) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_YOSHI) )
+	{
 		mCharaData.flag_atk1  = mCharaData.flag_atk2  = false;
 		mCharaData.flag_death = mCharaData.flag_hit	  = false;
 		mCharaData.flag_death_next = false;

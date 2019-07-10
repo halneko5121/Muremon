@@ -81,7 +81,6 @@ ActorNoppo::init()
 	alpha			= MAX_ALPHA;
 	s_atk_start_y	= 0.f;
 	//protected変数
-	mRandSpeed  = 0.f;
 	mDelay		 = mMaxAnimetion = 0;
 	mFlagTurn2 = mIsHitCheck  = false;
 
@@ -99,9 +98,7 @@ ActorNoppo::init()
 
 	pos_effectfont.x		= pos_effectfont.y = mDegSpin = 0.f;
 	mCountEffect			= 0;
-	mInit					= true;
 }
-
 
 /**
  * 実行
@@ -109,6 +106,26 @@ ActorNoppo::init()
 void
 ActorNoppo::runImple()
 {
+	// 攻撃開始
+	mCountEffect = 0;
+	mCharaData.speed = setSpeed();
+	mCharaData.animetion = 0;
+
+	if (mCharaData.flag_atk1)
+	{
+		mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, G_ATK_3_START_Y);
+	}
+	else if (mCharaData.flag_atk2)
+	{
+		s_atk_start_y = (float)(rand() % cRandY);
+		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+
+		mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, s_atk_start_y);
+	}
+
+
 }
 
 /**
@@ -117,36 +134,6 @@ ActorNoppo::runImple()
 void
 ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 {
-	mRandSpeed = 0.f;
-
-	// 攻撃開始
-	if (UtilBattle::isRunStrongGroundAttack() ||
-		UtilBattle::isRunStrongSkyAttack())
-	{
-		if(mFlagTurn2){
-			mCharaData	= init_charadata_noppo;
-			mCountEffect = 0;
-			mInit = true;
-		}
-		mCharaData			= setAtkFlag(mCharaData);
-		mCharaData.speed	 = setSpeed();
-
-		if (UtilBattle::isRunStrongGroundAttack())
-		{
-			mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, G_ATK_3_START_Y);
-		}
-		else if (UtilBattle::isRunStrongSkyAttack())
-		{
-			s_atk_start_y = (float)(rand() % cRandY);
-			rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-			rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-			mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-
-			mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, s_atk_start_y);
-		}
-	}
-
-	//キャラの動作(いちお100体分)
 	//当たり判定
 	if(!mCharaData.flag_death){
 		if(!boss_death){
@@ -319,11 +306,6 @@ void
 ActorNoppo::deathControl(int sound_startnum ,int rect_startnum)							//死亡処理
 {
 	static int wait_count = 0;
-
-	if(mInit){
-		if(mCharaData.animetion != 0) mCharaData.animetion = 0;
-		mInit = false;
-	}
 
 	if(mCharaData.flag_atk1){
 		if(!mCharaData.flag_death_next){

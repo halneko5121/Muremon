@@ -72,7 +72,6 @@ ActorNikuman::init()
 	//praivate変数
 	s_atk_start_y = 0.f;
 	//protected変数
-	mRandSpeed	 = 0.f;
 	mDelay		 = mMaxAnimetion = 0;
 	mFlagTurn2 = mIsHitCheck  = false;
 
@@ -98,6 +97,28 @@ ActorNikuman::init()
 void
 ActorNikuman::runImple()
 {
+	// 攻撃開始
+	mCountEffect = 0;
+	mDegSpin = 0.f;
+	mCharaData.animetion = 0;
+
+	if (mCharaData.flag_atk1)
+	{
+		rand_deg = (float)(rand() % cDegRand + cDegRandMin);
+		mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, G_ATK_2_START_Y);
+		mCharaData.speed = setSpeed();
+		mDegSpin = 0.f;
+	}
+	else if (mCharaData.flag_atk2)
+	{
+		s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
+		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+
+		mCharaData.speed = setSpeed();
+		mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, s_atk_start_y);
+	}
 }
 
 /**
@@ -106,39 +127,6 @@ ActorNikuman::runImple()
 void
 ActorNikuman::update(POS_CC<float> boss_cc, bool boss_death)
 {
-	mRandSpeed = 0.f;
-
-	// 攻撃開始
-	if (UtilBattle::isRunWeakGroundAttack() ||
-		UtilBattle::isRunWeakSkyAttack())
-	{
-		if(mFlagTurn2){
-			mCharaData		= cInitActorData;
-			mCountEffect	= 0;
-			mDegSpin		= 0.f;
-		}
-		mCharaData		= setAtkFlag(mCharaData);
-
-		if (UtilBattle::isRunWeakGroundAttack())
-		{
-			rand_deg = (float)(rand() % cDegRand + cDegRandMin);
-			mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, G_ATK_2_START_Y);
-			mCharaData.speed = setSpeed();
-			mDegSpin = 0.f;
-		}
-		else if (UtilBattle::isRunWeakSkyAttack())
-		{
-			s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
-			rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-			rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-			mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-
-			mCharaData.speed = setSpeed();
-			mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, s_atk_start_y);
-		}
-	}
-	
-	//キャラの動作(いちお100体分)
 	//当たり判定
 	if(!mCharaData.flag_death){
 		if(!boss_death){

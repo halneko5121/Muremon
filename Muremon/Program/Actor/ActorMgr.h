@@ -11,7 +11,7 @@
 
 enum ActorId
 {
-	cActorId_Null,			// ‚È‚µ
+	cActorId_Null = -1,		// ‚È‚µ
 	cActorId_Noppo,			// ƒmƒbƒ|
 	cActorId_Nikuman,		// ‚É‚­‚Ü‚ñ
 	cActorId_Yoshi,			// ‚æ‚µ‚½‚ë‚¤

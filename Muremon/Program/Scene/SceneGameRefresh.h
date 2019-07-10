@@ -9,11 +9,14 @@
 
 #include "Library/StateMachine.h"
 #include "Program/Scene/SceneBase.h"
+#include "Program/Actor/ActorMgr.h"
+#include "Program/Define.h"
 
 class ActorNikuman;
 class ActorNoppo;
 class ActorYoshi;
 class ActorBoss;
+class ActorBase;
 
 class SceneGameRefresh : public SceneBase
 {
@@ -32,6 +35,10 @@ private:
 
 	void				initHitFlag();
 	void				drawHitEffect();
+
+	ActorBase*			getActorNikuman(int index);
+	ActorBase*			getActorYoshi(int index);
+	ActorBase*			getActorNoppo(int index);
 
 	// ステート関数
 	void				stateEnterIdle();
@@ -58,12 +65,17 @@ private:
 private:
 	StateMachine<SceneGameRefresh>	mState;	// ステート
 	ActorBoss*			mBoss;
+	ActorBase*			mActor[cActorId_Count][MAX_VALLUE_PLAYER];
 
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mGameState;			// ゲームの状態(スタート・すっきりゲーム)
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
 	int					mNoppoKeyCount;		// のっぽの押されたキーの数をカウント
+
+	int					mNikumanCurrentIndex;	// にくまんの現在の番号
+	int					mYoshitaroCurrentIndex;	// 吉たろうの現在の番号
+	int					mNoppoCurrentIndex;		// のっぽの現在の番号
 
 	bool				mIsHitNiku;
 	bool				mIsHitYoshi;

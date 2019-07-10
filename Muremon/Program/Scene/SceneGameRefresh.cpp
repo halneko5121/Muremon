@@ -46,6 +46,9 @@ SceneGameRefresh::SceneGameRefresh()
 	, mNikumanKeyCount(0)
 	, mYoshitaroKeyCount(0)
 	, mNoppoKeyCount(0)
+	, mNikumanCurrentIndex(0)
+	, mYoshitaroCurrentIndex(0)
+	, mNoppoCurrentIndex(0)
 	, mIsHitNiku(false)
 	, mIsHitYoshi(false)
 	, mIsHitNoppo(false)
@@ -72,12 +75,12 @@ SceneGameRefresh::~SceneGameRefresh(void)
 void SceneGameRefresh::impleInit()
 {
 	// プレイヤー3種類分
-	for (int actor_id = cActorId_Noppo; actor_id <= cActorId_Yoshi; actor_id++)
+	for (int actor_id = cActorId_Noppo; actor_id < cActorId_Count; actor_id++)
 	{
 		// 各最大数生成
 		for (int j = 0; j < MAX_VALLUE_PLAYER; j++)
 		{
-			GetActorMgr()->createActor(static_cast<ActorId>(actor_id));
+			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id));
 		}
 	}
 	mBoss = new ActorBoss();
@@ -218,6 +221,24 @@ void SceneGameRefresh::drawHitEffect()
 	mVertex->drawF((float)mBoss->mMoveX - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 
+ActorBase*
+SceneGameRefresh::getActorNikuman(int index)
+{
+	return mActor[cActorId_Nikuman][index];
+}
+
+ActorBase*
+SceneGameRefresh::getActorYoshi(int index)
+{
+	return mActor[cActorId_Yoshi][index];
+}
+
+ActorBase*
+SceneGameRefresh::getActorNoppo(int index)
+{
+	return mActor[cActorId_Noppo][index];
+}
+
 void SceneGameRefresh::initHitFlag()
 {
 	mIsHitNiku = false;
@@ -315,6 +336,45 @@ SceneGameRefresh::stateExeGame()
 
 	UtilSound::playLoop(S_BGM_BATTLE);
 
+	if (UtilBattle::isRunWeakGroundAttack())
+	{
+		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunWeakSkyAttack())
+	{
+		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
+	if (UtilBattle::isRunMediumGroundAttack())
+	{
+		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunMediumSkyAttack())
+	{
+		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
+	if (UtilBattle::isRunStrongGroundAttack())
+	{
+		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunStrongSkyAttack())
+	{
+		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
 	// アクターの更新
 	GetActorMgr()->update(boss_cc, mBoss->mIsDeath);
 
@@ -397,18 +457,33 @@ SceneGameRefresh::stateExeGame()
 		UtilBattle::isRunWeakSkyAttack())
 	{
 		mNikumanKeyCount++;
+		mNikumanCurrentIndex++;
+		if (MAX_VALLUE_PLAYER <= mNikumanCurrentIndex)
+		{
+			mNikumanCurrentIndex = 0;
+		}
 	}
 	// よしたろう
 	if (UtilBattle::isRunMediumGroundAttack() ||
 		UtilBattle::isRunMediumSkyAttack())
 	{
 		mYoshitaroKeyCount++;
+		mYoshitaroCurrentIndex++;
+		if (MAX_VALLUE_PLAYER <= mYoshitaroCurrentIndex)
+		{
+			mYoshitaroCurrentIndex = 0;
+		}
 	}
 	// のっぽ
 	if (UtilBattle::isRunStrongGroundAttack() ||
 		UtilBattle::isRunStrongSkyAttack())
 	{
 		mNoppoKeyCount++;
+		mNoppoCurrentIndex++;
+		if (MAX_VALLUE_PLAYER <= mNoppoCurrentIndex)
+		{
+			mNoppoCurrentIndex = 0;
+		}
 	}
 
 	if (GetAsyncKeyState(VK_RETURN)) {	//エンターキーが押されたらタイトルに戻る

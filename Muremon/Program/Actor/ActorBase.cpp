@@ -116,19 +116,15 @@ ActorBase::setAtkPos(float start_x, float start_y)
  * @param	start_x	開始位置
  * @return	キャラデータ(フラグの状態)
  */
-CHARADATA
-ActorBase::setAtkFlag(CHARADATA set_charadata)
+void
+ActorBase::setGroundAtkFlag()
 {
-	if (UtilBattle::isRunGroundAttack())
-	{
-		set_charadata.flag_atk1 = true;
-	}
-	else if (UtilBattle::isRunSkyAttack())
-	{
-		set_charadata.flag_atk2 = true;
-	}
-
-	return set_charadata;
+	mCharaData.flag_atk1 = true;
+}
+void
+ActorBase::setSkyAtkFlag()
+{
+	mCharaData.flag_atk2 = true;
 }
 
 /**

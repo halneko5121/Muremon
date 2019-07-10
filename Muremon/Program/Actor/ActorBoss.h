@@ -17,63 +17,40 @@ public:
 	void fallDraw();
 
 public:
-	float boss_life;
-
-	float max_boss_life;
-
-	float boss_move_x;
-
-	float boss_move_y;
-
-	int hit_count;
-
-	bool boss_fall_flag;	//ボスが死亡した時のフラグ
-
-	int speed_x;
-
-	bool boss_win_flag;
+	float		mLife;
+	float		mMaxLife;
+	float		mMoveX;
+	float		mMoveY;
+	int			mHitCount;
+	bool		mIsDeath;		// ボスが死亡した時のフラグ
+	bool		mIsWin;
+	int			mSpeedX;
 
 private:
-	Texture	*texture;
-	Vertex	*vertex;
+	Texture*	mTexture;
+	Vertex*		mVertex;
+	float		mLvCount;
+	int			mDamageTime;
+	int			mMode;
+	int			mAlphaCount;	// ボスのアルファカウント
+	int			mPlayMode;
+	bool		mIsDamage;
+	bool		mIsRevival;
 
-	float lv_count;
+	int			mAlpha;
+	int			mFadeOutTime;
+	int			mRectData;
 
-	//ボスに使う
-	int damage_time;
+	int			mNoFontAlpha;
+	int			mNoDrawTime;
+	int			mNoFadeFlag;
 
-	int boss_mode;
-
-	int boss_alpha_count;	//ボスのアルファカウント
-
-	int play_mode;
-
-	bool boss_damage_flag;
-
-	bool boss_new_flag;
-
-	int boss_alpha;
-
-	int boss_fadeout_time;
-
-	int boss_rect_data;
-
-	int no_font_alpha;
-	int no_draw_time;
-	int no_fade_flag;
-
-	int boss_movecount;
-	bool boss_move_flag;
-
-	int move_anime_time;
-
-	unsigned int move_anime;
-
-	int damage_x;
-
-	int damage_y;
-
-	bool effect_font_move;
-
-	float effect_font;
+	int			mMoveCount;
+	bool		mIsMove;
+	int			mMoveAnimeTime;
+	unsigned int mMoveAnime;
+	int			mDamageX;
+	int			mDamageY;
+	bool		mEffectFontMove;
+	float		mEffectFont;
 };

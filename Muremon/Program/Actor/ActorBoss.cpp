@@ -42,63 +42,63 @@ enum BOSS_CONTROLTYPE
 
 ActorBoss::ActorBoss()
 {
-	vertex = new Vertex();
-	texture = new Texture();
-	UtilGraphics::loadVertexAndTexture(vertex, texture, "actor");
+	mVertex = new Vertex();
+	mTexture = new Texture();
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "actor");
 
 	//ボス
-	boss_fall_flag=false;
+	mIsDeath=false;
 
-	boss_alpha_count=0;
+	mAlphaCount=0;
 
-	boss_movecount=0;
+	mMoveCount=0;
 	
-	boss_new_flag=false;
+	mIsRevival=false;
 
-	hit_count=0;
+	mHitCount=0;
 
-	boss_damage_flag = false;
+	mIsDamage = false;
 
-	boss_mode=M_BOSS_MOVE;
+	mMode=M_BOSS_MOVE;
 	
-	boss_alpha=255;
+	mAlpha=255;
 		
-	boss_fadeout_time=0;
+	mFadeOutTime=0;
 	
-	damage_time=0;
+	mDamageTime=0;
 	
-	boss_rect_data=R_BOSS_MOVE1;
+	mRectData=R_BOSS_MOVE1;
 
-	lv_count = 0;
+	mLvCount = 0;
 
-	boss_life = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * lv_count); 
+	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
 
-	max_boss_life = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * lv_count); 
+	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
 
-	boss_move_x=BOSS_APPEARANCE_POSITION;
-	boss_move_y=BOSS_STABILITY_Y;
-	boss_movecount=0;
-	boss_move_flag=true;
+	mMoveX=BOSS_APPEARANCE_POSITION;
+	mMoveY=BOSS_STABILITY_Y;
+	mMoveCount=0;
+	mIsMove=true;
 
-	boss_win_flag=false;
+	mIsWin=false;
 
-	no_font_alpha=0;
-	no_draw_time=0;
-	no_fade_flag=NF_FADE_IN;
+	mNoFontAlpha=0;
+	mNoDrawTime=0;
+	mNoFadeFlag=NF_FADE_IN;
 
-	move_anime = 0;
+	mMoveAnime = 0;
 	
-	move_anime_time = 0;
+	mMoveAnimeTime = 0;
 
-	speed_x = 1;
+	mSpeedX = 1;
 
-	damage_x = 0;
+	mDamageX = 0;
 
-	damage_y = 0;
+	mDamageY = 0;
 
-	effect_font = 0;
+	mEffectFont = 0;
 
-	effect_font_move = false;
+	mEffectFontMove = false;
 }
 
 ActorBoss::~ActorBoss()
@@ -108,270 +108,270 @@ ActorBoss::~ActorBoss()
 void ActorBoss::impleInit()
 {
 	//ボス
-	boss_alpha_count=0;
+	mAlphaCount=0;
 
-	boss_movecount=0;
+	mMoveCount=0;
 	
-	boss_new_flag=false;
+	mIsRevival=false;
 
-	hit_count=0;
+	mHitCount=0;
 
-	boss_mode=M_BOSS_MOVE;
+	mMode=M_BOSS_MOVE;
 	
-	boss_alpha=255;
+	mAlpha=255;
 		
-	boss_fadeout_time=0;
+	mFadeOutTime=0;
 	
-	boss_damage_flag = false;
+	mIsDamage = false;
 
-	damage_time=0;
+	mDamageTime=0;
 	
-	boss_rect_data=R_BOSS_MOVE1;
+	mRectData=R_BOSS_MOVE1;
 
-	boss_move_x=BOSS_APPEARANCE_POSITION;
+	mMoveX=BOSS_APPEARANCE_POSITION;
 	
-	boss_movecount=0;
+	mMoveCount=0;
 
-	boss_move_flag=true;
+	mIsMove=true;
 
-	boss_win_flag=false;
+	mIsWin=false;
 
-	no_font_alpha=0;
-	no_draw_time=0;
-	no_fade_flag=NF_FADE_IN;
+	mNoFontAlpha=0;
+	mNoDrawTime=0;
+	mNoFadeFlag=NF_FADE_IN;
 
-	move_anime = 0;
+	mMoveAnime = 0;
 	
-	move_anime_time = 0;
+	mMoveAnimeTime = 0;
 
-	speed_x = 1;
+	mSpeedX = 1;
 
-	damage_x = 0;
+	mDamageX = 0;
 
-	damage_y = 0;
+	mDamageY = 0;
 
-	effect_font = 0;
+	mEffectFont = 0;
 
-	effect_font_move = false;
+	mEffectFontMove = false;
 
-	boss_life = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * lv_count); 
+	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
 
-	max_boss_life = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * lv_count); 
+	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
 
-	boss_new_flag=false;
+	mIsRevival=false;
 
-	boss_fall_flag=false;
+	mIsDeath=false;
 }
 
 void ActorBoss::control(int play_mode)
 {
 	//ボスの移動コントロール
-	if(boss_move_flag)
+	if(mIsMove)
 	{
-		boss_movecount++;
-		move_anime_time++;
+		mMoveCount++;
+		mMoveAnimeTime++;
 	}
 
 	//ボスの移動速度調整
-	if(boss_movecount>=BOSS_MOVECOUNT)
+	if(mMoveCount>=BOSS_MOVECOUNT)
 	{
-		boss_move_x-=1;
-		boss_movecount=0;
+		mMoveX-=1;
+		mMoveCount=0;
 		if(play_mode==PLAY_REFRESH)
 		{
-			if(boss_move_x<=BOSS_REFRESH_X_STOP)
+			if(mMoveX<=BOSS_REFRESH_X_STOP)
 			{
-				boss_move_x=BOSS_REFRESH_X_STOP;
-				boss_move_flag=false;
+				mMoveX=BOSS_REFRESH_X_STOP;
+				mIsMove=false;
 			}
 		}else{
-			if(boss_move_x<=BOSS_WIN_POSITOIN)
+			if(mMoveX<=BOSS_WIN_POSITOIN)
 			{
-				boss_move_x=BOSS_WIN_POSITOIN;
-				boss_move_flag=false;
-				boss_win_flag=true;
+				mMoveX=BOSS_WIN_POSITOIN;
+				mIsMove=false;
+				mIsWin=true;
 			}
 		}
 	}
 	
 	//ボスの移動アニメーションコントロール
-	if(move_anime_time % 16 ==15)
+	if(mMoveAnimeTime % 16 ==15)
 	{
-		move_anime++;
+		mMoveAnime++;
 	}
 
 	//ボスの移動ストップコントロール
 	//規定回数のダメージコントロール
-	if(hit_count==BOSS_DAMAGE_COUNT)
+	if(mHitCount==BOSS_DAMAGE_COUNT)
 	{
-		boss_move_flag = false;
-		boss_damage_flag=true;
-		hit_count=0;
+		mIsMove = false;
+		mIsDamage=true;
+		mHitCount=0;
 	}
 
 	//ライフが０になった時のコントロール
-	if(boss_life<0)
+	if(mLife<0)
 	{
-		boss_life=0;
+		mLife=0;
 	}
-	if(boss_life==0)
+	if(mLife==0)
 	{
-		boss_fall_flag=true;
-		boss_move_flag=false;
+		mIsDeath=true;
+		mIsMove=false;
 	}
 	
 	//ボスが死んだ後の初期化
-	if(boss_new_flag)
+	if(mIsRevival)
 	{
-		if(lv_count<7)
+		if(mLvCount<7)
 		{
-			lv_count++;
-		}else lv_count = 7;
+			mLvCount++;
+		}else mLvCount = 7;
 		impleInit();
 	}
 	
-	if(!boss_fall_flag)
+	if(!mIsDeath)
 	{
 		//ボスがダメージ食らった時の処理
-		if(boss_damage_flag)
+		if(mIsDamage)
 		{
-			boss_mode=M_BOSS_DAMEGE;
-			damage_x = rand()% DAMAGE_RAND;
-			damage_y = rand()% DAMAGE_RAND;
+			mMode=M_BOSS_DAMEGE;
+			mDamageX = rand()% DAMAGE_RAND;
+			mDamageY = rand()% DAMAGE_RAND;
 		}
 	}
 
 	//ボスがボスが死んだ時のフェードアウトシーン
-	if(boss_fall_flag)
+	if(mIsDeath)
 	{
-		boss_mode=M_BOSS_FALL;
-		boss_fadeout_time++;
-		effect_font_move = true;
-		if(boss_fadeout_time>BOSS_FALL_TIME)
+		mMode=M_BOSS_FALL;
+		mFadeOutTime++;
+		mEffectFontMove = true;
+		if(mFadeOutTime>BOSS_FALL_TIME)
 		{
-			if(boss_alpha_count++>1)
+			if(mAlphaCount++>1)
 			{
-				boss_alpha-=BOSS_ALPHA_FALL;
-				boss_alpha_count=0;
+				mAlpha-=BOSS_ALPHA_FALL;
+				mAlphaCount=0;
 			}
-			if(boss_alpha<0)
+			if(mAlpha<0)
 			{
-				boss_alpha=0;
-				boss_alpha_count=0;
+				mAlpha=0;
+				mAlphaCount=0;
 			}
 
-			if(boss_alpha==0)
+			if(mAlpha==0)
 			{
-				boss_alpha=0;
-				boss_alpha_count=0;
-				boss_new_flag=true;
+				mAlpha=0;
+				mAlphaCount=0;
+				mIsRevival=true;
 			}
 		}
 
-		if(effect_font_move)
+		if(mEffectFontMove)
 		{
-			effect_font++;
-			if(effect_font>NO_FONT){
-			effect_font_move=false;
-			effect_font = NO_FONT;
+			mEffectFont++;
+			if(mEffectFont>NO_FONT){
+			mEffectFontMove=false;
+			mEffectFont = NO_FONT;
 			}
 		}
 
-		if (boss_fadeout_time == BOSS_FALL_TIME)
+		if (mFadeOutTime == BOSS_FALL_TIME)
 		{
 			UtilSound::playOnce(S_DEAD);
 		}
 
 		//「No～」のフェードインアウト
-		switch(no_fade_flag)
+		switch(mNoFadeFlag)
 		{
 			case NF_FADE_IN:
-				no_font_alpha+=5;
-				if(no_font_alpha>=255)
+				mNoFontAlpha+=5;
+				if(mNoFontAlpha>=255)
 				{
-					no_font_alpha=255;
-					no_fade_flag=NF_USUALLY;
+					mNoFontAlpha=255;
+					mNoFadeFlag=NF_USUALLY;
 				}
 				break;
 			case NF_USUALLY:
-				no_font_alpha=255;
-				no_draw_time++;
-				if(no_draw_time>=60)
+				mNoFontAlpha=255;
+				mNoDrawTime++;
+				if(mNoDrawTime>=60)
 				{
-					no_fade_flag=NF_FADE_OUT;
+					mNoFadeFlag=NF_FADE_OUT;
 				}
 				break;
 			case NF_FADE_OUT:
-				no_font_alpha-=5;
-				if(no_font_alpha<=0)
+				mNoFontAlpha-=5;
+				if(mNoFontAlpha<=0)
 				{
-					no_font_alpha=0;
+					mNoFontAlpha=0;
 				}
 				break;
 		}
 	}
 
 	//ボスの描画、モード
-	switch(boss_mode)
+	switch(mMode)
 	{
 		case M_BOSS_MOVE:
-			boss_rect_data=R_BOSS_MOVE1 + move_anime%2;
+			mRectData=R_BOSS_MOVE1 + mMoveAnime%2;
 			if(play_mode==PLAY_REFRESH)
 			{
-				if(boss_move_x==BOSS_REFRESH_X_STOP)
+				if(mMoveX==BOSS_REFRESH_X_STOP)
 				{
-					boss_move_flag=false;
-					boss_mode=M_BOSS_USUALLY;
+					mIsMove=false;
+					mMode=M_BOSS_USUALLY;
 				}
 			}
 			break;
 		case M_BOSS_USUALLY:
-			boss_rect_data=R_BOSS_USUALLY;
+			mRectData=R_BOSS_USUALLY;
 			break;
 		case M_BOSS_DAMEGE:
-			boss_rect_data=R_BOSS_DAMAGE;
-			damage_time++;
-			if(damage_time==60)
+			mRectData=R_BOSS_DAMAGE;
+			mDamageTime++;
+			if(mDamageTime==60)
 			{
-				boss_damage_flag=false;
-				damage_x = 0;
-				damage_y = 0;
+				mIsDamage=false;
+				mDamageX = 0;
+				mDamageY = 0;
 				if(play_mode==PLAY_REFRESH)
 				{
-					if(boss_move_x==BOSS_REFRESH_X_STOP)
+					if(mMoveX==BOSS_REFRESH_X_STOP)
 					{
-						boss_move_flag=false;
-						boss_mode=M_BOSS_USUALLY;
-						damage_time=0;
+						mIsMove=false;
+						mMode=M_BOSS_USUALLY;
+						mDamageTime=0;
 					}else{ 
-						boss_mode=M_BOSS_MOVE;
-						boss_move_flag=true;
-						damage_time=0;
+						mMode=M_BOSS_MOVE;
+						mIsMove=true;
+						mDamageTime=0;
 					}
 				}else{
-					boss_mode=M_BOSS_MOVE;
-					boss_move_flag=true;
-					damage_time=0;
+					mMode=M_BOSS_MOVE;
+					mIsMove=true;
+					mDamageTime=0;
 				}
 			}
 			break;
 		case M_BOSS_FALL:
-			boss_rect_data=R_BOSS_FALL;
+			mRectData=R_BOSS_FALL;
 			break;
 	}
 }
 
 void ActorBoss::draw()
 {
-	UtilGraphics::setTexture(vertex, *texture, T_CAHRA_BOSS);
-	vertex->setColor(boss_alpha,255,255,255);
-	vertex->drawF(boss_move_x + damage_x,boss_move_y + damage_y,boss_rect_data);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
+	mVertex->setColor(mAlpha,255,255,255);
+	mVertex->drawF(mMoveX + mDamageX,mMoveY + mDamageY,mRectData);
 }
 
 void ActorBoss::fallDraw()
 {
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_EFFECT);
-	vertex->setColor(no_font_alpha,255,255,255);
-	vertex->drawF(boss_move_x - NO_POSITION_X - effect_font,NO_POSITION_Y - effect_font,R_BOSS_EFFECT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
+	mVertex->setColor(mNoFontAlpha,255,255,255);
+	mVertex->drawF(mMoveX - NO_POSITION_X - mEffectFont,NO_POSITION_Y - mEffectFont,R_BOSS_EFFECT);
 }
 

@@ -9,6 +9,7 @@
 #include "UITitleMenu.h"
 
 #include "Program/Util/UtilSound.h"
+#include "Program/Util/UtilGraphics.h"
 #include "Library/Graphics/Vertex.h"
 #include "Library/Graphics/Texture.h"
 #include "Program/Util/UtilInput.h"
@@ -190,7 +191,7 @@ UITitleMenu::update()
 void
 UITitleMenu::draw()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_FONT), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_FONT);
 
 	if (mState.isEqual(cState_Top))
 	{

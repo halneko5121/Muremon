@@ -12,6 +12,7 @@
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
 
 namespace
@@ -105,10 +106,10 @@ SceneTutorial::update()
 void
 SceneTutorial::draw()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL1), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL1);
 	mVertex->drawF(mTexturePos[TR_REFRESH].x,mTexturePos[TR_REFRESH].y,R_TUTORIAL1);
 
-	mVertex->setTextureData(mTexture->getTextureData(T_TUTORIAL2), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL2);
 	mVertex->drawF(mTexturePos[TR_NORMAL].x,mTexturePos[TR_NORMAL].y,R_TUTORIAL2);
 }
 

@@ -9,6 +9,7 @@
 #include "SceneTitle.h"
 
 #include "Program/Util/UtilSound.h"
+#include "Program/Util/UtilGraphics.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilInput.h"
@@ -93,10 +94,10 @@ SceneTitle::update()
 void
 SceneTitle::draw()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_TITLE_BG), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_TITLE_BG);
 	mVertex->drawF(cDispTitleBgX, cDispTitleBgY, R_TITLE_BG);
 
-	mVertex->setTextureData(mTexture->getTextureData(T_FONT), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_FONT);
 	mVertex->drawF(mTitlePos.x,mTitlePos.y,R_TITLE);
 
 	mUITitleMenu->draw();

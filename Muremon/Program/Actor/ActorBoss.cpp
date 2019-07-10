@@ -1,5 +1,7 @@
 #include "ActorBoss.h"
+
 #include "Program/Util/UtilSound.h"
+#include "Program/Util/UtilGraphics.h"
 
 ActorBoss::ActorBoss(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 {
@@ -341,14 +343,14 @@ void ActorBoss::control(int play_mode)
 
 void ActorBoss::draw()
 {
-	vertex->setTextureData(texture->getTextureData(T_CAHRA_BOSS),pDevice);
+	UtilGraphics::setTexture(vertex, *texture, T_CAHRA_BOSS);
 	vertex->setColor(boss_alpha,255,255,255);
 	vertex->drawF(boss_move_x + damage_x,boss_move_y + damage_y,boss_rect_data);
 }
 
 void ActorBoss::fallDraw()
 {
-	vertex->setTextureData(texture->getTextureData(T_GAME_EFFECT),pDevice);
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_EFFECT);
 	vertex->setColor(no_font_alpha,255,255,255);
 	vertex->drawF(boss_move_x - NO_POSITION_X - effect_font,NO_POSITION_Y - effect_font,R_BOSS_EFFECT);
 }

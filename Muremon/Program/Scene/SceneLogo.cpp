@@ -10,6 +10,7 @@
 
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
+#include "Program/Util/UtilGraphics.h"
 
 namespace
 {
@@ -65,7 +66,7 @@ SceneLogo::update()
 void
 SceneLogo::draw()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_LOGO), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_LOGO);
 	mVertex->drawF(400.f,300.f,R_LOGO);
 }
 

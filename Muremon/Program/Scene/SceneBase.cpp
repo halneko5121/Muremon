@@ -22,7 +22,7 @@ SceneBase::SceneBase()
 	, mIsSceneEnd(false)
 	, mMouseData()
 {
-	mTexture = new Texture();
+	mTexture	= new Texture();
 	mVertex		= new Vertex();
 }
 

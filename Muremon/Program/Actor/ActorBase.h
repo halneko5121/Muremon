@@ -168,7 +168,6 @@ protected:
 	float				mDegSpin;
 	float				mRandSpeed;
 
-	int					mCharaNum;
 	int					mDelay;
 	int					mCountEffect;
 	int					mMaxAnimetion;

@@ -87,7 +87,7 @@ ActorYoshi::init()
 	s_atk_start_y = 0.f;
 	//protected•Ï”
 	mRandSpeed	 = 0.f;
-	mDelay		 = mMaxAnimetion = mCharaNum = 0;
+	mDelay		 = mMaxAnimetion = 0;
 	mFlagTurn2 = mIsHitCheck  = false;
 
 	//\‘¢‘Ì

@@ -38,7 +38,7 @@ Texture::load(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
 	fopen_s(&fp, file_name, "r");		// ファイルオープン
 
 	// エラー処理
-	if(fp == NULL)
+	if(fp == nullptr)
 	{
 		MessageBox(NULL, TEXT("ファイルオープンに失敗しました"), NULL, MB_OK);
 		return false;

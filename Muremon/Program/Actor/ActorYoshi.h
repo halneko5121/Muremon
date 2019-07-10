@@ -11,8 +11,8 @@
 class ActorYoshi : public ActorBase
 {
 public:
-	ActorYoshi(Vertex *vertex, Texture *texture);
-	~ActorYoshi(void);
+	ActorYoshi();
+	~ActorYoshi();
 
 	POS_CC<float>	updateAttack2(int m_chara_num);
 	void			deathControl(int m_chara_num, int sound_num, int rect_startnum) override;

@@ -108,9 +108,9 @@ SceneGameNormal::~SceneGameNormal()
 void
 SceneGameNormal::impleInit()
 {
-	mNiku	= new ActorNikuman(mVertex, mTexture);
-	mNoppo	= new ActorNoppo(mVertex, mTexture);
-	mYoshi	= new ActorYoshi(mVertex, mTexture);
+	mNiku = new ActorNikuman();
+	mNoppo	= new ActorNoppo();
+	mYoshi	= new ActorYoshi();
 
 	mNiku->init();
 	mNoppo->init();
@@ -163,17 +163,11 @@ SceneGameNormal::draw()
 		//キャラ達
 		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
 
-		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), mDevice);
 		mNoppo->draw(R_NOPPO_G_ATK1);
-
-		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), mDevice);
 		mYoshi->draw(R_YOSHI_G_ATK1);
-
-		mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NIKU), mDevice);
 		mNiku->draw(R_NIKU_G_ATK1);
 
 		//エフェクトフォント類
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 		mNoppo->drawEffectFont(R_NOPPO_PETI);
 		mYoshi->drawEffectFont(R_YOSHI_BOYO);
 		mNiku->drawEffectFont(R_NIKU_BETYA);

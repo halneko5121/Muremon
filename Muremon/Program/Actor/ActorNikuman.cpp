@@ -47,10 +47,8 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorNikuman::ActorNikuman(Vertex* vertex , Texture* texture)
+ActorNikuman::ActorNikuman()
 {
-	mVertex		= vertex;
-	mTexture	= texture;
 }
 
 /**
@@ -215,6 +213,8 @@ ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num, int
 void
 ActorNikuman::drawEffectFont(int rect_startnum)
 {
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), GetGraphicsDevice());
+
 	//フォントエフェクトの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		if(mCharaData[i].flag_hit){
@@ -232,6 +232,8 @@ ActorNikuman::drawEffectFont(int rect_startnum)
 void
 ActorNikuman::draw(int rect_startnum)
 {
+	mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NIKU), GetGraphicsDevice());
+
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		mVertex->setAngle(draw_deg[i] += mDegSpin[i]);

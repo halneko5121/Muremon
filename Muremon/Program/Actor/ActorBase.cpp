@@ -7,6 +7,8 @@
  ******************************************************************/
 
 #include "ActorBase.h"
+
+#include "Library/Graphics/DirectGraphics.h"
 #include "Program/Util/UtilBattle.h"
 
 namespace
@@ -33,9 +35,14 @@ F_RECT rect_pos_e = {DRAW_E_RAD_X,DRAW_E_RAD_Y,DRAW_E_RAD_X,DRAW_E_RAD_Y};
 /**
  * @brief コンストラクタ
  */
-ActorBase::ActorBase(void)
+ActorBase::ActorBase()
 {
 	mOrbit	 = new OrbitCalculation();
+	mTexture = new Texture();
+	mVertex = new Vertex();
+
+	mTexture->load("Data\\TextureData\\actor.txt", GetGraphicsDevice());
+	mVertex->load("Data\\RectData\\actor.txt");
 }
 
 /**

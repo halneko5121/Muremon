@@ -59,10 +59,8 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorYoshi::ActorYoshi(Vertex* vertex, Texture* texture)
+ActorYoshi::ActorYoshi()
 {
-	mTexture	= texture;
-	mVertex		= vertex;
 }
 
 /**
@@ -242,6 +240,8 @@ ActorYoshi::setAnimetion(int max_animetion, int anime_count ,int rect_num ,int m
 void
 ActorYoshi::drawEffectFont(int rect_startnum)
 {
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), GetGraphicsDevice());
+
 	int rect_change = 0;
 
 	//フォントエフェクトの描画(いちお100体分)
@@ -262,6 +262,8 @@ ActorYoshi::drawEffectFont(int rect_startnum)
 void
 ActorYoshi::draw(int rect_startnum)
 {
+	mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_YOSHI), GetGraphicsDevice());
+
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		if(mCharaData[i].flag_atk1){

@@ -53,10 +53,8 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorNoppo::ActorNoppo(Vertex* vertex, Texture* texture)
+ActorNoppo::ActorNoppo()
 {
-	mTexture	= texture;
-	mVertex		= vertex;
 }
 
 /**
@@ -245,6 +243,8 @@ ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num,int mC
 void
 ActorNoppo::drawEffectFont(int rect_startnum)
 {
+	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), GetGraphicsDevice());
+
 	int rect_change = 0;
 
 	//フォントエフェクトの描画(いちお100体分)
@@ -266,6 +266,8 @@ ActorNoppo::drawEffectFont(int rect_startnum)
 void
 ActorNoppo::draw(int rect_startnum)
 {
+	mVertex->setTextureData(mTexture->getTextureData(T_CAHRA_NOPPO), GetGraphicsDevice());
+
 	//キャラの描画(いちお100体分)
 	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
 		if(mCharaData[i].flag_atk1){

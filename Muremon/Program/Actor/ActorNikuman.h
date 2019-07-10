@@ -11,8 +11,8 @@
 class ActorNikuman :	public ActorBase
 {
 public:
-	ActorNikuman(Vertex *vertex, Texture *texture);
-	~ActorNikuman(void);
+	ActorNikuman();
+	~ActorNikuman();
 
 	POS_CC<float>	updateAttack2(int m_chara_num, POS_CC<float> boss_cc);
 	void			deathControl(int m_chara_num, int sound_num, int rect_start_num);

@@ -12,6 +12,7 @@
 #include <tchar.h>
 #include <math.h>
 #include <vector>
+#include <string>
 #include <d3dx9math.h>
 
 #define RAD								(D3DX_PI/180.0f)	// Šp“x‚©‚çƒ‰ƒWƒAƒ“‚ğ‹‚ß‚é

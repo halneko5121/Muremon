@@ -13,8 +13,8 @@
 class OrbitRebound
 {
 public:
-	OrbitRebound(void);
-	~OrbitRebound(void);
+	OrbitRebound();
+	~OrbitRebound();
 
 	/************************************************************************************
 	*	–ğŠ„	F’µ‚Ë•Ô‚èˆ—(120`150)												*

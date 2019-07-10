@@ -1,10 +1,18 @@
 #include "OrbitWave.h"
 
-OrbitWave::OrbitWave(void)
+OrbitWave::OrbitWave()
+	: mAmplitude(0)
+	, mCycle(0)
+	, mSpeedX(0.0f)
+	, mMode(0)
+	, mTime1(0)
+	, mTime2(0)
+	, mSettle(0)
+	, mDeg(0)
 {
 }
 
-OrbitWave::~OrbitWave(void)
+OrbitWave::~OrbitWave()
 {
 }
 
@@ -21,24 +29,24 @@ POS_CC<float> OrbitWave::orbitSinWave(float limit_x, POS_CC<float> draw_cc)
 
 	float		 wave_y = 0; 
 
-	if(time1++ > 10)			{ deg++;	time1 = 0; }
-	if(draw_cc.x>= limit_x)		{ deg = 0;	time1 = 0; }
+	if(mTime1++ > 10)			{ mDeg++;	mTime1 = 0; }
+	if(draw_cc.x>= limit_x)		{ mDeg = 0;	mTime1 = 0; }
 
 	switch(mMode){
 	case WAVE_MODE_NORMAL:
-		wave_y	= mAmplitude * static_cast<float>(sin((mAmplitude * mCycle)) * deg);
+		wave_y	= mAmplitude * static_cast<float>(sin((mAmplitude * mCycle)) * mDeg);
 		break;
 	case WAVE_MODE_GAME:
-		if( time2++	> 10)
+		if( mTime2++	> 10)
 		{
-			settle++; time2 = 0; 
+			mSettle++; mTime2 = 0; 
 		}
-		if (settle > mAmplitude)
+		if (mSettle > mAmplitude)
 		{
-			settle = 0;
+			mSettle = 0;
 		}
 
-		wave_y	= (float)( (mAmplitude - settle) * sin((mAmplitude * mCycle) * deg) );
+		wave_y	= (float)( (mAmplitude - mSettle) * sin((mAmplitude * mCycle) * mDeg) );
 		break;
 	}
 

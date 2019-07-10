@@ -1,10 +1,10 @@
 #include "OrbitRebound.h"
 
-OrbitRebound::OrbitRebound(void)
+OrbitRebound::OrbitRebound()
 {
 }
 
-OrbitRebound::~OrbitRebound(void)
+OrbitRebound::~OrbitRebound()
 {
 }
 

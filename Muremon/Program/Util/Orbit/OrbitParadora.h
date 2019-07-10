@@ -13,8 +13,8 @@
 class OrbitParabora
 {
 public:
-	OrbitParabora(void);
-	~OrbitParabora(void);
+	OrbitParabora();
+	~OrbitParabora();
 
 	/****************************************************************************************************
 	*	–ğŠ„	F•ú•¨üˆ—																			*
@@ -28,5 +28,5 @@ public:
 	POS_CC<float> orbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc);
 
 private:
-	int time = 0;
+	int mTime;
 };

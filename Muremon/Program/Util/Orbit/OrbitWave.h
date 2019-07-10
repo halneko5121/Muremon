@@ -18,8 +18,8 @@ enum WAVE_MODE
 class OrbitWave
 {
 public:
-	OrbitWave(void);
-	~OrbitWave(void);
+	OrbitWave();
+	~OrbitWave();
 
 	/********************************************************************************************
 	*	–ğŠ„	F‰Šú‰»																		*
@@ -78,8 +78,8 @@ private:
 	int		mCycle;
 	float	mSpeedX;
 	int		mMode;
-	int		time1 = 0;
-	int		time2 = 0;
-	int		settle = 0;
-	float	deg = 0;
+	int		mTime1;
+	int		mTime2;
+	int		mSettle;
+	float	mDeg;
 };

@@ -81,10 +81,8 @@ void SceneGameRefresh::impleInit()
 	mNoppo->init();
 	mYoshi->init();
 
-	mBoss = new ActorBoss(mTexture, mVertex, mDevice);
-
-	mTexture->load("Data\\TextureData\\gamenormal.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	mVertex->load("Data\\RectData\\gamenormal.txt");
+	mBoss = new ActorBoss(mTexture, mVertex, UtilGraphics::getGraphicsDevice());
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	mState.changeState(cState_ReadyFadeIn);
 }

@@ -81,8 +81,7 @@ SceneTutorial::~SceneTutorial()
 void
 SceneTutorial::impleInit()
 {
-	mTexture->load("Data\\TextureData\\Tutorial.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	mVertex->load("Data\\RectData\\Tutorial.txt");
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "Tutorial");
 	mState.changeState(cState_RefreshSlide);
 }
 

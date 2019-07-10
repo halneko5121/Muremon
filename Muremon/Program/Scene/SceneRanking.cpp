@@ -101,8 +101,7 @@ SceneRanking::~SceneRanking()
 void
 SceneRanking::impleInit()
 {
-	mTexture->load("Data\\TextureData\\ranking.txt", mDevice);		//ŠG‚Ì“Ç‚İ‚İ
-	mVertex->load("Data\\RectData\\ranking.txt");
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "ranking");
 
 	// ƒvƒŒƒC‚µ‚½name‚Ì‰Šú‰»
 	mRankNewData.mName[0] = mRankNewData.mName[1] = mRankNewData.mName[2] = 0;

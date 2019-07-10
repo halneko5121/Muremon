@@ -42,8 +42,7 @@ SceneLogo::~SceneLogo()
 void
 SceneLogo::impleInit()
 {
-	mTexture->load("Data\\TextureData\\logo.txt", mDevice);		//ŠG‚Ì“Ç‚Ýž‚Ý
-	mVertex->load("Data\\RectData\\logo.txt");
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "logo");
 }
 
 /**

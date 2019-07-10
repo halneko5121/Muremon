@@ -69,12 +69,10 @@ SceneTitle::~SceneTitle()
 void
 SceneTitle::impleInit()
 {
-	mTexture->load("Data\\TextureData\\title.txt", mDevice);		//ŠG‚Ì“Ç‚İ‚İ
-	mVertex->load("Data\\RectData\\title.txt");
-
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "title");
 	UtilSound::playLoop(S_BGM_TITLE);
 
-	mUITitleMenu->init(mDevice);
+	mUITitleMenu->init();
 }
 
 /**

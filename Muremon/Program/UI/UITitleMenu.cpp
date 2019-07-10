@@ -92,7 +92,6 @@ UITitleMenu::UITitleMenu()
 	: mState()
 	, mTexture(nullptr)
 	, mVertex(nullptr)
-	, mDevice(nullptr)
 	, mCursorPos(cDispCursorX, cDispCursorY)
 	, mCurrentMenuItem(0)
 	, mAlphaZPush(0)
@@ -122,12 +121,9 @@ UITitleMenu::~UITitleMenu()
  * @brief	‰Šú‰»
  */
 void
-UITitleMenu::init(LPDIRECT3DDEVICE9 device)
+UITitleMenu::init()
 {
-	mDevice = device;
-	mTexture->load("Data\\TextureData\\title.txt", mDevice); // ŠG‚Ì“Ç‚Ýž‚Ý
-	mVertex->load("Data\\RectData\\title.txt");
-
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "title");
 	mState.changeState(cState_Top);
 }
 

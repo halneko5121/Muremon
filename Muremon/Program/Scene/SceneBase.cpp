@@ -16,7 +16,6 @@
  */
 SceneBase::SceneBase()
 	: mChangeSceneID(cSceneName_Logo)
-	, mDevice(nullptr)
 	, mTexture(nullptr)
 	, mVertex(nullptr)
 	, mIsSceneEnd(false)
@@ -39,10 +38,8 @@ SceneBase::~SceneBase()
  * @brief	初期化処理
  */
 void
-SceneBase::init(LPDIRECT3DDEVICE9 apDev)
+SceneBase::init()
 {
-	mDevice = apDev;		// デバイスセット
-
 	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
 	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
 	mMouseData.mIsDownRButton = mMouseData.mIsPushRButton = mMouseData.mIsReleaseRButton = false;

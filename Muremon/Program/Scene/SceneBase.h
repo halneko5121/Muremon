@@ -51,7 +51,7 @@ public:
 	/**
 	 * @brief	初期化処理
 	 */
-	void				init(LPDIRECT3DDEVICE9 apDev);
+	void				init();
 	virtual void		impleInit();
 
 	/**
@@ -87,7 +87,6 @@ public:
 
 protected:
     DWORD               mChangeSceneID;		// 変更するシーン番号
-	LPDIRECT3DDEVICE9	mDevice;			// デバイス
 	Texture*			mTexture;			// テクスチャ
 	Vertex*				mVertex;			// バーテックス
 	bool				mIsSceneEnd;		// シーン終了か

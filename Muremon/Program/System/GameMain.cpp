@@ -242,33 +242,33 @@ GameMain::controlSequence(void)
 	case cSceneName_Logo:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneLogo();
-		mScene->init(mGraphics->getDevice());
+		mScene->init();
 		break;
     case cSceneName_Title:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTitle();
-		mScene->init(mGraphics->getDevice());
+		mScene->init();
 		GetGameScore()->setScore(0);
 		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTutorial();
-		mScene->init(mGraphics->getDevice());
+		mScene->init();
 		break;
 	case cSceneName_GameRefresh:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneGameRefresh();
-		mScene->init(mGraphics->getDevice());
+		mScene->init();
 		break;
 	case cSceneName_GameNormal:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneGameNormal();
-		mScene->init(mGraphics->getDevice());
+		mScene->init();
 		break;
 	case cSceneName_Ranking:
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneRanking();
-		mScene->init(mGraphics->getDevice());
+		mScene->init();
 		break;
 	case cSceneName_GameEnd:
 		PostQuitMessage(0);

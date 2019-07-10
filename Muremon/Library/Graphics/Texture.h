@@ -42,8 +42,8 @@ public:
 	 * @param	num 番号
 	 * @return	テクスチャ
 	 */
-	LPDIRECT3DTEXTURE9*		getTextureData(DWORD num) { return &(mTexture[num]); }
-	LPDIRECT3DTEXTURE9		getTextureDataPtr(DWORD num) { return mTexture[num]; }
+	LPDIRECT3DTEXTURE9*		getTextureData(DWORD num) const		{ return &(mTexture[num]); }
+	LPDIRECT3DTEXTURE9		getTextureDataPtr(DWORD num) const	{ return mTexture[num]; }
 
 private:
 	LPDIRECT3DTEXTURE9*		mTexture;				// テクスチャ

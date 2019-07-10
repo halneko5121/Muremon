@@ -13,6 +13,7 @@
 #include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
+#include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
@@ -96,12 +97,12 @@ void SceneGameRefresh::update()
 void SceneGameRefresh::draw()
 {
 	if(mGameState == G_START_SCENE){
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ƒXƒe[ƒ^ƒX˜g•`‰æ
 		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);				//‚É‚­‚Ü‚ñŠç
@@ -115,7 +116,7 @@ void SceneGameRefresh::draw()
 
 		drawHpGauge();
 
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 		// ‘Ì—ÍƒQ[ƒW˜g
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);
@@ -126,7 +127,7 @@ void SceneGameRefresh::draw()
 	}
 	else if(mGameState == G_GAME_SCENE){
 
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//”wŒi
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//Šø
@@ -136,7 +137,7 @@ void SceneGameRefresh::draw()
 
 		drawHitEffect();
 
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ƒXƒe[ƒ^ƒX˜g•`‰æ
 		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//‚É‚­‚Ü‚ñŠç
@@ -150,12 +151,11 @@ void SceneGameRefresh::draw()
 
 		drawHpGauge();
 
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
 
 		//ƒLƒƒƒ‰’B
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 		mNoppo->draw(R_NOPPO_G_ATK1);
 		mYoshi->draw(R_YOSHI_G_ATK1);
@@ -220,7 +220,7 @@ void SceneGameRefresh::drawHpGauge()
 
 void SceneGameRefresh::drawHitEffect()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
 	mVertex->drawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }

@@ -15,6 +15,7 @@
 #include "Library/Sound/DirectSound.h"
 #include "Program/DefineGame.h"
 #include "Program/System/GameScore.h"
+#include "Program/Actor/ActorMgr.h"
 
 // 各シーンのinclude
 #include "Program/Scene/SceneLogo.h"
@@ -72,6 +73,7 @@ GameMain::init(void)
 	DirectSound::create();
 	FadeMgr::create();
 	GameScore::create();
+	ActorMgr::create();
 
 	// 最初のシーンを
 	mScene = new SceneLogo();
@@ -228,6 +230,7 @@ GameMain::release(void)
 	GetInputKey()->release();
 	DirectInputKey::destroy();
 	GameScore::destroy();
+	ActorMgr::destroy();
 	APP_SAFE_DELETE(mWindow);
 }
 

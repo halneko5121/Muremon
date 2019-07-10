@@ -15,6 +15,7 @@
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
+#include "Program/Actor/ActorMgr.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"
@@ -39,9 +40,6 @@ namespace
 
 SceneGameRefresh::SceneGameRefresh()
 	: mState()
-	, mNiku(nullptr)
-	, mNoppo(nullptr)
-	, mYoshi(nullptr)
 	, mBoss(nullptr)
 	, mStartAlpha(0)
 	, mGameState(G_START_SCENE)
@@ -73,15 +71,19 @@ SceneGameRefresh::~SceneGameRefresh(void)
 
 void SceneGameRefresh::impleInit()
 {
-	mNiku	= new ActorNikuman();
-	mNoppo	= new ActorNoppo();
-	mYoshi	= new ActorYoshi();
-
-	mNiku->init();
-	mNoppo->init();
-	mYoshi->init();
-
+	// プレイヤー3種類分
+	for (int actor_id = cActorId_Noppo; actor_id <= cActorId_Yoshi; actor_id++)
+	{
+		// 各最大数生成
+		for (int j = 0; j < MAX_VALLUE_PLAYER; j++)
+		{
+			GetActorMgr()->createActor(static_cast<ActorId>(actor_id));
+		}
+	}
 	mBoss = new ActorBoss();
+
+	GetActorMgr()->init();
+
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	mState.changeState(cState_ReadyFadeIn);
@@ -154,16 +156,9 @@ void SceneGameRefresh::draw()
 
 		//キャラ達
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-
-		mNoppo->draw();
-		mYoshi->draw();
-		mNiku->draw();
-
-		//エフェクトフォント類
-		mNoppo->drawEffectFont(R_NOPPO_PETI);
-		mYoshi->drawEffectFont(R_YOSHI_BOYO);
-		mNiku->drawEffectFont(R_NIKU_BETYA);
-
+		
+		// アクターの描画
+		GetActorMgr()->draw();
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 	}
 }
@@ -320,23 +315,67 @@ SceneGameRefresh::stateExeGame()
 
 	UtilSound::playLoop(S_BGM_BATTLE);
 
-	mNiku->update(boss_cc, mBoss->mIsDeath);
-	mYoshi->update(boss_cc, mBoss->mIsDeath);
-	mNoppo->update(boss_cc, mBoss->mIsDeath);
+	// アクターの更新
+	GetActorMgr()->update(boss_cc, mBoss->mIsDeath);
 
-	mIsHitNiku = mNiku->isHitCheck();//あたったというフラグが帰ってきます
-
-	mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
-
-	mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
+	// ヒットチェック
+	ActorMgr::ActorIterator it_begin = GetActorMgr()->begin();
+	ActorMgr::ActorIterator it_end = GetActorMgr()->end();
+	for (ActorMgr::ActorIterator it = it_begin; it != it_end; it++)
+	{
+		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
+		// 肉まん
+		ActorNikuman* actor_nikuman = dynamic_cast<ActorNikuman*>(actor);
+		if (actor_nikuman != nullptr)
+		{
+			if (actor->isHitCheck())
+			{
+				mIsHitNiku = true;
+				mCharaAtkY = actor_nikuman->m_chara_y;
+				actor_nikuman->setIsHitCheck(false);
+			}
+			else
+			{
+				mIsHitNiku = false;
+			}
+		}
+		// よしたろう
+		ActorYoshi* actor_yoshi = dynamic_cast<ActorYoshi*>(actor);
+		if (actor_yoshi != nullptr)
+		{
+			if (actor->isHitCheck())
+			{
+				mIsHitYoshi = true;
+				mCharaAtkY = actor_yoshi->m_chara_y;
+				actor_yoshi->setIsHitCheck(false);
+			}
+			else
+			{
+				mIsHitYoshi = false;
+			}
+		}
+		// のっぽ
+		ActorNoppo* actor_noppo = dynamic_cast<ActorNoppo*>(actor);
+		if (actor_noppo != nullptr)
+		{
+			if (actor->isHitCheck())
+			{
+				mIsHitNoppo = true;
+				mCharaAtkY = actor_noppo->m_chara_y;
+				actor_noppo->setIsHitCheck(false);
+			}
+			else
+			{
+				mIsHitNoppo = false;
+			}
+		}
+	}
 
 	if (mIsHitNiku)
 	{
 		mBoss->mHitCount++;
 		mBoss->mLife -= NIKUMAN_DAMAGE;
 		mIsHitEffect = true;
-		mCharaAtkY = mNiku->m_chara_y;
-		mNiku->setIsHitCheck(false);
 	}
 
 	if (mIsHitYoshi)
@@ -344,8 +383,6 @@ SceneGameRefresh::stateExeGame()
 		mBoss->mHitCount++;
 		mBoss->mLife -= YOSHITARO_DAMAGE;
 		mIsHitEffect = true;
-		mCharaAtkY = mYoshi->m_chara_y;
-		mYoshi->setIsHitCheck(false);
 	}
 
 	if (mIsHitNoppo)
@@ -353,8 +390,6 @@ SceneGameRefresh::stateExeGame()
 		mBoss->mHitCount++;
 		mBoss->mLife -= NOPPO_DAMAGE;
 		mIsHitEffect = true;
-		mCharaAtkY = mNoppo->m_chara_y;
-		mNoppo->setIsHitCheck(false);
 	}
 
 	// にくまん

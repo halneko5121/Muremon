@@ -156,11 +156,12 @@ ActorBase::setEffectShake(float change_x ,float change_y, POS_CC<float> font_cc)
  * @brief UŒ‚ˆ—
  */
 POS_CC<float>
-ActorBase::updateAttack1(int mCharaNum)
+ActorBase::updateAttack1()
 {
-	mCharaData[mCharaNum].draw_cc.x += mCharaData[mCharaNum].speed;			//‰E‚ÉˆÚ“®
+	// ‰E‚ÉˆÚ“®
+	mCharaData.draw_cc.x += mCharaData.speed;
 
-	return mCharaData[mCharaNum].draw_cc;
+	return mCharaData.draw_cc;
 }
 
 /**

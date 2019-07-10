@@ -169,7 +169,7 @@ ActorBoss::update(POS_CC<float> boss_cc, bool boss_death)
 }
 
 void
-ActorBoss::deathControl(int m_chara_num, int start_soundnum, int rect_startnum)
+ActorBoss::deathControl(int start_soundnum, int rect_startnum)
 {
 
 }
@@ -180,7 +180,7 @@ ActorBoss::drawEffectFont(int rect_startnum)
 }
 
 int
-ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num)
+ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
 {
 	return anime_count;
 }

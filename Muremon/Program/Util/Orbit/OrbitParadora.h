@@ -25,5 +25,8 @@ public:
 	*	作成日	：2009年 3月 21日																		*
 	*	更新日	：	年	月	 日							by	三上　亘									*
 	****************************************************************************************************/
-	POS_CC<float> orbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc, int char_num);
+	POS_CC<float> orbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc);
+
+private:
+	int time = 0;
 };

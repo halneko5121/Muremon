@@ -71,11 +71,15 @@ public:
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	POS_CC<float> orbitSinWave(float limit_x, POS_CC<float> draw_cc ,int chara_num);
+	POS_CC<float> orbitSinWave(float limit_x, POS_CC<float> draw_cc);
 
 private:
 	int		mAmplitude;
 	int		mCycle;
 	float	mSpeedX;
 	int		mMode;
+	int		time1 = 0;
+	int		time2 = 0;
+	int		settle = 0;
+	float	deg = 0;
 };

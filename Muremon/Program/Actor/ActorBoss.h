@@ -15,9 +15,9 @@ public:
 	void		init() override;
 	void		update(POS_CC<float> boss_cc, bool boss_death) override;
 	void		draw() override;
-	void		deathControl(int m_chara_num, int start_soundnum, int rect_startnum) override;
+	void		deathControl(int start_soundnum, int rect_startnum) override;
 	void		drawEffectFont(int rect_startnum) override;
-	int			setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) override;
+	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
 	void		control(int play_mode);
 	void		fallDraw();

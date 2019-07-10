@@ -57,10 +57,6 @@ private:
 
 private:
 	StateMachine<SceneGameRefresh>	mState;	// ステート
-
-	ActorNikuman*		mNiku;
-	ActorNoppo*			mNoppo;
-	ActorYoshi*			mYoshi;
 	ActorBoss*			mBoss;
 
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分

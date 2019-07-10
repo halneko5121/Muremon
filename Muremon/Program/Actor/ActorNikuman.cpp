@@ -76,22 +76,20 @@ ActorNikuman::init()
 	mDelay		 = mMaxAnimetion = mCharaNum = 0;
 	mFlagTurn2 = mIsHitCheck  = false;
 
-	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
-		//構造体
-		mCharaData[i].flag_atk1		= mCharaData[i].flag_atk2		 = false;
-		mCharaData[i].flag_death		= mCharaData[i].flag_deathfade	 = false;
-		mCharaData[i].flag_effect		= mCharaData[i].flag_effectfont = false;
-		mCharaData[i].flag_hit			= mCharaData[i].flag_death_next = false;
-		mCharaData[i].draw_cc.x		= (-RADIUS_NOPPO);						//キャラ座標の初期化
-		mCharaData[i].draw_cc.y		= (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
-		mCharaData[i].speed			= 0.f;
-		mCharaData[i].animetion		= 0;									//アニメーションさせる最大枚数
-		mCharaData[i].rect_num			= 0;
-		mCharaData[i].alpha			= 0;
+	//構造体
+	mCharaData.flag_atk1		= mCharaData.flag_atk2		 = false;
+	mCharaData.flag_death		= mCharaData.flag_deathfade	 = false;
+	mCharaData.flag_effect		= mCharaData.flag_effectfont = false;
+	mCharaData.flag_hit			= mCharaData.flag_death_next = false;
+	mCharaData.draw_cc.x		= (-RADIUS_NOPPO);						//キャラ座標の初期化
+	mCharaData.draw_cc.y		= (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
+	mCharaData.speed			= 0.f;
+	mCharaData.animetion		= 0;									//アニメーションさせる最大枚数
+	mCharaData.rect_num			= 0;
+	mCharaData.alpha			= 0;
 
-		pos_effectfont[i].x	= pos_effectfont[i].y =	rand_acc[i] = rand_move_x[i]  = mDegSpin[i] = draw_deg[i] = 0.f;
-		mCountEffect[i] = 0;
-	}
+	pos_effectfont.x	= pos_effectfont.y = rand_acc = rand_move_x = mDegSpin = draw_deg = 0.f;
+	mCountEffect = 0;
 }
 
 /**
@@ -107,85 +105,79 @@ ActorNikuman::update(POS_CC<float> boss_cc, bool boss_death)
 		UtilBattle::isRunWeakSkyAttack())
 	{
 		if(mFlagTurn2){
-			mCharaData[mCharaNum]	  = cInitActorData;
-			mCountEffect[mCharaNum]	  = 0;
-			mDegSpin[mCharaNum]		  = 0.f;
+			mCharaData		= cInitActorData;
+			mCountEffect	= 0;
+			mDegSpin		= 0.f;
 		}
-		mCharaData[mCharaNum]		= setAtkFlag(mCharaData[mCharaNum]);
+		mCharaData		= setAtkFlag(mCharaData);
 
 		if (UtilBattle::isRunWeakGroundAttack())
 		{
-			rand_deg[mCharaNum] = (float)(rand() % cDegRand + cDegRandMin);
-			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_NIKU, G_ATK_2_START_Y);
-			mCharaData[mCharaNum].speed = setSpeed();
-			mDegSpin[mCharaNum] = 0.f;
+			rand_deg = (float)(rand() % cDegRand + cDegRandMin);
+			mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, G_ATK_2_START_Y);
+			mCharaData.speed = setSpeed();
+			mDegSpin = 0.f;
 		}
 		else if (UtilBattle::isRunWeakSkyAttack())
 		{
 			s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
-			rand_acc[mCharaNum] = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-			rand_move_x[mCharaNum] = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-			mDegSpin[mCharaNum] = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+			rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+			rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+			mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-			mCharaData[mCharaNum].speed = setSpeed();
-			mCharaData[mCharaNum].draw_cc = setAtkPos(RADIUS_NIKU, s_atk_start_y);
+			mCharaData.speed = setSpeed();
+			mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, s_atk_start_y);
 		}
-
-		if(mCharaNum >= (MAX_VALLUE_PLAYER-1) ){ mCharaNum = 0; mFlagTurn2 = true; }	//最大数を超えたら1体目へ			
-		else mCharaNum++;																	//2体目、3体目～
 	}
 	
 	//キャラの動作(いちお100体分)
-	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
-		//当たり判定
-		if(!mCharaData[i].flag_death){
-			if(!boss_death){
-				if(isHit(mCharaData[i].draw_cc,boss_cc,ID_NIKUMAN)){
-					UtilSound::playOnce(S_NIKUMAN);
-					mCharaData[i].flag_hit		= true;
-					mCharaData[i].flag_death	= true;	
-					setIsHitCheck(true);
-					m_chara_y = mCharaData[i].draw_cc.y;
-				}
-			}
-
-			if(mCharaData[i].flag_atk1){
-				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < cWindowWidth){
-					mCharaData[i].animetion = setAnimetion(ANIME_G_ATK4_NIKU,mCharaData[i].animetion,NULL,i);
-					mCharaData[i].draw_cc	 = updateAttack1(i);
-				}
-			}
-			else if(mCharaData[i].flag_atk2){
-				if(mCharaData[i].draw_cc.x - RADIUS_NIKU < cWindowWidth){
-					mCharaData[i].animetion = setAnimetion(NULL,mCharaData[i].animetion,ANIME_S_ATK1_NIKU,i );
-					mCharaData[i].draw_cc	 = updateAttack2(i,boss_cc);
-				}
+	//当たり判定
+	if(!mCharaData.flag_death){
+		if(!boss_death){
+			if(isHit(mCharaData.draw_cc,boss_cc,ID_NIKUMAN)){
+				UtilSound::playOnce(S_NIKUMAN);
+				mCharaData.flag_hit		= true;
+				mCharaData.flag_death	= true;	
+				setIsHitCheck(true);
+				m_chara_y = mCharaData.draw_cc.y;
 			}
 		}
-		else deathControl(i,sound_startnum,rect_startnum);
 
-
-		//当たった後の処理
-		if(mCharaData[i].flag_hit){
-			//中心座標が画面外なら死亡
-			if( (mCharaData[i].draw_cc.x < -RADIUS_NIKU)  || (mCharaData[i].draw_cc.x > cWindowWidth  + RADIUS_NIKU) &&
-				(mCharaData[i].draw_cc.y < -RADIUS_NIKU) || (mCharaData[i].draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
-					mCharaData[i].flag_death = true;
+		if(mCharaData.flag_atk1){
+			if(mCharaData.draw_cc.x - RADIUS_NIKU < cWindowWidth){
+				mCharaData.animetion = setAnimetion(ANIME_G_ATK4_NIKU,mCharaData.animetion,NULL);
+				mCharaData.draw_cc	 = updateAttack1();
 			}
-
-			if(!mCharaData[i].flag_effectfont){
-				if(mCountEffect[i]++ < FONT_SET){
-					pos_effectfont[i] = setEffectFont(mCharaData[i].draw_cc,RADIUS_NIKU,POS_HITFONT_X);
-					mCharaData[i].flag_effectfont	= true;
-				}	
+		}
+		else if(mCharaData.flag_atk2){
+			if(mCharaData.draw_cc.x - RADIUS_NIKU < cWindowWidth){
+				mCharaData.animetion = setAnimetion(NULL,mCharaData.animetion,ANIME_S_ATK1_NIKU);
+				mCharaData.draw_cc	 = updateAttack2(boss_cc);
 			}
-			else{
-				if(mCountEffect[i]++ < FONT_DELETE){
-					pos_effectfont[i] = setEffectShake(SHAKE_X,SHAKE_Y,pos_effectfont[i]);
-				}
-				else{ mCharaData[i].flag_effectfont = false; mCountEffect[i] = 0;}
-			}
+		}
+	}
+	else deathControl(sound_startnum,rect_startnum);
 
+
+	//当たった後の処理
+	if(mCharaData.flag_hit){
+		//中心座標が画面外なら死亡
+		if( (mCharaData.draw_cc.x < -RADIUS_NIKU)  || (mCharaData.draw_cc.x > cWindowWidth  + RADIUS_NIKU) &&
+			(mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
+				mCharaData.flag_death = true;
+		}
+
+		if(!mCharaData.flag_effectfont){
+			if(mCountEffect++ < FONT_SET){
+				pos_effectfont = setEffectFont(mCharaData.draw_cc,RADIUS_NIKU,POS_HITFONT_X);
+				mCharaData.flag_effectfont	= true;
+			}	
+		}
+		else{
+			if(mCountEffect++ < FONT_DELETE){
+				pos_effectfont = setEffectShake(SHAKE_X,SHAKE_Y,pos_effectfont);
+			}
+			else{ mCharaData.flag_effectfont = false; mCountEffect = 0;}
 		}
 	}
 }
@@ -194,7 +186,7 @@ ActorNikuman::update(POS_CC<float> boss_cc, bool boss_death)
  * @brief アニメ設定
  */
 int
-ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num, int mCharaNum)
+ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 {
 	static int delay = 0;
 
@@ -207,7 +199,7 @@ ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num, int
 		delay = 0;
 	}
 
-	mCharaData[mCharaNum].rect_num	= rect_num;
+	mCharaData.rect_num	= rect_num;
 
 	return anime_count;
 }
@@ -221,12 +213,10 @@ ActorNikuman::drawEffectFont(int rect_startnum)
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 
 	//フォントエフェクトの描画(いちお100体分)
-	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
-		if(mCharaData[i].flag_hit){
-			if(mCountEffect[i]++ < FONT_DELETE){
-				mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-				mVertex->drawF(pos_effectfont[i].x,pos_effectfont[i].y,rect_startnum);
-			}
+	if(mCharaData.flag_hit){
+		if(mCountEffect++ < FONT_DELETE){
+			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+			mVertex->drawF(pos_effectfont.x,pos_effectfont.y,rect_startnum);
 		}
 	}
 }
@@ -239,12 +229,9 @@ ActorNikuman::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 
-	//キャラの描画(いちお100体分)
-	for(int i = 0;i < MAX_VALLUE_PLAYER;i++){
-		mVertex->setAngle(draw_deg[i] += mDegSpin[i]);
-		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-		mVertex->drawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y, (rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
-	}
+	mVertex->setAngle(draw_deg += mDegSpin);
+	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+	mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y, (rect_startnum + mCharaData.rect_num + mCharaData.animetion) );
 
 	drawEffectFont(R_NIKU_BETYA);
 }
@@ -253,44 +240,44 @@ ActorNikuman::draw()
  * @brief 攻撃処理
  */
 POS_CC<float>
-ActorNikuman::updateAttack2(int mCharaNum, POS_CC<float> boss_cc)		//キー入力による動作その2
+ActorNikuman::updateAttack2(POS_CC<float> boss_cc)
 {
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
 
-	range_x = fabsf(mCharaData[mCharaNum].draw_cc.x - (boss_cc.x + RADIUS_NIKU));
-	range_y = fabsf(mCharaData[mCharaNum].draw_cc.y - boss_cc.y);
+	range_x = fabsf(mCharaData.draw_cc.x - (boss_cc.x + RADIUS_NIKU));
+	range_y = fabsf(mCharaData.draw_cc.y - boss_cc.y);
 
-	plus_x = (range_x / mCharaData[mCharaNum].speed);
-	plus_y = (range_y / mCharaData[mCharaNum].speed);
+	plus_x = (range_x / mCharaData.speed);
+	plus_y = (range_y / mCharaData.speed);
 
-	mCharaData[mCharaNum].draw_cc.x += plus_x;								//中心に向かって右に移動
-	mCharaData[mCharaNum].draw_cc.y += plus_y;								//中心に向かって下に移動
+	mCharaData.draw_cc.x += plus_x;								//中心に向かって右に移動
+	mCharaData.draw_cc.y += plus_y;								//中心に向かって下に移動
 
-	return mCharaData[mCharaNum].draw_cc;
+	return mCharaData.draw_cc;
 }
 
 /**
  * @brief 死亡処理
  */
 void
-ActorNikuman::deathControl(int mCharaNum , int sound_num, int rect_startnum)			//死亡処理
+ActorNikuman::deathControl(int sound_num, int rect_startnum)
 {
-	mCharaData[mCharaNum].animetion = 0;
-	mCharaData[mCharaNum].animetion	= setAnimetion(NULL,mCharaData[mCharaNum].animetion,ANIME_DEATH_NIKU,mCharaNum);
+	mCharaData.animetion = 0;
+	mCharaData.animetion	= setAnimetion(NULL,mCharaData.animetion,ANIME_DEATH_NIKU);
 
-	if(mCharaData[mCharaNum].flag_atk1){
-		mCharaData[mCharaNum].draw_cc  = mOrbit->mRebound->orbitRebound(rand_deg[mCharaNum],mCharaData[mCharaNum].speed,mCharaData[mCharaNum].draw_cc);
+	if(mCharaData.flag_atk1){
+		mCharaData.draw_cc  = mOrbit->mRebound->orbitRebound(rand_deg,mCharaData.speed,mCharaData.draw_cc);
 	}
-	else if(mCharaData[mCharaNum].flag_atk2){
-		mCharaData[mCharaNum].draw_cc  = mOrbit->mParabora->orbitParabola(rand_acc[mCharaNum],rand_move_x[mCharaNum],cParaLimitY,mCharaData[mCharaNum].draw_cc,mCharaNum);	
+	else if(mCharaData.flag_atk2){
+		mCharaData.draw_cc  = mOrbit->mParabora->orbitParabola(rand_acc,rand_move_x,cParaLimitY,mCharaData.draw_cc);	
 	}
 
-	if( (mCharaData[mCharaNum].draw_cc.y < -RADIUS_NIKU) || (mCharaData[mCharaNum].draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
-		mCharaData[mCharaNum].flag_atk1  = false;
-		mCharaData[mCharaNum].flag_atk2  = false;
-		mCharaData[mCharaNum].flag_death = false;
-		mCharaData[mCharaNum].flag_hit	= false;
-		mDegSpin[mCharaNum]				= 0.f;
+	if( (mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
+		mCharaData.flag_atk1  = false;
+		mCharaData.flag_atk2  = false;
+		mCharaData.flag_death = false;
+		mCharaData.flag_hit	= false;
+		mDegSpin				= 0.f;
 	}
 }

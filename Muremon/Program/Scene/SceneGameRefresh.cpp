@@ -130,7 +130,7 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//”wŒi
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//Šø
 
-		mBoss->draw();
+		mBoss->draw(0);
 		mBoss->fallDraw();
 
 		drawHitEffect();
@@ -209,7 +209,7 @@ void SceneGameRefresh::drawNum()
 
 void SceneGameRefresh::drawHpGauge()
 {
-	float num = mBoss->boss_life / mBoss->max_boss_life;
+	float num = mBoss->mLife / mBoss->mMaxLife;
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,255,0,0);
@@ -220,7 +220,7 @@ void SceneGameRefresh::drawHitEffect()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
-	mVertex->drawF((float)mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
+	mVertex->drawF((float)mBoss->mMoveX - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 
 void SceneGameRefresh::initHitFlag()
@@ -315,16 +315,16 @@ SceneGameRefresh::stateEnterGame()
 void
 SceneGameRefresh::stateExeGame()
 {
-	boss_cc.x = mBoss->boss_move_x;
-	boss_cc.y = mBoss->boss_move_y;
+	boss_cc.x = mBoss->mMoveX;
+	boss_cc.y = mBoss->mMoveY;
 
 	UtilSound::playLoop(S_BGM_BATTLE);
 
-	mNiku->update(boss_cc, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->boss_fall_flag);
+	mNiku->update(boss_cc, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->mIsDeath);
 
-	mYoshi->update(boss_cc, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->boss_fall_flag);
+	mYoshi->update(boss_cc, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->mIsDeath);
 
-	mNoppo->update(boss_cc, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->boss_fall_flag);
+	mNoppo->update(boss_cc, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->mIsDeath);
 
 	mIsHitNiku = mNiku->isHitCheck();//‚ ‚½‚Á‚½‚Æ‚¢‚¤ƒtƒ‰ƒO‚ª‹A‚Á‚Ä‚«‚Ü‚·
 
@@ -334,8 +334,8 @@ SceneGameRefresh::stateExeGame()
 
 	if (mIsHitNiku)
 	{
-		mBoss->hit_count++;
-		mBoss->boss_life -= NIKUMAN_DAMAGE;
+		mBoss->mHitCount++;
+		mBoss->mLife -= NIKUMAN_DAMAGE;
 		mIsHitEffect = true;
 		mCharaAtkY = mNiku->m_chara_y;
 		mNiku->setIsHitCheck(false);
@@ -343,8 +343,8 @@ SceneGameRefresh::stateExeGame()
 
 	if (mIsHitYoshi)
 	{
-		mBoss->hit_count++;
-		mBoss->boss_life -= YOSHITARO_DAMAGE;
+		mBoss->mHitCount++;
+		mBoss->mLife -= YOSHITARO_DAMAGE;
 		mIsHitEffect = true;
 		mCharaAtkY = mYoshi->m_chara_y;
 		mYoshi->setIsHitCheck(false);
@@ -352,8 +352,8 @@ SceneGameRefresh::stateExeGame()
 
 	if (mIsHitNoppo)
 	{
-		mBoss->hit_count++;
-		mBoss->boss_life -= NOPPO_DAMAGE;
+		mBoss->mHitCount++;
+		mBoss->mLife -= NOPPO_DAMAGE;
 		mIsHitEffect = true;
 		mCharaAtkY = mNoppo->m_chara_y;
 		mNoppo->setIsHitCheck(false);
@@ -384,7 +384,7 @@ SceneGameRefresh::stateExeGame()
 
 	mBoss->control(PLAY_REFRESH);
 
-	if (!mBoss->boss_fall_flag)
+	if (!mBoss->mIsDeath)
 	{
 		if (mIsHitEffect)
 		{

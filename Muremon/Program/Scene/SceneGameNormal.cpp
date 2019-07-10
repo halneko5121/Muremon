@@ -112,12 +112,12 @@ SceneGameNormal::impleInit()
 	mNiku = new ActorNikuman();
 	mNoppo	= new ActorNoppo();
 	mYoshi	= new ActorYoshi();
+	mBoss = new ActorBoss();
 
 	mNiku->init();
 	mNoppo->init();
 	mYoshi->init();
 
-	mBoss = new ActorBoss();
 	mMission = new Mission(mTexture, mVertex);
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
@@ -153,7 +153,7 @@ SceneGameNormal::draw()
 	}
 	else if(mGameState == G_GAME_SCENE){
 
-		mBoss->draw();
+		mBoss->draw(0);
 
 		mBoss->fallDraw();
 
@@ -334,7 +334,7 @@ SceneGameNormal::drawTime()
 void
 SceneGameNormal::drawHpGauge()
 {
-	float num = mBoss->boss_life / mBoss->max_boss_life;
+	float num = mBoss->mLife / mBoss->mMaxLife;
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,200,30,30);
@@ -349,7 +349,7 @@ SceneGameNormal::drawHitEffect()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
-	mVertex->drawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
+	mVertex->drawF(mBoss->mMoveX - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 
 /**
@@ -406,7 +406,7 @@ SceneGameNormal::updateMissionOugi()
 	else if(mTimeCount >= 450 && 630 > mTimeCount){
 	}
 	if(mTimeCount > 630){
-		mBoss->boss_life -= 7000;
+		mBoss->mLife -= 7000;
 		recover();
 		mMissionStateKeep = MISSION_END;
 		mWavePos.x = WAVE_INIT_X;
@@ -460,13 +460,13 @@ SceneGameNormal::updateMissionNegative()
 		switch(mNegativeState)
 		{
 		case SPEED_UP:
-			mBoss->speed_x = 3;
+			mBoss->mSpeedX = 3;
 			break;
 		case RECOVER:
-			mBoss->boss_life = mBoss->max_boss_life;
+			mBoss->mLife = mBoss->mMaxLife;
 			break;
 		case SLIDE_IN:
-			mBoss->boss_move_x = 500;
+			mBoss->mMoveX = 500;
 			break;
 		case ATTACK_DOWN:
 			mNegativeDamege += 1;
@@ -520,7 +520,7 @@ void SceneGameNormal::selectNegative()
 void
 SceneGameNormal::recover()
 {
-	if(mBoss->boss_life <= 0){
+	if(mBoss->mLife <= 0){
 		mNegativeDamege = 1;
 	}
 }
@@ -609,8 +609,8 @@ SceneGameNormal::stateEnterGame()
 void
 SceneGameNormal::stateExeGame()
 {
-	boss_cc2.x = mBoss->boss_move_x;
-	boss_cc2.y = mBoss->boss_move_y;
+	boss_cc2.x = mBoss->mMoveX;
+	boss_cc2.y = mBoss->mMoveY;
 
 	if (mGameState != G_GAME_OVER) {
 		if ((boss_cc2.x - 150) < 500) {
@@ -677,11 +677,11 @@ SceneGameNormal::stateExeGame()
 		return;
 	}
 
-	mNiku->update(boss_cc2, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->boss_fall_flag);
+	mNiku->update(boss_cc2, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->mIsDeath);
 
-	mYoshi->update(boss_cc2, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->boss_fall_flag);
+	mYoshi->update(boss_cc2, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->mIsDeath);
 
-	mNoppo->update(boss_cc2, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->boss_fall_flag);
+	mNoppo->update(boss_cc2, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->mIsDeath);
 
 	mTime -= 1;
 
@@ -693,8 +693,8 @@ SceneGameNormal::stateExeGame()
 
 	if (mIsHitNiku)
 	{
-		mBoss->hit_count++;
-		mBoss->boss_life -= NIKUMAN_DAMAGE / mNegativeDamege;
+		mBoss->mHitCount++;
+		mBoss->mLife -= NIKUMAN_DAMAGE / mNegativeDamege;
 		mMissionGauge += NIKUMAN_GAGE;
 
 		UtilScore::addScore(NIKUMAN_SCORE);
@@ -705,8 +705,8 @@ SceneGameNormal::stateExeGame()
 
 	if (mIsHitYoshi)
 	{
-		mBoss->hit_count++;
-		mBoss->boss_life -= YOSHITARO_DAMAGE / mNegativeDamege;
+		mBoss->mHitCount++;
+		mBoss->mLife -= YOSHITARO_DAMAGE / mNegativeDamege;
 		mMissionGauge += YOSHITARO_GAGE;
 		UtilScore::addScore(YOSHITARO_SCORE);
 		mIsHitEffect = true;
@@ -716,8 +716,8 @@ SceneGameNormal::stateExeGame()
 
 	if (mIsHitNoppo)
 	{
-		mBoss->hit_count++;
-		mBoss->boss_life -= NOPPO_DAMAGE / mNegativeDamege;
+		mBoss->mHitCount++;
+		mBoss->mLife -= NOPPO_DAMAGE / mNegativeDamege;
 		mMissionGauge += NOPPO_GAGE;
 		UtilScore::addScore(NOPPO_SCORE);
 		mIsHitEffect = true;
@@ -748,13 +748,13 @@ SceneGameNormal::stateExeGame()
 	mBoss->control(PLAY_NORMAL);
 
 	//ゲームオーバー条件
-	if (mBoss->boss_win_flag)
+	if (mBoss->mIsWin)
 	{
 		mState.changeState(cState_GameOver);
 		return;
 	}
 
-	if (!mBoss->boss_fall_flag)
+	if (!mBoss->mIsDeath)
 	{
 		if (mIsHitEffect)
 		{

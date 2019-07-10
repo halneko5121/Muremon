@@ -105,7 +105,7 @@ ActorBoss::~ActorBoss()
 {
 }
 
-void ActorBoss::impleInit()
+void ActorBoss::init()
 {
 	//É{ÉX
 	mAlphaCount=0;
@@ -161,6 +161,28 @@ void ActorBoss::impleInit()
 	mIsRevival=false;
 
 	mIsDeath=false;
+}
+
+void
+ActorBoss::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
+{
+}
+
+void
+ActorBoss::deathControl(int m_chara_num, int start_soundnum, int rect_startnum)
+{
+
+}
+
+void
+ActorBoss::drawEffectFont(int rect_startnum)
+{
+}
+
+int
+ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num)
+{
+	return anime_count;
 }
 
 void ActorBoss::control(int play_mode)
@@ -227,7 +249,7 @@ void ActorBoss::control(int play_mode)
 		{
 			mLvCount++;
 		}else mLvCount = 7;
-		impleInit();
+		init();
 	}
 	
 	if(!mIsDeath)
@@ -361,7 +383,8 @@ void ActorBoss::control(int play_mode)
 	}
 }
 
-void ActorBoss::draw()
+void
+ActorBoss::draw(int rect_startnum)
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);

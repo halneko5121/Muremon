@@ -1,20 +1,26 @@
 #pragma once
 
 #include "Program/DefineGame.h"
+#include "Program/Actor/ActorBase.h"
 
 class Vertex;
 class Texture;
 
-class ActorBoss
+class ActorBoss : public ActorBase
 {
 public:
 	ActorBoss();
 	~ActorBoss();
 
-	void impleInit();
-	void control(int play_mode);
-	void draw();
-	void fallDraw();
+	void		init() override;
+	void		update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death) override;
+	void		draw(int rect_startnum) override;
+	void		deathControl(int m_chara_num, int start_soundnum, int rect_startnum) override;
+	void		drawEffectFont(int rect_startnum) override;
+	int			setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) override;
+
+	void		control(int play_mode);
+	void		fallDraw();
 
 public:
 	float		mLife;

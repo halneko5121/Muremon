@@ -102,6 +102,9 @@
     <ClCompile Include="Program\Util\UtilScore.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Actor\ActorMgr.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="Program\Util\UtilScore.h">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Actor\ActorMgr.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

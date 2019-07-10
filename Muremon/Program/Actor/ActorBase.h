@@ -185,4 +185,6 @@ protected:
 	bool				mFlagTurn2;								//“ñT–Ú‚Ìƒtƒ‰ƒO
 	bool				mIsHitCheck;
 	bool				mIsRun;
+	POS_CC<float>		mBossPos;
+	bool				mIsBossDeath;
 };

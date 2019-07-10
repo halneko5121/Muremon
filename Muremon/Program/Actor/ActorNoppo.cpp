@@ -87,7 +87,7 @@ ActorNoppo::ActorNoppo()
 	mCharaData.speed = 0.f;
 	mCharaData.animetion = 0;									//アニメーションさせる最大枚数
 	mCharaData.rect_num = 0;
-	mCharaData.alpha = 0;
+	mCharaData.alpha = 255;
 
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			cState_Idle);
@@ -122,25 +122,22 @@ void
 ActorNoppo::runImple()
 {
 	// 攻撃開始
+	bool is_atk1 = mCharaData.flag_atk1;
+	bool is_atk2 = mCharaData.flag_atk2;
+	mCharaData = init_charadata_noppo;
 	mCountEffect = 0;
 	mCharaData.speed = setSpeed();
-	mCharaData.animetion = 0;
 
-	if (mCharaData.flag_atk1)
+	if (is_atk1)
 	{
-		mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, G_ATK_3_START_Y);
+		mCharaData.flag_atk1 = is_atk1;
+		mState.changeStateIfDiff(cState_GroundAtk);
 	}
-	else if (mCharaData.flag_atk2)
+	else if (is_atk2)
 	{
-		mAtkStartY = (float)(rand() % cRandY);
-		mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-		mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
-
-		mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, mAtkStartY);
+		mCharaData.flag_atk2 = is_atk2;
+		mState.changeStateIfDiff(cState_SkyAtk);
 	}
-
-
 }
 
 /**
@@ -149,57 +146,10 @@ ActorNoppo::runImple()
 void
 ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 {
-	//当たり判定
-	if(!mCharaData.flag_death){
-		if(!boss_death){
-			if(isHit(mCharaData.draw_cc,boss_cc,ID_NIKUMAN)){
-				mCharaData.flag_hit		= true;
-				mCharaData.flag_death	= true;	
-				setIsHitCheck(true);
-				m_chara_y = mCharaData.draw_cc.y;
+	mBossPos = boss_cc;
+	mIsBossDeath = boss_death;
 
-				if(mCharaData.flag_atk1){
-					if (UtilSound::isPlaying(S_NOPPO_KOKE))
-					{
-						UtilSound::stop(S_NOPPO_KOKE);
-					}
-					UtilSound::playOnce(S_NOPPO_KOKE);
-					if( (UtilSound::isPlaying(S_NOPPO_PETI)) &&
-						(UtilSound::isPlaying(S_NOPPO_KOKE)) ) 
-					{
-						UtilSound::stop(S_NOPPO_PETI);
-					}
-					if (UtilSound::isPlaying(S_NOPPO_KOKE))
-					{
-						UtilSound::playOnce((S_NOPPO_PETI));
-					}
-				}
-				if(mCharaData.flag_atk2){
-					if (UtilSound::isPlaying(S_NOPPO_GANMEN))
-					{
-						UtilSound::stop(S_NOPPO_GANMEN);
-					}
-					UtilSound::playOnce(S_NOPPO_GANMEN);
-				}
-			}
-		}
-
-		//攻撃処理(xが画面外じゃなければ処理)
-		if(mCharaData.flag_atk1){
-			if(mCharaData.draw_cc.x - RADIUS_NOPPO < cWindowWidth){
-				mCharaData.draw_cc	 = updateAttack1();
-				mCharaData.animetion = setAnimetion(ANIME_G_ATK4_NOPPO,mCharaData.animetion,NULL);
-			}
-		}
-		else if(mCharaData.flag_atk2){
-			if(mCharaData.draw_cc.x - RADIUS_NOPPO < cWindowWidth){
-				mOrbit->mWave->setSpeed(mCharaData.speed);
-				mCharaData.draw_cc	 = updateAttack2();
-				mCharaData.animetion = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO),mCharaData.animetion,ANIME_S_ATK1_NOPPO);
-			}
-		}
-	}
-	else deathControl();
+	mState.executeState();
 
 	//当たった後の処理
 	if(mCharaData.flag_hit){
@@ -278,11 +228,9 @@ ActorNoppo::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
 
-	//キャラの描画(いちお100体分)
 	if(mCharaData.flag_atk1){
 		mVertex->setAngle(0.f);
 		if(mCharaData.flag_deathfade){
-			mCharaData.alpha = mVertex->fadeOut((10.f/60.f),mCharaData.alpha);
 			mVertex->setColor((D3DCOLOR)mCharaData.alpha,MAX_RGB,MAX_RGB,MAX_RGB);
 		}
 		else{
@@ -343,11 +291,10 @@ ActorNoppo::deathControl()
 		mCharaData.draw_cc   = mOrbit->mParabora->orbitParabola(mRandAcc,mRandMoveX,cParaLimitY,mCharaData.draw_cc);
 	}	
 	if(mCharaData.flag_deathfade){
-		if(mCharaData.alpha <= 0){
-			mCharaData.draw_cc.x = (-RADIUS_NOPPO);
-			mCharaData.draw_cc.y = (GAME_GROUND - RADIUS_NOPPO);
-			mCharaData.flag_deathfade	 = false;
-		}
+		mCharaData.draw_cc.x = (-RADIUS_NOPPO);
+		mCharaData.draw_cc.y = (GAME_GROUND - RADIUS_NOPPO);
+		mCharaData.flag_deathfade	 = false;
+		mState.changeState(cState_Idle);
 	}
 
 	if( (mCharaData.draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30) ){
@@ -366,6 +313,7 @@ ActorNoppo::deathControl()
 void
 ActorNoppo::stateEnterIdle()
 {
+	mCharaData = init_charadata_noppo;
 }
 void
 ActorNoppo::stateIdle()
@@ -378,10 +326,36 @@ ActorNoppo::stateIdle()
 void
 ActorNoppo::stateEnterGroundAtk()
 {
+	mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, G_ATK_3_START_Y);
 }
 void
 ActorNoppo::stateGroundAtk()
 {
+	if (mIsBossDeath) return;
+
+	if (isHit(mCharaData.draw_cc, mBossPos, ID_NIKUMAN))
+	{
+		mCharaData.flag_hit = true;
+		mCharaData.flag_death = true;
+		setIsHitCheck(true);
+		m_chara_y = mCharaData.draw_cc.y;
+
+		if (UtilSound::isPlaying(S_NOPPO_GANMEN))
+		{
+			UtilSound::stop(S_NOPPO_GANMEN);
+		}
+		UtilSound::playOnce(S_NOPPO_GANMEN);
+
+		mState.changeState(cState_Death);
+	}
+	// 攻撃処理(xが画面外じゃなければ処理)
+	else
+	{
+		if (mCharaData.draw_cc.x - RADIUS_NOPPO < cWindowWidth) {
+			mCharaData.draw_cc = updateAttack1();
+			mCharaData.animetion = setAnimetion(ANIME_G_ATK4_NOPPO, mCharaData.animetion, NULL);
+		}
+	}
 }
 
 /**
@@ -390,10 +364,50 @@ ActorNoppo::stateGroundAtk()
 void
 ActorNoppo::stateEnterSkyAtk()
 {
+	mAtkStartY = (float)(rand() % cRandY);
+	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+	mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+
+	mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, mAtkStartY);
 }
 void
 ActorNoppo::stateSkyAtk()
 {
+	if (mIsBossDeath) return;
+
+	if (isHit(mCharaData.draw_cc, mBossPos, ID_NIKUMAN))
+	{
+		mCharaData.flag_hit = true;
+		mCharaData.flag_death = true;
+		setIsHitCheck(true);
+		m_chara_y = mCharaData.draw_cc.y;
+
+		if (UtilSound::isPlaying(S_NOPPO_KOKE))
+		{
+			UtilSound::stop(S_NOPPO_KOKE);
+		}
+		UtilSound::playOnce(S_NOPPO_KOKE);
+		if ((UtilSound::isPlaying(S_NOPPO_PETI)) &&
+			(UtilSound::isPlaying(S_NOPPO_KOKE)))
+		{
+			UtilSound::stop(S_NOPPO_PETI);
+		}
+		if (UtilSound::isPlaying(S_NOPPO_KOKE))
+		{
+			UtilSound::playOnce((S_NOPPO_PETI));
+		}
+		mState.changeState(cState_Death);
+	}
+	// 攻撃処理(xが画面外じゃなければ処理)
+	else
+	{
+		if (mCharaData.draw_cc.x - RADIUS_NOPPO < cWindowWidth) {
+			mOrbit->mWave->setSpeed(mCharaData.speed);
+			mCharaData.draw_cc = updateAttack2();
+			mCharaData.animetion = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mCharaData.animetion, ANIME_S_ATK1_NOPPO);
+		}
+	}
 }
 
 /**
@@ -426,8 +440,10 @@ ActorNoppo::stateDeathFade()
 void
 ActorNoppo::stateEnterDeath()
 {
+	mCharaData.animetion = 0;
 }
 void
 ActorNoppo::stateDeath()
 {
+	deathControl();
 }

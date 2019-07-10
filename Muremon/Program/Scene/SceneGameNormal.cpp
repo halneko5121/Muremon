@@ -13,6 +13,7 @@
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilScore.h"
+#include "Program/Util/UtilGraphics.h"
 #include "Program/Mission/Mission.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
@@ -141,13 +142,13 @@ SceneGameNormal::update()
 void
 SceneGameNormal::draw()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 	mVertex->setColor(255, 255, 255, 255);
 	mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
 	mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
 
 	if(mGameState == G_START_SCENE){
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 		mVertex->setColor(mStartAlpha,255,255,255);
 
@@ -161,7 +162,7 @@ SceneGameNormal::draw()
 
 		drawHitEffect();
 		//キャラ達
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 		mNoppo->draw(R_NOPPO_G_ATK1);
 		mYoshi->draw(R_YOSHI_G_ATK1);
@@ -173,12 +174,12 @@ SceneGameNormal::draw()
 		mNiku->drawEffectFont(R_NIKU_BETYA);
 	}
 	else if(mGameState == G_GAME_OVER){
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_OVER);	//ゲームオーバー
 	}
 	else if(mGameState == G_GAME_CLEAR){
-		mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_CLEAR);	//ゲームクリア
 	}
@@ -190,7 +191,7 @@ SceneGameNormal::draw()
 		drawMissionNegative();
 	}
 
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->setColor(255,255,255,255);
 	mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
 	mVertex->drawF(G_SCORE_X,G_SCORE_Y,R_SCORE);		//すこあ
@@ -212,17 +213,14 @@ SceneGameNormal::draw()
 
 	drawMissionGuage();
 
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(G_GAGE_M_X,G_GAGE_M_Y,R_GAGE_FRAME);	//みっしょんゲージ枠
-
 	mVertex->drawF(G_HP_X,G_HP_Y,R_HP);	//しゃっくの体力
 	mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 
 	drawHpGauge();
 
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_FONT), mDevice);
-
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 
 	if(mMissionGauge >= MISSION_GAGE_MAX){
@@ -352,7 +350,7 @@ SceneGameNormal::drawHpGauge()
 void
 SceneGameNormal::drawHitEffect()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
 	mVertex->drawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
@@ -427,16 +425,12 @@ SceneGameNormal::updateMissionOugi()
 void
 SceneGameNormal::drawMissionOugi()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
-
+	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 	mVertex->setColor(mAlphaFont,255,255,255);
-
 	mVertex->drawF(400.f,300.f,R_MISSION_OSIRASE);
-
 	mVertex->drawF(400.f,300.f,R_OUGI_FONT);
 
-	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
-
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->drawF(mWavePos.x,mWavePos.y,R_OUGI);
 }
 
@@ -492,12 +486,9 @@ SceneGameNormal::updateMissionNegative()
 void
 SceneGameNormal::drawMissionNegative()
 {
-	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
-
+	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 	mVertex->setColor(mAlphaFont,255,255,255);
-
 	mVertex->drawF(400.f,300.f,R_MISSION_OSIRASE);
-
 	mVertex->drawF(400.f,300.f,R_NEGATIVE1 + mNegativeState - 1);
 }
 

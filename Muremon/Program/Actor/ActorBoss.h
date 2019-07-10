@@ -42,9 +42,14 @@ enum BOSS_CONTROLTYPE
 
 class ActorBoss
 {
-private:
-	Texture	*texture;
-	Vertex	*vertex;
+public:
+	ActorBoss();
+	~ActorBoss();
+
+	void impleInit();
+	void control(int play_mode);
+	void draw();
+	void fallDraw();
 
 public:
 	float boss_life;
@@ -68,6 +73,9 @@ public:
 	int posi_x;
 
 private:
+	Texture	*texture;
+	Vertex	*vertex;
+
 	//ƒ{ƒX‚ÉŽg‚¤
 	int damage_time;
 
@@ -136,13 +144,4 @@ private:
 	float effect_font;
 
 	float add_boss_life;
-
-public:
-	ActorBoss();
-	~ActorBoss();
-
-	void impleInit();
-	void control(int play_mode);
-	void draw();
-	void fallDraw();
 };

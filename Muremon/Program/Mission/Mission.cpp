@@ -1,6 +1,8 @@
 #include "Mission.h"
+
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilGraphics.h"
 
 #define TEN_SECOND	(600)
 
@@ -189,9 +191,10 @@ int Mission::update()
 
 void Mission::draw()
 {
-	vertex->setTextureData(texture->getTextureData(T_MISSION),pDevice);
+	UtilGraphics::setTexture(vertex, *texture, T_MISSION);
 
-	if(mission_state != MISSION_START){
+	if(mission_state != MISSION_START)
+	{
 		vertex->setColor(alpha,255,255,255);
 	}
 
@@ -201,9 +204,11 @@ void Mission::draw()
 	vertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_OSIRASE);	//みっしょんお知らせ枠
 	vertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_1 + mission_no);	//みっしょん
 
-	if(mission_no == MISSION_10 || mission_no == MISSION_11){
-		if(mission_state == MISSION_START){
-			vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+	if(mission_no == MISSION_10 || mission_no == MISSION_11)
+	{
+		if(mission_state == MISSION_START)
+		{
+			UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
 			vertex->setColor(alpha,255,255,255);
 			vertex->drawF(400.f,450.f,R_Z_PUSH_START);
 		}
@@ -973,7 +978,9 @@ void Mission::updateMission3D()	//『10秒間でちょうど100回連打せよ！！』
 void Mission::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	drawTime();
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(125.f + 29.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
@@ -982,7 +989,9 @@ void Mission::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 void Mission::updateMission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	drawTime();
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(76.f + 28.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
@@ -991,7 +1000,9 @@ void Mission::updateMission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 void Mission::updateMission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	drawTime();
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(118.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
@@ -1000,7 +1011,9 @@ void Mission::updateMission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
 void Mission::updateMission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	drawTime();
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(108.f + 28.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
@@ -1009,7 +1022,9 @@ void Mission::updateMission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 void Mission::updateMission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	drawTime();
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(131.f + 30.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
@@ -1018,7 +1033,9 @@ void Mission::updateMission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 void Mission::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	drawTime();
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+
 	for(int i = 1;i < success_type_count;i++){
 		vertex->drawF(96.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
@@ -1026,9 +1043,11 @@ void Mission::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 
 void Mission::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
-	if(flag_time_cnt == 0){
+	if(flag_time_cnt == 0)
+	{
 		vertex->drawF(mission_start.x,mission_start.y,R_MISSION_HASSEI);
-		vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+		UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
 		vertex->setColor(alpha_push_z,255,255,255);
 		vertex->drawF(400.f,450.f,R_Z_PUSH_START);
 	}
@@ -1037,9 +1056,11 @@ void Mission::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 
 void Mission::updateMission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
-	if(flag_time_cnt == 0){
+	if(flag_time_cnt == 0)
+	{
 		vertex->drawF(mission_start.x,mission_start.y,R_MISSION_HASSEI);
-		vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+
+		UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
 		vertex->setColor(alpha_push_z,255,255,255);
 		vertex->drawF(400.f,450.f,R_Z_PUSH_START);
 	}
@@ -1158,8 +1179,8 @@ void Mission::missionSelect()
 
 void Mission::drawTime()
 {
-	//タイム
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+	// タイム
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
 	for(int i = 0;i < 2;i++){
 		int num = time;
 		for(int j = 0;j < 2 - i;j++){
@@ -1176,8 +1197,8 @@ void Mission::drawTime()
 
 void Mission::drawCombo()
 {
-	//コンボ
-	vertex->setTextureData(texture->getTextureData(T_GAME_FONT),pDevice);
+	// コンボ
+	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
 	for(int i = 0;i < 3;i++){
 		int num = key_cnt;
 		for(int j = 1;j < 3 - i;j++){

@@ -153,7 +153,7 @@ SceneGameNormal::draw()
 	}
 	else if(mGameState == G_GAME_SCENE){
 
-		mBoss->draw(0);
+		mBoss->draw();
 
 		mBoss->fallDraw();
 
@@ -161,9 +161,9 @@ SceneGameNormal::draw()
 		//キャラ達
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
-		mNoppo->draw(R_NOPPO_G_ATK1);
-		mYoshi->draw(R_YOSHI_G_ATK1);
-		mNiku->draw(R_NIKU_G_ATK1);
+		mNoppo->draw();
+		mYoshi->draw();
+		mNiku->draw();
 
 		//エフェクトフォント類
 		mNoppo->drawEffectFont(R_NOPPO_PETI);
@@ -677,11 +677,9 @@ SceneGameNormal::stateExeGame()
 		return;
 	}
 
-	mNiku->update(boss_cc2, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->mIsDeath);
-
-	mYoshi->update(boss_cc2, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->mIsDeath);
-
-	mNoppo->update(boss_cc2, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->mIsDeath);
+	mNiku->update(boss_cc2, mBoss->mIsDeath);
+	mYoshi->update(boss_cc2, mBoss->mIsDeath);
+	mNoppo->update(boss_cc2, mBoss->mIsDeath);
 
 	mTime -= 1;
 

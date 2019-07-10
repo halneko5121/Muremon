@@ -87,9 +87,9 @@ public:
 	float				m_chara_y;
 	virtual void		deathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;
 	virtual void		init() = 0;
-	virtual void		update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool both_death) = 0;
+	virtual void		update(POS_CC<float> boss_cc, bool boss_death) = 0;
 	//•`‰æ
-	virtual void		draw(int rect_num) = 0;
+	virtual void		draw() = 0;
 	virtual void		drawEffectFont(int rect_startnum) = 0;
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) = 0;
 
@@ -173,6 +173,9 @@ protected:
 	int					mDelay;
 	int					mCountEffect[MAX_VALLUE_PLAYER];
 	int					mMaxAnimetion;
+
+	int					rect_startnum;
+	int					sound_startnum;
 
 	bool				mFlagTurn2;								//“ñT–Ú‚Ìƒtƒ‰ƒO
 	bool				mIsHitCheck;

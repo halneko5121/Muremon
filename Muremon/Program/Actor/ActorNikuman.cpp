@@ -66,6 +66,9 @@ ActorNikuman::~ActorNikuman(void)
 void
 ActorNikuman::init()								
 {
+	rect_startnum = R_NIKU_G_ATK1;
+	sound_startnum = S_NIKUMAN;
+
 	//praivate変数
 	s_atk_start_y = 0.f;
 	//protected変数
@@ -95,7 +98,7 @@ ActorNikuman::init()
  * @brief 更新
  */
 void
-ActorNikuman::update(POS_CC<float> boss_cc,int sound_startnum, int rect_startnum,bool boss_death)		//キャラクタの制御
+ActorNikuman::update(POS_CC<float> boss_cc, bool boss_death)
 {
 	mRandSpeed = 0.f;
 
@@ -232,7 +235,7 @@ ActorNikuman::drawEffectFont(int rect_startnum)
  * @brief 描画処理
  */
 void
-ActorNikuman::draw(int rect_startnum)
+ActorNikuman::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 
@@ -242,6 +245,8 @@ ActorNikuman::draw(int rect_startnum)
 		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
 		mVertex->drawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y, (rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
 	}
+
+	drawEffectFont(R_NIKU_BETYA);
 }
 
 /**

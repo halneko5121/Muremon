@@ -130,7 +130,7 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//背景
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//旗
 
-		mBoss->draw(0);
+		mBoss->draw();
 		mBoss->fallDraw();
 
 		drawHitEffect();
@@ -155,9 +155,9 @@ void SceneGameRefresh::draw()
 		//キャラ達
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
-		mNoppo->draw(R_NOPPO_G_ATK1);
-		mYoshi->draw(R_YOSHI_G_ATK1);
-		mNiku->draw(R_NIKU_G_ATK1);
+		mNoppo->draw();
+		mYoshi->draw();
+		mNiku->draw();
 
 		//エフェクトフォント類
 		mNoppo->drawEffectFont(R_NOPPO_PETI);
@@ -320,11 +320,9 @@ SceneGameRefresh::stateExeGame()
 
 	UtilSound::playLoop(S_BGM_BATTLE);
 
-	mNiku->update(boss_cc, S_NIKUMAN, R_NIKU_G_ATK1, mBoss->mIsDeath);
-
-	mYoshi->update(boss_cc, S_YOSHI_HIP, R_YOSHI_G_ATK1, mBoss->mIsDeath);
-
-	mNoppo->update(boss_cc, S_NOPPO_KOKE, R_NOPPO_G_ATK1, mBoss->mIsDeath);
+	mNiku->update(boss_cc, mBoss->mIsDeath);
+	mYoshi->update(boss_cc, mBoss->mIsDeath);
+	mNoppo->update(boss_cc, mBoss->mIsDeath);
 
 	mIsHitNiku = mNiku->isHitCheck();//あたったというフラグが帰ってきます
 

@@ -164,7 +164,7 @@ void ActorBoss::init()
 }
 
 void
-ActorBoss::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
+ActorBoss::update(POS_CC<float> boss_cc, bool boss_death)
 {
 }
 
@@ -384,7 +384,7 @@ void ActorBoss::control(int play_mode)
 }
 
 void
-ActorBoss::draw(int rect_startnum)
+ActorBoss::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);

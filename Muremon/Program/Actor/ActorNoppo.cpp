@@ -72,6 +72,9 @@ ActorNoppo::~ActorNoppo(void)
 void
 ActorNoppo::init()											
 {
+	rect_startnum = R_NOPPO_G_ATK1;
+	sound_startnum = S_NOPPO_KOKE;
+
 	mOrbit->mWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
 	//praivate変数
@@ -105,7 +108,7 @@ ActorNoppo::init()
  * @brief 更新
  */
 void
-ActorNoppo::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum,bool boss_death)			//キャラクタの制御
+ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 {
 	mRandSpeed = 0.f;
 
@@ -266,7 +269,7 @@ ActorNoppo::drawEffectFont(int rect_startnum)
  * @brief 描画処理
  */
 void
-ActorNoppo::draw(int rect_startnum)
+ActorNoppo::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
 
@@ -292,6 +295,9 @@ ActorNoppo::draw(int rect_startnum)
 			mVertex->drawF(mCharaData[i].draw_cc.x,mCharaData[i].draw_cc.y,(rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion) );
 		}
 	}
+
+	// エフェクトフォント類
+	drawEffectFont(R_NOPPO_PETI);
 }
 
 /**

@@ -78,6 +78,9 @@ ActorYoshi::~ActorYoshi(void)
 void
 ActorYoshi::init()											
 {
+	rect_startnum = R_YOSHI_G_ATK1;
+	sound_startnum = S_YOSHI_HIP;
+
 	mOrbit->mWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
 	//praivateïœêî
@@ -109,7 +112,7 @@ ActorYoshi::init()
  * @brief çXêV
  */
 void
-ActorYoshi::update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death)
+ActorYoshi::update(POS_CC<float> boss_cc, bool boss_death)
 {
 	mRandSpeed = 0.f;
 
@@ -262,7 +265,7 @@ ActorYoshi::drawEffectFont(int rect_startnum)
  * @brief ï`âÊèàóù
  */
 void
-ActorYoshi::draw(int rect_startnum)
+ActorYoshi::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
 
@@ -281,6 +284,8 @@ ActorYoshi::draw(int rect_startnum)
 		}
 		mVertex->drawF(mCharaData[i].draw_cc.x, mCharaData[i].draw_cc.y, (rect_startnum + mCharaData[i].rect_num + mCharaData[i].animetion));
 	}
+
+	drawEffectFont(R_YOSHI_BOYO);
 }
 
 /**

@@ -7,7 +7,7 @@
  *	管理者：三上
  ******************************************************************/
 
-class ActorBase;
+#include "ActorBase.h"
 
 enum ActorId
 {
@@ -20,6 +20,9 @@ enum ActorId
 
 class ActorMgr
 {
+public:
+	typedef std::vector<ActorBase*>::iterator ActorIterator;
+
 public:
 	ActorMgr();
 	~ActorMgr();
@@ -49,9 +52,28 @@ public:
 	 */
 	void				init();
 
+	/**
+	 * @brief	アクターの更新
+	 */
+	void				update(POS_CC<float> boss_cc, bool boss_death);
+
+	/**
+	 * @brief	アクターの描画
+	 */
+	void				draw();
+
+	/**
+	 * @brief	イテレーターの取得
+	 */
+	ActorIterator		begin();
+
+	/**
+	 * @brief	イテレーターの取得
+	 */
+	ActorIterator		end();
+
 private:
 	typedef std::vector<ActorBase*>	ActorList;
-	typedef std::vector<ActorBase*>::iterator ActorIterator;
 
 private:
 	static ActorMgr*	mInstance;		// インスタンス

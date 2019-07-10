@@ -18,8 +18,8 @@ public:
 	void			deathControl(int m_chara_num, int sound_num, int rect_startnum) override;
 
 	void			init() override;
-	void			update(POS_CC<float> boss_cc, int sound_startnum, int rect_startnum, bool boss_death) override;
-	void			draw(int rect_startnum) override;
+	void			update(POS_CC<float> boss_cc, bool boss_death) override;
+	void			draw() override;
 	void			drawEffectFont(int rect_startnum) override;
 	int				setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) override;
 

@@ -97,3 +97,51 @@ ActorMgr::init()
 	}
 }
 
+/**
+ * @brief	アクターの更新
+ */
+void
+ActorMgr::update(POS_CC<float> boss_cc, bool boss_death)
+{
+	ActorIterator it_begin = mActorList.begin();
+	ActorIterator it_end = mActorList.end();
+	for (ActorIterator it = it_begin; it != it_end; it++)
+	{
+		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
+		actor->update(boss_cc, boss_death);
+	}
+}
+
+/**
+ * @brief	アクターの描画
+ */
+void
+ActorMgr::draw()
+{
+	ActorIterator it_begin = mActorList.begin();
+	ActorIterator it_end = mActorList.end();
+	for (ActorIterator it = it_begin; it != it_end; it++)
+	{
+		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
+		actor->draw();
+	}
+}
+
+
+/**
+ * @brief	イテレーターの取得
+ */
+ActorMgr::ActorIterator
+ActorMgr::begin()
+{
+	return mActorList.begin();
+}
+
+/**
+ * @brief	イテレーターの取得
+ */
+ActorMgr::ActorIterator
+ActorMgr::end()
+{
+	return mActorList.end();
+}

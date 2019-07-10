@@ -1,7 +1,9 @@
 #pragma once
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
+
 #include "Program/DefineGame.h"
+
+class Vertex;
+class Texture;
 
 //ボスのコントロールタイプ
 enum BOSS_CONTROLTYPE
@@ -10,8 +12,7 @@ enum BOSS_CONTROLTYPE
 	NORMAL_TYPE,	//ノーマルモード
 };
 
-//ボス関連
-//#define BOSS_LIFEGAGE				(7000)	//ボスの最大ライフ
+// ボス関連
 #define BOSS_INITIAL_LIFE			(3000)	//ボスの初期ライフ
 #define BOSS_GROW_LIFE				(1000)	//ボスが死んだ時増加していくライフ
 #define BOSS_ALPHA_APPEAR			(20)	//ボスが出現した時のアルファ増値
@@ -137,8 +138,8 @@ private:
 	float add_boss_life;
 
 public:
-	ActorBoss(Texture* m_texture,Vertex* m_vertex);
-	~ActorBoss(void);
+	ActorBoss();
+	~ActorBoss();
 
 	void impleInit();
 	void control(int play_mode);

@@ -81,7 +81,7 @@ void SceneGameRefresh::impleInit()
 	mNoppo->init();
 	mYoshi->init();
 
-	mBoss = new ActorBoss(mTexture, mVertex);
+	mBoss = new ActorBoss();
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	mState.changeState(cState_ReadyFadeIn);

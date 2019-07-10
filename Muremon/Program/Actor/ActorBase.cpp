@@ -42,8 +42,7 @@ ActorBase::ActorBase()
 	mTexture = new Texture();
 	mVertex = new Vertex();
 
-	mTexture->load("Data\\TextureData\\actor.txt", UtilGraphics::getGraphicsDevice());
-	mVertex->load("Data\\RectData\\actor.txt");
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "actor");
 }
 
 /**

@@ -2,11 +2,14 @@
 
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 
-ActorBoss::ActorBoss(Texture* m_texture,Vertex* m_vertex)
+ActorBoss::ActorBoss()
 {
-	texture = m_texture;
-	vertex	= m_vertex;
+	vertex = new Vertex();
+	texture = new Texture();
+	UtilGraphics::loadVertexAndTexture(vertex, texture, "actor");
 
 	//É{ÉX
 	boss_fall_flag=false;
@@ -71,7 +74,7 @@ ActorBoss::ActorBoss(Texture* m_texture,Vertex* m_vertex)
 	effect_font_move = false;
 }
 
-ActorBoss::~ActorBoss(void)
+ActorBoss::~ActorBoss()
 {
 }
 

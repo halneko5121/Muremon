@@ -33,16 +33,17 @@ private:
 	void				drawTime();					// タイム
 	void				drawHpGauge();
 	void				drawMissionGuage();
+	void				drawHitEffect();
 
 	void				updateMissionOugi();		// アクシデント奥義の更新
 	void				drawMissionOugi();			// アクシデント奥義を描画
+
 	void				updateMissionNegative();	// ミッション失敗時の処理
 	void				selectNegative();			// どの処理にするかを判断
 	void				drawMissionNegative();		// ミッション失敗時の処理
 
 	void				recover();					// ミッション失敗で下がったものを元に戻す
-	void				drawHitEffect();
-
+	
 private:
 	// ステート関数
 	void				stateEnterIdle();

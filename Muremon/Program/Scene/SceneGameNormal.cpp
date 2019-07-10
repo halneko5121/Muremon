@@ -51,6 +51,9 @@ namespace
 	};
 }
 
+/**
+ * @brief	コンストラクタ
+ */
 SceneGameNormal::SceneGameNormal()
 	: mState()
 	, mMission(nullptr)
@@ -92,11 +95,18 @@ SceneGameNormal::SceneGameNormal()
 	mState.changeState(cState_Idle);
 }
 
+/**
+ * @brief	デストラクタ
+ */
 SceneGameNormal::~SceneGameNormal()
 {
 }
 
-void SceneGameNormal::impleInit()
+/**
+ * @brief	初期化
+ */
+void
+SceneGameNormal::impleInit()
 {
 	mNiku	= new ActorNikuman(mVertex, mTexture);
 	mNoppo	= new ActorNoppo(mVertex, mTexture);
@@ -116,12 +126,20 @@ void SceneGameNormal::impleInit()
 	mState.changeState(cState_ReadyFadeIn);
 }
 
-void SceneGameNormal::update()
+/**
+ * @brief	更新
+ */
+void
+SceneGameNormal::update()
 {
 	mState.executeState();
 }
 
-void SceneGameNormal::draw()
+/**
+ * @brief	描画
+ */
+void
+SceneGameNormal::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_BG), mDevice);
 	mVertex->setColor(255, 255, 255, 255);
@@ -218,7 +236,11 @@ void SceneGameNormal::draw()
 	}
 }
 
-void SceneGameNormal::end()
+/**
+ * @brief	シーン終了
+ */
+void
+SceneGameNormal::end()
 {
 	//ゲームオーバーの場合
 	requestChangeScene(cSceneName_Ranking);
@@ -228,7 +250,11 @@ void SceneGameNormal::end()
 	delete mMission;
 }
 
-void SceneGameNormal::drawKeyCount()
+/**
+ * @brief	連打数描画
+ */
+void
+SceneGameNormal::drawKeyCount()
 {
 	//にくまん
 	for(int i = 0;i < 4;i++){
@@ -256,7 +282,11 @@ void SceneGameNormal::drawKeyCount()
 	}
 }
 
-void SceneGameNormal::drawScore()
+/**
+ * @brief	スコアの描画
+ */
+void
+SceneGameNormal::drawScore()
 {
 	//スコア
 	for(int i = 0;i < 9;i++){
@@ -268,7 +298,11 @@ void SceneGameNormal::drawScore()
 	}
 }
 
-void SceneGameNormal::drawTime()
+/**
+ * @brief	タイムの描画
+ */
+void
+SceneGameNormal::drawTime()
 {
 	//タイム
 	for(int i = 0;i < 5;i++){
@@ -305,7 +339,11 @@ void SceneGameNormal::drawTime()
 	}
 }
 
-void SceneGameNormal::drawHpGauge()
+/**
+ * @brief	HPゲージの描画
+ */
+void
+SceneGameNormal::drawHpGauge()
 {
 	float num = mBoss->boss_life / mBoss->max_boss_life;
 
@@ -314,13 +352,22 @@ void SceneGameNormal::drawHpGauge()
 	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 }
 
-void SceneGameNormal::drawHitEffect()
+/**
+ * @brief	ヒットエフェクトの描画
+ */
+void
+SceneGameNormal::drawHitEffect()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_GAME_EFFECT), mDevice);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
 	mVertex->drawF(mBoss->boss_move_x - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
-void SceneGameNormal::drawMissionGuage()
+
+/**
+ * @brief	ミッションゲージの描画
+ */
+void
+SceneGameNormal::drawMissionGuage()
 {
 	float num = (float)mMissionGauge / (float)MISSION_GAGE_MAX;
 
@@ -329,7 +376,11 @@ void SceneGameNormal::drawMissionGuage()
 	mVertex->drawF(G_GAGE_M_X - (1.f - num) * 100.f,G_GAGE_M_Y,R_GAGE_IN);	//ミッションゲージ
 }
 
-void SceneGameNormal::updateMissionOugi()
+/**
+ * @brief	アクシデント奥義の更新
+ */
+void
+SceneGameNormal::updateMissionOugi()
 {
 	if(mTimeCount >= 0 && 60 > mTimeCount){
 		mAlphaFont += 5;
@@ -376,7 +427,11 @@ void SceneGameNormal::updateMissionOugi()
 	mTimeCount++;
 }
 
-void SceneGameNormal::drawMissionOugi()
+/**
+ * @brief	アクシデント奥義の描画
+ */
+void
+SceneGameNormal::drawMissionOugi()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
 
@@ -391,7 +446,11 @@ void SceneGameNormal::drawMissionOugi()
 	mVertex->drawF(mWavePos.x,mWavePos.y,R_OUGI);
 }
 
-void SceneGameNormal::updateMissionNegative()
+/**
+ * @brief	ミッション失敗時の更新
+ */
+void
+SceneGameNormal::updateMissionNegative()
 {
 	selectNegative();
 
@@ -433,7 +492,11 @@ void SceneGameNormal::updateMissionNegative()
 	mTimeCount++;
 }
 
-void SceneGameNormal::drawMissionNegative()
+/**
+ * @brief	ミッション失敗時の描画
+ */
+void
+SceneGameNormal::drawMissionNegative()
 {
 	mVertex->setTextureData(mTexture->getTextureData(T_MISSION), mDevice);
 
@@ -444,6 +507,9 @@ void SceneGameNormal::drawMissionNegative()
 	mVertex->drawF(400.f,300.f,R_NEGATIVE1 + mNegativeState - 1);
 }
 
+/**
+ * @brief	どの処理にするかの判断
+ */
 void SceneGameNormal::selectNegative()
 {
 	if(mNegativeState != 0){
@@ -466,7 +532,11 @@ void SceneGameNormal::selectNegative()
 	}
 }
 
-void SceneGameNormal::recover()
+/**
+ * @brief	失敗で下がったものの元に戻す
+ */
+void
+SceneGameNormal::recover()
 {
 	if(mBoss->boss_life <= 0){
 		mNegativeDamege = 1;

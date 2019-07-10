@@ -46,67 +46,6 @@ ActorBase::~ActorBase(void)
 }
 
 /**
- * @brief 攻撃処理
- */
-POS_CC<float>
-ActorBase::updateAttack1(int mCharaNum)
-{
-	mCharaData[mCharaNum].draw_cc.x += mCharaData[mCharaNum].speed;			//右に移動
-
-	return mCharaData[mCharaNum].draw_cc;
-}
-
-/**
- * @brief 衝突チェック
- */
-bool
-ActorBase::isHit(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int chara_id) const
-{
-	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
-	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
-
-	if(draw_cc_p.x < DEADLINE) return FALSE;
-
-	switch(chara_id){
-	case ID_YOSHI:
-		if(draw_cc_p.y < 50) return FALSE;	break;
-	case ID_NIKUMAN:
-		if(draw_cc_p.y < 75) return FALSE;	break;
-	case ID_NOPPO:
-		if(draw_cc_p.y < 0) return FALSE;	break;
-	}
-
-	check_rect_p = calculateBackRect(draw_cc_p,rect_pos_p[chara_id]);			
-	check_rect_e = calculateBackRect(draw_cc_e,rect_pos_e);									
-
-	//まず円の当たり判定
-//	if( (pow( (draw_cc_e.x - draw_cc_p.x),2) + pow( (draw_cc_e.y - draw_cc_p.y),2)) <= pow((rect_pos_p[chara_id].top + DRAW_E_RAD_X),2) ){
-		//円の当たり判定に入っていたら矩形での当たり判定
-		if( (check_rect_p.right >= check_rect_e.left)	&& (check_rect_p.left	<= check_rect_e.right) &&
-			(check_rect_p.top	<= check_rect_e.bottom) && (check_rect_p.bottom >= check_rect_e.top	 ) ){
-				return TRUE;
-		}
-//	}
-
-	return FALSE;
-}
-
-/**
- * @brief 四隅を計算
- */
-F_RECT
-ActorBase::calculateBackRect(POS_CC<float> draw_cc , F_RECT rect_pos) const
-{
-	// 中心座標からそれぞれ絵の半径を加・減算 
-	rect_pos.left		= (draw_cc.x - rect_pos.left);
-	rect_pos.top		= (draw_cc.y - rect_pos.top);
-	rect_pos.right		= (draw_cc.x + rect_pos.right);
-	rect_pos.bottom		= (draw_cc.y + rect_pos.bottom);
-
-	return rect_pos;
-}
-
-/**
  * @brief スピードの設定
  */
 float
@@ -126,7 +65,23 @@ ActorBase::setSpeed()
 }
 
 /**
- * @brief 攻撃フラグの設定
+ * @brief 攻撃位置の設定
+ */
+POS_CC<float>
+ActorBase::setAtkPos(float start_x, float start_y)
+{
+	POS_CC<float> draw_cc = { 0.f,0.f };
+
+	draw_cc.x = (-start_x);
+	draw_cc.y = start_y;
+
+	return draw_cc;
+}
+
+/**
+ * @brief	攻撃フラグの設定
+ * @param	start_x	開始位置
+ * @return	キャラデータ(フラグの状態)
  */
 CHARADATA
 ActorBase::setAtkFlag(CHARADATA set_charadata)
@@ -144,21 +99,11 @@ ActorBase::setAtkFlag(CHARADATA set_charadata)
 }
 
 /**
- * @brief 位置の設定
- */
-POS_CC<float>
-ActorBase::setAtkPos(float start_x, float start_y)
-{
-	POS_CC<float> draw_cc = {0.f,0.f};
-
-	draw_cc.x = (-start_x);
-	draw_cc.y = start_y;
-
-	return draw_cc;
-}
-
-/**
- * @brief フォント位置の設定
+ * @brief エフェクトフォント位置の設定
+ * @param	font_cc			開始位置
+ * @param	chara_radius	キャラ半径
+ * @param	range_font		フォントの大きさ
+ * @return	中心座標
  */
 POS_CC<float>
 ActorBase::setEffectFont(POS_CC<float> font_cc ,float chara_radius, float range_font)
@@ -174,6 +119,10 @@ ActorBase::setEffectFont(POS_CC<float> font_cc ,float chara_radius, float range_
 
 /**
  * @brief シェイク効果
+ * @param	change_x		揺れ幅
+ * @param	change_y		揺れ幅
+ * @param	font_cc			フォントの中心位置
+ * @return	中心座標
  */
 POS_CC<float>
 ActorBase::setEffectShake(float change_x ,float change_y, POS_CC<float> font_cc)
@@ -194,4 +143,65 @@ ActorBase::setEffectShake(float change_x ,float change_y, POS_CC<float> font_cc)
 	font_cc.y += (flag_shake_down ) ? shake_y++ : shake_y--;
 
 	return font_cc;
+}
+
+/**
+ * @brief 攻撃処理
+ */
+POS_CC<float>
+ActorBase::updateAttack1(int mCharaNum)
+{
+	mCharaData[mCharaNum].draw_cc.x += mCharaData[mCharaNum].speed;			//右に移動
+
+	return mCharaData[mCharaNum].draw_cc;
+}
+
+/**
+ * @brief 衝突チェック
+ */
+bool
+ActorBase::isHit(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int chara_id) const
+{
+	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
+	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
+
+	if (draw_cc_p.x < DEADLINE) return FALSE;
+
+	switch (chara_id) {
+	case ID_YOSHI:
+		if (draw_cc_p.y < 50) return FALSE;	break;
+	case ID_NIKUMAN:
+		if (draw_cc_p.y < 75) return FALSE;	break;
+	case ID_NOPPO:
+		if (draw_cc_p.y < 0) return FALSE;	break;
+	}
+
+	check_rect_p = calculateBackRect(draw_cc_p, rect_pos_p[chara_id]);
+	check_rect_e = calculateBackRect(draw_cc_e, rect_pos_e);
+
+	//まず円の当たり判定
+//	if( (pow( (draw_cc_e.x - draw_cc_p.x),2) + pow( (draw_cc_e.y - draw_cc_p.y),2)) <= pow((rect_pos_p[chara_id].top + DRAW_E_RAD_X),2) ){
+		//円の当たり判定に入っていたら矩形での当たり判定
+	if ((check_rect_p.right >= check_rect_e.left) && (check_rect_p.left <= check_rect_e.right) &&
+		(check_rect_p.top <= check_rect_e.bottom) && (check_rect_p.bottom >= check_rect_e.top)) {
+		return TRUE;
+	}
+	//	}
+
+	return FALSE;
+}
+
+/**
+ * @brief 中心座標から矩形を逆算
+ */
+F_RECT
+ActorBase::calculateBackRect(POS_CC<float> draw_cc, F_RECT rect_pos) const
+{
+	// 中心座標からそれぞれ絵の半径を加・減算 
+	rect_pos.left = (draw_cc.x - rect_pos.left);
+	rect_pos.top = (draw_cc.y - rect_pos.top);
+	rect_pos.right = (draw_cc.x + rect_pos.right);
+	rect_pos.bottom = (draw_cc.y + rect_pos.bottom);
+
+	return rect_pos;
 }

@@ -81,8 +81,8 @@ typedef struct CHARADATA{
 class ActorBase
 {
 public:
-	ActorBase(void);
-	virtual ~ActorBase(void);
+	ActorBase();
+	virtual ~ActorBase();
 
 	float				m_chara_y;
 	virtual void		deathControl(int m_chara_num, int start_soundnum, int rect_startnum) = 0;
@@ -93,72 +93,66 @@ public:
 	virtual void		drawEffectFont(int rect_startnum) = 0;
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num, int m_chara_num) = 0;
 
-	//共通する処理
-	/************************************************************************************
-	*	役割	：攻撃スピードを設定													*
-	*	関数名	：float SetSpeed();														*
-	*	戻り値	：float m_randspeed			移動スピード								*
-	************************************************************************************/
+	/**
+	 * @brief スピードの設定
+	 */
 	float				setSpeed();
 
-	/************************************************************************************
-	*	役割	：攻撃開始位置を設定													*
-	*	関数名	：POS_CC<float> SetAtk_Pos();											*
-	*	引数	：float	start_x,start_y		開始座標									*
-	*	戻り値	：中心座標																*
-	************************************************************************************/
+	/**
+	 * @brief	攻撃位置の設定
+	 * @param	start_x	開始位置
+	 * @param	start_y 開始位置
+	 * @return	中心座標
+	 */
 	POS_CC<float>		setAtkPos(float start_x, float start_y);
 
-	/************************************************************************************
-	*	役割	：押されたキーによって攻撃開始フラグをONにする							*
-	*	関数名	：CHARADATA SetAtk(int key , CHARADATA set_charadata);					*
-	*	戻り値	：キャラデータ(フラグの状態)											*
-	************************************************************************************/
+	/**
+	 * @brief	攻撃フラグの設定
+	 * @param	start_x	開始位置
+	 * @return	キャラデータ(フラグの状態)
+	 */
 	CHARADATA			setAtkFlag(CHARADATA set_charadata);
 
-	/************************************************************************************
-	*	役割	：エフェクトフォント(『ぱん！』とか)の位置を設定						*
-	*	関数名	：POS_CC<float> SetE_Font(POS_CC<float> font_cc ,float chara_radius, float range_font)*
-	*	引数	：POS_CC<float> font_cc													*
-	*			：float chara_radius													*
-	*			：float range_font														*
-	*	戻り値	：中心座標																*
-	************************************************************************************/
+	/**
+	 * @brief エフェクトフォント位置の設定
+	 * @param	font_cc			フォントの中心位置
+	 * @param	chara_radius	キャラ半径
+	 * @param	range_font		フォントの大きさ
+	 * @return	中心座標
+	 */
 	POS_CC<float>		setEffectFont(POS_CC<float> font_cc, float chara_radius, float range_font);
 
-	/************************************************************************************
-	*	役割	：上下左右に小刻みに揺らす												*
-	*	関数名	：POS_CC<float> EffectShake(float change_x ,float change_y, POS_CC<float> font_cc);	*
-	*	引数	：float change_x ,float change_y	揺れ幅								*
-	*			：POS_CC<float> font_cc					中心座標						*
-	*	戻り値	：中心座標																*
-	************************************************************************************/
+	/**
+	 * @brief シェイク効果
+	 * @param	change_x		揺れ幅
+	 * @param	change_y		揺れ幅
+	 * @param	font_cc			フォントの中心位置
+	 * @return	中心座標
+	 */
 	POS_CC<float>		setEffectShake(float change_x, float change_y, POS_CC<float> font_cc);
 
-	/************************************************************************************
-	*	役割	：キャラの攻撃移動処理1　(キーその１の処理)								*
-	*	関数名	：void CharaAttack_1(bool flag_atk1_charakind , int m_chara_num)		*
-	*	引数	：int  m_chara_num			キャラの『何体目か』						*
-	*	戻り値	：中心座標																*
-	************************************************************************************/
+	/**
+	 * @brief 攻撃処理１
+	 * @param	m_chara_num		キャラの『何体目か』
+	 * @return	中心座標
+	 */
 	POS_CC<float>		updateAttack1(int m_chara_num);
 
-	/************************************************************************************
-	*	役割	：キャラ達とbossの当たり判定											*
-	*	関数名	：bool HitCheck(POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e, int m_chara_num);		*
-	*	引数	：POS_CC<float> draw_cc_p ,POS_CC<float> draw_cc_e,	味方、敵の中心座標	*
-	*			：int m_chara_num							キャラの何体目か			*
-	*	戻り値	：敵と当たったかどうかのフラグ											*
-	************************************************************************************/
-	bool				isHit(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int m_chara_num) const;
+	/**
+	 * @brief 衝突チェック
+	 * @param	draw_cc_p		プレイヤーの位置
+	 * @param	draw_cc_e		エネミーの位置
+	 * @param	chara_id		キャラの『何体目か』
+	 * @return	敵と当たったかどうかのフラグ
+	 */
+	bool				isHit(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int chara_id) const;
 
-	/************************************************************************************
-	*	役割	：中心座標から矩形を逆算												*
-	*	関数名	：F_RECT CalculateBack_Rect(POS_CC<float> draw_cc , F_RECT rect_pos);	*
-	*	引数	：POS_CC<float> draw_cc			中心座標								*
-	*			：F_RECT　rect_pos			矩形情報(各半径情報)						*
-	*	戻り値	：与えた中心座標からrect_posの値を与えたtop,bottom,left,right			*
-	************************************************************************************/
+	/**
+	 * @brief 中心座標から矩形を逆算
+	 * @param	draw_cc			中心座標
+	 * @param	rect_pos		矩形情報(各半径情報)	
+	 * @return	与えた中心座標からrect_posの値を与えたRECT
+	 */
 	F_RECT				calculateBackRect(POS_CC<float> draw_cc, F_RECT rect_pos) const;
 
 	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }

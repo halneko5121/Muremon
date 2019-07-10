@@ -17,14 +17,12 @@ namespace
 	ActorBase*
 	createActror(ActorId id)
 	{
-		/*
 		switch (id)
 		{
 		case cActorId_Noppo:	return (new ActorNoppo());
 		case cActorId_Nikuman:	return (new ActorNikuman());
 		case cActorId_Yoshi:	return (new ActorYoshi());
 		}
-		*/
 
 		return nullptr;
 	}

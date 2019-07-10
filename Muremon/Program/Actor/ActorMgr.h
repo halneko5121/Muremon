@@ -15,7 +15,7 @@ enum ActorId
 	cActorId_Noppo,			// ƒmƒbƒ|
 	cActorId_Nikuman,		// ‚É‚­‚Ü‚ñ
 	cActorId_Yoshi,			// ‚æ‚µ‚½‚ë‚¤
-	cActorId_Count,			// ‚æ‚µ‚½‚ë‚¤
+	cActorId_Count,
 };
 
 class ActorMgr

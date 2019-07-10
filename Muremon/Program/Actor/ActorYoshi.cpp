@@ -54,7 +54,7 @@ namespace
 		//各フラグ
 		false, false, false, false, false, false, false, false,
 		// 中心座標
-		(-RADIUS_YOSHI),(cWindowWidth + 50.f + RADIUS_YOSHI),
+		POS_CC<float>((-RADIUS_YOSHI),(cWindowWidth + 50.f + RADIUS_YOSHI)),
 	};
 }
 

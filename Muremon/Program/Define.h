@@ -21,6 +21,16 @@
 
 template <class T>
 struct POS_CC{
+	POS_CC()
+		: x(0)
+		, y(0)
+	{}
+
+	POS_CC(T in_x, T in_y)
+		: x(in_x)
+		, y(in_y)
+	{}
+
 	T x;
 	T y;
 };

@@ -30,5 +30,4 @@ private:
 	float			rand_move_x;
 	float			s_atk_start_y;
 	POS_CC<float>	pos_effectfont;
-	bool			mInit;
 };

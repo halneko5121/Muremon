@@ -42,7 +42,7 @@ namespace
 		// 各フラグ
 		false, false, false, false, false, false, false, false,
 		// 中心座標
-		0.f, 0.f,
+		POS_CC<float>(0.f, 0.f),
 	};
 }
 

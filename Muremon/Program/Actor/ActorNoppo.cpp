@@ -48,7 +48,7 @@ namespace
 		// 各フラグ
 		false, false, false, false, false, false, false, false,
 		// 中心座標
-		(-RADIUS_NOPPO), (cWindowWidth + 50.f + RADIUS_NOPPO),
+		POS_CC<float>((-RADIUS_NOPPO), (cWindowWidth + 50.f + RADIUS_NOPPO)),
 	};
 }
 
@@ -56,7 +56,27 @@ namespace
  * @brief コンストラクタ
  */
 ActorNoppo::ActorNoppo()
+	: alpha(MAX_ALPHA)
+	, rand_acc(0.0f)
+	, rand_move_x(0.0f)
+	, s_atk_start_y(0.0f)
+	, pos_effectfont(0.0f, 0.0f)
 {
+	mRectStartNum = R_NOPPO_G_ATK1;
+	mSoundStartNum = S_NOPPO_KOKE;
+	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
+
+	//構造体
+	mCharaData.flag_atk1 = mCharaData.flag_atk2 = false;
+	mCharaData.flag_death = mCharaData.flag_deathfade = false;
+	mCharaData.flag_effect = mCharaData.flag_effectfont = false;
+	mCharaData.flag_hit = mCharaData.flag_death_next = false;
+	mCharaData.draw_cc.x = (-RADIUS_NOPPO);						//キャラ座標の初期化
+	mCharaData.draw_cc.y = (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
+	mCharaData.speed = 0.f;
+	mCharaData.animetion = 0;									//アニメーションさせる最大枚数
+	mCharaData.rect_num = 0;
+	mCharaData.alpha = 0;
 }
 
 /**
@@ -72,32 +92,7 @@ ActorNoppo::~ActorNoppo(void)
 void
 ActorNoppo::init()											
 {
-	mRectStartNum = R_NOPPO_G_ATK1;
-	mSoundStartNum = S_NOPPO_KOKE;
 
-	mOrbit->mWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
-
-	//praivate変数
-	alpha			= MAX_ALPHA;
-	s_atk_start_y	= 0.f;
-	//protected変数
-	mDelay		 = mMaxAnimetion = 0;
-	mFlagTurn2 = mIsHitCheck  = false;
-
-	//構造体
-	mCharaData.flag_atk1	= mCharaData.flag_atk2		 = false;
-	mCharaData.flag_death	= mCharaData.flag_deathfade	 = false;
-	mCharaData.flag_effect	= mCharaData.flag_effectfont = false;
-	mCharaData.flag_hit		= mCharaData.flag_death_next = false;
-	mCharaData.draw_cc.x	= (-RADIUS_NOPPO);						//キャラ座標の初期化
-	mCharaData.draw_cc.y	= (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
-	mCharaData.speed		= 0.f;
-	mCharaData.animetion	= 0;									//アニメーションさせる最大枚数
-	mCharaData.rect_num		= 0;
-	mCharaData.alpha		= 0;
-
-	pos_effectfont.x		= pos_effectfont.y = mDegSpin = 0.f;
-	mCountEffect			= 0;
 }
 
 /**

@@ -54,4 +54,4 @@ private:
 
 };
 
-static ActorMgr* GetDirectFont() { return ActorMgr::getInstance(); }
+static ActorMgr* GetActorMgr() { return ActorMgr::getInstance(); }

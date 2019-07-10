@@ -72,8 +72,8 @@ ActorNoppo::~ActorNoppo(void)
 void
 ActorNoppo::init()											
 {
-	rect_startnum = R_NOPPO_G_ATK1;
-	sound_startnum = S_NOPPO_KOKE;
+	mRectStartNum = R_NOPPO_G_ATK1;
+	mSoundStartNum = S_NOPPO_KOKE;
 
 	mOrbit->mWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
@@ -188,7 +188,7 @@ ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 			}
 		}
 	}
-	else deathControl(sound_startnum,rect_startnum);
+	else deathControl(mSoundStartNum,mRectStartNum);
 
 	//当たった後の処理
 	if(mCharaData.flag_hit){
@@ -276,7 +276,7 @@ ActorNoppo::draw()
 		}
 		else{
 			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y,(rect_startnum + mCharaData.rect_num + mCharaData.animetion) );
+			mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y,(mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
 		}
 	}
 	else if(mCharaData.flag_atk2){
@@ -285,7 +285,7 @@ ActorNoppo::draw()
 		}
 		else mVertex->setAngle(0.f);
 		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-		mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y,(rect_startnum + mCharaData.rect_num + mCharaData.animetion) );
+		mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y,(mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
 	}
 
 	// エフェクトフォント類

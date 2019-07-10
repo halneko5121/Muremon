@@ -66,8 +66,8 @@ ActorNikuman::~ActorNikuman(void)
 void
 ActorNikuman::init()								
 {
-	rect_startnum = R_NIKU_G_ATK1;
-	sound_startnum = S_NIKUMAN;
+	mRectStartNum = R_NIKU_G_ATK1;
+	mSoundStartNum = S_NIKUMAN;
 
 	//praivateïœêî
 	s_atk_start_y = 0.f;
@@ -156,7 +156,7 @@ ActorNikuman::update(POS_CC<float> boss_cc, bool boss_death)
 			}
 		}
 	}
-	else deathControl(sound_startnum,rect_startnum);
+	else deathControl(mSoundStartNum,mRectStartNum);
 
 
 	//ìñÇΩÇ¡ÇΩå„ÇÃèàóù
@@ -231,7 +231,7 @@ ActorNikuman::draw()
 
 	mVertex->setAngle(draw_deg += mDegSpin);
 	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-	mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y, (rect_startnum + mCharaData.rect_num + mCharaData.animetion) );
+	mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
 
 	drawEffectFont(R_NIKU_BETYA);
 }

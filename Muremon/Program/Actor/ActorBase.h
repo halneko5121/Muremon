@@ -173,8 +173,8 @@ protected:
 	int					mCountEffect;
 	int					mMaxAnimetion;
 
-	int					rect_startnum;
-	int					sound_startnum;
+	int					mRectStartNum;
+	int					mSoundStartNum;
 
 	bool				mFlagTurn2;								//“ñT–Ú‚Ìƒtƒ‰ƒO
 	bool				mIsHitCheck;

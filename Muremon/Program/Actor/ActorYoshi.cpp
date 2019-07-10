@@ -78,8 +78,8 @@ ActorYoshi::~ActorYoshi(void)
 void
 ActorYoshi::init()											
 {
-	rect_startnum = R_YOSHI_G_ATK1;
-	sound_startnum = S_YOSHI_HIP;
+	mRectStartNum = R_YOSHI_G_ATK1;
+	mSoundStartNum = S_YOSHI_HIP;
 
 	mOrbit->mWave->init(cWaveAmplit,cWaveCycle,NULL,WAVE_MODE_GAME);
 
@@ -186,7 +186,7 @@ ActorYoshi::update(POS_CC<float> boss_cc, bool boss_death)
 			}
 		}
 	}
-	else deathControl(sound_startnum,rect_startnum);
+	else deathControl(mSoundStartNum,mRectStartNum);
 
 	//“–‚½‚Á‚½Œã‚Ìˆ—
 	if(mCharaData.flag_hit){
@@ -273,7 +273,7 @@ ActorYoshi::draw()
 			mVertex->setAngle(0.f);
 		}
 	}
-	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y, (rect_startnum + mCharaData.rect_num + mCharaData.animetion));
+	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
 
 	drawEffectFont(R_YOSHI_BOYO);
 }

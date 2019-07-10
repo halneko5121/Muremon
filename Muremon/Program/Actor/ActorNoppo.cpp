@@ -102,6 +102,15 @@ ActorNoppo::init()
 	mInit					= true;
 }
 
+
+/**
+ * é¿çs
+ */
+void
+ActorNoppo::runImple()
+{
+}
+
 /**
  * @brief çXêV
  */

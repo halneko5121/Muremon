@@ -108,6 +108,14 @@ ActorYoshi::init()
 }
 
 /**
+ * é¿çs
+ */
+void
+ActorYoshi::runImple()
+{
+}
+
+/**
  * @brief çXêV
  */
 void

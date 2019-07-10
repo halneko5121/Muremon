@@ -13,6 +13,7 @@ public:
 	~ActorBoss();
 
 	void		init() override;
+	void		runImple() override;
 	void		update(POS_CC<float> boss_cc, bool boss_death) override;
 	void		draw() override;
 	void		deathControl(int start_soundnum, int rect_startnum) override;

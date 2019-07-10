@@ -88,10 +88,14 @@ public:
 	virtual void		deathControl(int start_soundnum, int rect_startnum) = 0;
 	virtual void		init() = 0;
 	virtual void		update(POS_CC<float> boss_cc, bool boss_death) = 0;
+
 	//描画
 	virtual void		draw() = 0;
 	virtual void		drawEffectFont(int rect_startnum) = 0;
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
+
+	void				run();
+	virtual void		runImple() {};
 
 	/**
 	 * @brief スピードの設定
@@ -158,6 +162,9 @@ public:
 
 	bool				isHitCheck() const { return mIsHitCheck; }
 
+	bool				isRun() const { return mIsRun; }
+
+
 protected:
 	OrbitCalculation*	mOrbit;
 
@@ -177,4 +184,5 @@ protected:
 
 	bool				mFlagTurn2;								//二週目のフラグ
 	bool				mIsHitCheck;
+	bool				mIsRun;
 };

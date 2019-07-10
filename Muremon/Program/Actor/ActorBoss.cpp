@@ -164,6 +164,12 @@ void ActorBoss::init()
 }
 
 void
+ActorBoss::runImple()
+{
+}
+
+
+void
 ActorBoss::update(POS_CC<float> boss_cc, bool boss_death)
 {
 }

@@ -18,6 +18,7 @@ public:
 	void			deathControl(int sound_num, int rect_startnum) override;
 
 	void			init() override;
+	void			runImple() override;
 	void			update(POS_CC<float> boss_cc, bool boss_death) override;
 	void			draw() override;
 	void			drawEffectFont(int rect_startnum) override;

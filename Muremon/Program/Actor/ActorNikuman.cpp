@@ -93,6 +93,14 @@ ActorNikuman::init()
 }
 
 /**
+ * é¿çs
+ */
+void
+ActorNikuman::runImple()
+{
+}
+
+/**
  * @brief çXêV
  */
 void

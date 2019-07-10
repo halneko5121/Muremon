@@ -64,11 +64,10 @@ namespace
 	};
 }
 
-Mission::Mission(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
+Mission::Mission(Texture* m_texture,Vertex* m_vertex)
 {
 	texture = m_texture;
 	vertex	= m_vertex;
-	pDevice = apDev;
 
 	cnt_key_nikuman = 0;	//にくまんの押されたキーの数をカウント
 
@@ -101,7 +100,7 @@ Mission::Mission(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
 	mission_start.y = -50.f;
 }
 
-Mission::~Mission(void)
+Mission::~Mission()
 {
 }
 

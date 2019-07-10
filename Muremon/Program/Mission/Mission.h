@@ -21,8 +21,6 @@ private:
 	Texture	*texture;
 	Vertex	*vertex;
 
-	LPDIRECT3DDEVICE9 pDevice;
-
 	D3DXVECTOR2 mission_start;	//みっしょん開始の位置
 
 	int alpha_count;	//
@@ -65,8 +63,8 @@ private:
 
 	int cnt_key_noppo;		//のっぽの押されたキーの数をカウント
 public:
-	Mission(Texture* m_texture, Vertex* m_vertex, LPDIRECT3DDEVICE9 apDev);
-	~Mission(void);
+	Mission(Texture* m_texture, Vertex* m_vertex);
+	~Mission();
 
 	int		getCountKeyNikuman()		{ return cnt_key_nikuman; };
 	int		getCountKeyYoshitaro()	{ return cnt_key_yoshitaro; };

@@ -3,11 +3,10 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilGraphics.h"
 
-ActorBoss::ActorBoss(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev)
+ActorBoss::ActorBoss(Texture* m_texture,Vertex* m_vertex)
 {
 	texture = m_texture;
 	vertex	= m_vertex;
-	pDevice = apDev;
 
 	//É{ÉX
 	boss_fall_flag=false;

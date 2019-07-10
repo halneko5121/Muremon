@@ -117,8 +117,8 @@ SceneGameNormal::impleInit()
 	mNoppo->init();
 	mYoshi->init();
 
-	mBoss = new ActorBoss(mTexture, mVertex, UtilGraphics::getGraphicsDevice());
-	mMission = new Mission(mTexture, mVertex, UtilGraphics::getGraphicsDevice());
+	mBoss = new ActorBoss(mTexture, mVertex);
+	mMission = new Mission(mTexture, mVertex);
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	mState.changeState(cState_ReadyFadeIn);

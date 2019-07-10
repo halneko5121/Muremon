@@ -45,8 +45,6 @@ private:
 	Texture	*texture;
 	Vertex	*vertex;
 
-	LPDIRECT3DDEVICE9 pDevice;
-
 public:
 	float boss_life;
 
@@ -139,7 +137,7 @@ private:
 	float add_boss_life;
 
 public:
-	ActorBoss(Texture* m_texture,Vertex* m_vertex,LPDIRECT3DDEVICE9 apDev);
+	ActorBoss(Texture* m_texture,Vertex* m_vertex);
 	~ActorBoss(void);
 
 	void impleInit();

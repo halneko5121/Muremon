@@ -189,7 +189,7 @@ ActorYoshi::update(POS_CC<float> boss_cc, bool boss_death)
 	}
 	else
 	{
-		deathControl(mSoundStartNum, mRectStartNum);
+		deathControl();
 	}
 
 	//“–‚½‚Á‚½Œã‚Ìˆ—
@@ -297,7 +297,7 @@ ActorYoshi::updateAttack2()														//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
  * @brief €–Sˆ—
  */
 void
-ActorYoshi::deathControl(int sound_num, int rect_startnum)
+ActorYoshi::deathControl()
 {
 //	if(mCharaData.animetion != 0) mCharaData.animetion = 0;
 

@@ -85,7 +85,7 @@ public:
 	virtual ~ActorBase();
 
 	float				m_chara_y;
-	virtual void		deathControl(int start_soundnum, int rect_startnum) = 0;
+	virtual void		deathControl() = 0;
 	virtual void		init() = 0;
 	virtual void		update(POS_CC<float> boss_cc, bool boss_death) = 0;
 

@@ -199,7 +199,7 @@ ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 			}
 		}
 	}
-	else deathControl(mSoundStartNum,mRectStartNum);
+	else deathControl();
 
 	//“–‚½‚Á‚½Œã‚Ìˆ—
 	if(mCharaData.flag_hit){
@@ -318,7 +318,7 @@ ActorNoppo::updateAttack2()
  * @brief €–Sˆ—
  */
 void
-ActorNoppo::deathControl(int sound_startnum ,int rect_startnum)							//€–Sˆ—
+ActorNoppo::deathControl()
 {
 	static int wait_count = 0;
 

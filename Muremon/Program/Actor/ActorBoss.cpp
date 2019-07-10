@@ -175,7 +175,7 @@ ActorBoss::update(POS_CC<float> boss_cc, bool boss_death)
 }
 
 void
-ActorBoss::deathControl(int start_soundnum, int rect_startnum)
+ActorBoss::deathControl()
 {
 
 }

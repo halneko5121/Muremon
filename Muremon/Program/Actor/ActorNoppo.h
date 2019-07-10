@@ -16,7 +16,7 @@ public:
 	~ActorNoppo(void);
 
 	POS_CC<float>	updateAttack2();
-	void			deathControl(int sound_startnum, int rect_startnum);
+	void			deathControl() override;
 
 	void			init() override;
 	void			runImple() override;

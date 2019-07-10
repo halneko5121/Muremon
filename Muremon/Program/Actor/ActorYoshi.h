@@ -15,7 +15,7 @@ public:
 	~ActorYoshi();
 
 	POS_CC<float>	updateAttack2();
-	void			deathControl(int sound_num, int rect_startnum) override;
+	void			deathControl() override;
 
 	void			init() override;
 	void			runImple() override;

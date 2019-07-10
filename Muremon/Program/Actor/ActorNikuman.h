@@ -15,7 +15,7 @@ public:
 	~ActorNikuman();
 
 	POS_CC<float>	updateAttack2(POS_CC<float> boss_cc);
-	void			deathControl(int sound_num, int rect_start_num);
+	void			deathControl() override;
 
 	void			init() override;
 	void			runImple() override;

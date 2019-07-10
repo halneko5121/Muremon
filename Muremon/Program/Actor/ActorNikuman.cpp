@@ -152,8 +152,7 @@ ActorNikuman::update(POS_CC<float> boss_cc, bool boss_death)
 			}
 		}
 	}
-	else deathControl(mSoundStartNum,mRectStartNum);
-
+	else deathControl();
 
 	//“–‚½‚Á‚½Œã‚Ìˆ—
 	if(mCharaData.flag_hit){
@@ -257,7 +256,7 @@ ActorNikuman::updateAttack2(POS_CC<float> boss_cc)
  * @brief €–Sˆ—
  */
 void
-ActorNikuman::deathControl(int sound_num, int rect_startnum)
+ActorNikuman::deathControl()
 {
 	mCharaData.animetion = 0;
 	mCharaData.animetion	= setAnimetion(NULL,mCharaData.animetion,ANIME_DEATH_NIKU);

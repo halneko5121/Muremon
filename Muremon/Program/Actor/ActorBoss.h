@@ -54,8 +54,6 @@ public:
 public:
 	float boss_life;
 
-	float lv_count;
-
 	float max_boss_life;
 
 	float boss_move_x;
@@ -70,57 +68,30 @@ public:
 
 	bool boss_win_flag;
 
-	int posi_x;
-
 private:
 	Texture	*texture;
 	Vertex	*vertex;
+
+	float lv_count;
 
 	//ボスに使う
 	int damage_time;
 
 	int boss_mode;
 
-	int boss_action;
-
-	int total_damage;	//合計ダメージ
-
-	int chara_damage;	//キャラクターのダメージ加算
-
-	int death_count;	//ボスが死んだカウント
-
-	int sum_score;		//加算ダメージ
-
-	int mission_gage;		//必殺ゲージ
-
 	int boss_alpha_count;	//ボスのアルファカウント
-
-	int boss_fade_flag;	//ボスフェードコントロール
-
-	int boss_out_count;	//ボスのフェードアウト開始時間
-
-	int boss_positoin_x;
 
 	int play_mode;
 
 	bool boss_damage_flag;
 
-	int boss_fall_x;
-
-	int boss_fall_count;
-
 	bool boss_new_flag;
 
 	int boss_alpha;
 
-	int boss_appear_time;
-
 	int boss_fadeout_time;
 
 	int boss_rect_data;
-
-	int new_time;
-
 
 	int no_font_alpha;
 	int no_draw_time;
@@ -128,8 +99,6 @@ private:
 
 	int boss_movecount;
 	bool boss_move_flag;
-
-	int boss_move_anime_time;
 
 	int move_anime_time;
 
@@ -142,6 +111,4 @@ private:
 	bool effect_font_move;
 
 	float effect_font;
-
-	float add_boss_life;
 };

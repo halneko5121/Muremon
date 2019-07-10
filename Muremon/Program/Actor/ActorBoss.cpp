@@ -17,11 +17,7 @@ ActorBoss::ActorBoss()
 	boss_alpha_count=0;
 
 	boss_movecount=0;
-
-	boss_fall_x=0;
 	
-	boss_fall_count=0;
-
 	boss_new_flag=false;
 
 	hit_count=0;
@@ -31,9 +27,7 @@ ActorBoss::ActorBoss()
 	boss_mode=M_BOSS_MOVE;
 	
 	boss_alpha=255;
-	
-	boss_appear_time=0;
-	
+		
 	boss_fadeout_time=0;
 	
 	damage_time=0;
@@ -45,8 +39,6 @@ ActorBoss::ActorBoss()
 	boss_life = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * lv_count); 
 
 	max_boss_life = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * lv_count); 
-
-	new_time=0;
 
 	boss_move_x=BOSS_APPEARANCE_POSITION;
 	boss_move_y=BOSS_STABILITY_Y;
@@ -84,11 +76,7 @@ void ActorBoss::impleInit()
 	boss_alpha_count=0;
 
 	boss_movecount=0;
-
-	boss_fall_x=0;
 	
-	boss_fall_count=0;
-
 	boss_new_flag=false;
 
 	hit_count=0;
@@ -96,9 +84,7 @@ void ActorBoss::impleInit()
 	boss_mode=M_BOSS_MOVE;
 	
 	boss_alpha=255;
-	
-	boss_appear_time=0;
-	
+		
 	boss_fadeout_time=0;
 	
 	boss_damage_flag = false;
@@ -106,8 +92,6 @@ void ActorBoss::impleInit()
 	damage_time=0;
 	
 	boss_rect_data=R_BOSS_MOVE1;
-
-	new_time=0;
 
 	boss_move_x=BOSS_APPEARANCE_POSITION;
 	
@@ -245,7 +229,6 @@ void ActorBoss::control(int play_mode)
 			{
 				boss_alpha=0;
 				boss_alpha_count=0;
-				boss_fall_count++;
 				boss_new_flag=true;
 			}
 		}

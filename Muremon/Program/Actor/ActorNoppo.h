@@ -6,6 +6,7 @@
  *													by	三上　亘					*
  ************************************************************************************/
 
+#include "Library/StateMachine.h"
 #include "ActorBase.h"
 
 class ActorNoppo : public ActorBase
@@ -25,9 +26,19 @@ public:
 	int				setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
 private:
-	float			mAlpha;
-	float			mRandAcc;
-	float			mRandMoveX;
-	float			mAtkStartY;
-	POS_CC<float>	mEffectFontPos;
+	// ステート関数
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(GroundAtk);
+	DECLAR_STATE_FUNC2(SkyAtk);
+	DECLAR_STATE_FUNC2(DeathReady);
+	DECLAR_STATE_FUNC2(DeathFade);
+	DECLAR_STATE_FUNC2(Death);
+
+private:
+	StateMachine<ActorNoppo>	mState;	// ステート
+	float						mAlpha;
+	float						mRandAcc;
+	float						mRandMoveX;
+	float						mAtkStartY;
+	POS_CC<float>				mEffectFontPos;
 };

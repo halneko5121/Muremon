@@ -50,6 +50,17 @@ namespace
 		// 中心座標
 		POS_CC<float>((-RADIUS_NOPPO), (cWindowWidth + 50.f + RADIUS_NOPPO)),
 	};
+
+	enum State
+	{
+		cState_Idle,			// 待機
+		cState_GroundAtk,		// 地上攻撃
+		cState_SkyAtk,			// 空中攻撃
+		cState_DeathReady,		// 死亡準備
+		cState_DeathFade,		// 死亡フェード
+		cState_Death,			// 死亡
+		cState_Count
+	};
 }
 
 /**
@@ -77,6 +88,15 @@ ActorNoppo::ActorNoppo()
 	mCharaData.animetion = 0;									//アニメーションさせる最大枚数
 	mCharaData.rect_num = 0;
 	mCharaData.alpha = 0;
+
+	mState.initialize(cState_Count, cState_Idle);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundAtk,		cState_GroundAtk);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, SkyAtk,			cState_SkyAtk);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, DeathReady,		cState_DeathReady);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, DeathFade,		cState_DeathFade);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, Death,			cState_Death);
+	mState.changeState(cState_Idle);
 }
 
 /**
@@ -334,4 +354,80 @@ ActorNoppo::deathControl(int sound_startnum ,int rect_startnum)							//死亡処理
 		mCharaData.flag_atk1  = mCharaData.flag_atk2 = false;
 		mCharaData.flag_death = mCharaData.flag_hit  = false;
 	}
+}
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+ActorNoppo::stateEnterIdle()
+{
+}
+void
+ActorNoppo::stateIdle()
+{
+}
+
+/**
+ * @brief ステート:GroundAtk
+ */
+void
+ActorNoppo::stateEnterGroundAtk()
+{
+}
+void
+ActorNoppo::stateGroundAtk()
+{
+}
+
+/**
+ * @brief ステート:SkyAtk
+ */
+void
+ActorNoppo::stateEnterSkyAtk()
+{
+}
+void
+ActorNoppo::stateSkyAtk()
+{
+}
+
+/**
+ * @brief ステート:DeathReady
+ */
+void
+ActorNoppo::stateEnterDeathReady()
+{
+}
+void
+ActorNoppo::stateDeathReady()
+{
+}
+
+/**
+ * @brief ステート:Idle
+ */
+void
+ActorNoppo::stateEnterDeathFade()
+{
+}
+void
+ActorNoppo::stateDeathFade()
+{
+}
+
+/**
+ * @brief ステート:Death
+ */
+void
+ActorNoppo::stateEnterDeath()
+{
+}
+void
+ActorNoppo::stateDeath()
+{
 }

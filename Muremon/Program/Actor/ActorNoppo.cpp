@@ -56,11 +56,11 @@ namespace
  * @brief コンストラクタ
  */
 ActorNoppo::ActorNoppo()
-	: alpha(MAX_ALPHA)
-	, rand_acc(0.0f)
-	, rand_move_x(0.0f)
-	, s_atk_start_y(0.0f)
-	, pos_effectfont(0.0f, 0.0f)
+	: mAlpha(MAX_ALPHA)
+	, mRandAcc(0.0f)
+	, mRandMoveX(0.0f)
+	, mAtkStartY(0.0f)
+	, mEffectFontPos(0.0f, 0.0f)
 {
 	mRectStartNum = R_NOPPO_G_ATK1;
 	mSoundStartNum = S_NOPPO_KOKE;
@@ -112,12 +112,12 @@ ActorNoppo::runImple()
 	}
 	else if (mCharaData.flag_atk2)
 	{
-		s_atk_start_y = (float)(rand() % cRandY);
-		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+		mAtkStartY = (float)(rand() % cRandY);
+		mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+		mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-		mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, s_atk_start_y);
+		mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, mAtkStartY);
 	}
 
 
@@ -191,13 +191,13 @@ ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 
 		if(!mCharaData.flag_effectfont){
 			if(mCountEffect++ < FONT_SET){
-				pos_effectfont = setEffectFont(mCharaData.draw_cc, RADIUS_NOPPO,POS_HITFONT_X);
+				mEffectFontPos = setEffectFont(mCharaData.draw_cc, RADIUS_NOPPO,POS_HITFONT_X);
 				mCharaData.flag_effectfont	= true;
 			}	
 		}
 		else{
 			if(mCountEffect++ < FONT_DELETE){
-				pos_effectfont = setEffectShake(SHAKE_X,SHAKE_Y,pos_effectfont);
+				mEffectFontPos = setEffectShake(SHAKE_X,SHAKE_Y,mEffectFontPos);
 			}
 			else{
 				mCharaData.flag_effectfont = false;
@@ -245,7 +245,7 @@ ActorNoppo::drawEffectFont(int rect_startnum)
 			if(mCharaData.flag_atk1)		rect_change = 0; 
 			else if(mCharaData.flag_atk2)	rect_change = 1;
 			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			mVertex->drawF(pos_effectfont.x,pos_effectfont.y,rect_startnum + rect_change);
+			mVertex->drawF(mEffectFontPos.x,mEffectFontPos.y,rect_startnum + rect_change);
 		}
 	}
 }
@@ -320,7 +320,7 @@ ActorNoppo::deathControl(int sound_startnum ,int rect_startnum)							//死亡処理
 		mCharaData.animetion = 0;																	//描画を固定
 		mCharaData.rect_num  = ANIME_S_ATK2_NOPPO;
 
-		mCharaData.draw_cc   = mOrbit->mParabora->orbitParabola(rand_acc,rand_move_x,cParaLimitY,mCharaData.draw_cc);
+		mCharaData.draw_cc   = mOrbit->mParabora->orbitParabola(mRandAcc,mRandMoveX,cParaLimitY,mCharaData.draw_cc);
 	}	
 	if(mCharaData.flag_deathfade){
 		if(mCharaData.alpha <= 0){

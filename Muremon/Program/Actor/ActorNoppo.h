@@ -25,9 +25,9 @@ public:
 	int				setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
 private:
-	float			alpha;
-	float			rand_acc;
-	float			rand_move_x;
-	float			s_atk_start_y;
-	POS_CC<float>	pos_effectfont;
+	float			mAlpha;
+	float			mRandAcc;
+	float			mRandMoveX;
+	float			mAtkStartY;
+	POS_CC<float>	mEffectFontPos;
 };

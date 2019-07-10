@@ -7,6 +7,17 @@
  *	管理者：三上
  ******************************************************************/
 
+class ActorBase;
+
+enum ActorId
+{
+	cActorId_Null,			// なし
+	cActorId_Noppo,			// ノッポ
+	cActorId_Nikuman,		// にくまん
+	cActorId_Yoshi,			// よしたろう
+	cActorId_Count,			// よしたろう
+};
+
 class ActorMgr
 {
 public:
@@ -28,8 +39,19 @@ public:
 	 */
 	static void			destroy();
 
+	/**
+	 * @brief	アクターの生成
+	 */
+	ActorBase*			createActor(ActorId id);
+
+private:
+	typedef std::vector<ActorBase*>	ActorList;
+
 private:
 	static ActorMgr*	mInstance;		// インスタンス
+	ActorList			mActorList;		// アクターを保管しておくリスト
+	int					mUniqId;		// ユニークID
+
 };
 
 static ActorMgr* GetDirectFont() { return ActorMgr::getInstance(); }

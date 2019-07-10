@@ -9,6 +9,8 @@
 #include "UtilGraphics.h"
 
 #include "Library/Graphics/DirectGraphics.h"
+#include "Library/Graphics/Texture.h"
+#include "Library/Graphics/Vertex.h"
 
 /**
  * @biref グラフィックスデバイスを取得する

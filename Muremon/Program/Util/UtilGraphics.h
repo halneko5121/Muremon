@@ -7,8 +7,8 @@
  *	ŠÇ—ÒFOã
  ******************************************************************/
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
+class Vertex;
+class Texture;
 
 namespace UtilGraphics
 {

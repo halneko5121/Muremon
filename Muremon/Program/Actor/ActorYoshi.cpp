@@ -119,14 +119,14 @@ ActorYoshi::runImple()
 	{
 		rand_deg = (float)(rand() % cDegRand + cDegRandMin);
 		mCharaData.draw_cc = POS_CC<float>(-RADIUS_YOSHI, G_ATK_1_START_Y);
-		mAngleDegree = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+		mAngleDegree = (float)(rand() % SPIN_SPEED + SPIN_RAND_MIN);
 	}
 	else if (mCharaData.flag_atk2)
 	{
 		s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
 		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-		mAngleDegree = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+		mAngleDegree = (float)(rand() % SPIN_SPEED + SPIN_RAND_MIN);
 
 		mCharaData.draw_cc = POS_CC<float>(-RADIUS_YOSHI, s_atk_start_y);
 	}

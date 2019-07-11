@@ -359,7 +359,7 @@ ActorNoppo::stateDeathReady()
 	else if (mCharaData.flag_atk2) {
 
 		// ‰ñ“]‚³‚¹‚é
-		mAngleDegree += SPIN_RAND;
+		mAngleDegree += SPIN_SPEED;
 
 		mCharaData.animetion = 0;																	//•`‰æ‚ðŒÅ’è
 		mCharaData.rect_num = ANIME_S_ATK2_NOPPO;

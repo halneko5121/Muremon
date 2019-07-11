@@ -114,7 +114,7 @@ ActorNikuman::runImple()
 		s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
 		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-		mAngleDegree = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+		mAngleDegree = (float)(rand() % SPIN_SPEED + SPIN_RAND_MIN);
 
 		mCharaData.speed = getNikumanSpeed();
 		mCharaData.draw_cc = POS_CC<float>(-RADIUS_NIKU, s_atk_start_y);

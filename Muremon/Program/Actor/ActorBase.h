@@ -25,7 +25,7 @@
 #define FONT_DELETE					(20)
 #define FONT_SET					(1)
 //‰ñ“]ŠÖŒW(•`‰æ)
-#define SPIN_RAND					(30)		//‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				
+#define SPIN_SPEED					(30)		//‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				
 #define SPIN_RAND_MIN				(1)						
 //•`‰æˆÊ’u
 #define POS_GROUND					(500.f)		//’n–Ê‚ÌÀ•W		

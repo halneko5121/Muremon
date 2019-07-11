@@ -122,15 +122,6 @@ ActorNikuman::update(POS_CC<float> boss_cc)
 {
 	mBossPos = boss_cc;
 	mState.executeState();
-
-	//当たった後の処理
-	if(mCharaData.flag_hit){
-		//中心座標が画面外なら死亡
-		if( (mCharaData.draw_cc.x < -RADIUS_NIKU)  || (mCharaData.draw_cc.x > cWindowWidth  + RADIUS_NIKU) &&
-			(mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
-				mCharaData.flag_death = true;
-		}
-	}
 }
 
 /**
@@ -236,8 +227,6 @@ ActorNikuman::stateGroundAtk()
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NIKUMAN)) 
 	{
 		UtilSound::playOnce(S_NIKUMAN);
-		mCharaData.flag_hit = true;
-		mCharaData.flag_death = true;
 		setIsHitCheck(true);
 		m_chara_y = mCharaData.draw_cc.y;
 
@@ -280,8 +269,6 @@ ActorNikuman::stateSkyAtk()
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NIKUMAN))
 	{
 		UtilSound::playOnce(S_NIKUMAN);
-		mCharaData.flag_hit = true;
-		mCharaData.flag_death = true;
 		setIsHitCheck(true);
 		m_chara_y = mCharaData.draw_cc.y;
 
@@ -320,6 +307,13 @@ ActorNikuman::stateGroundDeath()
 	{
 		mState.changeState(cState_End);
 	}
+
+	// 中心座標が画面外なら死亡
+	if ((mCharaData.draw_cc.x < -RADIUS_NIKU) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_NIKU) &&
+		(mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU))
+	{
+		mState.changeState(cState_End);
+	}
 }
 
 /**
@@ -341,6 +335,13 @@ ActorNikuman::stateSkyDeath()
 	{
 		mState.changeState(cState_End);
 	}
+
+	// 中心座標が画面外なら死亡
+	if ((mCharaData.draw_cc.x < -RADIUS_NIKU) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_NIKU) &&
+		(mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU)) 
+	{
+		mState.changeState(cState_End);
+	}
 }
 
 /**
@@ -351,8 +352,6 @@ ActorNikuman::stateEnterEnd()
 {
 	mCharaData.flag_atk1 = false;
 	mCharaData.flag_atk2 = false;
-	mCharaData.flag_death = false;
-	mCharaData.flag_hit = false;
 }
 void
 ActorNikuman::stateEnd()

@@ -3,6 +3,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Effect/EffectMgr.h"
 
 namespace
 {
@@ -167,9 +168,28 @@ ActorNoppo::drawEffectFont()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 
 	int rect_change = 0;
+	mCountEffect++;
 
-	//フォントエフェクトの描画(いちお100体分)
-	if(mCountEffect++ < FONT_DELETE)
+	if (mCharaData.flag_effectfont)
+	{
+		if (mCountEffect < FONT_DELETE)
+		{
+			mEffectFontPos = setEffectShake(SHAKE_X, SHAKE_Y, mEffectFontPos);
+		}
+		else
+		{
+			mCharaData.flag_effectfont = false;
+			mCountEffect = 0;
+		}
+	}
+	else
+	{
+		mEffectFontPos = setEffectFont(mCharaData.draw_cc, RADIUS_NOPPO, POS_HITFONT_X);
+		mCharaData.flag_effectfont = true;
+	}
+
+	// フォントエフェクトの描画
+	if(mCountEffect < FONT_DELETE)
 	{
 		if(mCharaData.flag_atk1)		rect_change = 0; 
 		else if(mCharaData.flag_atk2)	rect_change = 1;
@@ -203,12 +223,6 @@ ActorNoppo::draw()
 		else mVertex->setAngle(0.f);
 		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
 		mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y,(mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
-	}
-
-	// エフェクトフォント類
-	if (mCharaData.flag_hit)
-	{
-		drawEffectFont();
 	}
 }
 
@@ -279,7 +293,10 @@ ActorNoppo::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_NOPPO_GANMEN);
 
+		GetEffectMgr()->createEffect(cEffectId_HitEffect5, mTexture, mVertex, mCharaData.draw_cc);
+
 		mState.changeState(cState_DeathReady);
+		return;
 	}
 	// 攻撃処理(xが画面外じゃなければ処理)
 	else
@@ -335,7 +352,10 @@ ActorNoppo::stateSkyAtk()
 		{
 			UtilSound::playOnce((S_NOPPO_PETI));
 		}
+		GetEffectMgr()->createEffect(cEffectId_HitEffect6, mTexture, mVertex, mCharaData.draw_cc);
+
 		mState.changeState(cState_DeathReady);
+		return;
 	}
 	// 攻撃処理(xが画面外じゃなければ処理)
 	else
@@ -401,25 +421,6 @@ ActorNoppo::stateDeathReady()
 	if ((mCharaData.draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30)) {
 		mState.changeState(cState_Death);
 	}
-
-	if (mCharaData.flag_hit) {
-		if (!mCharaData.flag_effectfont) {
-			if (mCountEffect++ < FONT_SET) {
-				mEffectFontPos = setEffectFont(mCharaData.draw_cc, RADIUS_NOPPO, POS_HITFONT_X);
-				mCharaData.flag_effectfont = true;
-			}
-		}
-		else {
-			if (mCountEffect++ < FONT_DELETE) {
-				mEffectFontPos = setEffectShake(SHAKE_X, SHAKE_Y, mEffectFontPos);
-			}
-			else {
-				mCharaData.flag_effectfont = false;
-				mCountEffect = 0;
-			}
-		}
-	}
-
 }
 
 /**

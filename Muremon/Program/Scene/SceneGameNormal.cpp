@@ -161,9 +161,9 @@ SceneGameNormal::draw()
 		//ƒLƒƒƒ‰’B
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
-		mNoppo->drawImple();
-		mYoshi->drawImple();
-		mNiku->drawImple();
+		mNoppo->draw();
+		mYoshi->draw();
+		mNiku->draw();
 	}
 	else if(mGameState == G_GAME_OVER){
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);

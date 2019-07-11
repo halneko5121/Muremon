@@ -136,7 +136,7 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//”wŒi
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//Šø
 
-		mBoss->drawImple();
+		mBoss->draw();
 		mBoss->fallDraw();
 
 		drawHitEffect();

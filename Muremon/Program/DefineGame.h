@@ -28,6 +28,16 @@ const int cCursorWidth = 20;
 #define TIME_LIMIT					(10800)	//制限時間(仮　3:00)
 #define DEADLINE					(300.f)	//ゲームオーバーライン
 
+#define RADIUS_NIKU						(37.5f)				//キャラの半径
+#define RADIUS_YOSHI					(76.5f)				//キャラの半径
+#define RADIUS_NOPPO					(150.f)				//キャラの半径
+
+#define RADIUS_HIT_X_YOSHI				(30.f)				
+#define RADIUS_HIT_Y_YOSHI				(40.f)				
+#define RADIUS_HIT_X_NOPPO				(50.f)				
+#define RADIUS_HIT_Y_NOPPO				(100.f)				
+
+
 //描画位置
 #define G_BG_X						(400.f)
 #define G_BG_Y						(300.f)

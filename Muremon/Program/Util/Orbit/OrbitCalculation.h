@@ -12,15 +12,6 @@
 #include"OrbitRebound.h"
 #include"OrbitParadora.h"
 
-#define RADIUS_NIKU						(37.5f)				//ƒLƒƒƒ‰‚Ì”¼Œa
-#define RADIUS_YOSHI					(76.5f)				//ƒLƒƒƒ‰‚Ì”¼Œa
-#define RADIUS_NOPPO					(150.f)				//ƒLƒƒƒ‰‚Ì”¼Œa
-
-#define RADIUS_HIT_X_YOSHI				(30.f)				
-#define RADIUS_HIT_Y_YOSHI				(40.f)				
-#define RADIUS_HIT_X_NOPPO				(50.f)				
-#define RADIUS_HIT_Y_NOPPO				(100.f)				
-
 class OrbitCalculation
 {
 public:

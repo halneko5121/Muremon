@@ -153,7 +153,7 @@ SceneGameNormal::draw()
 	}
 	else if(mGameState == G_GAME_SCENE){
 
-		mBoss->draw();
+		mBoss->drawImple();
 
 		mBoss->fallDraw();
 
@@ -161,9 +161,9 @@ SceneGameNormal::draw()
 		//ƒLƒƒƒ‰’B
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
-		mNoppo->draw();
-		mYoshi->draw();
-		mNiku->draw();
+		mNoppo->drawImple();
+		mYoshi->drawImple();
+		mNiku->drawImple();
 	}
 	else if(mGameState == G_GAME_OVER){
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);

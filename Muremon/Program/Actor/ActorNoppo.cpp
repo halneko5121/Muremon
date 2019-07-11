@@ -169,7 +169,7 @@ ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num)
  * @brief •`‰æˆ—
  */
 void
-ActorNoppo::draw()
+ActorNoppo::drawImple()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
 

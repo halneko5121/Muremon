@@ -79,16 +79,18 @@ public:
 	ActorBase();
 	virtual ~ActorBase();
 
+	virtual void		drawImple() {};
+	virtual void		runImple() {};
+
 	float				m_chara_y;
 	virtual void		init() = 0;
 	virtual void		update(POS_CC<float> boss_cc) = 0;
 
 	//描画
-	virtual void		draw() = 0;
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				run();
-	virtual void		runImple() {};
+	void				draw();
 
 	/**
 	 * @brief スピードの設定

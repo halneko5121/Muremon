@@ -77,6 +77,15 @@ ActorBase::run()
 }
 
 /**
+ * @brief 描画
+ */
+void
+ActorBase::draw()
+{
+	drawImple();
+}
+
+/**
  * @brief スピードの設定
  */
 float

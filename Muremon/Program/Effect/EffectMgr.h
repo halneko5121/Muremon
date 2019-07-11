@@ -53,7 +53,7 @@ public:
 	/**
 	 * @brief	¶¬
 	 */
-	void				createEffect(EffectId id, Texture*	texture, Vertex* vertex, int rect_index, POS_CC<float> pos);
+	void				createEffect(EffectId id, Texture*	texture, Vertex* vertex, POS_CC<float> pos);
 
 	/**
 	 * @brief	XV

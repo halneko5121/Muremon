@@ -13,16 +13,15 @@
 namespace
 {
 	EffectBase*
-	createEffectImple(EffectId id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
+	createEffectImple(EffectId id, Texture* texture, Vertex* vertex, POS_CC<float> pos)
 	{
 		switch (id)
 		{
-		case cEffectId_HitEffect1:	return (new EffectFont(id, texture, vertex, rect_index, pos));
-		case cEffectId_HitEffect2:	return (new EffectFont(id, texture, vertex, rect_index, pos));
-		case cEffectId_HitEffect3:	return (new EffectFont(id, texture, vertex, rect_index, pos));
-		case cEffectId_HitEffect4:	return (new EffectFont(id, texture, vertex, rect_index, pos));
-		case cEffectId_HitEffect5:	return (new EffectFont(id, texture, vertex, rect_index, pos));
-		case cEffectId_HitEffect6:	return (new EffectFont(id, texture, vertex, rect_index, pos));
+		case cEffectId_HitEffect2:	return (new EffectFont(id, texture, vertex, R_NIKU_BETYA, pos));
+		case cEffectId_HitEffect3:	return (new EffectFont(id, texture, vertex, R_YOSHI_BOYO, pos));
+		case cEffectId_HitEffect4:	return (new EffectFont(id, texture, vertex, R_YOSHI_PAN, pos));
+		case cEffectId_HitEffect5:	return (new EffectFont(id, texture, vertex, R_NOPPO_PETI, pos));
+		case cEffectId_HitEffect6:	return (new EffectFont(id, texture, vertex, R_NOPPO_GOTU, pos));
 		}
 
 		return nullptr;
@@ -72,9 +71,9 @@ EffectMgr::destroy()
  * @brief	エフェクトの生成
  */
 void
-EffectMgr::createEffect(EffectId id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
+EffectMgr::createEffect(EffectId id, Texture* texture, Vertex* vertex, POS_CC<float> pos)
 {
-	EffectBase* effect = createEffectImple(id, texture, vertex, rect_index, pos);
+	EffectBase* effect = createEffectImple(id, texture, vertex, pos);
 	mEffectList.push_back(effect);
 }
 

@@ -175,14 +175,12 @@ protected:
 	CHARADATA			mCharaData;
 	float				mDegSpin;
 
-	int					mDelay;
 	int					mCountEffect;
 	int					mMaxAnimetion;
 
 	int					mRectStartNum;
 	int					mSoundStartNum;
 
-	bool				mFlagTurn2;								//“ñT–Ú‚Ìƒtƒ‰ƒO
 	bool				mIsHitCheck;
 	bool				mIsRun;
 	POS_CC<float>		mBossPos;

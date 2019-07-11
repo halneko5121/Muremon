@@ -175,5 +175,4 @@ protected:
 	bool				mIsHitCheck;
 	bool				mIsRun;
 	POS_CC<float>		mBossPos;
-	bool				mIsBossDeath;
 };

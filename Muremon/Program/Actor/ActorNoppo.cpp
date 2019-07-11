@@ -135,7 +135,6 @@ void
 ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 {
 	mBossPos = boss_cc;
-	mIsBossDeath = boss_death;
 
 	mState.executeState();
 }
@@ -233,8 +232,6 @@ ActorNoppo::stateEnterGroundAtk()
 void
 ActorNoppo::stateGroundAtk()
 {
-	if (mIsBossDeath) return;
-
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
 	{
 		mCharaData.flag_hit = true;
@@ -287,8 +284,6 @@ ActorNoppo::stateEnterSkyAtk()
 void
 ActorNoppo::stateSkyAtk()
 {
-	if (mIsBossDeath) return;
-
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
 	{
 		mCharaData.flag_hit = true;

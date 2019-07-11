@@ -66,14 +66,9 @@ typedef struct CHARADATA{
 	int	  rect_num;
 	float alpha;
 
-	bool  flag_hit;
 	bool  flag_atk1;
 	bool  flag_atk2;
-	bool  flag_effectfont;
-	bool  flag_death;
 	bool  flag_death_next;
-	bool  flag_deathfade;
-	bool  flag_effect;
 
 	POS_CC<float>  draw_cc;
 }CHARADATA;

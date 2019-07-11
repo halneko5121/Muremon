@@ -53,7 +53,7 @@ namespace
 		// スピード,アニメーション,矩形,透過度
 		(0.0f), 0, 0, (MAX_ALPHA),
 		//各フラグ
-		false, false, false, false, false, false, false, false,
+		false, false, false,
 		// 中心座標
 		POS_CC<float>((-RADIUS_YOSHI),(cWindowWidth + 50.f + RADIUS_YOSHI)),
 	};

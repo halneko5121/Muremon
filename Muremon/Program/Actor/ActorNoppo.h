@@ -30,9 +30,9 @@ private:
 	DECLAR_STATE_FUNC2(Idle);
 	DECLAR_STATE_FUNC2(GroundAtk);
 	DECLAR_STATE_FUNC2(SkyAtk);
-	DECLAR_STATE_FUNC2(DeathReady);
-	DECLAR_STATE_FUNC2(DeathFade);
-	DECLAR_STATE_FUNC2(Death);
+	DECLAR_STATE_FUNC2(GroundDeath);
+	DECLAR_STATE_FUNC2(SkyDeath);
+	DECLAR_STATE_FUNC2(End);
 
 private:
 	StateMachine<ActorNoppo>	mState;	// ステート

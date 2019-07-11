@@ -65,9 +65,9 @@ namespace
 		cState_Idle,			// 待機
 		cState_GroundAtk,		// 地上攻撃
 		cState_SkyAtk,			// 空中攻撃
-		cState_DeathReady,		// 死亡準備
-		cState_DeathFade,		// 死亡フェード
-		cState_Death,			// 死亡
+		cState_GroundDeath,		// 死亡（地上)
+		cState_SkyDeath,		// 死亡（空中）
+		cState_End,				// 終了
 		cState_Count
 	};
 }
@@ -91,9 +91,9 @@ ActorNoppo::ActorNoppo()
 	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			cState_Idle);
 	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundAtk,		cState_GroundAtk);
 	REGIST_STATE_FUNC2(ActorNoppo, mState, SkyAtk,			cState_SkyAtk);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, DeathReady,		cState_DeathReady);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, DeathFade,		cState_DeathFade);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, Death,			cState_Death);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundDeath,		cState_GroundDeath);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, SkyDeath,		cState_SkyDeath);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, End,				cState_End);
 	mState.changeState(cState_Idle);
 }
 
@@ -250,7 +250,7 @@ ActorNoppo::stateGroundAtk()
 
 		GetEffectMgr()->createEffect(cEffectId_HitEffect5, mTexture, mVertex, mCharaData.draw_cc);
 
-		mState.changeState(cState_DeathReady);
+		mState.changeState(cState_GroundDeath);
 		return;
 	}
 	// 攻撃処理(xが画面外じゃなければ処理)
@@ -259,6 +259,10 @@ ActorNoppo::stateGroundAtk()
 		if (mCharaData.draw_cc.x - RADIUS_NOPPO < cWindowWidth) {
 			mCharaData.draw_cc = updateAttack1();
 			mCharaData.animetion = setAnimetion(ANIME_G_ATK4_NOPPO, mCharaData.animetion, NULL);
+		}
+		else
+		{
+			mState.changeState(cState_End);
 		}
 	}
 }
@@ -308,7 +312,7 @@ ActorNoppo::stateSkyAtk()
 		}
 		GetEffectMgr()->createEffect(cEffectId_HitEffect6, mTexture, mVertex, mCharaData.draw_cc);
 
-		mState.changeState(cState_DeathReady);
+		mState.changeState(cState_SkyDeath);
 		return;
 	}
 	// 攻撃処理(xが画面外じゃなければ処理)
@@ -321,98 +325,90 @@ ActorNoppo::stateSkyAtk()
 		}
 		else
 		{
-			mState.changeState(cState_DeathReady);
+			mState.changeState(cState_End);
 		}
 	}
 }
 
 /**
- * @brief ステート:DeathReady
+ * @brief ステート:GroundDeath
  */
 void
-ActorNoppo::stateEnterDeathReady()
+ActorNoppo::stateEnterGroundDeath()
 {
 }
 void
-ActorNoppo::stateDeathReady()
+ActorNoppo::stateGroundDeath()
 {
 	static int wait_count = 0;
 
-	if (mCharaData.flag_atk1) {
-		if (!mCharaData.flag_death_next) {
-			mCharaData.animetion = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mCharaData.animetion, ANIME_MOTION1_NOPPO);
-			if (mCharaData.animetion == 2)
-			{
-				mCharaData.flag_death_next = true;
-			}
-		}
-		else {
-			mCharaData.animetion = 0;																//描画を固定
-			mCharaData.rect_num = ANIME_MOTION3_NOPPO;
-			if (wait_count++ > cWaitMotion) {
-				mCharaData.flag_deathfade = true;
-				wait_count = 0;
-				mState.changeState(cState_DeathFade);
-			}
+	if (!mCharaData.flag_death_next)
+	{
+		mCharaData.animetion = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mCharaData.animetion, ANIME_MOTION1_NOPPO);
+		if (mCharaData.animetion == 2)
+		{
+			mCharaData.flag_death_next = true;
 		}
 	}
-	else if (mCharaData.flag_atk2) {
-
-		// 回転させる
-		mAngleDegree += SPIN_SPEED;
-
-		mCharaData.animetion = 0;																	//描画を固定
-		mCharaData.rect_num = ANIME_S_ATK2_NOPPO;
-
-		mCharaData.draw_cc = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.draw_cc);
+	else 
+	{
+		mCharaData.animetion = 0;
+		mCharaData.rect_num = ANIME_MOTION3_NOPPO;
+		if (wait_count++ > cWaitMotion) {
+			mCharaData.flag_deathfade = true;
+			wait_count = 0;
+			mState.changeState(cState_End);
+		}
 	}
+}
+
+/**
+ * @brief ステート:SkyDeath
+ */
+void
+ActorNoppo::stateEnterSkyDeath()
+{
+}
+void
+ActorNoppo::stateSkyDeath()
+{
+	// 回転させる
+	mAngleDegree += SPIN_SPEED;
+
+	mCharaData.animetion = 0;																	//描画を固定
+	mCharaData.rect_num = ANIME_S_ATK2_NOPPO;
+
+	mCharaData.draw_cc = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.draw_cc);
 
 	//当たった後の処理
-	if (mCharaData.flag_hit) 
+	if (mCharaData.flag_hit)
 	{
-		//画面外なら死亡
+		// 画面外なら死亡
 		if ((mCharaData.draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_NOPPO + 50) &&
 			(mCharaData.draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 50)) {
 			mCharaData.flag_death = true;
-			mState.changeState(cState_Death);
+			mState.changeState(cState_End);
 		}
 	}
-	if ((mCharaData.draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30)) {
-		mState.changeState(cState_Death);
+
+	if ((mCharaData.draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30))
+	{
+		mState.changeState(cState_End);
 	}
 }
 
 /**
- * @brief ステート:DeathFade
+ * @brief ステート:End
  */
 void
-ActorNoppo::stateEnterDeathFade()
-{
-}
-void
-ActorNoppo::stateDeathFade()
-{
-	if (mCharaData.flag_deathfade) {
-		mCharaData.draw_cc.x = (-RADIUS_NOPPO);
-		mCharaData.draw_cc.y = (GAME_GROUND - RADIUS_NOPPO);
-
-		mCharaData.flag_deathfade = false;
-		mState.changeState(cState_Death);
-	}
-}
-
-/**
- * @brief ステート:Death
- */
-void
-ActorNoppo::stateEnterDeath()
+ActorNoppo::stateEnterEnd()
 {
 	mCharaData.flag_atk1 = mCharaData.flag_atk2 = false;
 	mCharaData.flag_death = mCharaData.flag_hit = false;
 	mCharaData.animetion = 0;
 }
 void
-ActorNoppo::stateDeath()
+ActorNoppo::stateEnd()
 {
 
 }

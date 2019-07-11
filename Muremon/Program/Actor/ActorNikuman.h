@@ -39,6 +39,4 @@ private:
 	float						mRandAcc;
 	float						mRandMoveX;
 	float						mRandDeg;
-	float						mDrawDeg;
-	POS_CC<float>				pos_effectfont;
 };

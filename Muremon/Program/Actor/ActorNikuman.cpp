@@ -73,8 +73,6 @@ ActorNikuman::ActorNikuman()
 	// ç\ë¢ëÃ
 	mCharaData = cInitActorData;
 
-	pos_effectfont.x = pos_effectfont.y = mDrawDeg = 0.f;
-
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorNikuman, mState, Idle,			cState_Idle);
 	REGIST_STATE_FUNC2(ActorNikuman, mState, GroundAtk,		cState_GroundAtk);
@@ -132,19 +130,6 @@ ActorNikuman::update(POS_CC<float> boss_cc)
 			(mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
 				mCharaData.flag_death = true;
 		}
-
-		if(!mCharaData.flag_effectfont){
-			if(mCountEffect++ < FONT_SET){
-				pos_effectfont = setEffectFont(mCharaData.draw_cc,RADIUS_NIKU,POS_HITFONT_X);
-				mCharaData.flag_effectfont	= true;
-			}	
-		}
-		else{
-			if(mCountEffect++ < FONT_DELETE){
-				pos_effectfont = setEffectShake(SHAKE_X,SHAKE_Y,pos_effectfont);
-			}
-			else{ mCharaData.flag_effectfont = false; mCountEffect = 0;}
-		}
 	}
 }
 
@@ -178,7 +163,7 @@ ActorNikuman::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 
-	mVertex->setAngle(mDrawDeg += mAngleDegree);
+	mVertex->setAngle(mAngleDegree);
 	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
 	mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
 }

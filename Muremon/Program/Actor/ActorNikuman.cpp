@@ -87,7 +87,7 @@ ActorNikuman::init()
 	mCharaData.rect_num			= 0;
 	mCharaData.alpha			= 0;
 
-	pos_effectfont.x	= pos_effectfont.y = rand_acc = rand_move_x = mDegSpin = draw_deg = 0.f;
+	pos_effectfont.x	= pos_effectfont.y = rand_acc = rand_move_x = mAngleDegree = draw_deg = 0.f;
 	mCountEffect = 0;
 }
 
@@ -99,7 +99,7 @@ ActorNikuman::runImple()
 {
 	// çUåÇäJén
 	mCountEffect = 0;
-	mDegSpin = 0.f;
+	mAngleDegree = 0.f;
 	mCharaData.animetion = 0;
 
 	if (mCharaData.flag_atk1)
@@ -107,14 +107,14 @@ ActorNikuman::runImple()
 		rand_deg = (float)(rand() % cDegRand + cDegRandMin);
 		mCharaData.draw_cc = POS_CC<float>(-RADIUS_NIKU, G_ATK_2_START_Y);
 		mCharaData.speed = getNikumanSpeed();
-		mDegSpin = 0.f;
+		mAngleDegree = 0.f;
 	}
 	else if (mCharaData.flag_atk2)
 	{
 		s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
 		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+		mAngleDegree = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
 		mCharaData.speed = getNikumanSpeed();
 		mCharaData.draw_cc = POS_CC<float>(-RADIUS_NIKU, s_atk_start_y);
@@ -224,7 +224,7 @@ ActorNikuman::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 
-	mVertex->setAngle(draw_deg += mDegSpin);
+	mVertex->setAngle(draw_deg += mAngleDegree);
 	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
 	mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
 
@@ -273,6 +273,6 @@ ActorNikuman::deathControl()
 		mCharaData.flag_atk2  = false;
 		mCharaData.flag_death = false;
 		mCharaData.flag_hit	= false;
-		mDegSpin				= 0.f;
+		mAngleDegree				= 0.f;
 	}
 }

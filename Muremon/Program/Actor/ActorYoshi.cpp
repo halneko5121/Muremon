@@ -101,7 +101,7 @@ ActorYoshi::init()
 	mCharaData.rect_num		= 0;
 	mCharaData.alpha		= 0;
 
-	pos_effectfont.x		= pos_effectfont.y =	rand_acc = rand_move_x = mDegSpin = draw_deg = 0.f;
+	pos_effectfont.x		= pos_effectfont.y =	rand_acc = rand_move_x = mAngleDegree = draw_deg = 0.f;
 	mCountEffect			= 0;
 }
 
@@ -119,14 +119,14 @@ ActorYoshi::runImple()
 	{
 		rand_deg = (float)(rand() % cDegRand + cDegRandMin);
 		mCharaData.draw_cc = POS_CC<float>(-RADIUS_YOSHI, G_ATK_1_START_Y);
-		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+		mAngleDegree = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 	}
 	else if (mCharaData.flag_atk2)
 	{
 		s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
 		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+		mAngleDegree = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
 		mCharaData.draw_cc = POS_CC<float>(-RADIUS_YOSHI, s_atk_start_y);
 	}
@@ -271,7 +271,7 @@ ActorYoshi::draw()
 	}
 	else if(mCharaData.flag_atk2){
 		if(mCharaData.flag_death_next){
-			mVertex->setAngle(mDegSpin += mDegSpin);
+			mVertex->setAngle(mAngleDegree += mAngleDegree);
 		}
 		else {
 			mVertex->setAngle(0.f);

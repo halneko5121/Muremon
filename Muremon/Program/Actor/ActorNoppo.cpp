@@ -177,20 +177,19 @@ ActorNoppo::draw()
 	if(mCharaData.flag_atk1)
 	{
 		mVertex->setAngle(0.f);
-		mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.alpha), 255, 255, 255);
 	}
 	else if(mCharaData.flag_atk2)
 	{
 		if(mCharaData.flag_hit)
 		{
-			mVertex->setAngle(mDegSpin += mDegSpin);
+			mVertex->setAngle(mAngleDegree += mAngleDegree);
 		}
 		else
 		{
 			mVertex->setAngle(0.f);
 		}
-		mVertex->setColor(255, 255, 255, 255);
 	}
+	mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.alpha), 255, 255, 255);
 	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y,
 		(mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
 }
@@ -292,7 +291,7 @@ ActorNoppo::stateEnterSkyAtk()
 	mAtkStartY = (float)(rand() % cRandY);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-	mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
+	mAngleDegree = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
 }
 void

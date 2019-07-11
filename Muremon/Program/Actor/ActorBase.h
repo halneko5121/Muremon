@@ -164,7 +164,7 @@ protected:
 	Vertex*				mVertex;
 
 	CHARADATA			mCharaData;
-	float				mDegSpin;
+	float				mAngleDegree;
 
 	int					mCountEffect;
 	int					mMaxAnimetion;

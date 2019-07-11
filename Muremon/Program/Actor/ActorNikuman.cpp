@@ -3,6 +3,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Effect/EffectMgr.h"
 
 namespace 
 {
@@ -44,13 +45,44 @@ namespace
 		// 中心座標
 		POS_CC<float>(0.f, 0.f),
 	};
+
+	enum State
+	{
+		cState_Idle,			// 待機
+		cState_GroundAtk,		// 地上攻撃
+		cState_SkyAtk,			// 空中攻撃
+		cState_GroundDeath,		// 死亡（地上)
+		cState_SkyDeath,		// 死亡（空中）
+		cState_End,				// 終了
+		cState_Count
+	};
 }
 
 /**
  * @brief コンストラクタ
  */
 ActorNikuman::ActorNikuman()
+	: mState()
+	, mRandAcc(0.0f)
+	, mRandMoveX(0.0f)
+	, mAtkStartY(0.0f)
 {
+	mRectStartNum = R_NIKU_G_ATK1;
+	mSoundStartNum = S_NIKUMAN;
+
+	// 構造体
+	mCharaData = cInitActorData;
+
+	pos_effectfont.x = pos_effectfont.y = mDrawDeg = 0.f;
+
+	mState.initialize(cState_Count, cState_Idle);
+	REGIST_STATE_FUNC2(ActorNikuman, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(ActorNikuman, mState, GroundAtk,		cState_GroundAtk);
+	REGIST_STATE_FUNC2(ActorNikuman, mState, SkyAtk,		cState_SkyAtk);
+	REGIST_STATE_FUNC2(ActorNikuman, mState, GroundDeath,	cState_GroundDeath);
+	REGIST_STATE_FUNC2(ActorNikuman, mState, SkyDeath,		cState_SkyDeath);
+	REGIST_STATE_FUNC2(ActorNikuman, mState, End,			cState_End);
+	mState.changeState(cState_Idle);
 }
 
 /**
@@ -66,29 +98,6 @@ ActorNikuman::~ActorNikuman(void)
 void
 ActorNikuman::init()								
 {
-	mRectStartNum = R_NIKU_G_ATK1;
-	mSoundStartNum = S_NIKUMAN;
-
-	//praivate変数
-	s_atk_start_y = 0.f;
-	//protected変数
-	mMaxAnimetion = 0;
-	mIsHitCheck  = false;
-
-	//構造体
-	mCharaData.flag_atk1		= mCharaData.flag_atk2		 = false;
-	mCharaData.flag_death		= mCharaData.flag_deathfade	 = false;
-	mCharaData.flag_effect		= mCharaData.flag_effectfont = false;
-	mCharaData.flag_hit			= mCharaData.flag_death_next = false;
-	mCharaData.draw_cc.x		= (-RADIUS_NOPPO);						//キャラ座標の初期化
-	mCharaData.draw_cc.y		= (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
-	mCharaData.speed			= 0.f;
-	mCharaData.animetion		= 0;									//アニメーションさせる最大枚数
-	mCharaData.rect_num			= 0;
-	mCharaData.alpha			= 0;
-
-	pos_effectfont.x	= pos_effectfont.y = rand_acc = rand_move_x = mAngleDegree = draw_deg = 0.f;
-	mCountEffect = 0;
 }
 
 /**
@@ -97,27 +106,13 @@ ActorNikuman::init()
 void
 ActorNikuman::runImple()
 {
-	// 攻撃開始
-	mCountEffect = 0;
-	mAngleDegree = 0.f;
-	mCharaData.animetion = 0;
-
 	if (mCharaData.flag_atk1)
 	{
-		rand_deg = (float)(rand() % cDegRand + cDegRandMin);
-		mCharaData.draw_cc = POS_CC<float>(-RADIUS_NIKU, G_ATK_2_START_Y);
-		mCharaData.speed = getNikumanSpeed();
-		mAngleDegree = 0.f;
+		mState.changeStateIfDiff(cState_GroundAtk);
 	}
 	else if (mCharaData.flag_atk2)
 	{
-		s_atk_start_y = (float)(rand() % cRandY + cRandYMin);
-		rand_acc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-		mAngleDegree = (float)(rand() % SPIN_SPEED + SPIN_RAND_MIN);
-
-		mCharaData.speed = getNikumanSpeed();
-		mCharaData.draw_cc = POS_CC<float>(-RADIUS_NIKU, s_atk_start_y);
+		mState.changeStateIfDiff(cState_SkyAtk);
 	}
 }
 
@@ -127,30 +122,8 @@ ActorNikuman::runImple()
 void
 ActorNikuman::update(POS_CC<float> boss_cc)
 {
-	//当たり判定
-	if(!mCharaData.flag_death){
-		if(isHit(mCharaData.draw_cc,boss_cc,ID_NIKUMAN)){
-			UtilSound::playOnce(S_NIKUMAN);
-			mCharaData.flag_hit		= true;
-			mCharaData.flag_death	= true;	
-			setIsHitCheck(true);
-			m_chara_y = mCharaData.draw_cc.y;
-		}
-
-		if(mCharaData.flag_atk1){
-			if(mCharaData.draw_cc.x - RADIUS_NIKU < cWindowWidth){
-				mCharaData.animetion = setAnimetion(ANIME_G_ATK4_NIKU,mCharaData.animetion,NULL);
-				mCharaData.draw_cc	 = updateAttack1();
-			}
-		}
-		else if(mCharaData.flag_atk2){
-			if(mCharaData.draw_cc.x - RADIUS_NIKU < cWindowWidth){
-				mCharaData.animetion = setAnimetion(NULL,mCharaData.animetion,ANIME_S_ATK1_NIKU);
-				mCharaData.draw_cc	 = updateAttack2(boss_cc);
-			}
-		}
-	}
-	else deathControl();
+	mBossPos = boss_cc;
+	mState.executeState();
 
 	//当たった後の処理
 	if(mCharaData.flag_hit){
@@ -198,23 +171,6 @@ ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 }
 
 /**
- * @brief フォントの描画処理
- */
-void
-ActorNikuman::drawEffectFont()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-
-	//フォントエフェクトの描画(いちお100体分)
-	if(mCharaData.flag_hit){
-		if(mCountEffect++ < FONT_DELETE){
-			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			mVertex->drawF(pos_effectfont.x,pos_effectfont.y, R_NIKU_BETYA);
-		}
-	}
-}
-
-/**
  * @brief 描画処理
  */
 void
@@ -222,11 +178,9 @@ ActorNikuman::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 
-	mVertex->setAngle(draw_deg += mAngleDegree);
+	mVertex->setAngle(mDrawDeg += mAngleDegree);
 	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
 	mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
-
-	drawEffectFont();
 }
 
 /**
@@ -256,21 +210,166 @@ ActorNikuman::updateAttack2(POS_CC<float> boss_cc)
 void
 ActorNikuman::deathControl()
 {
+}
+
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+ActorNikuman::stateEnterIdle()
+{
+}
+void
+ActorNikuman::stateIdle()
+{
+}
+
+/**
+ * @brief ステート:GroundAtk
+ */
+void
+ActorNikuman::stateEnterGroundAtk()
+{
+	// 攻撃開始
+	mCharaData = cInitActorData;
+	mCharaData.flag_atk1 = true;
+	mCharaData.speed = getNikumanSpeed();
 	mCharaData.animetion = 0;
-	mCharaData.animetion	= setAnimetion(NULL,mCharaData.animetion,ANIME_DEATH_NIKU);
+	mCharaData.draw_cc = POS_CC<float>(-RADIUS_NIKU, G_ATK_2_START_Y);
+	mCountEffect = 0;
+	mAngleDegree = 0.0f;
+	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
+}
+void
+ActorNikuman::stateGroundAtk()
+{
+	if (isHit(mCharaData.draw_cc, mBossPos, ID_NIKUMAN)) 
+	{
+		UtilSound::playOnce(S_NIKUMAN);
+		mCharaData.flag_hit = true;
+		mCharaData.flag_death = true;
+		setIsHitCheck(true);
+		m_chara_y = mCharaData.draw_cc.y;
 
-	if(mCharaData.flag_atk1){
-		mCharaData.draw_cc  = mOrbit->mRebound->orbitRebound(rand_deg,mCharaData.speed,mCharaData.draw_cc);
-	}
-	else if(mCharaData.flag_atk2){
-		mCharaData.draw_cc  = mOrbit->mParabora->orbitParabola(rand_acc,rand_move_x,cParaLimitY,mCharaData.draw_cc);	
+		GetEffectMgr()->createEffect(cEffectId_HitEffect2, mTexture, mVertex, mCharaData.draw_cc);
+
+		mState.changeState(cState_GroundDeath);
 	}
 
-	if( (mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU) ){
-		mCharaData.flag_atk1  = false;
-		mCharaData.flag_atk2  = false;
-		mCharaData.flag_death = false;
-		mCharaData.flag_hit	= false;
-		mAngleDegree				= 0.f;
+	if (mCharaData.draw_cc.x - RADIUS_NIKU < cWindowWidth)
+	{
+		mCharaData.animetion = setAnimetion(ANIME_G_ATK4_NIKU, mCharaData.animetion, NULL);
+		mCharaData.draw_cc = updateAttack1();
 	}
+	else
+	{
+		mState.changeState(cState_End);
+	}
+}
+
+/**
+ * @brief ステート:SkyAtk
+ */
+void
+ActorNikuman::stateEnterSkyAtk()
+{
+	// 攻撃開始
+	mCharaData = cInitActorData;
+	mCharaData.flag_atk2 = true;
+	mCharaData.speed = getNikumanSpeed();
+	mCharaData.draw_cc = POS_CC<float>(-RADIUS_NIKU, mAtkStartY);
+
+	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
+	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+	mAngleDegree = 0.0f;
+}
+void
+ActorNikuman::stateSkyAtk()
+{
+	if (isHit(mCharaData.draw_cc, mBossPos, ID_NIKUMAN))
+	{
+		UtilSound::playOnce(S_NIKUMAN);
+		mCharaData.flag_hit = true;
+		mCharaData.flag_death = true;
+		setIsHitCheck(true);
+		m_chara_y = mCharaData.draw_cc.y;
+
+		GetEffectMgr()->createEffect(cEffectId_HitEffect2, mTexture, mVertex, mCharaData.draw_cc);
+
+		mState.changeState(cState_SkyDeath);
+	}
+
+	if (mCharaData.draw_cc.x - RADIUS_NIKU < cWindowWidth) 
+	{
+		mCharaData.animetion = setAnimetion(NULL, mCharaData.animetion, ANIME_S_ATK1_NIKU);
+		mCharaData.draw_cc = updateAttack2(mBossPos);
+	}
+	else
+	{
+		mState.changeState(cState_End);
+	}
+}
+
+/**
+ * @brief ステート:GroundDeath
+ */
+void
+ActorNikuman::stateEnterGroundDeath()
+{
+}
+void
+ActorNikuman::stateGroundDeath()
+{
+	mCharaData.animetion = 0;
+	mCharaData.animetion = setAnimetion(NULL, mCharaData.animetion, ANIME_DEATH_NIKU);
+
+	mCharaData.draw_cc = mOrbit->mRebound->orbitRebound(mRandDeg, mCharaData.speed, mCharaData.draw_cc);
+
+	if ((mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU)) 
+	{
+		mState.changeState(cState_End);
+	}
+}
+
+/**
+ * @brief ステート:SkyDeath
+ */
+void
+ActorNikuman::stateEnterSkyDeath()
+{
+}
+void
+ActorNikuman::stateSkyDeath()
+{
+	mCharaData.animetion = 0;
+	mCharaData.animetion = setAnimetion(NULL, mCharaData.animetion, ANIME_DEATH_NIKU);
+
+	mCharaData.draw_cc = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.draw_cc);
+
+	if ((mCharaData.draw_cc.y < -RADIUS_NIKU) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NIKU))
+	{
+		mState.changeState(cState_End);
+	}
+}
+
+/**
+ * @brief ステート:End
+ */
+void
+ActorNikuman::stateEnterEnd()
+{
+	mCharaData.flag_atk1 = false;
+	mCharaData.flag_atk2 = false;
+	mCharaData.flag_death = false;
+	mCharaData.flag_hit = false;
+}
+void
+ActorNikuman::stateEnd()
+{
 }

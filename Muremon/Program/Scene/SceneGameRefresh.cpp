@@ -340,6 +340,7 @@ SceneGameRefresh::stateExeGame()
 
 	UtilSound::playLoop(S_BGM_BATTLE);
 
+	// ‚É‚­‚Ü‚ñ
 	if (UtilBattle::isRunWeakGroundAttack())
 	{
 		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
@@ -353,6 +354,7 @@ SceneGameRefresh::stateExeGame()
 		actor->run();
 	}
 
+	// ‚æ‚µ‚½‚ë‚¤
 	if (UtilBattle::isRunMediumGroundAttack())
 	{
 		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
@@ -366,6 +368,7 @@ SceneGameRefresh::stateExeGame()
 		actor->run();
 	}
 
+	// ‚Ì‚Á‚Û
 	if (UtilBattle::isRunStrongGroundAttack())
 	{
 		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);

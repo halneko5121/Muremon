@@ -11,8 +11,9 @@
  /**
   * @brief	コンストラクタ
   */
-EffectBase::EffectBase(Texture*	texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
-	: mTexture(texture)
+EffectBase::EffectBase(EffectId	id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
+	: mId(id)
+	, mTexture(texture)
 	, mVertex(vertex)
 	, mRectIndex(rect_index)
 	, mPos(pos)

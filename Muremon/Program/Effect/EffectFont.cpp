@@ -31,12 +31,14 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-EffectFont::EffectFont(Texture*	texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
-	: mTexture(texture)
-	, mVertex(vertex)
-	, mRectIndex(rect_index)
+EffectFont::EffectFont(EffectId	id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
+	: EffectBase(id, texture, vertex, rect_index, pos)
 	, mInitPos(pos)
-	, mPos(POS_CC<float>(0.0f, 0.0f))
+	, mShakeX(0.0f)
+	, mShakeY(0.0f)
+	, mIsShakeRight(false)
+	, mIsShakeDown(false)
+	, mShakeCount(0)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(EffectFont, mState, Idle,	cState_Idle);
@@ -62,6 +64,9 @@ EffectFont::update()
 	mState.executeState();
 }
 
+/**
+ * @brief	描画
+ */
 void
 EffectFont::draw()
 {
@@ -70,6 +75,15 @@ EffectFont::draw()
 	// フォントエフェクトの描画
 	mVertex->setColor(255, 255, 255, 255);
 	mVertex->drawF(mPos.x, mPos.y, mRectIndex);
+}
+
+/**
+ * @brief	終了したか？
+ */
+bool
+EffectFont::isEnd()
+{
+	return (mState.isEqual(cState_End));
 }
 
 /**

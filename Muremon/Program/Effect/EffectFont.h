@@ -9,18 +9,20 @@
 
 #include "Library/StateMachine.h"
 #include "Program/Define.h"
+#include "Program/Effect/EffectBase.h"
 
 class Texture;
 class Vertex;
 
-class EffectFont
+class EffectFont : public EffectBase
 {
 public:
-	EffectFont(Texture*	texture, Vertex* vertex, int rect_index, POS_CC<float> pos);
-	~EffectFont(void);
+	EffectFont(EffectId	id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos);
+	~EffectFont();
 
-	void			update();
-	void			draw();
+	void			update() override;
+	void			draw() override;
+	bool			isEnd() override;
 
 private:
 	POS_CC<float>	setPos(POS_CC<float> font_cc, float chara_radius, float range_font);
@@ -34,11 +36,7 @@ private:
 
 private:
 	StateMachine<EffectFont>	mState;			// ステート
-	Texture*					mTexture;		// テクスチャ
-	Vertex*						mVertex;		// バーテックス
-	int							mRectIndex;
 	POS_CC<float>				mInitPos;
-	POS_CC<float>				mPos;
 
 	float						mShakeX;
 	float						mShakeY;

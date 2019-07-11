@@ -7,6 +7,8 @@
  *	管理者：三上
  ******************************************************************/
 
+#include "Program/Define.h"
+
 enum EffectId
 {
 	cEffectId_Null = -1,	// なし
@@ -21,6 +23,8 @@ enum EffectId
 };
 
 class EffectBase;
+class Texture;
+class Vertex;
 
 class EffectMgr
 {
@@ -49,7 +53,7 @@ public:
 	/**
 	 * @brief	生成
 	 */
-	void				createEffect(EffectId id);
+	void				createEffect(EffectId id, Texture*	texture, Vertex* vertex, int rect_index, POS_CC<float> pos);
 
 	/**
 	 * @brief	更新
@@ -67,7 +71,6 @@ private:
 private:
 	static EffectMgr*	mInstance;		// インスタンス
 	EffectList			mEffectList;	// エフェクトを保管しておくリスト
-	int					mUniqId;		// ユニークID
 
 };
 

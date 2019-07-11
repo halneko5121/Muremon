@@ -8,20 +8,22 @@
 
 #include "EffectMgr.h"
 #include "EffectBase.h"
+#include "EffectFont.h"
 
 namespace
 {
 	EffectBase*
-	createEffectImple(EffectId id)
+	createEffectImple(EffectId id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
 	{
-		/*
 		switch (id)
 		{
-		case cEffectId_HitEffect1:	return (new ActorNoppo());
-		case cActorId_Nikuman:	return (new ActorNikuman());
-		case cActorId_Yoshi:	return (new ActorYoshi());
+		case cEffectId_HitEffect1:	return (new EffectFont(id, texture, vertex, rect_index, pos));
+		case cEffectId_HitEffect2:	return (new EffectFont(id, texture, vertex, rect_index, pos));
+		case cEffectId_HitEffect3:	return (new EffectFont(id, texture, vertex, rect_index, pos));
+		case cEffectId_HitEffect4:	return (new EffectFont(id, texture, vertex, rect_index, pos));
+		case cEffectId_HitEffect5:	return (new EffectFont(id, texture, vertex, rect_index, pos));
+		case cEffectId_HitEffect6:	return (new EffectFont(id, texture, vertex, rect_index, pos));
 		}
-		*/
 
 		return nullptr;
 	}
@@ -31,7 +33,6 @@ EffectMgr* EffectMgr::mInstance = nullptr;
 
 EffectMgr::EffectMgr()
 	: mEffectList()
-	, mUniqId(0)
 {
 }
 
@@ -68,18 +69,17 @@ EffectMgr::destroy()
 }
 
 /**
- * @brief	アクターの生成
+ * @brief	エフェクトの生成
  */
 void
-EffectMgr::createEffect(EffectId id)
+EffectMgr::createEffect(EffectId id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
 {
-	EffectBase* effect = createEffectImple(id);
+	EffectBase* effect = createEffectImple(id, texture, vertex, rect_index, pos);
 	mEffectList.push_back(effect);
-	mUniqId++;
 }
 
 /**
- * @brief	アクターの更新
+ * @brief	エフェクトの更新
  */
 void
 EffectMgr::update()
@@ -90,11 +90,16 @@ EffectMgr::update()
 	{
 		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
 		effect->update();
+
+		if (effect->isEnd())
+		{
+			mEffectList.erase(it);
+		}
 	}
 }
 
 /**
- * @brief	アクターの描画
+ * @brief	エフェクトの描画
  */
 void
 EffectMgr::draw()

@@ -174,7 +174,6 @@ protected:
 
 	CHARADATA			mCharaData;
 	float				mDegSpin;
-	float				mRandSpeed;
 
 	int					mDelay;
 	int					mCountEffect;

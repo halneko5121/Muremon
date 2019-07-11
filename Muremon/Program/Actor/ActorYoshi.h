@@ -40,5 +40,4 @@ private:
 	float						mAtkStartY;
 
 	float						mRandDeg;
-	float						mDrawDeg;
 };

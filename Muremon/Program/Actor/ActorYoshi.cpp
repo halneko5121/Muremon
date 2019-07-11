@@ -79,7 +79,6 @@ ActorYoshi::ActorYoshi()
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f) 
 	, mRandDeg(0.0f)
-	, mDrawDeg(0.0f)
 {
 	mRectStartNum = R_YOSHI_G_ATK1;
 	mSoundStartNum = S_YOSHI_HIP;

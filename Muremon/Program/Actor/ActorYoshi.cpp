@@ -241,7 +241,7 @@ ActorYoshi::setAnimetion(int max_animetion, int anime_count ,int rect_num)
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-ActorYoshi::drawEffectFont(int rect_startnum)
+ActorYoshi::drawEffectFont()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 
@@ -252,7 +252,7 @@ ActorYoshi::drawEffectFont(int rect_startnum)
 		if(mCountEffect++ < FONT_DELETE){
 			if(mCharaData.flag_atk1)		rect_change = 0; 
 			else if(mCharaData.flag_atk2)	rect_change = 1;
-			mVertex->drawF(pos_effectfont.x,pos_effectfont.y,rect_startnum + rect_change);
+			mVertex->drawF(pos_effectfont.x,pos_effectfont.y, R_YOSHI_BOYO + rect_change);
 		}
 	}
 }
@@ -279,7 +279,7 @@ ActorYoshi::draw()
 	}
 	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
 
-	drawEffectFont(R_YOSHI_BOYO);
+	drawEffectFont();
 }
 
 /**

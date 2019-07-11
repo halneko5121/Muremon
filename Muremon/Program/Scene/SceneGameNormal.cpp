@@ -164,11 +164,6 @@ SceneGameNormal::draw()
 		mNoppo->draw();
 		mYoshi->draw();
 		mNiku->draw();
-
-		//エフェクトフォント類
-		mNoppo->drawEffectFont(R_NOPPO_PETI);
-		mYoshi->drawEffectFont(R_YOSHI_BOYO);
-		mNiku->drawEffectFont(R_NIKU_BETYA);
 	}
 	else if(mGameState == G_GAME_OVER){
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);

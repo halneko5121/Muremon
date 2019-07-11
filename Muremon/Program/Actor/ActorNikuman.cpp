@@ -203,7 +203,7 @@ ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num)
  * @brief ƒtƒHƒ“ƒg‚Ì•`‰æˆ—
  */
 void
-ActorNikuman::drawEffectFont(int rect_startnum)
+ActorNikuman::drawEffectFont()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 
@@ -211,7 +211,7 @@ ActorNikuman::drawEffectFont(int rect_startnum)
 	if(mCharaData.flag_hit){
 		if(mCountEffect++ < FONT_DELETE){
 			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			mVertex->drawF(pos_effectfont.x,pos_effectfont.y,rect_startnum);
+			mVertex->drawF(pos_effectfont.x,pos_effectfont.y, R_NIKU_BETYA);
 		}
 	}
 }
@@ -228,7 +228,7 @@ ActorNikuman::draw()
 	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
 	mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
 
-	drawEffectFont(R_NIKU_BETYA);
+	drawEffectFont();
 }
 
 /**

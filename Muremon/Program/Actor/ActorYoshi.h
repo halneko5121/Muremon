@@ -21,8 +21,8 @@ public:
 	void			runImple() override;
 	void			update(POS_CC<float> boss_cc, bool boss_death) override;
 	void			draw() override;
-	void			drawEffectFont(int rect_startnum) override;
 	int				setAnimetion(int max_animetion, int anime_count, int rect_num) override;
+	void			drawEffectFont();
 
 private:
 	float			s_atk_start_y;

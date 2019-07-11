@@ -180,11 +180,6 @@ ActorBoss::deathControl()
 
 }
 
-void
-ActorBoss::drawEffectFont(int rect_startnum)
-{
-}
-
 int
 ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
 {
@@ -404,3 +399,7 @@ void ActorBoss::fallDraw()
 	mVertex->drawF(mMoveX - NO_POSITION_X - mEffectFont,NO_POSITION_Y - mEffectFont,R_BOSS_EFFECT);
 }
 
+void
+ActorBoss::drawEffectFont()
+{
+}

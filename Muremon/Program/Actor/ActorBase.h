@@ -91,7 +91,6 @@ public:
 
 	//•`‰æ
 	virtual void		draw() = 0;
-	virtual void		drawEffectFont(int rect_startnum) = 0;
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				run();

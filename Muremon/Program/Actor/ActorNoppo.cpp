@@ -76,17 +76,8 @@ ActorNoppo::ActorNoppo()
 	mSoundStartNum = S_NOPPO_KOKE;
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
-	//構造体
-	mCharaData.flag_atk1 = mCharaData.flag_atk2 = false;
-	mCharaData.flag_death = mCharaData.flag_deathfade = false;
-	mCharaData.flag_effect = mCharaData.flag_effectfont = false;
-	mCharaData.flag_hit = mCharaData.flag_death_next = false;
-	mCharaData.draw_cc.x = (-RADIUS_NOPPO);						//キャラ座標の初期化
-	mCharaData.draw_cc.y = (GAME_GROUND - RADIUS_NOPPO);			//キャラ座標の初期化
-	mCharaData.speed = 0.f;
-	mCharaData.animetion = 0;									//アニメーションさせる最大枚数
-	mCharaData.rect_num = 0;
-	mCharaData.alpha = 255;
+	// 構造体
+	mCharaData = init_charadata_noppo;
 
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			cState_Idle);
@@ -111,7 +102,6 @@ ActorNoppo::~ActorNoppo(void)
 void
 ActorNoppo::init()											
 {
-
 }
 
 /**
@@ -140,31 +130,6 @@ ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
 	mIsBossDeath = boss_death;
 
 	mState.executeState();
-
-	//当たった後の処理
-	if(mCharaData.flag_hit){
-		//画面外なら死亡
-		if( (mCharaData.draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.x > cWindowWidth  + RADIUS_NOPPO + 50) &&
-			(mCharaData.draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 50) ){
-				mCharaData.flag_death = true;
-		}
-
-		if(!mCharaData.flag_effectfont){
-			if(mCountEffect++ < FONT_SET){
-				mEffectFontPos = setEffectFont(mCharaData.draw_cc, RADIUS_NOPPO,POS_HITFONT_X);
-				mCharaData.flag_effectfont	= true;
-			}	
-		}
-		else{
-			if(mCountEffect++ < FONT_DELETE){
-				mEffectFontPos = setEffectShake(SHAKE_X,SHAKE_Y,mEffectFontPos);
-			}
-			else{
-				mCharaData.flag_effectfont = false;
-				mCountEffect = 0;
-			}
-		}
-	}
 }
 
 /**
@@ -174,10 +139,14 @@ int
 ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 {
 	static int delay = 0;
-
-	if(delay++ > 15){
-		if(max_animetion == 0) anime_count = 0;
-		else{
+	if(delay++ > 15)
+	{
+		if (max_animetion == 0)
+		{
+			anime_count = 0;
+		}
+		else
+		{
 			if(anime_count < max_animetion) anime_count++;
 			else anime_count = 0;
 		}
@@ -193,20 +162,19 @@ ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num)
  * @brief フォントの描画処理
  */
 void
-ActorNoppo::drawEffectFont(int rect_startnum)
+ActorNoppo::drawEffectFont()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 
 	int rect_change = 0;
 
 	//フォントエフェクトの描画(いちお100体分)
-	if(mCharaData.flag_hit){
-		if(mCountEffect++ < FONT_DELETE){
-			if(mCharaData.flag_atk1)		rect_change = 0; 
-			else if(mCharaData.flag_atk2)	rect_change = 1;
-			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			mVertex->drawF(mEffectFontPos.x,mEffectFontPos.y,rect_startnum + rect_change);
-		}
+	if(mCountEffect++ < FONT_DELETE)
+	{
+		if(mCharaData.flag_atk1)		rect_change = 0; 
+		else if(mCharaData.flag_atk2)	rect_change = 1;
+		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+		mVertex->drawF(mEffectFontPos.x,mEffectFontPos.y, R_NOPPO_PETI + rect_change);
 	}
 }
 
@@ -238,7 +206,10 @@ ActorNoppo::draw()
 	}
 
 	// エフェクトフォント類
-	drawEffectFont(R_NOPPO_PETI);
+	if (mCharaData.flag_hit)
+	{
+		drawEffectFont();
+	}
 }
 
 /**
@@ -418,9 +389,37 @@ ActorNoppo::stateDeathReady()
 		mCharaData.draw_cc = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.draw_cc);
 	}
 
+	//当たった後の処理
+	if (mCharaData.flag_hit) {
+		//画面外なら死亡
+		if ((mCharaData.draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_NOPPO + 50) &&
+			(mCharaData.draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 50)) {
+			mCharaData.flag_death = true;
+			mState.changeState(cState_Death);
+		}
+	}
 	if ((mCharaData.draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30)) {
 		mState.changeState(cState_Death);
 	}
+
+	if (mCharaData.flag_hit) {
+		if (!mCharaData.flag_effectfont) {
+			if (mCountEffect++ < FONT_SET) {
+				mEffectFontPos = setEffectFont(mCharaData.draw_cc, RADIUS_NOPPO, POS_HITFONT_X);
+				mCharaData.flag_effectfont = true;
+			}
+		}
+		else {
+			if (mCountEffect++ < FONT_DELETE) {
+				mEffectFontPos = setEffectShake(SHAKE_X, SHAKE_Y, mEffectFontPos);
+			}
+			else {
+				mCharaData.flag_effectfont = false;
+				mCountEffect = 0;
+			}
+		}
+	}
+
 }
 
 /**

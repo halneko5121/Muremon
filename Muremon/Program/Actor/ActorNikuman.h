@@ -16,7 +16,6 @@ public:
 	~ActorNikuman();
 
 	POS_CC<float>	updateAttack2(POS_CC<float> boss_cc);
-	void			deathControl() override;
 
 	void			init() override;
 	void			runImple() override;

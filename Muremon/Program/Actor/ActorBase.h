@@ -80,7 +80,6 @@ public:
 	virtual ~ActorBase();
 
 	float				m_chara_y;
-	virtual void		deathControl() = 0;
 	virtual void		init() = 0;
 	virtual void		update(POS_CC<float> boss_cc) = 0;
 

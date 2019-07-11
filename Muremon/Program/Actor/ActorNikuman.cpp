@@ -180,15 +180,6 @@ ActorNikuman::updateAttack2(POS_CC<float> boss_cc)
 	return mCharaData.draw_cc;
 }
 
-/**
- * @brief 死亡処理
- */
-void
-ActorNikuman::deathControl()
-{
-}
-
-
 // -----------------------------------------------------------------
 // ステート関数
 // -----------------------------------------------------------------

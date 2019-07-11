@@ -174,12 +174,6 @@ ActorBoss::update(POS_CC<float> boss_cc)
 {
 }
 
-void
-ActorBoss::deathControl()
-{
-
-}
-
 int
 ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
 {

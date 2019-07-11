@@ -1,3 +1,11 @@
+/******************************************************************
+ *	@file	ActorNoppo.cpp
+ *	@brief	アクター（のっぽ）
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
+
 #include "ActorNoppo.h"
 
 #include "Program/Util/UtilSound.h"
@@ -166,24 +174,25 @@ ActorNoppo::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
 
-	if(mCharaData.flag_atk1){
+	if(mCharaData.flag_atk1)
+	{
 		mVertex->setAngle(0.f);
-		if(mCharaData.flag_deathfade){
-			mVertex->setColor((D3DCOLOR)mCharaData.alpha,MAX_RGB,MAX_RGB,MAX_RGB);
-		}
-		else{
-			mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-			mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y,(mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
-		}
+		mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.alpha), 255, 255, 255);
 	}
-	else if(mCharaData.flag_atk2){
-		if(mCharaData.flag_hit){
+	else if(mCharaData.flag_atk2)
+	{
+		if(mCharaData.flag_hit)
+		{
 			mVertex->setAngle(mDegSpin += mDegSpin);
 		}
-		else mVertex->setAngle(0.f);
-		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-		mVertex->drawF(mCharaData.draw_cc.x,mCharaData.draw_cc.y,(mRectStartNum + mCharaData.rect_num + mCharaData.animetion) );
+		else
+		{
+			mVertex->setAngle(0.f);
+		}
+		mVertex->setColor(255, 255, 255, 255);
 	}
+	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y,
+		(mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
 }
 
 /**

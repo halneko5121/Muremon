@@ -16,6 +16,7 @@
 #include "Program/DefineGame.h"
 #include "Program/System/GameScore.h"
 #include "Program/Actor/ActorMgr.h"
+#include "Program/Effect/EffectMgr.h"
 
 // 各シーンのinclude
 #include "Program/Scene/SceneLogo.h"
@@ -74,6 +75,7 @@ GameMain::init(void)
 	FadeMgr::create();
 	GameScore::create();
 	ActorMgr::create();
+	EffectMgr::create();
 
 	// 最初のシーンを
 	mScene = new SceneLogo();
@@ -231,6 +233,7 @@ GameMain::release(void)
 	DirectInputKey::destroy();
 	GameScore::destroy();
 	ActorMgr::destroy();
+	EffectMgr::destroy();
 	APP_SAFE_DELETE(mWindow);
 }
 

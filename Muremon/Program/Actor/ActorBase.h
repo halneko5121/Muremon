@@ -81,14 +81,15 @@ public:
 
 	virtual void		drawImple() {};
 	virtual void		runImple() {};
+	virtual void		initImple() {};
 
 	float				m_chara_y;
-	virtual void		init() = 0;
 	virtual void		update(POS_CC<float> boss_cc) = 0;
 
 	//•`‰æ
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
+	void				init();
 	void				run();
 	void				draw();
 

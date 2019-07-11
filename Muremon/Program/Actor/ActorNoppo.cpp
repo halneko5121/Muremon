@@ -109,7 +109,7 @@ ActorNoppo::~ActorNoppo(void)
  * @brief èâä˙âª
  */
 void
-ActorNoppo::init()											
+ActorNoppo::initImple()											
 {
 }
 

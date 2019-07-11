@@ -18,7 +18,7 @@ public:
 
 	POS_CC<float>	updateAttack2();
 
-	void			init() override;
+	void			initImple() override;
 	void			runImple() override;
 	void			update(POS_CC<float> boss_cc) override;
 	void			drawImple() override;

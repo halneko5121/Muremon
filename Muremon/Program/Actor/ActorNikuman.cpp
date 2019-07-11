@@ -94,7 +94,7 @@ ActorNikuman::~ActorNikuman(void)
  * @brief ‰Šú‰»
  */
 void
-ActorNikuman::init()								
+ActorNikuman::initImple()								
 {
 }
 

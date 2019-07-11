@@ -105,7 +105,7 @@ ActorBoss::~ActorBoss()
 {
 }
 
-void ActorBoss::init()
+void ActorBoss::initImple()
 {
 	//É{ÉX
 	mAlphaCount=0;
@@ -244,7 +244,7 @@ void ActorBoss::control(int play_mode)
 		{
 			mLvCount++;
 		}else mLvCount = 7;
-		init();
+		initImple();
 	}
 	
 	if(!mIsDeath)

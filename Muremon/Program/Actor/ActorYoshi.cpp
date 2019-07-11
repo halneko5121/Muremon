@@ -108,7 +108,7 @@ ActorYoshi::~ActorYoshi(void)
  * @brief ‰Šú‰»
  */
 void
-ActorYoshi::init()											
+ActorYoshi::initImple()
 {
 }
 

@@ -66,6 +66,15 @@ ActorBase::~ActorBase(void)
 }
 
 /**
+ * @brief ‰Šú‰»
+ */
+void
+ActorBase::init()
+{
+	initImple();
+}
+
+/**
  * @brief Às
  */
 void

@@ -55,7 +55,7 @@ public:
 	/**
 	 * @brief	アクターの更新
 	 */
-	void				update(POS_CC<float> boss_cc, bool boss_death);
+	void				update(POS_CC<float> boss_cc);
 
 	/**
 	 * @brief	アクターの描画

@@ -87,7 +87,7 @@ public:
 	float				m_chara_y;
 	virtual void		deathControl() = 0;
 	virtual void		init() = 0;
-	virtual void		update(POS_CC<float> boss_cc, bool boss_death) = 0;
+	virtual void		update(POS_CC<float> boss_cc) = 0;
 
 	//•`‰æ
 	virtual void		draw() = 0;

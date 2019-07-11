@@ -136,36 +136,33 @@ ActorYoshi::runImple()
  * @brief çXêV
  */
 void
-ActorYoshi::update(POS_CC<float> boss_cc, bool boss_death)
+ActorYoshi::update(POS_CC<float> boss_cc)
 {
 	//ìñÇΩÇËîªíË
 	if(!mCharaData.flag_death)
 	{
-		if(!boss_death)
+		if(isHit(mCharaData.draw_cc,boss_cc,ID_YOSHI))
 		{
-			if(isHit(mCharaData.draw_cc,boss_cc,ID_YOSHI))
-			{
-				mCharaData.flag_hit		= true;
-				mCharaData.flag_death	= true;
-				setIsHitCheck(true);
-				m_chara_y = mCharaData.draw_cc.y;
+			mCharaData.flag_hit		= true;
+			mCharaData.flag_death	= true;
+			setIsHitCheck(true);
+			m_chara_y = mCharaData.draw_cc.y;
 
-				if(mCharaData.flag_atk1)
+			if(mCharaData.flag_atk1)
+			{
+				if (UtilSound::isPlaying(S_YOSHI_HIP))
 				{
-					if (UtilSound::isPlaying(S_YOSHI_HIP))
-					{
-						UtilSound::stop(S_YOSHI_HIP);
-					}
-					UtilSound::playOnce(S_YOSHI_HIP);
+					UtilSound::stop(S_YOSHI_HIP);
 				}
-				if(mCharaData.flag_atk2)
+				UtilSound::playOnce(S_YOSHI_HIP);
+			}
+			if(mCharaData.flag_atk2)
+			{
+				if (UtilSound::isPlaying(S_YOSHI_HUSEN))
 				{
-					if (UtilSound::isPlaying(S_YOSHI_HUSEN))
-					{
-						UtilSound::stop(S_YOSHI_HUSEN);
-					}
-					UtilSound::playOnce(S_YOSHI_HUSEN);
+					UtilSound::stop(S_YOSHI_HUSEN);
 				}
+				UtilSound::playOnce(S_YOSHI_HUSEN);
 			}
 		}
 

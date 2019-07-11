@@ -125,18 +125,16 @@ ActorNikuman::runImple()
  * @brief çXêV
  */
 void
-ActorNikuman::update(POS_CC<float> boss_cc, bool boss_death)
+ActorNikuman::update(POS_CC<float> boss_cc)
 {
 	//ìñÇΩÇËîªíË
 	if(!mCharaData.flag_death){
-		if(!boss_death){
-			if(isHit(mCharaData.draw_cc,boss_cc,ID_NIKUMAN)){
-				UtilSound::playOnce(S_NIKUMAN);
-				mCharaData.flag_hit		= true;
-				mCharaData.flag_death	= true;	
-				setIsHitCheck(true);
-				m_chara_y = mCharaData.draw_cc.y;
-			}
+		if(isHit(mCharaData.draw_cc,boss_cc,ID_NIKUMAN)){
+			UtilSound::playOnce(S_NIKUMAN);
+			mCharaData.flag_hit		= true;
+			mCharaData.flag_death	= true;	
+			setIsHitCheck(true);
+			m_chara_y = mCharaData.draw_cc.y;
 		}
 
 		if(mCharaData.flag_atk1){

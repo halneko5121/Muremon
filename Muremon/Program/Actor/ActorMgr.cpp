@@ -99,14 +99,14 @@ ActorMgr::init()
  * @brief	アクターの更新
  */
 void
-ActorMgr::update(POS_CC<float> boss_cc, bool boss_death)
+ActorMgr::update(POS_CC<float> boss_cc)
 {
 	ActorIterator it_begin = mActorList.begin();
 	ActorIterator it_end = mActorList.end();
 	for (ActorIterator it = it_begin; it != it_end; it++)
 	{
 		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
-		actor->update(boss_cc, boss_death);
+		actor->update(boss_cc);
 	}
 }
 

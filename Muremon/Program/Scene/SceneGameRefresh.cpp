@@ -380,7 +380,7 @@ SceneGameRefresh::stateExeGame()
 	}
 
 	// アクターの更新
-	GetActorMgr()->update(boss_cc, mBoss->mIsDeath);
+	GetActorMgr()->update(boss_cc);
 
 	// エフェクトの更新
 	GetEffectMgr()->update();

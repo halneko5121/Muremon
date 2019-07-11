@@ -132,10 +132,9 @@ ActorNoppo::runImple()
  * @brief çXêV
  */
 void
-ActorNoppo::update(POS_CC<float> boss_cc, bool boss_death)
+ActorNoppo::update(POS_CC<float> boss_cc)
 {
 	mBossPos = boss_cc;
-
 	mState.executeState();
 }
 

@@ -672,9 +672,9 @@ SceneGameNormal::stateExeGame()
 		return;
 	}
 
-	mNiku->update(boss_cc2, mBoss->mIsDeath);
-	mYoshi->update(boss_cc2, mBoss->mIsDeath);
-	mNoppo->update(boss_cc2, mBoss->mIsDeath);
+	mNiku->update(boss_cc2);
+	mYoshi->update(boss_cc2);
+	mNoppo->update(boss_cc2);
 
 	mTime -= 1;
 

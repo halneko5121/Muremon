@@ -19,7 +19,7 @@ public:
 
 	void			init() override;
 	void			runImple() override;
-	void			update(POS_CC<float> boss_cc, bool boss_death) override;
+	void			update(POS_CC<float> boss_cc) override;
 	void			draw() override;
 	int				setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 	void			drawEffectFont();

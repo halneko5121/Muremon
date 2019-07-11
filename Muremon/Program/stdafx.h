@@ -12,6 +12,7 @@
 #include <tchar.h>
 #include <math.h>
 #include <vector>
+#include <list>
 #include <string>
 #include <d3dx9math.h>
 

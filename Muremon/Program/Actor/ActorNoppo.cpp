@@ -234,8 +234,6 @@ ActorNoppo::stateGroundAtk()
 {
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
 	{
-		mCharaData.flag_hit = true;
-		mCharaData.flag_death = true;
 		setIsHitCheck(true);
 		m_chara_y = mCharaData.draw_cc.y;
 
@@ -286,8 +284,6 @@ ActorNoppo::stateSkyAtk()
 {
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
 	{
-		mCharaData.flag_hit = true;
-		mCharaData.flag_death = true;
 		setIsHitCheck(true);
 		m_chara_y = mCharaData.draw_cc.y;
 
@@ -375,15 +371,11 @@ ActorNoppo::stateSkyDeath()
 
 	mCharaData.draw_cc = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.draw_cc);
 
-	//“–‚½‚Á‚½Œã‚Ìˆ—
-	if (mCharaData.flag_hit)
+	// ‰æ–ÊŠO‚È‚ç€–S
+	if ((mCharaData.draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_NOPPO + 50) &&
+		(mCharaData.draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 50)) 
 	{
-		// ‰æ–ÊŠO‚È‚ç€–S
-		if ((mCharaData.draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_NOPPO + 50) &&
-			(mCharaData.draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 50)) {
-			mCharaData.flag_death = true;
-			mState.changeState(cState_End);
-		}
+		mState.changeState(cState_End);
 	}
 
 	if ((mCharaData.draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30))
@@ -399,7 +391,6 @@ void
 ActorNoppo::stateEnterEnd()
 {
 	mCharaData.flag_atk1 = mCharaData.flag_atk2 = false;
-	mCharaData.flag_death = mCharaData.flag_hit = false;
 	mCharaData.animetion = 0;
 }
 void

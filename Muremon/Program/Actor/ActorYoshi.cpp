@@ -241,8 +241,6 @@ ActorYoshi::stateGroundAtk()
 {
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_YOSHI))
 	{
-		mCharaData.flag_hit = true;
-		mCharaData.flag_death = true;
 		setIsHitCheck(true);
 		m_chara_y = mCharaData.draw_cc.y;
 
@@ -290,8 +288,6 @@ ActorYoshi::stateSkyAtk()
 {
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_YOSHI))
 	{
-		mCharaData.flag_hit = true;
-		mCharaData.flag_death = true;
 		setIsHitCheck(true);
 		m_chara_y = mCharaData.draw_cc.y;
 
@@ -348,7 +344,6 @@ ActorYoshi::stateGroundDeath()
 	if ((mCharaData.draw_cc.x < -RADIUS_YOSHI) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_YOSHI) &&
 		(mCharaData.draw_cc.y < -RADIUS_YOSHI) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_YOSHI))
 	{
-		mCharaData.flag_death = true;
 		mState.changeState(cState_End);
 	}
 }
@@ -388,7 +383,6 @@ ActorYoshi::stateSkyDeath()
 	if ((mCharaData.draw_cc.x < -RADIUS_YOSHI) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_YOSHI) &&
 		(mCharaData.draw_cc.y < -RADIUS_YOSHI) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_YOSHI)) 
 	{
-		mCharaData.flag_death = true;
 		mState.changeState(cState_End);
 	}
 }
@@ -400,7 +394,6 @@ void
 ActorYoshi::stateEnterEnd()
 {
 	mCharaData.flag_atk1 = mCharaData.flag_atk2 = false;
-	mCharaData.flag_death = mCharaData.flag_hit = false;
 	mCharaData.flag_death_next = false;
 	mCharaData.animetion = 0;
 }

@@ -83,16 +83,20 @@ EffectMgr::createEffect(EffectId id, Texture* texture, Vertex* vertex, POS_CC<fl
 void
 EffectMgr::update()
 {
-	EffectIterator it_begin = mEffectList.begin();
-	EffectIterator it_end = mEffectList.end();
-	for (EffectIterator it = it_begin; it != it_end; it++)
+	EffectIterator it = mEffectList.begin();
+	while (it != mEffectList.end())
 	{
 		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
 		effect->update();
 
 		if (effect->isEnd())
 		{
-			mEffectList.erase(it);
+			delete effect;
+			it = mEffectList.erase(it);
+		}
+		else
+		{
+			it++;
 		}
 	}
 }

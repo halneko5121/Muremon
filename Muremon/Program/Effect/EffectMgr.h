@@ -29,7 +29,7 @@ class Vertex;
 class EffectMgr
 {
 public:
-	typedef std::vector<EffectBase*>::iterator EffectIterator;
+	typedef std::list<EffectBase*>::iterator EffectIterator;
 
 public:
 	EffectMgr();
@@ -66,12 +66,11 @@ public:
 	void				draw();
 
 private:
-	typedef std::vector<EffectBase*>	EffectList;
+	typedef std::list<EffectBase*>	EffectList;
 
 private:
-	static EffectMgr*	mInstance;		// インスタンス
-	EffectList			mEffectList;	// エフェクトを保管しておくリスト
-
+	static EffectMgr*	mInstance;			// インスタンス
+	EffectList			mEffectList;		// エフェクトを保管しておくリスト
 };
 
 static EffectMgr* GetEffectMgr() { return EffectMgr::getInstance(); }

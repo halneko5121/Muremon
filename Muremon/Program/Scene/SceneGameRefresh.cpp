@@ -15,6 +15,7 @@
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
+#include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorMgr.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
@@ -163,6 +164,9 @@ void SceneGameRefresh::draw()
 		// アクターの描画
 		GetActorMgr()->draw();
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
+
+		// エフェクト描画
+		GetEffectMgr()->draw();
 	}
 }
 
@@ -377,6 +381,9 @@ SceneGameRefresh::stateExeGame()
 
 	// アクターの更新
 	GetActorMgr()->update(boss_cc, mBoss->mIsDeath);
+
+	// エフェクトの更新
+	GetEffectMgr()->update();
 
 	// ヒットチェック
 	ActorMgr::ActorIterator it_begin = GetActorMgr()->begin();

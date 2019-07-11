@@ -18,7 +18,7 @@ enum MISSION_STATE
 class Mission
 {
 public:
-	Mission(Texture* m_texture, Vertex* m_vertex);
+	Mission(Texture* texture, Vertex* vertex);
 	~Mission();
 
 	int		getCountKeyNikuman() { return mKeyCountNikuman; };
@@ -72,7 +72,7 @@ private:
 
 private:
 	Texture*	mTexture;
-	Vertex*		vertex;
+	Vertex*		mVertex;
 
 	D3DXVECTOR2 mMissionStartPos;	//‚Ý‚Á‚µ‚å‚ñŠJŽn‚ÌˆÊ’u
 

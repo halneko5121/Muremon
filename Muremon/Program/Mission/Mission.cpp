@@ -64,40 +64,31 @@ namespace
 	};
 }
 
-Mission::Mission(Texture* m_texture,Vertex* m_vertex)
+Mission::Mission(Texture* texture, Vertex* vertex)
+	: mTexture(texture)
+	, mVertex(vertex)
+	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
+	, mAlphaCount(0)
+	, mAlpha(0)
+	, mAlphaPushZ(255)
+	, mFlagZ(true)
+	, mFlagDraw(0)
+	, mIsSound(true)
+	, mIsSound2(true)
+	, mMoveCount(0)
+	, mCurrentMissionNo(0)
+	, mMissionState(MISSION_START)
+	, mTime(TEN_SECOND)
+	, mFlagTimeCount(0)
+	, mSuccessTypingCount(1)
+	, mFlagMissionState(MISSION_SEIKO)
+	, mIsInit(false)
+	, mKeyCount(0)
+	, mKeyState(0)
+	, mKeyCountNikuman(0)
+	, mKeyCountYoshitaro(0)
+	, mKeyCountNoppo(0)
 {
-	mTexture = m_texture;
-	vertex	= m_vertex;
-
-	mKeyCountNikuman = 0;	//にくまんの押されたキーの数をカウント
-
-	mKeyCountYoshitaro = 0;	//吉たろうの押されたキーの数をカウント
-
-	mKeyCountNoppo = 0;		//のっぽの押されたキーの数をカウント
-
-	mCurrentMissionNo	= 0;
-	mKeyState	= 0;
-	mTime		= TEN_SECOND;
-	mKeyCount		= 0;
-	mSuccessTypingCount	= 1;
-	mFlagMissionState = MISSION_SEIKO;
-	mMissionState = MISSION_START;
-	mFlagDraw	= 0;
-	mMoveCount	= 0;
-	mAlphaCount = 0;
-	mAlpha		= 0;
-	mAlphaPushZ= 255;
-	mFlagTimeCount = 0;
-
-	mFlagZ		= true;
-
-	mIsInit	= false;
-
-	mIsSound	= true;
-	mIsSound2 = true;
-
-	mMissionStartPos.x = MISSION_HASSEI_X;
-	mMissionStartPos.y = -50.f;
 }
 
 Mission::~Mission()
@@ -190,26 +181,26 @@ int Mission::update()
 
 void Mission::draw()
 {
-	UtilGraphics::setTexture(vertex, *mTexture, T_MISSION);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 
 	if(mMissionState != MISSION_START)
 	{
-		vertex->setColor(mAlpha,255,255,255);
+		mVertex->setColor(mAlpha,255,255,255);
 	}
 
-	vertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI + mMissionState);	//みっしょん発生
+	mVertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI + mMissionState);	//みっしょん発生
 
-	vertex->setColor(mAlpha,255,255,255);
-	vertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_OSIRASE);	//みっしょんお知らせ枠
-	vertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_1 + mCurrentMissionNo);	//みっしょん
+	mVertex->setColor(mAlpha,255,255,255);
+	mVertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_OSIRASE);	//みっしょんお知らせ枠
+	mVertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_1 + mCurrentMissionNo);	//みっしょん
 
 	if(mCurrentMissionNo == MISSION_10 || mCurrentMissionNo == MISSION_11)
 	{
 		if(mMissionState == MISSION_START)
 		{
-			UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
-			vertex->setColor(mAlpha,255,255,255);
-			vertex->drawF(400.f,450.f,R_Z_PUSH_START);
+			UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+			mVertex->setColor(mAlpha,255,255,255);
+			mVertex->drawF(400.f,450.f,R_Z_PUSH_START);
 		}
 	}
 
@@ -978,10 +969,10 @@ void Mission::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	for(int i = 1;i < mSuccessTypingCount;i++){
-		vertex->drawF(125.f + 29.f * (i - 1),278.f,R_F_NIKUMAN);
+		mVertex->drawF(125.f + 29.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
@@ -989,10 +980,10 @@ void Mission::updateMission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	for(int i = 1;i < mSuccessTypingCount;i++){
-		vertex->drawF(76.f + 28.5f * (i - 1),278.f,R_F_NIKUMAN);
+		mVertex->drawF(76.f + 28.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
@@ -1000,10 +991,10 @@ void Mission::updateMission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	for(int i = 1;i < mSuccessTypingCount;i++){
-		vertex->drawF(118.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
+		mVertex->drawF(118.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
@@ -1011,10 +1002,10 @@ void Mission::updateMission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	for(int i = 1;i < mSuccessTypingCount;i++){
-		vertex->drawF(108.f + 28.f * (i - 1),278.f,R_F_NIKUMAN);
+		mVertex->drawF(108.f + 28.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
@@ -1022,10 +1013,10 @@ void Mission::updateMission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	for(int i = 1;i < mSuccessTypingCount;i++){
-		vertex->drawF(131.f + 30.f * (i - 1),278.f,R_F_NIKUMAN);
+		mVertex->drawF(131.f + 30.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
@@ -1033,10 +1024,10 @@ void Mission::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	for(int i = 1;i < mSuccessTypingCount;i++){
-		vertex->drawF(96.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
+		mVertex->drawF(96.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
@@ -1044,11 +1035,11 @@ void Mission::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0)
 	{
-		vertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI);
+		mVertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI);
 
-		UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
-		vertex->setColor(mAlphaPushZ,255,255,255);
-		vertex->drawF(400.f,450.f,R_Z_PUSH_START);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+		mVertex->setColor(mAlphaPushZ,255,255,255);
+		mVertex->drawF(400.f,450.f,R_Z_PUSH_START);
 	}
 	//DrawNumT();		//デバッグ用
 }
@@ -1057,11 +1048,11 @@ void Mission::updateMission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0)
 	{
-		vertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI);
+		mVertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI);
 
-		UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
-		vertex->setColor(mAlphaPushZ,255,255,255);
-		vertex->drawF(400.f,450.f,R_Z_PUSH_START);
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+		mVertex->setColor(mAlphaPushZ,255,255,255);
+		mVertex->drawF(400.f,450.f,R_Z_PUSH_START);
 	}
 	//DrawNumT();		//デバッグ用
 }
@@ -1179,7 +1170,7 @@ void Mission::missionSelect()
 void Mission::drawTime()
 {
 	// タイム
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	for(int i = 0;i < 2;i++){
 		int num = mTime;
 		for(int j = 0;j < 2 - i;j++){
@@ -1190,20 +1181,20 @@ void Mission::drawTime()
 				num = num / 10;
 			}
 		}
-		vertex->drawF(M_TIMENUM_X + 50.f * i,M_TIMENUM_Y,R_0_B + num%10);
+		mVertex->drawF(M_TIMENUM_X + 50.f * i,M_TIMENUM_Y,R_0_B + num%10);
 	}
 }
 
 void Mission::drawCombo()
 {
 	// コンボ
-	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	for(int i = 0;i < 3;i++){
 		int num = mKeyCount;
 		for(int j = 1;j < 3 - i;j++){
 			num = num / 10;
 		}
-		vertex->drawF(M_COMBO_X + 50.f + 50.f * i,M_COMBO_Y,R_0_B + num%10);
+		mVertex->drawF(M_COMBO_X + 50.f + 50.f * i,M_COMBO_Y,R_0_B + num%10);
 	}
-	vertex->drawF(M_COMBO_X,M_COMBO_Y,R_COMBO);
+	mVertex->drawF(M_COMBO_X,M_COMBO_Y,R_COMBO);
 }

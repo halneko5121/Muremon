@@ -34,8 +34,8 @@ private:
 
 private:
 	StateMachine<ActorNikuman>	mState;	// ステート
-	float						mAtkStartY;
 	float						mRandAcc;
 	float						mRandMoveX;
+	float						mAtkStartY;
 	float						mRandDeg;
 };

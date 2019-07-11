@@ -66,6 +66,7 @@ ActorNikuman::ActorNikuman()
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
+	, mRandDeg(0.0f)
 {
 	mRectStartNum = R_NIKU_G_ATK1;
 	mSoundStartNum = S_NIKUMAN;

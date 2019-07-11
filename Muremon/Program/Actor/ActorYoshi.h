@@ -37,6 +37,5 @@ private:
 	float						mRandAcc;
 	float						mRandMoveX;
 	float						mAtkStartY;
-
 	float						mRandDeg;
 };

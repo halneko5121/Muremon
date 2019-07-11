@@ -26,7 +26,9 @@
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
+    <ClCompile Include="Program\Effect\EffectBase.cpp" />
     <ClCompile Include="Program\Effect\EffectFont.cpp" />
+    <ClCompile Include="Program\Effect\EffectMgr.cpp" />
     <ClCompile Include="Program\Mission\Mission.cpp" />
     <ClCompile Include="Program\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -70,7 +72,9 @@
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
     <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Program\DefineGame.h" />
+    <ClInclude Include="Program\Effect\EffectBase.h" />
     <ClInclude Include="Program\Effect\EffectFont.h" />
+    <ClInclude Include="Program\Effect\EffectMgr.h" />
     <ClInclude Include="Program\Mission\Mission.h" />
     <ClInclude Include="Program\stdafx.h" />
     <ClInclude Include="Program\System\GameMain.h" />

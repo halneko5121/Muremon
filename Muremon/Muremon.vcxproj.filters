@@ -111,6 +111,12 @@
     <ClCompile Include="Program\Effect\EffectFont.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Effect\EffectMgr.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Effect\EffectBase.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -223,6 +229,12 @@
       <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="Program\Effect\EffectFont.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Effect\EffectMgr.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Effect\EffectBase.h">
       <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>

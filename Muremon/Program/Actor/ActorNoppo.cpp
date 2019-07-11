@@ -71,7 +71,6 @@ ActorNoppo::ActorNoppo()
 	: mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
-	, mEffectFontPos(0.0f, 0.0f)
 {
 	mRectStartNum = R_NOPPO_G_ATK1;
 	mSoundStartNum = S_NOPPO_KOKE;
@@ -157,45 +156,6 @@ ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 	mCharaData.rect_num	= rect_num;
 
 	return anime_count;
-}
-
-/**
- * @brief フォントの描画処理
- */
-void
-ActorNoppo::drawEffectFont()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-
-	int rect_change = 0;
-	mCountEffect++;
-
-	if (mCharaData.flag_effectfont)
-	{
-		if (mCountEffect < FONT_DELETE)
-		{
-			mEffectFontPos = setEffectShake(SHAKE_X, SHAKE_Y, mEffectFontPos);
-		}
-		else
-		{
-			mCharaData.flag_effectfont = false;
-			mCountEffect = 0;
-		}
-	}
-	else
-	{
-		mEffectFontPos = setEffectFont(mCharaData.draw_cc, RADIUS_NOPPO, POS_HITFONT_X);
-		mCharaData.flag_effectfont = true;
-	}
-
-	// フォントエフェクトの描画
-	if(mCountEffect < FONT_DELETE)
-	{
-		if(mCharaData.flag_atk1)		rect_change = 0; 
-		else if(mCharaData.flag_atk2)	rect_change = 1;
-		mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-		mVertex->drawF(mEffectFontPos.x,mEffectFontPos.y, R_NOPPO_PETI + rect_change);
-	}
 }
 
 /**

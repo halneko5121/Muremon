@@ -23,7 +23,6 @@ public:
 	void			update(POS_CC<float> boss_cc, bool boss_death) override;
 	void			draw() override;
 	int				setAnimetion(int max_animetion, int anime_count, int rect_num) override;
-	void			drawEffectFont();
 
 private:
 	// ステート関数
@@ -39,5 +38,4 @@ private:
 	float						mRandAcc;
 	float						mRandMoveX;
 	float						mAtkStartY;
-	POS_CC<float>				mEffectFontPos;
 };

@@ -170,7 +170,7 @@ ActorBoss::runImple()
 
 
 void
-ActorBoss::update(POS_CC<float> boss_cc)
+ActorBoss::updateImple(POS_CC<float> boss_cc)
 {
 }
 

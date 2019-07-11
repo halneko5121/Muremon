@@ -86,6 +86,15 @@ ActorBase::run()
 }
 
 /**
+ * @brief XV
+ */
+void
+ActorBase::update(POS_CC<float> boss_cc)
+{
+	updateImple(boss_cc);
+}
+
+/**
  * @brief •`‰æ
  */
 void

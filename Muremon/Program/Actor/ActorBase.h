@@ -79,18 +79,20 @@ public:
 	ActorBase();
 	virtual ~ActorBase();
 
+	// ‚±‚¿‚ç‚ðoverride ‚µ‚Ä‰º‚³‚¢
 	virtual void		drawImple() {};
 	virtual void		runImple() {};
 	virtual void		initImple() {};
+	virtual void		updateImple(POS_CC<float> boss_cc) {};
 
 	float				m_chara_y;
-	virtual void		update(POS_CC<float> boss_cc) = 0;
 
 	//•`‰æ
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				init();
 	void				run();
+	void				update(POS_CC<float> boss_cc);
 	void				draw();
 
 	/**

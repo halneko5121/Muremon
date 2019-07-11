@@ -132,7 +132,7 @@ ActorYoshi::runImple()
  * @brief çXêV
  */
 void
-ActorYoshi::update(POS_CC<float> boss_cc)
+ActorYoshi::updateImple(POS_CC<float> boss_cc)
 {
 	mBossPos = boss_cc;
 	mState.executeState();

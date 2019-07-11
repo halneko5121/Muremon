@@ -133,7 +133,7 @@ ActorNoppo::runImple()
  * @brief çXêV
  */
 void
-ActorNoppo::update(POS_CC<float> boss_cc)
+ActorNoppo::updateImple(POS_CC<float> boss_cc)
 {
 	mBossPos = boss_cc;
 	mState.executeState();

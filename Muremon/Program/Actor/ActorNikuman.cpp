@@ -118,7 +118,7 @@ ActorNikuman::runImple()
  * @brief çXêV
  */
 void
-ActorNikuman::update(POS_CC<float> boss_cc)
+ActorNikuman::updateImple(POS_CC<float> boss_cc)
 {
 	mBossPos = boss_cc;
 	mState.executeState();

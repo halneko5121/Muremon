@@ -21,9 +21,9 @@ public:
 	Mission(Texture* m_texture, Vertex* m_vertex);
 	~Mission();
 
-	int		getCountKeyNikuman() { return cnt_key_nikuman; };
-	int		getCountKeyYoshitaro() { return cnt_key_yoshitaro; };
-	int		getCountKeyNoppo() { return cnt_key_noppo; };
+	int		getCountKeyNikuman() { return mKeyCountNikuman; };
+	int		getCountKeyYoshitaro() { return mKeyCountYoshitaro; };
+	int		getCountKeyNoppo() { return mKeyCountNoppo; };
 
 	void	init(int cnt_nikuman, int cnt_yoshitaro, int cnt_noppo);
 	int		update();
@@ -71,48 +71,34 @@ private:
 	void	updateMission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
 private:
-	Texture	*texture;
-	Vertex	*vertex;
+	Texture*	mTexture;
+	Vertex*		vertex;
 
-	D3DXVECTOR2 mission_start;	//みっしょん開始の位置
+	D3DXVECTOR2 mMissionStartPos;	//みっしょん開始の位置
 
-	int alpha_count;	//
+	int mAlphaCount;	//
+	int mAlpha;			//
+	int mAlphaPushZ;	//
 
-	int alpha;			//
+	int mFlagZ;			//
+	int mFlagDraw;		//
+	bool mIsSound;		//
+	bool mIsSound2;		//
 
-	int alpha_push_z;	//
+	int mMoveCount;		//
+	int mCurrentMissionNo;		// どのミッションが選択されたかを記憶
+	int mMissionState;			// ミッションが今どの状況か
 
-	int flag_z;			//
+	int mTime;					// 時間
+	int mFlagTimeCount;			// タイムカウントのフラグ
+	int mSuccessTypingCount;	// タイピング時正解しているか判定
+	int mFlagMissionState;		// ミッション成功・失敗
 
-	int flag_draw;		//
+	bool mIsInit;				// 初期化したかしてないか
+	int mKeyCount;				// キーの連打数を保存する変数
+	int mKeyState;				// キーの状態を保存する変数
 
-	bool flag_sound;	//
-
-	bool flag_sound2;	//
-
-	int cnt_move;		//
-
-	int mission_no;		//どのミッションが選択されたかを記憶
-
-	int mission_state;	//ミッションが今どの状況か
-
-	int time;	//時間
-
-	int flag_time_cnt;	//タイムカウントのフラグ
-
-	int success_type_count;	//タイピング時正解しているか判定
-
-	int flag_mission_state;	//ミッション成功・失敗
-
-	bool flag_init;		//初期化したかしてないか
-
-	int key_cnt;		//キーの連打数を保存する変数
-
-	int key_state;		//キーの状態を保存する変数
-
-	int cnt_key_nikuman;	//にくまんの押されたキーの数をカウント
-
-	int cnt_key_yoshitaro;	//吉たろうの押されたキーの数をカウント
-
-	int cnt_key_noppo;		//のっぽの押されたキーの数をカウント
+	int mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
+	int mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント
+	int mKeyCountNoppo;			// のっぽの押されたキーの数をカウント
 };

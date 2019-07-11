@@ -66,38 +66,38 @@ namespace
 
 Mission::Mission(Texture* m_texture,Vertex* m_vertex)
 {
-	texture = m_texture;
+	mTexture = m_texture;
 	vertex	= m_vertex;
 
-	cnt_key_nikuman = 0;	//‚É‚­‚Ü‚ñ‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
+	mKeyCountNikuman = 0;	//‚É‚­‚Ü‚ñ‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
 
-	cnt_key_yoshitaro = 0;	//‹g‚½‚ë‚¤‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
+	mKeyCountYoshitaro = 0;	//‹g‚½‚ë‚¤‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
 
-	cnt_key_noppo = 0;		//‚Ì‚Á‚Û‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
+	mKeyCountNoppo = 0;		//‚Ì‚Á‚Û‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
 
-	mission_no	= 0;
-	key_state	= 0;
-	time		= TEN_SECOND;
-	key_cnt		= 0;
-	success_type_count	= 1;
-	flag_mission_state = MISSION_SEIKO;
-	mission_state = MISSION_START;
-	flag_draw	= 0;
-	cnt_move	= 0;
-	alpha_count = 0;
-	alpha		= 0;
-	alpha_push_z= 255;
-	flag_time_cnt = 0;
+	mCurrentMissionNo	= 0;
+	mKeyState	= 0;
+	mTime		= TEN_SECOND;
+	mKeyCount		= 0;
+	mSuccessTypingCount	= 1;
+	mFlagMissionState = MISSION_SEIKO;
+	mMissionState = MISSION_START;
+	mFlagDraw	= 0;
+	mMoveCount	= 0;
+	mAlphaCount = 0;
+	mAlpha		= 0;
+	mAlphaPushZ= 255;
+	mFlagTimeCount = 0;
 
-	flag_z		= true;
+	mFlagZ		= true;
 
-	flag_init	= false;
+	mIsInit	= false;
 
-	flag_sound	= true;
-	flag_sound2 = true;
+	mIsSound	= true;
+	mIsSound2 = true;
 
-	mission_start.x = MISSION_HASSEI_X;
-	mission_start.y = -50.f;
+	mMissionStartPos.x = MISSION_HASSEI_X;
+	mMissionStartPos.y = -50.f;
 }
 
 Mission::~Mission()
@@ -106,114 +106,114 @@ Mission::~Mission()
 
 void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 {
-	mission_no	= 0;
-	key_state	= 0;
-	time		= TEN_SECOND;
-	key_cnt		= 0;
-	success_type_count	= 1;
-	flag_mission_state = MISSION_SEIKO;
-	mission_state = MISSION_START;
-	flag_draw	= 0;
-	cnt_move	= 0;
-	alpha_count = 0;
-	alpha		= 0;
-	alpha_push_z= 255;
+	mCurrentMissionNo	= 0;
+	mKeyState	= 0;
+	mTime		= TEN_SECOND;
+	mKeyCount		= 0;
+	mSuccessTypingCount	= 1;
+	mFlagMissionState = MISSION_SEIKO;
+	mMissionState = MISSION_START;
+	mFlagDraw	= 0;
+	mMoveCount	= 0;
+	mAlphaCount = 0;
+	mAlpha		= 0;
+	mAlphaPushZ= 255;
 
-	flag_time_cnt = 0;
+	mFlagTimeCount = 0;
 
-	flag_z		= true;
+	mFlagZ		= true;
 
-	flag_init	= false;
+	mIsInit	= false;
 
-	flag_sound	= true;
-	flag_sound2 = true;
+	mIsSound	= true;
+	mIsSound2 = true;
 
-	mission_start.x = MISSION_HASSEI_X;
-	mission_start.y = -50.f;
+	mMissionStartPos.x = MISSION_HASSEI_X;
+	mMissionStartPos.y = -50.f;
 
-	cnt_key_nikuman		= cnt_nikuman;		//‚É‚­‚Ü‚ñ‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
+	mKeyCountNikuman		= cnt_nikuman;		//‚É‚­‚Ü‚ñ‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
 
-	cnt_key_yoshitaro	= cnt_yoshitaro;	//‹g‚½‚ë‚¤‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
+	mKeyCountYoshitaro	= cnt_yoshitaro;	//‹g‚½‚ë‚¤‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
 
-	cnt_key_noppo		= cnt_noppo;		//‚Ì‚Á‚Û‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
+	mKeyCountNoppo		= cnt_noppo;		//‚Ì‚Á‚Û‚Ì‰Ÿ‚³‚ê‚½ƒL[‚Ì”‚ğƒJƒEƒ“ƒg
 }
 
 int Mission::update()
 {
-	if(mission_state == MISSION_START){
+	if(mMissionState == MISSION_START){
 		missionSelect();
 		//ˆÊ’u‚ğŒvZ
-		if(flag_draw == 7){
+		if(mFlagDraw == 7){
 			fadeIn();
-			return mission_state;
+			return mMissionState;
 		}
-		if(flag_draw%2 == 0){
-			if(mission_start.y < MISSION_HASSEI_Y){
-				mission_start.y += 5.f;
+		if(mFlagDraw%2 == 0){
+			if(mMissionStartPos.y < MISSION_HASSEI_Y){
+				mMissionStartPos.y += 5.f;
 			}
 			else{
-				flag_draw++;
+				mFlagDraw++;
 			}
 		}
-		else if(flag_draw%2 == 1){
-			mission_start.y -= 5.f;
-			if(mission_start.y == 0.f + 20.f * cnt_move){
-				flag_draw++;
-				cnt_move++;
+		else if(mFlagDraw%2 == 1){
+			mMissionStartPos.y -= 5.f;
+			if(mMissionStartPos.y == 0.f + 20.f * mMoveCount){
+				mFlagDraw++;
+				mMoveCount++;
 			}
 		}
 	}
-	else if(mission_state == MISSION_MIDDLE){
-		if(flag_sound){
+	else if(mMissionState == MISSION_MIDDLE){
+		if(mIsSound){
 			UtilSound::playOnce(S_OSIRASE);
-			flag_sound = false;
+			mIsSound = false;
 		}
 		updateMission();
 	}
 	else{
-		if(mission_state == MISSION_SEIKO){
-			if(flag_sound2){
+		if(mMissionState == MISSION_SEIKO){
+			if(mIsSound2){
 				UtilSound::playOnce(S_M_CLEAR);
-				flag_sound = false;
+				mIsSound = false;
 			}
 		}
-		else if(mission_state == MISSION_SIPPAI){
-			if(flag_sound2){
+		else if(mMissionState == MISSION_SIPPAI){
+			if(mIsSound2){
 				UtilSound::playOnce(S_M_OVER);
-				flag_sound2 = false;
+				mIsSound2 = false;
 			}
 		}
 		fadeOut();
 	}
-	return mission_state;
+	return mMissionState;
 }
 
 void Mission::draw()
 {
-	UtilGraphics::setTexture(vertex, *texture, T_MISSION);
+	UtilGraphics::setTexture(vertex, *mTexture, T_MISSION);
 
-	if(mission_state != MISSION_START)
+	if(mMissionState != MISSION_START)
 	{
-		vertex->setColor(alpha,255,255,255);
+		vertex->setColor(mAlpha,255,255,255);
 	}
 
-	vertex->drawF(mission_start.x,mission_start.y,R_MISSION_HASSEI + mission_state);	//‚İ‚Á‚µ‚å‚ñ”­¶
+	vertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI + mMissionState);	//‚İ‚Á‚µ‚å‚ñ”­¶
 
-	vertex->setColor(alpha,255,255,255);
+	vertex->setColor(mAlpha,255,255,255);
 	vertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_OSIRASE);	//‚İ‚Á‚µ‚å‚ñ‚¨’m‚ç‚¹˜g
-	vertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_1 + mission_no);	//‚İ‚Á‚µ‚å‚ñ
+	vertex->drawF(MISSION_OSIRASE_X,MISSION_OSIRASE_Y,R_MISSION_1 + mCurrentMissionNo);	//‚İ‚Á‚µ‚å‚ñ
 
-	if(mission_no == MISSION_10 || mission_no == MISSION_11)
+	if(mCurrentMissionNo == MISSION_10 || mCurrentMissionNo == MISSION_11)
 	{
-		if(mission_state == MISSION_START)
+		if(mMissionState == MISSION_START)
 		{
-			UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
-			vertex->setColor(alpha,255,255,255);
+			UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+			vertex->setColor(mAlpha,255,255,255);
 			vertex->drawF(400.f,450.f,R_Z_PUSH_START);
 		}
 	}
 
-	if(mission_state == MISSION_MIDDLE){
+	if(mMissionState == MISSION_MIDDLE){
 		updateMissionD();
 	}
 	else{
@@ -222,7 +222,7 @@ void Mission::draw()
 
 void Mission::updateMission()
 {
-	switch(mission_no)
+	switch(mCurrentMissionNo)
 	{
 	case MISSION_1:
 		updateMission1();
@@ -272,644 +272,644 @@ void Mission::updateMission()
 
 void Mission::updateMission1()	//w10•bˆÈ“à‚É100‰ñ˜A‘Å‚¹‚æIIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if (key_cnt >= 100)	mission_state = MISSION_SEIKO;
-		else				mission_state = MISSION_SIPPAI;
+		if (mKeyCount >= 100)	mMissionState = MISSION_SEIKO;
+		else				mMissionState = MISSION_SIPPAI;
 		return;
 	}
 
 	if (UtilInput::isAnyKeyPushed())
 	{
-		key_cnt++;
+		mKeyCount++;
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission2()	//w10•bŠÔ‚Å‚¿‚å‚¤‚Ç50‰ñ˜A‘Å‚¹‚æIIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if (key_cnt == 50)	mission_state = MISSION_SEIKO;
-		else				mission_state = MISSION_SIPPAI;
+		if (mKeyCount == 50)	mMissionState = MISSION_SEIKO;
+		else				mMissionState = MISSION_SIPPAI;
 		return;
 	}
 	
 	if (UtilInput::isAnyKeyPushed())
 	{
-		key_cnt++;
+		mKeyCount++;
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission3()	//w10•bŠÔ‚Å‚¿‚å‚¤‚Ç100‰ñ˜A‘Å‚¹‚æIIx
 {
-	if(time <= 0)
+	if(mTime <= 0)
 	{
-		if(key_cnt == 100)	mission_state = MISSION_SEIKO;
-		else				mission_state = MISSION_SIPPAI;
+		if(mKeyCount == 100)	mMissionState = MISSION_SEIKO;
+		else				mMissionState = MISSION_SIPPAI;
 		return;
 	}
 	
 	if (UtilInput::isAnyKeyPushed())
 	{
-		key_cnt++;
+		mKeyCount++;
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission4()	//wuNIKUMANTOTUGEKIv‚Æ“ü—Í‚¹‚æIIx
 {
-	if(time <= 0)
+	if(mTime <= 0)
 	{
-		if(success_type_count == MISSION4_FONT_NUM)	mission_state = MISSION_SEIKO;
-		else								mission_state = MISSION_SIPPAI;
+		if(mSuccessTypingCount == MISSION4_FONT_NUM)	mMissionState = MISSION_SEIKO;
+		else								mMissionState = MISSION_SIPPAI;
 		return;
 	}
 	
 	if (UtilInput::isKeyPushed(UtilInput::cKey_N))
 	{
-		if (success_type_count == 1 || success_type_count == 7)
+		if (mSuccessTypingCount == 1 || mSuccessTypingCount == 7)
 		{
-			success_type_count++;
+			mSuccessTypingCount++;
 		}
 	}
 
-	if(success_type_count < MISSION4_FONT_NUM)
+	if(mSuccessTypingCount < MISSION4_FONT_NUM)
 	{
-		switch (success_type_count)
+		switch (mSuccessTypingCount)
 		{
 		case 1:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 2:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 3:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 4:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 		case 5:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_M)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_M)) mSuccessTypingCount++;
 			break;
 		case 6:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 7:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 8:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 9:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 10:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 11:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 		case 12:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_G)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_G)) mSuccessTypingCount++;
 			break;
 		case 13:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) mSuccessTypingCount++;
 			break;
 		case 14:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 15:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		default:
 			break;
 		}
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission5()	//wuNIKUMANINSEKIRAKKAJUTUv‚Æ“ü—Í‚¹‚æIIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if(success_type_count == MISSION5_FONT_NUM)	mission_state = MISSION_SEIKO;
-		else								mission_state = MISSION_SIPPAI;
+		if(mSuccessTypingCount == MISSION5_FONT_NUM)	mMissionState = MISSION_SEIKO;
+		else								mMissionState = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(success_type_count < MISSION5_FONT_NUM)
+	if(mSuccessTypingCount < MISSION5_FONT_NUM)
 	{
-		switch (success_type_count)
+		switch (mSuccessTypingCount)
 		{
 		case 1:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 2:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 3:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 4:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 		case 5:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_M)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_M)) mSuccessTypingCount++;
 			break;
 		case 6:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 7:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 8:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 9:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 10:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
 			break;
 
 		case 11:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) mSuccessTypingCount++;
 			break;
 		case 12:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 13:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 14:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) mSuccessTypingCount++;
 			break;
 		case 15:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 16:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 17:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 18:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 19:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_J)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_J)) mSuccessTypingCount++;
 			break;
 		case 20:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 
 		case 21:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 22:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 		default:
 			break;
 		}
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission6()	//wuYOSITAROHIPATACKv‚Æ“ü—Í‚¹‚æIIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if(success_type_count == MISSION6_FONT_NUM)	mission_state = MISSION_SEIKO;
-		else								mission_state = MISSION_SIPPAI;
+		if(mSuccessTypingCount == MISSION6_FONT_NUM)	mMissionState = MISSION_SEIKO;
+		else								mMissionState = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(success_type_count < MISSION6_FONT_NUM)
+	if(mSuccessTypingCount < MISSION6_FONT_NUM)
 	{
-		switch (success_type_count)
+		switch (mSuccessTypingCount)
 		{
 		case 1:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_Y)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_Y)) mSuccessTypingCount++;
 			break;
 		case 2:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 3:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
 			break;
 		case 4:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 5:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 6:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 7:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) mSuccessTypingCount++;
 			break;
 		case 8:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 9:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) mSuccessTypingCount++;
 			break;
 		case 10:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 
 		case 11:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 		case 12:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 13:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 14:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 15:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_C)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_C)) mSuccessTypingCount++;
 			break;
 		case 16:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		default:
 			break;
 		}
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission7()	//wuYOSITAROHUSENSHOOTv‚Æ“ü—Í‚¹‚æIIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if (success_type_count == MISSION7_FONT_NUM)	mission_state = MISSION_SEIKO;
-		else								mission_state = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION7_FONT_NUM)	mMissionState = MISSION_SEIKO;
+		else								mMissionState = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(success_type_count < MISSION7_FONT_NUM)
+	if(mSuccessTypingCount < MISSION7_FONT_NUM)
 	{
-		switch (success_type_count)
+		switch (mSuccessTypingCount)
 		{
 		case 1:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_Y)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_Y)) mSuccessTypingCount++;
 			break;
 		case 2:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 3:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
 			break;
 		case 4:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 5:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 6:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		case 7:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) mSuccessTypingCount++;
 			break;
 		case 8:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 9:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) mSuccessTypingCount++;
 			break;
 		case 10:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 
 		case 11:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
 			break;
 		case 12:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) mSuccessTypingCount++;
 			break;
 		case 13:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 14:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
 			break;
 		case 15:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) mSuccessTypingCount++;
 			break;
 		case 16:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 17:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 18:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		default:
 			break;
 		}
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission8()	//wuNOPPOKOKEPPETIv‚Æ“ü—Í‚¹‚æIIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if (success_type_count == MISSION8_FONT_NUM)	mission_state = MISSION_SEIKO;
-		else								mission_state = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION8_FONT_NUM)	mMissionState = MISSION_SEIKO;
+		else								mMissionState = MISSION_SIPPAI;
 		return;
 	}
 	
-	if(success_type_count < MISSION8_FONT_NUM)
+	if(mSuccessTypingCount < MISSION8_FONT_NUM)
 	{
-		switch (success_type_count)
+		switch (mSuccessTypingCount)
 		{
 		case 1:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 2:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 3:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 		case 4:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 		case 5:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 6:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 7:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 8:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 9:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) mSuccessTypingCount++;
 			break;
 		case 10:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 
 		case 11:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 		case 12:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) mSuccessTypingCount++;
 			break;
 		case 13:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 14:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		default:
 			break;
 		}
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission9()	//wuNOPPOBOKUSIRIKOPUTAv‚Æ“ü—Í‚¹‚æIIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if (success_type_count == MISSION9_FONT_NUM)	mission_state = MISSION_SEIKO;
-		else											mission_state = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION9_FONT_NUM)	mMissionState = MISSION_SEIKO;
+		else											mMissionState = MISSION_SIPPAI;
 		return;
 	}
 
-	if(success_type_count < MISSION9_FONT_NUM)
+	if(mSuccessTypingCount < MISSION9_FONT_NUM)
 	{
-		switch (success_type_count)
+		switch (mSuccessTypingCount)
 		{
 		case 1:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
 			break;
 		case 2:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 3:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 		case 4:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 		case 5:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 6:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_B)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_B)) mSuccessTypingCount++;
 			break;
 		case 7:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 8:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 9:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 		case 10:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
 			break;
 
 		case 11:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 12:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) mSuccessTypingCount++;
 			break;
 		case 13:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
 			break;
 		case 14:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
 			break;
 		case 15:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
 			break;
 		case 16:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
 			break;
 		case 17:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
 			break;
 		case 18:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
 			break;
 		case 19:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) success_type_count++;
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
 			break;
 		default:
 			break;
 		}
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission10()	//w10•b”‚¦‚Ä‘OŒã1•bˆÈ“à‚Åu‚yƒL[v‚ğ‰Ÿ‚¹Ix
 {
-	if(flag_time_cnt == 0){
-		time = 0;
-		if(!flag_z){
-			alpha_push_z += 5;
-			if(alpha_push_z == 240){
-				flag_z = true;
+	if(mFlagTimeCount == 0){
+		mTime = 0;
+		if(!mFlagZ){
+			mAlphaPushZ += 5;
+			if(mAlphaPushZ == 240){
+				mFlagZ = true;
 			}
 		}
 		else{
-			alpha_push_z -= 5;
-			if(alpha_push_z == 50){
-				flag_z = false;
+			mAlphaPushZ -= 5;
+			if(mAlphaPushZ == 50){
+				mFlagZ = false;
 			}
 		}
 	}
 	if (UtilInput::isKeyPushedDecide())
 	{
-		flag_time_cnt += 1;
+		mFlagTimeCount += 1;
 	}
-	if(flag_time_cnt == 1){
-		time++;
+	if(mFlagTimeCount == 1){
+		mTime++;
 	}
-	else if(flag_time_cnt == 2)
+	else if(mFlagTimeCount == 2)
 	{
-		if(time <= 11*60 - 31 && time >= 9*60 + 31){
-			mission_state = MISSION_SEIKO;
+		if(mTime <= 11*60 - 31 && mTime >= 9*60 + 31){
+			mMissionState = MISSION_SEIKO;
 		}
 		else{
-			mission_state = MISSION_SIPPAI;
+			mMissionState = MISSION_SIPPAI;
 		}
 	}
 }
 
 void Mission::updateMission11()	//w5•b”‚¦‚Ä‘OŒã1•bˆÈ“à‚Åu‚yƒL[v‚ğ‰Ÿ‚¹Ix
 {
-	if(flag_time_cnt == 0){
-		time = 0;
-		if(!flag_z){
-			alpha_push_z += 5;
-			if(alpha_push_z == 240){
-				flag_z = true;
+	if(mFlagTimeCount == 0){
+		mTime = 0;
+		if(!mFlagZ){
+			mAlphaPushZ += 5;
+			if(mAlphaPushZ == 240){
+				mFlagZ = true;
 			}
 		}
 		else{
-			alpha_push_z -= 5;
-			if(alpha_push_z == 50){
-				flag_z = false;
+			mAlphaPushZ -= 5;
+			if(mAlphaPushZ == 50){
+				mFlagZ = false;
 			}
 		}
 	}
 	if (UtilInput::isKeyPushedDecide())
 	{
-		flag_time_cnt += 1;
-		if(flag_time_cnt > 2)
+		mFlagTimeCount += 1;
+		if(mFlagTimeCount > 2)
 		{
-			flag_time_cnt = 2;
+			mFlagTimeCount = 2;
 		}
 	}
-	if(flag_time_cnt == 1)
+	if(mFlagTimeCount == 1)
 	{
-		time++;
+		mTime++;
 	}
-	else if(flag_time_cnt == 2)
+	else if(mFlagTimeCount == 2)
 	{
-		if(time <= 6*60 - 31 && time >= 4*60 + 31)
+		if(mTime <= 6*60 - 31 && mTime >= 4*60 + 31)
 		{
-			mission_state = MISSION_SEIKO;
+			mMissionState = MISSION_SEIKO;
 		}
 		else
 		{
-			mission_state = MISSION_SIPPAI;
+			mMissionState = MISSION_SIPPAI;
 		}
 	}
 }
 
 void Mission::updateMission12()	//w10•bˆÈ“à‚Éu‚É‚­‚Ü‚ñv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if (cnt_key_nikuman > cnt_key_noppo && cnt_key_nikuman > cnt_key_yoshitaro)
+		if (mKeyCountNikuman > mKeyCountNoppo && mKeyCountNikuman > mKeyCountYoshitaro)
 		{
-			mission_state = MISSION_SEIKO;
+			mMissionState = MISSION_SEIKO;
 		}
 		else
 		{
-			mission_state = MISSION_SIPPAI;
+			mMissionState = MISSION_SIPPAI;
 		}
 		return;
 	}
 
 	if (UtilInput::isKeyPushedLineOne())
 	{
-		cnt_key_nikuman++;
+		mKeyCountNikuman++;
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission13()	//w10•bˆÈ“à‚Éu‚æ‚µ‚½‚ë‚¤v‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
 {
-	if (time <= 0)
+	if (mTime <= 0)
 	{
-		if (cnt_key_yoshitaro > cnt_key_nikuman && cnt_key_yoshitaro > cnt_key_noppo)
+		if (mKeyCountYoshitaro > mKeyCountNikuman && mKeyCountYoshitaro > mKeyCountNoppo)
 		{
-			mission_state = MISSION_SEIKO;
+			mMissionState = MISSION_SEIKO;
 		}
 		else
 		{
-			mission_state = MISSION_SIPPAI;
+			mMissionState = MISSION_SIPPAI;
 		}
 		return;
 	}
 	
 	if (UtilInput::isKeyPushedLineOne())
 	{
-		cnt_key_yoshitaro++;
+		mKeyCountYoshitaro++;
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMission14()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
 {
-	if(time <= 0)
+	if(mTime <= 0)
 	{
-		if(cnt_key_noppo > cnt_key_nikuman && cnt_key_noppo > cnt_key_yoshitaro)
+		if(mKeyCountNoppo > mKeyCountNikuman && mKeyCountNoppo > mKeyCountYoshitaro)
 		{
-			mission_state = MISSION_SEIKO;
+			mMissionState = MISSION_SEIKO;
 		}
 		else
 		{
-			mission_state = MISSION_SIPPAI;
+			mMissionState = MISSION_SIPPAI;
 		}
 		return;
 	}
 	
 	if (UtilInput::isKeyPushedLineThree())
 	{
-		cnt_key_noppo++;
+		mKeyCountNoppo++;
 	}
-	time--;
+	mTime--;
 }
 
 void Mission::updateMissionD()
 {
-	switch(mission_no)
+	switch(mCurrentMissionNo)
 	{
 	case MISSION_1:
 		updateMission1D();
@@ -978,9 +978,9 @@ void Mission::updateMission4D()	//wuNIKUMANTOTUGEKIv‚Æ“ü—Í‚¹‚æIIx
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 
-	for(int i = 1;i < success_type_count;i++){
+	for(int i = 1;i < mSuccessTypingCount;i++){
 		vertex->drawF(125.f + 29.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -989,9 +989,9 @@ void Mission::updateMission5D()	//wuNIKUMANINSEKIRAKKAJUTUv‚Æ“ü—Í‚¹‚æIIx
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 
-	for(int i = 1;i < success_type_count;i++){
+	for(int i = 1;i < mSuccessTypingCount;i++){
 		vertex->drawF(76.f + 28.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1000,9 +1000,9 @@ void Mission::updateMission6D()	//wuYOSITAROHIPATACKv‚Æ“ü—Í‚¹‚æIIx
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 
-	for(int i = 1;i < success_type_count;i++){
+	for(int i = 1;i < mSuccessTypingCount;i++){
 		vertex->drawF(118.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1011,9 +1011,9 @@ void Mission::updateMission7D()	//wuYOSITAROHUSENSHOOTv‚Æ“ü—Í‚¹‚æIIx
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 
-	for(int i = 1;i < success_type_count;i++){
+	for(int i = 1;i < mSuccessTypingCount;i++){
 		vertex->drawF(108.f + 28.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1022,9 +1022,9 @@ void Mission::updateMission8D()	//wuNOPPOKOKEPPETIv‚Æ“ü—Í‚¹‚æIIx
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 
-	for(int i = 1;i < success_type_count;i++){
+	for(int i = 1;i < mSuccessTypingCount;i++){
 		vertex->drawF(131.f + 30.f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
@@ -1033,21 +1033,21 @@ void Mission::updateMission9D()	//wuNOPPOBOKUSIRIKOPUTAv‚Æ“ü—Í‚¹‚æIIx
 {
 	drawTime();
 
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 
-	for(int i = 1;i < success_type_count;i++){
+	for(int i = 1;i < mSuccessTypingCount;i++){
 		vertex->drawF(96.f + 29.5f * (i - 1),278.f,R_F_NIKUMAN);
 	}
 }
 
 void Mission::updateMission10D()	//w10•b”‚¦‚Ä‘OŒã1•bˆÈ“à‚Åu‚yƒL[v‚ğ‰Ÿ‚¹Ix
 {
-	if(flag_time_cnt == 0)
+	if(mFlagTimeCount == 0)
 	{
-		vertex->drawF(mission_start.x,mission_start.y,R_MISSION_HASSEI);
+		vertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI);
 
-		UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
-		vertex->setColor(alpha_push_z,255,255,255);
+		UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+		vertex->setColor(mAlphaPushZ,255,255,255);
 		vertex->drawF(400.f,450.f,R_Z_PUSH_START);
 	}
 	//DrawNumT();		//ƒfƒoƒbƒO—p
@@ -1055,12 +1055,12 @@ void Mission::updateMission10D()	//w10•b”‚¦‚Ä‘OŒã1•bˆÈ“à‚Åu‚yƒL[v‚ğ‰Ÿ‚¹Ix
 
 void Mission::updateMission11D()	//w5•b”‚¦‚Ä‘OŒã1•bˆÈ“à‚Åu‚yƒL[v‚ğ‰Ÿ‚¹Ix
 {
-	if(flag_time_cnt == 0)
+	if(mFlagTimeCount == 0)
 	{
-		vertex->drawF(mission_start.x,mission_start.y,R_MISSION_HASSEI);
+		vertex->drawF(mMissionStartPos.x,mMissionStartPos.y,R_MISSION_HASSEI);
 
-		UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
-		vertex->setColor(alpha_push_z,255,255,255);
+		UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
+		vertex->setColor(mAlphaPushZ,255,255,255);
 		vertex->drawF(400.f,450.f,R_Z_PUSH_START);
 	}
 	//DrawNumT();		//ƒfƒoƒbƒO—p
@@ -1083,105 +1083,105 @@ void Mission::updateMission14D()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ë
 
 void Mission::fadeIn()
 {
-	if(alpha == MISSION_ALPHA_MAX){
-		mission_state = MISSION_MIDDLE;
+	if(mAlpha == MISSION_ALPHA_MAX){
+		mMissionState = MISSION_MIDDLE;
 		return ;
 	}
-	if(alpha_count++ > 1){
-		alpha += MISSION_ALPHA_INCREASE;
-		if(alpha > MISSION_ALPHA_MAX){
-			alpha = MISSION_ALPHA_MAX;
+	if(mAlphaCount++ > 1){
+		mAlpha += MISSION_ALPHA_INCREASE;
+		if(mAlpha > MISSION_ALPHA_MAX){
+			mAlpha = MISSION_ALPHA_MAX;
 		}
-		alpha_count = 0;
+		mAlphaCount = 0;
 	}
 }
 
 void Mission::fadeOut()
 {
-	if(alpha == 0){
-		if(mission_state == MISSION_SEIKO){
-			mission_state = MISSION_OUGI;
+	if(mAlpha == 0){
+		if(mMissionState == MISSION_SEIKO){
+			mMissionState = MISSION_OUGI;
 		}
-		else if(mission_state == MISSION_SIPPAI){
-			mission_state = MISSION_NEGATIVE;
+		else if(mMissionState == MISSION_SIPPAI){
+			mMissionState = MISSION_NEGATIVE;
 		}
 		return ;
 	}
-	else if(alpha_count++ > 1){
-		alpha -= MISSION_ALPHA_INCREASE + 5;
-		if(alpha < 0) { alpha = 0; }
-		alpha_count = 0;
+	else if(mAlphaCount++ > 1){
+		mAlpha -= MISSION_ALPHA_INCREASE + 5;
+		if(mAlpha < 0) { mAlpha = 0; }
+		mAlphaCount = 0;
 	}
 }
 
 void Mission::missionSelect()
 {
-	if(flag_init) { return ; }
+	if(mIsInit) { return ; }
 	else{
-		mission_no = rand()%100+1;
+		mCurrentMissionNo = rand()%100+1;
 		//mission_no = 86;		//ƒfƒoƒbƒO—p
-		if(mission_no >=0 && mission_no <= MISSION_1PAR){
-			mission_no = MISSION_1;
+		if(mCurrentMissionNo >=0 && mCurrentMissionNo <= MISSION_1PAR){
+			mCurrentMissionNo = MISSION_1;
 		}
-		else if(mission_no > MISSION_1PAR && mission_no <= MISSION_2PAR){
-			mission_no = MISSION_2;
+		else if(mCurrentMissionNo > MISSION_1PAR && mCurrentMissionNo <= MISSION_2PAR){
+			mCurrentMissionNo = MISSION_2;
 		}
-		else if(mission_no > MISSION_2PAR && mission_no <= MISSION_3PAR){
-			mission_no = MISSION_3;
+		else if(mCurrentMissionNo > MISSION_2PAR && mCurrentMissionNo <= MISSION_3PAR){
+			mCurrentMissionNo = MISSION_3;
 		}
-		else if(mission_no > MISSION_3PAR && mission_no <= MISSION_4PAR){
-			mission_no = MISSION_4;
+		else if(mCurrentMissionNo > MISSION_3PAR && mCurrentMissionNo <= MISSION_4PAR){
+			mCurrentMissionNo = MISSION_4;
 		}
-		else if(mission_no > MISSION_4PAR && mission_no <= MISSION_5PAR){
-			mission_no = MISSION_5;
+		else if(mCurrentMissionNo > MISSION_4PAR && mCurrentMissionNo <= MISSION_5PAR){
+			mCurrentMissionNo = MISSION_5;
 		}
-		else if(mission_no > MISSION_5PAR && mission_no <= MISSION_6PAR){
-			mission_no = MISSION_6;
+		else if(mCurrentMissionNo > MISSION_5PAR && mCurrentMissionNo <= MISSION_6PAR){
+			mCurrentMissionNo = MISSION_6;
 		}
-		else if(mission_no > MISSION_6PAR && mission_no <= MISSION_7PAR){
-			mission_no = MISSION_7;
+		else if(mCurrentMissionNo > MISSION_6PAR && mCurrentMissionNo <= MISSION_7PAR){
+			mCurrentMissionNo = MISSION_7;
 		}
-		else if(mission_no > MISSION_7PAR && mission_no <= MISSION_8PAR){
-			mission_no = MISSION_8;
+		else if(mCurrentMissionNo > MISSION_7PAR && mCurrentMissionNo <= MISSION_8PAR){
+			mCurrentMissionNo = MISSION_8;
 		}
-		else if(mission_no > MISSION_8PAR && mission_no <= MISSION_9PAR){
-			mission_no = MISSION_9;
+		else if(mCurrentMissionNo > MISSION_8PAR && mCurrentMissionNo <= MISSION_9PAR){
+			mCurrentMissionNo = MISSION_9;
 		}
-		else if(mission_no > MISSION_9PAR && mission_no <= MISSION_10PAR){
-			mission_no = MISSION_10;
+		else if(mCurrentMissionNo > MISSION_9PAR && mCurrentMissionNo <= MISSION_10PAR){
+			mCurrentMissionNo = MISSION_10;
 		}
-		else if(mission_no > MISSION_10PAR && mission_no <= MISSION_11PAR){
-			mission_no = MISSION_11;
+		else if(mCurrentMissionNo > MISSION_10PAR && mCurrentMissionNo <= MISSION_11PAR){
+			mCurrentMissionNo = MISSION_11;
 		}
-		else if(mission_no > MISSION_11PAR && mission_no <= MISSION_12PAR){
-			mission_no = MISSION_12;
-			if(cnt_key_nikuman >= cnt_key_noppo && cnt_key_nikuman >= cnt_key_yoshitaro){
-				mission_no = MISSION_1;
+		else if(mCurrentMissionNo > MISSION_11PAR && mCurrentMissionNo <= MISSION_12PAR){
+			mCurrentMissionNo = MISSION_12;
+			if(mKeyCountNikuman >= mKeyCountNoppo && mKeyCountNikuman >= mKeyCountYoshitaro){
+				mCurrentMissionNo = MISSION_1;
 			}
 		}
-		else if(mission_no > MISSION_12PAR && mission_no <= MISSION_13PAR){
-			mission_no = MISSION_13;
-			if(cnt_key_yoshitaro >= cnt_key_nikuman && cnt_key_yoshitaro >= cnt_key_noppo){
-				mission_no = MISSION_1;
+		else if(mCurrentMissionNo > MISSION_12PAR && mCurrentMissionNo <= MISSION_13PAR){
+			mCurrentMissionNo = MISSION_13;
+			if(mKeyCountYoshitaro >= mKeyCountNikuman && mKeyCountYoshitaro >= mKeyCountNoppo){
+				mCurrentMissionNo = MISSION_1;
 			}
 		}
-		else if(mission_no > MISSION_13PAR && mission_no <= MISSION_14PAR){
-			mission_no = MISSION_14;
-			if(cnt_key_noppo >= cnt_key_nikuman && cnt_key_noppo >= cnt_key_yoshitaro){
-				mission_no = MISSION_1;
+		else if(mCurrentMissionNo > MISSION_13PAR && mCurrentMissionNo <= MISSION_14PAR){
+			mCurrentMissionNo = MISSION_14;
+			if(mKeyCountNoppo >= mKeyCountNikuman && mKeyCountNoppo >= mKeyCountYoshitaro){
+				mCurrentMissionNo = MISSION_1;
 			}
 		}
 		//mission_no = MISSION_11;		//ƒfƒoƒbƒO—p
-		flag_init = true;
+		mIsInit = true;
 	}
 }
 
 void Mission::drawTime()
 {
 	// ƒ^ƒCƒ€
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 	for(int i = 0;i < 2;i++){
-		int num = time;
+		int num = mTime;
 		for(int j = 0;j < 2 - i;j++){
 			if(j == 0){
 				num = num / 60;
@@ -1197,9 +1197,9 @@ void Mission::drawTime()
 void Mission::drawCombo()
 {
 	// ƒRƒ“ƒ{
-	UtilGraphics::setTexture(vertex, *texture, T_GAME_FONT);
+	UtilGraphics::setTexture(vertex, *mTexture, T_GAME_FONT);
 	for(int i = 0;i < 3;i++){
-		int num = key_cnt;
+		int num = mKeyCount;
 		for(int j = 1;j < 3 - i;j++){
 			num = num / 10;
 		}

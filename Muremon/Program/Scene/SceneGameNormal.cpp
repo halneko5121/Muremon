@@ -692,7 +692,7 @@ SceneGameNormal::stateExeGame()
 
 		UtilScore::addScore(NIKUMAN_SCORE);
 		mIsHitEffect = true;
-		mCharaAtkY = mNiku->mActorY;
+		mCharaAtkY = mNiku->mHitPosY;
 		mNiku->setIsHitCheck(false);
 	}
 
@@ -703,7 +703,7 @@ SceneGameNormal::stateExeGame()
 		mMissionGauge += YOSHITARO_GAGE;
 		UtilScore::addScore(YOSHITARO_SCORE);
 		mIsHitEffect = true;
-		mCharaAtkY = mYoshi->mActorY;
+		mCharaAtkY = mYoshi->mHitPosY;
 		mYoshi->setIsHitCheck(false);
 	}
 
@@ -714,7 +714,7 @@ SceneGameNormal::stateExeGame()
 		mMissionGauge += NOPPO_GAGE;
 		UtilScore::addScore(NOPPO_SCORE);
 		mIsHitEffect = true;
-		mCharaAtkY = mNoppo->mActorY;
+		mCharaAtkY = mNoppo->mHitPosY;
 		mNoppo->setIsHitCheck(false);
 	}
 

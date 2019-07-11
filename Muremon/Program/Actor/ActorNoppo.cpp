@@ -226,7 +226,7 @@ ActorNoppo::stateGroundAtk()
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mActorY = mCharaData.draw_cc.y;
+		mHitPosY = mCharaData.draw_cc.y;
 
 		if (UtilSound::isPlaying(S_NOPPO_GANMEN))
 		{
@@ -276,7 +276,7 @@ ActorNoppo::stateSkyAtk()
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mActorY = mCharaData.draw_cc.y;
+		mHitPosY = mCharaData.draw_cc.y;
 
 		if (UtilSound::isPlaying(S_NOPPO_KOKE))
 		{

@@ -401,7 +401,7 @@ SceneGameRefresh::stateExeGame()
 			if (actor->isHitCheck())
 			{
 				mIsHitNiku = true;
-				mCharaAtkY = actor_nikuman->mActorY;
+				mCharaAtkY = actor_nikuman->mHitPosY;
 				actor_nikuman->setIsHitCheck(false);
 			}
 			else
@@ -416,7 +416,7 @@ SceneGameRefresh::stateExeGame()
 			if (actor->isHitCheck())
 			{
 				mIsHitYoshi = true;
-				mCharaAtkY = actor_yoshi->mActorY;
+				mCharaAtkY = actor_yoshi->mHitPosY;
 				actor_yoshi->setIsHitCheck(false);
 			}
 			else
@@ -431,7 +431,7 @@ SceneGameRefresh::stateExeGame()
 			if (actor->isHitCheck())
 			{
 				mIsHitNoppo = true;
-				mCharaAtkY = actor_noppo->mActorY;
+				mCharaAtkY = actor_noppo->mHitPosY;
 				actor_noppo->setIsHitCheck(false);
 			}
 			else

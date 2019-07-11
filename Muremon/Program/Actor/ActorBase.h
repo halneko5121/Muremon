@@ -85,7 +85,7 @@ public:
 	virtual void		initImple() {};
 	virtual void		updateImple(POS_CC<float> boss_cc) {};
 
-	float				mActorY;
+	float				mHitPosY;
 
 	//•`‰æ
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;

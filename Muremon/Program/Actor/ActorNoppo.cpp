@@ -287,7 +287,7 @@ ActorNoppo::stateEnterGroundAtk()
 	mCharaData = init_charadata_noppo;
 	mCharaData.flag_atk1 = true;
 	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, G_ATK_3_START_Y);
+	mCharaData.draw_cc = POS_CC<float>(-RADIUS_NOPPO, G_ATK_3_START_Y);
 	mCountEffect = 0;
 }
 void
@@ -329,7 +329,7 @@ ActorNoppo::stateEnterSkyAtk()
 	mCharaData = init_charadata_noppo;
 	mCharaData.flag_atk2 = true;
 	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = setAtkPos(RADIUS_NOPPO, mAtkStartY);
+	mCharaData.draw_cc = POS_CC<float>(-RADIUS_NOPPO, mAtkStartY);
 
 	mCountEffect = 0;
 	mAtkStartY = (float)(rand() % cRandY);

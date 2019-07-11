@@ -104,14 +104,6 @@ public:
 	float				getNikumanSpeed() const;
 
 	/**
-	 * @brief	攻撃位置の設定
-	 * @param	start_x	開始位置
-	 * @param	start_y 開始位置
-	 * @return	中心座標
-	 */
-	POS_CC<float>		setAtkPos(float start_x, float start_y);
-
-	/**
 	 * @brief	攻撃フラグの設定
 	 * @return	キャラデータ(フラグの状態)
 	 */

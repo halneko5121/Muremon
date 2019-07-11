@@ -92,21 +92,6 @@ ActorBase::getNikumanSpeed() const
 	return (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
 }
 
-
-/**
- * @brief 攻撃位置の設定
- */
-POS_CC<float>
-ActorBase::setAtkPos(float start_x, float start_y)
-{
-	POS_CC<float> draw_cc = { 0.f,0.f };
-
-	draw_cc.x = (-start_x);
-	draw_cc.y = start_y;
-
-	return draw_cc;
-}
-
 /**
  * @brief	攻撃フラグの設定
  * @param	start_x	開始位置

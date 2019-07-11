@@ -169,18 +169,7 @@ ActorYoshi::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
 
-	//ƒLƒƒƒ‰‚Ì•`‰æ(‚¢‚¿‚¨100‘Ì•ª)
-	if(mCharaData.flag_atk1){
-		mVertex->setAngle(0.f);
-	}
-	else if(mCharaData.flag_atk2){
-		if(mCharaData.flag_death_next){
-			mVertex->setAngle(mAngleDegree += mAngleDegree);
-		}
-		else {
-			mVertex->setAngle(0.f);
-		}
-	}
+	mVertex->setAngle(mAngleDegree);
 	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
 }
 
@@ -233,7 +222,6 @@ ActorYoshi::stateEnterGroundAtk()
 	mCharaData.draw_cc = POS_CC<float>(-RADIUS_YOSHI, G_ATK_1_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
-//	mAngleDegree = (float)(rand() % SPIN_SPEED + SPIN_RAND_MIN);
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }
 void
@@ -281,7 +269,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-	mAngleDegree = (float)(rand() % SPIN_SPEED + SPIN_RAND_MIN);
+	mAngleDegree = 0.0f;
 }
 void
 ActorYoshi::stateSkyAtk()
@@ -368,6 +356,7 @@ ActorYoshi::stateSkyDeath()
 	}
 	if (mCharaData.flag_death_next)
 	{
+		mAngleDegree += SPIN_SPEED;
 		mCharaData.animetion = 0;																//•`‰æ‚ðŒÅ’è
 		mCharaData.rect_num = ANIME_DEATH_YOSHI;
 

@@ -221,7 +221,7 @@ ActorYoshi::stateGroundAtk()
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_YOSHI))
 	{
 		setIsHitCheck(true);
-		m_chara_y = mCharaData.draw_cc.y;
+		mActorY = mCharaData.draw_cc.y;
 
 		if (UtilSound::isPlaying(S_YOSHI_HIP))
 		{
@@ -268,7 +268,7 @@ ActorYoshi::stateSkyAtk()
 	if (isHit(mCharaData.draw_cc, mBossPos, ID_YOSHI))
 	{
 		setIsHitCheck(true);
-		m_chara_y = mCharaData.draw_cc.y;
+		mActorY = mCharaData.draw_cc.y;
 
 		if (UtilSound::isPlaying(S_YOSHI_HUSEN))
 		{

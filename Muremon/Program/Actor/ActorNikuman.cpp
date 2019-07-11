@@ -219,7 +219,7 @@ ActorNikuman::stateGroundAtk()
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
-		m_chara_y = mCharaData.draw_cc.y;
+		mActorY = mCharaData.draw_cc.y;
 
 		GetEffectMgr()->createEffect(cEffectId_HitEffect2, mTexture, mVertex, mCharaData.draw_cc);
 
@@ -261,7 +261,7 @@ ActorNikuman::stateSkyAtk()
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
-		m_chara_y = mCharaData.draw_cc.y;
+		mActorY = mCharaData.draw_cc.y;
 
 		GetEffectMgr()->createEffect(cEffectId_HitEffect2, mTexture, mVertex, mCharaData.draw_cc);
 

@@ -84,20 +84,17 @@ ActorBase::run()
  * @brief スピードの設定
  */
 float
-ActorBase::setSpeed()
+ActorBase::getSpeed() const
 {
-	// 肉まんの空中攻撃は計算方法が違うので
-	if (UtilBattle::isRunWeakSkyAttack())
-	{
-		mRandSpeed = (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
-	}
-	else
-	{
-		mRandSpeed = (float)(rand() % SPEED_RAND) + SPEED_MIN;
-	}
-
-	return mRandSpeed;
+	return (float)(rand() % SPEED_RAND) + SPEED_MIN;
 }
+
+float
+ActorBase::getNikumanSpeed() const
+{
+	return (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
+}
+
 
 /**
  * @brief 攻撃位置の設定

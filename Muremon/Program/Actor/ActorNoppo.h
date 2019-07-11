@@ -36,7 +36,6 @@ private:
 
 private:
 	StateMachine<ActorNoppo>	mState;	// ステート
-	float						mAlpha;
 	float						mRandAcc;
 	float						mRandMoveX;
 	float						mAtkStartY;

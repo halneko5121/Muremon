@@ -106,7 +106,7 @@ ActorNikuman::runImple()
 	{
 		rand_deg = (float)(rand() % cDegRand + cDegRandMin);
 		mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, G_ATK_2_START_Y);
-		mCharaData.speed = setSpeed();
+		mCharaData.speed = getNikumanSpeed();
 		mDegSpin = 0.f;
 	}
 	else if (mCharaData.flag_atk2)
@@ -116,7 +116,7 @@ ActorNikuman::runImple()
 		rand_move_x = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 		mDegSpin = (float)(rand() % SPIN_RAND + SPIN_RAND_MIN);
 
-		mCharaData.speed = setSpeed();
+		mCharaData.speed = getNikumanSpeed();
 		mCharaData.draw_cc = setAtkPos(RADIUS_NIKU, s_atk_start_y);
 	}
 }

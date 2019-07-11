@@ -100,7 +100,8 @@ public:
 	/**
 	 * @brief スピードの設定
 	 */
-	float				setSpeed();
+	float				getSpeed() const;
+	float				getNikumanSpeed() const;
 
 	/**
 	 * @brief	攻撃位置の設定

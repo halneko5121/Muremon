@@ -112,7 +112,7 @@ void
 ActorYoshi::runImple()
 {
 	mCountEffect = 0;
-	mCharaData.speed = setSpeed();
+	mCharaData.speed = getSpeed();
 	mCharaData.animetion = 0;
 
 	if (mCharaData.flag_atk1)

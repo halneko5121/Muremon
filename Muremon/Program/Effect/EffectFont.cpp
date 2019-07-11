@@ -45,7 +45,7 @@ EffectFont::EffectFont(EffectId	id, Texture* texture, Vertex* vertex, int rect_i
 	REGIST_STATE_FUNC2(EffectFont, mState, Run,		cState_Run);
 	REGIST_STATE_FUNC2(EffectFont, mState, Fade,	cState_Fade);
 	REGIST_STATE_FUNC2(EffectFont, mState, End,		cState_End);
-	mState.changeState(cState_Idle);
+	mState.changeState(cState_Run);
 }
 
  /**
@@ -163,7 +163,7 @@ EffectFont::stateRun()
 	}
 	else
 	{
-		mState.changeState(cState_Fade);
+		mState.changeState(cState_End);
 	}
 }
 

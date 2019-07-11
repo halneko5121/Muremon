@@ -16,7 +16,7 @@
 
 namespace
 {
-	const int cFontDeleteCount = 20;
+	const int cFontDeleteCount = 30;
 
 	enum State
 	{

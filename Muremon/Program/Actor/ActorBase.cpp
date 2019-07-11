@@ -49,6 +49,7 @@ ActorBase::ActorBase()
 	, mIsHitCheck(false)
 	, mIsRun(false)
 	, mBossPos(0.0f, 0.0f)
+	, mHitPosY(0.0f)
 {
 	mOrbit	 = new OrbitCalculation();
 	mTexture = new Texture();

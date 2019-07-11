@@ -84,10 +84,6 @@ public:
 	virtual void		runImple() {};
 	virtual void		initImple() {};
 	virtual void		updateImple(POS_CC<float> boss_cc) {};
-
-	float				mHitPosY;
-
-	//•`‰æ
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				init();
@@ -155,6 +151,7 @@ public:
 
 	bool				isRun() const { return mIsRun; }
 
+	float				getHitPosY() const { return mHitPosY; }
 
 protected:
 	OrbitCalculation*	mOrbit;
@@ -174,4 +171,5 @@ protected:
 	bool				mIsHitCheck;
 	bool				mIsRun;
 	POS_CC<float>		mBossPos;
+	float				mHitPosY;
 };

@@ -76,7 +76,8 @@ namespace
  * @brief コンストラクタ
  */
 ActorNoppo::ActorNoppo()
-	: mRandAcc(0.0f)
+	: mState()
+	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
 {

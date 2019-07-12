@@ -300,6 +300,9 @@ void
 ActorBoss::stateEnterDead()
 {
 	mRectData = R_BOSS_FALL;
+
+	EffectParam param(mTexture, mVertex, POS_CC<float>(mMoveX, mMoveY));
+	GetEffectMgr()->createEffect(cEffectId_HitEffect7, param);
 }
 void
 ActorBoss::stateDead()

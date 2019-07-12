@@ -71,48 +71,32 @@ namespace
 
 ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	: ActorBase(texture, vertex)
+	, mLife(BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount))
+	, mMaxLife(BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount))
+	, mMoveX(BOSS_APPEARANCE_POSITION)
+	, mMoveY(BOSS_STABILITY_Y)
+	, mHitCount(0)
+	, mIsWin(false)
+	, mSpeedX(1)
+
+	, mState()
+	, mLvCount(0)
+	, mDamageTime(0)
+	, mAlphaCount(0)
+	, mPlayMode(PLAY_REFRESH)
+	, mAlpha(255)
+	, mFadeOutTime(0)
+	, mRectData(R_BOSS_MOVE1)
+	, mNoFontAlpha(0)
+	, mNoDrawTime(0)
+	, mNoFadeFlag(NF_FADE_IN)
+	, mMoveAnimeTime(0)
+	, mMoveAnime(0)
+	, mDamageX(0)
+	, mDamageY(0)
+	, mEffectFont(0)
+	, mEffectFontMove(false)
 {
-	mAlphaCount=0;
-	
-	mHitCount=0;
-	
-	mAlpha=255;
-		
-	mFadeOutTime=0;
-	
-	mDamageTime=0;
-	
-	mRectData=R_BOSS_MOVE1;
-
-	mLvCount = 0;
-
-	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
-
-	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
-
-	mMoveX=BOSS_APPEARANCE_POSITION;
-	mMoveY=BOSS_STABILITY_Y;
-
-	mIsWin=false;
-
-	mNoFontAlpha=0;
-	mNoDrawTime=0;
-	mNoFadeFlag=NF_FADE_IN;
-
-	mMoveAnime = 0;
-	
-	mMoveAnimeTime = 0;
-
-	mSpeedX = 1;
-
-	mDamageX = 0;
-
-	mDamageY = 0;
-
-	mEffectFont = 0;
-
-	mEffectFontMove = false;
-
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorBoss, mState, Idle,			cState_Idle);
 	REGIST_STATE_FUNC2(ActorBoss, mState, Move,			cState_Move);

@@ -16,7 +16,7 @@
 
 namespace
 {
-	const int cAliveFrame = 15;
+	const int cAliveFrame = 3;
 
 	enum State
 	{
@@ -101,6 +101,7 @@ EffectHit::stateIdle()
 void
 EffectHit::stateEnterRun()
 {
+	mPos.x -= DRAW_E_RAD_X;
 }
 void
 EffectHit::stateRun()

@@ -76,7 +76,7 @@ GameInfoMgr::getGameScore() const
 }
 
 /**
- * @brief	リフレッシュモードに設定
+ * @brief	ゲームモードをリフレッシュモードに設定
  */
 void
 GameInfoMgr::setGameModeRefresh()
@@ -85,7 +85,7 @@ GameInfoMgr::setGameModeRefresh()
 }
 
 /**
- * @brief	ノーマルモードに設定
+ * @brief	ゲームモードをノーマルモードに設定
  */
 void
 GameInfoMgr::setGameModeNormal()
@@ -94,7 +94,7 @@ GameInfoMgr::setGameModeNormal()
 }
 
 /**
- * @brief	リフレッシュモードか
+ * @brief	ゲームモードがリフレッシュモードか
  */
 bool
 GameInfoMgr::isGameModeRefresh() const
@@ -103,7 +103,7 @@ GameInfoMgr::isGameModeRefresh() const
 }
 
 /**
- * @brief	ノーマルモードか
+ * @brief	ゲームモードがノーマルモードか
  */
 bool
 GameInfoMgr::isGameModeNormal() const

@@ -10,23 +10,6 @@
 
 DirectGraphics* DirectGraphics::mInstance = nullptr;
 
- /**
- * @brief	コンストラクタ
- */
-DirectGraphics::DirectGraphics()
-	: mD3d(nullptr)
-	, mDevice(nullptr)
-	, mD3dPresentParam()
-{
-}
-
-/**
- * @brief	デストラクタ
- */
-DirectGraphics::~DirectGraphics()
-{
-}
-
 /**
  * @brief	インスタンスの取得
  */
@@ -217,4 +200,21 @@ DirectGraphics::release()
 	
 	// LPDIRECT3D9(DirectGraphics)の開放
 	APP_SAFE_RELEASE(mD3d);
+}
+
+/**
+* @brief	コンストラクタ
+*/
+DirectGraphics::DirectGraphics()
+	: mD3d(nullptr)
+	, mDevice(nullptr)
+	, mD3dPresentParam()
+{
+}
+
+/**
+ * @brief	デストラクタ
+ */
+DirectGraphics::~DirectGraphics()
+{
 }

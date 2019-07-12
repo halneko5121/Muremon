@@ -18,16 +18,6 @@ class DirectGraphics
 {
 public:
 	/**
-	 * @brief	コンストラクタ
-	 */
-	DirectGraphics();
-
-	/**
-	 * @brief	デストラクタ
-	 */
-	~DirectGraphics();
-
-	/**
 	 * @brief	インスタンスの取得
 	 */
 	static DirectGraphics*	getInstance();
@@ -86,6 +76,17 @@ public:
 	 * @brief	デバイスの取得
 	 */
 	LPDIRECT3DDEVICE9		getDevice() { return mDevice;	}
+
+private:
+	/**
+	 * @brief	コンストラクタ
+	 */
+	DirectGraphics();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~DirectGraphics();
 
 private:
 	static DirectGraphics*	mInstance;				// インスタンス

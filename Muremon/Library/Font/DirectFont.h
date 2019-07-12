@@ -25,16 +25,6 @@ class DirectFont
 {
 public:
 	/**
-	 * @brief	コンストラクタ
-	 */
-	DirectFont();
-
-	/**
-	 * @brief	デストラクタ
-	 */
-	~DirectFont();
-
-	/**
 	 * @brief	インスタンスの取得
 	 */
 	static DirectFont*	getInstance();
@@ -105,6 +95,17 @@ public:
 	 * @param	option　DrawTextのuFormatオプション
 	 */
 	void				draw(LPSTR str, long pos_x, long pos_y, DWORD option);
+
+private:
+	/**
+	 * @brief	コンストラクタ
+	 */
+	DirectFont();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~DirectFont();
 
 private:
 	static DirectFont*	mInstance;		// インスタンス

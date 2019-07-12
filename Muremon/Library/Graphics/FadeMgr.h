@@ -16,16 +16,6 @@ class FadeMgr
 {
 public:
 	/**
-	 * @brief	コンストラクタ
-	 */
-	FadeMgr();
-
-	/**
-	 * @brief	デストラクタ
-	 */
-	~FadeMgr();
-
-	/**
 	 * @brief	インスタンスの取得
 	 */
 	static FadeMgr*		getInstance();
@@ -82,6 +72,17 @@ private:
 		cFadeState_FadeIn,
 		cFadeState_FadeOut,
 	};
+
+private:
+	/**
+	 * @brief	コンストラクタ
+	*/
+	FadeMgr();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~FadeMgr();
 
 private:
 	static FadeMgr*		mInstance;		// インスタンス

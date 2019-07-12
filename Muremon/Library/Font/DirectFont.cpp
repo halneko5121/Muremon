@@ -18,26 +18,6 @@ namespace
 DirectFont* DirectFont::mInstance = nullptr;
 
 /**
- * @brief	コンストラクタ
- */
-DirectFont::DirectFont()
-	: mFontDevice(nullptr)
-	, mFont(nullptr)
-	, mFontDesc()
-	, mFontColor(0)
-	, mFontSize(10, 10)
-{
-}
-
-/**
- * @brief	デストラクタ
- */
-DirectFont::~DirectFont()
-{
-
-}
-
-/**
  * @brief	インスタンスの取得
  */
 DirectFont*
@@ -243,4 +223,24 @@ DirectFont::draw(LPSTR str , long pos_x, long pos_y, DWORD option)
 			option | DT_LEFT | DT_NOCLIP,	// 描画方法
 			l_color);						// 文字の色
 	}
+}
+
+/**
+ * @brief	コンストラクタ
+ */
+DirectFont::DirectFont()
+	: mFontDevice(nullptr)
+	, mFont(nullptr)
+	, mFontDesc()
+	, mFontColor(0)
+	, mFontSize(10, 10)
+{
+}
+
+/**
+ * @brief	デストラクタ
+ */
+DirectFont::~DirectFont()
+{
+
 }

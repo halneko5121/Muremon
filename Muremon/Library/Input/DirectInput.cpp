@@ -22,25 +22,6 @@ namespace
 }
 
 /**
- * @brief	コンストラクタ
- */
-DirectInputKey::DirectInputKey(void)
-	: mDirectInput(nullptr)
-	, mKeyBordDevice(nullptr)
-	, mWindowHandle(nullptr)
-{
-	ZeroMemory(&mKeyStatePrev,	MAX_KEYDATA);
-	ZeroMemory(&mKeyState,		MAX_KEYDATA);
-}
-
-/**
- * @brief	デストラクタ
- */
-DirectInputKey::~DirectInputKey()
-{
-}
-
-/**
  * @brief	インスタンスの取得
  */
 DirectInputKey*
@@ -564,4 +545,23 @@ DirectInputMouse::setProperty()
 	}
 
 	return TRUE;
+}
+
+/**
+ * @brief	コンストラクタ
+ */
+DirectInputKey::DirectInputKey(void)
+	: mDirectInput(nullptr)
+	, mKeyBordDevice(nullptr)
+	, mWindowHandle(nullptr)
+{
+	ZeroMemory(&mKeyStatePrev, MAX_KEYDATA);
+	ZeroMemory(&mKeyState, MAX_KEYDATA);
+}
+
+/**
+ * @brief	デストラクタ
+ */
+DirectInputKey::~DirectInputKey()
+{
 }

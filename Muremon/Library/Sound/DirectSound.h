@@ -17,16 +17,6 @@ class DirectSound
 {
 public:
 	/**
-	 * @brief	コンストラクタ
-	 */
-	DirectSound();
-
-	/**
-	 * @brief	デストラクタ
-	 */
-	~DirectSound();
-
-	/**
 	 * @brief	インスタンスの取得
 	 */
 	static DirectSound*		getInstance();
@@ -97,6 +87,16 @@ public:
 	void					setVolume(short volume, short id);
 
 private:
+	/**
+	 * @brief	コンストラクタ
+	 */
+	DirectSound();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~DirectSound();
+
 	/**
 	 * @brief	音楽データ読み込み＆登録
 	 * @param	file_name	ファイル名

@@ -12,35 +12,6 @@
 
 FadeMgr* FadeMgr::mInstance = nullptr;
 
- /**
-  * @brief	コンストラクタ
-  */
-FadeMgr::FadeMgr()
-	: mDevice(nullptr)
-	, mTexture(nullptr)
-	, mVertex(nullptr)
-	, mAlpha(255)
-	, mColorR(255)
-	, mColorG(255)
-	, mColorB(255)
-	, mFadeSpeed(0)
-	, mState(cFadeState_None)
-{
-	mTexture = new Texture();
-	mVertex = new Vertex();
-}
-
-/**
- * @brief	デストラクタ
- */
-FadeMgr::~FadeMgr()
-{
-	mTexture->release();
-	mVertex->release();
-	APP_SAFE_DELETE(mTexture);
-	APP_SAFE_DELETE(mVertex);
-}
-
 /**
  * @brief	インスタンスの取得
  */
@@ -160,4 +131,33 @@ FadeMgr::setColor(int r, int g, int b)
 	mColorR = r;
 	mColorG = g;
 	mColorB = b;
+}
+
+/**
+ * @brief	コンストラクタ
+ */
+FadeMgr::FadeMgr()
+	: mDevice(nullptr)
+	, mTexture(nullptr)
+	, mVertex(nullptr)
+	, mAlpha(255)
+	, mColorR(255)
+	, mColorG(255)
+	, mColorB(255)
+	, mFadeSpeed(0)
+	, mState(cFadeState_None)
+{
+	mTexture = new Texture();
+	mVertex = new Vertex();
+}
+
+/**
+ * @brief	デストラクタ
+ */
+FadeMgr::~FadeMgr()
+{
+	mTexture->release();
+	mVertex->release();
+	APP_SAFE_DELETE(mTexture);
+	APP_SAFE_DELETE(mVertex);
 }

@@ -45,16 +45,6 @@ class DirectInputKey
 {
 public:
 	/**
-	 * @brief	コンストラクタ
-	 */
-	DirectInputKey();
-
-	/**
-	 * @brief	デストラクタ
-	 */
-	~DirectInputKey();
-
-	/**
 	 * @brief	インスタンスの取得
 	 */
 	static DirectInputKey*		getInstance();
@@ -115,6 +105,16 @@ private:
 	enum { MAX_KEYDATA = 256 };								// 一度に受け付けるキーの最大数
 
 private:
+	/**
+	 * @brief	コンストラクタ
+	 */
+	DirectInputKey();
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	~DirectInputKey();
+
 	/**
 	 * @brief	デバイス全体の情報更新
 	 */

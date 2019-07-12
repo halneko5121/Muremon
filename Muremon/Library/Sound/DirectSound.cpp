@@ -15,27 +15,6 @@
 DirectSound* DirectSound::mInstance = nullptr;
 
 /**
- * @brief	コンストラクタ
- */
-DirectSound::DirectSound()
-	: mDirectSound(nullptr)
-	, mPrimaryBuffer(nullptr)
-	, mMaxSound()
-{
-	for (int i = 0; i < MAX_SOUND; i++)
-	{
-		mSecondaryBuffer[i] = nullptr;
-	}
-}
-
-/**
- * @brief	デストラクタ
- */
-DirectSound::~DirectSound()
-{
-}
-
-/**
  * @brief インスンタンスの取得
  */
 DirectSound*
@@ -151,109 +130,6 @@ DirectSound::load(LPTSTR file_name)
 }
 
 /**
- * @brief	音楽データ読み込み
- * @param	file_name	ファイル名
- * @param	id			登録するサウンドのID
- * @return	S_OK:成功   E_FAIL:失敗
- */
-HRESULT
-DirectSound::loadAndRegist(LPTSTR file_name, short id)
-{
-	if(id >= MAX_SOUND)
-	{
-		MessageBox(NULL, TEXT("登録しようとしているIDが大きすぎます"), NULL, MB_OK);
-		return E_FAIL;
-	}
-
-	HMMIO			hmmio = NULL;
-	MMCKINFO		ckInfo;
-	WAVEFORMATEX	wfex;
-
-	// WAVEファイル内のヘッダ情報の確認と読み込み
-	hmmio = mmioOpen(file_name, NULL, MMIO_ALLOCBUF | MMIO_READ);
-
-	// RIFFファイルのチャンクの先頭に進入
-	if(mmioDescend(hmmio, &ckInfo, NULL, 0) != MMSYSERR_NOERROR)
-	{
-		MessageBox(NULL,TEXT("チャンクへの進入失敗[RIFF]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		return E_FAIL;
-	}
-
-	// チャンクの検索
-	if(ckInfo.ckid != FOURCC_RIFF || ckInfo.fccType != mmioFOURCC('W','A','V','E'))
-	{
-		MessageBox(NULL,TEXT("発見できませんでした[RIFF][WAVE]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		return E_FAIL;
-	}
-
-	// フォーマットチャンクの検索
-	ckInfo.ckid = mmioFOURCC('f','m','t',' ');
-	if(mmioDescend(hmmio, &ckInfo, NULL, MMIO_FINDCHUNK) != MMSYSERR_NOERROR)
-	{
-		MessageBox(NULL,TEXT("発見できませんでした[fmt ]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		return E_FAIL;
-	}
-
-	// フォーマットの読み込み
-	ZeroMemory(&wfex, sizeof(WAVEFORMATEX));
-	if(mmioRead(hmmio, (HPSTR)&wfex, sizeof(WAVEFORMATEX)) != sizeof(WAVEFORMATEX))
-	{
-		MessageBox(NULL,TEXT("読み込み失敗[fmt ]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		return E_FAIL;
-	}
-
-	// チャンクから退出
-	if(mmioAscend(hmmio, &ckInfo, NULL) != MMSYSERR_NOERROR)
-	{
-		MessageBox(NULL,TEXT("チャンクからの退出に失敗しました[fmt ]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		return E_FAIL;
-	}
-
-	// データチャンクの検索
-	ckInfo.ckid = mmioFOURCC('d','a','t','a');
-	if(mmioDescend(hmmio, &ckInfo, NULL, MMIO_FINDCHUNK) != MMSYSERR_NOERROR)
-	{
-		MessageBox(NULL,TEXT("発見できませんでした[data]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		return E_FAIL;
-	}
-
-	// データの読み込み
-	char	*lpBuffer = new char[ckInfo.cksize];
-	if(mmioRead(hmmio, lpBuffer, ckInfo.cksize) != (LONG)ckInfo.cksize)
-	{
-		MessageBox(NULL,TEXT("読み込み失敗[data]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		SAFE_DELETE_ARRAY(lpBuffer);		//念のため
-		return E_FAIL;
-	}
-
-	// チャンクから退出
-	if(mmioAscend(hmmio, &ckInfo, NULL) != MMSYSERR_NOERROR)
-	{
-		MessageBox(NULL,TEXT("チャンクからの退出に失敗しました[data]"),TEXT("DSound"),MB_OK);
-		mmioClose(hmmio,0);
-		SAFE_DELETE_ARRAY(lpBuffer);		//念のため
-		return E_FAIL;
-	}
-	if(FAILED(createSecondaryBuffer(wfex, lpBuffer, ckInfo.cksize, id)))
-	{
-		MessageBox(NULL,TEXT("セカンダリバッファ作成失敗"),TEXT("DSound"),MB_OK);
-		return E_FAIL;
-	}
-
-	// WAVEファイルを閉じる
-	mmioClose(hmmio, 0);
-
-	return S_OK;
-}
-
-/**
  * @brief	再生
  * @param	id		サウンドのID
  */
@@ -341,6 +217,131 @@ DirectSound::setVolume(short volume, short id)
 		volume = DSBVOLUME_MIN;
 	}
 	mSecondaryBuffer[id]->SetVolume(volume);
+}
+
+/**
+ * @brief	コンストラクタ
+ */
+DirectSound::DirectSound()
+	: mDirectSound(nullptr)
+	, mPrimaryBuffer(nullptr)
+	, mMaxSound()
+{
+	for (int i = 0; i < MAX_SOUND; i++)
+	{
+		mSecondaryBuffer[i] = nullptr;
+	}
+}
+
+/**
+ * @brief	デストラクタ
+ */
+DirectSound::~DirectSound()
+{
+}
+
+
+/**
+ * @brief	音楽データ読み込み
+ * @param	file_name	ファイル名
+ * @param	id			登録するサウンドのID
+ * @return	S_OK:成功   E_FAIL:失敗
+ */
+HRESULT
+DirectSound::loadAndRegist(LPTSTR file_name, short id)
+{
+	if (id >= MAX_SOUND)
+	{
+		MessageBox(NULL, TEXT("登録しようとしているIDが大きすぎます"), NULL, MB_OK);
+		return E_FAIL;
+	}
+
+	HMMIO			hmmio = NULL;
+	MMCKINFO		ckInfo;
+	WAVEFORMATEX	wfex;
+
+	// WAVEファイル内のヘッダ情報の確認と読み込み
+	hmmio = mmioOpen(file_name, NULL, MMIO_ALLOCBUF | MMIO_READ);
+
+	// RIFFファイルのチャンクの先頭に進入
+	if (mmioDescend(hmmio, &ckInfo, NULL, 0) != MMSYSERR_NOERROR)
+	{
+		MessageBox(NULL, TEXT("チャンクへの進入失敗[RIFF]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		return E_FAIL;
+	}
+
+	// チャンクの検索
+	if (ckInfo.ckid != FOURCC_RIFF || ckInfo.fccType != mmioFOURCC('W', 'A', 'V', 'E'))
+	{
+		MessageBox(NULL, TEXT("発見できませんでした[RIFF][WAVE]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		return E_FAIL;
+	}
+
+	// フォーマットチャンクの検索
+	ckInfo.ckid = mmioFOURCC('f', 'm', 't', ' ');
+	if (mmioDescend(hmmio, &ckInfo, NULL, MMIO_FINDCHUNK) != MMSYSERR_NOERROR)
+	{
+		MessageBox(NULL, TEXT("発見できませんでした[fmt ]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		return E_FAIL;
+	}
+
+	// フォーマットの読み込み
+	ZeroMemory(&wfex, sizeof(WAVEFORMATEX));
+	if (mmioRead(hmmio, (HPSTR)&wfex, sizeof(WAVEFORMATEX)) != sizeof(WAVEFORMATEX))
+	{
+		MessageBox(NULL, TEXT("読み込み失敗[fmt ]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		return E_FAIL;
+	}
+
+	// チャンクから退出
+	if (mmioAscend(hmmio, &ckInfo, NULL) != MMSYSERR_NOERROR)
+	{
+		MessageBox(NULL, TEXT("チャンクからの退出に失敗しました[fmt ]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		return E_FAIL;
+	}
+
+	// データチャンクの検索
+	ckInfo.ckid = mmioFOURCC('d', 'a', 't', 'a');
+	if (mmioDescend(hmmio, &ckInfo, NULL, MMIO_FINDCHUNK) != MMSYSERR_NOERROR)
+	{
+		MessageBox(NULL, TEXT("発見できませんでした[data]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		return E_FAIL;
+	}
+
+	// データの読み込み
+	char	*lpBuffer = new char[ckInfo.cksize];
+	if (mmioRead(hmmio, lpBuffer, ckInfo.cksize) != (LONG)ckInfo.cksize)
+	{
+		MessageBox(NULL, TEXT("読み込み失敗[data]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		SAFE_DELETE_ARRAY(lpBuffer);		//念のため
+		return E_FAIL;
+	}
+
+	// チャンクから退出
+	if (mmioAscend(hmmio, &ckInfo, NULL) != MMSYSERR_NOERROR)
+	{
+		MessageBox(NULL, TEXT("チャンクからの退出に失敗しました[data]"), TEXT("DSound"), MB_OK);
+		mmioClose(hmmio, 0);
+		SAFE_DELETE_ARRAY(lpBuffer);		//念のため
+		return E_FAIL;
+	}
+	if (FAILED(createSecondaryBuffer(wfex, lpBuffer, ckInfo.cksize, id)))
+	{
+		MessageBox(NULL, TEXT("セカンダリバッファ作成失敗"), TEXT("DSound"), MB_OK);
+		return E_FAIL;
+	}
+
+	// WAVEファイルを閉じる
+	mmioClose(hmmio, 0);
+
+	return S_OK;
 }
 
 /**

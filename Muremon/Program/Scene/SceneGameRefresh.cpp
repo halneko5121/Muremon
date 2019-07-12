@@ -458,7 +458,7 @@ SceneGameRefresh::stateExeGame()
 
 	mBoss->control(PLAY_REFRESH);
 
-	if (!mBoss->mIsDeath)
+	if (!mBoss->isDead())
 	{
 		if (mIsHitEffect)
 		{

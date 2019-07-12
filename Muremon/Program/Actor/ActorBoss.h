@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Library/StateMachine.h"
 #include "Program/DefineGame.h"
 #include "Program/Actor/ActorBase.h"
 
@@ -22,24 +23,35 @@ public:
 	void		fallDraw();
 	void		drawEffectFont();
 
+	bool		isDead() const;
+
 public:
 	float		mLife;
 	float		mMaxLife;
 	float		mMoveX;
 	float		mMoveY;
 	int			mHitCount;
-	bool		mIsDeath;		// ボスが死亡した時のフラグ
 	bool		mIsWin;
 	int			mSpeedX;
 
 private:
+	// ステート関数
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Move);
+	DECLAR_STATE_FUNC2(Damage);
+	DECLAR_STATE_FUNC2(Stop);
+	DECLAR_STATE_FUNC2(Dead);
+	DECLAR_STATE_FUNC2(DeadFade);
+	DECLAR_STATE_FUNC2(Revival);
+	DECLAR_STATE_FUNC2(End);
+
+private:
+	StateMachine<ActorBoss>	mState;	// ステート
+
 	float		mLvCount;
 	int			mDamageTime;
-	int			mMode;
 	int			mAlphaCount;	// ボスのアルファカウント
 	int			mPlayMode;
-	bool		mIsDamage;
-	bool		mIsRevival;
 
 	int			mAlpha;
 	int			mFadeOutTime;
@@ -50,7 +62,6 @@ private:
 	int			mNoFadeFlag;
 
 	int			mMoveCount;
-	bool		mIsMove;
 	int			mMoveAnimeTime;
 	unsigned int mMoveAnime;
 	int			mDamageX;

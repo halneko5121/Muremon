@@ -5,35 +5,50 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 
-//ボスのコントロールタイプ
-enum BOSS_CONTROLTYPE
+namespace
 {
-	REFRESH_TYPE,	//すっきりモード
-	NORMAL_TYPE,	//ノーマルモード
-};
+	//ボスのコントロールタイプ
+	enum BOSS_CONTROLTYPE
+	{
+		REFRESH_TYPE,	//すっきりモード
+		NORMAL_TYPE,	//ノーマルモード
+	};
 
-enum BOSS_FADE
-{
-	F_BOSS_ACTION,		//移動、ダメージ
-	F_BOSS_FALL,		//滅
-	F_BOSS_END,			//アルファ値エンド
-};
+	enum BOSS_FADE
+	{
+		F_BOSS_ACTION,		//移動、ダメージ
+		F_BOSS_FALL,		//滅
+		F_BOSS_END,			//アルファ値エンド
+	};
 
-enum NO_FONT
-{
-	NF_FADE_IN,
-	NF_USUALLY,
-	NF_FADE_OUT,
-};
+	enum NO_FONT
+	{
+		NF_FADE_IN,
+		NF_USUALLY,
+		NF_FADE_OUT,
+	};
 
-enum BOSS_MODE
-{
-	M_BOSS_MOVE,		//移動
-	M_BOSS_DAMEGE,		//ダメージ
-	M_BOSS_USUALLY,		//ボス停止
-	M_BOSS_FALL,		//滅
-};
+	enum BOSS_MODE
+	{
+		M_BOSS_MOVE,		//移動
+		M_BOSS_DAMEGE,		//ダメージ
+		M_BOSS_USUALLY,		//ボス停止
+		M_BOSS_FALL,		//滅
+	};
 
+	enum State
+	{
+		cState_Idle,			// 待機
+		cState_Move,			// 移動
+		cState_Damage,			// ダメージ
+		cState_Stop,			// 立ち止まり
+		cState_Dead,			// 死亡
+		cState_DeadFade,		// 死亡（フェード）
+		cState_End,				// 終了
+		cState_Revival,			// 復活
+		cState_Count
+	};
+}
 
 // ボス関連
 #define BOSS_INITIAL_LIFE			(3000)	//ボスの初期ライフ
@@ -57,20 +72,9 @@ enum BOSS_MODE
 ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	: ActorBase(texture, vertex)
 {
-	//ボス
-	mIsDeath=false;
-
 	mAlphaCount=0;
-
-	mMoveCount=0;
 	
-	mIsRevival=false;
-
 	mHitCount=0;
-
-	mIsDamage = false;
-
-	mMode=M_BOSS_MOVE;
 	
 	mAlpha=255;
 		
@@ -88,8 +92,6 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 
 	mMoveX=BOSS_APPEARANCE_POSITION;
 	mMoveY=BOSS_STABILITY_Y;
-	mMoveCount=0;
-	mIsMove=true;
 
 	mIsWin=false;
 
@@ -110,6 +112,17 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	mEffectFont = 0;
 
 	mEffectFontMove = false;
+
+	mState.initialize(cState_Count, cState_Idle);
+	REGIST_STATE_FUNC2(ActorBoss, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(ActorBoss, mState, Move,			cState_Move);
+	REGIST_STATE_FUNC2(ActorBoss, mState, Damage,		cState_Damage);
+	REGIST_STATE_FUNC2(ActorBoss, mState, Stop,			cState_Stop);
+	REGIST_STATE_FUNC2(ActorBoss, mState, Dead,			cState_Dead);
+	REGIST_STATE_FUNC2(ActorBoss, mState, DeadFade,		cState_DeadFade);
+	REGIST_STATE_FUNC2(ActorBoss, mState, Revival,		cState_Revival);
+	REGIST_STATE_FUNC2(ActorBoss, mState, End,			cState_End);
+	mState.changeState(cState_Idle);
 }
 
 ActorBoss::~ActorBoss()
@@ -118,33 +131,23 @@ ActorBoss::~ActorBoss()
 
 void ActorBoss::initImple()
 {
+	mState.changeState(cState_Move);
+
 	//ボス
 	mAlphaCount=0;
-
-	mMoveCount=0;
 	
-	mIsRevival=false;
-
 	mHitCount=0;
-
-	mMode=M_BOSS_MOVE;
 	
 	mAlpha=255;
 		
 	mFadeOutTime=0;
 	
-	mIsDamage = false;
-
 	mDamageTime=0;
 	
 	mRectData=R_BOSS_MOVE1;
 
 	mMoveX=BOSS_APPEARANCE_POSITION;
 	
-	mMoveCount=0;
-
-	mIsMove=true;
-
 	mIsWin=false;
 
 	mNoFontAlpha=0;
@@ -168,10 +171,6 @@ void ActorBoss::initImple()
 	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
 
 	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
-
-	mIsRevival=false;
-
-	mIsDeath=false;
 }
 
 void
@@ -193,199 +192,26 @@ ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
 
 void ActorBoss::control(int play_mode)
 {
-	//ボスの移動コントロール
-	if(mIsMove)
-	{
-		mMoveCount++;
-		mMoveAnimeTime++;
-	}
+	mPlayMode = play_mode;
 
-	//ボスの移動速度調整
-	if(mMoveCount>=BOSS_MOVECOUNT)
-	{
-		mMoveX-=1;
-		mMoveCount=0;
-		if(play_mode==PLAY_REFRESH)
-		{
-			if(mMoveX<=BOSS_REFRESH_X_STOP)
-			{
-				mMoveX=BOSS_REFRESH_X_STOP;
-				mIsMove=false;
-			}
-		}else{
-			if(mMoveX<=BOSS_WIN_POSITOIN)
-			{
-				mMoveX=BOSS_WIN_POSITOIN;
-				mIsMove=false;
-				mIsWin=true;
-			}
-		}
-	}
-	
-	//ボスの移動アニメーションコントロール
+	mState.executeState();
+
+	// ボスの移動アニメーションコントロール
 	if(mMoveAnimeTime % 16 ==15)
 	{
 		mMoveAnime++;
 	}
 
-	//ボスの移動ストップコントロール
-	//規定回数のダメージコントロール
-	if(mHitCount==BOSS_DAMAGE_COUNT)
-	{
-		mIsMove = false;
-		mIsDamage=true;
-		mHitCount=0;
-	}
-
 	//ライフが０になった時のコントロール
-	if(mLife<0)
+	if (mLife < 0) mLife = 0;
+	if (mLife == 0)
 	{
-		mLife=0;
+		mState.changeStateIfDiff(cState_Dead);
 	}
-	if(mLife==0)
+	// 規定回数のダメージコントロール
+	else if(mHitCount==BOSS_DAMAGE_COUNT)
 	{
-		mIsDeath=true;
-		mIsMove=false;
-	}
-	
-	//ボスが死んだ後の初期化
-	if(mIsRevival)
-	{
-		if(mLvCount<7)
-		{
-			mLvCount++;
-		}else mLvCount = 7;
-		initImple();
-	}
-	
-	if(!mIsDeath)
-	{
-		//ボスがダメージ食らった時の処理
-		if(mIsDamage)
-		{
-			mMode=M_BOSS_DAMEGE;
-			mDamageX = rand()% DAMAGE_RAND;
-			mDamageY = rand()% DAMAGE_RAND;
-		}
-	}
-
-	//ボスがボスが死んだ時のフェードアウトシーン
-	if(mIsDeath)
-	{
-		mMode=M_BOSS_FALL;
-		mFadeOutTime++;
-		mEffectFontMove = true;
-		if(mFadeOutTime>BOSS_FALL_TIME)
-		{
-			if(mAlphaCount++>1)
-			{
-				mAlpha-=BOSS_ALPHA_FALL;
-				mAlphaCount=0;
-			}
-			if(mAlpha<0)
-			{
-				mAlpha=0;
-				mAlphaCount=0;
-			}
-
-			if(mAlpha==0)
-			{
-				mAlpha=0;
-				mAlphaCount=0;
-				mIsRevival=true;
-			}
-		}
-
-		if(mEffectFontMove)
-		{
-			mEffectFont++;
-			if(mEffectFont>NO_FONT){
-			mEffectFontMove=false;
-			mEffectFont = NO_FONT;
-			}
-		}
-
-		if (mFadeOutTime == BOSS_FALL_TIME)
-		{
-			UtilSound::playOnce(S_DEAD);
-		}
-
-		//「No～」のフェードインアウト
-		switch(mNoFadeFlag)
-		{
-			case NF_FADE_IN:
-				mNoFontAlpha+=5;
-				if(mNoFontAlpha>=255)
-				{
-					mNoFontAlpha=255;
-					mNoFadeFlag=NF_USUALLY;
-				}
-				break;
-			case NF_USUALLY:
-				mNoFontAlpha=255;
-				mNoDrawTime++;
-				if(mNoDrawTime>=60)
-				{
-					mNoFadeFlag=NF_FADE_OUT;
-				}
-				break;
-			case NF_FADE_OUT:
-				mNoFontAlpha-=5;
-				if(mNoFontAlpha<=0)
-				{
-					mNoFontAlpha=0;
-				}
-				break;
-		}
-	}
-
-	//ボスの描画、モード
-	switch(mMode)
-	{
-		case M_BOSS_MOVE:
-			mRectData=R_BOSS_MOVE1 + mMoveAnime%2;
-			if(play_mode==PLAY_REFRESH)
-			{
-				if(mMoveX==BOSS_REFRESH_X_STOP)
-				{
-					mIsMove=false;
-					mMode=M_BOSS_USUALLY;
-				}
-			}
-			break;
-		case M_BOSS_USUALLY:
-			mRectData=R_BOSS_USUALLY;
-			break;
-		case M_BOSS_DAMEGE:
-			mRectData=R_BOSS_DAMAGE;
-			mDamageTime++;
-			if(mDamageTime==60)
-			{
-				mIsDamage=false;
-				mDamageX = 0;
-				mDamageY = 0;
-				if(play_mode==PLAY_REFRESH)
-				{
-					if(mMoveX==BOSS_REFRESH_X_STOP)
-					{
-						mIsMove=false;
-						mMode=M_BOSS_USUALLY;
-						mDamageTime=0;
-					}else{ 
-						mMode=M_BOSS_MOVE;
-						mIsMove=true;
-						mDamageTime=0;
-					}
-				}else{
-					mMode=M_BOSS_MOVE;
-					mIsMove=true;
-					mDamageTime=0;
-				}
-			}
-			break;
-		case M_BOSS_FALL:
-			mRectData=R_BOSS_FALL;
-			break;
+		mState.changeState(cState_Damage);
 	}
 }
 
@@ -406,5 +232,247 @@ void ActorBoss::fallDraw()
 
 void
 ActorBoss::drawEffectFont()
+{
+}
+
+/**
+ * @brief 死亡しているか？
+ */
+bool
+ActorBoss::isDead() const
+{
+	return (mState.isEqual(cState_Dead));
+}
+
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+ActorBoss::stateEnterIdle()
+{
+}
+void
+ActorBoss::stateIdle()
+{
+}
+
+/**
+ * @brief ステート:Move
+ */
+void
+ActorBoss::stateEnterMove()
+{
+}
+void
+ActorBoss::stateMove()
+{
+	// 数フレームおきに移動
+	if (mState.getStateCount() % BOSS_MOVECOUNT == 0)
+	{ 
+		mMoveX--;
+	}
+	mMoveAnimeTime++;
+
+	mRectData = R_BOSS_MOVE1 + mMoveAnime % 2;
+	if (mPlayMode == PLAY_REFRESH)
+	{
+		if (mMoveX == BOSS_REFRESH_X_STOP)
+		{
+			mState.changeState(cState_Stop);
+			return;
+		}
+	}
+	else
+	{
+		if (mMoveX <= BOSS_WIN_POSITOIN)
+		{
+			mState.changeState(cState_End);
+			return;
+		}
+	}
+}
+
+/**
+ * @brief ステート:Damage
+ */
+void
+ActorBoss::stateEnterDamage()
+{
+	mDamageX = rand() % DAMAGE_RAND;
+	mDamageY = rand() % DAMAGE_RAND;
+	mHitCount = 0;
+}
+void
+ActorBoss::stateDamage()
+{
+	mRectData = R_BOSS_DAMAGE;
+	mDamageTime++;
+	if (mDamageTime == 60)
+	{
+		mDamageX = 0;
+		mDamageY = 0;
+		if (mPlayMode == PLAY_REFRESH)
+		{
+			if (mMoveX == BOSS_REFRESH_X_STOP)
+			{
+				mDamageTime = 0;
+				mState.changeState(cState_Stop);
+				return;
+			}
+			else
+			{
+				mDamageTime = 0;
+				mState.changeState(cState_Move);
+				return;
+			}
+		}
+		else
+		{
+			mDamageTime = 0;
+			mState.changeState(cState_Move);
+			return;
+		}
+	}
+
+}
+
+/**
+ * @brief ステート:Stop
+ */
+void
+ActorBoss::stateEnterStop()
+{
+	mRectData = R_BOSS_USUALLY;
+}
+void
+ActorBoss::stateStop()
+{
+}
+
+/**
+ * @brief ステート:Dead
+ */
+void
+ActorBoss::stateEnterDead()
+{
+	mRectData = R_BOSS_FALL;
+}
+void
+ActorBoss::stateDead()
+{
+	mFadeOutTime++;
+	mEffectFontMove = true;
+
+	if (mFadeOutTime == BOSS_FALL_TIME)
+	{
+		UtilSound::playOnce(S_DEAD);
+	}
+	else if (mFadeOutTime > BOSS_FALL_TIME)
+	{
+		if (mAlphaCount++ > 1)
+		{
+			mAlpha -= BOSS_ALPHA_FALL;
+			mAlphaCount = 0;
+		}
+		if (mAlpha < 0)
+		{
+			mAlpha = 0;
+			mAlphaCount = 0;
+		}
+
+		if (mAlpha == 0)
+		{
+			mAlpha = 0;
+			mAlphaCount = 0;
+			mState.changeState(cState_Revival);
+			return;
+		}
+	}
+
+	if (mEffectFontMove)
+	{
+		mEffectFont++;
+		if (mEffectFont > NO_FONT) {
+			mEffectFontMove = false;
+			mEffectFont = NO_FONT;
+		}
+	}
+
+	//「No～」のフェードインアウト
+	switch (mNoFadeFlag)
+	{
+	case NF_FADE_IN:
+		mNoFontAlpha += 5;
+		if (mNoFontAlpha >= 255)
+		{
+			mNoFontAlpha = 255;
+			mNoFadeFlag = NF_USUALLY;
+		}
+		break;
+	case NF_USUALLY:
+		mNoFontAlpha = 255;
+		mNoDrawTime++;
+		if (mNoDrawTime >= 60)
+		{
+			mNoFadeFlag = NF_FADE_OUT;
+		}
+		break;
+	case NF_FADE_OUT:
+		mNoFontAlpha -= 5;
+		if (mNoFontAlpha <= 0)
+		{
+			mNoFontAlpha = 0;
+		}
+		break;
+	}
+
+}
+
+/**
+ * @brief ステート:DeadFade
+ */
+void
+ActorBoss::stateEnterDeadFade()
+{
+}
+void
+ActorBoss::stateDeadFade()
+{
+}
+
+/**
+ * @brief ステート:Revival
+ */
+void
+ActorBoss::stateEnterRevival()
+{
+	if (mLvCount < 7)
+	{
+		mLvCount++;
+	}
+	else mLvCount = 7;
+	initImple();
+}
+void
+ActorBoss::stateRevival()
+{
+	mState.changeState(cState_Move);
+}
+
+/**
+ * @brief ステート:End
+ */
+void
+ActorBoss::stateEnterEnd()
+{
+	mIsWin = true;
+}
+void
+ActorBoss::stateEnd()
 {
 }

@@ -15,8 +15,10 @@
 #include "Library/Sound/DirectSound.h"
 #include "Program/DefineGame.h"
 #include "Program/System/GameScore.h"
+#include "Program/System/GameInfoMgr.h"
 #include "Program/Actor/ActorMgr.h"
 #include "Program/Effect/EffectMgr.h"
+#include "Program/Util/UtilGame.h"
 
 // ŠeƒV[ƒ“‚Ìinclude
 #include "Program/Scene/SceneLogo.h"
@@ -73,7 +75,7 @@ GameMain::init(void)
 	DirectFont::create();
 	DirectSound::create();
 	FadeMgr::create();
-	GameScore::create();
+	GameInfoMgr::create();
 	ActorMgr::create();
 	EffectMgr::create();
 
@@ -231,9 +233,9 @@ GameMain::release(void)
 	DirectInputMouse::destroy();
 	GetInputKey()->release();
 	DirectInputKey::destroy();
-	GameScore::destroy();
 	ActorMgr::destroy();
 	EffectMgr::destroy();
+	GameInfoMgr::destroy();
 	APP_SAFE_DELETE(mWindow);
 }
 
@@ -254,7 +256,7 @@ GameMain::controlSequence(void)
 		APP_SAFE_DELETE(mScene);
 		mScene = new SceneTitle();
 		mScene->init();
-		GetGameScore()->setScore(0);
+		UtilGame::setScore(0);
 		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);

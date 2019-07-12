@@ -21,21 +21,6 @@ public:
 	~GameScore();
 
 	/**
-	 * @brief	インスタンスの取得
-	 */
-	static GameScore*		getInstance();
-
-	/**
-	 * @brief	インスタンスの生成
-	 */
-	static void				create();
-
-	/**
-	 * @brief	インスタンスの破棄
-	 */
-	static void				destroy();
-
-	/**
 	 * @brief	スコアの設定
 	 */
 	void					setScore(int score);
@@ -56,8 +41,5 @@ public:
 	void					mulScore(int mul_score);
 
 private:
-	static GameScore*		mInstance;		// インスタンス
-	int						mScore;			// スコア
+	int						mScore;		// スコア
 };
-
-static GameScore* GetGameScore() { return GameScore::getInstance(); }

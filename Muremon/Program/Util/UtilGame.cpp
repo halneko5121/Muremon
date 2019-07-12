@@ -7,6 +7,7 @@
  ******************************************************************/
 
 #include "UtilGame.h"
+#include "Program/System/GameInfoMgr.h"
 #include "Program/System/GameScore.h"
 
 /**
@@ -15,7 +16,7 @@
 void
 UtilGame::setScore(int score)
 {
-	GetGameScore()->setScore(score);
+	GetGameInfoMgr()->getGameScore()->setScore(score);
 }
 
 /**
@@ -24,7 +25,7 @@ UtilGame::setScore(int score)
 int
 UtilGame::getScore()
 {
-	return GetGameScore()->getScore();
+	return GetGameInfoMgr()->getGameScore()->getScore();
 }
 
 /**
@@ -33,7 +34,7 @@ UtilGame::getScore()
 void
 UtilGame::addScore(int add_score)
 {
-	GetGameScore()->addScore(add_score);
+	GetGameInfoMgr()->getGameScore()->addScore(add_score);
 }
 
 /**
@@ -42,5 +43,5 @@ UtilGame::addScore(int add_score)
 void
 UtilGame::mulScore(int mul_score)
 {
-	GetGameScore()->mulScore(mul_score);
+	GetGameInfoMgr()->getGameScore()->mulScore(mul_score);
 }

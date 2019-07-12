@@ -118,6 +118,7 @@ SceneGameNormal::impleInit()
 	mNiku->init();
 	mNoppo->init();
 	mYoshi->init();
+	mBoss->init();
 
 	mMission = new Mission(mTexture, mVertex);
 
@@ -747,7 +748,7 @@ SceneGameNormal::stateExeGame()
 		return;
 	}
 
-	if (!mBoss->mIsDeath)
+	if (!mBoss->isDead())
 	{
 		if (mIsHitEffect)
 		{

@@ -89,7 +89,7 @@ void SceneGameRefresh::impleInit()
 	mBoss = new ActorBoss(mTexture, mVertex);
 
 	GetActorMgr()->init();
-
+	mBoss->init();
 
 	mState.changeState(cState_ReadyFadeIn);
 }

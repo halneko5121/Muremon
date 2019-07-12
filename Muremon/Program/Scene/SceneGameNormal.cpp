@@ -748,7 +748,7 @@ SceneGameNormal::stateExeGame()
 		return;
 	}
 
-	if (!mBoss->isDead())
+	if (!mBoss->mIsDeath)
 	{
 		if (mIsHitEffect)
 		{

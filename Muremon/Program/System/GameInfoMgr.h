@@ -42,9 +42,17 @@ public:
 	 */
 	GameScore*				getGameScore() const;
 
+	// ゲームモード
+	void					setGameModeRefresh();
+	void					setGameModeNormal();
+	bool					isGameModeRefresh() const;
+	bool					isGameModeNormal() const;
+
 private:
 	static GameInfoMgr*		mInstance;		// インスタンス
 	GameScore*				mScore;			// スコア
+	int						mGameMode;		// モード
+
 };
 
 static GameInfoMgr* GetGameInfoMgr() { return GameInfoMgr::getInstance(); }

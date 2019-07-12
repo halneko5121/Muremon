@@ -8,13 +8,27 @@
 
 #include "GameInfoMgr.h"
 
+#include "GameScore.h"
+
+namespace
+{
+	enum GameMode
+	{
+		cGameMode_Refresh,
+		cGameMode_Normal,
+	};
+}
+
 GameInfoMgr* GameInfoMgr::mInstance = nullptr;
 
 /**
  * @brief	コンストラクタ
  */
 GameInfoMgr::GameInfoMgr()
+	: mScore(nullptr)
+	, mGameMode(cGameMode_Refresh)
 {
+	mScore = new GameScore();
 }
 
 /**
@@ -59,4 +73,40 @@ GameScore*
 GameInfoMgr::getGameScore() const
 {
 	return mScore;
+}
+
+/**
+ * @brief	リフレッシュモードに設定
+ */
+void
+GameInfoMgr::setGameModeRefresh()
+{
+	mGameMode = cGameMode_Refresh;
+}
+
+/**
+ * @brief	ノーマルモードに設定
+ */
+void
+GameInfoMgr::setGameModeNormal()
+{
+	mGameMode = cGameMode_Normal;
+}
+
+/**
+ * @brief	リフレッシュモードか
+ */
+bool
+GameInfoMgr::isGameModeRefresh() const
+{
+	return (mGameMode == cGameMode_Refresh);
+}
+
+/**
+ * @brief	ノーマルモードか
+ */
+bool
+GameInfoMgr::isGameModeNormal() const
+{
+	return (mGameMode == cGameMode_Normal);
 }

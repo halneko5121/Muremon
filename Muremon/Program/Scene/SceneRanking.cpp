@@ -107,7 +107,7 @@ SceneRanking::impleInit()
 	mRankNewData.mName[0] = mRankNewData.mName[1] = mRankNewData.mName[2] = 0;
 
 	// プレイしたスコアの初期化
-	mRankNewData.mScore = UtilScore::getScore();
+	mRankNewData.mScore = UtilGame::getScore();
 
 	loadRanking();
 	mRankingNo = checkRankingIn();

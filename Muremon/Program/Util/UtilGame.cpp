@@ -1,6 +1,6 @@
 /******************************************************************
- *	@file	UtilScore.cpp
- *	@brief	スコア関連のUtil
+ *	@file	UtilGame.cpp
+ *	@brief	ゲーム関連のUtil
  *
  *	製作者：三上
  *	管理者：三上
@@ -13,7 +13,7 @@
  * @brief	スコアの設定
  */
 void
-UtilScore::setScore(int score)
+UtilGame::setScore(int score)
 {
 	GetGameScore()->setScore(score);
 }
@@ -22,7 +22,7 @@ UtilScore::setScore(int score)
  * @brief	スコアの取得
  */
 int
-UtilScore::getScore()
+UtilGame::getScore()
 {
 	return GetGameScore()->getScore();
 }
@@ -31,7 +31,7 @@ UtilScore::getScore()
  * @brief	スコアの加算
  */
 void
-UtilScore::addScore(int add_score)
+UtilGame::addScore(int add_score)
 {
 	GetGameScore()->addScore(add_score);
 }
@@ -40,7 +40,7 @@ UtilScore::addScore(int add_score)
  * @brief	スコアの減算
  */
 void
-UtilScore::mulScore(int mul_score)
+UtilGame::mulScore(int mul_score)
 {
 	GetGameScore()->mulScore(mul_score);
 }

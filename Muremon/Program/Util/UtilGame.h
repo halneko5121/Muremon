@@ -1,13 +1,13 @@
 #pragma once
 /******************************************************************
- *	@file	UtilScore.h
- *	@brief	スコア関連のUtil
+ *	@file	UtilGame.h
+ *	@brief	ゲーム関連のUtil
  *
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
 
-namespace UtilScore
+namespace UtilGame
 {
 	void				setScore(int score);
 	int					getScore();

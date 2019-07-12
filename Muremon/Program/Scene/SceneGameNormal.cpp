@@ -275,7 +275,7 @@ SceneGameNormal::drawScore()
 {
 	//ÉXÉRÉA
 	for(int i = 0;i < 9;i++){
-		int num = UtilScore::getScore();
+		int num = UtilGame::getScore();
 		for(int j = 1; j < 9 - i;j++){
 			num = num / 10;
 		}
@@ -407,7 +407,7 @@ SceneGameNormal::updateMissionOugi()
 		mMissionStateKeep = MISSION_END;
 		mWavePos.x = WAVE_INIT_X;
 		mWavePos.y = WAVE_INIT_Y;
-		UtilScore::addScore(MISSION_CLEAR_SCORE);
+		UtilGame::addScore(MISSION_CLEAR_SCORE);
 	}
 	mTimeCount++;
 }
@@ -691,7 +691,7 @@ SceneGameNormal::stateExeGame()
 		mBoss->mLife -= NIKUMAN_DAMAGE / mNegativeDamege;
 		mMissionGauge += NIKUMAN_GAGE;
 
-		UtilScore::addScore(NIKUMAN_SCORE);
+		UtilGame::addScore(NIKUMAN_SCORE);
 		mIsHitEffect = true;
 		mCharaAtkY = mNiku->getHitPosY();
 		mNiku->setIsHitCheck(false);
@@ -702,7 +702,7 @@ SceneGameNormal::stateExeGame()
 		mBoss->mHitCount++;
 		mBoss->mLife -= YOSHITARO_DAMAGE / mNegativeDamege;
 		mMissionGauge += YOSHITARO_GAGE;
-		UtilScore::addScore(YOSHITARO_SCORE);
+		UtilGame::addScore(YOSHITARO_SCORE);
 		mIsHitEffect = true;
 		mCharaAtkY = mYoshi->getHitPosY();
 		mYoshi->setIsHitCheck(false);
@@ -713,7 +713,7 @@ SceneGameNormal::stateExeGame()
 		mBoss->mHitCount++;
 		mBoss->mLife -= NOPPO_DAMAGE / mNegativeDamege;
 		mMissionGauge += NOPPO_GAGE;
-		UtilScore::addScore(NOPPO_SCORE);
+		UtilGame::addScore(NOPPO_SCORE);
 		mIsHitEffect = true;
 		mCharaAtkY = mNoppo->getHitPosY();
 		mNoppo->setIsHitCheck(false);

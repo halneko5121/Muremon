@@ -11,6 +11,42 @@
 #include "Program/System/GameScore.h"
 
 /**
+ * @brief	ゲームモードをリフレッシュモードに設定
+ */
+void
+UtilGame::setGameModeRefresh()
+{
+	GetGameInfoMgr()->setGameModeRefresh();
+}
+
+/**
+ * @brief	ゲームモードをノーマルモードに設定
+ */
+void
+UtilGame::setGameModeNormal()
+{
+	GetGameInfoMgr()->setGameModeNormal();
+}
+
+/**
+ * @brief	ゲームモードがリフレッシュモードか
+ */
+bool
+UtilGame::isGameModeRefresh()
+{
+	return GetGameInfoMgr()->isGameModeRefresh();
+}
+
+/**
+ * @brief	ゲームモードがノーマルモードか
+ */
+bool
+UtilGame::isGameModeNormal()
+{
+	return GetGameInfoMgr()->isGameModeNormal();
+}
+
+/**
  * @brief	スコアの設定
  */
 void

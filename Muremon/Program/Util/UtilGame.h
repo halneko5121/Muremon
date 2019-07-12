@@ -9,6 +9,13 @@
 
 namespace UtilGame
 {
+	// ゲームモード
+	void				setGameModeRefresh();
+	void				setGameModeNormal();
+	bool				isGameModeRefresh();
+	bool				isGameModeNormal();
+
+	// スコア関連
 	void				setScore(int score);
 	int					getScore();
 	void				addScore(int add_score);

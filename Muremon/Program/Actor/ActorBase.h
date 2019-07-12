@@ -80,7 +80,7 @@ public:
 	virtual ~ActorBase();
 
 	// こちらをoverride して下さい
-	virtual void		drawImple() {};
+	virtual void		drawImple(Texture* texture, Vertex* vertex) {};
 	virtual void		runImple() {};
 	virtual void		initImple() {};
 	virtual void		updateImple(POS_CC<float> boss_cc) {};
@@ -89,7 +89,7 @@ public:
 	void				init();
 	void				run();
 	void				update(POS_CC<float> boss_cc);
-	void				draw();
+	void				draw(Texture* texture, Vertex* vertex);
 
 	/**
 	 * @brief スピードの設定

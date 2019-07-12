@@ -169,13 +169,13 @@ ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num)
  * @brief •`‰æˆ—
  */
 void
-ActorNoppo::drawImple()
+ActorNoppo::drawImple(Texture* texture, Vertex* vertex)
 {
-	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
+	UtilGraphics::setTexture(vertex, *texture, T_CAHRA_NOPPO);
 
-	mVertex->setAngle(mAngleDegree);
-	mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.alpha), 255, 255, 255);
-	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y,
+	vertex->setAngle(mAngleDegree);
+	vertex->setColor(static_cast<D3DCOLOR>(mCharaData.alpha), 255, 255, 255);
+	vertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y,
 		(mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
 }
 

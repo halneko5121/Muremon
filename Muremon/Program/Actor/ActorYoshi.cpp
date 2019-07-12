@@ -164,7 +164,7 @@ ActorYoshi::setAnimetion(int max_animetion, int anime_count ,int rect_num)
  * @brief •`‰æˆ—
  */
 void
-ActorYoshi::drawImple()
+ActorYoshi::drawImple(Texture* texture, Vertex* vertex)
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
 

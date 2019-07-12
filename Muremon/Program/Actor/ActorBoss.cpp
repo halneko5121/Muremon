@@ -379,7 +379,7 @@ void ActorBoss::control(int play_mode)
 }
 
 void
-ActorBoss::drawImple()
+ActorBoss::drawImple(Texture* texture, Vertex* vertex)
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);

@@ -114,14 +114,14 @@ ActorMgr::update(POS_CC<float> boss_cc)
  * @brief	アクターの描画
  */
 void
-ActorMgr::draw()
+ActorMgr::draw(Texture* texture, Vertex* vertex)
 {
 	ActorIterator it_begin = mActorList.begin();
 	ActorIterator it_end = mActorList.end();
 	for (ActorIterator it = it_begin; it != it_end; it++)
 	{
 		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
-		actor->draw();
+		actor->draw(texture, vertex);
 	}
 }
 

@@ -44,7 +44,6 @@ SceneGameRefresh::SceneGameRefresh()
 	: mState()
 	, mBoss(nullptr)
 	, mStartAlpha(0)
-	, mGameState(G_START_SCENE)
 	, mNikumanKeyCount(0)
 	, mYoshitaroKeyCount(0)
 	, mNoppoKeyCount(0)
@@ -95,7 +94,10 @@ void SceneGameRefresh::update()
 
 void SceneGameRefresh::draw()
 {
-	if(mGameState == G_START_SCENE){
+	if( mState.isEqual(cState_ReadyFadeIn) ||
+		mState.isEqual(cState_Ready) ||
+		mState.isEqual(cState_ReadyFadeOut))
+	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
@@ -121,8 +123,8 @@ void SceneGameRefresh::draw()
 		mVertex->setColor(mStartAlpha,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_START);
 	}
-	else if(mGameState == G_GAME_SCENE){
-
+	else if(mState.isEqual(cState_Game))
+	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//îwåi
@@ -287,7 +289,6 @@ SceneGameRefresh::stateExeReadyFadeOut()
 	if (mStartAlpha < 0)
 	{
 		mStartAlpha = 0;
-		mGameState = G_GAME_SCENE;
 		mState.changeState(cState_Game);
 		return;
 	}

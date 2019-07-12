@@ -234,28 +234,6 @@ enum GAMESTART_FADE_MODE
 	GS_USUALLY,			//通常
 };
 
-enum BOSS_MODE
-{
-	M_BOSS_MOVE,		//移動
-	M_BOSS_DAMEGE,		//ダメージ
-	M_BOSS_USUALLY,		//ボス停止
-	M_BOSS_FALL,		//滅
-};
-
-enum BOSS_FADE
-{
-	F_BOSS_ACTION,		//移動、ダメージ
-	F_BOSS_FALL,		//滅
-	F_BOSS_END,			//アルファ値エンド
-};
-
-enum NO_FONT
-{
-	NF_FADE_IN,
-	NF_USUALLY,
-	NF_FADE_OUT,
-};
-
 enum PLAY_MODE
 {
 	PLAY_REFRESH,

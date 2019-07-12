@@ -136,7 +136,7 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//背景
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//旗
 
-		mBoss->draw(mTexture, mVertex);
+		mBoss->draw();
 		mBoss->fallDraw();
 
 		drawHitEffect();
@@ -162,7 +162,7 @@ void SceneGameRefresh::draw()
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		
 		// アクターの描画
-		GetActorMgr()->draw(mTexture, mVertex);
+		GetActorMgr()->draw();
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//体力ゲージ枠
 
 		// エフェクト描画

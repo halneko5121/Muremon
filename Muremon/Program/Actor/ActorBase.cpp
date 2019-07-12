@@ -99,9 +99,9 @@ ActorBase::update(POS_CC<float> boss_cc)
  * @brief •`‰æ
  */
 void
-ActorBase::draw(Texture* texture, Vertex* vertex)
+ActorBase::draw()
 {
-	drawImple(texture, vertex);
+	drawImple();
 }
 
 /**

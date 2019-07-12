@@ -60,7 +60,7 @@ public:
 	/**
 	 * @brief	アクターの描画
 	 */
-	void				draw(Texture* texture, Vertex* vertex);
+	void				draw();
 
 	/**
 	 * @brief	イテレーターの取得

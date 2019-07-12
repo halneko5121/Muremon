@@ -53,17 +53,10 @@ private:
 	int			mFadeOutTime;
 	int			mRectData;
 
-	int			mNoFontAlpha;
-	int			mNoDrawTime;
-	int			mNoFadeFlag;
-
 	int			mMoveCount;
 	int			mMoveAnimeTime;
 	unsigned int mMoveAnime;
 	int			mDamageX;
 	int			mDamageY;
-
 	float		mHitPos;
-	bool		mEffectFontMove;
-	float		mEffectFont;
 };

@@ -23,13 +23,6 @@ namespace
 		F_BOSS_END,			//アルファ値エンド
 	};
 
-	enum NO_FONT
-	{
-		NF_FADE_IN,
-		NF_USUALLY,
-		NF_FADE_OUT,
-	};
-
 	enum BOSS_MODE
 	{
 		M_BOSS_MOVE,		//移動
@@ -64,11 +57,6 @@ namespace
 
 #define DAMAGE_RAND					(5)
 
-#define NO_FONT						(25)
-
-#define NO_POSITION_X				(150.f)
-#define NO_POSITION_Y				(150.f)
-
 #define BOSS_MOVECOUNT				(3)
 
 ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
@@ -88,16 +76,11 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	, mAlpha(255)
 	, mFadeOutTime(0)
 	, mRectData(R_BOSS_MOVE1)
-	, mNoFontAlpha(0)
-	, mNoDrawTime(0)
-	, mNoFadeFlag(NF_FADE_IN)
 	, mMoveAnimeTime(0)
 	, mMoveAnime(0)
 	, mDamageX(0)
 	, mDamageY(0)
 	, mHitPos(0.0f)
-	, mEffectFont(0)
-	, mEffectFontMove(false)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorBoss, mState, Idle,			cState_Idle);
@@ -308,7 +291,6 @@ void
 ActorBoss::stateDead()
 {
 	mFadeOutTime++;
-	mEffectFontMove = true;
 
 	if (mFadeOutTime == BOSS_FALL_TIME)
 	{
@@ -370,16 +352,11 @@ ActorBoss::stateEnterRevival()
 	mRectData = R_BOSS_MOVE1;
 	mMoveX = BOSS_APPEARANCE_POSITION;
 	mIsWin = false;
-	mNoFontAlpha = 0;
-	mNoDrawTime = 0;
-	mNoFadeFlag = NF_FADE_IN;
 	mMoveAnime = 0;
 	mMoveAnimeTime = 0;
 	mSpeedX = 1;
 	mDamageX = 0;
 	mDamageY = 0;
-	mEffectFont = 0;
-	mEffectFontMove = false;
 	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount);
 	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount);
 }

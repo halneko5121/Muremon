@@ -108,7 +108,7 @@ void
 EffectBossDead::stateEnterFadeIn()
 {
 	mPos.x -= cAddPositionX;
-	mPos.x += cAddPositionY;
+	mPos.y -= cAddPositionY;
 }
 void
 EffectBossDead::stateFadeIn()

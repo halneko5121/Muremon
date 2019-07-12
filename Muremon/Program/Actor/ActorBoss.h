@@ -21,7 +21,6 @@ public:
 
 	void		hit(const float& hit_pos, int damage);
 	void		fallDraw();
-	void		drawHitEffect();
 	void		drawEffectFont();
 
 	bool		isDead() const;
@@ -68,10 +67,6 @@ private:
 	int			mDamageY;
 
 	float		mHitPos;
-	int			mHitEffectAlpha;
-	int			mHitEffectTime;
-	bool		mIsHitEffect;
-
 	bool		mEffectFontMove;
 	float		mEffectFont;
 };

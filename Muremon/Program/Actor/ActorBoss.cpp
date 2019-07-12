@@ -5,6 +5,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Effect/EffectMgr.h"
 
 namespace
 {
@@ -95,9 +96,6 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	, mDamageX(0)
 	, mDamageY(0)
 	, mHitPos(0.0f)
-	, mHitEffectAlpha(0)
-	, mHitEffectTime(0)
-	, mIsHitEffect(false)
 	, mEffectFont(0)
 	, mEffectFontMove(false)
 {
@@ -149,30 +147,6 @@ ActorBoss::updateImple(POS_CC<float> boss_cc)
 	{
 		mState.changeState(cState_Damage);
 	}
-
-	if (!isDead())
-	{
-		if (mIsHitEffect)
-		{
-			mHitEffectAlpha = 255;
-			mHitEffectTime++;
-			if (mHitEffectTime == 1)
-			{
-				mIsHitEffect = false;
-				mHitEffectTime = 0;
-			}
-		}
-		else {
-			mHitEffectAlpha = 0;
-			mHitEffectTime = 0;
-		}
-	}
-	else
-	{
-		mIsHitEffect = false;
-		mHitEffectAlpha = 0;
-	}
-
 }
 
 int
@@ -196,7 +170,8 @@ ActorBoss::drawImple()
  */
 void ActorBoss::hit(const float& hit_pos, int damage)
 {
-	mIsHitEffect = true;
+	EffectParam param(mTexture, mVertex, POS_CC<float>(mMoveX, hit_pos));
+	GetEffectMgr()->createEffect(cEffectId_HitEffect1, param);
 	mHitPos = hit_pos;
 	mHitCount++;
 	mLife -= damage;
@@ -207,13 +182,6 @@ void ActorBoss::fallDraw()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mNoFontAlpha,255,255,255);
 	mVertex->drawF(mMoveX - NO_POSITION_X - mEffectFont,NO_POSITION_Y - mEffectFont,R_BOSS_EFFECT);
-}
-
-void ActorBoss::drawHitEffect()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->setColor(mHitEffectAlpha, 255, 255, 255);
-	mVertex->drawF(mMoveX - HIT_EFFECT_X, mHitPos, R_HIT_EFFECT);
 }
 
 void

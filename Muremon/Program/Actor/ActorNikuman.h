@@ -12,7 +12,7 @@
 class ActorNikuman :	public ActorBase
 {
 public:
-	ActorNikuman();
+	ActorNikuman(Texture* texture, Vertex* vertex);
 	~ActorNikuman();
 
 	POS_CC<float>	updateAttack2(POS_CC<float> boss_cc);

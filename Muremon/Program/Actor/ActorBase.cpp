@@ -36,10 +36,10 @@ F_RECT rect_pos_e = {DRAW_E_RAD_X,DRAW_E_RAD_Y,DRAW_E_RAD_X,DRAW_E_RAD_Y};
 /**
  * @brief コンストラクタ
  */
-ActorBase::ActorBase()
+ActorBase::ActorBase(Texture* texture, Vertex* vertex)
 	: mOrbit(nullptr)
-	, mTexture(nullptr)
-	, mVertex(nullptr)
+	, mTexture(texture)
+	, mVertex(vertex)
 	, mCharaData()
 	, mAngleDegree(0.0f)
 	, mCountEffect(0)
@@ -52,17 +52,12 @@ ActorBase::ActorBase()
 	, mHitPosY(0.0f)
 {
 	mOrbit	 = new OrbitCalculation();
-	mTexture = new Texture();
-	mVertex = new Vertex();
-
-
-	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "actor");
 }
 
 /**
  * @brief デストラクタ
  */
-ActorBase::~ActorBase(void)
+ActorBase::~ActorBase()
 {
 }
 

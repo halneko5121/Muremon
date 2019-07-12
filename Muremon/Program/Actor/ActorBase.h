@@ -76,7 +76,7 @@ typedef struct CHARADATA{
 class ActorBase
 {
 public:
-	ActorBase();
+	ActorBase(Texture* texture, Vertex* vertex);
 	virtual ~ActorBase();
 
 	// ‚±‚¿‚ç‚ðoverride ‚µ‚Ä‰º‚³‚¢

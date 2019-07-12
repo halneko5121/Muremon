@@ -109,17 +109,17 @@ SceneGameNormal::~SceneGameNormal()
 void
 SceneGameNormal::impleInit()
 {
-	mNiku = new ActorNikuman();
-	mNoppo	= new ActorNoppo();
-	mYoshi	= new ActorYoshi();
-	mBoss = new ActorBoss();
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
+	mNiku = new ActorNikuman(mTexture, mVertex);
+	mNoppo	= new ActorNoppo(mTexture, mVertex);
+	mYoshi	= new ActorYoshi(mTexture, mVertex);
+	mBoss = new ActorBoss(mTexture, mVertex);
 
 	mNiku->init();
 	mNoppo->init();
 	mYoshi->init();
 
 	mMission = new Mission(mTexture, mVertex);
-	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	mState.changeState(cState_ReadyFadeIn);
 }

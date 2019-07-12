@@ -9,7 +9,7 @@ class Texture;
 class ActorBoss : public ActorBase
 {
 public:
-	ActorBoss();
+	ActorBoss(Texture* texture, Vertex* vertex);
 	~ActorBoss();
 
 	void		initImple() override;
@@ -33,8 +33,6 @@ public:
 	int			mSpeedX;
 
 private:
-	Texture*	mTexture;
-	Vertex*		mVertex;
 	float		mLvCount;
 	int			mDamageTime;
 	int			mMode;

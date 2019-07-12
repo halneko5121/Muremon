@@ -73,8 +73,9 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorYoshi::ActorYoshi()
-	: mState()
+ActorYoshi::ActorYoshi(Texture* texture, Vertex* vertex)
+	: ActorBase(texture, vertex)
+	, mState()
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f) 

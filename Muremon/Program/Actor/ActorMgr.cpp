@@ -15,13 +15,13 @@
 namespace
 {
 	ActorBase*
-	createActror(ActorId id)
+	createActror(ActorId id, Texture* texture, Vertex* vertex)
 	{
 		switch (id)
 		{
-		case cActorId_Noppo:	return (new ActorNoppo());
-		case cActorId_Nikuman:	return (new ActorNikuman());
-		case cActorId_Yoshi:	return (new ActorYoshi());
+		case cActorId_Noppo:	return (new ActorNoppo(texture, vertex));
+		case cActorId_Nikuman:	return (new ActorNikuman(texture, vertex));
+		case cActorId_Yoshi:	return (new ActorYoshi(texture, vertex));
 		}
 
 		return nullptr;
@@ -71,9 +71,9 @@ ActorMgr::destroy()
  * @brief	アクターの生成
  */
 ActorBase*
-ActorMgr::createActor(ActorId id)
+ActorMgr::createActor(ActorId id, Texture* texture, Vertex* vertex)
 {
-	ActorBase* actor = createActror(id);
+	ActorBase* actor = createActror(id, texture, vertex);
 	mActorList.push_back(actor);
 	mUniqId++;
 

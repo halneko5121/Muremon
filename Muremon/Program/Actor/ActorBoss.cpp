@@ -40,12 +40,9 @@ enum BOSS_CONTROLTYPE
 #define MISSION_CLEAR_SCORE			(50000)	//ミッションクリア加算スコア
 #define BOSS_KO_SCORE				(10000)
 
-ActorBoss::ActorBoss()
+ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
+	: ActorBase(texture, vertex)
 {
-	mVertex = new Vertex();
-	mTexture = new Texture();
-	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "actor");
-
 	//ボス
 	mIsDeath=false;
 

@@ -75,20 +75,21 @@ SceneGameRefresh::~SceneGameRefresh(void)
 
 void SceneGameRefresh::impleInit()
 {
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
+
 	// プレイヤー3種類分
 	for (int actor_id = cActorId_Noppo; actor_id < cActorId_Count; actor_id++)
 	{
 		// 各最大数生成
 		for (int j = 0; j < MAX_VALLUE_PLAYER; j++)
 		{
-			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id));
+			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id), mTexture, mVertex);
 		}
 	}
-	mBoss = new ActorBoss();
+	mBoss = new ActorBoss(mTexture, mVertex);
 
 	GetActorMgr()->init();
 
-	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	mState.changeState(cState_ReadyFadeIn);
 }

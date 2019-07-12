@@ -12,7 +12,7 @@
 class ActorYoshi : public ActorBase
 {
 public:
-	ActorYoshi();
+	ActorYoshi(Texture* texture, Vertex* vertex);
 	~ActorYoshi();
 
 	POS_CC<float>	updateAttack2();

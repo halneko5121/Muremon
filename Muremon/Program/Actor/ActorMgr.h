@@ -45,7 +45,7 @@ public:
 	/**
 	 * @brief	アクターの生成
 	 */
-	ActorBase*			createActor(ActorId id);
+	ActorBase*			createActor(ActorId id, Texture* texture, Vertex* vertex);
 
 	/**
 	 * @brief	アクターの初期化

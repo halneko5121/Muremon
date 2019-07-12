@@ -6,7 +6,7 @@
  *	ä«óùé“ÅFéOè„
  ******************************************************************/
 
-#include "UtilScore.h"
+#include "UtilGame.h"
 #include "Program/System/GameScore.h"
 
 /**

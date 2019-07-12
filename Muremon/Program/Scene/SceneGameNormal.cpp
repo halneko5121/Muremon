@@ -12,7 +12,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilBattle.h"
-#include "Program/Util/UtilScore.h"
+#include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Mission/Mission.h"
 #include "Program/Actor/ActorBoss.h"

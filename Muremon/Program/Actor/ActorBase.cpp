@@ -212,14 +212,10 @@ ActorBase::isHit(POS_CC<float> draw_cc_p, POS_CC<float> draw_cc_e, int chara_id)
 	check_rect_p = calculateBackRect(draw_cc_p, rect_pos_p[chara_id]);
 	check_rect_e = calculateBackRect(draw_cc_e, rect_pos_e);
 
-	//‚Ü‚¸‰~‚Ì“–‚½‚è”»’è
-//	if( (pow( (draw_cc_e.x - draw_cc_p.x),2) + pow( (draw_cc_e.y - draw_cc_p.y),2)) <= pow((rect_pos_p[chara_id].top + DRAW_E_RAD_X),2) ){
-		//‰~‚Ì“–‚½‚è”»’è‚É“ü‚Á‚Ä‚¢‚½‚ç‹éŒ`‚Å‚Ì“–‚½‚è”»’è
 	if ((check_rect_p.right >= check_rect_e.left) && (check_rect_p.left <= check_rect_e.right) &&
 		(check_rect_p.top <= check_rect_e.bottom) && (check_rect_p.bottom >= check_rect_e.top)) {
 		return TRUE;
 	}
-	//	}
 
 	return FALSE;
 }

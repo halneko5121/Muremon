@@ -159,6 +159,8 @@ ActorBoss::drawImple()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);
 	mVertex->drawF(mMoveX + mDamageX,mMoveY + mDamageY,mRectData);
+
+	fallDraw();
 }
 
 void ActorBoss::fallDraw()

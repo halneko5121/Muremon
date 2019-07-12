@@ -11,6 +11,7 @@
 #include "ActorNoppo.h"
 #include "ActorNikuman.h"
 #include "ActorYoshi.h"
+#include "ActorBoss.h"
 
 namespace
 {
@@ -22,6 +23,7 @@ namespace
 		case cActorId_Noppo:	return (new ActorNoppo(texture, vertex));
 		case cActorId_Nikuman:	return (new ActorNikuman(texture, vertex));
 		case cActorId_Yoshi:	return (new ActorYoshi(texture, vertex));
+		case cActorId_Boss:		return (new ActorBoss(texture, vertex));
 		}
 
 		return nullptr;

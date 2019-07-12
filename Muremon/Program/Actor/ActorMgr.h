@@ -15,6 +15,7 @@ enum ActorId
 	cActorId_Noppo,			// ノッポ
 	cActorId_Nikuman,		// にくまん
 	cActorId_Yoshi,			// よしたろう
+	cActorId_Boss,			// ボス
 	cActorId_Count,
 };
 

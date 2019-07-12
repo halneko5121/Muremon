@@ -77,7 +77,7 @@ void SceneGameRefresh::impleInit()
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	// プレイヤー3種類分
-	for (int actor_id = cActorId_Noppo; actor_id < cActorId_Count; actor_id++)
+	for (int actor_id = cActorId_Noppo; actor_id <= cActorId_Yoshi; actor_id++)
 	{
 		// 各最大数生成
 		for (int j = 0; j < MAX_VALLUE_PLAYER; j++)
@@ -85,10 +85,9 @@ void SceneGameRefresh::impleInit()
 			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id), mTexture, mVertex);
 		}
 	}
-	mBoss = new ActorBoss(mTexture, mVertex);
-
+	// ボス
+	mBoss = dynamic_cast<ActorBoss*>(GetActorMgr()->createActor(cActorId_Boss, mTexture, mVertex));
 	GetActorMgr()->init();
-	mBoss->init();
 
 	mState.changeState(cState_ReadyFadeIn);
 }
@@ -133,8 +132,8 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//背景
 		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//旗
 
-		mBoss->draw();
-		mBoss->fallDraw();
+		// アクターの描画
+		GetActorMgr()->draw();
 
 		drawHitEffect();
 
@@ -151,9 +150,6 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
 
 		drawHpGauge();
-
-		// アクターの描画
-		GetActorMgr()->draw();
 
 		// 体力ゲージ枠
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
@@ -457,8 +453,6 @@ SceneGameRefresh::stateExeGame()
 	if (GetAsyncKeyState(VK_RETURN)) {	//エンターキーが押されたらタイトルに戻る
 		mIsSceneEnd = true;
 	}
-
-	mBoss->update(boss_cc);
 
 	if (!mBoss->isDead())
 	{

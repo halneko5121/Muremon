@@ -15,13 +15,7 @@ class SceneBase;
 class DirectInputKey;
 class DirectInputMouse;
 class DirectGraphics;
-class C_Sprite;
 class DirectFont;
-class C_DWaveSound;
-class C_DOggSound;
-namespace Dix {
-	class C_PCMPlayer;
-}
 
 class GameMain
 {

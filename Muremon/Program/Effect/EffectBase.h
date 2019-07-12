@@ -43,5 +43,5 @@ protected:
 	Vertex*			mVertex;		// バーテックス
 	int				mRectIndex;
 	POS_CC<float>	mPos;
-
+	int				mAlpha;
 };

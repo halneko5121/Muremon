@@ -17,6 +17,7 @@ EffectBase::EffectBase(EffectId	id, int rect_index, const EffectParam& param)
 	, mVertex(param.mVertex)
 	, mRectIndex(rect_index)
 	, mPos(param.mPos)
+	, mAlpha(255)
 {
 	
 }

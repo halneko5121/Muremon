@@ -16,7 +16,7 @@
 
 #define G_ALPHA_INCREASE	(15)
 #define GAME_GROUND			(500.f)		// ゲーム中の地面に当たる所
-#define MAX_VALLUE_PLAYER	(2)			// キャラ1種類につきの総数
+#define MAX_VALLUE_PLAYER	(100)		// キャラ1種類につきの総数
 #define GRAVITY 			(0.98f)		// 重力加速度
 
 template <class T>

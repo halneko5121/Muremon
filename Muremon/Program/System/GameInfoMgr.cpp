@@ -51,3 +51,12 @@ GameInfoMgr::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }
+
+/**
+ * @brief	スコアクラスの取得
+ */
+GameScore*
+GameInfoMgr::getGameScore() const
+{
+	return mScore;
+}

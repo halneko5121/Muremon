@@ -7,6 +7,8 @@
  *	管理者：三上
  ******************************************************************/
 
+class GameScore;
+
 class GameInfoMgr
 {
 public:
@@ -35,8 +37,14 @@ public:
 	 */
 	static void				destroy();
 
+	/**
+	 * @brief	スコアクラスの取得
+	 */
+	GameScore*				getGameScore() const;
+
 private:
 	static GameInfoMgr*		mInstance;		// インスタンス
+	GameScore*				mScore;			// スコア
 };
 
 static GameInfoMgr* GetGameInfoMgr() { return GameInfoMgr::getInstance(); }

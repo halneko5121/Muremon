@@ -117,13 +117,10 @@ void SceneGameRefresh::draw()
 		drawNum();
 
 		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);								//‚µ‚á‚Á‚­‚Ì‘Ì—Í
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);					//‘Ì—ÍƒQ[ƒW
-
 		drawHpGauge();
 
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-
 		// ‘Ì—ÍƒQ[ƒW˜g
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);
 
 		// ƒQ[ƒ€ƒXƒ^[ƒg
@@ -156,15 +153,12 @@ void SceneGameRefresh::draw()
 
 		drawHpGauge();
 
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
-
-		//ƒLƒƒƒ‰’B
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		
 		// ƒAƒNƒ^[‚Ì•`‰æ
 		GetActorMgr()->draw();
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
+
+		// ‘Ì—ÍƒQ[ƒW˜g
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);
 
 		// ƒGƒtƒFƒNƒg•`‰æ
 		GetEffectMgr()->draw();

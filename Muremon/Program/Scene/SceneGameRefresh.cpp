@@ -50,9 +50,6 @@ SceneGameRefresh::SceneGameRefresh()
 	, mNikumanCurrentIndex(0)
 	, mYoshitaroCurrentIndex(0)
 	, mNoppoCurrentIndex(0)
-	, mIsHitNiku(false)
-	, mIsHitYoshi(false)
-	, mIsHitNoppo(false)
 	, mIsHitEffect(false)
 	, mHitEffectAlpha(0)
 	, mHitEffectTime(0)
@@ -238,15 +235,6 @@ SceneGameRefresh::getActorNoppo(int index)
 	return mActor[cActorId_Noppo][index];
 }
 
-void SceneGameRefresh::initHitFlag()
-{
-	mIsHitNiku = false;
-
-	mIsHitYoshi = false;
-
-	mIsHitNoppo = false;
-}
-
 // -----------------------------------------------------------------
 // ステート関数
 // -----------------------------------------------------------------
@@ -395,13 +383,11 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mIsHitNiku = true;
+				mBoss->mHitCount++;
+				mBoss->mLife -= NIKUMAN_DAMAGE;
+				mIsHitEffect = true;
 				mCharaAtkY = actor_nikuman->getHitPosY();
 				actor_nikuman->setIsHitCheck(false);
-			}
-			else
-			{
-				mIsHitNiku = false;
 			}
 		}
 		// よしたろう
@@ -410,13 +396,11 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mIsHitYoshi = true;
+				mBoss->mHitCount++;
+				mBoss->mLife -= YOSHITARO_DAMAGE;
+				mIsHitEffect = true;
 				mCharaAtkY = actor_yoshi->getHitPosY();
 				actor_yoshi->setIsHitCheck(false);
-			}
-			else
-			{
-				mIsHitYoshi = false;
 			}
 		}
 		// のっぽ
@@ -425,36 +409,13 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mIsHitNoppo = true;
+				mBoss->mHitCount++;
+				mBoss->mLife -= NOPPO_DAMAGE;
+				mIsHitEffect = true;
 				mCharaAtkY = actor_noppo->getHitPosY();
 				actor_noppo->setIsHitCheck(false);
 			}
-			else
-			{
-				mIsHitNoppo = false;
-			}
 		}
-	}
-
-	if (mIsHitNiku)
-	{
-		mBoss->mHitCount++;
-		mBoss->mLife -= NIKUMAN_DAMAGE;
-		mIsHitEffect = true;
-	}
-
-	if (mIsHitYoshi)
-	{
-		mBoss->mHitCount++;
-		mBoss->mLife -= YOSHITARO_DAMAGE;
-		mIsHitEffect = true;
-	}
-
-	if (mIsHitNoppo)
-	{
-		mBoss->mHitCount++;
-		mBoss->mLife -= NOPPO_DAMAGE;
-		mIsHitEffect = true;
 	}
 
 	// にくまん

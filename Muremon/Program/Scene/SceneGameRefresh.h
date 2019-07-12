@@ -33,7 +33,6 @@ private:
 	void				drawNum();
 	void				drawHpGauge();
 
-	void				initHitFlag();
 	void				drawHitEffect();
 
 	ActorBase*			getActorNikuman(int index);
@@ -77,9 +76,6 @@ private:
 	int					mYoshitaroCurrentIndex;	// ãgÇΩÇÎÇ§ÇÃåªç›ÇÃî‘çÜ
 	int					mNoppoCurrentIndex;		// ÇÃÇ¡Ç€ÇÃåªç›ÇÃî‘çÜ
 
-	bool				mIsHitNiku;
-	bool				mIsHitYoshi;
-	bool				mIsHitNoppo;
 	bool				mIsHitEffect;
 	int					mHitEffectAlpha;
 	int					mHitEffectTime;

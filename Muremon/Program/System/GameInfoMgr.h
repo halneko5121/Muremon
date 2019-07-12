@@ -35,26 +35,6 @@ public:
 	 */
 	static void				destroy();
 
-	/**
-	 * @brief	スコアの設定
-	 */
-	void					setScore(int score);
-
-	/**
-	 * @brief	スコアの取得
-	 */
-	int						getScore() const;
-
-	/**
-	 * @brief	スコアの加算
-	 */
-	void					addScore(int add_score);
-
-	/**
-	 * @brief	スコアの減算
-	 */
-	void					mulScore(int mul_score);
-
 private:
 	static GameInfoMgr*		mInstance;		// インスタンス
 };

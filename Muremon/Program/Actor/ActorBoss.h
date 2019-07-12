@@ -19,7 +19,9 @@ public:
 	void		drawImple() override;
 	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
+	void		hit(const float& hit_pos, int damage);
 	void		fallDraw();
+	void		drawHitEffect();
 	void		drawEffectFont();
 
 	bool		isDead() const;
@@ -64,6 +66,12 @@ private:
 	unsigned int mMoveAnime;
 	int			mDamageX;
 	int			mDamageY;
+
+	float		mHitPos;
+	int			mHitEffectAlpha;
+	int			mHitEffectTime;
+	bool		mIsHitEffect;
+
 	bool		mEffectFontMove;
 	float		mEffectFont;
 };

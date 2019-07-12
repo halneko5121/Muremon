@@ -51,10 +51,6 @@ SceneGameRefresh::SceneGameRefresh()
 	, mNikumanCurrentIndex(0)
 	, mYoshitaroCurrentIndex(0)
 	, mNoppoCurrentIndex(0)
-	, mIsHitEffect(false)
-	, mHitEffectAlpha(0)
-	, mHitEffectTime(0)
-	, mCharaAtkY(0)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	mState.registState(this, &SceneGameRefresh::stateEnterIdle,			&SceneGameRefresh::stateExeIdle,		nullptr, cState_Idle);
@@ -135,8 +131,6 @@ void SceneGameRefresh::draw()
 		// アクターの描画
 		GetActorMgr()->draw();
 
-		drawHitEffect();
-
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
@@ -206,13 +200,6 @@ void SceneGameRefresh::drawHpGauge()
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,255,0,0);
 	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
-}
-
-void SceneGameRefresh::drawHitEffect()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->setColor(mHitEffectAlpha,255,255,255);
-	mVertex->drawF((float)mBoss->mMoveX - HIT_EFFECT_X,mCharaAtkY,R_HIT_EFFECT);
 }
 
 ActorBase*
@@ -381,10 +368,7 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->mHitCount++;
-				mBoss->mLife -= NIKUMAN_DAMAGE;
-				mIsHitEffect = true;
-				mCharaAtkY = actor_nikuman->getHitPosY();
+				mBoss->hit(actor_nikuman->getHitPosY(), NIKUMAN_DAMAGE);
 				actor_nikuman->setIsHitCheck(false);
 			}
 		}
@@ -394,10 +378,7 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->mHitCount++;
-				mBoss->mLife -= YOSHITARO_DAMAGE;
-				mIsHitEffect = true;
-				mCharaAtkY = actor_yoshi->getHitPosY();
+				mBoss->hit(actor_yoshi->getHitPosY(), YOSHITARO_DAMAGE);
 				actor_yoshi->setIsHitCheck(false);
 			}
 		}
@@ -407,10 +388,7 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->mHitCount++;
-				mBoss->mLife -= NOPPO_DAMAGE;
-				mIsHitEffect = true;
-				mCharaAtkY = actor_noppo->getHitPosY();
+				mBoss->hit(actor_noppo->getHitPosY(), NOPPO_DAMAGE);
 				actor_noppo->setIsHitCheck(false);
 			}
 		}
@@ -452,29 +430,6 @@ SceneGameRefresh::stateExeGame()
 
 	if (GetAsyncKeyState(VK_RETURN)) {	//エンターキーが押されたらタイトルに戻る
 		mIsSceneEnd = true;
-	}
-
-	if (!mBoss->isDead())
-	{
-		if (mIsHitEffect)
-		{
-			mHitEffectAlpha = 255;
-			mHitEffectTime++;
-			if (mHitEffectTime == 1)
-			{
-				mIsHitEffect = false;
-				mHitEffectTime = 0;
-			}
-		}
-		else {
-			mHitEffectAlpha = 0;
-			mHitEffectTime = 0;
-		}
-	}
-	else 
-	{
-		mIsHitEffect = false;
-		mHitEffectAlpha = 0;
 	}
 }
 

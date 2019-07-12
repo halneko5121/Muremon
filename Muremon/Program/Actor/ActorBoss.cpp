@@ -116,45 +116,6 @@ ActorBoss::~ActorBoss()
 void ActorBoss::initImple()
 {
 	mState.changeState(cState_Move);
-
-	//ボス
-	mAlphaCount=0;
-	
-	mHitCount=0;
-	
-	mAlpha=255;
-		
-	mFadeOutTime=0;
-	
-	mDamageTime=0;
-	
-	mRectData=R_BOSS_MOVE1;
-
-	mMoveX=BOSS_APPEARANCE_POSITION;
-	
-	mIsWin=false;
-
-	mNoFontAlpha=0;
-	mNoDrawTime=0;
-	mNoFadeFlag=NF_FADE_IN;
-
-	mMoveAnime = 0;
-	
-	mMoveAnimeTime = 0;
-
-	mSpeedX = 1;
-
-	mDamageX = 0;
-
-	mDamageY = 0;
-
-	mEffectFont = 0;
-
-	mEffectFontMove = false;
-
-	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
-
-	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount); 
 }
 
 void
@@ -227,7 +188,6 @@ ActorBoss::isDead() const
 {
 	return (mState.isEqual(cState_Dead));
 }
-
 
 // -----------------------------------------------------------------
 // ステート関数
@@ -440,7 +400,28 @@ ActorBoss::stateEnterRevival()
 		mLvCount++;
 	}
 	else mLvCount = 7;
-	initImple();
+
+	// リセット
+	mAlphaCount = 0;
+	mHitCount = 0;
+	mAlpha = 255;
+	mFadeOutTime = 0;
+	mDamageTime = 0;
+	mRectData = R_BOSS_MOVE1;
+	mMoveX = BOSS_APPEARANCE_POSITION;
+	mIsWin = false;
+	mNoFontAlpha = 0;
+	mNoDrawTime = 0;
+	mNoFadeFlag = NF_FADE_IN;
+	mMoveAnime = 0;
+	mMoveAnimeTime = 0;
+	mSpeedX = 1;
+	mDamageX = 0;
+	mDamageY = 0;
+	mEffectFont = 0;
+	mEffectFontMove = false;
+	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount);
+	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount);
 }
 void
 ActorBoss::stateRevival()

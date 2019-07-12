@@ -33,6 +33,7 @@
     <ClCompile Include="Program\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Program\System\GameInfoMgr.cpp" />
     <ClCompile Include="Program\System\GameMain.cpp" />
     <ClCompile Include="Program\main.cpp" />
     <ClCompile Include="Program\Scene\SceneBase.cpp" />
@@ -51,7 +52,7 @@
     <ClCompile Include="Program\Util\UtilBattle.cpp" />
     <ClCompile Include="Program\Util\UtilGraphics.cpp" />
     <ClCompile Include="Program\Util\UtilInput.cpp" />
-    <ClCompile Include="Program\Util\UtilScore.cpp" />
+    <ClCompile Include="Program\Util\UtilGame.cpp" />
     <ClCompile Include="Program\Util\UtilSound.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +78,7 @@
     <ClInclude Include="Program\Effect\EffectMgr.h" />
     <ClInclude Include="Program\Mission\Mission.h" />
     <ClInclude Include="Program\stdafx.h" />
+    <ClInclude Include="Program\System\GameInfoMgr.h" />
     <ClInclude Include="Program\System\GameMain.h" />
     <ClInclude Include="Program\main.h" />
     <ClInclude Include="Program\Scene\SceneBase.h" />
@@ -95,7 +97,7 @@
     <ClInclude Include="Program\Util\UtilBattle.h" />
     <ClInclude Include="Program\Util\UtilGraphics.h" />
     <ClInclude Include="Program\Util\UtilInput.h" />
-    <ClInclude Include="Program\Util\UtilScore.h" />
+    <ClInclude Include="Program\Util\UtilGame.h" />
     <ClInclude Include="Program\Util\UtilSound.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -99,9 +99,6 @@
     <ClCompile Include="Program\System\GameScore.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Util\UtilScore.cpp">
-      <Filter>Util</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Actor\ActorMgr.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
@@ -116,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="Program\Effect\EffectBase.cpp">
       <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\System\GameInfoMgr.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Util\UtilGame.cpp">
+      <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +222,6 @@
     <ClInclude Include="Program\System\GameScore.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Util\UtilScore.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="Program\Actor\ActorMgr.h">
       <Filter>Actor</Filter>
     </ClInclude>
@@ -236,6 +236,12 @@
     </ClInclude>
     <ClInclude Include="Program\Effect\EffectBase.h">
       <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\System\GameInfoMgr.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Util\UtilGame.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

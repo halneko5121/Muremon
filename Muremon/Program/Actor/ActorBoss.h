@@ -19,7 +19,6 @@ public:
 	void		drawImple() override;
 	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
-	void		control(int play_mode);
 	void		fallDraw();
 	void		drawEffectFont();
 
@@ -51,7 +50,6 @@ private:
 	float		mLvCount;
 	int			mDamageTime;
 	int			mAlphaCount;	// ボスのアルファカウント
-	int			mPlayMode;
 
 	int			mAlpha;
 	int			mFadeOutTime;

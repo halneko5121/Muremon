@@ -14,6 +14,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Util/UtilGame.h"
 #include "Program/DefineGame.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorMgr.h"
@@ -72,6 +73,7 @@ SceneGameRefresh::~SceneGameRefresh(void)
 
 void SceneGameRefresh::impleInit()
 {
+	UtilGame::setGameModeNormal();
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	// ƒvƒŒƒCƒ„[3Ží—Þ•ª
@@ -456,7 +458,7 @@ SceneGameRefresh::stateExeGame()
 		mIsSceneEnd = true;
 	}
 
-	mBoss->control(PLAY_REFRESH);
+	mBoss->update(boss_cc);
 
 	if (!mBoss->isDead())
 	{

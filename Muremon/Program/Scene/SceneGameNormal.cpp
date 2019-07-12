@@ -109,6 +109,7 @@ SceneGameNormal::~SceneGameNormal()
 void
 SceneGameNormal::impleInit()
 {
+	UtilGame::setGameModeNormal();
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 	mNiku = new ActorNikuman(mTexture, mVertex);
 	mNoppo	= new ActorNoppo(mTexture, mVertex);
@@ -739,7 +740,7 @@ SceneGameNormal::stateExeGame()
 	}
 	recover();
 
-	mBoss->control(PLAY_NORMAL);
+	mBoss->update(boss_cc2);
 
 	//ゲームオーバー条件
 	if (mBoss->mIsWin)

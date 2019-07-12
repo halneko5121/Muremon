@@ -234,12 +234,6 @@ enum GAME_STATE
 	G_GAME_CLEAR,		//ÉQÅ[ÉÄÉNÉäÉA
 };
 
-enum PLAY_MODE
-{
-	PLAY_REFRESH,
-	PLAY_NORMAL,
-};
-
 enum CHARA_ID
 {
 	ID_YOSHI,

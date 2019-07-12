@@ -1,9 +1,10 @@
 #include "ActorBoss.h"
 
-#include "Program/Util/UtilSound.h"
-#include "Program/Util/UtilGraphics.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
+#include "Program/Util/UtilSound.h"
+#include "Program/Util/UtilGraphics.h"
+#include "Program/Util/UtilGame.h"
 
 namespace
 {
@@ -83,7 +84,6 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	, mLvCount(0)
 	, mDamageTime(0)
 	, mAlphaCount(0)
-	, mPlayMode(PLAY_REFRESH)
 	, mAlpha(255)
 	, mFadeOutTime(0)
 	, mRectData(R_BOSS_MOVE1)
@@ -123,26 +123,13 @@ ActorBoss::runImple()
 {
 }
 
-
 void
 ActorBoss::updateImple(POS_CC<float> boss_cc)
 {
-}
-
-int
-ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
-{
-	return anime_count;
-}
-
-void ActorBoss::control(int play_mode)
-{
-	mPlayMode = play_mode;
-
 	mState.executeState();
 
 	// ボスの移動アニメーションコントロール
-	if(mMoveAnimeTime % 16 ==15)
+	if (mMoveAnimeTime % 16 == 15)
 	{
 		mMoveAnime++;
 	}
@@ -154,10 +141,16 @@ void ActorBoss::control(int play_mode)
 		mState.changeStateIfDiff(cState_Dead);
 	}
 	// 規定回数のダメージコントロール
-	else if(mHitCount==BOSS_DAMAGE_COUNT)
+	else if (mHitCount == BOSS_DAMAGE_COUNT)
 	{
 		mState.changeState(cState_Damage);
 	}
+}
+
+int
+ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
+{
+	return anime_count;
 }
 
 void
@@ -223,7 +216,7 @@ ActorBoss::stateMove()
 	mMoveAnimeTime++;
 
 	mRectData = R_BOSS_MOVE1 + mMoveAnime % 2;
-	if (mPlayMode == PLAY_REFRESH)
+	if (UtilGame::isGameModeRefresh())
 	{
 		if (mMoveX == BOSS_REFRESH_X_STOP)
 		{
@@ -260,7 +253,7 @@ ActorBoss::stateDamage()
 	{
 		mDamageX = 0;
 		mDamageY = 0;
-		if (mPlayMode == PLAY_REFRESH)
+		if (UtilGame::isGameModeRefresh())
 		{
 			if (mMoveX == BOSS_REFRESH_X_STOP)
 			{

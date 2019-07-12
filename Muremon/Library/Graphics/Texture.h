@@ -23,22 +23,6 @@ public:
 	~Texture();
 
 	/**
-	 * @brief	インスタンスの取得
-	 */
-	static Texture*			getInstance();
-
-	/**
-	 * @brief	インスタンスの生成
-	 */
-	static void				create();
-
-	/**
-	 * @brief	インスタンスの破棄
-	 */
-	static void				destroy();
-
-
-	/**
 	 * @brief	テクスチャデータをロードする
 	 * @param	file_name	ファイル名
 	 * @param	pDevice     デバイス
@@ -66,5 +50,3 @@ private:
 	LPDIRECT3DTEXTURE9*		mTexture;				// テクスチャ
 	DWORD					mLoadedTextureCount;	// 読み込まれているテクスチャの総数
 };
-
-static Texture* GetTexture() { return Texture::getInstance(); }

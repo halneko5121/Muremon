@@ -8,8 +8,6 @@
 
 #include "Texture.h"
 
-Texture* Texture::mInstance = nullptr;
-
 /**
  * @brief	コンストラクタ
  */
@@ -25,35 +23,6 @@ Texture::Texture()
 Texture::~Texture()
 {
 }
-
-/**
- * @brief	インスタンスの取得
- */
-Texture*
-Texture::getInstance()
-{
-	return mInstance;
-}
-
-/**
- * @brief	インスタンスの生成
- */
-void
-Texture::create()
-{
-	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
-	mInstance = new Texture();
-}
-
-/**
- * @brief	インスタンスの破棄
- */
-void
-Texture::destroy()
-{
-	APP_SAFE_DELETE(mInstance);
-}
-
 
 /**
  * @brief	テクスチャデータをロードする

@@ -228,12 +228,6 @@ enum GAME_STATE
 	G_GAME_CLEAR,		//ゲームクリア
 };
 
-enum GAMESTART_FADE_MODE
-{
-	GS_FADE_IN,			//フェードイン
-	GS_USUALLY,			//通常
-};
-
 enum PLAY_MODE
 {
 	PLAY_REFRESH,

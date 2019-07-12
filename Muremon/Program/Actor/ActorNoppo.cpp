@@ -235,7 +235,8 @@ ActorNoppo::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_NOPPO_GANMEN);
 
-		GetEffectMgr()->createEffect(cEffectId_HitEffect5, mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		GetEffectMgr()->createEffect(cEffectId_HitEffect5, param);
 
 		mState.changeState(cState_GroundDeath);
 		return;
@@ -293,7 +294,9 @@ ActorNoppo::stateSkyAtk()
 		{
 			UtilSound::playOnce((S_NOPPO_PETI));
 		}
-		GetEffectMgr()->createEffect(cEffectId_HitEffect6, mTexture, mVertex, mCharaData.draw_cc);
+
+		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		GetEffectMgr()->createEffect(cEffectId_HitEffect6, param);
 
 		mState.changeState(cState_SkyDeath);
 		return;

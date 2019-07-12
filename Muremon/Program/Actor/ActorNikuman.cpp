@@ -223,7 +223,8 @@ ActorNikuman::stateGroundAtk()
 		setIsHitCheck(true);
 		mHitPosY = mCharaData.draw_cc.y;
 
-		GetEffectMgr()->createEffect(cEffectId_HitEffect2, mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		GetEffectMgr()->createEffect(cEffectId_HitEffect2, param);
 
 		mState.changeState(cState_GroundDeath);
 	}
@@ -265,7 +266,8 @@ ActorNikuman::stateSkyAtk()
 		setIsHitCheck(true);
 		mHitPosY = mCharaData.draw_cc.y;
 
-		GetEffectMgr()->createEffect(cEffectId_HitEffect2, mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		GetEffectMgr()->createEffect(cEffectId_HitEffect2, param);
 
 		mState.changeState(cState_SkyDeath);
 	}

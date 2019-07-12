@@ -230,7 +230,8 @@ ActorYoshi::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_YOSHI_HIP);
 
-		GetEffectMgr()->createEffect(cEffectId_HitEffect3, mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		GetEffectMgr()->createEffect(cEffectId_HitEffect3, param);
 
 		mState.changeState(cState_GroundDeath);
 	}
@@ -277,7 +278,8 @@ ActorYoshi::stateSkyAtk()
 		}
 		UtilSound::playOnce(S_YOSHI_HUSEN);
 
-		GetEffectMgr()->createEffect(cEffectId_HitEffect4, mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		GetEffectMgr()->createEffect(cEffectId_HitEffect4, param);
 
 		mState.changeState(cState_SkyDeath);
 	}

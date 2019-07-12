@@ -13,15 +13,15 @@
 namespace
 {
 	EffectBase*
-	createEffectImple(EffectId id, Texture* texture, Vertex* vertex, POS_CC<float> pos)
+	createEffectImple(EffectId id, const EffectParam& param)
 	{
 		switch (id)
 		{
-		case cEffectId_HitEffect2:	return (new EffectFont(id, texture, vertex, R_NIKU_BETYA, pos));
-		case cEffectId_HitEffect3:	return (new EffectFont(id, texture, vertex, R_YOSHI_BOYO, pos));
-		case cEffectId_HitEffect4:	return (new EffectFont(id, texture, vertex, R_YOSHI_PAN, pos));
-		case cEffectId_HitEffect5:	return (new EffectFont(id, texture, vertex, R_NOPPO_PETI, pos));
-		case cEffectId_HitEffect6:	return (new EffectFont(id, texture, vertex, R_NOPPO_GOTU, pos));
+		case cEffectId_HitEffect2:	return (new EffectFont(id, R_NIKU_BETYA, param));
+		case cEffectId_HitEffect3:	return (new EffectFont(id, R_YOSHI_BOYO, param));
+		case cEffectId_HitEffect4:	return (new EffectFont(id, R_YOSHI_PAN, param));
+		case cEffectId_HitEffect5:	return (new EffectFont(id, R_NOPPO_PETI, param));
+		case cEffectId_HitEffect6:	return (new EffectFont(id, R_NOPPO_GOTU, param));
 		}
 
 		return nullptr;
@@ -71,9 +71,9 @@ EffectMgr::destroy()
  * @brief	エフェクトの生成
  */
 void
-EffectMgr::createEffect(EffectId id, Texture* texture, Vertex* vertex, POS_CC<float> pos)
+EffectMgr::createEffect(EffectId id, const EffectParam& param)
 {
-	EffectBase* effect = createEffectImple(id, texture, vertex, pos);
+	EffectBase* effect = createEffectImple(id, param);
 	mEffectList.push_back(effect);
 }
 

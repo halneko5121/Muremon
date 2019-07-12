@@ -17,7 +17,7 @@ class Vertex;
 class EffectFont : public EffectBase
 {
 public:
-	EffectFont(EffectId	id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos);
+	EffectFont(EffectId	id, int rect_index, const EffectParam& param);
 	~EffectFont();
 
 	void			update() override;

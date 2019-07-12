@@ -11,13 +11,14 @@
  /**
   * @brief	コンストラクタ
   */
-EffectBase::EffectBase(EffectId	id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
+EffectBase::EffectBase(EffectId	id, int rect_index, const EffectParam& param)
 	: mId(id)
-	, mTexture(texture)
-	, mVertex(vertex)
+	, mTexture(param.mTexture)
+	, mVertex(param.mVertex)
 	, mRectIndex(rect_index)
-	, mPos(pos)
+	, mPos(param.mPos)
 {
+	
 }
 
 /**

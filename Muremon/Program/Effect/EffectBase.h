@@ -13,10 +13,24 @@ class Texture;
 class Vertex;
 enum EffectId;
 
+struct EffectParam
+{
+	EffectParam(Texture* texture, Vertex* vertex, POS_CC<float> pos)
+		: mTexture(texture)
+		, mVertex(vertex)
+		, mPos(pos)
+	{
+	}
+
+	Texture*		mTexture;
+	Vertex*			mVertex;
+	POS_CC<float>	mPos;
+};
+
 class EffectBase
 {
 public:
-	EffectBase(EffectId	id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos);
+	EffectBase(EffectId	id, int rect_index, const EffectParam& param);
 	virtual ~EffectBase();
 
 	virtual void	update() = 0;

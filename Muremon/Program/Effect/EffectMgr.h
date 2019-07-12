@@ -8,6 +8,7 @@
  ******************************************************************/
 
 #include "Program/Define.h"
+#include "Program/Effect/EffectBase.h"
 
 enum EffectId
 {
@@ -53,7 +54,7 @@ public:
 	/**
 	 * @brief	ê∂ê¨
 	 */
-	void				createEffect(EffectId id, Texture*	texture, Vertex* vertex, POS_CC<float> pos);
+	void				createEffect(EffectId id, const EffectParam& param);
 
 	/**
 	 * @brief	çXêV

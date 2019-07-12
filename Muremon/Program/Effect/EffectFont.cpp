@@ -31,9 +31,9 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-EffectFont::EffectFont(EffectId	id, Texture* texture, Vertex* vertex, int rect_index, POS_CC<float> pos)
-	: EffectBase(id, texture, vertex, rect_index, pos)
-	, mInitPos(pos)
+EffectFont::EffectFont(EffectId	id, int rect_index, const EffectParam& param)
+	: EffectBase(id, rect_index, param)
+	, mInitPos(param.mPos)
 	, mShakeX(0.0f)
 	, mShakeY(0.0f)
 	, mIsShakeRight(false)

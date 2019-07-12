@@ -157,8 +157,6 @@ SceneGameNormal::draw()
 
 		mBoss->drawImple();
 
-		mBoss->fallDraw();
-
 		drawHitEffect();
 		//ƒLƒƒƒ‰’B
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);

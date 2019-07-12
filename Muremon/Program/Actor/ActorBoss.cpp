@@ -161,8 +161,6 @@ ActorBoss::drawImple()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);
 	mVertex->drawF(mMoveX + mDamageX,mMoveY + mDamageY,mRectData);
-
-	fallDraw();
 }
 
 /**
@@ -175,18 +173,6 @@ void ActorBoss::hit(const float& hit_pos, int damage)
 	mHitPos = hit_pos;
 	mHitCount++;
 	mLife -= damage;
-}
-
-void ActorBoss::fallDraw()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->setColor(mNoFontAlpha,255,255,255);
-	mVertex->drawF(mMoveX - NO_POSITION_X - mEffectFont,NO_POSITION_Y - mEffectFont,R_BOSS_EFFECT);
-}
-
-void
-ActorBoss::drawEffectFont()
-{
 }
 
 /**
@@ -346,44 +332,6 @@ ActorBoss::stateDead()
 			return;
 		}
 	}
-
-	if (mEffectFontMove)
-	{
-		mEffectFont++;
-		if (mEffectFont > NO_FONT) {
-			mEffectFontMove = false;
-			mEffectFont = NO_FONT;
-		}
-	}
-
-	//「No～」のフェードインアウト
-	switch (mNoFadeFlag)
-	{
-	case NF_FADE_IN:
-		mNoFontAlpha += 5;
-		if (mNoFontAlpha >= 255)
-		{
-			mNoFontAlpha = 255;
-			mNoFadeFlag = NF_USUALLY;
-		}
-		break;
-	case NF_USUALLY:
-		mNoFontAlpha = 255;
-		mNoDrawTime++;
-		if (mNoDrawTime >= 60)
-		{
-			mNoFadeFlag = NF_FADE_OUT;
-		}
-		break;
-	case NF_FADE_OUT:
-		mNoFontAlpha -= 5;
-		if (mNoFontAlpha <= 0)
-		{
-			mNoFontAlpha = 0;
-		}
-		break;
-	}
-
 }
 
 /**

@@ -123,6 +123,9 @@
     <ClCompile Include="Program\Effect\EffectHit.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Effect\EffectBossDead.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -247,6 +250,9 @@
       <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="Program\Effect\EffectHit.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Effect\EffectBossDead.h">
       <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>

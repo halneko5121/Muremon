@@ -28,6 +28,7 @@
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
     <ClCompile Include="Program\Effect\EffectBase.cpp" />
     <ClCompile Include="Program\Effect\EffectFont.cpp" />
+    <ClCompile Include="Program\Effect\EffectHit.cpp" />
     <ClCompile Include="Program\Effect\EffectMgr.cpp" />
     <ClCompile Include="Program\Mission\Mission.cpp" />
     <ClCompile Include="Program\stdafx.cpp">
@@ -75,6 +76,7 @@
     <ClInclude Include="Program\DefineGame.h" />
     <ClInclude Include="Program\Effect\EffectBase.h" />
     <ClInclude Include="Program\Effect\EffectFont.h" />
+    <ClInclude Include="Program\Effect\EffectHit.h" />
     <ClInclude Include="Program\Effect\EffectMgr.h" />
     <ClInclude Include="Program\Mission\Mission.h" />
     <ClInclude Include="Program\stdafx.h" />

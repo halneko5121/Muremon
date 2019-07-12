@@ -9,6 +9,7 @@
 #include "EffectMgr.h"
 #include "EffectBase.h"
 #include "EffectFont.h"
+#include "EffectHit.h"
 
 namespace
 {
@@ -17,6 +18,7 @@ namespace
 	{
 		switch (id)
 		{
+		case cEffectId_HitEffect1:	return (new EffectHit(id, R_HIT_EFFECT, param));
 		case cEffectId_HitEffect2:	return (new EffectFont(id, R_NIKU_BETYA, param));
 		case cEffectId_HitEffect3:	return (new EffectFont(id, R_YOSHI_BOYO, param));
 		case cEffectId_HitEffect4:	return (new EffectFont(id, R_YOSHI_PAN, param));

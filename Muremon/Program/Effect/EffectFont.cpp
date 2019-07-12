@@ -16,7 +16,7 @@
 
 namespace
 {
-	const int cFontDeleteCount = 30;
+	const int cAliveFrame = 30;
 
 	enum State
 	{
@@ -157,7 +157,7 @@ EffectFont::stateEnterRun()
 void
 EffectFont::stateRun()
 {
-	if (mState.getStateCount() < cFontDeleteCount)
+	if (mState.getStateCount() < cAliveFrame)
 	{
 		mPos = setEffectShake(SHAKE_X, SHAKE_Y, mPos);
 	}

@@ -188,12 +188,12 @@ SceneGameNormal::draw()
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->setColor(255,255,255,255);
-	mVertex->drawF(Vector2f(G_STATE_FRAME_X, G_STATE_FRAME_Y), R_STATE_FRAME);	//ステータス枠描画
-	mVertex->drawF(Vector2f(G_SCORE_X, G_SCORE_Y), R_SCORE);		//すこあ
+	mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
+	mVertex->drawF(cDispScorePos, R_SCORE);		//すこあ
 
 	drawScore();
 
-	mVertex->drawF(Vector2f(G_TIME_X, G_TIME_Y), R_TIME);		//たいむ
+	mVertex->drawF(cDispTimePos, R_TIME);		//たいむ
 
 	drawTime();
 

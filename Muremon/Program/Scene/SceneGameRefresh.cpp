@@ -105,7 +105,7 @@ void SceneGameRefresh::draw()
 
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(Vector2f(G_STATE_FRAME_X, G_STATE_FRAME_Y), R_STATE_FRAME);	//ステータス枠描画
+		mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
 		mVertex->drawF(Vector2f(G_FACE_X, G_F_NIKUMAN_Y), R_F_NIKUMAN);				//にくまん顔
 		mVertex->drawF(Vector2f(G_FACE_X, G_F_YOSHITARO_Y), R_F_YOSHITARO);			//よしたろう顔
 		mVertex->drawF(Vector2f(G_FACE_X, G_F_NOPPO_Y), R_F_NOPPO);					//のっぽ顔
@@ -135,7 +135,7 @@ void SceneGameRefresh::draw()
 
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(Vector2f(G_STATE_FRAME_X, G_STATE_FRAME_Y), R_STATE_FRAME);	//ステータス枠描画
+		mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
 		mVertex->drawF(Vector2f(G_FACE_X, G_F_NIKUMAN_Y), R_F_NIKUMAN);	//にくまん顔
 		mVertex->drawF(Vector2f(G_FACE_X, G_F_YOSHITARO_Y), R_F_YOSHITARO);	//よしたろう顔
 		mVertex->drawF(Vector2f(G_FACE_X, G_F_NOPPO_Y), R_F_NOPPO);	//のっぽ顔

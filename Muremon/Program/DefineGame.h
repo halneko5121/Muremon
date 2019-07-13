@@ -40,12 +40,9 @@ const int cCursorWidth = 20;
 
 //•`‰æˆÊ’u
 const Vector2f cDispBgPos = { 400.0f, 300.0f };
-const float G_SCORE_X = 60.f;
-const float G_SCORE_Y = 20.f;
-const float G_TIME_X = 60.f;
-const float G_TIME_Y = 70.f;
-const float G_STATE_FRAME_X = 400.f;
-const float G_STATE_FRAME_Y = 560.f;
+const Vector2f cDispScorePos = { 60.0f, 20.0f };
+const Vector2f cDispTimePos = { 60.0f, 70.0f };
+const Vector2f cDispStateFramePos = { 400.0f, 560.0f };
 const float G_FACE_X = 30.f;
 const float G_F_NIKUMAN_Y = 560.f;
 const float G_F_YOSHITARO_Y = 535.f;

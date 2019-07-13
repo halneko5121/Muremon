@@ -39,7 +39,7 @@ namespace
 
 	CHARADATA cInitActorData = {
 		// スピード, アニメーション, 矩形, 透過度
-		(0.0f), 0, 0, (MAX_ALPHA),
+		(0.0f), 0, 0, 255,
 		// 各フラグ
 		false, false, false,
 		// 中心座標
@@ -157,7 +157,7 @@ ActorNikuman::drawImple()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 
 	mVertex->setAngle(mAngleDegree);
-	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
+	mVertex->setColor(255, 255, 255, 255);
 	mVertex->drawF(mCharaData.mNowPos, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation) );
 }
 

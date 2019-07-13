@@ -53,7 +53,7 @@ namespace
 
 	CHARADATA init_charadata_noppo = {
 		// スピード, アニメーション, 矩形, 透過度
-		(0.0f), 0, 0, (MAX_ALPHA),
+		(0.0f), 0, 0, 255,
 		// 各フラグ
 		false, false, false,
 		// 中心座標

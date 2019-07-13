@@ -210,13 +210,13 @@ SceneGameNormal::draw()
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(cDispMissionGaugePos, R_GAGE_FRAME);	//みっしょんゲージ枠
-	mVertex->drawF(cDispHpPos, R_HP);	//しゃっくの体力
-	mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
+	mVertex->drawF(cDispBossHpPos, R_HP);	//しゃっくの体力
+	mVertex->drawF(cDispGaugePos, R_GAGE_IN);	//体力ゲージ
 
 	drawHpGauge();
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_FRAME);	//体力ゲージ枠
+	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);	//体力ゲージ枠
 
 	if(mMissionGauge >= MISSION_GAGE_MAX)
 	{
@@ -348,7 +348,7 @@ SceneGameNormal::drawHpGauge()
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,200,30,30);
-	mVertex->drawF(Vector2f(G_GAGE_X - (1.f - num) * 100.f, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
+	mVertex->drawF(Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//体力ゲージ
 }
 
 /**

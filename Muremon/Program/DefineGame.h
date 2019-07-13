@@ -46,13 +46,12 @@ const Vector2f cDispStateFramePos = { 400.0f, 560.0f };
 const Vector2f cDispMissionPos = { 260.0f, 540.0f };
 const Vector2f cDispMissionGaugePos = { 260.0f, 570.0f };
 const Vector2f cDispBossHpPos = { 675.0f, 540.0f };
+const Vector2f cDispGaugePos = { 675.0f, 570.0f };
 
 const float G_FACE_X = 30.f;
 const float G_F_NIKUMAN_Y = 560.f;
 const float G_F_YOSHITARO_Y = 535.f;
 const float G_F_NOPPO_Y = 585.f;
-const float G_GAGE_X = 675.f;
-const float G_GAGE_Y = 570.f;
 const float G_FLAG_X = 400.f;
 const float G_FLAG_Y = 450.f;
 const float G_PUSHNUM = 60.f;

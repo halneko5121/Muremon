@@ -112,12 +112,12 @@ void SceneGameRefresh::draw()
 
 		drawNum();
 
-		mVertex->drawF(cDispHpPos, R_HP);								//しゃっくの体力
+		mVertex->drawF(cDispBossHpPos, R_HP);								//しゃっくの体力
 		drawHpGauge();
 
 		// 体力ゲージ枠
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_FRAME);
+		mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
 
 		// ゲームスタート
 		mVertex->setColor(mStartAlpha,255,255,255);
@@ -142,14 +142,14 @@ void SceneGameRefresh::draw()
 
 		drawNum();
 
-		mVertex->drawF(cDispHpPos, R_HP);	//しゃっくの体力
-		mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
+		mVertex->drawF(cDispBossHpPos, R_HP);	//しゃっくの体力
+		mVertex->drawF(cDispGaugePos, R_GAGE_IN);	//体力ゲージ
 
 		drawHpGauge();
 
 		// 体力ゲージ枠
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_FRAME);
+		mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
 
 		// エフェクト描画
 		GetEffectMgr()->draw();
@@ -201,7 +201,7 @@ void SceneGameRefresh::drawHpGauge()
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,255,0,0);
-	mVertex->drawF(Vector2f(G_GAGE_X - (1.f - num) * 100.f, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
+	mVertex->drawF(Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//体力ゲージ
 }
 
 ActorBase*

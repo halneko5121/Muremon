@@ -9,6 +9,18 @@
 
 namespace
 {
+	// ボス関連
+	const int cInitLife = 3000;			// ボスの初期ライフ
+	const int cAddLife = 1000;			// ボスが死んだ時増加していくライフ
+	const int cDeadAlpha = 5;			// ボスが滅した時のアルファ減値
+	const int cAppearPosX = 950;		// ボスの出現中心位置
+	const int cAppearPosY = 350;		// ボスY位置の固定
+	const int cRefreshStopX = 550;		// スッキリモードのボスの止める中心座標
+	const int cDamageHitCount = 50;		// ボスが攻撃を何回食らった時に痛がり表示
+	const int cDeadSeTime = 60;
+	const int cDamagePosRand = 5;
+	const int cMoveInterval = 3;
+
 	enum State
 	{
 		cState_Idle,			// 待機
@@ -23,26 +35,12 @@ namespace
 	};
 }
 
-// ボス関連
-#define BOSS_INITIAL_LIFE			(3000)	//ボスの初期ライフ
-#define BOSS_GROW_LIFE				(1000)	//ボスが死んだ時増加していくライフ
-#define BOSS_ALPHA_FALL				(5)		//ボスが滅した時のアルファ減値
-#define BOSS_APPEARANCE_POSITION	(950)	//ボスの出現中心位置
-#define BOSS_REFRESH_X_STOP			(550)	//スッキリモードのボスの止める中心座標
-#define BOSS_STABILITY_Y			(350)	//ボスY位置の固定
-#define BOSS_DAMAGE_COUNT			(50)	//ボスが攻撃を何回食らった時に痛がり表示
-#define BOSS_FALL_TIME				(60)
-
-#define DAMAGE_RAND					(5)
-
-#define BOSS_MOVECOUNT				(3)
-
 ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	: ActorBase(texture, vertex)
-	, mLife(BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount))
-	, mMaxLife(BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount))
-	, mMoveX(BOSS_APPEARANCE_POSITION)
-	, mMoveY(BOSS_STABILITY_Y)
+	, mLife(cInitLife + (cAddLife * mLvCount))
+	, mMaxLife(cInitLife + (cAddLife * mLvCount))
+	, mMoveX(cAppearPosX)
+	, mMoveY(cAppearPosY)
 	, mHitCount(0)
 	, mIsWin(false)
 	, mSpeedX(1)
@@ -104,7 +102,7 @@ ActorBoss::updateImple(POS_CC<float> boss_cc)
 		mState.changeStateIfDiff(cState_Dead);
 	}
 	// 規定回数のダメージコントロール
-	else if (mHitCount == BOSS_DAMAGE_COUNT)
+	else if (mHitCount == cDamageHitCount)
 	{
 		mState.changeState(cState_Damage);
 	}
@@ -172,7 +170,7 @@ void
 ActorBoss::stateMove()
 {
 	// 数フレームおきに移動
-	if (mState.getStateCount() % BOSS_MOVECOUNT == 0)
+	if (mState.getStateCount() % cMoveInterval == 0)
 	{ 
 		mMoveX--;
 	}
@@ -181,7 +179,7 @@ ActorBoss::stateMove()
 	mRectData = R_BOSS_MOVE1 + mMoveAnime % 2;
 	if (UtilGame::isGameModeRefresh())
 	{
-		if (mMoveX == BOSS_REFRESH_X_STOP)
+		if (mMoveX == cRefreshStopX)
 		{
 			mState.changeState(cState_Stop);
 			return;
@@ -203,8 +201,8 @@ ActorBoss::stateMove()
 void
 ActorBoss::stateEnterDamage()
 {
-	mDamageX = rand() % DAMAGE_RAND;
-	mDamageY = rand() % DAMAGE_RAND;
+	mDamageX = rand() % cDamagePosRand;
+	mDamageY = rand() % cDamagePosRand;
 	mHitCount = 0;
 }
 void
@@ -218,7 +216,7 @@ ActorBoss::stateDamage()
 		mDamageY = 0;
 		if (UtilGame::isGameModeRefresh())
 		{
-			if (mMoveX == BOSS_REFRESH_X_STOP)
+			if (mMoveX == cRefreshStopX)
 			{
 				mDamageTime = 0;
 				mState.changeState(cState_Stop);
@@ -270,15 +268,15 @@ ActorBoss::stateDead()
 {
 	mFadeOutTime++;
 
-	if (mFadeOutTime == BOSS_FALL_TIME)
+	if (mFadeOutTime == cDeadSeTime)
 	{
 		UtilSound::playOnce(S_DEAD);
 	}
-	else if (mFadeOutTime > BOSS_FALL_TIME)
+	else if (mFadeOutTime > cDeadSeTime)
 	{
 		if (mAlphaCount++ > 1)
 		{
-			mAlpha -= BOSS_ALPHA_FALL;
+			mAlpha -= cDeadAlpha;
 			mAlphaCount = 0;
 		}
 		if (mAlpha < 0)
@@ -328,15 +326,15 @@ ActorBoss::stateEnterRevival()
 	mFadeOutTime = 0;
 	mDamageTime = 0;
 	mRectData = R_BOSS_MOVE1;
-	mMoveX = BOSS_APPEARANCE_POSITION;
+	mMoveX = cAppearPosX;
 	mIsWin = false;
 	mMoveAnime = 0;
 	mMoveAnimeTime = 0;
 	mSpeedX = 1;
 	mDamageX = 0;
 	mDamageY = 0;
-	mLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount);
-	mMaxLife = BOSS_INITIAL_LIFE + (BOSS_GROW_LIFE * mLvCount);
+	mLife = cInitLife + (cAddLife * mLvCount);
+	mMaxLife = cInitLife + (cAddLife * mLvCount);
 }
 void
 ActorBoss::stateRevival()

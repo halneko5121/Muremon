@@ -13,7 +13,7 @@ Vector2f OrbitParabora::orbitParabola(float acceleration, float move_x, float li
 {
 	mTime++;
 	
-	acceleration -= (GRAVITY * mTime);
+	acceleration -= (cGravity * mTime);
 	
 	draw_cc.x += move_x;
 	draw_cc.y -= acceleration;

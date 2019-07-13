@@ -193,7 +193,7 @@ ActorBoss::stateMove()
 	}
 	else
 	{
-		if (mMoveX <= BOSS_WIN_POSITOIN)
+		if (mMoveX <= cGameOverPosX)
 		{
 			mState.changeState(cState_End);
 			return;

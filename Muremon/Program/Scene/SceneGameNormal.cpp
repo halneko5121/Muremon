@@ -359,7 +359,7 @@ SceneGameNormal::drawHitEffect()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mHitEffectAlpha,255,255,255);
-	mVertex->drawF(Vector2f(mBoss->mMoveX - HIT_EFFECT_X, mCharaAtkY), R_HIT_EFFECT);
+	mVertex->drawF(Vector2f(mBoss->mMoveX - cHitEffectPos.x, mCharaAtkY), R_HIT_EFFECT);
 }
 
 /**
@@ -562,7 +562,7 @@ SceneGameNormal::stateEnterReadyFadeIn()
 void
 SceneGameNormal::stateExeReadyFadeIn()
 {
-	mStartAlpha += (G_ALPHA_INCREASE - 5);
+	mStartAlpha += (cAlphaIncrease - 5);
 	if (mStartAlpha >= 255)
 	{
 		mStartAlpha = 255;
@@ -598,7 +598,7 @@ SceneGameNormal::stateEnterReadyFadeOut()
 void
 SceneGameNormal::stateExeReadyFadeOut()
 {
-	mStartAlpha -= (G_ALPHA_INCREASE - 10);
+	mStartAlpha -= (cAlphaIncrease - 10);
 	if (mStartAlpha < 0)
 	{
 		mStartAlpha = 0;

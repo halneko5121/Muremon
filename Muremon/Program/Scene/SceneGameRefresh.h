@@ -61,7 +61,7 @@ private:
 private:
 	StateMachine<SceneGameRefresh>	mState;	// ステート
 	ActorBoss*			mBoss;
-	ActorBase*			mActor[cActorId_Count][MAX_VALLUE_PLAYER];
+	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
 
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント

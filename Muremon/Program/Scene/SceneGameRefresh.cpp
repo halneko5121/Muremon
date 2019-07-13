@@ -75,7 +75,7 @@ void SceneGameRefresh::impleInit()
 	for (int actor_id = cActorId_Noppo; actor_id <= cActorId_Yoshi; actor_id++)
 	{
 		// ŠeÅ‘å”¶¬
-		for (int j = 0; j < MAX_VALLUE_PLAYER; j++)
+		for (int j = 0; j < cMaxPlayerCount; j++)
 		{
 			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id), mTexture, mVertex);
 		}
@@ -249,7 +249,7 @@ SceneGameRefresh::stateEnterReadyFadeIn()
 void
 SceneGameRefresh::stateExeReadyFadeIn()
 {
-	mStartAlpha += (G_ALPHA_INCREASE - 5);
+	mStartAlpha += (cAlphaIncrease - 5);
 	if (mStartAlpha >= 255)
 	{
 		mStartAlpha = 255;
@@ -285,7 +285,7 @@ SceneGameRefresh::stateEnterReadyFadeOut()
 void
 SceneGameRefresh::stateExeReadyFadeOut()
 {
-	mStartAlpha -= (G_ALPHA_INCREASE - 10);
+	mStartAlpha -= (cAlphaIncrease - 10);
 	if (mStartAlpha < 0)
 	{
 		mStartAlpha = 0;
@@ -401,7 +401,7 @@ SceneGameRefresh::stateExeGame()
 	{
 		mNikumanKeyCount++;
 		mNikumanCurrentIndex++;
-		if (MAX_VALLUE_PLAYER <= mNikumanCurrentIndex)
+		if (cMaxPlayerCount <= mNikumanCurrentIndex)
 		{
 			mNikumanCurrentIndex = 0;
 		}
@@ -412,7 +412,7 @@ SceneGameRefresh::stateExeGame()
 	{
 		mYoshitaroKeyCount++;
 		mYoshitaroCurrentIndex++;
-		if (MAX_VALLUE_PLAYER <= mYoshitaroCurrentIndex)
+		if (cMaxPlayerCount <= mYoshitaroCurrentIndex)
 		{
 			mYoshitaroCurrentIndex = 0;
 		}
@@ -423,7 +423,7 @@ SceneGameRefresh::stateExeGame()
 	{
 		mNoppoKeyCount++;
 		mNoppoCurrentIndex++;
-		if (MAX_VALLUE_PLAYER <= mNoppoCurrentIndex)
+		if (cMaxPlayerCount <= mNoppoCurrentIndex)
 		{
 			mNoppoCurrentIndex = 0;
 		}

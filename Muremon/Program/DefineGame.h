@@ -61,8 +61,8 @@ const float WAVE_UP_Y = (60.f / (60.f * 3.5f));
 
 const int MISSION_GAGE_MAX = 5000;
 
-const int HIT_EFFECT_X = 100;
-const int HIT_FFFECT_Y = 450;
+const Vector2f cHitEffectPos = { 100.0f, 450.0 };
+
 const int MISSION_CLEAR_SCORE = 50000;	//ミッションクリア加算スコア
 const int BOSS_KO_SCORE = 10000;
 //キャラクターのスコア、ゲージ設定
@@ -76,12 +76,12 @@ const int NOPPO_DAMAGE = 60;	//のっぽの攻撃力
 const int NOPPO_GAGE = 10;	//のっぽミッションゲージ増加量
 const int NOPPO_SCORE = 10;	//のっぽスコア加算
 
-const int BOSS_WIN_POSITOIN = 450;
+const int cGameOverPosX = 450;
 
-const int G_ALPHA_INCREASE = 15;
+const int cAlphaIncrease = 15;
 const float GAME_GROUND = 500.f;		// ゲーム中の地面に当たる所
-const int MAX_VALLUE_PLAYER = 100;		// キャラ1種類につきの総数
-const float GRAVITY = 0.98f;			// 重力加速度
+const int cMaxPlayerCount = 100;		// キャラ1種類につきの総数
+const float cGravity = 0.98f;			// 重力加速度
 
 enum TEXTURE_DATA_GAME
 {

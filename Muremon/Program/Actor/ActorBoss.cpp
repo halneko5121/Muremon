@@ -48,9 +48,7 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	, mState()
 	, mLvCount(0)
 	, mDamageTime(0)
-	, mAlphaCount(0)
 	, mAlpha(255)
-	, mFadeOutTime(0)
 	, mRectData(R_BOSS_MOVE1)
 	, mMoveAnimeTime(0)
 	, mMoveAnime(0)
@@ -266,29 +264,16 @@ ActorBoss::stateEnterDead()
 void
 ActorBoss::stateDead()
 {
-	mFadeOutTime++;
-
-	if (mFadeOutTime == cDeadSeTime)
+	if (mState.getStateCount() == cDeadSeTime)
 	{
 		UtilSound::playOnce(S_DEAD);
 	}
-	else if (mFadeOutTime > cDeadSeTime)
+	else if (cDeadSeTime < mState.getStateCount())
 	{
-		if (mAlphaCount++ > 1)
-		{
-			mAlpha -= cDeadAlpha;
-			mAlphaCount = 0;
-		}
-		if (mAlpha < 0)
-		{
-			mAlpha = 0;
-			mAlphaCount = 0;
-		}
-
+		mAlpha -= cDeadAlpha;
+		if (mAlpha < 0) mAlpha = 0;
 		if (mAlpha == 0)
 		{
-			mAlpha = 0;
-			mAlphaCount = 0;
 			mState.changeState(cState_Revival);
 			return;
 		}
@@ -320,10 +305,8 @@ ActorBoss::stateEnterRevival()
 	else mLvCount = 7;
 
 	// ƒŠƒZƒbƒg
-	mAlphaCount = 0;
 	mHitCount = 0;
 	mAlpha = 255;
-	mFadeOutTime = 0;
 	mDamageTime = 0;
 	mRectData = R_BOSS_MOVE1;
 	mMoveX = cAppearPosX;

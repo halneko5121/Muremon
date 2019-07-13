@@ -47,10 +47,7 @@ private:
 
 	float		mLvCount;
 	int			mDamageTime;
-	int			mAlphaCount;	// ボスのアルファカウント
-
 	int			mAlpha;
-	int			mFadeOutTime;
 	int			mRectData;
 
 	int			mMoveCount;

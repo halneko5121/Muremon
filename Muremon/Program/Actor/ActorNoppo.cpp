@@ -120,11 +120,11 @@ ActorNoppo::initImple()
 void
 ActorNoppo::runImple()
 {
-	if (mCharaData.flag_atk1)
+	if (mCharaData.mIsAtk1)
 	{
 		mState.changeStateIfDiff(cState_GroundAtk);
 	}
-	else if (mCharaData.flag_atk2)
+	else if (mCharaData.mIsAtk2)
 	{
 		mState.changeStateIfDiff(cState_SkyAtk);
 	}
@@ -161,7 +161,7 @@ ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 		delay = 0;
 	}
 
-	mCharaData.rect_num	= rect_num;
+	mCharaData.mRectNum	= rect_num;
 
 	return anime_count;
 }
@@ -175,9 +175,9 @@ ActorNoppo::drawImple()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
 
 	mVertex->setAngle(mAngleDegree);
-	mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.alpha), 255, 255, 255);
-	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y,
-		(mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
+	mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.mAlpha), 255, 255, 255);
+	mVertex->drawF(mCharaData.mNowPos.x, mCharaData.mNowPos.y,
+		(mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation));
 }
 
 /**
@@ -186,9 +186,9 @@ ActorNoppo::drawImple()
 Vector2f
 ActorNoppo::updateAttack2()	
 {
-	mCharaData.draw_cc = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData.draw_cc);
+	mCharaData.mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData.mNowPos);
 
-	return mCharaData.draw_cc;
+	return mCharaData.mNowPos;
 }
 
 // -----------------------------------------------------------------
@@ -215,19 +215,19 @@ ActorNoppo::stateEnterGroundAtk()
 {
 	// UŒ‚ŠJn
 	mCharaData = init_charadata_noppo;
-	mCharaData.flag_atk1 = true;
-	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = Vector2f(-RADIUS_NOPPO, G_ATK_3_START_Y);
+	mCharaData.mIsAtk1 = true;
+	mCharaData.mSpeed = getSpeed();
+	mCharaData.mNowPos = Vector2f(-RADIUS_NOPPO, G_ATK_3_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 }
 void
 ActorNoppo::stateGroundAtk()
 {
-	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
+	if (isHit(mCharaData.mNowPos, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mCharaData.draw_cc.y;
+		mHitPosY = mCharaData.mNowPos.y;
 
 		if (UtilSound::isPlaying(S_NOPPO_GANMEN))
 		{
@@ -235,7 +235,7 @@ ActorNoppo::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_NOPPO_GANMEN);
 
-		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect5, param);
 
 		mState.changeState(cState_GroundDeath);
@@ -244,9 +244,9 @@ ActorNoppo::stateGroundAtk()
 	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
 	else
 	{
-		if (mCharaData.draw_cc.x - RADIUS_NOPPO < cWindowWidth) {
-			mCharaData.draw_cc = updateAttack1();
-			mCharaData.animetion = setAnimetion(ANIME_G_ATK4_NOPPO, mCharaData.animetion, NULL);
+		if (mCharaData.mNowPos.x - RADIUS_NOPPO < cWindowWidth) {
+			mCharaData.mNowPos = updateAttack1();
+			mCharaData.mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mCharaData.mAnimation, NULL);
 		}
 		else
 		{
@@ -262,9 +262,9 @@ void
 ActorNoppo::stateEnterSkyAtk()
 {
 	mCharaData = init_charadata_noppo;
-	mCharaData.flag_atk2 = true;
-	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = Vector2f(-RADIUS_NOPPO, mAtkStartY);
+	mCharaData.mIsAtk2 = true;
+	mCharaData.mSpeed = getSpeed();
+	mCharaData.mNowPos = Vector2f(-RADIUS_NOPPO, mAtkStartY);
 
 	mCountEffect = 0;
 	mAtkStartY = (float)(rand() % cRandY);
@@ -275,10 +275,10 @@ ActorNoppo::stateEnterSkyAtk()
 void
 ActorNoppo::stateSkyAtk()
 {
-	if (isHit(mCharaData.draw_cc, mBossPos, ID_NOPPO))
+	if (isHit(mCharaData.mNowPos, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mCharaData.draw_cc.y;
+		mHitPosY = mCharaData.mNowPos.y;
 
 		if (UtilSound::isPlaying(S_NOPPO_KOKE))
 		{
@@ -295,7 +295,7 @@ ActorNoppo::stateSkyAtk()
 			UtilSound::playOnce((S_NOPPO_PETI));
 		}
 
-		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect6, param);
 
 		mState.changeState(cState_SkyDeath);
@@ -304,10 +304,10 @@ ActorNoppo::stateSkyAtk()
 	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
 	else
 	{
-		if (mCharaData.draw_cc.x - RADIUS_NOPPO < cWindowWidth) {
-			mOrbit->mWave->setSpeed(mCharaData.speed);
-			mCharaData.draw_cc = updateAttack2();
-			mCharaData.animetion = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mCharaData.animetion, ANIME_S_ATK1_NOPPO);
+		if (mCharaData.mNowPos.x - RADIUS_NOPPO < cWindowWidth) {
+			mOrbit->mWave->setSpeed(mCharaData.mSpeed);
+			mCharaData.mNowPos = updateAttack2();
+			mCharaData.mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mCharaData.mAnimation, ANIME_S_ATK1_NOPPO);
 		}
 		else
 		{
@@ -328,18 +328,18 @@ ActorNoppo::stateGroundDeath()
 {
 	static int wait_count = 0;
 
-	if (!mCharaData.flag_death_next)
+	if (!mCharaData.mIsDeathNext)
 	{
-		mCharaData.animetion = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mCharaData.animetion, ANIME_MOTION1_NOPPO);
-		if (mCharaData.animetion == 2)
+		mCharaData.mAnimation = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mCharaData.mAnimation, ANIME_MOTION1_NOPPO);
+		if (mCharaData.mAnimation == 2)
 		{
-			mCharaData.flag_death_next = true;
+			mCharaData.mIsDeathNext = true;
 		}
 	}
 	else 
 	{
-		mCharaData.animetion = 0;
-		mCharaData.rect_num = ANIME_MOTION3_NOPPO;
+		mCharaData.mAnimation = 0;
+		mCharaData.mRectNum = ANIME_MOTION3_NOPPO;
 		if (wait_count++ > cWaitMotion) {
 			wait_count = 0;
 			mState.changeState(cState_End);
@@ -360,19 +360,19 @@ ActorNoppo::stateSkyDeath()
 	// ‰ñ“]‚³‚¹‚é
 	mAngleDegree += SPIN_SPEED;
 
-	mCharaData.animetion = 0;																	//•`‰æ‚ğŒÅ’è
-	mCharaData.rect_num = ANIME_S_ATK2_NOPPO;
+	mCharaData.mAnimation = 0;																	//•`‰æ‚ğŒÅ’è
+	mCharaData.mRectNum = ANIME_S_ATK2_NOPPO;
 
-	mCharaData.draw_cc = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.draw_cc);
+	mCharaData.mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.mNowPos);
 
 	// ‰æ–ÊŠO‚È‚ç€–S
-	if ((mCharaData.draw_cc.x < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_NOPPO + 50) &&
-		(mCharaData.draw_cc.y < -(RADIUS_NOPPO + 50)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 50)) 
+	if ((mCharaData.mNowPos.x < -(RADIUS_NOPPO + 50)) || (mCharaData.mNowPos.x > cWindowWidth + RADIUS_NOPPO + 50) &&
+		(mCharaData.mNowPos.y < -(RADIUS_NOPPO + 50)) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_NOPPO + 50)) 
 	{
 		mState.changeState(cState_End);
 	}
 
-	if ((mCharaData.draw_cc.y < (-RADIUS_NOPPO)) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_NOPPO + 30))
+	if ((mCharaData.mNowPos.y < (-RADIUS_NOPPO)) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_NOPPO + 30))
 	{
 		mState.changeState(cState_End);
 	}
@@ -384,8 +384,8 @@ ActorNoppo::stateSkyDeath()
 void
 ActorNoppo::stateEnterEnd()
 {
-	mCharaData.flag_atk1 = mCharaData.flag_atk2 = false;
-	mCharaData.animetion = 0;
+	mCharaData.mIsAtk1 = mCharaData.mIsAtk2 = false;
+	mCharaData.mAnimation = 0;
 }
 void
 ActorNoppo::stateEnd()

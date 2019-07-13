@@ -119,11 +119,11 @@ ActorYoshi::initImple()
 void
 ActorYoshi::runImple()
 {
-	if (mCharaData.flag_atk1)
+	if (mCharaData.mIsAtk1)
 	{
 		mState.changeStateIfDiff(cState_GroundAtk);
 	}
-	else if (mCharaData.flag_atk2)
+	else if (mCharaData.mIsAtk2)
 	{
 		mState.changeStateIfDiff(cState_SkyAtk);
 	}
@@ -156,7 +156,7 @@ ActorYoshi::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 		delay = 0;
 	}
 
-	mCharaData.rect_num	= rect_num;
+	mCharaData.mRectNum	= rect_num;
 
 	return anime_count;
 }
@@ -170,7 +170,7 @@ ActorYoshi::drawImple()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
 
 	mVertex->setAngle(mAngleDegree);
-	mVertex->drawF(mCharaData.draw_cc.x, mCharaData.draw_cc.y, (mRectStartNum + mCharaData.rect_num + mCharaData.animetion));
+	mVertex->drawF(mCharaData.mNowPos.x, mCharaData.mNowPos.y, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation));
 }
 
 /**
@@ -179,9 +179,9 @@ ActorYoshi::drawImple()
 Vector2f
 ActorYoshi::updateAttack2()														//キー入力による動作その2
 {
-	mCharaData.draw_cc = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData.draw_cc);
+	mCharaData.mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData.mNowPos);
 
-	return mCharaData.draw_cc;
+	return mCharaData.mNowPos;
 }
 
 // -----------------------------------------------------------------
@@ -208,10 +208,10 @@ ActorYoshi::stateEnterGroundAtk()
 {
 	// 攻撃開始
 	mCharaData = cInitActorData;
-	mCharaData.flag_atk1 = true;
-	mCharaData.speed = getSpeed();
-	mCharaData.animetion = 0;
-	mCharaData.draw_cc = Vector2f(-RADIUS_YOSHI, G_ATK_1_START_Y);
+	mCharaData.mIsAtk1 = true;
+	mCharaData.mSpeed = getSpeed();
+	mCharaData.mAnimation = 0;
+	mCharaData.mNowPos = Vector2f(-RADIUS_YOSHI, G_ATK_1_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
@@ -219,10 +219,10 @@ ActorYoshi::stateEnterGroundAtk()
 void
 ActorYoshi::stateGroundAtk()
 {
-	if (isHit(mCharaData.draw_cc, mBossPos, ID_YOSHI))
+	if (isHit(mCharaData.mNowPos, mBossPos, ID_YOSHI))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mCharaData.draw_cc.y;
+		mHitPosY = mCharaData.mNowPos.y;
 
 		if (UtilSound::isPlaying(S_YOSHI_HIP))
 		{
@@ -230,16 +230,16 @@ ActorYoshi::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_YOSHI_HIP);
 
-		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect3, param);
 
 		mState.changeState(cState_GroundDeath);
 	}
 
-	if (mCharaData.draw_cc.x - RADIUS_YOSHI < cWindowWidth)
+	if (mCharaData.mNowPos.x - RADIUS_YOSHI < cWindowWidth)
 	{
-		mCharaData.draw_cc = updateAttack1();
-		mCharaData.animetion = setAnimetion(ANIME_G_ATK4_YOSHI, mCharaData.animetion, NULL);
+		mCharaData.mNowPos = updateAttack1();
+		mCharaData.mAnimation = setAnimetion(ANIME_G_ATK4_YOSHI, mCharaData.mAnimation, NULL);
 	}
 	else
 	{
@@ -255,9 +255,9 @@ ActorYoshi::stateEnterSkyAtk()
 {
 	// 攻撃開始
 	mCharaData = cInitActorData;
-	mCharaData.flag_atk2 = true;
-	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = Vector2f(-RADIUS_YOSHI, mAtkStartY);
+	mCharaData.mIsAtk2 = true;
+	mCharaData.mSpeed = getSpeed();
+	mCharaData.mNowPos = Vector2f(-RADIUS_YOSHI, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
@@ -267,10 +267,10 @@ ActorYoshi::stateEnterSkyAtk()
 void
 ActorYoshi::stateSkyAtk()
 {
-	if (isHit(mCharaData.draw_cc, mBossPos, ID_YOSHI))
+	if (isHit(mCharaData.mNowPos, mBossPos, ID_YOSHI))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mCharaData.draw_cc.y;
+		mHitPosY = mCharaData.mNowPos.y;
 
 		if (UtilSound::isPlaying(S_YOSHI_HUSEN))
 		{
@@ -278,17 +278,17 @@ ActorYoshi::stateSkyAtk()
 		}
 		UtilSound::playOnce(S_YOSHI_HUSEN);
 
-		EffectParam param(mTexture, mVertex, mCharaData.draw_cc);
+		EffectParam param(mTexture, mVertex, mCharaData.mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect4, param);
 
 		mState.changeState(cState_SkyDeath);
 	}
 
-	if (mCharaData.draw_cc.x - RADIUS_YOSHI < cWindowWidth)
+	if (mCharaData.mNowPos.x - RADIUS_YOSHI < cWindowWidth)
 	{
-		mOrbit->mWave->setSpeed(mCharaData.speed);
-		mCharaData.draw_cc = updateAttack2();
-		mCharaData.animetion = setAnimetion(NULL, mCharaData.animetion, ANIME_S_ATK1_YOSHI);
+		mOrbit->mWave->setSpeed(mCharaData.mSpeed);
+		mCharaData.mNowPos = updateAttack2();
+		mCharaData.mAnimation = setAnimetion(NULL, mCharaData.mAnimation, ANIME_S_ATK1_YOSHI);
 	}
 	else
 	{
@@ -306,25 +306,25 @@ ActorYoshi::stateEnterGroundDeath()
 void
 ActorYoshi::stateGroundDeath()
 {
-	if (!mCharaData.flag_death_next)
+	if (!mCharaData.mIsDeathNext)
 	{
-		mCharaData.animetion = setAnimetion((ANIME_MOTION3_YOSHI - ANIME_G_ATK4_YOSHI), mCharaData.animetion, ANIME_MOTION1_YOSHI);
-		if (mCharaData.animetion == 3)
+		mCharaData.mAnimation = setAnimetion((ANIME_MOTION3_YOSHI - ANIME_G_ATK4_YOSHI), mCharaData.mAnimation, ANIME_MOTION1_YOSHI);
+		if (mCharaData.mAnimation == 3)
 		{
-			mCharaData.flag_death_next = true;
+			mCharaData.mIsDeathNext = true;
 		}
 	}
-	if (mCharaData.flag_death_next)
+	if (mCharaData.mIsDeathNext)
 	{
-		mCharaData.animetion = 0;																//描画を固定
-		mCharaData.rect_num = ANIME_DEATH_YOSHI;
+		mCharaData.mAnimation = 0;																//描画を固定
+		mCharaData.mRectNum = ANIME_DEATH_YOSHI;
 
-		mCharaData.draw_cc = mOrbit->mRebound->orbitRebound(mRandDeg, mCharaData.speed, mCharaData.draw_cc);
+		mCharaData.mNowPos = mOrbit->mRebound->orbitRebound(mRandDeg, mCharaData.mSpeed, mCharaData.mNowPos);
 	}
 
 	// 中心座標が画面外なら死亡
-	if ((mCharaData.draw_cc.x < -RADIUS_YOSHI) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_YOSHI) &&
-		(mCharaData.draw_cc.y < -RADIUS_YOSHI) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_YOSHI))
+	if ((mCharaData.mNowPos.x < -RADIUS_YOSHI) || (mCharaData.mNowPos.x > cWindowWidth + RADIUS_YOSHI) &&
+		(mCharaData.mNowPos.y < -RADIUS_YOSHI) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_YOSHI))
 	{
 		mState.changeState(cState_End);
 	}
@@ -340,31 +340,31 @@ ActorYoshi::stateEnterSkyDeath()
 void
 ActorYoshi::stateSkyDeath()
 {
-	if (!mCharaData.flag_death_next)
+	if (!mCharaData.mIsDeathNext)
 	{
-		mCharaData.animetion = setAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI), mCharaData.animetion, ANIME_S_ATK2_YOSHI);
-		if (mCharaData.animetion == 3)
+		mCharaData.mAnimation = setAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI), mCharaData.mAnimation, ANIME_S_ATK2_YOSHI);
+		if (mCharaData.mAnimation == 3)
 		{
-			mCharaData.flag_death_next = true;
+			mCharaData.mIsDeathNext = true;
 		}
 	}
-	if (mCharaData.flag_death_next)
+	if (mCharaData.mIsDeathNext)
 	{
 		mAngleDegree += SPIN_SPEED;
-		mCharaData.animetion = 0;																//描画を固定
-		mCharaData.rect_num = ANIME_DEATH_YOSHI;
+		mCharaData.mAnimation = 0;																//描画を固定
+		mCharaData.mRectNum = ANIME_DEATH_YOSHI;
 
-		mCharaData.draw_cc = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.draw_cc);
+		mCharaData.mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.mNowPos);
 	}
 
-	if ((mCharaData.draw_cc.y < -RADIUS_YOSHI) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_YOSHI))
+	if ((mCharaData.mNowPos.y < -RADIUS_YOSHI) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_YOSHI))
 	{
 		mState.changeState(cState_End);
 	}
 
 	// 中心座標が画面外なら死亡
-	if ((mCharaData.draw_cc.x < -RADIUS_YOSHI) || (mCharaData.draw_cc.x > cWindowWidth + RADIUS_YOSHI) &&
-		(mCharaData.draw_cc.y < -RADIUS_YOSHI) || (mCharaData.draw_cc.y > cWindowHeight + RADIUS_YOSHI)) 
+	if ((mCharaData.mNowPos.x < -RADIUS_YOSHI) || (mCharaData.mNowPos.x > cWindowWidth + RADIUS_YOSHI) &&
+		(mCharaData.mNowPos.y < -RADIUS_YOSHI) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_YOSHI)) 
 	{
 		mState.changeState(cState_End);
 	}
@@ -376,9 +376,9 @@ ActorYoshi::stateSkyDeath()
 void
 ActorYoshi::stateEnterEnd()
 {
-	mCharaData.flag_atk1 = mCharaData.flag_atk2 = false;
-	mCharaData.flag_death_next = false;
-	mCharaData.animetion = 0;
+	mCharaData.mIsAtk1 = mCharaData.mIsAtk2 = false;
+	mCharaData.mIsDeathNext = false;
+	mCharaData.mAnimation = 0;
 }
 void
 ActorYoshi::stateEnd()

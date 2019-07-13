@@ -61,16 +61,16 @@ typedef struct F_RECT{
 
 //キャラのデータ
 typedef struct CHARADATA{
-	float speed;
-	int	  animetion;
-	int	  rect_num;
-	float alpha;
+	float		mSpeed;
+	int			mAnimation;
+	int			mRectNum;
+	float		mAlpha;
 
-	bool  flag_atk1;
-	bool  flag_atk2;
-	bool  flag_death_next;
+	bool		mIsAtk1;
+	bool		mIsAtk2;
+	bool		mIsDeathNext;
 
-	Vector2f  draw_cc;
+	Vector2f	mNowPos;
 }CHARADATA;
 
 class ActorBase

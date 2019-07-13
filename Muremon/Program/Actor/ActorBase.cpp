@@ -122,12 +122,12 @@ ActorBase::getNikumanSpeed() const
 void
 ActorBase::setGroundAtkFlag()
 {
-	mCharaData.flag_atk1 = true;
+	mCharaData.mIsAtk1 = true;
 }
 void
 ActorBase::setSkyAtkFlag()
 {
-	mCharaData.flag_atk2 = true;
+	mCharaData.mIsAtk2 = true;
 }
 
 /**
@@ -184,9 +184,9 @@ Vector2f
 ActorBase::updateAttack1()
 {
 	// ‰E‚ÉˆÚ“®
-	mCharaData.draw_cc.x += mCharaData.speed;
+	mCharaData.mNowPos.x += mCharaData.mSpeed;
 
-	return mCharaData.draw_cc;
+	return mCharaData.mNowPos;
 }
 
 /**

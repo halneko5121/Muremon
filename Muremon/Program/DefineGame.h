@@ -77,9 +77,7 @@ const int NOPPO_GAGE = 10;	//のっぽミッションゲージ増加量
 const int NOPPO_SCORE = 10;	//のっぽスコア加算
 
 const int cGameOverPosX = 450;
-
 const int cAlphaIncrease = 15;
-const float GAME_GROUND = 500.f;		// ゲーム中の地面に当たる所
 const int cMaxPlayerCount = 100;		// キャラ1種類につきの総数
 const float cGravity = 0.98f;			// 重力加速度
 

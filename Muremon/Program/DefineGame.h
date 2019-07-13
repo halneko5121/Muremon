@@ -39,8 +39,7 @@ const int cCursorWidth = 20;
 
 
 //•`‰æˆÊ’u
-const float G_BG_X = 400.f;
-const float G_BG_Y = 300.f;
+const Vector2f cDispBgPos = { 400.0f, 300.0f };
 const float G_SCORE_X = 60.f;
 const float G_SCORE_Y = 20.f;
 const float G_TIME_X = 60.f;

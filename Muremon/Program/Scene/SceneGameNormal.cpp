@@ -143,14 +143,14 @@ SceneGameNormal::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_BG);
+	mVertex->drawF(cDispBgPos, R_GAME_BG);
 	mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);
 
 	if(mGameState == G_START_SCENE)
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(mStartAlpha,255,255,255);
-		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_START);	//ゲームスタート
+		mVertex->drawF(cDispBgPos, R_GAME_START);	//ゲームスタート
 	}
 	else if(mGameState == G_GAME_SCENE)
 	{
@@ -168,13 +168,13 @@ SceneGameNormal::draw()
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_OVER);	//ゲームオーバー
+		mVertex->drawF(cDispBgPos, R_GAME_OVER);	//ゲームオーバー
 	}
 	else if(mGameState == G_GAME_CLEAR)
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_CLEAR);	//ゲームクリア
+		mVertex->drawF(cDispBgPos, R_GAME_CLEAR);	//ゲームクリア
 	}
 
 	if(mMissionStateKeep == MISSION_OUGI)

@@ -100,7 +100,7 @@ void SceneGameRefresh::draw()
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_BG);
+		mVertex->drawF(cDispBgPos, R_GAME_BG);
 		mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);
 
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
@@ -121,13 +121,13 @@ void SceneGameRefresh::draw()
 
 		// ゲームスタート
 		mVertex->setColor(mStartAlpha,255,255,255);
-		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_START);
+		mVertex->drawF(cDispBgPos, R_GAME_START);
 	}
 	else if(mState.isEqual(cState_Game))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_BG);	//背景
+		mVertex->drawF(cDispBgPos, R_GAME_BG);	//背景
 		mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);	//旗
 
 		// アクターの描画

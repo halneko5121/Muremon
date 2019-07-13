@@ -8,7 +8,7 @@ OrbitRebound::~OrbitRebound()
 {
 }
 
-POS_CC<float> OrbitRebound::orbitRebound(float deg, float radius, POS_CC<float> draw_cc)
+Vector2<float> OrbitRebound::orbitRebound(float deg, float radius, Vector2<float> draw_cc)
 {
 	float rad = 0.f;
 	float draw_x,draw_y = 0.f;

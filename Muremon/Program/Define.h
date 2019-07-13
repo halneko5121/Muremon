@@ -15,13 +15,13 @@
 #define MAX_STRING			(256)
 
 template <class T>
-struct POS_CC{
-	POS_CC()
+struct Vector2{
+	Vector2()
 		: x(0)
 		, y(0)
 	{}
 
-	POS_CC(T in_x, T in_y)
+	Vector2(T in_x, T in_y)
 		: x(in_x)
 		, y(in_y)
 	{}
@@ -29,4 +29,3 @@ struct POS_CC{
 	T x;
 	T y;
 };
-//í«â¡Å™éOè„3/26

@@ -56,7 +56,7 @@ public:
 	/**
 	 * @brief	アクターの更新
 	 */
-	void				update(POS_CC<float> boss_cc);
+	void				update(Vector2<float> boss_cc);
 
 	/**
 	 * @brief	アクターの描画

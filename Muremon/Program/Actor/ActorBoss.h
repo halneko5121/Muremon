@@ -15,7 +15,7 @@ public:
 
 	void		initImple() override;
 	void		runImple() override;
-	void		updateImple(POS_CC<float> boss_cc) override;
+	void		updateImple(Vector2<float> boss_cc) override;
 	void		drawImple() override;
 	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 

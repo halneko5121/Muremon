@@ -9,7 +9,7 @@ OrbitParabora::~OrbitParabora()
 {
 }
 
-POS_CC<float> OrbitParabora::orbitParabola(float acceleration, float move_x, float limit_y ,POS_CC<float> draw_cc)
+Vector2<float> OrbitParabora::orbitParabola(float acceleration, float move_x, float limit_y ,Vector2<float> draw_cc)
 {
 	mTime++;
 	

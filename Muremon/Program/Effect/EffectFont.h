@@ -25,8 +25,8 @@ public:
 	bool			isEnd() override;
 
 private:
-	POS_CC<float>	setPos(POS_CC<float> font_cc, float chara_radius, float range_font);
-	POS_CC<float>	setEffectShake(float change_x, float change_y, POS_CC<float> font_cc);
+	Vector2<float>	setPos(Vector2<float> font_cc, float chara_radius, float range_font);
+	Vector2<float>	setEffectShake(float change_x, float change_y, Vector2<float> font_cc);
 
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
@@ -36,7 +36,7 @@ private:
 
 private:
 	StateMachine<EffectFont>	mState;			// ステート
-	POS_CC<float>				mInitPos;
+	Vector2<float>				mInitPos;
 
 	float						mShakeX;
 	float						mShakeY;

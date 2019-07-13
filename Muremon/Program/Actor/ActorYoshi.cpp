@@ -55,7 +55,7 @@ namespace
 		//各フラグ
 		false, false, false,
 		// 中心座標
-		POS_CC<float>((-RADIUS_YOSHI),(cWindowWidth + 50.f + RADIUS_YOSHI)),
+		Vector2<float>((-RADIUS_YOSHI),(cWindowWidth + 50.f + RADIUS_YOSHI)),
 	};
 
 	enum State
@@ -133,7 +133,7 @@ ActorYoshi::runImple()
  * @brief 更新
  */
 void
-ActorYoshi::updateImple(POS_CC<float> boss_cc)
+ActorYoshi::updateImple(Vector2<float> boss_cc)
 {
 	mBossPos = boss_cc;
 	mState.executeState();
@@ -176,7 +176,7 @@ ActorYoshi::drawImple()
 /**
  * @brief 攻撃処理
  */
-POS_CC<float>
+Vector2<float>
 ActorYoshi::updateAttack2()														//キー入力による動作その2
 {
 	mCharaData.draw_cc = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData.draw_cc);
@@ -211,7 +211,7 @@ ActorYoshi::stateEnterGroundAtk()
 	mCharaData.flag_atk1 = true;
 	mCharaData.speed = getSpeed();
 	mCharaData.animetion = 0;
-	mCharaData.draw_cc = POS_CC<float>(-RADIUS_YOSHI, G_ATK_1_START_Y);
+	mCharaData.draw_cc = Vector2<float>(-RADIUS_YOSHI, G_ATK_1_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
@@ -257,7 +257,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mCharaData = cInitActorData;
 	mCharaData.flag_atk2 = true;
 	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = POS_CC<float>(-RADIUS_YOSHI, mAtkStartY);
+	mCharaData.draw_cc = Vector2<float>(-RADIUS_YOSHI, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);

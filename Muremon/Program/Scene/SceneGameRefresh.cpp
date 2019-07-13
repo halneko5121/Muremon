@@ -25,7 +25,7 @@
 
 namespace
 {
-	POS_CC<float> boss_cc = { 600, 350 };
+	Vector2<float> boss_cc = { 600, 350 };
 
 	enum State
 	{

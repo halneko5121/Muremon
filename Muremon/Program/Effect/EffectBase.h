@@ -15,7 +15,7 @@ enum EffectId;
 
 struct EffectParam
 {
-	EffectParam(Texture* texture, Vertex* vertex, POS_CC<float> pos)
+	EffectParam(Texture* texture, Vertex* vertex, Vector2<float> pos)
 		: mTexture(texture)
 		, mVertex(vertex)
 		, mPos(pos)
@@ -24,7 +24,7 @@ struct EffectParam
 
 	Texture*		mTexture;
 	Vertex*			mVertex;
-	POS_CC<float>	mPos;
+	Vector2<float>	mPos;
 };
 
 class EffectBase
@@ -42,6 +42,6 @@ protected:
 	Texture*		mTexture;		// テクスチャ
 	Vertex*			mVertex;		// バーテックス
 	int				mRectIndex;
-	POS_CC<float>	mPos;
+	Vector2<float>	mPos;
 	int				mAlpha;
 };

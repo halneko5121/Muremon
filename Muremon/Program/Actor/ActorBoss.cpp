@@ -9,28 +9,6 @@
 
 namespace
 {
-	//ボスのコントロールタイプ
-	enum BOSS_CONTROLTYPE
-	{
-		REFRESH_TYPE,	//すっきりモード
-		NORMAL_TYPE,	//ノーマルモード
-	};
-
-	enum BOSS_FADE
-	{
-		F_BOSS_ACTION,		//移動、ダメージ
-		F_BOSS_FALL,		//滅
-		F_BOSS_END,			//アルファ値エンド
-	};
-
-	enum BOSS_MODE
-	{
-		M_BOSS_MOVE,		//移動
-		M_BOSS_DAMEGE,		//ダメージ
-		M_BOSS_USUALLY,		//ボス停止
-		M_BOSS_FALL,		//滅
-	};
-
 	enum State
 	{
 		cState_Idle,			// 待機

@@ -15,6 +15,7 @@
 #include <list>
 #include <string>
 #include <d3dx9math.h>
+#include "Library/Math/Vector.h"
 
 #define RAD								(D3DX_PI/180.0f)	// 角度からラジアンを求める
 #define DEG								(180.0f/D3DX_PI)	// ラジアンから角度を求める
@@ -45,19 +46,3 @@
 #define SAFE_RELEASE(p) 				{if(p){(p)->Release(); 	(p) = nullptr;} }
 #define SAFE_DELETE_ARRAY(p)			{if(p){delete[](p);		(p) = nullptr;} }
 #define SAFE_DELETE(p)					{if(p){delete(p);		(p) = nullptr;} }
-
-template <class T>
-struct Vector2 {
-	Vector2()
-		: x(0)
-		, y(0)
-	{}
-
-	Vector2(T in_x, T in_y)
-		: x(in_x)
-		, y(in_y)
-	{}
-
-	T x;
-	T y;
-};

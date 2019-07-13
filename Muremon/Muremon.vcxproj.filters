@@ -126,6 +126,9 @@
     <ClCompile Include="Program\Effect\EffectBossDead.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Library\Math\Vector.cpp">
+      <Filter>Library\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -255,6 +258,9 @@
     <ClInclude Include="Program\Effect\EffectBossDead.h">
       <Filter>Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Library\Math\Vector.h">
+      <Filter>Library\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -298,6 +304,9 @@
     </Filter>
     <Filter Include="Effect">
       <UniqueIdentifier>{b6dcc952-1334-4084-bbda-2960a6fb5b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Math">
+      <UniqueIdentifier>{6639024e-fef0-40c6-a460-411e31df5631}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

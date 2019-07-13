@@ -14,6 +14,7 @@
     <ClCompile Include="Library\Font\DirectFont.cpp" />
     <ClCompile Include="Library\Graphics\FadeMgr.cpp" />
     <ClCompile Include="Library\Input\DirectInput.cpp" />
+    <ClCompile Include="Library\Math\Vector.cpp" />
     <ClCompile Include="Library\Sound\DirectSound.cpp" />
     <ClCompile Include="Library\Graphics\DirectGraphics.cpp" />
     <ClCompile Include="Library\Graphics\Texture.cpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="Library\Font\DirectFont.h" />
     <ClInclude Include="Library\Graphics\FadeMgr.h" />
     <ClInclude Include="Library\Input\DirectInput.h" />
+    <ClInclude Include="Library\Math\Vector.h" />
     <ClInclude Include="Library\Sound\DirectSound.h" />
     <ClInclude Include="Library\Graphics\DirectGraphics.h" />
     <ClInclude Include="Library\Graphics\Texture.h" />

@@ -43,7 +43,7 @@ namespace
 		// 各フラグ
 		false, false, false,
 		// 中心座標
-		Vector2<float>(0.f, 0.f),
+		Vector2f(0.f, 0.f),
 	};
 
 	enum State
@@ -120,7 +120,7 @@ ActorNikuman::runImple()
  * @brief 更新
  */
 void
-ActorNikuman::updateImple(Vector2<float> boss_cc)
+ActorNikuman::updateImple(Vector2f boss_cc)
 {
 	mBossPos = boss_cc;
 	mState.executeState();
@@ -164,8 +164,8 @@ ActorNikuman::drawImple()
 /**
  * @brief 攻撃処理
  */
-Vector2<float>
-ActorNikuman::updateAttack2(Vector2<float> boss_cc)
+Vector2f
+ActorNikuman::updateAttack2(Vector2f boss_cc)
 {
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
@@ -209,7 +209,7 @@ ActorNikuman::stateEnterGroundAtk()
 	mCharaData.flag_atk1 = true;
 	mCharaData.speed = getNikumanSpeed();
 	mCharaData.animetion = 0;
-	mCharaData.draw_cc = Vector2<float>(-RADIUS_NIKU, G_ATK_2_START_Y);
+	mCharaData.draw_cc = Vector2f(-RADIUS_NIKU, G_ATK_2_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
@@ -250,7 +250,7 @@ ActorNikuman::stateEnterSkyAtk()
 	mCharaData = cInitActorData;
 	mCharaData.flag_atk2 = true;
 	mCharaData.speed = getNikumanSpeed();
-	mCharaData.draw_cc = Vector2<float>(-RADIUS_NIKU, mAtkStartY);
+	mCharaData.draw_cc = Vector2f(-RADIUS_NIKU, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);

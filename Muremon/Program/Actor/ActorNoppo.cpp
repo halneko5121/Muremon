@@ -57,7 +57,7 @@ namespace
 		// 各フラグ
 		false, false, false,
 		// 中心座標
-		Vector2<float>((-RADIUS_NOPPO), (cWindowWidth + 50.f + RADIUS_NOPPO)),
+		Vector2f((-RADIUS_NOPPO), (cWindowWidth + 50.f + RADIUS_NOPPO)),
 	};
 
 	enum State
@@ -134,7 +134,7 @@ ActorNoppo::runImple()
  * @brief 更新
  */
 void
-ActorNoppo::updateImple(Vector2<float> boss_cc)
+ActorNoppo::updateImple(Vector2f boss_cc)
 {
 	mBossPos = boss_cc;
 	mState.executeState();
@@ -183,7 +183,7 @@ ActorNoppo::drawImple()
 /**
  * @brief 攻撃処理
  */
-Vector2<float>
+Vector2f
 ActorNoppo::updateAttack2()	
 {
 	mCharaData.draw_cc = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData.draw_cc);
@@ -217,7 +217,7 @@ ActorNoppo::stateEnterGroundAtk()
 	mCharaData = init_charadata_noppo;
 	mCharaData.flag_atk1 = true;
 	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = Vector2<float>(-RADIUS_NOPPO, G_ATK_3_START_Y);
+	mCharaData.draw_cc = Vector2f(-RADIUS_NOPPO, G_ATK_3_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 }
@@ -264,7 +264,7 @@ ActorNoppo::stateEnterSkyAtk()
 	mCharaData = init_charadata_noppo;
 	mCharaData.flag_atk2 = true;
 	mCharaData.speed = getSpeed();
-	mCharaData.draw_cc = Vector2<float>(-RADIUS_NOPPO, mAtkStartY);
+	mCharaData.draw_cc = Vector2f(-RADIUS_NOPPO, mAtkStartY);
 
 	mCountEffect = 0;
 	mAtkStartY = (float)(rand() % cRandY);

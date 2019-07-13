@@ -85,7 +85,7 @@ ActorBase::run()
  * @brief 更新
  */
 void
-ActorBase::update(Vector2<float> boss_cc)
+ActorBase::update(Vector2f boss_cc)
 {
 	updateImple(boss_cc);
 }
@@ -137,10 +137,10 @@ ActorBase::setSkyAtkFlag()
  * @param	range_font		フォントの大きさ
  * @return	中心座標
  */
-Vector2<float>
-ActorBase::setEffectFont(Vector2<float> font_cc ,float chara_radius, float range_font)
+Vector2f
+ActorBase::setEffectFont(Vector2f font_cc ,float chara_radius, float range_font)
 {
-	Vector2<float> pos_effectfont = { 0.f	,0.f };
+	Vector2f pos_effectfont = { 0.f	,0.f };
 
 	//『べチャ！』とか表示位置(中心座標から左上)
 	pos_effectfont.x = (font_cc.x - (chara_radius + range_font) );
@@ -156,8 +156,8 @@ ActorBase::setEffectFont(Vector2<float> font_cc ,float chara_radius, float range
  * @param	font_cc			フォントの中心位置
  * @return	中心座標
  */
-Vector2<float>
-ActorBase::setEffectShake(float change_x ,float change_y, Vector2<float> font_cc)
+Vector2f
+ActorBase::setEffectShake(float change_x ,float change_y, Vector2f font_cc)
 {
 	static float shake_x	,shake_y	= 0.f; 
 	static bool  flag_shake_right,flag_shake_down = false; 
@@ -180,7 +180,7 @@ ActorBase::setEffectShake(float change_x ,float change_y, Vector2<float> font_cc
 /**
  * @brief 攻撃処理
  */
-Vector2<float>
+Vector2f
 ActorBase::updateAttack1()
 {
 	// 右に移動
@@ -193,7 +193,7 @@ ActorBase::updateAttack1()
  * @brief 衝突チェック
  */
 bool
-ActorBase::isHit(Vector2<float> draw_cc_p, Vector2<float> draw_cc_e, int chara_id) const
+ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
 {
 	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
 	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
@@ -224,7 +224,7 @@ ActorBase::isHit(Vector2<float> draw_cc_p, Vector2<float> draw_cc_e, int chara_i
  * @brief 中心座標から矩形を逆算
  */
 F_RECT
-ActorBase::calculateBackRect(Vector2<float> draw_cc, F_RECT rect_pos) const
+ActorBase::calculateBackRect(Vector2f draw_cc, F_RECT rect_pos) const
 {
 	// 中心座標からそれぞれ絵の半径を加・減算 
 	rect_pos.left = (draw_cc.x - rect_pos.left);

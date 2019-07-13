@@ -24,7 +24,7 @@ void OrbitWave::init(int set_amplitude, int set_cycle, float set_speed_x, int se
 	mMode		= set_mode;
 }
 
-Vector2<float> OrbitWave::orbitSinWave(float limit_x, Vector2<float> draw_cc)
+Vector2f OrbitWave::orbitSinWave(float limit_x, Vector2f draw_cc)
 {
 
 	float		 wave_y = 0; 

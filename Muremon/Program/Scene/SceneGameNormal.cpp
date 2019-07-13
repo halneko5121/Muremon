@@ -37,7 +37,7 @@ namespace
 		ATTACK_DOWN,
 	};
 
-	Vector2<float> boss_cc2 = { 600, 350 };
+	Vector2f boss_cc2 = { 600, 350 };
 
 	enum State
 	{

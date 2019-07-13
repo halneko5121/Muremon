@@ -70,7 +70,7 @@ typedef struct CHARADATA{
 	bool  flag_atk2;
 	bool  flag_death_next;
 
-	Vector2<float>  draw_cc;
+	Vector2f  draw_cc;
 }CHARADATA;
 
 class ActorBase
@@ -83,12 +83,12 @@ public:
 	virtual void		drawImple() {};
 	virtual void		runImple() {};
 	virtual void		initImple() {};
-	virtual void		updateImple(Vector2<float> boss_cc) {};
+	virtual void		updateImple(Vector2f boss_cc) {};
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				init();
 	void				run();
-	void				update(Vector2<float> boss_cc);
+	void				update(Vector2f boss_cc);
 	void				draw();
 
 	/**
@@ -111,7 +111,7 @@ public:
 	 * @param	range_font		フォントの大きさ
 	 * @return	中心座標
 	 */
-	Vector2<float>		setEffectFont(Vector2<float> font_cc, float chara_radius, float range_font);
+	Vector2f		setEffectFont(Vector2f font_cc, float chara_radius, float range_font);
 
 	/**
 	 * @brief シェイク効果
@@ -120,13 +120,13 @@ public:
 	 * @param	font_cc			フォントの中心位置
 	 * @return	中心座標
 	 */
-	Vector2<float>		setEffectShake(float change_x, float change_y, Vector2<float> font_cc);
+	Vector2f		setEffectShake(float change_x, float change_y, Vector2f font_cc);
 
 	/**
 	 * @brief 攻撃処理１
 	 * @return	中心座標
 	 */
-	Vector2<float>		updateAttack1();
+	Vector2f		updateAttack1();
 
 	/**
 	 * @brief 衝突チェック
@@ -135,7 +135,7 @@ public:
 	 * @param	chara_id		キャラの『何体目か』
 	 * @return	敵と当たったかどうかのフラグ
 	 */
-	bool				isHit(Vector2<float> draw_cc_p, Vector2<float> draw_cc_e, int chara_id) const;
+	bool				isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const;
 
 	/**
 	 * @brief 中心座標から矩形を逆算
@@ -143,7 +143,7 @@ public:
 	 * @param	rect_pos		矩形情報(各半径情報)	
 	 * @return	与えた中心座標からrect_posの値を与えたRECT
 	 */
-	F_RECT				calculateBackRect(Vector2<float> draw_cc, F_RECT rect_pos) const;
+	F_RECT				calculateBackRect(Vector2f draw_cc, F_RECT rect_pos) const;
 
 	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }
 
@@ -170,6 +170,6 @@ protected:
 
 	bool				mIsHitCheck;
 	bool				mIsRun;
-	Vector2<float>		mBossPos;
+	Vector2f		mBossPos;
 	float				mHitPosY;
 };

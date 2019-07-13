@@ -25,7 +25,7 @@ public:
 	*	作成日	：2009年 3月 21日																		*
 	*	更新日	：	年	月	 日							by	三上　亘									*
 	****************************************************************************************************/
-	Vector2<float> orbitParabola(float acceleration, float move_x, float limit_y ,Vector2<float> draw_cc);
+	Vector2f orbitParabola(float acceleration, float move_x, float limit_y ,Vector2f draw_cc);
 
 private:
 	int mTime;

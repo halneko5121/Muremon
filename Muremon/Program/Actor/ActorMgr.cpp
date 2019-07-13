@@ -101,7 +101,7 @@ ActorMgr::init()
  * @brief	アクターの更新
  */
 void
-ActorMgr::update(Vector2<float> boss_cc)
+ActorMgr::update(Vector2f boss_cc)
 {
 	ActorIterator it_begin = mActorList.begin();
 	ActorIterator it_end = mActorList.end();

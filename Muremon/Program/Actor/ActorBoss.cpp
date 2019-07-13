@@ -82,7 +82,7 @@ ActorBoss::runImple()
 }
 
 void
-ActorBoss::updateImple(Vector2<float> boss_cc)
+ActorBoss::updateImple(Vector2f boss_cc)
 {
 	mState.executeState();
 
@@ -124,7 +124,7 @@ ActorBoss::drawImple()
  */
 void ActorBoss::hit(const float& hit_pos, int damage)
 {
-	EffectParam param(mTexture, mVertex, Vector2<float>(mMoveX, hit_pos));
+	EffectParam param(mTexture, mVertex, Vector2f(mMoveX, hit_pos));
 	GetEffectMgr()->createEffect(cEffectId_HitEffect1, param);
 	mHitPos = hit_pos;
 	mHitCount++;
@@ -266,7 +266,7 @@ ActorBoss::stateEnterDead()
 {
 	mRectData = R_BOSS_FALL;
 
-	EffectParam param(mTexture, mVertex, Vector2<float>(mMoveX, mMoveY));
+	EffectParam param(mTexture, mVertex, Vector2f(mMoveX, mMoveY));
 	GetEffectMgr()->createEffect(cEffectId_HitEffect7, param);
 }
 void

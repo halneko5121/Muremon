@@ -93,10 +93,10 @@ EffectFont::isEnd()
  * @param	range_font		フォントの大きさ
  * @return	中心座標
  */
-Vector2<float>
-EffectFont::setPos(Vector2<float> font_cc, float chara_radius, float range_font)
+Vector2f
+EffectFont::setPos(Vector2f font_cc, float chara_radius, float range_font)
 {
-	Vector2<float> pos_effectfont = { 0.f, 0.f };
+	Vector2f pos_effectfont = { 0.f, 0.f };
 
 	//『べチャ！』とか表示位置(中心座標から左上)
 	pos_effectfont.x = (font_cc.x - (chara_radius + range_font));
@@ -112,8 +112,8 @@ EffectFont::setPos(Vector2<float> font_cc, float chara_radius, float range_font)
  * @param	font_cc			フォントの中心位置
  * @return	中心座標
  */
-Vector2<float>
-EffectFont::setEffectShake(float change_x, float change_y, Vector2<float> font_cc)
+Vector2f
+EffectFont::setEffectShake(float change_x, float change_y, Vector2f font_cc)
 {
 	if (mShakeX > change_x) { mIsShakeRight = false; mShakeCount++; }
 	else if (mShakeX < (-change_x)) { mIsShakeRight = true;  mShakeCount++; }

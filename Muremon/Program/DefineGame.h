@@ -22,8 +22,6 @@ const int cWindowPosX = 220;
 const int cCursorHeight = 20;
 const int cCursorWidth = 20;
 
-#define G_MAX_ALPHA					(255)
-
 #define TIME_LIMIT					(10800)	//制限時間(仮　3:00)
 #define DEADLINE					(300.f)	//ゲームオーバーライン
 

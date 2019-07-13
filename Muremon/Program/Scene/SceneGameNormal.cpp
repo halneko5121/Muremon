@@ -563,9 +563,9 @@ void
 SceneGameNormal::stateExeReadyFadeIn()
 {
 	mStartAlpha += (G_ALPHA_INCREASE - 5);
-	if (mStartAlpha >= G_MAX_ALPHA)
+	if (mStartAlpha >= 255)
 	{
-		mStartAlpha = G_MAX_ALPHA;
+		mStartAlpha = 255;
 		mState.changeState(cState_Ready);
 		return;
 	}

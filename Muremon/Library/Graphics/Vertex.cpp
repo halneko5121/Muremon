@@ -176,17 +176,16 @@ Vertex::setTextureRect(long left , long top , long right , long bottom)
 
 /**
  * @brief	テクスチャの描画を行う
- * @param	x	X座標
- * @param	y	Y座標
+ * @param	pos	座標
  */
-void Vertex::draw(float x , float y)
+void Vertex::draw(const Vector2f& pos)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
 	float texSizeY = abs(mRectPosition.bottom - mRectPosition.top) / 2.0f;
 
     // 回転の中心座標
-    D3DXVECTOR2 l_center(x,y);
+    D3DXVECTOR2 l_center(pos.x, pos.y);
 
     // 回転角度
     float texSin = sinf(D3DXToRadian(mDegree));
@@ -230,18 +229,17 @@ void Vertex::draw(float x , float y)
 
 /**
  * @brief	テクスチャの描画を行う（マウスカーソル用仮作成）
- * @param	x			X座標
- * @param	y			Y座標
+ * @param	pos	座標
  */
 void
-Vertex::drawLT(float x , float y)
+Vertex::drawLT(const Vector2f& pos)
 {
 	// テクスチャの距離を計算(ここで倍率も計算)
 	float texSizeX = (float)abs(mRectPosition.right - mRectPosition.left);
 	float texSizeY = (float)abs(mRectPosition.bottom - mRectPosition.top);
 
     // 回転の中心座標
-    D3DXVECTOR2 l_center(x,y);
+    D3DXVECTOR2 l_center(pos.x, pos.y);
 
     // 回転角度
     float texSin = sinf(D3DXToRadian(mDegree));
@@ -285,18 +283,17 @@ Vertex::drawLT(float x , float y)
 
 /**
  * @brief	テクスチャの描画を行う（マウスカーソル用仮作成）
- * @param	x			X座標
- * @param	y			Y座標
+ * @param	pos		座標
  */
 void
-Vertex::drawRB(float x, float y)
+Vertex::drawRB(const Vector2f& pos)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
 	float texSizeY = abs(mRectPosition.bottom - mRectPosition.top) / 2.0f;
 
     // 回転の中心座標
-    D3DXVECTOR2 l_center(x,y);
+    D3DXVECTOR2 l_center(pos.x, pos.y);
 
     // 回転角度
     float texSin = sinf(D3DXToRadian(mDegree));
@@ -340,17 +337,16 @@ Vertex::drawRB(float x, float y)
 
 /**
  * @brief	テクスチャの描画を行う（中心の下から）
- * @param	x	X座標
- * @param	y	Y座標
+ * @param	pos		座標
  */
-void Vertex::drawCB(float x, float y)
+void Vertex::drawCB(const Vector2f& pos)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
 	float texSizeY = (float)abs(mRectPosition.bottom - mRectPosition.top);
 
     // 回転の中心座標
-    D3DXVECTOR2 l_center(x,y);
+    D3DXVECTOR2 l_center(pos.x, pos.y);
 
     // 回転角度
     float texSin = sinf(D3DXToRadian(mDegree));

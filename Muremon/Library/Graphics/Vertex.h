@@ -79,10 +79,10 @@ public:
 	 * @param	y			Y座標
 	 * @param	rect_num	登録されている矩形のNo
 	 */
-	void	draw(float x, float y);
-	void	drawLT(float x, float y); // マウスカーソル用仮作成
-	void	drawRB(float x, float y); // マウスカーソル用仮作成
-	void	drawCB(float x, float y); // 中心の下から
+	void	draw(const Vector2f& pos);
+	void	drawLT(const Vector2f& pos); // マウスカーソル用仮作成
+	void	drawRB(const Vector2f& pos); // マウスカーソル用仮作成
+	void	drawCB(const Vector2f& pos); // 中心の下から
 	void	drawF(float x, float y, int rect_num);
 
 	/**

@@ -10,7 +10,6 @@
 #include "Library/StateMachine.h"
 #include "Program/Scene/SceneBase.h"
 #include "Program/Actor/ActorMgr.h"
-#include "Program/Define.h"
 
 class ActorNikuman;
 class ActorNoppo;

@@ -7,7 +7,6 @@
  ******************************************************************/
 
 #include "Library/Font/DirectFont.h"
-#include "Program/Define.h"
 
 namespace
 {

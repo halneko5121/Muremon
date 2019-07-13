@@ -7,8 +7,6 @@
 	更新日：	年	月	 日															
  **********************************/
 
-#include "Program/Define.h"
-
 enum WAVE_MODE
 {
 	WAVE_MODE_NORMAL,										//通常の正弦波処理

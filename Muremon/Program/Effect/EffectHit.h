@@ -8,7 +8,6 @@
  ******************************************************************/
 
 #include "Library/StateMachine.h"
-#include "Program/Define.h"
 #include "Program/Effect/EffectBase.h"
 
 class Texture;

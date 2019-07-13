@@ -7,8 +7,6 @@
  *	ŠÇ—ÒFOã
  ******************************************************************/
 
-#include "Program/Define.h"
-
 class Texture;
 class Vertex;
 enum EffectId;

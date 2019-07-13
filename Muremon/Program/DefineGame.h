@@ -22,7 +22,6 @@ const int cWindowPosX = 220;
 const int cCursorHeight = 20;
 const int cCursorWidth = 20;
 
-#define G_ALPHA_INCREASE			(15)
 #define G_MAX_ALPHA					(255)
 
 #define TIME_LIMIT					(10800)	//制限時間(仮　3:00)
@@ -58,36 +57,34 @@ const float G_F_NOPPO_Y = 585.f;
 const float G_PUSHNUM = 60.f;
 
 //奥義
-#define WAVE_INIT_X			(-500.f)
-#define WAVE_INIT_Y			(300.f)
-#define WAVE_SPEED_X		((800.f+500.f+500.f) / (60.f * 3.5f))
-#define WAVE_UP_Y			(60.f / (60.f * 3.5f))
+const float WAVE_INIT_X = -500.f;
+const float WAVE_INIT_Y = 300.f;
+const float WAVE_SPEED_X = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
+const float WAVE_UP_Y = (60.f / (60.f * 3.5f));
 
-#define MISSION_GAGE_MAX	(5000)
+const int MISSION_GAGE_MAX = 5000;
 
-
-#define HIT_EFFECT_X				(100)
-#define HIT_FFFECT_Y				(450)
-#define MISSION_CLEAR_SCORE			(50000)	//ミッションクリア加算スコア
-#define BOSS_KO_SCORE				(10000)
+const int HIT_EFFECT_X = 100;
+const int HIT_FFFECT_Y = 450;
+const int MISSION_CLEAR_SCORE = 50000;	//ミッションクリア加算スコア
+const int BOSS_KO_SCORE = 10000;
 //キャラクターのスコア、ゲージ設定
-#define NIKUMAN_DAMAGE				(20)	//にくまんの攻撃力
-#define NIKUMAN_GAGE				(30)	//にくまんミッションゲージ増加量
-#define NIKUMAN_SCORE				(30)	//にくまんスコア加算
-#define YOSHITARO_DAMAGE			(40)	//よしたろうの攻撃力
-#define YOSHITARO_GAGE				(20)	//よしたろうミッションゲージ増加量
-#define YOSHITARO_SCORE				(20)	//よしたろうスコア加算
-#define NOPPO_DAMAGE				(60)	//のっぽの攻撃力
-#define NOPPO_GAGE					(10)	//のっぽミッションゲージ増加量
-#define NOPPO_SCORE					(10)	//のっぽスコア加算
+const int NIKUMAN_DAMAGE = 20;	//にくまんの攻撃力
+const int NIKUMAN_GAGE = 30;	//にくまんミッションゲージ増加量
+const int NIKUMAN_SCORE = 30;	//にくまんスコア加算
+const int YOSHITARO_DAMAGE = 40;	//よしたろうの攻撃力
+const int YOSHITARO_GAGE = 20;	//よしたろうミッションゲージ増加量
+const int YOSHITARO_SCORE = 20;	//よしたろうスコア加算
+const int NOPPO_DAMAGE = 60;	//のっぽの攻撃力
+const int NOPPO_GAGE = 10;	//のっぽミッションゲージ増加量
+const int NOPPO_SCORE = 10;	//のっぽスコア加算
 
-#define BOSS_WIN_POSITOIN	(450)
+const int BOSS_WIN_POSITOIN = 450;
 
-#define G_ALPHA_INCREASE	(15)
-#define GAME_GROUND			(500.f)		// ゲーム中の地面に当たる所
-#define MAX_VALLUE_PLAYER	(100)		// キャラ1種類につきの総数
-#define GRAVITY 			(0.98f)		// 重力加速度
-
+const int G_ALPHA_INCREASE = 15;
+const float GAME_GROUND = 500.f;		// ゲーム中の地面に当たる所
+const int MAX_VALLUE_PLAYER = 100;		// キャラ1種類につきの総数
+const float GRAVITY = 0.98f;			// 重力加速度
 
 enum TEXTURE_DATA_GAME
 {

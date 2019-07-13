@@ -741,7 +741,7 @@ SceneGameNormal::stateExeGame()
 	mBoss->update(boss_cc2);
 
 	//ゲームオーバー条件
-	if (mBoss->mIsWin)
+	if (mBoss->isWin())
 	{
 		mState.changeState(cState_GameOver);
 		return;

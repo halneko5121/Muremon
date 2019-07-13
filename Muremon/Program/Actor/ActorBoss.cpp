@@ -42,7 +42,6 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	, mMoveX(cAppearPosX)
 	, mMoveY(cAppearPosY)
 	, mHitCount(0)
-	, mIsWin(false)
 	, mSpeedX(1)
 
 	, mState()
@@ -139,6 +138,15 @@ bool
 ActorBoss::isDead() const
 {
 	return (mState.isEqual(cState_Dead));
+}
+
+/**
+ * @brief èüÇ¡ÇΩÇ©ÅIÅH
+ */
+bool
+ActorBoss::isWin() const
+{
+	return (mState.isEqual(cState_End));
 }
 
 // -----------------------------------------------------------------
@@ -310,7 +318,6 @@ ActorBoss::stateEnterRevival()
 	mDamageTime = 0;
 	mRectData = R_BOSS_MOVE1;
 	mMoveX = cAppearPosX;
-	mIsWin = false;
 	mMoveAnime = 0;
 	mMoveAnimeTime = 0;
 	mSpeedX = 1;
@@ -331,7 +338,6 @@ ActorBoss::stateRevival()
 void
 ActorBoss::stateEnterEnd()
 {
-	mIsWin = true;
 }
 void
 ActorBoss::stateEnd()

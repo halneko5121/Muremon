@@ -21,6 +21,7 @@ public:
 
 	void		hit(const float& hit_pos, int damage);
 	bool		isDead() const;
+	bool		isWin() const;
 
 public:
 	float		mLife;
@@ -28,7 +29,6 @@ public:
 	float		mMoveX;
 	float		mMoveY;
 	int			mHitCount;
-	bool		mIsWin;
 	int			mSpeedX;
 
 private:

@@ -112,7 +112,7 @@ void SceneGameRefresh::draw()
 
 		drawNum();
 
-		mVertex->drawF(Vector2f(G_HP_X, G_HP_Y), R_HP);								//しゃっくの体力
+		mVertex->drawF(cDispHpPos, R_HP);								//しゃっくの体力
 		drawHpGauge();
 
 		// 体力ゲージ枠
@@ -142,7 +142,7 @@ void SceneGameRefresh::draw()
 
 		drawNum();
 
-		mVertex->drawF(Vector2f(G_HP_X, G_HP_Y), R_HP);	//しゃっくの体力
+		mVertex->drawF(cDispHpPos, R_HP);	//しゃっくの体力
 		mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
 
 		drawHpGauge();

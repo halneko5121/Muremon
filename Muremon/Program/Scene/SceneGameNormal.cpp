@@ -203,14 +203,14 @@ SceneGameNormal::draw()
 
 	drawKeyCount();
 
-	mVertex->drawF(Vector2f(G_MISSION_X, G_MISSION_Y), R_MISSION_GAGE);	//みっしょんげ～じ
-	mVertex->drawF(Vector2f(G_GAGE_M_X, G_GAGE_M_Y), R_GAGE_IN);	//みっしょんゲージ
+	mVertex->drawF(cDispMissionPos, R_MISSION_GAGE);	//みっしょんげ～じ
+	mVertex->drawF(cDispMissionGaugePos, R_GAGE_IN);	//みっしょんゲージ
 
 	drawMissionGuage();
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->drawF(Vector2f(G_GAGE_M_X, G_GAGE_M_Y), R_GAGE_FRAME);	//みっしょんゲージ枠
-	mVertex->drawF(Vector2f(G_HP_X, G_HP_Y), R_HP);	//しゃっくの体力
+	mVertex->drawF(cDispMissionGaugePos, R_GAGE_FRAME);	//みっしょんゲージ枠
+	mVertex->drawF(cDispHpPos, R_HP);	//しゃっくの体力
 	mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
 
 	drawHpGauge();
@@ -372,7 +372,7 @@ SceneGameNormal::drawMissionGuage()
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,30,30,200);
-	mVertex->drawF(Vector2f(G_GAGE_M_X - (1.f - num) * 100.f, G_GAGE_M_Y), R_GAGE_IN);	//ミッションゲージ
+	mVertex->drawF(Vector2f(cDispMissionGaugePos.x - (1.f - num) * 100.f, cDispMissionGaugePos.y), R_GAGE_IN);	//ミッションゲージ
 }
 
 /**

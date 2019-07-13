@@ -158,7 +158,7 @@ ActorNikuman::drawImple()
 
 	mVertex->setAngle(mAngleDegree);
 	mVertex->setColor(MAX_ALPHA,MAX_RGB,MAX_RGB,MAX_RGB);
-	mVertex->drawF(mCharaData.mNowPos.x,mCharaData.mNowPos.y, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation) );
+	mVertex->drawF(mCharaData.mNowPos, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation) );
 }
 
 /**

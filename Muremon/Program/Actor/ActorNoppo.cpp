@@ -176,8 +176,7 @@ ActorNoppo::drawImple()
 
 	mVertex->setAngle(mAngleDegree);
 	mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.mAlpha), 255, 255, 255);
-	mVertex->drawF(mCharaData.mNowPos.x, mCharaData.mNowPos.y,
-		(mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation));
+	mVertex->drawF(mCharaData.mNowPos, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation));
 }
 
 /**

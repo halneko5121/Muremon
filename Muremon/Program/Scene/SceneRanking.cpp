@@ -220,7 +220,7 @@ SceneRanking::drawBackGround()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_BG);
 	mVertex->setColor(255,255,255,255);
-	mVertex->drawF(400.f,300.f,R_RANKING_BG);
+	mVertex->drawF(Vector2f(400.f, 300.f), R_RANKING_BG);
 }
 
 /**
@@ -233,8 +233,8 @@ SceneRanking::drawRankingPlace()
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF((float)cPlacePosX,(float)cNamePosY + i * cDislocateY,R_FONT_1 + i);
-		mVertex->drawF((float)cDotX,(float)cNamePosY+i * cDislocateY,R_FONT_DOT);
+		mVertex->drawF(Vector2f((float)cPlacePosX, (float)cNamePosY + i * cDislocateY), R_FONT_1 + i);
+		mVertex->drawF(Vector2f((float)cDotX, (float)cNamePosY+i * cDislocateY), R_FONT_DOT);
 	}
 }
 
@@ -250,7 +250,7 @@ SceneRanking::drawRankingName()
 		{
 			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
 			mVertex->setColor(mNameAlpha[j][i],255,255,255);
-			mVertex->drawF((float)cNamePosX+i*cDislocateX,(float)cNamePosY+j*cDislocateY,R_FONT_A + mRankData[j].mName[i]);
+			mVertex->drawF(Vector2f((float)cNamePosX+i*cDislocateX, (float)cNamePosY+j*cDislocateY), R_FONT_A + mRankData[j].mName[i]);
 		}
 	}
 }
@@ -277,7 +277,7 @@ SceneRanking::drawRankingScore()
 		{
 			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
 			mVertex->setColor(255,255,255,255);
-			mVertex->drawF((float)cScorePosX+(9-j)*cDislocateX,(float)cNamePosY+i*cDislocateY,R_FONT_0 + num[9-j]);
+			mVertex->drawF(Vector2f((float)cScorePosX+(9-j)*cDislocateX,(float)cNamePosY+i*cDislocateY),R_FONT_0 + num[9-j]);
 		}
 	}
 }

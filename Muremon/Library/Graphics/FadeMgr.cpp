@@ -90,7 +90,7 @@ FadeMgr::draw()
 {
 	mVertex->setTextureData(mTexture->getTextureData(0), mDevice);
 	mVertex->setColor(mAlpha, mColorR, mColorG, mColorB);
-	mVertex->drawF(400.f, 300.f, 0);
+	mVertex->drawF(Vector2f(400.0f, 300.0f), 0);
 }
 
 /**

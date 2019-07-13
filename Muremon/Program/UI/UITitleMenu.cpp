@@ -18,26 +18,13 @@
 namespace
 {
 	// 表示座標
-	const float cDispTitleBgX = 400.f;
-	const float cDispTitleBgY = 300.f;
-	const float cDispZPushX = 400.f;
-	const float cDispZPushY = 450.f;
-	const float cDispStartX = 400.f;
-	const float cDispStartY = 340.f;
-	const float cDispRankingX = 400.f;
-	const float cDispRankingY = 420.f;
-	const float cDispGameEndX = 400.f;
-	const float cDispGameEndY = 500.f;
-	const float cDispGameNormalX = 400.f;
-	const float cDispGameNormalY = 380.f;
-	const float cDispGameRefreshX = 400.f;
-	const float cDispGameRefreshY = 460.f;
-	const float cDispGameTitleX = 400.f;
-	const float cDispGameTitleY = 130.f;
-	const float cDispCursorX = 260.f;
-	const float cDispCursorY = 340.f;
-	const float cDispCursor2X = 280.f;
-	const float cDispCursor2Y = 380.f;
+	const Vector2f cDispZPushPos = { 400.0f, 450.0f };
+	const Vector2f cDispStart = { 400.0f, 340.0f };
+	const Vector2f cDispStartPos = { 400.0f, 340.0f };
+	const Vector2f cDispRankingPos = { 400.0f, 420.0f };
+	const Vector2f cDispGameEndPos = { 400.0f, 500.0f };
+	const Vector2f cDispCursorPos = { 260.0f, 340.0f };
+	const Vector2f cDispCursor2Pos = { 280.0f, 380.0f };
 	const float cDispCursorYRemove = 80.f;
 
 	enum TEXTURE_DATA_TITLE	//絵
@@ -92,7 +79,7 @@ UITitleMenu::UITitleMenu()
 	: mState()
 	, mTexture(nullptr)
 	, mVertex(nullptr)
-	, mCursorPos(cDispCursorX, cDispCursorY)
+	, mCursorPos(cDispCursorPos)
 	, mCurrentMenuItem(0)
 	, mAlphaZPush(0)
 	, mTimeCount(0)
@@ -134,7 +121,7 @@ void
 UITitleMenu::update()
 {
 	//カーソル位置を計算
-	mCursorPos.y = cDispCursorY + cDispCursorYRemove * mCurrentMenuItem;
+	mCursorPos.y = cDispCursorPos.y + cDispCursorYRemove * mCurrentMenuItem;
 
 	// めっちゃ上下押されても違和感にないように
 	if (UtilSound::isPlaying(S_SE_CURSOR_MOVE))
@@ -192,26 +179,26 @@ UITitleMenu::draw()
 	if (mState.isEqual(cState_Top))
 	{
 		mVertex->setColor(mAlphaZPush, 255, 255, 255);
-		mVertex->drawF(cDispZPushX, cDispZPushY, R_ZPUSH);
+		mVertex->drawF(cDispZPushPos, R_ZPUSH);
 	}
 	else if (mState.isEqual(cState_MenuSelect))
 	{
-		mVertex->drawF(cDispStartX, cDispStartY, R_START);
-		mVertex->drawF(cDispRankingX, cDispRankingY, R_RANKING);
-		mVertex->drawF(cDispGameEndX, cDispGameEndY, R_END);
+		mVertex->drawF(cDispStart, R_START);
+		mVertex->drawF(cDispRankingPos, R_RANKING);
+		mVertex->drawF(cDispGameEndPos, R_END);
 	}
 	else if (mState.isEqual(cState_GameSelect))
 	{
-		mVertex->drawF(cDispStartX, cDispStartY, R_REFRESH);
-		mVertex->drawF(cDispRankingX, cDispRankingY, R_NORMAL);
-		mVertex->drawF(cDispGameEndX, cDispGameEndY, R_TUTORIAL_T);
+		mVertex->drawF(cDispStartPos, R_REFRESH);
+		mVertex->drawF(cDispRankingPos, R_NORMAL);
+		mVertex->drawF(cDispGameEndPos, R_TUTORIAL_T);
 	}
 
 	//カーソル
 	if (!mState.isEqual(cState_Top))
 	{
-		mVertex->drawF(mCursorPos.x, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
-		mVertex->drawF(mCursorPos.x + cDispCursor2X, mCursorPos.y, (R_CURSOR1 + (mCursorAnime % 2)));
+		mVertex->drawF(mCursorPos, (R_CURSOR1 + (mCursorAnime % 2)));
+		mVertex->drawF(Vector2f(mCursorPos.x + cDispCursor2Pos.x, mCursorPos.y), (R_CURSOR1 + (mCursorAnime % 2)));
 	}
 }
 

@@ -73,7 +73,7 @@ EffectBossDead::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mAlpha, 255, 255, 255);
-	mVertex->drawF(mPos.x, mPos.y, mRectIndex);
+	mVertex->drawF(mPos, mRectIndex);
 }
 
 /**

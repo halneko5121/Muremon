@@ -390,19 +390,18 @@ void Vertex::drawCB(const Vector2f& pos)
 
 /**
  * @brief	テクスチャの描画を行う
- * @param	x			X座標
- * @param	y			Y座標
+ * @param	pos			座標
  * @param	rect_num	登録されている矩形のNo
  */
 void
-Vertex::drawF(float x, float y, int rect_num)
+Vertex::drawF(const Vector2f& pos, int rect_num)
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left) / 2.0f;
 	float texSizeY = abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top) / 2.0f;
 
     // 回転の中心座標
-    D3DXVECTOR2 l_center(x,y);
+    D3DXVECTOR2 l_center(pos.x, pos.y);
 
     // 回転角度
     float texSin = sinf(D3DXToRadian(mDegree));

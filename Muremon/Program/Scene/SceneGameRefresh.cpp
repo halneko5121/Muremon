@@ -100,56 +100,56 @@ void SceneGameRefresh::draw()
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);
-		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);
+		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_BG);
+		mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);
 
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
-		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);				//にくまん顔
-		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);			//よしたろう顔
-		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);					//のっぽ顔
+		mVertex->drawF(Vector2f(G_STATE_FRAME_X, G_STATE_FRAME_Y), R_STATE_FRAME);	//ステータス枠描画
+		mVertex->drawF(Vector2f(G_FACE_X, G_F_NIKUMAN_Y), R_F_NIKUMAN);				//にくまん顔
+		mVertex->drawF(Vector2f(G_FACE_X, G_F_YOSHITARO_Y), R_F_YOSHITARO);			//よしたろう顔
+		mVertex->drawF(Vector2f(G_FACE_X, G_F_NOPPO_Y), R_F_NOPPO);					//のっぽ顔
 
 		drawNum();
 
-		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);								//しゃっくの体力
+		mVertex->drawF(Vector2f(G_HP_X, G_HP_Y), R_HP);								//しゃっくの体力
 		drawHpGauge();
 
 		// 体力ゲージ枠
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);
+		mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_FRAME);
 
 		// ゲームスタート
 		mVertex->setColor(mStartAlpha,255,255,255);
-		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_START);
+		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_START);
 	}
 	else if(mState.isEqual(cState_Game))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(G_BG_X,G_BG_Y,R_GAME_BG);	//背景
-		mVertex->drawF(G_FLAG_X,G_FLAG_Y,R_FLAG);	//旗
+		mVertex->drawF(Vector2f(G_BG_X, G_BG_Y), R_GAME_BG);	//背景
+		mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);	//旗
 
 		// アクターの描画
 		GetActorMgr()->draw();
 
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(G_STATE_FRAME_X,G_STATE_FRAME_Y,R_STATE_FRAME);	//ステータス枠描画
-		mVertex->drawF(G_FACE_X,G_F_NIKUMAN_Y,R_F_NIKUMAN);	//にくまん顔
-		mVertex->drawF(G_FACE_X,G_F_YOSHITARO_Y,R_F_YOSHITARO);	//よしたろう顔
-		mVertex->drawF(G_FACE_X,G_F_NOPPO_Y,R_F_NOPPO);	//のっぽ顔
+		mVertex->drawF(Vector2f(G_STATE_FRAME_X, G_STATE_FRAME_Y), R_STATE_FRAME);	//ステータス枠描画
+		mVertex->drawF(Vector2f(G_FACE_X, G_F_NIKUMAN_Y), R_F_NIKUMAN);	//にくまん顔
+		mVertex->drawF(Vector2f(G_FACE_X, G_F_YOSHITARO_Y), R_F_YOSHITARO);	//よしたろう顔
+		mVertex->drawF(Vector2f(G_FACE_X, G_F_NOPPO_Y), R_F_NOPPO);	//のっぽ顔
 
 		drawNum();
 
-		mVertex->drawF(G_HP_X,G_HP_Y,R_HP);	//しゃっくの体力
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
+		mVertex->drawF(Vector2f(G_HP_X, G_HP_Y), R_HP);	//しゃっくの体力
+		mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
 
 		drawHpGauge();
 
 		// 体力ゲージ枠
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->drawF(G_GAGE_X,G_GAGE_Y,R_GAGE_FRAME);
+		mVertex->drawF(Vector2f(G_GAGE_X, G_GAGE_Y), R_GAGE_FRAME);
 
 		// エフェクト描画
 		GetEffectMgr()->draw();
@@ -175,7 +175,7 @@ void SceneGameRefresh::drawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_NIKUMAN_Y,R_0 + num%10);
+		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_NIKUMAN_Y), R_0 + num % 10);
 	}
 	//よしたろう
 	for(int i = 0;i < 4;i++){
@@ -183,7 +183,7 @@ void SceneGameRefresh::drawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_YOSHITARO_Y,R_0 + num%10);
+		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_YOSHITARO_Y), R_0 + num % 10);
 	}
 	//のっぽ
 	for(int i = 0;i < 4;i++){
@@ -191,7 +191,7 @@ void SceneGameRefresh::drawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(G_PUSHNUM + 20.f * i,G_F_NOPPO_Y,R_0 + num%10);
+		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_NOPPO_Y), R_0 + num % 10);
 	}
 }
 
@@ -201,7 +201,7 @@ void SceneGameRefresh::drawHpGauge()
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,255,0,0);
-	mVertex->drawF(G_GAGE_X - (1.f - num) * 100.f,G_GAGE_Y,R_GAGE_IN);	//体力ゲージ
+	mVertex->drawF(Vector2f(G_GAGE_X - (1.f - num) * 100.f, G_GAGE_Y), R_GAGE_IN);	//体力ゲージ
 }
 
 ActorBase*

@@ -50,7 +50,7 @@ private:
 	StateMachine<UITitleMenu>	mState;					// ステート
 	Texture*					mTexture;				// テクスチャ
 	Vertex*						mVertex;				// バーテックス
-	D3DXVECTOR2					mCursorPos;				// カーソル位置
+	Vector2f					mCursorPos;				// カーソル位置
 	int							mCurrentMenuItem;		// カーソルが選択しているものを判別。
 	int							mAlphaZPush;			// Zpush 用のアルファ
 	int							mTimeCount;				// ロゴのタイムカウント

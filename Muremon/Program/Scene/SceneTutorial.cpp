@@ -106,10 +106,10 @@ void
 SceneTutorial::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL1);
-	mVertex->drawF(mTexturePos[TR_REFRESH].x,mTexturePos[TR_REFRESH].y,R_TUTORIAL1);
+	mVertex->drawF(mTexturePos[TR_REFRESH], R_TUTORIAL1);
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL2);
-	mVertex->drawF(mTexturePos[TR_NORMAL].x,mTexturePos[TR_NORMAL].y,R_TUTORIAL2);
+	mVertex->drawF(mTexturePos[TR_NORMAL], R_TUTORIAL2);
 }
 
 /**

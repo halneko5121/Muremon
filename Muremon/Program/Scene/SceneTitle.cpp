@@ -93,10 +93,10 @@ void
 SceneTitle::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TITLE_BG);
-	mVertex->drawF(cDispTitleBgX, cDispTitleBgY, R_TITLE_BG);
+	mVertex->drawF(Vector2f(cDispTitleBgX, cDispTitleBgY), R_TITLE_BG);
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_FONT);
-	mVertex->drawF(mTitlePos.x,mTitlePos.y,R_TITLE);
+	mVertex->drawF(mTitlePos, R_TITLE);
 
 	mUITitleMenu->draw();
 }

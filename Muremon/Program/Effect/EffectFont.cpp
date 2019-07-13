@@ -74,7 +74,7 @@ EffectFont::draw()
 
 	// フォントエフェクトの描画
 	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(mPos.x, mPos.y, mRectIndex);
+	mVertex->drawF(mPos, mRectIndex);
 }
 
 /**

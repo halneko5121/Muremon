@@ -170,7 +170,7 @@ ActorYoshi::drawImple()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
 
 	mVertex->setAngle(mAngleDegree);
-	mVertex->drawF(mCharaData.mNowPos.x, mCharaData.mNowPos.y, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation));
+	mVertex->drawF(mCharaData.mNowPos, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation));
 }
 
 /**

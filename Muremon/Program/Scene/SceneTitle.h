@@ -28,7 +28,7 @@ private:
 
 private:
 	UITitleMenu*	mUITitleMenu;			// タイトルメニューUI
-	D3DXVECTOR2		mTitlePos;
+	Vector2f		mTitlePos;
 	int				mNextSceneIndex;		// 次のシーン番号
 	int				mDrawCount;
 	int				mCountMove;

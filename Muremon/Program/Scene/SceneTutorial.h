@@ -47,5 +47,5 @@ private:
 private:
 	StateMachine<SceneTutorial>	mState;			// ステート
 	int							mSlideState;
-	D3DXVECTOR2					mTexturePos[2];
+	Vector2f					mTexturePos[2];
 };

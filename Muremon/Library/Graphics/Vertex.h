@@ -83,7 +83,7 @@ public:
 	void	drawLT(const Vector2f& pos); // マウスカーソル用仮作成
 	void	drawRB(const Vector2f& pos); // マウスカーソル用仮作成
 	void	drawCB(const Vector2f& pos); // 中心の下から
-	void	drawF(float x, float y, int rect_num);
+	void	drawF(const Vector2f& pos, int rect_num);
 
 	/**
 	 * @brief	矩形をtxtデータから読み込む

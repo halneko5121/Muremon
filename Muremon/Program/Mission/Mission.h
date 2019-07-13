@@ -74,7 +74,7 @@ private:
 	Texture*	mTexture;
 	Vertex*		mVertex;
 
-	D3DXVECTOR2 mMissionStartPos;	//みっしょん開始の位置
+	Vector2f	mMissionStartPos;	//みっしょん開始の位置
 
 	int mAlphaCount;	//
 	int mAlpha;			//

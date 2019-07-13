@@ -39,33 +39,33 @@ const int cCursorWidth = 20;
 
 
 //•`‰æˆÊ’u
-#define G_BG_X						(400.f)
-#define G_BG_Y						(300.f)
-#define G_SCORE_X					(60.f)
-#define G_SCORE_Y					(20.f)
-#define G_TIME_X					(60.f)
-#define G_TIME_Y					(70.f)
-#define G_STATE_FRAME_X				(400.f)
-#define G_STATE_FRAME_Y				(560.f)
-#define G_FACE_X					(30.f)
-#define G_F_NIKUMAN_Y				(560.f)
-#define G_F_YOSHITARO_Y				(535.f)
-#define G_F_NOPPO_Y					(585.f)
-#define G_MISSION_X					(260.f)
-#define G_MISSION_Y					(540.f)
-#define G_GAGE_M_X					(260.f)
-#define G_GAGE_M_Y					(570.f)
-#define G_HP_X						(675.f)
-#define G_HP_Y						(540.f)
-#define G_GAGE_X					(675.f)
-#define G_GAGE_Y					(570.f)
-#define G_FLAG_X					(400.f)
-#define G_FLAG_Y					(450.f)
-#define G_PUSHNUM					(60.f)
-#define G_SCORENUM_X				(30.f)
-#define G_SCORENUM_Y				(40.f)
-#define G_TIMENUM_X					(30.f)
-#define G_TIMENUM_Y					(90.f)
+const float G_BG_X = 400.f;
+const float G_BG_Y = 300.f;
+const float G_SCORE_X = 60.f;
+const float G_SCORE_Y = 20.f;
+const float G_TIME_X = 60.f;
+const float G_TIME_Y = 70.f;
+const float G_STATE_FRAME_X = 400.f;
+const float G_STATE_FRAME_Y = 560.f;
+const float G_FACE_X = 30.f;
+const float G_F_NIKUMAN_Y = 560.f;
+const float G_F_YOSHITARO_Y = 535.f;
+const float G_F_NOPPO_Y = 585.f;
+const float G_MISSION_X = 260.f;
+const float G_MISSION_Y = 540.f;
+const float G_GAGE_M_X = 260.f;
+const float G_GAGE_M_Y = 570.f;
+const float G_HP_X = 675.f;
+const float G_HP_Y = 540.f;
+const float G_GAGE_X = 675.f;
+const float G_GAGE_Y = 570.f;
+const float G_FLAG_X = 400.f;
+const float G_FLAG_Y = 450.f;
+const float G_PUSHNUM = 60.f;
+const float G_SCORENUM_X = 30.f;
+const float G_SCORENUM_Y = 40.f;
+const float G_TIMENUM_X = 30.f;
+const float G_TIMENUM_Y = 90.f;
 
 //‰œ‹`
 #define WAVE_INIT_X			(-500.f)

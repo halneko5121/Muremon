@@ -47,18 +47,15 @@ const Vector2f cDispMissionPos = { 260.0f, 540.0f };
 const Vector2f cDispMissionGaugePos = { 260.0f, 570.0f };
 const Vector2f cDispBossHpPos = { 675.0f, 540.0f };
 const Vector2f cDispGaugePos = { 675.0f, 570.0f };
+const Vector2f cDispFlagPos = { 400.0f, 450.0f };
+const Vector2f cDispScoreNumPos = { 30.0f, 40.0f };
+const Vector2f cDispTimeNumPos = { 30.0f, 90.0f };
 
 const float G_FACE_X = 30.f;
 const float G_F_NIKUMAN_Y = 560.f;
 const float G_F_YOSHITARO_Y = 535.f;
 const float G_F_NOPPO_Y = 585.f;
-const float G_FLAG_X = 400.f;
-const float G_FLAG_Y = 450.f;
 const float G_PUSHNUM = 60.f;
-const float G_SCORENUM_X = 30.f;
-const float G_SCORENUM_Y = 40.f;
-const float G_TIMENUM_X = 30.f;
-const float G_TIMENUM_Y = 90.f;
 
 //‰œ‹`
 #define WAVE_INIT_X			(-500.f)

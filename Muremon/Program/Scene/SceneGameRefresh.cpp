@@ -101,7 +101,7 @@ void SceneGameRefresh::draw()
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(cDispBgPos, R_GAME_BG);
-		mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);
+		mVertex->drawF(cDispFlagPos, R_FLAG);
 
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
@@ -128,7 +128,7 @@ void SceneGameRefresh::draw()
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(cDispBgPos, R_GAME_BG);	//”wŒi
-		mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);	//Šø
+		mVertex->drawF(cDispFlagPos, R_FLAG);	//Šø
 
 		// ƒAƒNƒ^[‚Ì•`‰æ
 		GetActorMgr()->draw();

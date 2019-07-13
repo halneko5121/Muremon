@@ -144,7 +144,7 @@ SceneGameNormal::draw()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 	mVertex->setColor(255, 255, 255, 255);
 	mVertex->drawF(cDispBgPos, R_GAME_BG);
-	mVertex->drawF(Vector2f(G_FLAG_X, G_FLAG_Y), R_FLAG);
+	mVertex->drawF(cDispFlagPos, R_FLAG);
 
 	if(mGameState == G_START_SCENE)
 	{
@@ -282,7 +282,7 @@ SceneGameNormal::drawScore()
 		for(int j = 1; j < 9 - i;j++){
 			num = num / 10;
 		}
-		mVertex->drawF(Vector2f(G_SCORENUM_X + 20.f * i, G_SCORENUM_Y), R_0 + num % 10);
+		mVertex->drawF(Vector2f(cDispScoreNumPos.x + 20.f * i, cDispScoreNumPos.y), R_0 + num % 10);
 	}
 }
 
@@ -324,16 +324,16 @@ SceneGameNormal::drawTime()
 			}
 			if(i == 0 || i == 3)
 			{
-				mVertex->drawF(Vector2f(G_TIMENUM_X + 20.f * i, G_TIMENUM_Y), R_0 + num % 6);
+				mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 6);
 			}
 			else
 			{
-				mVertex->drawF(Vector2f(G_TIMENUM_X + 20.f * i, G_TIMENUM_Y), R_0 + num % 10);
+				mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 10);
 			}
 		}
 		else
 		{
-			mVertex->drawF(Vector2f(G_TIMENUM_X + 20.f * i, G_TIMENUM_Y), R_SEMICORON);
+			mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_SEMICORON);
 		}
 	}
 }

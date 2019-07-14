@@ -184,13 +184,11 @@ ActorBase::setEffectShake(float change_x ,float change_y, Vector2f font_cc)
 /**
  * @brief UŒ‚ˆ—
  */
-Vector2f
+void
 ActorBase::updateAttack1()
 {
 	// ‰E‚ÉˆÚ“®
 	mNowPos.x += mSpeed;
-
-	return mNowPos;
 }
 
 /**

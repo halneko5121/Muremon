@@ -237,7 +237,7 @@ ActorYoshi::stateGroundAtk()
 
 	if (mNowPos.x - cYoshiRadius < cWindowWidth)
 	{
-		mNowPos = updateAttack1();
+		updateAttack1();
 		mAnimation = setAnimetion(ANIME_G_ATK4_YOSHI, mAnimation, NULL);
 	}
 	else

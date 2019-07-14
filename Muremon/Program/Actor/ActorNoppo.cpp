@@ -241,8 +241,9 @@ ActorNoppo::stateGroundAtk()
 	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
 	else
 	{
-		if (mNowPos.x - cNoppoRadius < cWindowWidth) {
-			mNowPos = updateAttack1();
+		if (mNowPos.x - cNoppoRadius < cWindowWidth) 
+		{
+			updateAttack1();
 			mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mAnimation, NULL);
 		}
 		else

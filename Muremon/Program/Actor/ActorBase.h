@@ -71,7 +71,7 @@ public:
 	 * @param	range_font		フォントの大きさ
 	 * @return	中心座標
 	 */
-	Vector2f		setEffectFont(Vector2f font_cc, float chara_radius, float range_font);
+	Vector2f			setEffectFont(Vector2f font_cc, float chara_radius, float range_font);
 
 	/**
 	 * @brief シェイク効果
@@ -80,13 +80,13 @@ public:
 	 * @param	font_cc			フォントの中心位置
 	 * @return	中心座標
 	 */
-	Vector2f		setEffectShake(float change_x, float change_y, Vector2f font_cc);
+	Vector2f			setEffectShake(float change_x, float change_y, Vector2f font_cc);
 
 	/**
 	 * @brief 攻撃処理１
 	 * @return	中心座標
 	 */
-	Vector2f		updateAttack1();
+	void				updateAttack1();
 
 	/**
 	 * @brief 衝突チェック

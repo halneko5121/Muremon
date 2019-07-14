@@ -46,7 +46,6 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 
 	, mState()
 	, mLvCount(0)
-	, mDamageTime(0)
 	, mAlpha(255)
 	, mRectData(R_BOSS_MOVE1)
 	, mMoveAnimeTime(0)
@@ -210,13 +209,12 @@ ActorBoss::stateEnterDamage()
 	mDamageX = rand() % cDamagePosRand;
 	mDamageY = rand() % cDamagePosRand;
 	mHitCount = 0;
+	mRectData = R_BOSS_DAMAGE;
 }
 void
 ActorBoss::stateDamage()
 {
-	mRectData = R_BOSS_DAMAGE;
-	mDamageTime++;
-	if (mDamageTime == 60)
+	if (mState.getStateCount() == 60)
 	{
 		mDamageX = 0;
 		mDamageY = 0;
@@ -224,20 +222,17 @@ ActorBoss::stateDamage()
 		{
 			if (mMoveX == cRefreshStopX)
 			{
-				mDamageTime = 0;
 				mState.changeState(cState_Stop);
 				return;
 			}
 			else
 			{
-				mDamageTime = 0;
 				mState.changeState(cState_Move);
 				return;
 			}
 		}
 		else
 		{
-			mDamageTime = 0;
 			mState.changeState(cState_Move);
 			return;
 		}
@@ -315,7 +310,6 @@ ActorBoss::stateEnterRevival()
 	// ƒŠƒZƒbƒg
 	mHitCount = 0;
 	mAlpha = 255;
-	mDamageTime = 0;
 	mRectData = R_BOSS_MOVE1;
 	mMoveX = cAppearPosX;
 	mMoveAnime = 0;

@@ -46,7 +46,6 @@ private:
 	StateMachine<ActorBoss>	mState;	// ステート
 
 	float		mLvCount;
-	int			mDamageTime;
 	int			mAlpha;
 	int			mRectData;
 

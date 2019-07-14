@@ -46,7 +46,6 @@ ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 
 	, mState()
 	, mLvCount(0)
-	, mAlpha(255)
 	, mRectData(R_BOSS_MOVE1)
 	, mMoveAnimeTime(0)
 	, mMoveAnime(0)

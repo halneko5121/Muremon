@@ -27,8 +27,8 @@ namespace
 //íÜêSÇ©ÇÁÅAè„â∫ç∂âEÇÃïù
 F_RECT rect_pos_p[] = {
 	{cNikumanRadius ,cNikumanRadius ,cNikumanRadius ,cNikumanRadius},
-	{cYoshiHitRadiusX,cYoshiHitRadiusY,cYoshiHitRadiusX,cYoshiHitRadiusY},
-	{cNoppoHitRadiusX,cNoppoHitRadiusY,cNoppoHitRadiusX,cNoppoHitRadiusY},
+	{cYoshiHitRadius.x, cYoshiHitRadius.y, cYoshiHitRadius.x, cYoshiHitRadius.y},
+	{cNoppoHitRadius.x, cNoppoHitRadius.y, cNoppoHitRadius.x ,cNoppoHitRadius.y},
 };
 
 F_RECT rect_pos_e = {DRAW_E_RAD_X,DRAW_E_RAD_Y,DRAW_E_RAD_X,DRAW_E_RAD_Y};

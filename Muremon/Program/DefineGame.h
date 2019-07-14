@@ -29,10 +29,8 @@ const float cNikumanRadius = 37.5f;			// ƒLƒƒƒ‰‚Ì”¼Œa
 const float cYoshiRadius = 76.5f;			// ƒLƒƒƒ‰‚Ì”¼Œa
 const float cNoppoRadius = 150.f;			// ƒLƒƒƒ‰‚Ì”¼Œa
 
-const float cYoshiHitRadiusX = 30.f;
-const float cYoshiHitRadiusY = 40.f;
-const float cNoppoHitRadiusX = 50.f;
-const float cNoppoHitRadiusY = 100.f;
+const Vector2f cYoshiHitRadius = { 30.0f, 40.0f };
+const Vector2f cNoppoHitRadius = { 50.0f, 100.0f };
 
 //•`‰æˆÊ’u
 const Vector2f cDispBgPos = { 400.0f, 300.0f };

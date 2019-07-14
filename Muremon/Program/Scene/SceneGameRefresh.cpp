@@ -369,7 +369,7 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->hit(actor_nikuman->getHitPosY(), NIKUMAN_DAMAGE);
+				mBoss->hit(actor_nikuman->getHitPosY(), cAtkPowerNikuman);
 				actor_nikuman->setIsHitCheck(false);
 			}
 		}
@@ -379,7 +379,7 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->hit(actor_yoshi->getHitPosY(), YOSHITARO_DAMAGE);
+				mBoss->hit(actor_yoshi->getHitPosY(), cAtkPowerYoshitaro);
 				actor_yoshi->setIsHitCheck(false);
 			}
 		}
@@ -389,7 +389,7 @@ SceneGameRefresh::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->hit(actor_noppo->getHitPosY(), NOPPO_DAMAGE);
+				mBoss->hit(actor_noppo->getHitPosY(), cAtkPowerNoppo);
 				actor_noppo->setIsHitCheck(false);
 			}
 		}

@@ -711,10 +711,10 @@ SceneGameNormal::stateExeGame()
 	if (mIsHitNiku)
 	{
 		mBoss->mHitCount++;
-		mBoss->mLife -= NIKUMAN_DAMAGE / mNegativeDamege;
-		mMissionGauge += NIKUMAN_GAGE;
+		mBoss->mLife -= cAtkPowerNikuman / mNegativeDamege;
+		mMissionGauge += cAddGaugePowerNikuman;
 
-		UtilGame::addScore(NIKUMAN_SCORE);
+		UtilGame::addScore(cAddScoreNikuman);
 		mIsHitEffect = true;
 		mCharaAtkY = mNiku->getHitPosY();
 		mNiku->setIsHitCheck(false);
@@ -723,9 +723,9 @@ SceneGameNormal::stateExeGame()
 	if (mIsHitYoshi)
 	{
 		mBoss->mHitCount++;
-		mBoss->mLife -= YOSHITARO_DAMAGE / mNegativeDamege;
-		mMissionGauge += YOSHITARO_GAGE;
-		UtilGame::addScore(YOSHITARO_SCORE);
+		mBoss->mLife -= cAtkPowerYoshitaro / mNegativeDamege;
+		mMissionGauge += cAddGaugePowerYoshitaro;
+		UtilGame::addScore(cAddScoreYoshitaro);
 		mIsHitEffect = true;
 		mCharaAtkY = mYoshi->getHitPosY();
 		mYoshi->setIsHitCheck(false);
@@ -734,9 +734,9 @@ SceneGameNormal::stateExeGame()
 	if (mIsHitNoppo)
 	{
 		mBoss->mHitCount++;
-		mBoss->mLife -= NOPPO_DAMAGE / mNegativeDamege;
-		mMissionGauge += NOPPO_GAGE;
-		UtilGame::addScore(NOPPO_SCORE);
+		mBoss->mLife -= cAtkPowerNoppo / mNegativeDamege;
+		mMissionGauge += cAddGaugePowerNoppo;
+		UtilGame::addScore(cAddScoreNoppo);
 		mIsHitEffect = true;
 		mCharaAtkY = mNoppo->getHitPosY();
 		mNoppo->setIsHitCheck(false);

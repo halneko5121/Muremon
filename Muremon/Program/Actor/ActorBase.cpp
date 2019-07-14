@@ -40,7 +40,14 @@ ActorBase::ActorBase(Texture* texture, Vertex* vertex)
 	: mOrbit(nullptr)
 	, mTexture(texture)
 	, mVertex(vertex)
-	, mCharaData()
+	, mSpeed(0.0f)
+	, mAnimation(0)
+	, mRectNum(0)
+	, mAlpha(255)
+	, mIsAtk1(false)
+	, mIsAtk2(false)
+	, mIsDeathNext(false)
+	, mNowPos(0.0f, 0.0f)
 	, mAngleDegree(0.0f)
 	, mRectStartNum(0)
 	, mSoundStartNum(0)
@@ -120,12 +127,12 @@ ActorBase::getNikumanSpeed() const
 void
 ActorBase::setGroundAtkFlag()
 {
-	mCharaData.mIsAtk1 = true;
+	mIsAtk1 = true;
 }
 void
 ActorBase::setSkyAtkFlag()
 {
-	mCharaData.mIsAtk2 = true;
+	mIsAtk2 = true;
 }
 
 /**
@@ -182,9 +189,9 @@ Vector2f
 ActorBase::updateAttack1()
 {
 	// ‰E‚ÉˆÚ“®
-	mCharaData.mNowPos.x += mCharaData.mSpeed;
+	mNowPos.x += mSpeed;
 
-	return mCharaData.mNowPos;
+	return mNowPos;
 }
 
 /**

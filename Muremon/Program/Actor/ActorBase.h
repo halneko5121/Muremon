@@ -59,20 +59,6 @@ typedef struct F_RECT{
     float   bottom;
 }F_RECT;
 
-//キャラのデータ
-typedef struct CHARADATA{
-	float		mSpeed;
-	int			mAnimation;
-	int			mRectNum;
-	float		mAlpha;
-
-	bool		mIsAtk1;
-	bool		mIsAtk2;
-	bool		mIsDeathNext;
-
-	Vector2f	mNowPos;
-}CHARADATA;
-
 class ActorBase
 {
 public:
@@ -159,7 +145,14 @@ protected:
 	Texture*			mTexture;
 	Vertex*				mVertex;
 
-	CHARADATA			mCharaData;
+	float				mSpeed;
+	int					mAnimation;
+	int					mRectNum;
+	int					mAlpha;
+	bool				mIsAtk1;
+	bool				mIsAtk2;
+	bool				mIsDeathNext;
+	Vector2f			mNowPos;
 	float				mAngleDegree;
 
 	int					mRectStartNum;

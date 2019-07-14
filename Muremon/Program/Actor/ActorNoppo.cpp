@@ -51,15 +51,6 @@ namespace
 		MAX_ANIME_NOPPO,
 	};
 
-	CHARADATA init_charadata_noppo = {
-		// スピード, アニメーション, 矩形, 透過度
-		(0.0f), 0, 0, 255,
-		// 各フラグ
-		false, false, false,
-		// 中心座標
-		Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius)),
-	};
-
 	enum State
 	{
 		cState_Idle,			// 待機
@@ -84,10 +75,8 @@ ActorNoppo::ActorNoppo(Texture* texture, Vertex* vertex)
 {
 	mRectStartNum = R_NOPPO_G_ATK1;
 	mSoundStartNum = S_NOPPO_KOKE;
+	mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
-
-	// 構造体
-	mCharaData = init_charadata_noppo;
 
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			cState_Idle);
@@ -120,11 +109,11 @@ ActorNoppo::initImple()
 void
 ActorNoppo::runImple()
 {
-	if (mCharaData.mIsAtk1)
+	if (mIsAtk1)
 	{
 		mState.changeStateIfDiff(cState_GroundAtk);
 	}
-	else if (mCharaData.mIsAtk2)
+	else if (mIsAtk2)
 	{
 		mState.changeStateIfDiff(cState_SkyAtk);
 	}
@@ -161,7 +150,7 @@ ActorNoppo::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 		delay = 0;
 	}
 
-	mCharaData.mRectNum	= rect_num;
+	mRectNum	= rect_num;
 
 	return anime_count;
 }
@@ -175,8 +164,8 @@ ActorNoppo::drawImple()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
 
 	mVertex->setAngle(mAngleDegree);
-	mVertex->setColor(static_cast<D3DCOLOR>(mCharaData.mAlpha), 255, 255, 255);
-	mVertex->drawF(mCharaData.mNowPos, (mRectStartNum + mCharaData.mRectNum + mCharaData.mAnimation));
+	mVertex->setColor(static_cast<D3DCOLOR>(mAlpha), 255, 255, 255);
+	mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation));
 }
 
 /**
@@ -185,9 +174,9 @@ ActorNoppo::drawImple()
 Vector2f
 ActorNoppo::updateAttack2()	
 {
-	mCharaData.mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX,mCharaData.mNowPos);
+	mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX,mNowPos);
 
-	return mCharaData.mNowPos;
+	return mNowPos;
 }
 
 // -----------------------------------------------------------------
@@ -213,19 +202,28 @@ void
 ActorNoppo::stateEnterGroundAtk()
 {
 	// 攻撃開始
-	mCharaData = init_charadata_noppo;
-	mCharaData.mIsAtk1 = true;
-	mCharaData.mSpeed = getSpeed();
-	mCharaData.mNowPos = Vector2f(-cNoppoRadius, G_ATK_3_START_Y);
+	{
+		mSpeed = 0.0f;
+		mAnimation = 0;
+		mRectNum = 0;
+		mAlpha = 255;
+		mIsAtk1 = false;
+		mIsAtk2 = false;
+		mIsDeathNext = false;
+		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
+	}
+	mIsAtk1 = true;
+	mSpeed = getSpeed();
+	mNowPos = Vector2f(-cNoppoRadius, G_ATK_3_START_Y);
 	mAngleDegree = 0.0f;
 }
 void
 ActorNoppo::stateGroundAtk()
 {
-	if (isHit(mCharaData.mNowPos, mBossPos, ID_NOPPO))
+	if (isHit(mNowPos, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mCharaData.mNowPos.y;
+		mHitPosY = mNowPos.y;
 
 		if (UtilSound::isPlaying(S_NOPPO_GANMEN))
 		{
@@ -233,7 +231,7 @@ ActorNoppo::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_NOPPO_GANMEN);
 
-		EffectParam param(mTexture, mVertex, mCharaData.mNowPos);
+		EffectParam param(mTexture, mVertex, mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect5, param);
 
 		mState.changeState(cState_GroundDeath);
@@ -242,9 +240,9 @@ ActorNoppo::stateGroundAtk()
 	// 攻撃処理(xが画面外じゃなければ処理)
 	else
 	{
-		if (mCharaData.mNowPos.x - cNoppoRadius < cWindowWidth) {
-			mCharaData.mNowPos = updateAttack1();
-			mCharaData.mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mCharaData.mAnimation, NULL);
+		if (mNowPos.x - cNoppoRadius < cWindowWidth) {
+			mNowPos = updateAttack1();
+			mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mAnimation, NULL);
 		}
 		else
 		{
@@ -259,10 +257,20 @@ ActorNoppo::stateGroundAtk()
 void
 ActorNoppo::stateEnterSkyAtk()
 {
-	mCharaData = init_charadata_noppo;
-	mCharaData.mIsAtk2 = true;
-	mCharaData.mSpeed = getSpeed();
-	mCharaData.mNowPos = Vector2f(-cNoppoRadius, mAtkStartY);
+	// 攻撃開始
+	{
+		mSpeed = 0.0f;
+		mAnimation = 0;
+		mRectNum = 0;
+		mAlpha = 255;
+		mIsAtk1 = false;
+		mIsAtk2 = false;
+		mIsDeathNext = false;
+		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
+	}
+	mIsAtk2 = true;
+	mSpeed = getSpeed();
+	mNowPos = Vector2f(-cNoppoRadius, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
@@ -272,10 +280,10 @@ ActorNoppo::stateEnterSkyAtk()
 void
 ActorNoppo::stateSkyAtk()
 {
-	if (isHit(mCharaData.mNowPos, mBossPos, ID_NOPPO))
+	if (isHit(mNowPos, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mCharaData.mNowPos.y;
+		mHitPosY = mNowPos.y;
 
 		if (UtilSound::isPlaying(S_NOPPO_KOKE))
 		{
@@ -292,7 +300,7 @@ ActorNoppo::stateSkyAtk()
 			UtilSound::playOnce((S_NOPPO_PETI));
 		}
 
-		EffectParam param(mTexture, mVertex, mCharaData.mNowPos);
+		EffectParam param(mTexture, mVertex, mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect6, param);
 
 		mState.changeState(cState_SkyDeath);
@@ -301,10 +309,10 @@ ActorNoppo::stateSkyAtk()
 	// 攻撃処理(xが画面外じゃなければ処理)
 	else
 	{
-		if (mCharaData.mNowPos.x - cNoppoRadius < cWindowWidth) {
-			mOrbit->mWave->setSpeed(mCharaData.mSpeed);
-			mCharaData.mNowPos = updateAttack2();
-			mCharaData.mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mCharaData.mAnimation, ANIME_S_ATK1_NOPPO);
+		if (mNowPos.x - cNoppoRadius < cWindowWidth) {
+			mOrbit->mWave->setSpeed(mSpeed);
+			mNowPos = updateAttack2();
+			mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mAnimation, ANIME_S_ATK1_NOPPO);
 		}
 		else
 		{
@@ -325,18 +333,18 @@ ActorNoppo::stateGroundDeath()
 {
 	static int wait_count = 0;
 
-	if (!mCharaData.mIsDeathNext)
+	if (!mIsDeathNext)
 	{
-		mCharaData.mAnimation = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mCharaData.mAnimation, ANIME_MOTION1_NOPPO);
-		if (mCharaData.mAnimation == 2)
+		mAnimation = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mAnimation, ANIME_MOTION1_NOPPO);
+		if (mAnimation == 2)
 		{
-			mCharaData.mIsDeathNext = true;
+			mIsDeathNext = true;
 		}
 	}
 	else 
 	{
-		mCharaData.mAnimation = 0;
-		mCharaData.mRectNum = ANIME_MOTION3_NOPPO;
+		mAnimation = 0;
+		mRectNum = ANIME_MOTION3_NOPPO;
 		if (wait_count++ > cWaitMotion) {
 			wait_count = 0;
 			mState.changeState(cState_End);
@@ -357,19 +365,19 @@ ActorNoppo::stateSkyDeath()
 	// 回転させる
 	mAngleDegree += SPIN_SPEED;
 
-	mCharaData.mAnimation = 0;																	//描画を固定
-	mCharaData.mRectNum = ANIME_S_ATK2_NOPPO;
+	mAnimation = 0;																	//描画を固定
+	mRectNum = ANIME_S_ATK2_NOPPO;
 
-	mCharaData.mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.mNowPos);
+	mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	// 画面外なら死亡
-	if ((mCharaData.mNowPos.x < -(cNoppoRadius + 50)) || (mCharaData.mNowPos.x > cWindowWidth + cNoppoRadius + 50) &&
-		(mCharaData.mNowPos.y < -(cNoppoRadius + 50)) || (mCharaData.mNowPos.y > cWindowHeight + cNoppoRadius + 50)) 
+	if ((mNowPos.x < -(cNoppoRadius + 50)) || (mNowPos.x > cWindowWidth + cNoppoRadius + 50) &&
+		(mNowPos.y < -(cNoppoRadius + 50)) || (mNowPos.y > cWindowHeight + cNoppoRadius + 50)) 
 	{
 		mState.changeState(cState_End);
 	}
 
-	if ((mCharaData.mNowPos.y < (-cNoppoRadius)) || (mCharaData.mNowPos.y > cWindowHeight + cNoppoRadius + 30))
+	if ((mNowPos.y < (-cNoppoRadius)) || (mNowPos.y > cWindowHeight + cNoppoRadius + 30))
 	{
 		mState.changeState(cState_End);
 	}
@@ -381,8 +389,8 @@ ActorNoppo::stateSkyDeath()
 void
 ActorNoppo::stateEnterEnd()
 {
-	mCharaData.mIsAtk1 = mCharaData.mIsAtk2 = false;
-	mCharaData.mAnimation = 0;
+	mIsAtk1 = mIsAtk2 = false;
+	mAnimation = 0;
 }
 void
 ActorNoppo::stateEnd()

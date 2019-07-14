@@ -162,14 +162,11 @@ protected:
 	CHARADATA			mCharaData;
 	float				mAngleDegree;
 
-	int					mCountEffect;
-	int					mMaxAnimetion;
-
 	int					mRectStartNum;
 	int					mSoundStartNum;
 
 	bool				mIsHitCheck;
 	bool				mIsRun;
-	Vector2f		mBossPos;
+	Vector2f			mBossPos;
 	float				mHitPosY;
 };

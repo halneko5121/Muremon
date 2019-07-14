@@ -212,7 +212,6 @@ ActorYoshi::stateEnterGroundAtk()
 	mCharaData.mSpeed = getSpeed();
 	mCharaData.mAnimation = 0;
 	mCharaData.mNowPos = Vector2f(-cYoshiRadius, G_ATK_1_START_Y);
-	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }

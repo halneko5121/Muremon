@@ -217,7 +217,6 @@ ActorNoppo::stateEnterGroundAtk()
 	mCharaData.mIsAtk1 = true;
 	mCharaData.mSpeed = getSpeed();
 	mCharaData.mNowPos = Vector2f(-cNoppoRadius, G_ATK_3_START_Y);
-	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 }
 void
@@ -265,7 +264,6 @@ ActorNoppo::stateEnterSkyAtk()
 	mCharaData.mSpeed = getSpeed();
 	mCharaData.mNowPos = Vector2f(-cNoppoRadius, mAtkStartY);
 
-	mCountEffect = 0;
 	mAtkStartY = (float)(rand() % cRandY);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);

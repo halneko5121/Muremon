@@ -201,7 +201,6 @@ ActorNikuman::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mIsDeathNext = false;
 		mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
 	}
 	mIsAtk1 = true;
@@ -251,7 +250,6 @@ ActorNikuman::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mIsDeathNext = false;
 		mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
 	}
 	mIsAtk2 = true;

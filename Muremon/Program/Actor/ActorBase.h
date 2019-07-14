@@ -151,7 +151,6 @@ protected:
 	int					mAlpha;
 	bool				mIsAtk1;
 	bool				mIsAtk2;
-	bool				mIsDeathNext;
 	Vector2f			mNowPos;
 	float				mAngleDegree;
 

@@ -51,12 +51,13 @@ namespace
 
 	enum State
 	{
-		cState_Idle,			// 待機
-		cState_GroundAtk,		// 地上攻撃
-		cState_SkyAtk,			// 空中攻撃
-		cState_GroundDeath,		// 死亡（地上)
-		cState_SkyDeath,		// 死亡（空中）
-		cState_End,				// 終了
+		cState_Idle,				// 待機
+		cState_GroundAtk,			// 地上攻撃
+		cState_SkyAtk,				// 空中攻撃
+		cState_GroundDeath,			// 死亡（地上)
+		cState_SkyDeathAnime,		// 死亡（空中）アニメ
+		cState_SkyDeath,			// 死亡（空中）
+		cState_End,					// 終了
 		cState_Count
 	};
 }
@@ -78,12 +79,13 @@ ActorYoshi::ActorYoshi(Texture* texture, Vertex* vertex)
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
 	mState.initialize(cState_Count, cState_Idle);
-	REGIST_STATE_FUNC2(ActorYoshi, mState, Idle,		cState_Idle);
-	REGIST_STATE_FUNC2(ActorYoshi, mState, GroundAtk,	cState_GroundAtk);
-	REGIST_STATE_FUNC2(ActorYoshi, mState, SkyAtk,		cState_SkyAtk);
-	REGIST_STATE_FUNC2(ActorYoshi, mState, GroundDeath, cState_GroundDeath);
-	REGIST_STATE_FUNC2(ActorYoshi, mState, SkyDeath,	cState_SkyDeath);
-	REGIST_STATE_FUNC2(ActorYoshi, mState, End,			cState_End);
+	REGIST_STATE_FUNC2(ActorYoshi, mState, Idle,				cState_Idle);
+	REGIST_STATE_FUNC2(ActorYoshi, mState, GroundAtk,			cState_GroundAtk);
+	REGIST_STATE_FUNC2(ActorYoshi, mState, SkyAtk,				cState_SkyAtk);
+	REGIST_STATE_FUNC2(ActorYoshi, mState, GroundDeath,			cState_GroundDeath);
+	REGIST_STATE_FUNC2(ActorYoshi, mState, SkyDeathAnime,		cState_SkyDeathAnime);
+	REGIST_STATE_FUNC2(ActorYoshi, mState, SkyDeath,			cState_SkyDeath);
+	REGIST_STATE_FUNC2(ActorYoshi, mState, End,					cState_End);
 	mState.changeState(cState_Idle);
 }
 
@@ -203,7 +205,6 @@ ActorYoshi::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mIsDeathNext = false;
 		mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	}
 	mIsAtk1 = true;
@@ -231,6 +232,7 @@ ActorYoshi::stateGroundAtk()
 		GetEffectMgr()->createEffect(cEffectId_HitEffect3, param);
 
 		mState.changeState(cState_GroundDeath);
+		return;
 	}
 
 	if (mNowPos.x - cYoshiRadius < cWindowWidth)
@@ -258,7 +260,6 @@ ActorYoshi::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mIsDeathNext = false;
 		mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	}
 	mIsAtk2 = true;
@@ -287,7 +288,7 @@ ActorYoshi::stateSkyAtk()
 		EffectParam param(mTexture, mVertex, mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect4, param);
 
-		mState.changeState(cState_SkyDeath);
+		mState.changeState(cState_SkyDeathAnime);
 	}
 
 	if (mNowPos.x - cYoshiRadius < cWindowWidth)
@@ -308,25 +309,13 @@ ActorYoshi::stateSkyAtk()
 void
 ActorYoshi::stateEnterGroundDeath()
 {
+	mAnimation = 0;
+	mRectNum = ANIME_DEATH_YOSHI;
 }
 void
 ActorYoshi::stateGroundDeath()
 {
-	if (!mIsDeathNext)
-	{
-		mAnimation = setAnimetion((ANIME_MOTION3_YOSHI - ANIME_G_ATK4_YOSHI), mAnimation, ANIME_MOTION1_YOSHI);
-		if (mAnimation == 3)
-		{
-			mIsDeathNext = true;
-		}
-	}
-	if (mIsDeathNext)
-	{
-		mAnimation = 0;																//描画を固定
-		mRectNum = ANIME_DEATH_YOSHI;
-
-		mNowPos = mOrbit->mRebound->orbitRebound(mRandDeg, mSpeed, mNowPos);
-	}
+	mNowPos = mOrbit->mRebound->orbitRebound(mRandDeg, mSpeed, mNowPos);
 
 	// 中心座標が画面外なら死亡
 	if ((mNowPos.x < -cYoshiRadius) || (mNowPos.x > cWindowWidth + cYoshiRadius) &&
@@ -337,31 +326,38 @@ ActorYoshi::stateGroundDeath()
 }
 
 /**
+ * @brief ステート:SkyDeathAnime
+ */
+void
+ActorYoshi::stateEnterSkyDeathAnime()
+{
+}
+void
+ActorYoshi::stateSkyDeathAnime()
+{
+	mAnimation = setAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI), mAnimation, ANIME_S_ATK2_YOSHI);
+	if (mAnimation == 3)
+	{
+		mState.changeState(cState_SkyDeath);
+		return;
+	}
+}
+
+
+/**
  * @brief ステート:SkyDeath
  */
 void
 ActorYoshi::stateEnterSkyDeath()
 {
+	mAnimation = 0;																//描画を固定
+	mRectNum = ANIME_DEATH_YOSHI;
 }
 void
 ActorYoshi::stateSkyDeath()
 {
-	if (!mIsDeathNext)
-	{
-		mAnimation = setAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI), mAnimation, ANIME_S_ATK2_YOSHI);
-		if (mAnimation == 3)
-		{
-			mIsDeathNext = true;
-		}
-	}
-	if (mIsDeathNext)
-	{
-		mAngleDegree += SPIN_SPEED;
-		mAnimation = 0;																//描画を固定
-		mRectNum = ANIME_DEATH_YOSHI;
-
-		mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
-	}
+	mAngleDegree += SPIN_SPEED;
+	mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	if ((mNowPos.y < -cYoshiRadius) || (mNowPos.y > cWindowHeight + cYoshiRadius))
 	{
@@ -383,7 +379,6 @@ void
 ActorYoshi::stateEnterEnd()
 {
 	mIsAtk1 = mIsAtk2 = false;
-	mIsDeathNext = false;
 	mAnimation = 0;
 }
 void

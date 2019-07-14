@@ -53,12 +53,13 @@ namespace
 
 	enum State
 	{
-		cState_Idle,			// 待機
-		cState_GroundAtk,		// 地上攻撃
-		cState_SkyAtk,			// 空中攻撃
-		cState_GroundDeath,		// 死亡（地上)
-		cState_SkyDeath,		// 死亡（空中）
-		cState_End,				// 終了
+		cState_Idle,				// 待機
+		cState_GroundAtk,			// 地上攻撃
+		cState_SkyAtk,				// 空中攻撃
+		cState_GroundDeathAnime,	// 死亡（地上)アニメ
+		cState_GroundDeath,			// 死亡（地上)
+		cState_SkyDeath,			// 死亡（空中）
+		cState_End,					// 終了
 		cState_Count
 	};
 }
@@ -79,12 +80,13 @@ ActorNoppo::ActorNoppo(Texture* texture, Vertex* vertex)
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
 	mState.initialize(cState_Count, cState_Idle);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			cState_Idle);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundAtk,		cState_GroundAtk);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, SkyAtk,			cState_SkyAtk);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundDeath,		cState_GroundDeath);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, SkyDeath,		cState_SkyDeath);
-	REGIST_STATE_FUNC2(ActorNoppo, mState, End,				cState_End);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			 cState_Idle);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundAtk,		 cState_GroundAtk);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, SkyAtk,			 cState_SkyAtk);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundDeathAnime, cState_GroundDeathAnime);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundDeath,		 cState_GroundDeath);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, SkyDeath,		 cState_SkyDeath);
+	REGIST_STATE_FUNC2(ActorNoppo, mState, End,				 cState_End);
 	mState.changeState(cState_Idle);
 }
 
@@ -209,7 +211,6 @@ ActorNoppo::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mIsDeathNext = false;
 		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	}
 	mIsAtk1 = true;
@@ -234,7 +235,7 @@ ActorNoppo::stateGroundAtk()
 		EffectParam param(mTexture, mVertex, mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect5, param);
 
-		mState.changeState(cState_GroundDeath);
+		mState.changeState(cState_GroundDeathAnime);
 		return;
 	}
 	// 攻撃処理(xが画面外じゃなければ処理)
@@ -265,7 +266,6 @@ ActorNoppo::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mIsDeathNext = false;
 		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	}
 	mIsAtk2 = true;
@@ -322,33 +322,38 @@ ActorNoppo::stateSkyAtk()
 }
 
 /**
+ * @brief ステート:GroundDeathAnime
+ */
+void
+ActorNoppo::stateEnterGroundDeathAnime()
+{
+}
+void
+ActorNoppo::stateGroundDeathAnime()
+{
+	mAnimation = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mAnimation, ANIME_MOTION1_NOPPO);
+	if (mAnimation == 2)
+	{
+		mState.changeState(cState_GroundDeath);
+	}
+}
+
+/**
  * @brief ステート:GroundDeath
  */
 void
 ActorNoppo::stateEnterGroundDeath()
 {
+	mAnimation = 0;
+	mRectNum = ANIME_MOTION3_NOPPO;
 }
 void
 ActorNoppo::stateGroundDeath()
 {
-	static int wait_count = 0;
-
-	if (!mIsDeathNext)
+	if (cWaitMotion <= mState.getStateCount())
 	{
-		mAnimation = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mAnimation, ANIME_MOTION1_NOPPO);
-		if (mAnimation == 2)
-		{
-			mIsDeathNext = true;
-		}
-	}
-	else 
-	{
-		mAnimation = 0;
-		mRectNum = ANIME_MOTION3_NOPPO;
-		if (wait_count++ > cWaitMotion) {
-			wait_count = 0;
-			mState.changeState(cState_End);
-		}
+		mState.changeState(cState_End);
+		return;
 	}
 }
 
@@ -390,6 +395,7 @@ void
 ActorNoppo::stateEnterEnd()
 {
 	mIsAtk1 = mIsAtk2 = false;
+	mAlpha = 0;
 	mAnimation = 0;
 }
 void

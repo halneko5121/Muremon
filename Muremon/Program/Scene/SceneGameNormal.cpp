@@ -28,6 +28,11 @@ namespace
 	const int cNegativePar3 = 70;
 	const int cNegativePar4 = 100;
 
+	const Vector2f cWaveInitPos = { -500.0f, 300.0f };
+	const float cWaveSpeedX = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
+	const float cWaveUpY = (60.f / (60.f * 3.5f));
+	const int cMaxMissionGauge = 5000;
+
 	enum NEGATIVE_DATA
 	{
 		NO_NEGATIVE,
@@ -81,7 +86,7 @@ SceneGameNormal::SceneGameNormal()
 	, mCharaAtkY(0)
 	, mAlphaFont(0)
 	, mTimeCount(0)
-	, mWavePos(WAVE_INIT_X, WAVE_INIT_Y)
+	, mWavePos(cWaveInitPos)
 	, mNegativeState(NO_NEGATIVE)
 	, mNegativeDamege(1)
 {
@@ -218,7 +223,7 @@ SceneGameNormal::draw()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
 
-	if(mMissionGauge >= MISSION_GAGE_MAX)
+	if(mMissionGauge >= cMaxMissionGauge)
 	{
 		mMission->draw();
 	}
@@ -368,7 +373,7 @@ SceneGameNormal::drawHitEffect()
 void
 SceneGameNormal::drawMissionGuage()
 {
-	float num = (float)mMissionGauge / (float)MISSION_GAGE_MAX;
+	float num = (float)mMissionGauge / (float)cMaxMissionGauge;
 
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,30,30,200);
@@ -402,8 +407,8 @@ SceneGameNormal::updateMissionOugi()
 		}
 	}
 	else if(mTimeCount >= 210 && 420 > mTimeCount){		//”g‚ð“®‚©‚·(3.5sec)
-		mWavePos.x += WAVE_SPEED_X;
-		mWavePos.y -= WAVE_UP_Y;
+		mWavePos.x += cWaveSpeedX;
+		mWavePos.y -= cWaveUpY;
 		if(mTimeCount % 10 <= 4){
 			mWavePos.y -= 2.f;
 		}
@@ -419,8 +424,7 @@ SceneGameNormal::updateMissionOugi()
 		mBoss->mLife -= 7000;
 		recover();
 		mMissionStateKeep = MISSION_END;
-		mWavePos.x = WAVE_INIT_X;
-		mWavePos.y = WAVE_INIT_Y;
+		mWavePos = cWaveInitPos;
 		UtilGame::addScore(MISSION_CLEAR_SCORE);
 	}
 	mTimeCount++;
@@ -647,7 +651,7 @@ SceneGameNormal::stateExeGame()
 	}
 
 	//ƒ~ƒbƒVƒ‡ƒ“‚ª‹N“®‚·‚é’iŠK‚Ü‚Å‚¢‚Á‚½‚ç
-	if (mMissionGauge >= MISSION_GAGE_MAX) {
+	if (mMissionGauge >= cMaxMissionGauge) {
 		if (!mIsInit) {
 			UtilSound::playOnce(S_OSIRASE);
 			mMission->init(mNikumanKeyCount, mYoshitaroKeyCount, mNoppoKeyCount);

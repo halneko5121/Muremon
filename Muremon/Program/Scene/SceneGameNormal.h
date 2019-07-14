@@ -102,7 +102,7 @@ private:
 	int					mAlphaFont;
 	int					mTimeCount;
 
-	D3DXVECTOR2			mWavePos;
+	Vector2f			mWavePos;
 
 	// NEGATIVE‚ÅŽg—p
 	int					mNegativeState;

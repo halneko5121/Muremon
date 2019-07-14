@@ -52,13 +52,6 @@ const float G_F_NOPPO_Y = 585.f;
 const float G_PUSHNUM = 60.f;
 
 //奥義
-const float WAVE_INIT_X = -500.f;
-const float WAVE_INIT_Y = 300.f;
-const float WAVE_SPEED_X = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
-const float WAVE_UP_Y = (60.f / (60.f * 3.5f));
-
-const int MISSION_GAGE_MAX = 5000;
-
 const Vector2f cHitEffectPos = { 100.0f, 450.0 };
 
 const int MISSION_CLEAR_SCORE = 50000;	//ミッションクリア加算スコア

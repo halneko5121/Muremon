@@ -44,11 +44,11 @@ const Vector2f cDispFlagPos = { 400.0f, 450.0f };
 const Vector2f cDispScoreNumPos = { 30.0f, 40.0f };
 const Vector2f cDispTimeNumPos = { 30.0f, 90.0f };
 
-const float G_FACE_X = 30.f;
-const float G_F_NIKUMAN_Y = 560.f;
-const float G_F_YOSHITARO_Y = 535.f;
-const float G_F_NOPPO_Y = 585.f;
-const float G_PUSHNUM = 60.f;
+const float cDispFaceIconPosX = 30.f;
+const float cDispFaceIconYoshiPosY = 535.f;
+const float cDispFaceIconNikumanPosY = 560.f;
+const float cDispFaceIconNoppoPosY = 585.f;
+const float cDispPushKeyCountPosX = 60.f;
 
 // キャラクターのスコア、ゲージ設定
 const int NIKUMAN_DAMAGE = 20;	//にくまんの攻撃力

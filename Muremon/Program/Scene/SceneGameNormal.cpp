@@ -207,9 +207,9 @@ SceneGameNormal::draw()
 
 	drawTime();
 
-	mVertex->drawF(Vector2f(G_FACE_X, G_F_NIKUMAN_Y), R_F_NIKUMAN);	//‚É‚­‚Ü‚ñŠç
-	mVertex->drawF(Vector2f(G_FACE_X, G_F_YOSHITARO_Y), R_F_YOSHITARO);	//‚æ‚µ‚½‚ë‚¤Šç
-	mVertex->drawF(Vector2f(G_FACE_X, G_F_NOPPO_Y), R_F_NOPPO);	//‚Ì‚Á‚ÛŠç
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//‚É‚­‚Ü‚ñŠç
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//‚æ‚µ‚½‚ë‚¤Šç
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//‚Ì‚Á‚ÛŠç
 
 	drawKeyCount();
 
@@ -260,7 +260,7 @@ SceneGameNormal::drawKeyCount()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_NIKUMAN_Y), R_0 + num % 10);
+		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNikumanPosY), R_0 + num % 10);
 	}
 	//‚æ‚µ‚½‚ë‚¤
 	for(int i = 0;i < 4;i++){
@@ -268,7 +268,7 @@ SceneGameNormal::drawKeyCount()
 		for(int j = 1;j < 4 - i;j++){
 			num = num / 10;
 		}
-		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_YOSHITARO_Y), R_0 + num % 10);
+		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconYoshiPosY), R_0 + num % 10);
 	}
 	//‚Ì‚Á‚Û
 	for(int i = 0;i < 4;i++){
@@ -276,7 +276,7 @@ SceneGameNormal::drawKeyCount()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_NOPPO_Y), R_0 + num % 10);
+		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNoppoPosY), R_0 + num % 10);
 	}
 }
 

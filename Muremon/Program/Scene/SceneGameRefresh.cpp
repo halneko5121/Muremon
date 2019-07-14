@@ -106,9 +106,9 @@ void SceneGameRefresh::draw()
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
-		mVertex->drawF(Vector2f(G_FACE_X, G_F_NIKUMAN_Y), R_F_NIKUMAN);				//にくまん顔
-		mVertex->drawF(Vector2f(G_FACE_X, G_F_YOSHITARO_Y), R_F_YOSHITARO);			//よしたろう顔
-		mVertex->drawF(Vector2f(G_FACE_X, G_F_NOPPO_Y), R_F_NOPPO);					//のっぽ顔
+		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);				//にくまん顔
+		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);			//よしたろう顔
+		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);					//のっぽ顔
 
 		drawNum();
 
@@ -136,9 +136,9 @@ void SceneGameRefresh::draw()
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
-		mVertex->drawF(Vector2f(G_FACE_X, G_F_NIKUMAN_Y), R_F_NIKUMAN);	//にくまん顔
-		mVertex->drawF(Vector2f(G_FACE_X, G_F_YOSHITARO_Y), R_F_YOSHITARO);	//よしたろう顔
-		mVertex->drawF(Vector2f(G_FACE_X, G_F_NOPPO_Y), R_F_NOPPO);	//のっぽ顔
+		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
+		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
+		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//のっぽ顔
 
 		drawNum();
 
@@ -175,7 +175,7 @@ void SceneGameRefresh::drawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_NIKUMAN_Y), R_0 + num % 10);
+		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNikumanPosY), R_0 + num % 10);
 	}
 	//よしたろう
 	for(int i = 0;i < 4;i++){
@@ -183,7 +183,7 @@ void SceneGameRefresh::drawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_YOSHITARO_Y), R_0 + num % 10);
+		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconYoshiPosY), R_0 + num % 10);
 	}
 	//のっぽ
 	for(int i = 0;i < 4;i++){
@@ -191,7 +191,7 @@ void SceneGameRefresh::drawNum()
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(G_PUSHNUM + 20.f * i, G_F_NOPPO_Y), R_0 + num % 10);
+		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNoppoPosY), R_0 + num % 10);
 	}
 }
 

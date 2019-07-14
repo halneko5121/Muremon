@@ -14,14 +14,6 @@ const int cWindowWidth = 800;
 const float cWindowCenterX = (cWindowWidth / 2.f);
 const float cWindowCenterY = (cWindowHeight / 2.f);
 
-// Windowを表示する位置
-const int cWindowPosY = 100;
-const int cWindowPosX = 220;
-
-// ゲーム用カーソルのサイズ
-const int cCursorHeight = 20;
-const int cCursorWidth = 20;
-
 const float cDeadLinePosX = 300.f;			// ゲームオーバーライン
 
 const float cNikumanRadius = 37.5f;			// キャラの半径
@@ -31,7 +23,7 @@ const float cNoppoRadius = 150.f;			// キャラの半径
 const Vector2f cYoshiHitRadius = { 30.0f, 40.0f };
 const Vector2f cNoppoHitRadius = { 50.0f, 100.0f };
 
-//描画位置
+// 描画位置
 const Vector2f cDispBgPos = { 400.0f, 300.0f };
 const Vector2f cDispScorePos = { 60.0f, 20.0f };
 const Vector2f cDispTimePos = { 60.0f, 70.0f };

@@ -30,6 +30,14 @@
 
 namespace
 {
+	// Windowを表示する位置
+	const int cWindowPosY = 100;
+	const int cWindowPosX = 220;
+
+	// ゲーム用カーソルのサイズ
+	const int cCursorHeight = 20;
+	const int cCursorWidth = 20;
+
 	enum State
 	{
 		cState_Init,

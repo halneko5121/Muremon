@@ -37,8 +37,8 @@ namespace
 
 ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
 	: ActorBase(texture, vertex)
-	, mLife(cInitLife + (cAddLife * mLvCount))
-	, mMaxLife(cInitLife + (cAddLife * mLvCount))
+	, mLife(cInitLife)
+	, mMaxLife(cInitLife)
 	, mMoveX(cAppearPosX)
 	, mMoveY(cAppearPosY)
 	, mHitCount(0)

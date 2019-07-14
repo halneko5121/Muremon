@@ -24,7 +24,7 @@ public:
 	bool		isWin() const;
 
 public:
-	float		mLife;
+	int			mLife;
 	float		mMaxLife;
 	float		mMoveX;
 	float		mMoveY;

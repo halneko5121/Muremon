@@ -13,7 +13,7 @@ namespace
 	const int cParaRandMoveX = -15;							// 移動量				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = 600.f + RADIUS_YOSHI + 50.f;	// 放物線の最終座標
+	const float cParaLimitY = 600.f + cYoshiRadius + 50.f;	// 放物線の最終座標
 
 	// バウンド関係
 	const int cDegRand = 30;								// ランダムの幅
@@ -55,7 +55,7 @@ namespace
 		//各フラグ
 		false, false, false,
 		// 中心座標
-		Vector2f((-RADIUS_YOSHI),(cWindowWidth + 50.f + RADIUS_YOSHI)),
+		Vector2f((-cYoshiRadius),(cWindowWidth + 50.f + cYoshiRadius)),
 	};
 
 	enum State
@@ -211,7 +211,7 @@ ActorYoshi::stateEnterGroundAtk()
 	mCharaData.mIsAtk1 = true;
 	mCharaData.mSpeed = getSpeed();
 	mCharaData.mAnimation = 0;
-	mCharaData.mNowPos = Vector2f(-RADIUS_YOSHI, G_ATK_1_START_Y);
+	mCharaData.mNowPos = Vector2f(-cYoshiRadius, G_ATK_1_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
@@ -236,7 +236,7 @@ ActorYoshi::stateGroundAtk()
 		mState.changeState(cState_GroundDeath);
 	}
 
-	if (mCharaData.mNowPos.x - RADIUS_YOSHI < cWindowWidth)
+	if (mCharaData.mNowPos.x - cYoshiRadius < cWindowWidth)
 	{
 		mCharaData.mNowPos = updateAttack1();
 		mCharaData.mAnimation = setAnimetion(ANIME_G_ATK4_YOSHI, mCharaData.mAnimation, NULL);
@@ -257,7 +257,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mCharaData = cInitActorData;
 	mCharaData.mIsAtk2 = true;
 	mCharaData.mSpeed = getSpeed();
-	mCharaData.mNowPos = Vector2f(-RADIUS_YOSHI, mAtkStartY);
+	mCharaData.mNowPos = Vector2f(-cYoshiRadius, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
@@ -284,7 +284,7 @@ ActorYoshi::stateSkyAtk()
 		mState.changeState(cState_SkyDeath);
 	}
 
-	if (mCharaData.mNowPos.x - RADIUS_YOSHI < cWindowWidth)
+	if (mCharaData.mNowPos.x - cYoshiRadius < cWindowWidth)
 	{
 		mOrbit->mWave->setSpeed(mCharaData.mSpeed);
 		mCharaData.mNowPos = updateAttack2();
@@ -323,8 +323,8 @@ ActorYoshi::stateGroundDeath()
 	}
 
 	// 中心座標が画面外なら死亡
-	if ((mCharaData.mNowPos.x < -RADIUS_YOSHI) || (mCharaData.mNowPos.x > cWindowWidth + RADIUS_YOSHI) &&
-		(mCharaData.mNowPos.y < -RADIUS_YOSHI) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_YOSHI))
+	if ((mCharaData.mNowPos.x < -cYoshiRadius) || (mCharaData.mNowPos.x > cWindowWidth + cYoshiRadius) &&
+		(mCharaData.mNowPos.y < -cYoshiRadius) || (mCharaData.mNowPos.y > cWindowHeight + cYoshiRadius))
 	{
 		mState.changeState(cState_End);
 	}
@@ -357,14 +357,14 @@ ActorYoshi::stateSkyDeath()
 		mCharaData.mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.mNowPos);
 	}
 
-	if ((mCharaData.mNowPos.y < -RADIUS_YOSHI) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_YOSHI))
+	if ((mCharaData.mNowPos.y < -cYoshiRadius) || (mCharaData.mNowPos.y > cWindowHeight + cYoshiRadius))
 	{
 		mState.changeState(cState_End);
 	}
 
 	// 中心座標が画面外なら死亡
-	if ((mCharaData.mNowPos.x < -RADIUS_YOSHI) || (mCharaData.mNowPos.x > cWindowWidth + RADIUS_YOSHI) &&
-		(mCharaData.mNowPos.y < -RADIUS_YOSHI) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_YOSHI)) 
+	if ((mCharaData.mNowPos.x < -cYoshiRadius) || (mCharaData.mNowPos.x > cWindowWidth + cYoshiRadius) &&
+		(mCharaData.mNowPos.y < -cYoshiRadius) || (mCharaData.mNowPos.y > cWindowHeight + cYoshiRadius)) 
 	{
 		mState.changeState(cState_End);
 	}

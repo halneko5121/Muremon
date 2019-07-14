@@ -152,7 +152,7 @@ EffectFont::stateIdle()
 void
 EffectFont::stateEnterRun()
 {
-	mPos = setPos(mInitPos, RADIUS_NOPPO, POS_HITFONT_X);
+	mPos = setPos(mInitPos, cNoppoRadius, POS_HITFONT_X);
 }
 void
 EffectFont::stateRun()

@@ -33,9 +33,9 @@
 #define DRAW_E_RAD_X				(150.f)		//BOSS‚Ì”¼Œa(X)
 #define DRAW_E_RAD_Y				(200.f)		//BOSS‚Ì”¼Œa(Y)
 
-#define G_ATK_1_START_Y				(POS_GROUND + 40 - RADIUS_YOSHI)	
-#define G_ATK_2_START_Y				(POS_GROUND + 20 - RADIUS_NIKU)		
-#define G_ATK_3_START_Y				(POS_GROUND + 70 - RADIUS_NOPPO)	
+#define G_ATK_1_START_Y				(POS_GROUND + 40 - cYoshiRadius)	
+#define G_ATK_2_START_Y				(POS_GROUND + 20 - cNikumanRadius)		
+#define G_ATK_3_START_Y				(POS_GROUND + 70 - cNoppoRadius)	
 
 enum ATK_KIND
 {

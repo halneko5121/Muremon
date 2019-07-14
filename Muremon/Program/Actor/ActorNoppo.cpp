@@ -21,7 +21,7 @@ namespace
 	const int cParaRandMoveX = -15;									// 移動量				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = cWindowHeight + RADIUS_NOPPO + 50;	// 放物線の最終座標
+	const float cParaLimitY = cWindowHeight + cNoppoRadius + 50;	// 放物線の最終座標
 
 	// 波処理関係
 	const int cWaveAmplit = 20;										// 振幅(上下に動く幅)					
@@ -57,7 +57,7 @@ namespace
 		// 各フラグ
 		false, false, false,
 		// 中心座標
-		Vector2f((-RADIUS_NOPPO), (cWindowWidth + 50.f + RADIUS_NOPPO)),
+		Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius)),
 	};
 
 	enum State
@@ -216,7 +216,7 @@ ActorNoppo::stateEnterGroundAtk()
 	mCharaData = init_charadata_noppo;
 	mCharaData.mIsAtk1 = true;
 	mCharaData.mSpeed = getSpeed();
-	mCharaData.mNowPos = Vector2f(-RADIUS_NOPPO, G_ATK_3_START_Y);
+	mCharaData.mNowPos = Vector2f(-cNoppoRadius, G_ATK_3_START_Y);
 	mCountEffect = 0;
 	mAngleDegree = 0.0f;
 }
@@ -243,7 +243,7 @@ ActorNoppo::stateGroundAtk()
 	// 攻撃処理(xが画面外じゃなければ処理)
 	else
 	{
-		if (mCharaData.mNowPos.x - RADIUS_NOPPO < cWindowWidth) {
+		if (mCharaData.mNowPos.x - cNoppoRadius < cWindowWidth) {
 			mCharaData.mNowPos = updateAttack1();
 			mCharaData.mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mCharaData.mAnimation, NULL);
 		}
@@ -263,7 +263,7 @@ ActorNoppo::stateEnterSkyAtk()
 	mCharaData = init_charadata_noppo;
 	mCharaData.mIsAtk2 = true;
 	mCharaData.mSpeed = getSpeed();
-	mCharaData.mNowPos = Vector2f(-RADIUS_NOPPO, mAtkStartY);
+	mCharaData.mNowPos = Vector2f(-cNoppoRadius, mAtkStartY);
 
 	mCountEffect = 0;
 	mAtkStartY = (float)(rand() % cRandY);
@@ -303,7 +303,7 @@ ActorNoppo::stateSkyAtk()
 	// 攻撃処理(xが画面外じゃなければ処理)
 	else
 	{
-		if (mCharaData.mNowPos.x - RADIUS_NOPPO < cWindowWidth) {
+		if (mCharaData.mNowPos.x - cNoppoRadius < cWindowWidth) {
 			mOrbit->mWave->setSpeed(mCharaData.mSpeed);
 			mCharaData.mNowPos = updateAttack2();
 			mCharaData.mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mCharaData.mAnimation, ANIME_S_ATK1_NOPPO);
@@ -365,13 +365,13 @@ ActorNoppo::stateSkyDeath()
 	mCharaData.mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mCharaData.mNowPos);
 
 	// 画面外なら死亡
-	if ((mCharaData.mNowPos.x < -(RADIUS_NOPPO + 50)) || (mCharaData.mNowPos.x > cWindowWidth + RADIUS_NOPPO + 50) &&
-		(mCharaData.mNowPos.y < -(RADIUS_NOPPO + 50)) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_NOPPO + 50)) 
+	if ((mCharaData.mNowPos.x < -(cNoppoRadius + 50)) || (mCharaData.mNowPos.x > cWindowWidth + cNoppoRadius + 50) &&
+		(mCharaData.mNowPos.y < -(cNoppoRadius + 50)) || (mCharaData.mNowPos.y > cWindowHeight + cNoppoRadius + 50)) 
 	{
 		mState.changeState(cState_End);
 	}
 
-	if ((mCharaData.mNowPos.y < (-RADIUS_NOPPO)) || (mCharaData.mNowPos.y > cWindowHeight + RADIUS_NOPPO + 30))
+	if ((mCharaData.mNowPos.y < (-cNoppoRadius)) || (mCharaData.mNowPos.y > cWindowHeight + cNoppoRadius + 30))
 	{
 		mState.changeState(cState_End);
 	}

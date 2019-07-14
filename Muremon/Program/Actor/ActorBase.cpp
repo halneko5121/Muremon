@@ -26,9 +26,9 @@ namespace
 //l,t,r,b
 //íÜêSÇ©ÇÁÅAè„â∫ç∂âEÇÃïù
 F_RECT rect_pos_p[] = {
-	{RADIUS_NIKU ,RADIUS_NIKU ,RADIUS_NIKU ,RADIUS_NIKU},
-	{RADIUS_HIT_X_YOSHI,RADIUS_HIT_Y_YOSHI,RADIUS_HIT_X_YOSHI,RADIUS_HIT_Y_YOSHI},
-	{RADIUS_HIT_X_NOPPO,RADIUS_HIT_Y_NOPPO,RADIUS_HIT_X_NOPPO,RADIUS_HIT_Y_NOPPO},
+	{cNikumanRadius ,cNikumanRadius ,cNikumanRadius ,cNikumanRadius},
+	{cYoshiHitRadiusX,cYoshiHitRadiusY,cYoshiHitRadiusX,cYoshiHitRadiusY},
+	{cNoppoHitRadiusX,cNoppoHitRadiusY,cNoppoHitRadiusX,cNoppoHitRadiusY},
 };
 
 F_RECT rect_pos_e = {DRAW_E_RAD_X,DRAW_E_RAD_Y,DRAW_E_RAD_X,DRAW_E_RAD_Y};
@@ -198,7 +198,7 @@ ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
 	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
 	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
 
-	if (draw_cc_p.x < DEADLINE) return FALSE;
+	if (draw_cc_p.x < cDeadLinePosX) return FALSE;
 
 	switch (chara_id) {
 	case ID_YOSHI:

@@ -13,13 +13,9 @@
 #include "Program/Util/Orbit/OrbitCalculation.h"
 #include "Program/DefineGame.h"
 
-/*================================
-		Define
-=================================*/
-//âÒì]ä÷åW(ï`âÊ)
+// âÒì]ä÷åW(ï`âÊ)
 #define SPIN_SPEED					(30)		//âÒì]Ç≥ÇπÇÈë¨Ç≥(äpìx)				
-#define SPIN_RAND_MIN				(1)						
-//ï`âÊà íu
+// ï`âÊà íu
 #define POS_GROUND					(500.f)		//ínñ ÇÃç¿ïW		
 
 #define DRAW_E_RAD_X				(150.f)		//BOSSÇÃîºåa(X)
@@ -29,21 +25,7 @@
 #define G_ATK_2_START_Y				(POS_GROUND + 20 - cNikumanRadius)		
 #define G_ATK_3_START_Y				(POS_GROUND + 70 - cNoppoRadius)	
 
-enum ATK_KIND
-{
-	G_ATK_1,
-	G_ATK_2,
-	G_ATK_3,
-	S_ATK_1,
-	S_ATK_2,
-	S_ATK_3,
-};
-
-/*================================
-		Struct
-=================================*/
-
-//RECTÇÃ float_ver
+// RECTÇÃ float_ver
 typedef struct F_RECT{
 	float   left;
     float   top;

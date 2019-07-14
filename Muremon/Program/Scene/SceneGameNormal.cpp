@@ -28,6 +28,11 @@ namespace
 	const int cNegativePar3 = 70;
 	const int cNegativePar4 = 100;
 
+	const int cTimeLimitCount = 10800;					// 制限時間(仮　3:00)
+	const int cMissionClearAddScore = 50000;			// ミッションクリア加算スコア
+	const Vector2f cHitEffectPos = { 100.0f, 450.0 };
+
+	// 奥義
 	const Vector2f cWaveInitPos = { -500.0f, 300.0f };
 	const float cWaveSpeedX = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
 	const float cWaveUpY = (60.f / (60.f * 3.5f));
@@ -425,7 +430,7 @@ SceneGameNormal::updateMissionOugi()
 		recover();
 		mMissionStateKeep = MISSION_END;
 		mWavePos = cWaveInitPos;
-		UtilGame::addScore(MISSION_CLEAR_SCORE);
+		UtilGame::addScore(cMissionClearAddScore);
 	}
 	mTimeCount++;
 }

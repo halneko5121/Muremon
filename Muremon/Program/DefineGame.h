@@ -22,7 +22,6 @@ const int cWindowPosX = 220;
 const int cCursorHeight = 20;
 const int cCursorWidth = 20;
 
-const int cTimeLimitCount = 10800;			// 制限時間(仮　3:00)
 const float cDeadLinePosX = 300.f;			// ゲームオーバーライン
 
 const float cNikumanRadius = 37.5f;			// キャラの半径
@@ -51,12 +50,7 @@ const float G_F_YOSHITARO_Y = 535.f;
 const float G_F_NOPPO_Y = 585.f;
 const float G_PUSHNUM = 60.f;
 
-//奥義
-const Vector2f cHitEffectPos = { 100.0f, 450.0 };
-
-const int MISSION_CLEAR_SCORE = 50000;	//ミッションクリア加算スコア
-const int BOSS_KO_SCORE = 10000;
-//キャラクターのスコア、ゲージ設定
+// キャラクターのスコア、ゲージ設定
 const int NIKUMAN_DAMAGE = 20;	//にくまんの攻撃力
 const int NIKUMAN_GAGE = 30;	//にくまんミッションゲージ増加量
 const int NIKUMAN_SCORE = 30;	//にくまんスコア加算

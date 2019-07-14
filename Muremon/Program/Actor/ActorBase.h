@@ -16,14 +16,6 @@
 /*================================
 		Define
 =================================*/
-//シェイク関係
-#define SHAKE_X						(1.f)		//揺れ幅
-#define SHAKE_Y						(0.5f)
-#define POS_HITFONT_X				(30.f)		//敵に当たった時に出すフォントの位置
-#define POS_HITFONT_Y				(30.f)		//敵に当たった時に出すフォントの位置
-
-#define FONT_DELETE					(20)
-#define FONT_SET					(1)
 //回転関係(描画)
 #define SPIN_SPEED					(30)		//回転させる速さ(角度)				
 #define SPIN_RAND_MIN				(1)						

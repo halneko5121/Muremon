@@ -17,6 +17,9 @@
 namespace
 {
 	const int cAliveFrame = 30;
+	const float cShakeX = 1.f;				// —h‚ê•
+	const float cShakeY = 0.5f;
+	const float cEffectSizeX = 30.f;		// ƒtƒHƒ“ƒg‚Ì‘å‚«‚³
 
 	enum State
 	{
@@ -152,14 +155,14 @@ EffectFont::stateIdle()
 void
 EffectFont::stateEnterRun()
 {
-	mPos = setPos(mInitPos, cNoppoRadius, POS_HITFONT_X);
+	mPos = setPos(mInitPos, cNoppoRadius, cEffectSizeX);
 }
 void
 EffectFont::stateRun()
 {
 	if (mState.getStateCount() < cAliveFrame)
 	{
-		mPos = setEffectShake(SHAKE_X, SHAKE_Y, mPos);
+		mPos = setEffectShake(cShakeX, cShakeY, mPos);
 	}
 	else
 	{

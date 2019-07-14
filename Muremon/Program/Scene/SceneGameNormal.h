@@ -80,7 +80,6 @@ private:
 	int					mTime;				// 時間をはかる
 	bool				mIsPose;			// ポーズをしているかしていないか
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
-	int					mGameState;			// ゲームの状態(スタート・すっきりゲーム)
 	int					mMissionStateKeep;	// ミッションの状態をキープ
 	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
 	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント

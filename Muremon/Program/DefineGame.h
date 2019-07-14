@@ -187,14 +187,6 @@ enum RECT_DATA_GAME
 	R_POSE,
 };
 
-enum GAME_STATE
-{
-	G_START_SCENE,		//スタート
-	G_GAME_SCENE,		//ゲーム中
-	G_GAME_OVER,		//ゲームオーバー
-	G_GAME_CLEAR,		//ゲームクリア
-};
-
 enum CHARA_ID
 {
 	ID_YOSHI,

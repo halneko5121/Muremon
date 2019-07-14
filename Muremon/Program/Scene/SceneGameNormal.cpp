@@ -75,7 +75,6 @@ SceneGameNormal::SceneGameNormal()
 	, mTime(cTimeLimitCount)
 	, mIsPose(false)
 	, mStartAlpha(0)
-	, mGameState(G_START_SCENE)
 	, mMissionStateKeep(0)
 	, mNikumanKeyCount(0)
 	, mYoshitaroKeyCount(0)
@@ -156,13 +155,15 @@ SceneGameNormal::draw()
 	mVertex->drawF(cDispBgPos, R_GAME_BG);
 	mVertex->drawF(cDispFlagPos, R_FLAG);
 
-	if(mGameState == G_START_SCENE)
+	if (mState.isEqual(cState_ReadyFadeIn) ||
+		mState.isEqual(cState_Ready) ||
+		mState.isEqual(cState_ReadyFadeOut))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(mStartAlpha,255,255,255);
 		mVertex->drawF(cDispBgPos, R_GAME_START);	//ゲームスタート
 	}
-	else if(mGameState == G_GAME_SCENE)
+	else if (mState.isEqual(cState_Game))
 	{
 		mBoss->drawImple();
 
@@ -174,13 +175,13 @@ SceneGameNormal::draw()
 		mYoshi->draw();
 		mNiku->draw();
 	}
-	else if(mGameState == G_GAME_OVER)
+	else if (mState.isEqual(cState_GameOver))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(cDispBgPos, R_GAME_OVER);	//ゲームオーバー
 	}
-	else if(mGameState == G_GAME_CLEAR)
+	else if (mState.isEqual(cState_GameClear))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
@@ -611,7 +612,6 @@ SceneGameNormal::stateExeReadyFadeOut()
 	if (mStartAlpha < 0)
 	{
 		mStartAlpha = 0;
-		mGameState = G_GAME_SCENE;
 		mState.changeState(cState_Game);
 		return;
 	}
@@ -631,14 +631,12 @@ SceneGameNormal::stateExeGame()
 	boss_cc2.x = mBoss->mMoveX;
 	boss_cc2.y = mBoss->mMoveY;
 
-	if (mGameState != G_GAME_OVER) {
-		if ((boss_cc2.x - 150) < 500) {
-			UtilSound::playLoop(S_SAIREN);
-		}
-		else
-		{
-			UtilSound::stop(S_SAIREN);
-		}
+	if ((boss_cc2.x - 150) < 500) {
+		UtilSound::playLoop(S_SAIREN);
+	}
+	else
+	{
+		UtilSound::stop(S_SAIREN);
 	}
 
 	if (UtilInput::isKeyPushedReturn())
@@ -800,7 +798,6 @@ SceneGameNormal::stateExeGame()
 void
 SceneGameNormal::stateEnterGameOver()
 {
-	mGameState = G_GAME_OVER;
 	UtilSound::stop(S_SAIREN);
 	UtilSound::stop(S_BGM_BATTLE);
 	UtilSound::playOnce(S_OVER);
@@ -820,7 +817,6 @@ SceneGameNormal::stateExeGameOver()
 void
 SceneGameNormal::stateEnterGameClear()
 {
-	mGameState = G_GAME_CLEAR;
 	UtilSound::stop(S_SAIREN);
 	UtilSound::stop(S_BGM_BATTLE);
 	UtilSound::playOnce(S_G_CLEAR);

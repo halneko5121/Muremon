@@ -155,7 +155,26 @@ void Mission::update()
 	if( mMissionState != MISSION_START && 
 		mMissionState != MISSION_MIDDLE)
 	{
-		fadeOut();
+		if (mAlpha == 0) {
+			if (mMissionState == MISSION_SEIKO) {
+				mMissionState = MISSION_OUGI;
+				mState.changeState(cState_Ougi);
+			}
+			else if (mMissionState == MISSION_SIPPAI) {
+				mMissionState = MISSION_NEGATIVE;
+				mState.changeState(cState_BadStatus);
+			}
+			return;
+		}
+		else
+		{
+			if (mAlphaCount++ > 1) {
+				mAlpha -= MISSION_ALPHA_INCREASE + 5;
+				if (mAlpha < 0) { mAlpha = 0; }
+				mAlphaCount = 0;
+			}
+		}
+
 	}
 }
 
@@ -1111,26 +1130,6 @@ void Mission::fadeIn()
 		if(mAlpha > MISSION_ALPHA_MAX){
 			mAlpha = MISSION_ALPHA_MAX;
 		}
-		mAlphaCount = 0;
-	}
-}
-
-void Mission::fadeOut()
-{
-	if(mAlpha == 0){
-		if(mMissionState == MISSION_SEIKO){
-			mMissionState = MISSION_OUGI;
-			mState.changeState(cState_Ougi);
-		}
-		else if(mMissionState == MISSION_SIPPAI){
-			mMissionState = MISSION_NEGATIVE;
-			mState.changeState(cState_BadStatus);
-		}
-		return ;
-	}
-	else if(mAlphaCount++ > 1){
-		mAlpha -= MISSION_ALPHA_INCREASE + 5;
-		if(mAlpha < 0) { mAlpha = 0; }
 		mAlphaCount = 0;
 	}
 }

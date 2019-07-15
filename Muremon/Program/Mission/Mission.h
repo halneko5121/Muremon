@@ -34,7 +34,6 @@ public:
 
 private:
 	void	fadeIn();
-	void	fadeOut();
 
 	void	drawTime();		//ŽžŠÔ‚ð•\Ž¦
 	void	drawCombo();

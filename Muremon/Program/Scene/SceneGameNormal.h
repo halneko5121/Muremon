@@ -30,6 +30,7 @@ public:
 
 private:
 	void				updateRunAtk();
+	void				drawBg();
 	void				drawKeyCount();				// 連打数
 	void				drawScore();				// スコア
 	void				drawTime();					// タイム

@@ -147,10 +147,8 @@ SceneGameNormal::update()
 void
 SceneGameNormal::draw()
 {
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
-	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(cDispBgPos, R_GAME_BG);
-	mVertex->drawF(cDispFlagPos, R_FLAG);
+	// ”wŒi
+	drawBg();
 
 	if (mState.isEqual(cState_ReadyFadeIn) ||
 		mState.isEqual(cState_Ready) ||
@@ -286,6 +284,18 @@ SceneGameNormal::updateRunAtk()
 		actor->setSkyAtkFlag();
 		actor->run();
 	}
+}
+
+/**
+ * @brief	”wŒi•`‰æ
+ */
+void
+SceneGameNormal::drawBg()
+{
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
+	mVertex->setColor(255, 255, 255, 255);
+	mVertex->drawF(cDispBgPos, R_GAME_BG);
+	mVertex->drawF(cDispFlagPos, R_FLAG);
 }
 
 /**

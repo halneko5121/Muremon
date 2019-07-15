@@ -32,11 +32,6 @@ public:
 private:
 	void				updateRunAtk();
 	void				drawBg();
-	void				drawKeyCount();				// 連打数
-	void				drawScore();				// スコア
-	void				drawTime();					// タイム
-	void				drawHpGauge();
-	void				drawMissionGuage();
 
 	void				updateMissionOugi();		// アクシデント奥義の更新
 	void				drawMissionOugi();			// アクシデント奥義を描画

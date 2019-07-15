@@ -8,6 +8,7 @@
 
 #include "UtilBattle.h"
 #include "UtilInput.h"
+#include "Program/System/GameInfoMgr.h"
 
 /**
  * @brief	’nãUŒ‚‚ªŽÀs‚³‚ê‚½‚©H
@@ -79,4 +80,75 @@ bool
 UtilBattle::isRunStrongSkyAttack()
 {
 	return (isRunSkyAttack() && UtilInput::isKeyPushedLineThree());
+}
+
+/**
+ * @brief	UŒ‚‰ñ”‚ðƒŠƒZƒbƒg
+ */
+void
+UtilBattle::resetAtkCount()
+{
+	GetGameInfoMgr()->setWeakAtkCount(0);
+	GetGameInfoMgr()->setMediumAtkCount(0);
+	GetGameInfoMgr()->setStrongAtkCount(0);
+}
+
+/**
+ * @brief	ŽãUŒ‚‰ñ”‚ð‰ÁŽZ
+ */
+void
+UtilBattle::addWeakAtkCount()
+{
+	int count =GetGameInfoMgr()->getWeakAtkCount();
+	count++;
+	GetGameInfoMgr()->setWeakAtkCount(count);
+}
+
+/**
+ * @brief	ŽãUŒ‚‰ñ”‚ðŽæ“¾
+ */
+int
+UtilBattle::getWeakAtkCount()
+{
+	return GetGameInfoMgr()->getWeakAtkCount();
+}
+
+/**
+ * @brief	’†UŒ‚‰ñ”‚ð‰ÁŽZ
+ */
+void
+UtilBattle::addMediumAtkCount()
+{
+	int count = GetGameInfoMgr()->getMediumAtkCount();
+	count++;
+	GetGameInfoMgr()->setMediumAtkCount(count);
+}
+
+/**
+ * @brief	’†UŒ‚‰ñ”‚ðŽæ“¾
+ */
+int
+UtilBattle::getMediumAtkCount()
+{
+	return GetGameInfoMgr()->getMediumAtkCount();
+}
+
+/**
+ * @brief	‹­UŒ‚‰ñ”‚ð‰ÁŽZ
+ */
+void
+UtilBattle::addStrongAtkCount()
+{
+	int count =GetGameInfoMgr()->getStrongAtkCount();
+	count++;
+	GetGameInfoMgr()->setStrongAtkCount(count);
+}
+
+/**
+ * @brief	‹­UŒ‚‰ñ”‚ðŽæ“¾
+ */
+int
+UtilBattle::getStrongAtkCount()
+{
+	return GetGameInfoMgr()->getStrongAtkCount();
 }

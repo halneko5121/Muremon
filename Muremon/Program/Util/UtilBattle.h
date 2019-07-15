@@ -9,6 +9,7 @@
 
 namespace UtilBattle
 {
+	// UŒ‚‚µ‚½‚©H
 	bool		isRunGroundAttack();
 	bool		isRunSkyAttack();
 
@@ -20,4 +21,19 @@ namespace UtilBattle
 
 	bool		isRunStrongGroundAttack();
 	bool		isRunStrongSkyAttack();
+
+	// UŒ‚‰ñ”
+	void		resetAtkCount();
+
+	void		addWeakAtkCount();
+	int			getWeakAtkCount();
+
+	void		addMediumAtkCount();
+	int			getMediumAtkCount();
+
+	void		addStrongAtkCount();
+	int			getStrongAtkCount();
+
+
+
 }

@@ -29,6 +29,7 @@ public:
 	void				end() override;
 
 private:
+	void				updateRunAtk();
 	void				drawKeyCount();				// 連打数
 	void				drawScore();				// スコア
 	void				drawTime();					// タイム
@@ -43,12 +44,12 @@ private:
 	void				drawMissionNegative();		// ミッション失敗時の処理
 
 	void				recover();					// ミッション失敗で下がったものを元に戻す
-	
-private:
+
 	ActorBase*			getActorNikuman(int index);
 	ActorBase*			getActorYoshi(int index);
 	ActorBase*			getActorNoppo(int index);
 
+private:
 	// ステート関数
 	void				stateEnterIdle();
 	void				stateExeIdle();

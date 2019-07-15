@@ -92,8 +92,6 @@ private:
 
 	int						mFlagZ;			//
 	int						mFlagDraw;		//
-	bool					mIsSound;		//
-	bool					mIsSound2;		//
 
 	int						mMoveCount;		//
 	int						mCurrentMissionNo;		// どのミッションが選択されたかを記憶

@@ -85,8 +85,6 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 	, mAlphaPushZ(255)
 	, mFlagZ(true)
 	, mFlagDraw(0)
-	, mIsSound(true)
-	, mIsSound2(true)
 	, mMoveCount(0)
 	, mCurrentMissionNo(0)
 	, mMissionState(MISSION_START)
@@ -131,9 +129,6 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mFlagTimeCount = 0;
 
 	mFlagZ		= true;
-
-	mIsSound	= true;
-	mIsSound2 = true;
 
 	mMissionStartPos.x = MISSION_HASSEI_X;
 	mMissionStartPos.y = -50.f;

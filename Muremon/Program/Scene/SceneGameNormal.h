@@ -51,26 +51,13 @@ private:
 
 private:
 	// ステート関数
-	void				stateEnterIdle();
-	void				stateExeIdle();
-
-	void				stateEnterReadyFadeIn();
-	void				stateExeReadyFadeIn();
-
-	void				stateEnterReady();
-	void				stateExeReady();
-
-	void				stateEnterReadyFadeOut();
-	void				stateExeReadyFadeOut();
-
-	void				stateEnterGame();
-	void				stateExeGame();
-
-	void				stateEnterGameOver();
-	void				stateExeGameOver();
-
-	void				stateEnterGameClear();
-	void				stateExeGameClear();
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(ReadyFadeIn);
+	DECLAR_STATE_FUNC2(Ready);
+	DECLAR_STATE_FUNC2(ReadyFadeOut);
+	DECLAR_STATE_FUNC2(Game);
+	DECLAR_STATE_FUNC2(GameOver);
+	DECLAR_STATE_FUNC2(TimeOver);
 
 private:
 	StateMachine<SceneGameNormal>	mState;	// ステート

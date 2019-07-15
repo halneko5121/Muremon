@@ -58,7 +58,7 @@ namespace
 		cState_ReadyFadeOut,	// 準備フェードアウト
 		cState_Game,			// ゲーム中
 		cState_GameOver,		// ゲームオーバー
-		cState_GameClear,		// ゲームクリア
+		cState_TimeOver,		// タイムオーバー
 		cState_Count
 	};
 }
@@ -90,13 +90,13 @@ SceneGameNormal::SceneGameNormal()
 	, mNegativeAtkLv(0)
 {
 	mState.initialize(cState_Count, cState_Idle);
-	mState.registState(this, &SceneGameNormal::stateEnterIdle,			&SceneGameNormal::stateExeIdle,			nullptr, cState_Idle);
-	mState.registState(this, &SceneGameNormal::stateEnterReadyFadeIn,	&SceneGameNormal::stateExeReadyFadeIn,	nullptr, cState_ReadyFadeIn);
-	mState.registState(this, &SceneGameNormal::stateEnterReady,			&SceneGameNormal::stateExeReady,		nullptr, cState_Ready);
-	mState.registState(this, &SceneGameNormal::stateEnterReadyFadeOut,	&SceneGameNormal::stateExeReadyFadeOut, nullptr, cState_ReadyFadeOut);
-	mState.registState(this, &SceneGameNormal::stateEnterGame,			&SceneGameNormal::stateExeGame,			nullptr, cState_Game);
-	mState.registState(this, &SceneGameNormal::stateEnterGameOver,		&SceneGameNormal::stateExeGameOver,		nullptr, cState_GameOver);
-	mState.registState(this, &SceneGameNormal::stateEnterGameClear,		&SceneGameNormal::stateExeGameClear,	nullptr, cState_GameClear);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, ReadyFadeIn,	cState_ReadyFadeIn);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, Ready,			cState_Ready);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, ReadyFadeOut,	cState_ReadyFadeOut);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, Game,			cState_Game);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, GameOver,		cState_GameOver);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, TimeOver,		cState_TimeOver);
 	mState.changeState(cState_Idle);
 }
 
@@ -175,7 +175,7 @@ SceneGameNormal::draw()
 		mVertex->setColor(255,255,255,255);
 		mVertex->drawF(cDispBgPos, R_GAME_OVER);	//ゲームオーバー
 	}
-	else if (mState.isEqual(cState_GameClear))
+	else if (mState.isEqual(cState_TimeOver))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(255,255,255,255);
@@ -607,7 +607,7 @@ SceneGameNormal::stateEnterIdle()
 {
 }
 void
-SceneGameNormal::stateExeIdle()
+SceneGameNormal::stateIdle()
 {
 }
 
@@ -620,7 +620,7 @@ SceneGameNormal::stateEnterReadyFadeIn()
 	UtilSound::playOnce(S_GAME_START);
 }
 void
-SceneGameNormal::stateExeReadyFadeIn()
+SceneGameNormal::stateReadyFadeIn()
 {
 	mStartAlpha += (cAlphaIncrease - 5);
 	if (mStartAlpha >= 255)
@@ -639,7 +639,7 @@ SceneGameNormal::stateEnterReady()
 {
 }
 void
-SceneGameNormal::stateExeReady()
+SceneGameNormal::stateReady()
 {
 	if (60 < mState.getStateCount())
 	{
@@ -656,7 +656,7 @@ SceneGameNormal::stateEnterReadyFadeOut()
 {
 }
 void
-SceneGameNormal::stateExeReadyFadeOut()
+SceneGameNormal::stateReadyFadeOut()
 {
 	mStartAlpha -= (cAlphaIncrease - 10);
 	if (mStartAlpha < 0)
@@ -676,7 +676,7 @@ SceneGameNormal::stateEnterGame()
 	UtilSound::playLoop(S_BGM_BATTLE);
 }
 void
-SceneGameNormal::stateExeGame()
+SceneGameNormal::stateGame()
 {
 	boss_cc2.x = mBoss->mMoveX;
 	boss_cc2.y = mBoss->mMoveY;
@@ -749,7 +749,7 @@ SceneGameNormal::stateExeGame()
 
 	if (mTime == 0)
 	{
-		mState.changeState(cState_GameClear);
+		mState.changeState(cState_TimeOver);
 		return;
 	}
 
@@ -862,7 +862,7 @@ SceneGameNormal::stateEnterGameOver()
 	UtilSound::playOnce(S_OVER);
 }
 void
-SceneGameNormal::stateExeGameOver()
+SceneGameNormal::stateGameOver()
 {
 	if (120 < mState.getStateCount())
 	{
@@ -871,17 +871,17 @@ SceneGameNormal::stateExeGameOver()
 }
 
 /**
- * @brief ステート:GameClear
+ * @brief ステート:TimeOver
  */
 void
-SceneGameNormal::stateEnterGameClear()
+SceneGameNormal::stateEnterTimeOver()
 {
 	UtilSound::stop(S_SAIREN);
 	UtilSound::stop(S_BGM_BATTLE);
 	UtilSound::playOnce(S_G_CLEAR);
 }
 void
-SceneGameNormal::stateExeGameClear()
+SceneGameNormal::stateTimeOver()
 {
 	if (180 < mState.getStateCount())
 	{

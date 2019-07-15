@@ -47,11 +47,11 @@ SceneGameRefresh::SceneGameRefresh()
 	, mNoppoCurrentIndex(0)
 {
 	mState.initialize(cState_Count, cState_Idle);
-	mState.registState(this, &SceneGameRefresh::stateEnterIdle,			&SceneGameRefresh::stateExeIdle,		nullptr, cState_Idle);
-	mState.registState(this, &SceneGameRefresh::stateEnterReadyFadeIn,	&SceneGameRefresh::stateExeReadyFadeIn, nullptr, cState_ReadyFadeIn);
-	mState.registState(this, &SceneGameRefresh::stateEnterReady,		&SceneGameRefresh::stateExeReady,		nullptr, cState_Ready);
-	mState.registState(this, &SceneGameRefresh::stateEnterReadyFadeOut,	&SceneGameRefresh::stateExeReadyFadeOut,nullptr, cState_ReadyFadeOut);
-	mState.registState(this, &SceneGameRefresh::stateEnterGame,			&SceneGameRefresh::stateExeGame,		nullptr, cState_Game);
+	REGIST_STATE_FUNC2(SceneGameRefresh, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(SceneGameRefresh, mState, ReadyFadeIn,	cState_ReadyFadeIn);
+	REGIST_STATE_FUNC2(SceneGameRefresh, mState, Ready,			cState_Ready);
+	REGIST_STATE_FUNC2(SceneGameRefresh, mState, ReadyFadeOut,	cState_ReadyFadeOut);
+	REGIST_STATE_FUNC2(SceneGameRefresh, mState, Game,			cState_Game);
 	mState.changeState(cState_Idle);
 }
 
@@ -277,7 +277,7 @@ SceneGameRefresh::stateEnterIdle()
 {
 }
 void
-SceneGameRefresh::stateExeIdle()
+SceneGameRefresh::stateIdle()
 {
 }
 
@@ -290,7 +290,7 @@ SceneGameRefresh::stateEnterReadyFadeIn()
 	UtilSound::playOnce(S_GAME_START);
 }
 void
-SceneGameRefresh::stateExeReadyFadeIn()
+SceneGameRefresh::stateReadyFadeIn()
 {
 	mStartAlpha += (cAlphaIncrease - 5);
 	if (mStartAlpha >= 255)
@@ -309,7 +309,7 @@ SceneGameRefresh::stateEnterReady()
 {
 }
 void
-SceneGameRefresh::stateExeReady()
+SceneGameRefresh::stateReady()
 {
 	if (60 < mState.getStateCount())
 	{
@@ -326,7 +326,7 @@ SceneGameRefresh::stateEnterReadyFadeOut()
 {
 }
 void
-SceneGameRefresh::stateExeReadyFadeOut()
+SceneGameRefresh::stateReadyFadeOut()
 {
 	mStartAlpha -= (cAlphaIncrease - 10);
 	if (mStartAlpha < 0)
@@ -345,7 +345,7 @@ SceneGameRefresh::stateEnterGame()
 {
 }
 void
-SceneGameRefresh::stateExeGame()
+SceneGameRefresh::stateGame()
 {
 	boss_cc.x = mBoss->mMoveX;
 	boss_cc.y = mBoss->mMoveY;

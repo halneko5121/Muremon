@@ -38,20 +38,11 @@ private:
 	ActorBase*			getActorNoppo(int index);
 
 	// ステート関数
-	void				stateEnterIdle();
-	void				stateExeIdle();
-
-	void				stateEnterReadyFadeIn();
-	void				stateExeReadyFadeIn();
-
-	void				stateEnterReady();
-	void				stateExeReady();
-
-	void				stateEnterReadyFadeOut();
-	void				stateExeReadyFadeOut();
-
-	void				stateEnterGame();
-	void				stateExeGame();
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(ReadyFadeIn);
+	DECLAR_STATE_FUNC2(Ready);
+	DECLAR_STATE_FUNC2(ReadyFadeOut);
+	DECLAR_STATE_FUNC2(Game);
 
 private:
 	StateMachine<SceneGameRefresh>	mState;	// ステート

@@ -192,11 +192,11 @@ SceneGameNormal::draw()
 	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//ÇÊÇµÇΩÇÎÇ§äÁ
 	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//ÇÃÇ¡Ç€äÁ
 
+	drawKeyCount();
+
 	drawScore();
 
 	drawTime();
-
-	drawKeyCount();
 
 	mVertex->drawF(cDispMissionPos, R_MISSION_GAGE);	//Ç›Ç¡ÇµÇÂÇÒÇ∞Å`Ç∂
 	mVertex->drawF(cDispMissionGaugePos, R_GAGE_IN);	//Ç›Ç¡ÇµÇÂÇÒÉQÅ[ÉW

@@ -201,14 +201,10 @@ SceneGameNormal::draw()
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(cDispMissionGaugePos, R_GAGE_FRAME);	//‚Ý‚Á‚µ‚å‚ñƒQ[ƒW˜g
-	mVertex->drawF(cDispBossHpPos, R_HP);	//‚µ‚á‚Á‚­‚Ì‘Ì—Í
 	mVertex->drawF(cDispGaugePos, R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
 
 	drawHpGauge();
-
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
-
+	
 	drawScore();
 
 	drawTime();
@@ -404,11 +400,20 @@ SceneGameNormal::drawTime()
 void
 SceneGameNormal::drawHpGauge()
 {
-	float num = mBoss->mLife / mBoss->mMaxLife;
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
+	// u‚µ‚á‚Á‚­‚Ì‘Ì—Ív
+	mVertex->drawF(cDispBossHpPos, R_HP);
+
+	// ŽÀÛ‚Ì‘Ì—ÍƒQ[ƒW—Ê
+	float num = mBoss->mLife / mBoss->mMaxLife;
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,200,30,30);
 	mVertex->drawF(Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
+
+	// ‘Ì—ÍƒQ[ƒW‚Ìu˜gv
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
 }
 
 /**

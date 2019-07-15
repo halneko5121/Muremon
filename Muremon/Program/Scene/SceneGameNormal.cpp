@@ -393,18 +393,17 @@ void SceneGameNormal::selectNegative()
 		return ;
 	}
 
-	mNegativeState = rand()%100+1;
-
-	if(mNegativeState > 0 && mNegativeState <= cNegativePar1){
+	int rand_negative = rand() % 100 + 1;
+	if(rand_negative > 0 && rand_negative <= cNegativePar1){
 		mNegativeState = SPEED_UP;
 	}
-	else if(mNegativeState > cNegativePar1 && mNegativeState <= cNegativePar2){
+	else if(rand_negative > cNegativePar1 && rand_negative <= cNegativePar2){
 		mNegativeState = RECOVER;
 	}
-	else if(mNegativeState > cNegativePar2 && mNegativeState <= cNegativePar3){
+	else if(rand_negative > cNegativePar2 && rand_negative <= cNegativePar3){
 		mNegativeState = SLIDE_IN;
 	}
-	else if(mNegativeState > cNegativePar3 && mNegativeState <= cNegativePar4){
+	else if(rand_negative > cNegativePar3 && rand_negative <= cNegativePar4){
 		mNegativeState = ATTACK_DOWN;
 	}
 }

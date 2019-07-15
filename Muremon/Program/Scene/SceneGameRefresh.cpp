@@ -89,66 +89,29 @@ void SceneGameRefresh::update()
 
 void SceneGameRefresh::draw()
 {
-	if( mState.isEqual(cState_ReadyFadeIn) ||
-		mState.isEqual(cState_Ready) ||
-		mState.isEqual(cState_ReadyFadeOut))
-	{
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
-		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(cDispBgPos, R_GAME_BG);
-		mVertex->drawF(cDispFlagPos, R_FLAG);
+	// 背景
+	drawBg();
 
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
-		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);				//にくまん顔
-		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);			//よしたろう顔
-		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);					//のっぽ顔
+	// アクターの描画
+	GetActorMgr()->draw();
 
-		drawKeyCount();
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+	mVertex->setColor(255, 255, 255, 255);
+	mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//のっぽ顔
 
-		mVertex->drawF(cDispBossHpPos, R_HP);								//しゃっくの体力
-		drawHpGauge();
+	drawKeyCount();
 
-		// 体力ゲージ枠
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
+	drawHpGauge();
 
-		// ゲームスタート
-		mVertex->setColor(mStartAlpha,255,255,255);
-		mVertex->drawF(cDispBgPos, R_GAME_START);
-	}
-	else if(mState.isEqual(cState_Game))
-	{
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
-		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(cDispBgPos, R_GAME_BG);	//背景
-		mVertex->drawF(cDispFlagPos, R_FLAG);	//旗
+	// ゲームスタート
+	mVertex->setColor(mStartAlpha, 255, 255, 255);
+	mVertex->drawF(cDispBgPos, R_GAME_START);
 
-		// アクターの描画
-		GetActorMgr()->draw();
-
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
-		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
-		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
-		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//のっぽ顔
-
-		drawKeyCount();
-
-		mVertex->drawF(cDispBossHpPos, R_HP);	//しゃっくの体力
-		mVertex->drawF(cDispGaugePos, R_GAGE_IN);	//体力ゲージ
-
-		drawHpGauge();
-
-		// 体力ゲージ枠
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
-
-		// エフェクト描画
-		GetEffectMgr()->draw();
-	}
+	// エフェクト描画
+	GetEffectMgr()->draw();
 }
 
 void SceneGameRefresh::end()
@@ -210,6 +173,14 @@ void SceneGameRefresh::updateRunAtk()
 	}
 }
 
+void SceneGameRefresh::drawBg()
+{
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
+	mVertex->setColor(255, 255, 255, 255);
+	mVertex->drawF(cDispBgPos, R_GAME_BG);
+	mVertex->drawF(cDispFlagPos, R_FLAG);
+}
+
 void SceneGameRefresh::drawKeyCount()
 {
 	//にくまん
@@ -240,11 +211,19 @@ void SceneGameRefresh::drawKeyCount()
 
 void SceneGameRefresh::drawHpGauge()
 {
-	float num = mBoss->mLife / mBoss->mMaxLife;
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
-	mVertex->setScale(num,1.f);
-	mVertex->setColor(255,255,0,0);
+	// 「しゃっくの体力」
+	mVertex->drawF(cDispBossHpPos, R_HP);
+
+	// 実際の体力ゲージ量
+	float num = mBoss->mLife / mBoss->mMaxLife;
+	mVertex->setScale(num, 1.f);
+	mVertex->setColor(255, 255, 0, 0);
 	mVertex->drawF(Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//体力ゲージ
+
+	// 体力ゲージの「枠」
+	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
 }
 
 ActorBase*

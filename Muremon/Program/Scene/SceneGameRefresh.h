@@ -30,6 +30,7 @@ public:
 
 private:
 	void				updateRunAtk();
+	void				drawBg();
 	void				drawKeyCount();
 	void				drawHpGauge();
 

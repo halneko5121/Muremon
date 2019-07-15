@@ -76,9 +76,6 @@ SceneGameNormal::SceneGameNormal()
 	, mIsPose(false)
 	, mStartAlpha(0)
 	, mMissionStateKeep(0)
-	, mNikumanKeyCount(0)
-	, mYoshitaroKeyCount(0)
-	, mNoppoKeyCount(0)
 	, mIsInit(false)
 	, mMissionGauge(0)
 	, mIsHitNiku(false)
@@ -257,7 +254,7 @@ SceneGameNormal::drawKeyCount()
 {
 	//にくまん
 	for(int i = 0;i < 4;i++){
-		int num = mNikumanKeyCount;
+		int num = UtilBattle::getWeakAtkCount();
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
@@ -265,7 +262,7 @@ SceneGameNormal::drawKeyCount()
 	}
 	//よしたろう
 	for(int i = 0;i < 4;i++){
-		int num = mYoshitaroKeyCount;
+		int num = UtilBattle::getMediumAtkCount();
 		for(int j = 1;j < 4 - i;j++){
 			num = num / 10;
 		}
@@ -273,7 +270,7 @@ SceneGameNormal::drawKeyCount()
 	}
 	//のっぽ
 	for(int i = 0;i < 4;i++){
-		int num = mNoppoKeyCount;
+		int num = UtilBattle::getStrongAtkCount();
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
@@ -649,27 +646,36 @@ SceneGameNormal::stateExeGame()
 		}
 	}
 
-	if (mIsPose) {
+	if (mIsPose) 
+	{
 		return;
 	}
 
 	//ミッションが起動する段階までいったら
-	if (mMissionGauge >= cMaxMissionGauge) {
-		if (!mIsInit) {
+	if (mMissionGauge >= cMaxMissionGauge)
+	{
+		if (!mIsInit)
+		{
 			UtilSound::playOnce(S_OSIRASE);
-			mMission->init(mNikumanKeyCount, mYoshitaroKeyCount, mNoppoKeyCount);
+			mMission->init(
+				UtilBattle::getWeakAtkCount(),
+				UtilBattle::getMediumAtkCount(),
+				UtilBattle::getStrongAtkCount());
 			mIsInit = true;
 		}
 		if (mMissionStateKeep < MISSION_OUGI) {
 			mMissionStateKeep = mMission->update();
-			if (mNikumanKeyCount != mMission->getCountKeyNikuman()) {
-				mNikumanKeyCount = mMission->getCountKeyNikuman();
+			if (UtilBattle::getWeakAtkCount() != mMission->getCountKeyNikuman()) 
+			{
+				UtilBattle::setWeakAtkCount(mMission->getCountKeyNikuman());
 			}
-			if (mYoshitaroKeyCount != mMission->getCountKeyYoshitaro()) {
-				mYoshitaroKeyCount = mMission->getCountKeyYoshitaro();
+			if (UtilBattle::getMediumAtkCount() != mMission->getCountKeyYoshitaro())
+			{
+				UtilBattle::setMediumAtkCount(mMission->getCountKeyYoshitaro());
 			}
-			if (mNoppoKeyCount != mMission->getCountKeyNoppo()) {
-				mNoppoKeyCount = mMission->getCountKeyNoppo();
+			if (UtilBattle::getStrongAtkCount() != mMission->getCountKeyNoppo())
+			{
+				UtilBattle::setStrongAtkCount(mMission->getCountKeyNoppo());
 			}
 		}
 		else if (mMissionStateKeep == MISSION_OUGI) {
@@ -744,19 +750,19 @@ SceneGameNormal::stateExeGame()
 	if (UtilBattle::isRunWeakGroundAttack() ||
 		UtilBattle::isRunWeakSkyAttack())
 	{
-		mNikumanKeyCount++;
+		UtilBattle::addWeakAtkCount();
 	}
 	// よしたろう
 	if (UtilBattle::isRunMediumGroundAttack() ||
 		UtilBattle::isRunMediumSkyAttack())
 	{
-		mYoshitaroKeyCount++;
+		UtilBattle::addMediumAtkCount();
 	}
 	// のっぽ
 	if (UtilBattle::isRunStrongGroundAttack() ||
 		UtilBattle::isRunStrongSkyAttack())
 	{
-		mNoppoKeyCount++;
+		UtilBattle::addStrongAtkCount();
 	}
 	recover();
 

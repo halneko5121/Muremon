@@ -81,9 +81,6 @@ private:
 	bool				mIsPose;			// ポーズをしているかしていないか
 	int					mStartAlpha;		// げ～むすた～とのアルファ差分
 	int					mMissionStateKeep;	// ミッションの状態をキープ
-	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
-	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
-	int					mNoppoKeyCount;		// のっぽの押されたキーの数をカウント
 	bool				mIsInit;			// 初期化したかどうか
 	int					mMissionGauge;		// 必殺ゲージ
 	bool				mIsHitNiku;

@@ -30,6 +30,8 @@ public:
 	int		update();
 	void	draw();
 
+	int		getMissionState() const;
+
 private:
 	void	fadeIn();
 	void	fadeOut();

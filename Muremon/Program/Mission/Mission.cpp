@@ -231,6 +231,15 @@ void Mission::draw()
 	}
 }
 
+/**
+ * @ brief ミッションステートを取得
+ */
+int
+Mission::getMissionState() const
+{
+	return mMissionState;
+}
+
 void Mission::updateMission()
 {
 	switch(mCurrentMissionNo)

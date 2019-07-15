@@ -34,8 +34,6 @@ namespace
 		cState_Ready,			// 準備
 		cState_ReadyFadeOut,	// 準備フェードアウト
 		cState_Game,			// ゲーム中
-		cState_GameOver,		// ゲームオーバー
-		cState_GameClear,		// ゲームクリア
 		cState_Count
 	};
 }
@@ -54,8 +52,6 @@ SceneGameRefresh::SceneGameRefresh()
 	mState.registState(this, &SceneGameRefresh::stateEnterReady,		&SceneGameRefresh::stateExeReady,		nullptr, cState_Ready);
 	mState.registState(this, &SceneGameRefresh::stateEnterReadyFadeOut,	&SceneGameRefresh::stateExeReadyFadeOut,nullptr, cState_ReadyFadeOut);
 	mState.registState(this, &SceneGameRefresh::stateEnterGame,			&SceneGameRefresh::stateExeGame,		nullptr, cState_Game);
-	mState.registState(this, &SceneGameRefresh::stateEnterGameOver,		&SceneGameRefresh::stateExeGameOver,	nullptr, cState_GameOver);
-	mState.registState(this, &SceneGameRefresh::stateEnterGameClear,	&SceneGameRefresh::stateExeGameClear,	nullptr, cState_GameClear);
 	mState.changeState(cState_Idle);
 }
 
@@ -421,28 +417,4 @@ SceneGameRefresh::stateExeGame()
 	if (GetAsyncKeyState(VK_RETURN)) {	//エンターキーが押されたらタイトルに戻る
 		mIsSceneEnd = true;
 	}
-}
-
-/**
- * @brief ステート:GameOver
- */
-void
-SceneGameRefresh::stateEnterGameOver()
-{
-}
-void
-SceneGameRefresh::stateExeGameOver()
-{
-}
-
-/**
- * @brief ステート:GameClear
- */
-void
-SceneGameRefresh::stateEnterGameClear()
-{
-}
-void
-SceneGameRefresh::stateExeGameClear()
-{
 }

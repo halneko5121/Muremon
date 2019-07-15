@@ -53,12 +53,6 @@ private:
 	void				stateEnterGame();
 	void				stateExeGame();
 
-	void				stateEnterGameOver();
-	void				stateExeGameOver();
-
-	void				stateEnterGameClear();
-	void				stateExeGameClear();
-
 private:
 	StateMachine<SceneGameRefresh>	mState;	// ステート
 	ActorBoss*			mBoss;

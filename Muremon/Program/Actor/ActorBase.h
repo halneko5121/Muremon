@@ -118,6 +118,8 @@ protected:
 
 	Texture*			mTexture;
 	Vertex*				mVertex;
+	int					mRectStartNum;
+	int					mSoundStartNum;
 
 	float				mSpeed;
 	int					mAnimation;
@@ -127,9 +129,6 @@ protected:
 	bool				mIsAtk2;
 	Vector2f			mNowPos;
 	float				mAngleDegree;
-
-	int					mRectStartNum;
-	int					mSoundStartNum;
 
 	bool				mIsHitCheck;
 	bool				mIsRun;

@@ -192,10 +192,7 @@ SceneGameNormal::draw()
 	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
 	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//のっぽ顔
 
-	mVertex->drawF(cDispScorePos, R_SCORE);		//すこあ
 	drawScore();
-
-	mVertex->drawF(cDispTimePos, R_TIME);		//たいむ
 
 	drawTime();
 
@@ -335,6 +332,8 @@ SceneGameNormal::drawKeyCount()
 void
 SceneGameNormal::drawScore()
 {
+	mVertex->drawF(cDispScorePos, R_SCORE);		//すこあ
+
 	//スコア
 	for(int i = 0;i < 9;i++){
 		int num = UtilGame::getScore();
@@ -351,6 +350,8 @@ SceneGameNormal::drawScore()
 void
 SceneGameNormal::drawTime()
 {
+	mVertex->drawF(cDispTimePos, R_TIME);		//たいむ
+
 	//タイム
 	for(int i = 0;i < 5;i++)
 	{

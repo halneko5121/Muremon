@@ -77,13 +77,6 @@ private:
 	int					mYoshitaroCurrentIndex;	// 吉たろうの現在の番号
 	int					mNoppoCurrentIndex;		// のっぽの現在の番号
 
-	bool				mIsHitEffect;
-
-	// ヒットエフェクト
-	int					mHitEffectAlpha;
-	int					mHitEffectTime;
-
-	float				mCharaAtkY;
 
 	// 奥義内で使用
 	int					mAlphaFont;

@@ -79,10 +79,6 @@ SceneGameNormal::SceneGameNormal()
 	, mNikumanCurrentIndex(0)
 	, mYoshitaroCurrentIndex(0)
 	, mNoppoCurrentIndex(0)
-	, mIsHitEffect(false)
-	, mHitEffectAlpha(0)
-	, mHitEffectTime(0)
-	, mCharaAtkY(0)
 	, mAlphaFont(0)
 	, mTimeCount(0)
 	, mWavePos(cWaveInitPos)
@@ -826,28 +822,6 @@ SceneGameNormal::stateGame()
 	{
 		mState.changeState(cState_GameOver);
 		return;
-	}
-
-	if (!mBoss->isDead())
-	{
-		if (mIsHitEffect)
-		{
-			mHitEffectAlpha = 255;
-			mHitEffectTime++;
-			if (mHitEffectTime == 1)
-			{
-				mIsHitEffect = false;
-				mHitEffectTime = 0;
-			}
-		}
-		else {
-			mHitEffectAlpha = 0;
-			mHitEffectTime = 0;
-		}
-	}
-	else {
-		mIsHitEffect = false;
-		mHitEffectAlpha = 0;
 	}
 }
 

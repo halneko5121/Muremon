@@ -19,6 +19,7 @@
 #include "Program/Actor/ActorMgr.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Util/UtilBattle.h"
 
 // ŠeƒV[ƒ“‚Ìinclude
 #include "Program/Scene/SceneLogo.h"
@@ -265,6 +266,7 @@ GameMain::controlSequence(void)
 		mScene = new SceneTitle();
 		mScene->init();
 		UtilGame::setScore(0);
+		UtilBattle::resetAtkCount();
 		break;
 	case cSceneName_Tutorial:
 		APP_SAFE_DELETE(mScene);

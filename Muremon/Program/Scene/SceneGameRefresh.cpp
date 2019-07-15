@@ -44,9 +44,6 @@ SceneGameRefresh::SceneGameRefresh()
 	: mState()
 	, mBoss(nullptr)
 	, mStartAlpha(0)
-	, mNikumanKeyCount(0)
-	, mYoshitaroKeyCount(0)
-	, mNoppoKeyCount(0)
 	, mNikumanCurrentIndex(0)
 	, mYoshitaroCurrentIndex(0)
 	, mNoppoCurrentIndex(0)
@@ -171,7 +168,7 @@ void SceneGameRefresh::drawNum()
 {
 	//‚É‚­‚Ü‚ñ
 	for(int i = 0;i < 4;i++){
-		int num = mNikumanKeyCount;
+		int num = UtilBattle::getWeakAtkCount();
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
@@ -179,7 +176,7 @@ void SceneGameRefresh::drawNum()
 	}
 	//‚æ‚µ‚½‚ë‚¤
 	for(int i = 0;i < 4;i++){
-		int num = mYoshitaroKeyCount;
+		int num = UtilBattle::getMediumAtkCount();
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
@@ -187,7 +184,7 @@ void SceneGameRefresh::drawNum()
 	}
 	//‚Ì‚Á‚Û
 	for(int i = 0;i < 4;i++){
-		int num = mNoppoKeyCount;
+		int num = UtilBattle::getStrongAtkCount();
 		for(int j = 1;j < 4 - i;j++){
 			num = (num / 10);
 		}
@@ -399,7 +396,7 @@ SceneGameRefresh::stateExeGame()
 	if (UtilBattle::isRunWeakGroundAttack() ||
 		UtilBattle::isRunWeakSkyAttack())
 	{
-		mNikumanKeyCount++;
+		UtilBattle::addWeakAtkCount();
 		mNikumanCurrentIndex++;
 		if (cMaxPlayerCount <= mNikumanCurrentIndex)
 		{
@@ -410,7 +407,7 @@ SceneGameRefresh::stateExeGame()
 	if (UtilBattle::isRunMediumGroundAttack() ||
 		UtilBattle::isRunMediumSkyAttack())
 	{
-		mYoshitaroKeyCount++;
+		UtilBattle::addMediumAtkCount();
 		mYoshitaroCurrentIndex++;
 		if (cMaxPlayerCount <= mYoshitaroCurrentIndex)
 		{
@@ -421,7 +418,7 @@ SceneGameRefresh::stateExeGame()
 	if (UtilBattle::isRunStrongGroundAttack() ||
 		UtilBattle::isRunStrongSkyAttack())
 	{
-		mNoppoKeyCount++;
+		UtilBattle::addStrongAtkCount();
 		mNoppoCurrentIndex++;
 		if (cMaxPlayerCount <= mNoppoCurrentIndex)
 		{

@@ -63,11 +63,7 @@ private:
 	ActorBoss*			mBoss;
 	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
 
-	int					mStartAlpha;		// げ～むすた～とのアルファ差分
-	int					mNikumanKeyCount;	// にくまんの押されたキーの数をカウント
-	int					mYoshitaroKeyCount;	// 吉たろうの押されたキーの数をカウント
-	int					mNoppoKeyCount;		// のっぽの押されたキーの数をカウント
-
+	int					mStartAlpha;			// げ～むすた～とのアルファ差分
 	int					mNikumanCurrentIndex;	// にくまんの現在の番号
 	int					mYoshitaroCurrentIndex;	// 吉たろうの現在の番号
 	int					mNoppoCurrentIndex;		// のっぽの現在の番号

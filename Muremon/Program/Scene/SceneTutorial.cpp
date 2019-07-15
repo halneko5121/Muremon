@@ -61,13 +61,13 @@ SceneTutorial::SceneTutorial()
 	mTexturePos[TR_REFRESH].x = mTexturePos[TR_NORMAL].x  = cTrRightX;
 
 	mState.initialize(cState_Count, cState_Idle);
-	mState.registState(this, &SceneTutorial::stateEnterIdle,			&SceneTutorial::stateExeIdle,			nullptr, cState_Idle);
-	mState.registState(this, &SceneTutorial::stateEnterRefreshSlide,	&SceneTutorial::stateExeRefreshSlide,	nullptr, cState_RefreshSlide);
-	mState.registState(this, &SceneTutorial::stateEnterRefresh,			&SceneTutorial::stateExeRefresh,		nullptr, cState_Refresh);
-	mState.registState(this, &SceneTutorial::stateEnterNormalSlide,		&SceneTutorial::stateExeNormalSlide,	nullptr, cState_NormalSlide);
-	mState.registState(this, &SceneTutorial::stateEnterNormal,			&SceneTutorial::stateExeNormal,			nullptr, cState_Normal);
-	mState.registState(this, &SceneTutorial::stateEnterEndSlide,		&SceneTutorial::stateExeEndSlide,		nullptr, cState_EndSlide);
-	mState.registState(this, &SceneTutorial::stateEnterEnd,				&SceneTutorial::stateExeEnd,			nullptr, cState_End);
+	REGIST_STATE_FUNC2(SceneTutorial, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(SceneTutorial, mState, RefreshSlide,	cState_RefreshSlide);
+	REGIST_STATE_FUNC2(SceneTutorial, mState, Refresh,		cState_Refresh);
+	REGIST_STATE_FUNC2(SceneTutorial, mState, NormalSlide,	cState_NormalSlide);
+	REGIST_STATE_FUNC2(SceneTutorial, mState, Normal,		cState_Normal);
+	REGIST_STATE_FUNC2(SceneTutorial, mState, EndSlide,		cState_EndSlide);
+	REGIST_STATE_FUNC2(SceneTutorial, mState, End,			cState_End);
 	mState.changeState(cState_Idle);
 }
 
@@ -135,7 +135,7 @@ SceneTutorial::stateEnterIdle()
 {
 }
 void
-SceneTutorial::stateExeIdle()
+SceneTutorial::stateIdle()
 {
 }
 
@@ -149,7 +149,7 @@ SceneTutorial::stateEnterRefreshSlide()
 }
 
 void
-SceneTutorial::stateExeRefreshSlide()
+SceneTutorial::stateRefreshSlide()
 {
 	mTexturePos[TR_REFRESH].x -= 10.f;
 
@@ -167,7 +167,7 @@ SceneTutorial::stateEnterRefresh()
 {
 }
 void
-SceneTutorial::stateExeRefresh()
+SceneTutorial::stateRefresh()
 {
 	if (UtilInput::isKeyPushed(DIK_RIGHT))
 	{
@@ -187,7 +187,7 @@ SceneTutorial::stateEnterNormalSlide()
 }
 
 void
-SceneTutorial::stateExeNormalSlide()
+SceneTutorial::stateNormalSlide()
 {
 	// ç∂Ç÷à⁄ìÆÇµÇƒÇ¢ÇÈ
 	if (mSlideState == 1)
@@ -222,7 +222,7 @@ SceneTutorial::stateEnterNormal()
 {
 }
 void
-SceneTutorial::stateExeNormal()
+SceneTutorial::stateNormal()
 {
 	if (UtilInput::isKeyPushed(DIK_LEFT))
 	{
@@ -250,7 +250,7 @@ SceneTutorial::stateEnterEndSlide()
 }
 
 void
-SceneTutorial::stateExeEndSlide()
+SceneTutorial::stateEndSlide()
 {
 	// ç∂Ç÷à⁄ìÆÇµÇƒÇ¢ÇÈ
 	if (mSlideState == 1)
@@ -285,6 +285,6 @@ SceneTutorial::stateEnterEnd()
 	mIsSceneEnd = true;
 }
 void
-SceneTutorial::stateExeEnd()
+SceneTutorial::stateEnd()
 {
 }

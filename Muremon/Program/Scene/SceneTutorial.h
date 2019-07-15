@@ -23,26 +23,13 @@ public:
 
 private:
 	// ステート関数
-	void			stateEnterIdle();
-	void			stateExeIdle();
-
-	void			stateEnterRefreshSlide();
-	void			stateExeRefreshSlide();
-
-	void			stateEnterRefresh();
-	void			stateExeRefresh();
-
-	void			stateEnterNormalSlide();
-	void			stateExeNormalSlide();
-
-	void			stateEnterNormal();
-	void			stateExeNormal();
-
-	void			stateEnterEndSlide();
-	void			stateExeEndSlide();
-
-	void			stateEnterEnd();
-	void			stateExeEnd();
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(RefreshSlide);
+	DECLAR_STATE_FUNC2(Refresh);
+	DECLAR_STATE_FUNC2(NormalSlide);
+	DECLAR_STATE_FUNC2(Normal);
+	DECLAR_STATE_FUNC2(EndSlide);
+	DECLAR_STATE_FUNC2(End);
 
 private:
 	StateMachine<SceneTutorial>	mState;			// ステート

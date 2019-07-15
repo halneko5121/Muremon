@@ -106,5 +106,5 @@ private:
 
 	// NEGATIVE‚ÅŽg—p
 	int					mNegativeState;
-	int					mNegativeDamege;
+	int					mNegativeAtkLv;
 };

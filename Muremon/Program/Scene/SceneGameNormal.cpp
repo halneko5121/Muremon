@@ -87,7 +87,7 @@ SceneGameNormal::SceneGameNormal()
 	, mTimeCount(0)
 	, mWavePos(cWaveInitPos)
 	, mNegativeState(NO_NEGATIVE)
-	, mNegativeDamege(1)
+	, mNegativeAtkLv(0)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	mState.registState(this, &SceneGameNormal::stateEnterIdle,			&SceneGameNormal::stateExeIdle,			nullptr, cState_Idle);
@@ -521,7 +521,7 @@ SceneGameNormal::updateMissionNegative()
 			mBoss->mMoveX = 500;
 			break;
 		case ATTACK_DOWN:
-			mNegativeDamege += 1;
+			mNegativeAtkLv++;
 			break;
 		}
 		mMissionStateKeep = MISSION_END;
@@ -573,7 +573,7 @@ void
 SceneGameNormal::recover()
 {
 	if(mBoss->mLife <= 0){
-		mNegativeDamege = 1;
+		mNegativeAtkLv = 0;
 	}
 }
 
@@ -775,7 +775,8 @@ SceneGameNormal::stateExeGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->hit(actor->getHitPosY(), (actor->getAtkPower() / mNegativeDamege));
+				float mul_power = pow(0.5f, mNegativeAtkLv);
+				mBoss->hit(actor->getHitPosY(), (actor->getAtkPower() * mul_power));
 				actor->setIsHitCheck(false);
 				mMissionGauge += actor->getMissionPower();
 				UtilGame::addScore(actor->getScore());

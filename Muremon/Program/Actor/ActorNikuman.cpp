@@ -23,6 +23,10 @@ namespace
 	const int cRandY = 300;
 	const int cRandYMin = -200;
 
+	const int cAtkPowerNikuman = 20;				// にくまんの攻撃力
+	const int cAddGaugePowerNikuman = 30;			// にくまんミッションゲージ増加量
+
+
 	enum ANIME_NIKU
 	{
 		ANIME_G_ATK1_NIKU,
@@ -63,6 +67,7 @@ ActorNikuman::ActorNikuman(Texture* texture, Vertex* vertex)
 	mRectStartNum = R_NIKU_G_ATK1;
 	mSoundStartNum = S_NIKUMAN;
 	mAtkPower = cAtkPowerNikuman;
+	mMissionPower = cAddGaugePowerNikuman;
 	mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
 
 	mState.initialize(cState_Count, cState_Idle);

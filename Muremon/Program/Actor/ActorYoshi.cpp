@@ -28,6 +28,9 @@ namespace
 	const int cWaveCycle = 200;								// ŽüŠú(‘½‚«‚¯‚ê‚Î‘å‚«‚¢’öŽüŠú‚ª’Z‚­)
 	const int cWaveLimitX = 400;							// ‚±‚ÌÀ•W‚Ü‚Å—ˆ‚é‚Æ’¼ü‰^“®‚ÖˆÚs
 
+	const int cAtkPowerYoshitaro = 40;						// ‚æ‚µ‚½‚ë‚¤‚ÌUŒ‚—Í
+	const int cAddGaugePowerYoshitaro = 20;					// ‚æ‚µ‚½‚ë‚¤ƒ~ƒbƒVƒ‡ƒ“ƒQ[ƒW‘‰Á—Ê
+
 	enum ANIME_YOSHI
 	{
 		ANIME_G_ATK1_YOSHI,
@@ -76,6 +79,7 @@ ActorYoshi::ActorYoshi(Texture* texture, Vertex* vertex)
 	mRectStartNum = R_YOSHI_G_ATK1;
 	mSoundStartNum = S_YOSHI_HIP;
 	mAtkPower = cAtkPowerYoshitaro;
+	mMissionPower = cAddGaugePowerYoshitaro;
 	mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 

@@ -43,16 +43,8 @@ const float cDispFaceIconNoppoPosY = 585.f;
 const float cDispPushKeyCountPosX = 60.f;
 
 // キャラクターのスコア、ゲージ設定
-const int cAtkPowerNikuman = 20;		// にくまんの攻撃力
-const int cAddGaugePowerNikuman = 30;	// にくまんミッションゲージ増加量
 const int cAddScoreNikuman = 30;		// にくまんスコア加算
-
-const int cAtkPowerYoshitaro = 40;		// よしたろうの攻撃力
-const int cAddGaugePowerYoshitaro = 20;	// よしたろうミッションゲージ増加量
 const int cAddScoreYoshitaro = 20;		// よしたろうスコア加算
-
-const int cAtkPowerNoppo = 60;			// のっぽの攻撃力
-const int cAddGaugePowerNoppo = 10;		// のっぽミッションゲージ増加量
 const int cAddScoreNoppo = 10;			// のっぽスコア加算
 
 const int cGameOverPosX = 450;

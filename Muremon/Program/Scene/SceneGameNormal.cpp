@@ -776,7 +776,7 @@ SceneGameNormal::stateExeGame()
 			{
 				mBoss->hit(actor_nikuman->getHitPosY(), (actor_nikuman->getAtkPower() / mNegativeDamege));
 				actor_nikuman->setIsHitCheck(false);
-				mMissionGauge += cAddGaugePowerNikuman;
+				mMissionGauge += actor_nikuman->getMissionPower();
 				UtilGame::addScore(cAddScoreNikuman);
 			}
 		}
@@ -788,7 +788,7 @@ SceneGameNormal::stateExeGame()
 			{
 				mBoss->hit(actor_yoshi->getHitPosY(), (actor_yoshi->getAtkPower() / mNegativeDamege));
 				actor_yoshi->setIsHitCheck(false);
-				mMissionGauge += cAddGaugePowerYoshitaro;
+				mMissionGauge += actor_yoshi->getMissionPower();
 				UtilGame::addScore(cAddScoreYoshitaro);
 			}
 		}
@@ -800,7 +800,7 @@ SceneGameNormal::stateExeGame()
 			{
 				mBoss->hit(actor_noppo->getHitPosY(), (actor_noppo->getAtkPower() / mNegativeDamege));
 				actor_noppo->setIsHitCheck(false);
-				mMissionGauge += cAddGaugePowerNoppo;
+				mMissionGauge += actor_noppo->getMissionPower();
 				UtilGame::addScore(cAddScoreNoppo);
 			}
 		}

@@ -1101,19 +1101,6 @@ void Mission::updateMission14D()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ðˆê”Ô‚‚­‚µ‚ë
 	drawTime();
 }
 
-void Mission::fadeIn()
-{
-	if(mAlpha == MISSION_ALPHA_MAX){
-		mMissionState = MISSION_MIDDLE;
-		mState.changeState(cState_Run);
-		return ;
-	}
-	mAlpha += MISSION_ALPHA_INCREASE;
-	if(mAlpha > MISSION_ALPHA_MAX){
-		mAlpha = MISSION_ALPHA_MAX;
-	}
-}
-
 void Mission::drawTime()
 {
 	// ƒ^ƒCƒ€
@@ -1228,7 +1215,16 @@ Mission::stateStart()
 {
 	//ˆÊ’u‚ðŒvŽZ
 	if (mFlagDraw == 7) {
-		fadeIn();
+		mAlpha += MISSION_ALPHA_INCREASE;
+		if (mAlpha > MISSION_ALPHA_MAX) 
+		{
+			mAlpha = MISSION_ALPHA_MAX;
+		}
+		if (mAlpha == MISSION_ALPHA_MAX) 
+		{
+			mMissionState = MISSION_MIDDLE;
+			mState.changeState(cState_Run);
+		}
 		return;
 	}
 	if (mFlagDraw % 2 == 0) {

@@ -33,8 +33,6 @@ public:
 	int		getMissionState() const;
 
 private:
-	void	fadeIn();
-
 	void	drawTime();		//ŽžŠÔ‚ð•\Ž¦
 	void	drawCombo();
 

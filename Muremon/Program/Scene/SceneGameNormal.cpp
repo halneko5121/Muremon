@@ -194,10 +194,6 @@ SceneGameNormal::draw()
 
 	drawKeyCount();
 
-	drawScore();
-
-	drawTime();
-
 	mVertex->drawF(cDispMissionPos, R_MISSION_GAGE);	//‚Ý‚Á‚µ‚å‚ñ‚°`‚¶
 	mVertex->drawF(cDispMissionGaugePos, R_GAGE_IN);	//‚Ý‚Á‚µ‚å‚ñƒQ[ƒW
 
@@ -212,6 +208,10 @@ SceneGameNormal::draw()
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);	//‘Ì—ÍƒQ[ƒW˜g
+
+	drawScore();
+
+	drawTime();
 
 	if(mMissionGauge >= cMaxMissionGauge)
 	{

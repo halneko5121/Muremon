@@ -155,26 +155,14 @@ void Mission::update()
 	if( mMissionState != MISSION_START && 
 		mMissionState != MISSION_MIDDLE)
 	{
-		if (mAlpha == 0) {
-			if (mMissionState == MISSION_SEIKO) {
-				mMissionState = MISSION_OUGI;
-				mState.changeState(cState_Ougi);
-			}
-			else if (mMissionState == MISSION_SIPPAI) {
-				mMissionState = MISSION_NEGATIVE;
-				mState.changeState(cState_BadStatus);
-			}
-			return;
-		}
-		else
+		if (mAlpha != 0) 
 		{
 			if (mAlphaCount++ > 1) {
-				mAlpha -= MISSION_ALPHA_INCREASE + 5;
+				mAlpha -= MISSION_ALPHA_INCREASE + 10;
 				if (mAlpha < 0) { mAlpha = 0; }
 				mAlphaCount = 0;
 			}
 		}
-
 	}
 }
 
@@ -1337,6 +1325,12 @@ Mission::stateEnterSuccess()
 void
 Mission::stateSuccess()
 {
+	if (mAlpha == 0)
+	{
+		mMissionState = MISSION_OUGI;
+		mState.changeState(cState_Ougi);
+		return;
+	}
 }
 
 /**
@@ -1350,6 +1344,11 @@ Mission::stateEnterFailure()
 void
 Mission::stateFailure()
 {
+	if (mAlpha == 0) {
+		mMissionState = MISSION_NEGATIVE;
+		mState.changeState(cState_BadStatus);
+		return;
+	}
 }
 
 /**

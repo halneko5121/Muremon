@@ -149,14 +149,14 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mKeyCountNoppo		= cnt_noppo;		//のっぽの押されたキーの数をカウント
 }
 
-int Mission::update()
+void Mission::update()
 {
 	if(mMissionState == MISSION_START){
 		missionSelect();
 		//位置を計算
 		if(mFlagDraw == 7){
 			fadeIn();
-			return mMissionState;
+			return;
 		}
 		if(mFlagDraw%2 == 0){
 			if(mMissionStartPos.y < MISSION_HASSEI_Y){
@@ -196,7 +196,6 @@ int Mission::update()
 		}
 		fadeOut();
 	}
-	return mMissionState;
 }
 
 void Mission::draw()

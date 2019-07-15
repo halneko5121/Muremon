@@ -27,7 +27,7 @@ public:
 	int		getCountKeyNoppo() { return mKeyCountNoppo; };
 
 	void	init(int cnt_nikuman, int cnt_yoshitaro, int cnt_noppo);
-	int		update();
+	void	update();
 	void	draw();
 
 	int		getMissionState() const;

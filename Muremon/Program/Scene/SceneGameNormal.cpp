@@ -560,7 +560,8 @@ SceneGameNormal::stateGame()
 			mIsInit = true;
 		}
 		if (mMissionStateKeep < MISSION_OUGI) {
-			mMissionStateKeep = mMission->update();
+			mMission->update();
+			mMissionStateKeep = mMission->getMissionState();
 			if (UtilBattle::getWeakAtkCount() != mMission->getCountKeyNikuman()) 
 			{
 				UtilBattle::setWeakAtkCount(mMission->getCountKeyNikuman());

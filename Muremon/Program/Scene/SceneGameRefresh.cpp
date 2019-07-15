@@ -166,6 +166,54 @@ void SceneGameRefresh::end()
 	mVertex->release();
 }
 
+/**
+ * @brief 攻撃開始の更新
+ */
+void SceneGameRefresh::updateRunAtk()
+{
+	// にくまん
+	if (UtilBattle::isRunWeakGroundAttack())
+	{
+		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunWeakSkyAttack())
+	{
+		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
+	// よしたろう
+	if (UtilBattle::isRunMediumGroundAttack())
+	{
+		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunMediumSkyAttack())
+	{
+		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
+	// のっぽ
+	if (UtilBattle::isRunStrongGroundAttack())
+	{
+		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunStrongSkyAttack())
+	{
+		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+}
+
 void SceneGameRefresh::drawKeyCount()
 {
 	//にくまん
@@ -308,47 +356,8 @@ SceneGameRefresh::stateExeGame()
 
 	UtilSound::playLoop(S_BGM_BATTLE);
 
-	// にくまん
-	if (UtilBattle::isRunWeakGroundAttack())
-	{
-		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
-		actor->setGroundAtkFlag();
-		actor->run();
-	}
-	else if (UtilBattle::isRunWeakSkyAttack())
-	{
-		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
-		actor->setSkyAtkFlag();
-		actor->run();
-	}
-
-	// よしたろう
-	if (UtilBattle::isRunMediumGroundAttack())
-	{
-		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
-		actor->setGroundAtkFlag();
-		actor->run();
-	}
-	else if (UtilBattle::isRunMediumSkyAttack())
-	{
-		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
-		actor->setSkyAtkFlag();
-		actor->run();
-	}
-
-	// のっぽ
-	if (UtilBattle::isRunStrongGroundAttack())
-	{
-		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
-		actor->setGroundAtkFlag();
-		actor->run();
-	}
-	else if (UtilBattle::isRunStrongSkyAttack())
-	{
-		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
-		actor->setSkyAtkFlag();
-		actor->run();
-	}
+	// 各攻撃の開始
+	updateRunAtk();
 
 	// アクターの更新
 	GetActorMgr()->update(boss_cc);

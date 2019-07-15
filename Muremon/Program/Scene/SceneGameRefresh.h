@@ -29,6 +29,7 @@ public:
 	void				end() override;
 
 private:
+	void				updateRunAtk();
 	void				drawKeyCount();
 	void				drawHpGauge();
 

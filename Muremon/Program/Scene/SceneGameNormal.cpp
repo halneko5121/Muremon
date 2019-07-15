@@ -155,6 +155,9 @@ SceneGameNormal::draw()
 	{
 		// アクターの描画
 		GetActorMgr()->draw();
+
+		// エフェクト描画
+		GetEffectMgr()->draw();
 	}
 	else
 	{

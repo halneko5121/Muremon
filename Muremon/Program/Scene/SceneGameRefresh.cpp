@@ -95,6 +95,9 @@ void SceneGameRefresh::draw()
 	// アクターの描画
 	GetActorMgr()->draw();
 
+	// エフェクト描画
+	GetEffectMgr()->draw();
+
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->setColor(255, 255, 255, 255);
 	mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
@@ -109,9 +112,6 @@ void SceneGameRefresh::draw()
 	// ゲームスタート
 	mVertex->setColor(mStartAlpha, 255, 255, 255);
 	mVertex->drawF(cDispBgPos, R_GAME_START);
-
-	// エフェクト描画
-	GetEffectMgr()->draw();
 }
 
 void SceneGameRefresh::end()

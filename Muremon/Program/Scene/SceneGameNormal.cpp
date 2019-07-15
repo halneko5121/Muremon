@@ -768,40 +768,17 @@ SceneGameNormal::stateExeGame()
 	for (ActorMgr::ActorIterator it = it_begin; it != it_end; it++)
 	{
 		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
-		// 肉まん
-		ActorNikuman* actor_nikuman = dynamic_cast<ActorNikuman*>(actor);
-		if (actor_nikuman != nullptr)
+		ActorBoss* actor_boss = dynamic_cast<ActorBoss*>(actor);
+
+		// ボス以外のアクター
+		if (actor != nullptr && actor != actor_boss)
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->hit(actor_nikuman->getHitPosY(), (actor_nikuman->getAtkPower() / mNegativeDamege));
-				actor_nikuman->setIsHitCheck(false);
-				mMissionGauge += actor_nikuman->getMissionPower();
-				UtilGame::addScore(cAddScoreNikuman);
-			}
-		}
-		// よしたろう
-		ActorYoshi* actor_yoshi = dynamic_cast<ActorYoshi*>(actor);
-		if (actor_yoshi != nullptr)
-		{
-			if (actor->isHitCheck())
-			{
-				mBoss->hit(actor_yoshi->getHitPosY(), (actor_yoshi->getAtkPower() / mNegativeDamege));
-				actor_yoshi->setIsHitCheck(false);
-				mMissionGauge += actor_yoshi->getMissionPower();
-				UtilGame::addScore(cAddScoreYoshitaro);
-			}
-		}
-		// のっぽ
-		ActorNoppo* actor_noppo = dynamic_cast<ActorNoppo*>(actor);
-		if (actor_noppo != nullptr)
-		{
-			if (actor->isHitCheck())
-			{
-				mBoss->hit(actor_noppo->getHitPosY(), (actor_noppo->getAtkPower() / mNegativeDamege));
-				actor_noppo->setIsHitCheck(false);
-				mMissionGauge += actor_noppo->getMissionPower();
-				UtilGame::addScore(cAddScoreNoppo);
+				mBoss->hit(actor->getHitPosY(), (actor->getAtkPower() / mNegativeDamege));
+				actor->setIsHitCheck(false);
+				mMissionGauge += actor->getMissionPower();
+				UtilGame::addScore(actor->getScore());
 			}
 		}
 	}
@@ -842,8 +819,6 @@ SceneGameNormal::stateExeGame()
 		}
 	}
 	recover();
-
-	mBoss->update(boss_cc2);
 
 	//ゲームオーバー条件
 	if (mBoss->isWin())

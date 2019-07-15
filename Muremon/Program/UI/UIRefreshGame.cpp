@@ -37,6 +37,10 @@ UIRefreshGame::UIRefreshGame()
  */
 UIRefreshGame::~UIRefreshGame()
 {
+	mTexture->release();
+	APP_SAFE_DELETE(mTexture);
+	mVertex->release();
+	APP_SAFE_DELETE(mVertex);
 }
 
 /**
@@ -45,7 +49,7 @@ UIRefreshGame::~UIRefreshGame()
 void
 UIRefreshGame::init()
 {
-	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "title");
+	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 }
 
 /**

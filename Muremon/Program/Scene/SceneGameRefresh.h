@@ -16,6 +16,7 @@ class ActorNoppo;
 class ActorYoshi;
 class ActorBoss;
 class ActorBase;
+class UIRefreshGame;
 
 class SceneGameRefresh : public SceneBase
 {
@@ -31,8 +32,6 @@ public:
 private:
 	void				updateRunAtk();
 	void				drawBg();
-	void				drawKeyCount();
-	void				drawHpGauge();
 
 	ActorBase*			getActorNikuman(int index);
 	ActorBase*			getActorYoshi(int index);
@@ -49,7 +48,7 @@ private:
 	StateMachine<SceneGameRefresh>	mState;	// ステート
 	ActorBoss*			mBoss;
 	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
-
+	UIRefreshGame*		mUIRefreshGame;			// UI
 	int					mStartAlpha;			// げ～むすた～とのアルファ差分
 	int					mNikumanCurrentIndex;	// にくまんの現在の番号
 	int					mYoshitaroCurrentIndex;	// 吉たろうの現在の番号

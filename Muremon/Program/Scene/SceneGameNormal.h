@@ -16,6 +16,7 @@ class ActorBoss;
 class ActorNikuman;
 class ActorNoppo;
 class ActorYoshi;
+class UINormalGame;
 
 class SceneGameNormal : public SceneBase
 {
@@ -66,6 +67,7 @@ private:
 	Mission*			mMission;
 	ActorBoss*			mBoss;
 	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
+	UINormalGame*		mUINormalGame;
 
 	int					mTime;					// éûä‘ÇÇÕÇ©ÇÈ
 	bool				mIsPose;				// É|Å[ÉYÇÇµÇƒÇ¢ÇÈÇ©ÇµÇƒÇ¢Ç»Ç¢Ç©

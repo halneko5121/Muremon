@@ -19,6 +19,7 @@
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"
+#include "Program/UI/UINormalGame.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/DefineGame.h"
 
@@ -70,6 +71,7 @@ SceneGameNormal::SceneGameNormal()
 	: mState()
 	, mMission(nullptr)
 	, mBoss(nullptr)
+	, mUINormalGame(nullptr)
 	, mTime(cTimeLimitCount)
 	, mIsPose(false)
 	, mGameStateFontAlpha(0)
@@ -86,6 +88,8 @@ SceneGameNormal::SceneGameNormal()
 	, mNegativeState(NO_NEGATIVE)
 	, mNegativeAtkLv(0)
 {
+	mUINormalGame = new UINormalGame();
+
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, Idle,			cState_Idle);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, ReadyFadeIn,	cState_ReadyFadeIn);
@@ -127,6 +131,8 @@ SceneGameNormal::impleInit()
 
 	// 初期化
 	GetActorMgr()->init();
+
+	mUINormalGame->init();
 
 	mMission = new Mission(mTexture, mVertex);
 
@@ -175,25 +181,9 @@ SceneGameNormal::draw()
 		drawMissionNegative();
 	}
 
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->setColor(255,255,255,255);
-	mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//のっぽ顔
+	mUINormalGame->draw(*mBoss, mMissionGauge, mTime);
 
-	drawKeyCount();
-
-	drawHpGauge();
-
-	// ノーマルモード特有
-	drawMissionGuage();
-	
-	drawScore();
-
-	drawTime();
-
-	if(mMissionGauge >= cMaxMissionGauge)
+//	if(mMissionGauge >= cMaxMissionGauge)
 	{
 		mMission->draw();
 	}
@@ -274,109 +264,6 @@ SceneGameNormal::drawBg()
 	mVertex->drawF(cDispFlagPos, R_FLAG);
 }
 
-/**
- * @brief	連打数描画
- */
-void
-SceneGameNormal::drawKeyCount()
-{
-	//にくまん
-	for(int i = 0;i < 4;i++){
-		int num = UtilBattle::getWeakAtkCount();
-		for(int j = 1;j < 4 - i;j++){
-			num = (num / 10);
-		}
-		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNikumanPosY), R_0 + num % 10);
-	}
-	//よしたろう
-	for(int i = 0;i < 4;i++){
-		int num = UtilBattle::getMediumAtkCount();
-		for(int j = 1;j < 4 - i;j++){
-			num = num / 10;
-		}
-		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconYoshiPosY), R_0 + num % 10);
-	}
-	//のっぽ
-	for(int i = 0;i < 4;i++){
-		int num = UtilBattle::getStrongAtkCount();
-		for(int j = 1;j < 4 - i;j++){
-			num = (num / 10);
-		}
-		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNoppoPosY), R_0 + num % 10);
-	}
-}
-
-/**
- * @brief	スコアの描画
- */
-void
-SceneGameNormal::drawScore()
-{
-	mVertex->drawF(cDispScorePos, R_SCORE);		//すこあ
-
-	//スコア
-	for(int i = 0;i < 9;i++){
-		int num = UtilGame::getScore();
-		for(int j = 1; j < 9 - i;j++){
-			num = num / 10;
-		}
-		mVertex->drawF(Vector2f(cDispScoreNumPos.x + 20.f * i, cDispScoreNumPos.y), R_0 + num % 10);
-	}
-}
-
-/**
- * @brief	タイムの描画
- */
-void
-SceneGameNormal::drawTime()
-{
-	mVertex->drawF(cDispTimePos, R_TIME);		//たいむ
-
-	//タイム
-	for(int i = 0;i < 5;i++)
-	{
-		int num = mTime;
-		if(i != 2)
-		{
-			int a = 0;
-			if(i > 2)
-			{
-				a = i - 1;
-			}
-			else
-			{
-				a = i;
-			}
-			for(int j = 0;j < 4 - a;j++)
-			{
-				if(j == 0)
-				{
-					num = num / 60;
-				}
-				else if(j == 2)
-				{
-					num = num / 6;
-				}
-				else
-				{
-					num = num / 10;
-				}
-			}
-			if(i == 0 || i == 3)
-			{
-				mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 6);
-			}
-			else
-			{
-				mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 10);
-			}
-		}
-		else
-		{
-			mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_SEMICORON);
-		}
-	}
-}
 
 /**
  * @brief	HPゲージの描画
@@ -398,26 +285,6 @@ SceneGameNormal::drawHpGauge()
 	// 体力ゲージの「枠」
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
-}
-
-/**
- * @brief	ミッションゲージの描画
- */
-void
-SceneGameNormal::drawMissionGuage()
-{
-	// 「みっしょんゲージ」
-	mVertex->drawF(cDispMissionPos, R_MISSION_GAGE);
-
-	// 実際のミッションゲージ量
-	float num = (float)mMissionGauge / (float)cMaxMissionGauge;
-	mVertex->setScale(num,1.f);
-	mVertex->setColor(255,30,30,200);
-	mVertex->drawF(Vector2f(cDispMissionGaugePos.x - (1.f - num) * 100.f, cDispMissionGaugePos.y), R_GAGE_IN);
-
-	// ミッションゲージの「枠」
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->drawF(cDispMissionGaugePos, R_GAGE_FRAME);	//みっしょんゲージ枠
 }
 
 /**

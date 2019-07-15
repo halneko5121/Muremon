@@ -41,6 +41,7 @@
     <ClCompile Include="Program\main.cpp" />
     <ClCompile Include="Program\Scene\SceneBase.cpp" />
     <ClCompile Include="Program\System\GameScore.cpp" />
+    <ClCompile Include="Program\UI\UINormalGame.cpp" />
     <ClCompile Include="Program\UI\UIRefreshGame.cpp" />
     <ClCompile Include="Program\UI\UITitleMenu.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="Program\main.h" />
     <ClInclude Include="Program\Scene\SceneBase.h" />
     <ClInclude Include="Program\System\GameScore.h" />
+    <ClInclude Include="Program\UI\UINormalGame.h" />
     <ClInclude Include="Program\UI\UIRefreshGame.h" />
     <ClInclude Include="Program\UI\UITitleMenu.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />

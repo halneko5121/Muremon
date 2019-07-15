@@ -132,6 +132,9 @@
     <ClCompile Include="Program\UI\UIRefreshGame.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Program\UI\UINormalGame.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -265,6 +268,9 @@
       <Filter>Library\Math</Filter>
     </ClInclude>
     <ClInclude Include="Program\UI\UIRefreshGame.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\UI\UINormalGame.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

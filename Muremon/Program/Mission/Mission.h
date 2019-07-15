@@ -88,7 +88,6 @@ private:
 
 	Vector2f				mMissionStartPos;	//‚Ý‚Á‚µ‚å‚ñŠJŽn‚ÌˆÊ’u
 
-	int						mAlphaCount;	//
 	int						mAlpha;			//
 	int						mAlphaPushZ;	//
 

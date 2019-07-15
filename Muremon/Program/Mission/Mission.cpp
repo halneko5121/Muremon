@@ -80,7 +80,6 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 	: mTexture(texture)
 	, mVertex(vertex)
 	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
-	, mAlphaCount(0)
 	, mAlpha(0)
 	, mAlphaPushZ(255)
 	, mFlagZ(true)
@@ -125,7 +124,6 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mMissionState = MISSION_START;
 	mFlagDraw	= 0;
 	mMoveCount	= 0;
-	mAlphaCount = 0;
 	mAlpha		= 0;
 	mAlphaPushZ= 255;
 
@@ -157,11 +155,8 @@ void Mission::update()
 	{
 		if (mAlpha != 0) 
 		{
-			if (mAlphaCount++ > 1) {
-				mAlpha -= MISSION_ALPHA_INCREASE + 10;
-				if (mAlpha < 0) { mAlpha = 0; }
-				mAlphaCount = 0;
-			}
+			mAlpha -= MISSION_ALPHA_INCREASE;
+			if (mAlpha < 0) { mAlpha = 0; }
 		}
 	}
 }
@@ -1113,12 +1108,9 @@ void Mission::fadeIn()
 		mState.changeState(cState_Run);
 		return ;
 	}
-	if(mAlphaCount++ > 1){
-		mAlpha += MISSION_ALPHA_INCREASE;
-		if(mAlpha > MISSION_ALPHA_MAX){
-			mAlpha = MISSION_ALPHA_MAX;
-		}
-		mAlphaCount = 0;
+	mAlpha += MISSION_ALPHA_INCREASE;
+	if(mAlpha > MISSION_ALPHA_MAX){
+		mAlpha = MISSION_ALPHA_MAX;
 	}
 }
 

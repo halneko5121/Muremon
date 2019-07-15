@@ -69,7 +69,9 @@ private:
 
 	int					mTime;					// 時間をはかる
 	bool				mIsPose;				// ポーズをしているかしていないか
-	int					mStartAlpha;			// げ～むすた～とのアルファ差分
+	int					mGameStateFontAlpha;	// げ～むすた～とのアルファ差分
+	int					mGameStateRectNum;		// ゲームステートの応じた矩形番号
+
 	int					mMissionStateKeep;		// ミッションの状態をキープ
 	bool				mIsInit;				// 初期化したかどうか
 	int					mMissionGauge;			// 必殺ゲージ

@@ -72,7 +72,8 @@ SceneGameNormal::SceneGameNormal()
 	, mBoss(nullptr)
 	, mTime(cTimeLimitCount)
 	, mIsPose(false)
-	, mStartAlpha(0)
+	, mGameStateFontAlpha(0)
+	, mGameStateRectNum(0)
 	, mMissionStateKeep(0)
 	, mIsInit(false)
 	, mMissionGauge(0)
@@ -150,30 +151,16 @@ SceneGameNormal::draw()
 	// 背景
 	drawBg();
 
-	if (mState.isEqual(cState_ReadyFadeIn) ||
-		mState.isEqual(cState_Ready) ||
-		mState.isEqual(cState_ReadyFadeOut))
-	{
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(mStartAlpha,255,255,255);
-		mVertex->drawF(cDispBgPos, R_GAME_START);	//ゲームスタート
-	}
-	else if (mState.isEqual(cState_Game))
+	if (mState.isEqual(cState_Game))
 	{
 		// アクターの描画
 		GetActorMgr()->draw();
 	}
-	else if (mState.isEqual(cState_GameOver))
+	else
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(cDispBgPos, R_GAME_OVER);	//ゲームオーバー
-	}
-	else if (mState.isEqual(cState_TimeOver))
-	{
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(cDispBgPos, R_GAME_CLEAR);	//ゲームクリア
+		mVertex->setColor(mGameStateFontAlpha, 255, 255, 255);
+		mVertex->drawF(cDispBgPos, mGameStateRectNum);
 	}
 
 	if(mMissionStateKeep == MISSION_OUGI)
@@ -630,14 +617,15 @@ void
 SceneGameNormal::stateEnterReadyFadeIn()
 {
 	UtilSound::playOnce(S_GAME_START);
+	mGameStateRectNum = R_GAME_START;
 }
 void
 SceneGameNormal::stateReadyFadeIn()
 {
-	mStartAlpha += (cAlphaIncrease - 5);
-	if (mStartAlpha >= 255)
+	mGameStateFontAlpha += (cAlphaIncrease - 5);
+	if (mGameStateFontAlpha >= 255)
 	{
-		mStartAlpha = 255;
+		mGameStateFontAlpha = 255;
 		mState.changeState(cState_Ready);
 		return;
 	}
@@ -670,10 +658,10 @@ SceneGameNormal::stateEnterReadyFadeOut()
 void
 SceneGameNormal::stateReadyFadeOut()
 {
-	mStartAlpha -= (cAlphaIncrease - 10);
-	if (mStartAlpha < 0)
+	mGameStateFontAlpha -= (cAlphaIncrease - 10);
+	if (mGameStateFontAlpha < 0)
 	{
-		mStartAlpha = 0;
+		mGameStateFontAlpha = 0;
 		mState.changeState(cState_Game);
 		return;
 	}
@@ -850,6 +838,8 @@ SceneGameNormal::stateEnterGameOver()
 	UtilSound::stop(S_SAIREN);
 	UtilSound::stop(S_BGM_BATTLE);
 	UtilSound::playOnce(S_OVER);
+	mGameStateRectNum = R_GAME_OVER;
+	mGameStateFontAlpha = 255;
 }
 void
 SceneGameNormal::stateGameOver()
@@ -869,6 +859,8 @@ SceneGameNormal::stateEnterTimeOver()
 	UtilSound::stop(S_SAIREN);
 	UtilSound::stop(S_BGM_BATTLE);
 	UtilSound::playOnce(S_G_CLEAR);
+	mGameStateRectNum = R_GAME_CLEAR;
+	mGameStateFontAlpha = 255;
 }
 void
 SceneGameNormal::stateTimeOver()

@@ -218,11 +218,12 @@ void SceneGameRefresh::drawHpGauge()
 
 	// ŽÀÛ‚Ì‘Ì—ÍƒQ[ƒW—Ê
 	float num = mBoss->mLife / mBoss->mMaxLife;
-	mVertex->setScale(num, 1.f);
+	mVertex->setScale(num, 1.0f);
 	mVertex->setColor(255, 255, 0, 0);
 	mVertex->drawF(Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
 
 	// ‘Ì—ÍƒQ[ƒW‚Ìu˜gv
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
 }
 

@@ -107,7 +107,7 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);			//‚æ‚µ‚½‚ë‚¤Šç
 		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);					//‚Ì‚Á‚ÛŠç
 
-		drawNum();
+		drawKeyCount();
 
 		mVertex->drawF(cDispBossHpPos, R_HP);								//‚µ‚á‚Á‚­‚Ì‘Ì—Í
 		drawHpGauge();
@@ -137,7 +137,7 @@ void SceneGameRefresh::draw()
 		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//‚æ‚µ‚½‚ë‚¤Šç
 		mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//‚Ì‚Á‚ÛŠç
 
-		drawNum();
+		drawKeyCount();
 
 		mVertex->drawF(cDispBossHpPos, R_HP);	//‚µ‚á‚Á‚­‚Ì‘Ì—Í
 		mVertex->drawF(cDispGaugePos, R_GAGE_IN);	//‘Ì—ÍƒQ[ƒW
@@ -164,7 +164,7 @@ void SceneGameRefresh::end()
 	mVertex->release();
 }
 
-void SceneGameRefresh::drawNum()
+void SceneGameRefresh::drawKeyCount()
 {
 	//‚É‚­‚Ü‚ñ
 	for(int i = 0;i < 4;i++){

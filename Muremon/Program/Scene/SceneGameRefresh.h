@@ -29,7 +29,7 @@ public:
 	void				end() override;
 
 private:
-	void				drawNum();
+	void				drawKeyCount();
 	void				drawHpGauge();
 
 	ActorBase*			getActorNikuman(int index);

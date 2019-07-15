@@ -65,7 +65,7 @@ namespace
 	enum State
 	{
 		cState_Idle,			// 待機
-		cState_Start,			// 開始
+		cState_StartShake,		// 開始シェイク
 		cState_Run,				// 実行
 		cState_Success,			// 成功
 		cState_Failure,			// 失敗
@@ -100,7 +100,7 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission, mState, Idle,		cState_Idle);
-	REGIST_STATE_FUNC2(Mission, mState, Start,		cState_Start);
+	REGIST_STATE_FUNC2(Mission, mState, StartShake, cState_StartShake);
 	REGIST_STATE_FUNC2(Mission, mState, Run,		cState_Run);
 	REGIST_STATE_FUNC2(Mission, mState, Success,	cState_Success);
 	REGIST_STATE_FUNC2(Mission, mState, Failure,	cState_Failure);
@@ -143,7 +143,7 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 
 	mKeyCountNoppo		= cnt_noppo;		//のっぽの押されたキーの数をカウント
 
-	mState.changeState(cState_Start);
+	mState.changeState(cState_StartShake);
 }
 
 void Mission::update()
@@ -1150,10 +1150,10 @@ Mission::stateIdle()
 }
 
 /**
- * @brief ステート:Start
+ * @brief ステート:StartShake
  */
 void
-Mission::stateEnterStart()
+Mission::stateEnterStartShake()
 {
 	// みっしょんを決めたり初期化したり
 	mCurrentMissionNo = rand() % 100 + 1;
@@ -1211,7 +1211,7 @@ Mission::stateEnterStart()
 	}
 }
 void
-Mission::stateStart()
+Mission::stateStartShake()
 {
 	//位置を計算
 	if (mFlagDraw == 7) {

@@ -756,48 +756,6 @@ SceneGameNormal::stateExeGame()
 	// 各攻撃の開始
 	updateRunAtk();
 
-	// にくまん
-	if (UtilBattle::isRunWeakGroundAttack())
-	{
-		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
-		actor->setGroundAtkFlag();
-		actor->run();
-	}
-	else if (UtilBattle::isRunWeakSkyAttack())
-	{
-		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
-		actor->setSkyAtkFlag();
-		actor->run();
-	}
-
-	// よしたろう
-	if (UtilBattle::isRunMediumGroundAttack())
-	{
-		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
-		actor->setGroundAtkFlag();
-		actor->run();
-	}
-	else if (UtilBattle::isRunMediumSkyAttack())
-	{
-		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
-		actor->setSkyAtkFlag();
-		actor->run();
-	}
-
-	// のっぽ
-	if (UtilBattle::isRunStrongGroundAttack())
-	{
-		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
-		actor->setGroundAtkFlag();
-		actor->run();
-	}
-	else if (UtilBattle::isRunStrongSkyAttack())
-	{
-		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
-		actor->setSkyAtkFlag();
-		actor->run();
-	}
-
 	// アクターの更新
 	GetActorMgr()->update(boss_cc2);
 

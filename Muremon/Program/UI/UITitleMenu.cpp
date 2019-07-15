@@ -102,6 +102,10 @@ UITitleMenu::UITitleMenu()
  */
 UITitleMenu::~UITitleMenu()
 {
+	mTexture->release();
+	APP_SAFE_DELETE(mTexture);
+	mVertex->release();
+	APP_SAFE_DELETE(mVertex);
 }
 
 /**

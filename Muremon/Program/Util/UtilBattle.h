@@ -25,12 +25,15 @@ namespace UtilBattle
 	// UŒ‚‰ñ”
 	void		resetAtkCount();
 
+	void		setWeakAtkCount(int count);
 	void		addWeakAtkCount();
 	int			getWeakAtkCount();
 
+	void		setMediumAtkCount(int count);
 	void		addMediumAtkCount();
 	int			getMediumAtkCount();
 
+	void		setStrongAtkCount(int count);
 	void		addStrongAtkCount();
 	int			getStrongAtkCount();
 

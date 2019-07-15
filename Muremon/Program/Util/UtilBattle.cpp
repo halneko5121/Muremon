@@ -94,6 +94,15 @@ UtilBattle::resetAtkCount()
 }
 
 /**
+ * @brief	ŽãUŒ‚‰ñ”‚ðÝ’è
+ */
+void
+UtilBattle::setWeakAtkCount(int count)
+{
+	GetGameInfoMgr()->setWeakAtkCount(count);
+}
+
+/**
  * @brief	ŽãUŒ‚‰ñ”‚ð‰ÁŽZ
  */
 void
@@ -114,6 +123,15 @@ UtilBattle::getWeakAtkCount()
 }
 
 /**
+ * @brief	’†UŒ‚‰ñ”‚ðÝ’è
+ */
+void
+UtilBattle::setMediumAtkCount(int count)
+{
+	GetGameInfoMgr()->setMediumAtkCount(count);
+}
+
+/**
  * @brief	’†UŒ‚‰ñ”‚ð‰ÁŽZ
  */
 void
@@ -131,6 +149,15 @@ int
 UtilBattle::getMediumAtkCount()
 {
 	return GetGameInfoMgr()->getMediumAtkCount();
+}
+
+/**
+ * @brief	‹­UŒ‚‰ñ”‚ðÝ’è
+ */
+void
+UtilBattle::setStrongAtkCount(int count)
+{
+	GetGameInfoMgr()->setStrongAtkCount(count);
 }
 
 /**

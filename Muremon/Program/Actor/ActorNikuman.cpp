@@ -60,9 +60,10 @@ ActorNikuman::ActorNikuman(Texture* texture, Vertex* vertex)
 	, mAtkStartY(0.0f)
 	, mRandDeg(0.0f)
 {
-	mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
 	mRectStartNum = R_NIKU_G_ATK1;
 	mSoundStartNum = S_NIKUMAN;
+	mAtkPower = cAtkPowerNikuman;
+	mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
 
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorNikuman, mState, Idle,			cState_Idle);

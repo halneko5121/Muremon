@@ -113,6 +113,8 @@ public:
 
 	float				getHitPosY() const { return mHitPosY; }
 
+	int					getAtkPower() const { return mAtkPower; }
+
 protected:
 	OrbitCalculation*	mOrbit;
 
@@ -125,9 +127,11 @@ protected:
 	int					mAnimation;
 	int					mRectNum;
 	int					mAlpha;
+	Vector2f			mNowPos;
+
+	int					mAtkPower;
 	bool				mIsAtk1;
 	bool				mIsAtk2;
-	Vector2f			mNowPos;
 	float				mAngleDegree;
 
 	bool				mIsHitCheck;

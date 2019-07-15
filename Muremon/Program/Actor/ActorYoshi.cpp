@@ -75,6 +75,7 @@ ActorYoshi::ActorYoshi(Texture* texture, Vertex* vertex)
 {
 	mRectStartNum = R_YOSHI_G_ATK1;
 	mSoundStartNum = S_YOSHI_HIP;
+	mAtkPower = cAtkPowerYoshitaro;
 	mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 

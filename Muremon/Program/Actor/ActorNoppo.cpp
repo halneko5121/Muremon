@@ -76,6 +76,7 @@ ActorNoppo::ActorNoppo(Texture* texture, Vertex* vertex)
 {
 	mRectStartNum = R_NOPPO_G_ATK1;
 	mSoundStartNum = S_NOPPO_KOKE;
+	mAtkPower = cAtkPowerNoppo;
 	mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 

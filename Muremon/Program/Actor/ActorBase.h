@@ -115,6 +115,8 @@ public:
 
 	int					getAtkPower() const { return mAtkPower; }
 
+	int					getMissionPower() const { return mMissionPower; }
+
 protected:
 	OrbitCalculation*	mOrbit;
 
@@ -129,6 +131,7 @@ protected:
 	int					mAlpha;
 	Vector2f			mNowPos;
 
+	int					mMissionPower;
 	int					mAtkPower;
 	bool				mIsAtk1;
 	bool				mIsAtk2;

@@ -194,16 +194,10 @@ SceneGameNormal::draw()
 
 	drawKeyCount();
 
-	mVertex->drawF(cDispMissionPos, R_MISSION_GAGE);	//みっしょんげ～じ
-	mVertex->drawF(cDispMissionGaugePos, R_GAGE_IN);	//みっしょんゲージ
-
-	drawMissionGuage();
-
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->drawF(cDispMissionGaugePos, R_GAGE_FRAME);	//みっしょんゲージ枠
-	mVertex->drawF(cDispGaugePos, R_GAGE_IN);	//体力ゲージ
-
 	drawHpGauge();
+
+	// ノーマルモード特有
+	drawMissionGuage();
 	
 	drawScore();
 
@@ -422,11 +416,18 @@ SceneGameNormal::drawHpGauge()
 void
 SceneGameNormal::drawMissionGuage()
 {
-	float num = (float)mMissionGauge / (float)cMaxMissionGauge;
+	// 「みっしょんゲージ」
+	mVertex->drawF(cDispMissionPos, R_MISSION_GAGE);
 
+	// 実際のミッションゲージ量
+	float num = (float)mMissionGauge / (float)cMaxMissionGauge;
 	mVertex->setScale(num,1.f);
 	mVertex->setColor(255,30,30,200);
-	mVertex->drawF(Vector2f(cDispMissionGaugePos.x - (1.f - num) * 100.f, cDispMissionGaugePos.y), R_GAGE_IN);	//ミッションゲージ
+	mVertex->drawF(Vector2f(cDispMissionGaugePos.x - (1.f - num) * 100.f, cDispMissionGaugePos.y), R_GAGE_IN);
+
+	// ミッションゲージの「枠」
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+	mVertex->drawF(cDispMissionGaugePos, R_GAGE_FRAME);	//みっしょんゲージ枠
 }
 
 /**

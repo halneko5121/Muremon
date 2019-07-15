@@ -188,17 +188,16 @@ SceneGameNormal::draw()
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	mVertex->setColor(255,255,255,255);
 	mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);	//ステータス枠描画
-	mVertex->drawF(cDispScorePos, R_SCORE);		//すこあ
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
+	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//のっぽ顔
 
+	mVertex->drawF(cDispScorePos, R_SCORE);		//すこあ
 	drawScore();
 
 	mVertex->drawF(cDispTimePos, R_TIME);		//たいむ
 
 	drawTime();
-
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);	//のっぽ顔
 
 	drawKeyCount();
 

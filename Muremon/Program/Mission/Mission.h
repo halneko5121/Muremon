@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Library/StateMachine.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 #include "Program/DefineGame.h"
@@ -71,6 +72,19 @@ private:
 	void	updateMission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
 private:
+	// ステート関数
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Start);
+	DECLAR_STATE_FUNC2(Run);
+	DECLAR_STATE_FUNC2(Success);
+	DECLAR_STATE_FUNC2(Failure);
+	DECLAR_STATE_FUNC2(Ougi);
+	DECLAR_STATE_FUNC2(BadStatus);
+	DECLAR_STATE_FUNC2(End);
+
+private:
+	StateMachine<Mission>	mState;	// ステート
+
 	Texture*	mTexture;
 	Vertex*		mVertex;
 

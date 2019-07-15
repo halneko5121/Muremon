@@ -61,6 +61,19 @@ namespace
 		MISSION_13,	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 		MISSION_14,	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 	};
+
+	enum State
+	{
+		cState_Idle,			// 待機
+		cState_Start,			// 開始
+		cState_Run,				// 実行
+		cState_Success,			// 成功
+		cState_Failure,			// 失敗
+		cState_Ougi,			// 奥義
+		cState_BadStatus,		// バッドステータス
+		cState_End,				// 終了
+		cState_Count
+	};
 }
 
 Mission::Mission(Texture* texture, Vertex* vertex)
@@ -87,6 +100,16 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 	, mKeyCountYoshitaro(0)
 	, mKeyCountNoppo(0)
 {
+	mState.initialize(cState_Count, cState_Idle);
+	REGIST_STATE_FUNC2(Mission, mState, Idle,		cState_Idle);
+	REGIST_STATE_FUNC2(Mission, mState, Start,		cState_Start);
+	REGIST_STATE_FUNC2(Mission, mState, Run,		cState_Run);
+	REGIST_STATE_FUNC2(Mission, mState, Success,	cState_Success);
+	REGIST_STATE_FUNC2(Mission, mState, Failure,	cState_Failure);
+	REGIST_STATE_FUNC2(Mission, mState, Ougi,		cState_Ougi);
+	REGIST_STATE_FUNC2(Mission, mState, BadStatus,	cState_BadStatus);
+	REGIST_STATE_FUNC2(Mission, mState, End,		cState_End);
+	mState.changeState(cState_Idle);
 }
 
 Mission::~Mission()
@@ -1198,4 +1221,104 @@ void Mission::drawCombo()
 		mVertex->drawF(Vector2f(M_COMBO_X + 50.f + 50.f * i, M_COMBO_Y), R_0_B + num % 10);
 	}
 	mVertex->drawF(Vector2f(M_COMBO_X, M_COMBO_Y), R_COMBO);
+}
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+Mission::stateEnterIdle()
+{
+}
+void
+Mission::stateIdle()
+{
+}
+
+/**
+ * @brief ステート:Start
+ */
+void
+Mission::stateEnterStart()
+{
+}
+void
+Mission::stateStart()
+{
+}
+
+/**
+ * @brief ステート:Run
+ */
+void
+Mission::stateEnterRun()
+{
+}
+void
+Mission::stateRun()
+{
+}
+
+/**
+ * @brief ステート:Success
+ */
+void
+Mission::stateEnterSuccess()
+{
+}
+void
+Mission::stateSuccess()
+{
+}
+
+/**
+ * @brief ステート:Failure
+ */
+void
+Mission::stateEnterFailure()
+{
+}
+void
+Mission::stateFailure()
+{
+}
+
+/**
+ * @brief ステート:Ougi
+ */
+void
+Mission::stateEnterOugi()
+{
+}
+void
+Mission::stateOugi()
+{
+}
+
+/**
+ * @brief ステート:BadStatus
+ */
+void
+Mission::stateEnterBadStatus()
+{
+}
+void
+Mission::stateBadStatus()
+{
+}
+
+/**
+ * @brief ステート:End
+ */
+void
+Mission::stateEnterEnd()
+{
+}
+void
+Mission::stateEnd()
+{
 }

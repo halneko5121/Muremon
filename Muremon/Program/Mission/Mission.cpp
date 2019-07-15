@@ -83,7 +83,6 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 	, mFlagMissionState(MISSION_SEIKO)
 	, mIsInit(false)
 	, mKeyCount(0)
-	, mKeyState(0)
 	, mKeyCountNikuman(0)
 	, mKeyCountYoshitaro(0)
 	, mKeyCountNoppo(0)
@@ -97,7 +96,6 @@ Mission::~Mission()
 void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 {
 	mCurrentMissionNo	= 0;
-	mKeyState	= 0;
 	mTime		= TEN_SECOND;
 	mKeyCount		= 0;
 	mSuccessTypingCount	= 1;

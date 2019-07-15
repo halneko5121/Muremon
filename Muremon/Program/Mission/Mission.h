@@ -96,7 +96,6 @@ private:
 
 	bool mIsInit;				// 初期化したかしてないか
 	int mKeyCount;				// キーの連打数を保存する変数
-	int mKeyState;				// キーの状態を保存する変数
 
 	int mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
 	int mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント

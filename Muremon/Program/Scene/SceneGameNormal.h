@@ -9,6 +9,7 @@
 
 #include "Library/StateMachine.h"
 #include "Program/Scene/SceneBase.h"
+#include "Program/Actor/ActorMgr.h"
 
 class Mission;
 class ActorBoss;
@@ -33,7 +34,6 @@ private:
 	void				drawTime();					// タイム
 	void				drawHpGauge();
 	void				drawMissionGuage();
-	void				drawHitEffect();
 
 	void				updateMissionOugi();		// アクシデント奥義の更新
 	void				drawMissionOugi();			// アクシデント奥義を描画
@@ -45,6 +45,10 @@ private:
 	void				recover();					// ミッション失敗で下がったものを元に戻す
 	
 private:
+	ActorBase*			getActorNikuman(int index);
+	ActorBase*			getActorYoshi(int index);
+	ActorBase*			getActorNoppo(int index);
+
 	// ステート関数
 	void				stateEnterIdle();
 	void				stateExeIdle();
@@ -72,20 +76,19 @@ private:
 
 	Mission*			mMission;
 	ActorBoss*			mBoss;
+	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
 
-	ActorNikuman*		mNiku;
-	ActorNoppo*			mNoppo;
-	ActorYoshi*			mYoshi;
+	int					mTime;					// 時間をはかる
+	bool				mIsPose;				// ポーズをしているかしていないか
+	int					mStartAlpha;			// げ～むすた～とのアルファ差分
+	int					mMissionStateKeep;		// ミッションの状態をキープ
+	bool				mIsInit;				// 初期化したかどうか
+	int					mMissionGauge;			// 必殺ゲージ
 
-	int					mTime;				// 時間をはかる
-	bool				mIsPose;			// ポーズをしているかしていないか
-	int					mStartAlpha;		// げ～むすた～とのアルファ差分
-	int					mMissionStateKeep;	// ミッションの状態をキープ
-	bool				mIsInit;			// 初期化したかどうか
-	int					mMissionGauge;		// 必殺ゲージ
-	bool				mIsHitNiku;
-	bool				mIsHitYoshi;
-	bool				mIsHitNoppo;
+	int					mNikumanCurrentIndex;	// にくまんの現在の番号
+	int					mYoshitaroCurrentIndex;	// 吉たろうの現在の番号
+	int					mNoppoCurrentIndex;		// のっぽの現在の番号
+
 	bool				mIsHitEffect;
 
 	// ヒットエフェクト

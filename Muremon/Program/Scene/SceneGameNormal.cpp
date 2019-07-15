@@ -19,6 +19,7 @@
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"
+#include "Program/Effect/EffectMgr.h"
 #include "Program/DefineGame.h"
 
 namespace
@@ -69,18 +70,15 @@ SceneGameNormal::SceneGameNormal()
 	: mState()
 	, mMission(nullptr)
 	, mBoss(nullptr)
-	, mNiku(nullptr)
-	, mNoppo(nullptr)
-	, mYoshi(nullptr)
 	, mTime(cTimeLimitCount)
 	, mIsPose(false)
 	, mStartAlpha(0)
 	, mMissionStateKeep(0)
 	, mIsInit(false)
 	, mMissionGauge(0)
-	, mIsHitNiku(false)
-	, mIsHitYoshi(false)
-	, mIsHitNoppo(false)
+	, mNikumanCurrentIndex(0)
+	, mYoshitaroCurrentIndex(0)
+	, mNoppoCurrentIndex(0)
 	, mIsHitEffect(false)
 	, mHitEffectAlpha(0)
 	, mHitEffectTime(0)
@@ -117,15 +115,21 @@ SceneGameNormal::impleInit()
 {
 	UtilGame::setGameModeNormal();
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
-	mNiku = new ActorNikuman(mTexture, mVertex);
-	mNoppo	= new ActorNoppo(mTexture, mVertex);
-	mYoshi	= new ActorYoshi(mTexture, mVertex);
-	mBoss = new ActorBoss(mTexture, mVertex);
 
-	mNiku->init();
-	mNoppo->init();
-	mYoshi->init();
-	mBoss->init();
+	// プレイヤー3種類分
+	for (int actor_id = cActorId_Noppo; actor_id <= cActorId_Yoshi; actor_id++)
+	{
+		// 各最大数生成
+		for (int j = 0; j < cMaxPlayerCount; j++)
+		{
+			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id), mTexture, mVertex);
+		}
+	}
+	// ボス
+	mBoss = dynamic_cast<ActorBoss*>(GetActorMgr()->createActor(cActorId_Boss, mTexture, mVertex));
+
+	// 初期化
+	GetActorMgr()->init();
 
 	mMission = new Mission(mTexture, mVertex);
 
@@ -162,15 +166,8 @@ SceneGameNormal::draw()
 	}
 	else if (mState.isEqual(cState_Game))
 	{
-		mBoss->drawImple();
-
-		drawHitEffect();
-		//キャラ達
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-
-		mNoppo->draw();
-		mYoshi->draw();
-		mNiku->draw();
+		// アクターの描画
+		GetActorMgr()->draw();
 	}
 	else if (mState.isEqual(cState_GameOver))
 	{
@@ -360,17 +357,6 @@ SceneGameNormal::drawHpGauge()
 }
 
 /**
- * @brief	ヒットエフェクトの描画
- */
-void
-SceneGameNormal::drawHitEffect()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->setColor(mHitEffectAlpha,255,255,255);
-	mVertex->drawF(Vector2f(mBoss->mMoveX - cHitEffectPos.x, mCharaAtkY), R_HIT_EFFECT);
-}
-
-/**
  * @brief	ミッションゲージの描画
  */
 void
@@ -542,6 +528,24 @@ SceneGameNormal::recover()
 	}
 }
 
+ActorBase*
+SceneGameNormal::getActorNikuman(int index)
+{
+	return mActor[cActorId_Nikuman][index];
+}
+
+ActorBase*
+SceneGameNormal::getActorYoshi(int index)
+{
+	return mActor[cActorId_Yoshi][index];
+}
+
+ActorBase*
+SceneGameNormal::getActorNoppo(int index)
+{
+	return mActor[cActorId_Noppo][index];
+}
+
 // -----------------------------------------------------------------
 // ステート関数
 // -----------------------------------------------------------------
@@ -700,69 +704,132 @@ SceneGameNormal::stateExeGame()
 		return;
 	}
 
-	mNiku->update(boss_cc2);
-	mYoshi->update(boss_cc2);
-	mNoppo->update(boss_cc2);
+	// にくまん
+	if (UtilBattle::isRunWeakGroundAttack())
+	{
+		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunWeakSkyAttack())
+	{
+		ActorBase* actor = getActorNikuman(mNikumanCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
+	// よしたろう
+	if (UtilBattle::isRunMediumGroundAttack())
+	{
+		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunMediumSkyAttack())
+	{
+		ActorBase* actor = getActorYoshi(mYoshitaroCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
+	// のっぽ
+	if (UtilBattle::isRunStrongGroundAttack())
+	{
+		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
+		actor->setGroundAtkFlag();
+		actor->run();
+	}
+	else if (UtilBattle::isRunStrongSkyAttack())
+	{
+		ActorBase* actor = getActorNoppo(mNoppoCurrentIndex);
+		actor->setSkyAtkFlag();
+		actor->run();
+	}
+
+	// アクターの更新
+	GetActorMgr()->update(boss_cc2);
+
+	// エフェクトの更新
+	GetEffectMgr()->update();
+
+	// ヒットチェック
+	ActorMgr::ActorIterator it_begin = GetActorMgr()->begin();
+	ActorMgr::ActorIterator it_end = GetActorMgr()->end();
+	for (ActorMgr::ActorIterator it = it_begin; it != it_end; it++)
+	{
+		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
+		// 肉まん
+		ActorNikuman* actor_nikuman = dynamic_cast<ActorNikuman*>(actor);
+		if (actor_nikuman != nullptr)
+		{
+			if (actor->isHitCheck())
+			{
+				mBoss->hit(actor_nikuman->getHitPosY(), (actor_nikuman->getAtkPower() / mNegativeDamege));
+				actor_nikuman->setIsHitCheck(false);
+				mMissionGauge += cAddGaugePowerNikuman;
+				UtilGame::addScore(cAddScoreNikuman);
+			}
+		}
+		// よしたろう
+		ActorYoshi* actor_yoshi = dynamic_cast<ActorYoshi*>(actor);
+		if (actor_yoshi != nullptr)
+		{
+			if (actor->isHitCheck())
+			{
+				mBoss->hit(actor_yoshi->getHitPosY(), (actor_yoshi->getAtkPower() / mNegativeDamege));
+				actor_yoshi->setIsHitCheck(false);
+				mMissionGauge += cAddGaugePowerYoshitaro;
+				UtilGame::addScore(cAddScoreYoshitaro);
+			}
+		}
+		// のっぽ
+		ActorNoppo* actor_noppo = dynamic_cast<ActorNoppo*>(actor);
+		if (actor_noppo != nullptr)
+		{
+			if (actor->isHitCheck())
+			{
+				mBoss->hit(actor_noppo->getHitPosY(), (actor_noppo->getAtkPower() / mNegativeDamege));
+				actor_noppo->setIsHitCheck(false);
+				mMissionGauge += cAddGaugePowerNoppo;
+				UtilGame::addScore(cAddScoreNoppo);
+			}
+		}
+	}
 
 	mTime -= 1;
-
-	mIsHitNiku = mNiku->isHitCheck();//あたったというフラグが帰ってきます
-
-	mIsHitYoshi = mYoshi->isHitCheck();//これをつかってダメージなどを
-
-	mIsHitNoppo = mNoppo->isHitCheck();//反映させてください
-
-	if (mIsHitNiku)
-	{
-		mBoss->mHitCount++;
-		mBoss->mLife -= cAtkPowerNikuman / mNegativeDamege;
-		mMissionGauge += cAddGaugePowerNikuman;
-
-		UtilGame::addScore(cAddScoreNikuman);
-		mIsHitEffect = true;
-		mCharaAtkY = mNiku->getHitPosY();
-		mNiku->setIsHitCheck(false);
-	}
-
-	if (mIsHitYoshi)
-	{
-		mBoss->mHitCount++;
-		mBoss->mLife -= cAtkPowerYoshitaro / mNegativeDamege;
-		mMissionGauge += cAddGaugePowerYoshitaro;
-		UtilGame::addScore(cAddScoreYoshitaro);
-		mIsHitEffect = true;
-		mCharaAtkY = mYoshi->getHitPosY();
-		mYoshi->setIsHitCheck(false);
-	}
-
-	if (mIsHitNoppo)
-	{
-		mBoss->mHitCount++;
-		mBoss->mLife -= cAtkPowerNoppo / mNegativeDamege;
-		mMissionGauge += cAddGaugePowerNoppo;
-		UtilGame::addScore(cAddScoreNoppo);
-		mIsHitEffect = true;
-		mCharaAtkY = mNoppo->getHitPosY();
-		mNoppo->setIsHitCheck(false);
-	}
 
 	// にくまん
 	if (UtilBattle::isRunWeakGroundAttack() ||
 		UtilBattle::isRunWeakSkyAttack())
 	{
 		UtilBattle::addWeakAtkCount();
+		mNikumanCurrentIndex++;
+		if (cMaxPlayerCount <= mNikumanCurrentIndex)
+		{
+			mNikumanCurrentIndex = 0;
+		}
 	}
 	// よしたろう
 	if (UtilBattle::isRunMediumGroundAttack() ||
 		UtilBattle::isRunMediumSkyAttack())
 	{
 		UtilBattle::addMediumAtkCount();
+		mYoshitaroCurrentIndex++;
+		if (cMaxPlayerCount <= mYoshitaroCurrentIndex)
+		{
+			mYoshitaroCurrentIndex = 0;
+		}
 	}
 	// のっぽ
 	if (UtilBattle::isRunStrongGroundAttack() ||
 		UtilBattle::isRunStrongSkyAttack())
 	{
 		UtilBattle::addStrongAtkCount();
+		mNoppoCurrentIndex++;
+		if (cMaxPlayerCount <= mNoppoCurrentIndex)
+		{
+			mNoppoCurrentIndex = 0;
+		}
 	}
 	recover();
 

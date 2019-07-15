@@ -79,6 +79,8 @@ void SceneGameRefresh::impleInit()
 	}
 	// É{ÉX
 	mBoss = dynamic_cast<ActorBoss*>(GetActorMgr()->createActor(cActorId_Boss, mTexture, mVertex));
+
+	// èâä˙âª
 	GetActorMgr()->init();
 
 	mState.changeState(cState_ReadyFadeIn);

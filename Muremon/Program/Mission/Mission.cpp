@@ -66,6 +66,7 @@ namespace
 	{
 		cState_Idle,			// 待機
 		cState_StartShake,		// 開始シェイク
+		cState_StartFadeOut,	// 開始フェードアウト
 		cState_Run,				// 実行
 		cState_Success,			// 成功
 		cState_Failure,			// 失敗
@@ -99,14 +100,15 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 	, mKeyCountNoppo(0)
 {
 	mState.initialize(cState_Count, cState_Idle);
-	REGIST_STATE_FUNC2(Mission, mState, Idle,		cState_Idle);
-	REGIST_STATE_FUNC2(Mission, mState, StartShake, cState_StartShake);
-	REGIST_STATE_FUNC2(Mission, mState, Run,		cState_Run);
-	REGIST_STATE_FUNC2(Mission, mState, Success,	cState_Success);
-	REGIST_STATE_FUNC2(Mission, mState, Failure,	cState_Failure);
-	REGIST_STATE_FUNC2(Mission, mState, Ougi,		cState_Ougi);
-	REGIST_STATE_FUNC2(Mission, mState, BadStatus,	cState_BadStatus);
-	REGIST_STATE_FUNC2(Mission, mState, End,		cState_End);
+	REGIST_STATE_FUNC2(Mission, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(Mission, mState, StartShake,		cState_StartShake);
+	REGIST_STATE_FUNC2(Mission, mState, StartFadeOut,	cState_StartFadeOut);
+	REGIST_STATE_FUNC2(Mission, mState, Run,			cState_Run);
+	REGIST_STATE_FUNC2(Mission, mState, Success,		cState_Success);
+	REGIST_STATE_FUNC2(Mission, mState, Failure,		cState_Failure);
+	REGIST_STATE_FUNC2(Mission, mState, Ougi,			cState_Ougi);
+	REGIST_STATE_FUNC2(Mission, mState, BadStatus,		cState_BadStatus);
+	REGIST_STATE_FUNC2(Mission, mState, End,			cState_End);
 	mState.changeState(cState_Idle);
 }
 
@@ -123,7 +125,6 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mFlagMissionState = MISSION_SEIKO;
 	mMissionState = MISSION_START;
 	mFlagDraw	= 0;
-	mMoveCount	= 0;
 	mAlpha		= 0;
 	mAlphaPushZ= 255;
 
@@ -1155,6 +1156,8 @@ Mission::stateIdle()
 void
 Mission::stateEnterStartShake()
 {
+	mMoveCount = 0;
+
 	// みっしょんを決めたり初期化したり
 	mCurrentMissionNo = rand() % 100 + 1;
 
@@ -1213,34 +1216,54 @@ Mission::stateEnterStartShake()
 void
 Mission::stateStartShake()
 {
-	//位置を計算
-	if (mFlagDraw == 7) {
-		mAlpha += MISSION_ALPHA_INCREASE;
-		if (mAlpha > MISSION_ALPHA_MAX) 
+	if (mFlagDraw % 2 == 0) 
+	{
+		if (mMissionStartPos.y < MISSION_HASSEI_Y) 
 		{
-			mAlpha = MISSION_ALPHA_MAX;
-		}
-		if (mAlpha == MISSION_ALPHA_MAX) 
-		{
-			mMissionState = MISSION_MIDDLE;
-			mState.changeState(cState_Run);
-		}
-		return;
-	}
-	if (mFlagDraw % 2 == 0) {
-		if (mMissionStartPos.y < MISSION_HASSEI_Y) {
 			mMissionStartPos.y += 5.f;
 		}
-		else {
+		else
+		{
 			mFlagDraw++;
 		}
 	}
-	else if (mFlagDraw % 2 == 1) {
+	else if (mFlagDraw % 2 == 1) 
+	{
 		mMissionStartPos.y -= 5.f;
 		if (mMissionStartPos.y == 0.f + 20.f * mMoveCount) {
 			mFlagDraw++;
 			mMoveCount++;
 		}
+	}
+
+	// 位置を計算
+	if (mFlagDraw == 7)
+	{
+		mState.changeState(cState_StartFadeOut);
+		return;
+	}	
+}
+
+/**
+ * @brief ステート:StartFadeOut
+ */
+void
+Mission::stateEnterStartFadeOut()
+{
+}
+void
+Mission::stateStartFadeOut()
+{
+	mAlpha += MISSION_ALPHA_INCREASE;
+	if (mAlpha > MISSION_ALPHA_MAX)
+	{
+		mAlpha = MISSION_ALPHA_MAX;
+	}
+	if (mAlpha == MISSION_ALPHA_MAX)
+	{
+		mMissionState = MISSION_MIDDLE;
+		mState.changeState(cState_Run);
+		return;
 	}
 }
 

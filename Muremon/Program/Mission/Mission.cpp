@@ -94,7 +94,6 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 	, mFlagTimeCount(0)
 	, mSuccessTypingCount(1)
 	, mFlagMissionState(MISSION_SEIKO)
-	, mIsInit(false)
 	, mKeyCount(0)
 	, mKeyCountNikuman(0)
 	, mKeyCountYoshitaro(0)
@@ -134,8 +133,6 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 
 	mFlagZ		= true;
 
-	mIsInit	= false;
-
 	mIsSound	= true;
 	mIsSound2 = true;
 
@@ -147,53 +144,17 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mKeyCountYoshitaro	= cnt_yoshitaro;	//吉たろうの押されたキーの数をカウント
 
 	mKeyCountNoppo		= cnt_noppo;		//のっぽの押されたキーの数をカウント
+
+	mState.changeState(cState_Start);
 }
 
 void Mission::update()
 {
-	if(mMissionState == MISSION_START){
-		missionSelect();
-		//位置を計算
-		if(mFlagDraw == 7){
-			fadeIn();
-			return;
-		}
-		if(mFlagDraw%2 == 0){
-			if(mMissionStartPos.y < MISSION_HASSEI_Y){
-				mMissionStartPos.y += 5.f;
-			}
-			else{
-				mFlagDraw++;
-			}
-		}
-		else if(mFlagDraw%2 == 1){
-			mMissionStartPos.y -= 5.f;
-			if(mMissionStartPos.y == 0.f + 20.f * mMoveCount){
-				mFlagDraw++;
-				mMoveCount++;
-			}
-		}
-	}
-	else if(mMissionState == MISSION_MIDDLE){
-		if(mIsSound){
-			UtilSound::playOnce(S_OSIRASE);
-			mIsSound = false;
-		}
-		updateMission();
-	}
-	else{
-		if(mMissionState == MISSION_SEIKO){
-			if(mIsSound2){
-				UtilSound::playOnce(S_M_CLEAR);
-				mIsSound = false;
-			}
-		}
-		else if(mMissionState == MISSION_SIPPAI){
-			if(mIsSound2){
-				UtilSound::playOnce(S_M_OVER);
-				mIsSound2 = false;
-			}
-		}
+	mState.executeState();
+
+	if( mMissionState != MISSION_START && 
+		mMissionState != MISSION_MIDDLE)
+	{
 		fadeOut();
 	}
 }
@@ -226,8 +187,6 @@ void Mission::draw()
 	if(mMissionState == MISSION_MIDDLE){
 		updateMissionD();
 	}
-	else{
-	}
 }
 
 /**
@@ -239,62 +198,20 @@ Mission::getMissionState() const
 	return mMissionState;
 }
 
-void Mission::updateMission()
-{
-	switch(mCurrentMissionNo)
-	{
-	case MISSION_1:
-		updateMission1();
-		break;
-	case MISSION_2:
-		updateMission2();
-		break;
-	case MISSION_3:
-		updateMission3();
-		break;
-	case MISSION_4:
-		updateMission4();
-		break;
-	case MISSION_5:
-		updateMission5();
-		break;
-	case MISSION_6:
-		updateMission6();
-		break;
-	case MISSION_7:
-		updateMission7();
-		break;
-	case MISSION_8:
-		updateMission8();
-		break;
-	case MISSION_9:
-		updateMission9();
-		break;
-	case MISSION_10:
-		updateMission10();
-		break;
-	case MISSION_11:
-		updateMission11();
-		break;
-	case MISSION_12:
-		updateMission12();
-		break;
-	case MISSION_13:
-		updateMission13();
-		break;
-	case MISSION_14:
-		updateMission14();
-		break;
-	}
-	//time++;
-}
-
 void Mission::updateMission1()	//『10秒以内に100回連打せよ！！』
 {
 	if (mTime <= 0)
 	{
-		if (mKeyCount >= 100)	mMissionState = MISSION_SEIKO;
-		else				mMissionState = MISSION_SIPPAI;
+		if (mKeyCount >= 100)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 
@@ -309,8 +226,16 @@ void Mission::updateMission2()	//『10秒間でちょうど50回連打せよ！！』
 {
 	if (mTime <= 0)
 	{
-		if (mKeyCount == 50)	mMissionState = MISSION_SEIKO;
-		else				mMissionState = MISSION_SIPPAI;
+		if (mKeyCount == 50)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 	
@@ -325,8 +250,16 @@ void Mission::updateMission3()	//『10秒間でちょうど100回連打せよ！！』
 {
 	if(mTime <= 0)
 	{
-		if(mKeyCount == 100)	mMissionState = MISSION_SEIKO;
-		else				mMissionState = MISSION_SIPPAI;
+		if (mKeyCount == 100)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 	
@@ -341,8 +274,16 @@ void Mission::updateMission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	if(mTime <= 0)
 	{
-		if(mSuccessTypingCount == MISSION4_FONT_NUM)	mMissionState = MISSION_SEIKO;
-		else								mMissionState = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION4_FONT_NUM)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 	
@@ -414,8 +355,16 @@ void Mission::updateMission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
-		if(mSuccessTypingCount == MISSION5_FONT_NUM)	mMissionState = MISSION_SEIKO;
-		else								mMissionState = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION5_FONT_NUM)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 	
@@ -502,8 +451,16 @@ void Mission::updateMission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
-		if(mSuccessTypingCount == MISSION6_FONT_NUM)	mMissionState = MISSION_SEIKO;
-		else								mMissionState = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION6_FONT_NUM)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 	
@@ -571,8 +528,16 @@ void Mission::updateMission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
-		if (mSuccessTypingCount == MISSION7_FONT_NUM)	mMissionState = MISSION_SEIKO;
-		else								mMissionState = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION7_FONT_NUM)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 	
@@ -646,8 +611,16 @@ void Mission::updateMission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
-		if (mSuccessTypingCount == MISSION8_FONT_NUM)	mMissionState = MISSION_SEIKO;
-		else								mMissionState = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION8_FONT_NUM)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 	
@@ -709,8 +682,16 @@ void Mission::updateMission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
-		if (mSuccessTypingCount == MISSION9_FONT_NUM)	mMissionState = MISSION_SEIKO;
-		else											mMissionState = MISSION_SIPPAI;
+		if (mSuccessTypingCount == MISSION9_FONT_NUM)
+		{
+			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+		}
 		return;
 	}
 
@@ -811,9 +792,13 @@ void Mission::updateMission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	{
 		if(mTime <= 11*60 - 31 && mTime >= 9*60 + 31){
 			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+			return;
 		}
 		else{
 			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+			return;
 		}
 	}
 }
@@ -852,10 +837,14 @@ void Mission::updateMission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 		if(mTime <= 6*60 - 31 && mTime >= 4*60 + 31)
 		{
 			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
+			return;
 		}
 		else
 		{
 			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
+			return;
 		}
 	}
 }
@@ -867,10 +856,12 @@ void Mission::updateMission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ
 		if (mKeyCountNikuman > mKeyCountNoppo && mKeyCountNikuman > mKeyCountYoshitaro)
 		{
 			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
 		}
 		else
 		{
 			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
 		}
 		return;
 	}
@@ -889,10 +880,12 @@ void Mission::updateMission13()	//『10秒以内に「よしたろう」の連打数を一番高くし
 		if (mKeyCountYoshitaro > mKeyCountNikuman && mKeyCountYoshitaro > mKeyCountNoppo)
 		{
 			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
 		}
 		else
 		{
 			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
 		}
 		return;
 	}
@@ -911,10 +904,12 @@ void Mission::updateMission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！
 		if(mKeyCountNoppo > mKeyCountNikuman && mKeyCountNoppo > mKeyCountYoshitaro)
 		{
 			mMissionState = MISSION_SEIKO;
+			mState.changeState(cState_Success);
 		}
 		else
 		{
 			mMissionState = MISSION_SIPPAI;
+			mState.changeState(cState_Failure);
 		}
 		return;
 	}
@@ -1108,6 +1103,7 @@ void Mission::fadeIn()
 {
 	if(mAlpha == MISSION_ALPHA_MAX){
 		mMissionState = MISSION_MIDDLE;
+		mState.changeState(cState_Run);
 		return ;
 	}
 	if(mAlphaCount++ > 1){
@@ -1124,9 +1120,11 @@ void Mission::fadeOut()
 	if(mAlpha == 0){
 		if(mMissionState == MISSION_SEIKO){
 			mMissionState = MISSION_OUGI;
+			mState.changeState(cState_Ougi);
 		}
 		else if(mMissionState == MISSION_SIPPAI){
 			mMissionState = MISSION_NEGATIVE;
+			mState.changeState(cState_BadStatus);
 		}
 		return ;
 	}
@@ -1134,68 +1132,6 @@ void Mission::fadeOut()
 		mAlpha -= MISSION_ALPHA_INCREASE + 5;
 		if(mAlpha < 0) { mAlpha = 0; }
 		mAlphaCount = 0;
-	}
-}
-
-void Mission::missionSelect()
-{
-	if(mIsInit) { return ; }
-	else{
-		mCurrentMissionNo = rand()%100+1;
-		//mission_no = 86;		//デバッグ用
-		if(mCurrentMissionNo >=0 && mCurrentMissionNo <= MISSION_1PAR){
-			mCurrentMissionNo = MISSION_1;
-		}
-		else if(mCurrentMissionNo > MISSION_1PAR && mCurrentMissionNo <= MISSION_2PAR){
-			mCurrentMissionNo = MISSION_2;
-		}
-		else if(mCurrentMissionNo > MISSION_2PAR && mCurrentMissionNo <= MISSION_3PAR){
-			mCurrentMissionNo = MISSION_3;
-		}
-		else if(mCurrentMissionNo > MISSION_3PAR && mCurrentMissionNo <= MISSION_4PAR){
-			mCurrentMissionNo = MISSION_4;
-		}
-		else if(mCurrentMissionNo > MISSION_4PAR && mCurrentMissionNo <= MISSION_5PAR){
-			mCurrentMissionNo = MISSION_5;
-		}
-		else if(mCurrentMissionNo > MISSION_5PAR && mCurrentMissionNo <= MISSION_6PAR){
-			mCurrentMissionNo = MISSION_6;
-		}
-		else if(mCurrentMissionNo > MISSION_6PAR && mCurrentMissionNo <= MISSION_7PAR){
-			mCurrentMissionNo = MISSION_7;
-		}
-		else if(mCurrentMissionNo > MISSION_7PAR && mCurrentMissionNo <= MISSION_8PAR){
-			mCurrentMissionNo = MISSION_8;
-		}
-		else if(mCurrentMissionNo > MISSION_8PAR && mCurrentMissionNo <= MISSION_9PAR){
-			mCurrentMissionNo = MISSION_9;
-		}
-		else if(mCurrentMissionNo > MISSION_9PAR && mCurrentMissionNo <= MISSION_10PAR){
-			mCurrentMissionNo = MISSION_10;
-		}
-		else if(mCurrentMissionNo > MISSION_10PAR && mCurrentMissionNo <= MISSION_11PAR){
-			mCurrentMissionNo = MISSION_11;
-		}
-		else if(mCurrentMissionNo > MISSION_11PAR && mCurrentMissionNo <= MISSION_12PAR){
-			mCurrentMissionNo = MISSION_12;
-			if(mKeyCountNikuman >= mKeyCountNoppo && mKeyCountNikuman >= mKeyCountYoshitaro){
-				mCurrentMissionNo = MISSION_1;
-			}
-		}
-		else if(mCurrentMissionNo > MISSION_12PAR && mCurrentMissionNo <= MISSION_13PAR){
-			mCurrentMissionNo = MISSION_13;
-			if(mKeyCountYoshitaro >= mKeyCountNikuman && mKeyCountYoshitaro >= mKeyCountNoppo){
-				mCurrentMissionNo = MISSION_1;
-			}
-		}
-		else if(mCurrentMissionNo > MISSION_13PAR && mCurrentMissionNo <= MISSION_14PAR){
-			mCurrentMissionNo = MISSION_14;
-			if(mKeyCountNoppo >= mKeyCountNikuman && mKeyCountNoppo >= mKeyCountYoshitaro){
-				mCurrentMissionNo = MISSION_1;
-			}
-		}
-		//mission_no = MISSION_11;		//デバッグ用
-		mIsInit = true;
 	}
 }
 
@@ -1253,10 +1189,84 @@ Mission::stateIdle()
 void
 Mission::stateEnterStart()
 {
+	// みっしょんを決めたり初期化したり
+	mCurrentMissionNo = rand() % 100 + 1;
+
+	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {
+		mCurrentMissionNo = MISSION_1;
+	}
+	else if (mCurrentMissionNo > MISSION_1PAR && mCurrentMissionNo <= MISSION_2PAR) {
+		mCurrentMissionNo = MISSION_2;
+	}
+	else if (mCurrentMissionNo > MISSION_2PAR && mCurrentMissionNo <= MISSION_3PAR) {
+		mCurrentMissionNo = MISSION_3;
+	}
+	else if (mCurrentMissionNo > MISSION_3PAR && mCurrentMissionNo <= MISSION_4PAR) {
+		mCurrentMissionNo = MISSION_4;
+	}
+	else if (mCurrentMissionNo > MISSION_4PAR && mCurrentMissionNo <= MISSION_5PAR) {
+		mCurrentMissionNo = MISSION_5;
+	}
+	else if (mCurrentMissionNo > MISSION_5PAR && mCurrentMissionNo <= MISSION_6PAR) {
+		mCurrentMissionNo = MISSION_6;
+	}
+	else if (mCurrentMissionNo > MISSION_6PAR && mCurrentMissionNo <= MISSION_7PAR) {
+		mCurrentMissionNo = MISSION_7;
+	}
+	else if (mCurrentMissionNo > MISSION_7PAR && mCurrentMissionNo <= MISSION_8PAR) {
+		mCurrentMissionNo = MISSION_8;
+	}
+	else if (mCurrentMissionNo > MISSION_8PAR && mCurrentMissionNo <= MISSION_9PAR) {
+		mCurrentMissionNo = MISSION_9;
+	}
+	else if (mCurrentMissionNo > MISSION_9PAR && mCurrentMissionNo <= MISSION_10PAR) {
+		mCurrentMissionNo = MISSION_10;
+	}
+	else if (mCurrentMissionNo > MISSION_10PAR && mCurrentMissionNo <= MISSION_11PAR) {
+		mCurrentMissionNo = MISSION_11;
+	}
+	else if (mCurrentMissionNo > MISSION_11PAR && mCurrentMissionNo <= MISSION_12PAR) {
+		mCurrentMissionNo = MISSION_12;
+		if (mKeyCountNikuman >= mKeyCountNoppo && mKeyCountNikuman >= mKeyCountYoshitaro) {
+			mCurrentMissionNo = MISSION_1;
+		}
+	}
+	else if (mCurrentMissionNo > MISSION_12PAR && mCurrentMissionNo <= MISSION_13PAR) {
+		mCurrentMissionNo = MISSION_13;
+		if (mKeyCountYoshitaro >= mKeyCountNikuman && mKeyCountYoshitaro >= mKeyCountNoppo) {
+			mCurrentMissionNo = MISSION_1;
+		}
+	}
+	else if (mCurrentMissionNo > MISSION_13PAR && mCurrentMissionNo <= MISSION_14PAR) {
+		mCurrentMissionNo = MISSION_14;
+		if (mKeyCountNoppo >= mKeyCountNikuman && mKeyCountNoppo >= mKeyCountYoshitaro) {
+			mCurrentMissionNo = MISSION_1;
+		}
+	}
 }
 void
 Mission::stateStart()
 {
+	//位置を計算
+	if (mFlagDraw == 7) {
+		fadeIn();
+		return;
+	}
+	if (mFlagDraw % 2 == 0) {
+		if (mMissionStartPos.y < MISSION_HASSEI_Y) {
+			mMissionStartPos.y += 5.f;
+		}
+		else {
+			mFlagDraw++;
+		}
+	}
+	else if (mFlagDraw % 2 == 1) {
+		mMissionStartPos.y -= 5.f;
+		if (mMissionStartPos.y == 0.f + 20.f * mMoveCount) {
+			mFlagDraw++;
+			mMoveCount++;
+		}
+	}
 }
 
 /**
@@ -1265,10 +1275,56 @@ Mission::stateStart()
 void
 Mission::stateEnterRun()
 {
+	UtilSound::playOnce(S_OSIRASE);
 }
 void
 Mission::stateRun()
 {
+	switch (mCurrentMissionNo)
+	{
+	case MISSION_1:
+		updateMission1();
+		break;
+	case MISSION_2:
+		updateMission2();
+		break;
+	case MISSION_3:
+		updateMission3();
+		break;
+	case MISSION_4:
+		updateMission4();
+		break;
+	case MISSION_5:
+		updateMission5();
+		break;
+	case MISSION_6:
+		updateMission6();
+		break;
+	case MISSION_7:
+		updateMission7();
+		break;
+	case MISSION_8:
+		updateMission8();
+		break;
+	case MISSION_9:
+		updateMission9();
+		break;
+	case MISSION_10:
+		updateMission10();
+		break;
+	case MISSION_11:
+		updateMission11();
+		break;
+	case MISSION_12:
+		updateMission12();
+		break;
+	case MISSION_13:
+		updateMission13();
+		break;
+	case MISSION_14:
+		updateMission14();
+		break;
+	}
 }
 
 /**
@@ -1277,6 +1333,7 @@ Mission::stateRun()
 void
 Mission::stateEnterSuccess()
 {
+	UtilSound::playOnce(S_M_CLEAR);
 }
 void
 Mission::stateSuccess()
@@ -1289,6 +1346,7 @@ Mission::stateSuccess()
 void
 Mission::stateEnterFailure()
 {
+	UtilSound::playOnce(S_M_OVER);
 }
 void
 Mission::stateFailure()

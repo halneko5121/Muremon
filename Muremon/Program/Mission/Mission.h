@@ -39,8 +39,6 @@ private:
 	void	drawTime();		//時間を表示
 	void	drawCombo();
 
-	void	missionSelect();	//みっしょんを決めたり初期化したり
-	void	updateMission();
 	void	updateMissionD();
 
 	void	updateMission1();	//『10秒以内に100回連打せよ！！』
@@ -109,7 +107,6 @@ private:
 	int						mSuccessTypingCount;	// タイピング時正解しているか判定
 	int						mFlagMissionState;		// ミッション成功・失敗
 
-	bool					mIsInit;				// 初期化したかしてないか
 	int						mKeyCount;				// キーの連打数を保存する変数
 
 	int						mKeyCountNikuman;		// にくまんの押されたキーの数をカウント

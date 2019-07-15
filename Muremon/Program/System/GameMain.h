@@ -63,14 +63,10 @@ public:
 
 private:
 	// ステート関数
-	void		 stateEnterInit();
-	void		 stateExeInit();
-
-	void		 stateEnterRun();
-	void		 stateExeRun();
-
-	void		 stateEnterEnd();
-	void		 stateExeEnd();
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Init);
+	DECLAR_STATE_FUNC2(Run);
+	DECLAR_STATE_FUNC2(End);
 
 private:
 	StateMachine<GameMain>	mState;			// ステート

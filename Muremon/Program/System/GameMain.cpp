@@ -41,6 +41,7 @@ namespace
 
 	enum State
 	{
+		cState_Idle,
 		cState_Init,
 		cState_Run,
 		cState_End,
@@ -91,10 +92,12 @@ GameMain::init(void)
 	// 最初のシーンを
 	mScene = new SceneLogo();
 
-	mState.initialize(cState_Count, cState_Init);
-	mState.registState(this, &GameMain::stateEnterInit,	&GameMain::stateExeInit,	nullptr, cState_Init);
-	mState.registState(this, &GameMain::stateEnterRun,	&GameMain::stateExeRun,		nullptr, cState_Run);
-	mState.registState(this, &GameMain::stateEnterEnd,	&GameMain::stateExeEnd,		nullptr, cState_End);
+	mState.initialize(cState_Count, cState_Idle);
+	REGIST_STATE_FUNC2(GameMain, mState, Idle,	cState_Idle);
+	REGIST_STATE_FUNC2(GameMain, mState, Init,	cState_Init);
+	REGIST_STATE_FUNC2(GameMain, mState, Run,	cState_Run);
+	REGIST_STATE_FUNC2(GameMain, mState, End,	cState_End);
+	mState.changeState(cState_Idle);
 }
 
 /**
@@ -300,6 +303,18 @@ GameMain::controlSequence(void)
 // -----------------------------------------------------------------
 
 /**
+ * @brief ステート:Idle
+ */
+void
+GameMain::stateEnterIdle()
+{
+}
+void
+GameMain::stateIdle()
+{
+}
+
+/**
  * @brief ステート:Init
  */
 void
@@ -311,7 +326,7 @@ GameMain::stateEnterInit()
 	controlSequence();
 }
 void
-GameMain::stateExeInit()
+GameMain::stateInit()
 {
 	if (GetFadeMgr()->isFadeEnd())
 	{
@@ -331,7 +346,7 @@ GameMain::stateEnterRun()
 	mScene->draw();
 }
 void
-GameMain::stateExeRun()
+GameMain::stateRun()
 {
 	mScene->update();
 
@@ -367,7 +382,7 @@ GameMain::stateEnterEnd()
 	mScene->draw();
 }
 void
-GameMain::stateExeEnd()
+GameMain::stateEnd()
 {
 	if (GetFadeMgr()->isFadeEnd())
 	{

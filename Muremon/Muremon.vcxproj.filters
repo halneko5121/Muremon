@@ -129,6 +129,9 @@
     <ClCompile Include="Library\Math\Vector.cpp">
       <Filter>Library\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Program\UI\UIRefreshGame.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -260,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="Library\Math\Vector.h">
       <Filter>Library\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\UI\UIRefreshGame.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

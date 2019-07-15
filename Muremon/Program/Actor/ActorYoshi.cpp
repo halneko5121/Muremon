@@ -30,6 +30,7 @@ namespace
 
 	const int cAtkPowerYoshitaro = 40;						// よしたろうの攻撃力
 	const int cAddGaugePowerYoshitaro = 20;					// よしたろうミッションゲージ増加量
+	const int cAddScoreYoshitaro = 20;						// よしたろうスコア加算
 
 	enum ANIME_YOSHI
 	{
@@ -80,6 +81,7 @@ ActorYoshi::ActorYoshi(Texture* texture, Vertex* vertex)
 	mSoundStartNum = S_YOSHI_HIP;
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
+	mScore = cAddScoreYoshitaro;
 	mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 

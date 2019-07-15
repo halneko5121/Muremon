@@ -42,11 +42,6 @@ const float cDispFaceIconNikumanPosY = 560.f;
 const float cDispFaceIconNoppoPosY = 585.f;
 const float cDispPushKeyCountPosX = 60.f;
 
-// キャラクターのスコア、ゲージ設定
-const int cAddScoreNikuman = 30;		// にくまんスコア加算
-const int cAddScoreYoshitaro = 20;		// よしたろうスコア加算
-const int cAddScoreNoppo = 10;			// のっぽスコア加算
-
 const int cGameOverPosX = 450;
 const int cAlphaIncrease = 15;
 const int cMaxPlayerCount = 100;		// キャラ1種類につきの総数

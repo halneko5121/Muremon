@@ -36,6 +36,7 @@ namespace
 
 	const int cAtkPowerNoppo = 60;									// のっぽの攻撃力
 	const int cAddGaugePowerNoppo = 10;								// のっぽミッションゲージ増加量
+	const int cAddScoreNoppo = 10;									// のっぽスコア加算
 
 	enum ANIME_NOPPO
 	{
@@ -81,6 +82,7 @@ ActorNoppo::ActorNoppo(Texture* texture, Vertex* vertex)
 	mSoundStartNum = S_NOPPO_KOKE;
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
+	mScore = cAddScoreNoppo;
 	mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 

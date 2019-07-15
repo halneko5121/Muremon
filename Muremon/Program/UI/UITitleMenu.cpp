@@ -90,10 +90,10 @@ UITitleMenu::UITitleMenu()
 	mVertex = new Vertex();
 
 	mState.initialize(cState_Count, cState_Idle);
-	mState.registState(this, &UITitleMenu::stateEnterIdle,		 &UITitleMenu::stateExeIdle,		nullptr, cState_Idle);
-	mState.registState(this, &UITitleMenu::stateEnterTop,		 &UITitleMenu::stateExeTop,			nullptr, cState_Top);
-	mState.registState(this, &UITitleMenu::stateEnterMenuSelect, &UITitleMenu::stateExeMenuSelect,	nullptr, cState_MenuSelect);
-	mState.registState(this, &UITitleMenu::stateEnterGameSelect, &UITitleMenu::stateExeGameSelect,	nullptr, cState_GameSelect);
+	REGIST_STATE_FUNC2(UITitleMenu, mState, Idle,		cState_Idle);
+	REGIST_STATE_FUNC2(UITitleMenu, mState, Top,		cState_Top);
+	REGIST_STATE_FUNC2(UITitleMenu, mState, MenuSelect,	cState_MenuSelect);
+	REGIST_STATE_FUNC2(UITitleMenu, mState, GameSelect,	cState_GameSelect);
 	mState.changeState(cState_Idle);
 }
 
@@ -293,7 +293,7 @@ UITitleMenu::stateEnterIdle()
 {
 }
 void
-UITitleMenu::stateExeIdle()
+UITitleMenu::stateIdle()
 {
 }
 
@@ -305,7 +305,7 @@ UITitleMenu::stateEnterTop()
 {
 }
 void
-UITitleMenu::stateExeTop()
+UITitleMenu::stateTop()
 {
 	if (UtilInput::isKeyPushed(DIK_DOWN))
 	{
@@ -344,7 +344,7 @@ UITitleMenu::stateEnterMenuSelect()
 {
 }
 void
-UITitleMenu::stateExeMenuSelect()
+UITitleMenu::stateMenuSelect()
 {
 	if (UtilInput::isKeyPushed(DIK_DOWN) ||
 		UtilInput::isKeyPushed(DIK_UP))
@@ -394,7 +394,7 @@ UITitleMenu::stateEnterGameSelect()
 {
 }
 void
-UITitleMenu::stateExeGameSelect()
+UITitleMenu::stateGameSelect()
 {
 	if (UtilInput::isKeyPushed(DIK_DOWN) ||
 		UtilInput::isKeyPushed(DIK_UP))

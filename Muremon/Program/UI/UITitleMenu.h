@@ -34,17 +34,10 @@ public:
 
 private:
 	// ステート関数
-	void	stateEnterIdle();
-	void	stateExeIdle();
-
-	void	stateEnterTop();
-	void	stateExeTop();
-
-	void	stateEnterMenuSelect();
-	void	stateExeMenuSelect();
-
-	void	stateEnterGameSelect();
-	void	stateExeGameSelect();
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Top);
+	DECLAR_STATE_FUNC2(MenuSelect);
+	DECLAR_STATE_FUNC2(GameSelect);
 
 private:
 	StateMachine<UITitleMenu>	mState;					// ステート

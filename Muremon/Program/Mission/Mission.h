@@ -84,34 +84,33 @@ private:
 
 private:
 	StateMachine<Mission>	mState;	// ステート
+	Texture*				mTexture;
+	Vertex*					mVertex;
 
-	Texture*	mTexture;
-	Vertex*		mVertex;
+	Vector2f				mMissionStartPos;	//みっしょん開始の位置
 
-	Vector2f	mMissionStartPos;	//みっしょん開始の位置
+	int						mAlphaCount;	//
+	int						mAlpha;			//
+	int						mAlphaPushZ;	//
 
-	int mAlphaCount;	//
-	int mAlpha;			//
-	int mAlphaPushZ;	//
+	int						mFlagZ;			//
+	int						mFlagDraw;		//
+	bool					mIsSound;		//
+	bool					mIsSound2;		//
 
-	int mFlagZ;			//
-	int mFlagDraw;		//
-	bool mIsSound;		//
-	bool mIsSound2;		//
+	int						mMoveCount;		//
+	int						mCurrentMissionNo;		// どのミッションが選択されたかを記憶
+	int						mMissionState;			// ミッションが今どの状況か
 
-	int mMoveCount;		//
-	int mCurrentMissionNo;		// どのミッションが選択されたかを記憶
-	int mMissionState;			// ミッションが今どの状況か
+	int						mTime;					// 時間
+	int						mFlagTimeCount;			// タイムカウントのフラグ
+	int						mSuccessTypingCount;	// タイピング時正解しているか判定
+	int						mFlagMissionState;		// ミッション成功・失敗
 
-	int mTime;					// 時間
-	int mFlagTimeCount;			// タイムカウントのフラグ
-	int mSuccessTypingCount;	// タイピング時正解しているか判定
-	int mFlagMissionState;		// ミッション成功・失敗
+	bool					mIsInit;				// 初期化したかしてないか
+	int						mKeyCount;				// キーの連打数を保存する変数
 
-	bool mIsInit;				// 初期化したかしてないか
-	int mKeyCount;				// キーの連打数を保存する変数
-
-	int mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
-	int mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント
-	int mKeyCountNoppo;			// のっぽの押されたキーの数をカウント
+	int						mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
+	int						mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント
+	int						mKeyCountNoppo;			// のっぽの押されたキーの数をカウント
 };

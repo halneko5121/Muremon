@@ -42,6 +42,18 @@ public:
 	 */
 	GameScore*				getGameScore() const;
 
+	/**
+	 * @brief	各種キー入力数の情報
+	 */
+	void					setWeakAtkCount(int count);
+	int						getWeakAtkCount() const;
+
+	void					setMediumAtkCount(int count);
+	int						getMediumAtkCount() const;
+
+	void					setStrongAtkCount(int count);
+	int						getStrongAtkCount() const;
+
 	// ゲームモード
 	void					setGameModeRefresh();
 	void					setGameModeNormal();
@@ -49,10 +61,12 @@ public:
 	bool					isGameModeNormal() const;
 
 private:
-	static GameInfoMgr*		mInstance;		// インスタンス
-	GameScore*				mScore;			// スコア
-	int						mGameMode;		// モード
-
+	static GameInfoMgr*		mInstance;			// インスタンス
+	GameScore*				mScore;				// スコア
+	int						mGameMode;			// モード
+	int						mWeakAtkCount;		// 弱攻撃（にくまん）を行った回数
+	int						mMediumAtkCount;	// 中攻撃（吉たろう）を行った回数
+	int						mStrongAtkCount;	// 強攻撃（のっぽ）を行った回数
 };
 
 static GameInfoMgr* GetGameInfoMgr() { return GameInfoMgr::getInstance(); }

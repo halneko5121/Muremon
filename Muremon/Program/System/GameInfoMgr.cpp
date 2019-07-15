@@ -27,6 +27,9 @@ GameInfoMgr* GameInfoMgr::mInstance = nullptr;
 GameInfoMgr::GameInfoMgr()
 	: mScore(nullptr)
 	, mGameMode(cGameMode_Refresh)
+	, mWeakAtkCount(0)
+	, mMediumAtkCount(0)
+	, mStrongAtkCount(0)
 {
 	mScore = new GameScore();
 }
@@ -73,6 +76,60 @@ GameScore*
 GameInfoMgr::getGameScore() const
 {
 	return mScore;
+}
+
+/**
+ * @brief	弱攻撃（にくまん）を行った回数を設定
+ */
+void
+GameInfoMgr::setWeakAtkCount(int count)
+{
+	mWeakAtkCount = count;
+}
+
+/**
+ * @brief	弱攻撃（にくまん）を行った回数を取得
+ */
+int
+GameInfoMgr::getWeakAtkCount() const
+{
+	return mWeakAtkCount;
+}
+
+/**
+ * @brief	中攻撃（吉たろう）を行った回数を設定
+ */
+void
+GameInfoMgr::setMediumAtkCount(int count)
+{
+	mMediumAtkCount = count;
+}
+
+/**
+ * @brief	弱攻撃（にくまん）を行った回数を取得
+ */
+int
+GameInfoMgr::getMediumAtkCount() const
+{
+	return mMediumAtkCount;
+}
+
+/**
+ * @brief	強攻撃（のっぽ）を行った回数を設定
+ */
+void
+GameInfoMgr::setStrongAtkCount(int count)
+{
+	mStrongAtkCount = count;
+}
+
+/**
+ * @brief	強攻撃（のっぽ）を行った回数を取得
+ */
+int
+GameInfoMgr::getStrongAtkCount() const
+{
+	return mStrongAtkCount;
 }
 
 /**

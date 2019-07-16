@@ -56,7 +56,6 @@ private:
 
 	void	updateMissionD();
 
-	void	updateMission1();	//『10秒以内に100回連打せよ！！』
 	void	updateMission2();	//『10秒間でちょうど50回連打せよ！！』
 	void	updateMission3();	//『10秒間でちょうど100回連打せよ！！』
 	void	updateMission4();	//『「NIKUMANTOTUGEKI」と入力せよ！！』
@@ -71,7 +70,6 @@ private:
 	void	updateMission13();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void	updateMission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	void	updateMission1D();	//『10秒以内に100回連打せよ！！』
 	void	updateMission2D();	//『10秒間でちょうど50回連打せよ！！』
 	void	updateMission3D();	//『10秒間でちょうど100回連打せよ！！』
 	void	updateMission4D();	//『「NIKUMANTOTUGEKI」と入力せよ！！』

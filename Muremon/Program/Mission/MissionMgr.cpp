@@ -253,7 +253,8 @@ void MissionMgr::draw()
 		}
 	}
 
-	if(mState.isEqual(cState_Run)){
+	if(mState.isEqual(cState_Run))
+	{
 		updateMissionD();
 	}
 
@@ -298,28 +299,6 @@ void
 MissionMgr::resetBadStatusAtkLv()
 {
 	mNegativeAtkLv = 0;
-}
-
-void MissionMgr::updateMission1()	//Åw10ïbà»ì‡Ç…100âÒòAë≈ÇπÇÊÅIÅIÅx
-{
-	if (mTime <= 0)
-	{
-		if (mKeyCount >= 100)
-		{
-			mState.changeState(cState_Success);
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-		}
-		return;
-	}
-
-	if (UtilInput::isAnyKeyPushed())
-	{
-		mKeyCount++;
-	}
-	mTime--;
 }
 
 void MissionMgr::updateMission2()	//Åw10ïbä‘Ç≈ÇøÇÂÇ§Ç«50âÒòAë≈ÇπÇÊÅIÅIÅx
@@ -1002,57 +981,7 @@ void MissionMgr::updateMission14()	//Åw10ïbà»ì‡Ç…ÅuÇÃÇ¡Ç€ÅvÇÃòAë≈êîÇàÍî‘çÇÇ≠ÇµÇ
 
 void MissionMgr::updateMissionD()
 {
-	switch(mCurrentMissionNo)
-	{
-	case MISSION_1:
-		updateMission1D();
-		break;
-	case MISSION_2:
-		updateMission2D();
-		break;
-	case MISSION_3:
-		updateMission3D();
-		break;
-	case MISSION_4:
-		updateMission4D();
-		break;
-	case MISSION_5:
-		updateMission5D();
-		break;
-	case MISSION_6:
-		updateMission6D();
-		break;
-	case MISSION_7:
-		updateMission7D();
-		break;
-	case MISSION_8:
-		updateMission8D();
-		break;
-	case MISSION_9:
-		updateMission9D();
-		break;
-	case MISSION_10:
-		updateMission10D();
-		break;
-	case MISSION_11:
-		updateMission11D();
-		break;
-	case MISSION_12:
-		updateMission12D();
-		break;
-	case MISSION_13:
-		updateMission13D();
-		break;
-	case MISSION_14:
-		updateMission14D();
-		break;
-	}
-}
-
-void MissionMgr::updateMission1D()	//Åw10ïbà»ì‡Ç…100âÒòAë≈ÇπÇÊÅIÅIÅx
-{
-	drawTime();
-	drawCombo();
+	mMission[mCurrentMissionNo]->draw();
 }
 
 void MissionMgr::updateMission2D()	//Åw10ïbä‘Ç≈ÇøÇÂÇ§Ç«50âÒòAë≈ÇπÇÊÅIÅIÅx
@@ -1258,7 +1187,7 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// Ç›Ç¡ÇµÇÂÇÒÇåàÇﬂÇΩÇËèâä˙âªÇµÇΩÇË
-	mCurrentMissionNo = rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission1; // rand() % 100 + 1;
 
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {
 		mCurrentMissionNo = MISSION_1;
@@ -1372,56 +1301,22 @@ void
 MissionMgr::stateEnterRun()
 {
 	UtilSound::playOnce(S_OSIRASE);
+	mMission[mCurrentMissionNo]->run();
 }
 void
 MissionMgr::stateRun()
 {
-//	mMissionBase[mCurrentMissionNo]->update();
+	mMission[mCurrentMissionNo]->update();
 
-	switch (mCurrentMissionNo)
+	if (mMission[mCurrentMissionNo]->isSuccess())
 	{
-	case MISSION_1:
-		updateMission1();
-		break;
-	case MISSION_2:
-		updateMission2();
-		break;
-	case MISSION_3:
-		updateMission3();
-		break;
-	case MISSION_4:
-		updateMission4();
-		break;
-	case MISSION_5:
-		updateMission5();
-		break;
-	case MISSION_6:
-		updateMission6();
-		break;
-	case MISSION_7:
-		updateMission7();
-		break;
-	case MISSION_8:
-		updateMission8();
-		break;
-	case MISSION_9:
-		updateMission9();
-		break;
-	case MISSION_10:
-		updateMission10();
-		break;
-	case MISSION_11:
-		updateMission11();
-		break;
-	case MISSION_12:
-		updateMission12();
-		break;
-	case MISSION_13:
-		updateMission13();
-		break;
-	case MISSION_14:
-		updateMission14();
-		break;
+		mState.changeState(cState_Success);
+		return;
+	}
+	if (mMission[mCurrentMissionNo]->isFailure())
+	{
+		mState.changeState(cState_Failure);
+		return;
 	}
 }
 

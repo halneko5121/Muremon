@@ -11,7 +11,7 @@
 #include "Program/Scene/SceneBase.h"
 #include "Program/Actor/ActorMgr.h"
 
-class Mission;
+class MissionMgr;
 class ActorBoss;
 class ActorNikuman;
 class ActorNoppo;
@@ -59,7 +59,7 @@ private:
 private:
 	StateMachine<SceneGameNormal>	mState;	// ステート
 
-	Mission*			mMission;
+	MissionMgr*			mMission;
 	ActorBoss*			mBoss;
 	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
 	UINormalGame*		mUINormalGame;

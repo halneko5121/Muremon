@@ -77,7 +77,7 @@ namespace
 	};
 }
 
-Mission::Mission(Texture* texture, Vertex* vertex)
+MissionMgr::MissionMgr(Texture* texture, Vertex* vertex)
 	: mTexture(texture)
 	, mVertex(vertex)
 	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
@@ -98,23 +98,23 @@ Mission::Mission(Texture* texture, Vertex* vertex)
 	, mKeyCountNoppo(0)
 {
 	mState.initialize(cState_Count, cState_Idle);
-	REGIST_STATE_FUNC2(Mission, mState, Idle,			cState_Idle);
-	REGIST_STATE_FUNC2(Mission, mState, StartShake,		cState_StartShake);
-	REGIST_STATE_FUNC2(Mission, mState, StartFadeOut,	cState_StartFadeOut);
-	REGIST_STATE_FUNC2(Mission, mState, Run,			cState_Run);
-	REGIST_STATE_FUNC2(Mission, mState, Success,		cState_Success);
-	REGIST_STATE_FUNC2(Mission, mState, Failure,		cState_Failure);
-	REGIST_STATE_FUNC2(Mission, mState, Ougi,			cState_Ougi);
-	REGIST_STATE_FUNC2(Mission, mState, BadStatus,		cState_BadStatus);
-	REGIST_STATE_FUNC2(Mission, mState, End,			cState_End);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Idle,			cState_Idle);
+	REGIST_STATE_FUNC2(MissionMgr, mState, StartShake,		cState_StartShake);
+	REGIST_STATE_FUNC2(MissionMgr, mState, StartFadeOut,	cState_StartFadeOut);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Run,			cState_Run);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Success,		cState_Success);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Failure,		cState_Failure);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Ougi,			cState_Ougi);
+	REGIST_STATE_FUNC2(MissionMgr, mState, BadStatus,		cState_BadStatus);
+	REGIST_STATE_FUNC2(MissionMgr, mState, End,			cState_End);
 	mState.changeState(cState_Idle);
 }
 
-Mission::~Mission()
+MissionMgr::~MissionMgr()
 {
 }
 
-void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
+void MissionMgr::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 {
 	mCurrentMissionNo	= 0;
 	mTime		= TEN_SECOND;
@@ -142,12 +142,12 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mState.changeState(cState_StartShake);
 }
 
-void Mission::update()
+void MissionMgr::update()
 {
 	mState.executeState();
 }
 
-void Mission::draw()
+void MissionMgr::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 
@@ -181,12 +181,12 @@ void Mission::draw()
  * @ brief ミッションステートを取得
  */
 int
-Mission::getMissionState() const
+MissionMgr::getMissionState() const
 {
 	return mMissionState;
 }
 
-void Mission::updateMission1()	//『10秒以内に100回連打せよ！！』
+void MissionMgr::updateMission1()	//『10秒以内に100回連打せよ！！』
 {
 	if (mTime <= 0)
 	{
@@ -210,7 +210,7 @@ void Mission::updateMission1()	//『10秒以内に100回連打せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission2()	//『10秒間でちょうど50回連打せよ！！』
+void MissionMgr::updateMission2()	//『10秒間でちょうど50回連打せよ！！』
 {
 	if (mTime <= 0)
 	{
@@ -234,7 +234,7 @@ void Mission::updateMission2()	//『10秒間でちょうど50回連打せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission3()	//『10秒間でちょうど100回連打せよ！！』
+void MissionMgr::updateMission3()	//『10秒間でちょうど100回連打せよ！！』
 {
 	if(mTime <= 0)
 	{
@@ -258,7 +258,7 @@ void Mission::updateMission3()	//『10秒間でちょうど100回連打せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
+void MissionMgr::updateMission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	if(mTime <= 0)
 	{
@@ -339,7 +339,7 @@ void Mission::updateMission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
+void MissionMgr::updateMission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
@@ -435,7 +435,7 @@ void Mission::updateMission5()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
+void MissionMgr::updateMission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
@@ -512,7 +512,7 @@ void Mission::updateMission6()	//『「YOSITAROHIPATACK」と入力せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
+void MissionMgr::updateMission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
@@ -595,7 +595,7 @@ void Mission::updateMission7()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
+void MissionMgr::updateMission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
@@ -666,7 +666,7 @@ void Mission::updateMission8()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
+void MissionMgr::updateMission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	if (mTime <= 0)
 	{
@@ -752,7 +752,7 @@ void Mission::updateMission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 	mTime--;
 }
 
-void Mission::updateMission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void MissionMgr::updateMission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0){
 		mTime = 0;
@@ -791,7 +791,7 @@ void Mission::updateMission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	}
 }
 
-void Mission::updateMission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void MissionMgr::updateMission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0){
 		mTime = 0;
@@ -837,7 +837,7 @@ void Mission::updateMission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	}
 }
 
-void Mission::updateMission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
+void MissionMgr::updateMission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 {
 	if (mTime <= 0)
 	{
@@ -861,7 +861,7 @@ void Mission::updateMission12()	//『10秒以内に「にくまん」の連打数を一番高くしろ
 	mTime--;
 }
 
-void Mission::updateMission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
+void MissionMgr::updateMission13()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 {
 	if (mTime <= 0)
 	{
@@ -885,7 +885,7 @@ void Mission::updateMission13()	//『10秒以内に「よしたろう」の連打数を一番高くし
 	mTime--;
 }
 
-void Mission::updateMission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
+void MissionMgr::updateMission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 {
 	if(mTime <= 0)
 	{
@@ -909,7 +909,7 @@ void Mission::updateMission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！
 	mTime--;
 }
 
-void Mission::updateMissionD()
+void MissionMgr::updateMissionD()
 {
 	switch(mCurrentMissionNo)
 	{
@@ -958,25 +958,25 @@ void Mission::updateMissionD()
 	}
 }
 
-void Mission::updateMission1D()	//『10秒以内に100回連打せよ！！』
+void MissionMgr::updateMission1D()	//『10秒以内に100回連打せよ！！』
 {
 	drawTime();
 	drawCombo();
 }
 
-void Mission::updateMission2D()	//『10秒間でちょうど50回連打せよ！！』
+void MissionMgr::updateMission2D()	//『10秒間でちょうど50回連打せよ！！』
 {
 	drawTime();
 	drawCombo();
 }
 
-void Mission::updateMission3D()	//『10秒間でちょうど100回連打せよ！！』
+void MissionMgr::updateMission3D()	//『10秒間でちょうど100回連打せよ！！』
 {
 	drawTime();
 	drawCombo();
 }
 
-void Mission::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
+void MissionMgr::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	drawTime();
 
@@ -988,7 +988,7 @@ void Mission::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 	}
 }
 
-void Mission::updateMission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
+void MissionMgr::updateMission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 {
 	drawTime();
 
@@ -1000,7 +1000,7 @@ void Mission::updateMission5D()	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 	}
 }
 
-void Mission::updateMission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
+void MissionMgr::updateMission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
 {
 	drawTime();
 
@@ -1012,7 +1012,7 @@ void Mission::updateMission6D()	//『「YOSITAROHIPATACK」と入力せよ！！』
 	}
 }
 
-void Mission::updateMission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
+void MissionMgr::updateMission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 {
 	drawTime();
 
@@ -1024,7 +1024,7 @@ void Mission::updateMission7D()	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 	}
 }
 
-void Mission::updateMission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
+void MissionMgr::updateMission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 {
 	drawTime();
 
@@ -1036,7 +1036,7 @@ void Mission::updateMission8D()	//『「NOPPOKOKEPPETI」と入力せよ！！』
 	}
 }
 
-void Mission::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
+void MissionMgr::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 {
 	drawTime();
 
@@ -1048,7 +1048,7 @@ void Mission::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
 	}
 }
 
-void Mission::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void MissionMgr::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0)
 	{
@@ -1060,7 +1060,7 @@ void Mission::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	}
 }
 
-void Mission::updateMission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
+void MissionMgr::updateMission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0)
 	{
@@ -1072,22 +1072,22 @@ void Mission::updateMission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	}
 }
 
-void Mission::updateMission12D()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
+void MissionMgr::updateMission12D()	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 {
 	drawTime();
 }
 
-void Mission::updateMission13D()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
+void MissionMgr::updateMission13D()	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 {
 	drawTime();
 }
 
-void Mission::updateMission14D()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
+void MissionMgr::updateMission14D()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 {
 	drawTime();
 }
 
-void Mission::drawTime()
+void MissionMgr::drawTime()
 {
 	// タイム
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
@@ -1105,7 +1105,7 @@ void Mission::drawTime()
 	}
 }
 
-void Mission::drawCombo()
+void MissionMgr::drawCombo()
 {
 	// コンボ
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
@@ -1127,11 +1127,11 @@ void Mission::drawCombo()
  * @brief ステート:Idle
  */
 void
-Mission::stateEnterIdle()
+MissionMgr::stateEnterIdle()
 {
 }
 void
-Mission::stateIdle()
+MissionMgr::stateIdle()
 {
 }
 
@@ -1139,7 +1139,7 @@ Mission::stateIdle()
  * @brief ステート:StartShake
  */
 void
-Mission::stateEnterStartShake()
+MissionMgr::stateEnterStartShake()
 {
 	UtilSound::playOnce(S_OSIRASE);
 	mMoveCount = 0;
@@ -1200,7 +1200,7 @@ Mission::stateEnterStartShake()
 	}
 }
 void
-Mission::stateStartShake()
+MissionMgr::stateStartShake()
 {
 	if (mFlagDraw % 2 == 0) 
 	{
@@ -1234,11 +1234,11 @@ Mission::stateStartShake()
  * @brief ステート:StartFadeOut
  */
 void
-Mission::stateEnterStartFadeOut()
+MissionMgr::stateEnterStartFadeOut()
 {
 }
 void
-Mission::stateStartFadeOut()
+MissionMgr::stateStartFadeOut()
 {
 	mAlpha += MISSION_ALPHA_INCREASE;
 	if (mAlpha > MISSION_ALPHA_MAX)
@@ -1257,12 +1257,12 @@ Mission::stateStartFadeOut()
  * @brief ステート:Run
  */
 void
-Mission::stateEnterRun()
+MissionMgr::stateEnterRun()
 {
 	UtilSound::playOnce(S_OSIRASE);
 }
 void
-Mission::stateRun()
+MissionMgr::stateRun()
 {
 	switch (mCurrentMissionNo)
 	{
@@ -1315,12 +1315,12 @@ Mission::stateRun()
  * @brief ステート:Success
  */
 void
-Mission::stateEnterSuccess()
+MissionMgr::stateEnterSuccess()
 {
 	UtilSound::playOnce(S_M_CLEAR);
 }
 void
-Mission::stateSuccess()
+MissionMgr::stateSuccess()
 {
 	mAlpha -= MISSION_ALPHA_INCREASE;
 	if (mAlpha < 0) { mAlpha = 0; }
@@ -1337,12 +1337,12 @@ Mission::stateSuccess()
  * @brief ステート:Failure
  */
 void
-Mission::stateEnterFailure()
+MissionMgr::stateEnterFailure()
 {
 	UtilSound::playOnce(S_M_OVER);
 }
 void
-Mission::stateFailure()
+MissionMgr::stateFailure()
 {
 	mAlpha -= MISSION_ALPHA_INCREASE;
 	if (mAlpha < 0) { mAlpha = 0; }
@@ -1359,11 +1359,11 @@ Mission::stateFailure()
  * @brief ステート:Ougi
  */
 void
-Mission::stateEnterOugi()
+MissionMgr::stateEnterOugi()
 {
 }
 void
-Mission::stateOugi()
+MissionMgr::stateOugi()
 {
 }
 
@@ -1371,11 +1371,11 @@ Mission::stateOugi()
  * @brief ステート:BadStatus
  */
 void
-Mission::stateEnterBadStatus()
+MissionMgr::stateEnterBadStatus()
 {
 }
 void
-Mission::stateBadStatus()
+MissionMgr::stateBadStatus()
 {
 }
 
@@ -1383,10 +1383,10 @@ Mission::stateBadStatus()
  * @brief ステート:End
  */
 void
-Mission::stateEnterEnd()
+MissionMgr::stateEnterEnd()
 {
 }
 void
-Mission::stateEnd()
+MissionMgr::stateEnd()
 {
 }

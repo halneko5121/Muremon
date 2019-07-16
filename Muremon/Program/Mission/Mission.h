@@ -16,11 +16,11 @@ enum MISSION_STATE
 	MISSION_END,
 };
 
-class Mission
+class MissionMgr
 {
 public:
-	Mission(Texture* texture, Vertex* vertex);
-	~Mission();
+	MissionMgr(Texture* texture, Vertex* vertex);
+	~MissionMgr();
 
 	int		getCountKeyNikuman() { return mKeyCountNikuman; };
 	int		getCountKeyYoshitaro() { return mKeyCountYoshitaro; };
@@ -81,7 +81,7 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<Mission>	mState;	// ステート
+	StateMachine<MissionMgr>	mState;	// ステート
 	Texture*				mTexture;
 	Vertex*					mVertex;
 

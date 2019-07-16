@@ -57,7 +57,7 @@ Mission1::runImple()
  * @brief	çXêV
  */
 void
-Mission1::update()
+Mission1::updateImple()
 {
 	mState.executeState();
 }
@@ -117,24 +117,24 @@ Mission1::stateEnterRun()
 void
 Mission1::stateRun()
 {
-	if (mTime <= 0)
+	if (isTimeOver())
 	{
 		if (mKeyCount >= 100)
 		{
 			mState.changeState(cState_Success);
+			return;
 		}
 		else
 		{
 			mState.changeState(cState_Failure);
+			return;
 		}
-		return;
 	}
 
 	if (UtilInput::isAnyKeyPushed())
 	{
 		mKeyCount++;
 	}
-	mTime--;
 }
 
 /**

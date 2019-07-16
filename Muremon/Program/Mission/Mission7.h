@@ -20,7 +20,7 @@ public:
 	virtual ~Mission7();
 
 	void					runImple() override;
-	void					update() override;
+	void					updateImple() override;
 	void					draw() override;
 	bool					isSuccess() const override;
 	bool					isFailure() const override;

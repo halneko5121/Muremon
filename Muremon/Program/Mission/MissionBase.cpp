@@ -49,6 +49,26 @@ MissionBase::run()
 	runImple();
 }
 
+/**
+ * @brief	XV
+ */
+void
+MissionBase::update()
+{
+	updateImple();
+	mTime--;
+	if (mTime <= 0) mTime = 0;
+}
+
+/**
+ * @brief	ŠÔØ‚ê‚©H
+ */
+bool
+MissionBase::isTimeOver() const
+{
+	return (mTime == 0);
+}
+
 void 
 MissionBase::drawTime()
 {

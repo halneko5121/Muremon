@@ -55,7 +55,7 @@ Mission7::runImple()
  * @brief	XV
  */
 void
-Mission7::update()
+Mission7::updateImple()
 {
 	mState.executeState();
 }

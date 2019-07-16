@@ -8,6 +8,8 @@
 
 #include "Mission3.h"
 
+#include "Program/Util/UtilInput.h"
+
 namespace
 {
 	enum State
@@ -66,6 +68,8 @@ Mission3::updateImple()
 void
 Mission3::draw()
 {
+	drawTime();
+	drawCombo();
 }
 
 /**
@@ -74,7 +78,7 @@ Mission3::draw()
 bool
 Mission3::isSuccess() const
 {
-	return false;
+	return (mState.isEqual(cState_Success));
 }
 
 /**
@@ -83,7 +87,7 @@ Mission3::isSuccess() const
 bool
 Mission3::isFailure() const
 {
-	return (!isSuccess());
+	return (mState.isEqual(cState_Failure));
 }
 
 
@@ -113,6 +117,24 @@ Mission3::stateEnterRun()
 void
 Mission3::stateRun()
 {
+	if (isTimeOver())
+	{
+		if (mKeyCount == 100)
+		{
+			mState.changeState(cState_Success);
+			return;
+		}
+		else
+		{
+			mState.changeState(cState_Failure);
+			return;
+		}
+	}
+
+	if (UtilInput::isAnyKeyPushed())
+	{
+		mKeyCount++;
+	}
 }
 
 /**

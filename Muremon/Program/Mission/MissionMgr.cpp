@@ -301,28 +301,6 @@ MissionMgr::resetBadStatusAtkLv()
 	mNegativeAtkLv = 0;
 }
 
-void MissionMgr::updateMission3()	//『10秒間でちょうど100回連打せよ！！』
-{
-	if(mTime <= 0)
-	{
-		if (mKeyCount == 100)
-		{
-			mState.changeState(cState_Success);
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-		}
-		return;
-	}
-	
-	if (UtilInput::isAnyKeyPushed())
-	{
-		mKeyCount++;
-	}
-	mTime--;
-}
-
 void MissionMgr::updateMission4()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	if(mTime <= 0)
@@ -962,12 +940,6 @@ void MissionMgr::updateMissionD()
 	mMission[mCurrentMissionNo]->draw();
 }
 
-void MissionMgr::updateMission3D()	//『10秒間でちょうど100回連打せよ！！』
-{
-	drawTime();
-	drawCombo();
-}
-
 void MissionMgr::updateMission4D()	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 {
 	drawTime();
@@ -1159,7 +1131,7 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// みっしょんを決めたり初期化したり
-	mCurrentMissionNo = cMissionId_Mission2; // rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission3; // rand() % 100 + 1;
 
 	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {

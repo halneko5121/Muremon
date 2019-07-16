@@ -1,4 +1,11 @@
 #pragma once
+/******************************************************************
+ *	@file	MissionMgr.h
+ *	@brief	ミッション管理
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
 #include "Library/StateMachine.h"
 #include "Library/Graphics/Texture.h"

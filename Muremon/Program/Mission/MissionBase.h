@@ -25,6 +25,7 @@ public:
 	virtual bool	isSuccess() const = 0;
 	virtual bool	isFailure() const = 0;
 
+protected:
 	void			drawTime();
 	void			drawCombo();
 

@@ -56,7 +56,6 @@ private:
 
 	void	updateMissionD();
 
-	void	updateMission7();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 	void	updateMission8();	//『「NOPPOKOKEPPETI」と入力せよ！！』
 	void	updateMission9();	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
 	void	updateMission10();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
@@ -65,7 +64,6 @@ private:
 	void	updateMission13();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void	updateMission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	void	updateMission7D();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
 	void	updateMission8D();	//『「NOPPOKOKEPPETI」と入力せよ！！』
 	void	updateMission9D();	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
 	void	updateMission10D();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』

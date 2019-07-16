@@ -1,12 +1,19 @@
 /******************************************************************
  *	@file	Mission7.cpp
- *	@brief	ミッション7
+ *	@brief	ミッション7（「YOSITAROHUSENSHOOT」と入力せよ！！）
  *
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
 
 #include "Mission7.h"
+
+#include "Library/Graphics/Vertex.h"
+#include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilGraphics.h"
+#include "Program/DefineGame.h"
+
+#define MISSION7_FONT_NUM	(19)
 
 namespace
 {
@@ -66,6 +73,14 @@ Mission7::updateImple()
 void
 Mission7::draw()
 {
+	drawTime();
+
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+
+	for (int i = 1;i < mSuccessTypingCount;i++)
+	{
+		mVertex->drawF(Vector2f(108.0f + 28.0f * (i - 1), 278.0f), R_F_NIKUMAN);
+	}
 }
 
 /**
@@ -74,7 +89,7 @@ Mission7::draw()
 bool
 Mission7::isSuccess() const
 {
-	return false;
+	return (mState.isEqual(cState_Success));
 }
 
 /**
@@ -83,7 +98,7 @@ Mission7::isSuccess() const
 bool
 Mission7::isFailure() const
 {
-	return (!isSuccess());
+	return (mState.isEqual(cState_Failure));
 }
 
 
@@ -113,6 +128,83 @@ Mission7::stateEnterRun()
 void
 Mission7::stateRun()
 {
+	if (isTimeOver())
+	{
+		if (mSuccessTypingCount == MISSION7_FONT_NUM)
+		{
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mState.changeState(cState_Failure);
+		}
+		return;
+	}
+
+	if (mSuccessTypingCount < MISSION7_FONT_NUM)
+	{
+		switch (mSuccessTypingCount)
+		{
+		case 1:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_Y)) mSuccessTypingCount++;
+			break;
+		case 2:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
+			break;
+		case 3:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
+			break;
+		case 4:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
+			break;
+		case 5:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
+			break;
+		case 6:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
+			break;
+		case 7:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) mSuccessTypingCount++;
+			break;
+		case 8:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
+			break;
+		case 9:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) mSuccessTypingCount++;
+			break;
+		case 10:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
+			break;
+
+		case 11:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
+			break;
+		case 12:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_E)) mSuccessTypingCount++;
+			break;
+		case 13:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
+			break;
+		case 14:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
+			break;
+		case 15:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_H)) mSuccessTypingCount++;
+			break;
+		case 16:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
+			break;
+		case 17:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
+			break;
+		case 18:
+			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
+			break;
+		default:
+			break;
+		}
+	}
+
 }
 
 /**

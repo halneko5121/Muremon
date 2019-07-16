@@ -62,7 +62,6 @@ SceneGameNormal::SceneGameNormal()
 	, mIsPose(false)
 	, mGameStateFontAlpha(0)
 	, mGameStateRectNum(0)
-	, mMissionStateKeep(0)
 	, mIsInit(false)
 	, mMissionGauge(0)
 	, mNikumanCurrentIndex(0)
@@ -482,28 +481,11 @@ void
 SceneGameNormal::stateMission()
 {
 	mMission->update();
-	mMissionStateKeep = mMission->getMissionState();
 
-	if (mMissionStateKeep < MISSION_OUGI) {
-		if (UtilBattle::getWeakAtkCount() != mMission->getCountKeyNikuman())
-		{
-			UtilBattle::setWeakAtkCount(mMission->getCountKeyNikuman());
-		}
-		if (UtilBattle::getMediumAtkCount() != mMission->getCountKeyYoshitaro())
-		{
-			UtilBattle::setMediumAtkCount(mMission->getCountKeyYoshitaro());
-		}
-		if (UtilBattle::getStrongAtkCount() != mMission->getCountKeyNoppo())
-		{
-			UtilBattle::setStrongAtkCount(mMission->getCountKeyNoppo());
-		}
-	}
-	else if (mMissionStateKeep == MISSION_OUGI) {
-		mState.changeState(cState_MissionSeccess);
-		return;
-	}
-	else if (mMissionStateKeep == MISSION_NEGATIVE) {
-		mState.changeState(cState_MissionFailure);
+	if (mMission->isEnd())
+	{
+		mMissionGauge = 0;
+		mState.changeState(cState_Game);
 		return;
 	}
 }
@@ -518,15 +500,6 @@ SceneGameNormal::stateEnterMissionSeccess()
 void
 SceneGameNormal::stateMissionSeccess()
 {
-	mMission->update();
-	mMissionStateKeep = mMission->getMissionState();
-
-	if (mMissionStateKeep == MISSION_END)
-	{
-		mMissionGauge = 0;
-		mState.changeState(cState_Game);
-		return;
-	}
 }
 
 /**
@@ -539,15 +512,6 @@ SceneGameNormal::stateEnterMissionFailure()
 void
 SceneGameNormal::stateMissionFailure()
 {
-	mMission->update();
-	mMissionStateKeep = mMission->getMissionState();
-
-	if (mMissionStateKeep == MISSION_END)
-	{
-		mMissionGauge = 0;
-		mState.changeState(cState_Game);
-		return;
-	}
 }
 
 /**

@@ -4,6 +4,7 @@
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Util/UtilBattle.h"
 #include "Program/Actor/ActorBoss.h"
 
 #define TEN_SECOND	(600)
@@ -928,6 +929,7 @@ void MissionMgr::updateMission12()	//w10•bˆÈ“à‚Éu‚É‚­‚Ü‚ñv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚
 
 	if (UtilInput::isKeyPushedLineOne())
 	{
+		UtilBattle::addWeakAtkCount();
 		mKeyCountNikuman++;
 	}
 	mTime--;
@@ -952,6 +954,7 @@ void MissionMgr::updateMission13()	//w10•bˆÈ“à‚Éu‚æ‚µ‚½‚ë‚¤v‚Ì˜A‘Å”‚ğˆê”Ô‚‚
 	
 	if (UtilInput::isKeyPushedLineOne())
 	{
+		UtilBattle::addMediumAtkCount();
 		mKeyCountYoshitaro++;
 	}
 	mTime--;
@@ -976,6 +979,7 @@ void MissionMgr::updateMission14()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚
 	
 	if (UtilInput::isKeyPushedLineThree())
 	{
+		UtilBattle::addStrongAtkCount();
 		mKeyCountNoppo++;
 	}
 	mTime--;

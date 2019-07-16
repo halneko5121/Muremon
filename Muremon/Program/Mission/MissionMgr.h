@@ -24,10 +24,6 @@ public:
 	MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss);
 	~MissionMgr();
 
-	int		getCountKeyNikuman() { return mKeyCountNikuman; };
-	int		getCountKeyYoshitaro() { return mKeyCountYoshitaro; };
-	int		getCountKeyNoppo() { return mKeyCountNoppo; };
-
 	void	init(int cnt_nikuman, int cnt_yoshitaro, int cnt_noppo);
 	void	update();
 	void	draw();

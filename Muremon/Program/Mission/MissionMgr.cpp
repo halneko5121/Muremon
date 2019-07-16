@@ -77,9 +77,10 @@ namespace
 	};
 }
 
-MissionMgr::MissionMgr(Texture* texture, Vertex* vertex)
+MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, const ActorBoss* boss)
 	: mTexture(texture)
 	, mVertex(vertex)
+	, mActorBoss(boss)
 	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
 	, mAlpha(0)
 	, mAlphaPushZ(255)

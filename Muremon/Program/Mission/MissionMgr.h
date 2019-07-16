@@ -5,6 +5,8 @@
 #include "Library/Graphics/Vertex.h"
 #include "Program/DefineGame.h"
 
+class ActorBoss;
+
 enum MISSION_STATE
 {
 	MISSION_START,
@@ -19,7 +21,7 @@ enum MISSION_STATE
 class MissionMgr
 {
 public:
-	MissionMgr(Texture* texture, Vertex* vertex);
+	MissionMgr(Texture* texture, Vertex* vertex, const ActorBoss* boss);
 	~MissionMgr();
 
 	int		getCountKeyNikuman() { return mKeyCountNikuman; };
@@ -84,6 +86,7 @@ private:
 	StateMachine<MissionMgr>	mState;	// ステート
 	Texture*				mTexture;
 	Vertex*					mVertex;
+	const ActorBoss*		mActorBoss;
 
 	Vector2f				mMissionStartPos;	//みっしょん開始の位置
 

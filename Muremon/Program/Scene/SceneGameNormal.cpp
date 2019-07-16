@@ -25,25 +25,12 @@
 
 namespace
 {
-	const int cNegativePar1 = 40;
-	const int cNegativePar2 = 60;
-	const int cNegativePar3 = 70;
-	const int cNegativePar4 = 100;
 
 	const int cTimeLimitCount = 10800;					// 制限時間(仮　3:00)
 	const Vector2f cHitEffectPos = { 100.0f, 450.0 };
 
 	// 奥義
 	const int cMaxMissionGauge = 5000;
-
-	enum NEGATIVE_DATA
-	{
-		NO_NEGATIVE,
-		SPEED_UP,
-		RECOVER,
-		SLIDE_IN,
-		ATTACK_DOWN,
-	};
 
 	Vector2f boss_cc2 = { 600, 350 };
 
@@ -83,8 +70,6 @@ SceneGameNormal::SceneGameNormal()
 	, mNoppoCurrentIndex(0)
 	, mAlphaFont(0)
 	, mTimeCount(0)
-	, mNegativeState(NO_NEGATIVE)
-	, mNegativeAtkLv(0)
 {
 	mUINormalGame = new UINormalGame();
 
@@ -174,17 +159,11 @@ SceneGameNormal::draw()
 		GetEffectMgr()->draw();
 	}
 
-	if(mMissionStateKeep == MISSION_OUGI)
-	{
-	}
-	else if(mMissionStateKeep == MISSION_NEGATIVE)
-	{
-		drawMissionNegative();
-	}
+	// ミッション関連
 	mMission->draw();
 
+	// 各種UI
 	mUINormalGame->draw(*mBoss, mMissionGauge, mTime);
-
 }
 
 /**
@@ -263,95 +242,13 @@ SceneGameNormal::drawBg()
 }
 
 /**
- * @brief	ミッション失敗時の更新
- */
-void
-SceneGameNormal::updateMissionNegative()
-{
-	selectNegative();
-
-	mNegativeState = SLIDE_IN;
-
-	if(mTimeCount >= 0 && 60 > mTimeCount){
-		mAlphaFont += 5;
-		if(mAlphaFont > 255){
-			mAlphaFont = 255;
-		}
-	}
-	else if(mTimeCount >= 60 && 120 > mTimeCount){
-		mAlphaFont = 255;
-	}
-	else if(mTimeCount >= 120 && 180 > mTimeCount){
-		mAlphaFont -= 5;
-		if(mAlphaFont < 0){
-			mAlphaFont = 0;
-		}
-	}
-	else if(mTimeCount >= 180){
-		switch(mNegativeState)
-		{
-		case SPEED_UP:
-			mBoss->mSpeedX = 3;
-			break;
-		case RECOVER:
-			mBoss->mLife = mBoss->mMaxLife;
-			break;
-		case SLIDE_IN:
-			mBoss->mMoveX = 500;
-			break;
-		case ATTACK_DOWN:
-			mNegativeAtkLv++;
-			break;
-		}
-		mMissionStateKeep = MISSION_END;
-	}
-	mTimeCount++;
-}
-
-/**
- * @brief	ミッション失敗時の描画
- */
-void
-SceneGameNormal::drawMissionNegative()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
-	mVertex->setColor(mAlphaFont,255,255,255);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_MISSION_OSIRASE);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_NEGATIVE1 + mNegativeState - 1);
-}
-
-/**
- * @brief	どの処理にするかの判断
- */
-void SceneGameNormal::selectNegative()
-{
-	if(mNegativeState != 0){
-		return ;
-	}
-
-	int rand_negative = rand() % 100 + 1;
-	if(rand_negative > 0 && rand_negative <= cNegativePar1){
-		mNegativeState = SPEED_UP;
-	}
-	else if(rand_negative > cNegativePar1 && rand_negative <= cNegativePar2){
-		mNegativeState = RECOVER;
-	}
-	else if(rand_negative > cNegativePar2 && rand_negative <= cNegativePar3){
-		mNegativeState = SLIDE_IN;
-	}
-	else if(rand_negative > cNegativePar3 && rand_negative <= cNegativePar4){
-		mNegativeState = ATTACK_DOWN;
-	}
-}
-
-/**
  * @brief	失敗で下がったものの元に戻す
  */
 void
 SceneGameNormal::recover()
 {
 	if(mBoss->mLife <= 0){
-		mNegativeAtkLv = 0;
+		mMission->resetBadStatusAtkLv();
 	}
 }
 
@@ -518,7 +415,7 @@ SceneGameNormal::stateGame()
 		{
 			if (actor->isHitCheck())
 			{
-				float mul_power = pow(0.5f, mNegativeAtkLv);
+				float mul_power = pow(0.5f, mMission->getBadStatusAtkLv());
 				mBoss->hit(actor->getHitPosY(), (actor->getAtkPower() * mul_power));
 				actor->setIsHitCheck(false);
 				mMissionGauge += actor->getMissionPower();
@@ -628,7 +525,6 @@ SceneGameNormal::stateMissionSeccess()
 
 	if (mMissionStateKeep == MISSION_END)
 	{
-		mNegativeState = NO_NEGATIVE;
 		mTimeCount = 0;
 		mMissionGauge = 0;
 		mState.changeState(cState_Game);
@@ -647,11 +543,10 @@ void
 SceneGameNormal::stateMissionFailure()
 {
 	mMission->update();
-	updateMissionNegative();
+	mMissionStateKeep = mMission->getMissionState();
 
 	if (mMissionStateKeep == MISSION_END)
 	{
-		mNegativeState = NO_NEGATIVE;
 		mTimeCount = 0;
 		mMissionGauge = 0;
 		mState.changeState(cState_Game);

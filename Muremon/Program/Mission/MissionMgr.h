@@ -33,6 +33,8 @@ public:
 	void	draw();
 
 	int		getMissionState() const;
+	int		getBadStatusAtkLv() const;
+	void	resetBadStatusAtkLv();
 
 private:
 	void	drawTime();		//時間を表示
@@ -102,6 +104,10 @@ private:
 
 	int						mAlphaFont;
 	Vector2f				mWavePos;
+
+	int						mNegativeAlpha;
+	int						mNegativeState;
+	int						mNegativeAtkLv;
 
 	int						mTime;					// 時間
 	int						mFlagTimeCount;			// タイムカウントのフラグ

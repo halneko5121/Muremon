@@ -48,10 +48,25 @@ namespace
 {
 	const int cMissionClearAddScore = 50000;			// ミッションクリア加算スコア
 
+	// バッドステータスが選択されるパーセンテージ
+	const int cNegativePar1 = 40;
+	const int cNegativePar2 = 60;
+	const int cNegativePar3 = 70;
+	const int cNegativePar4 = 100;
+
 	// 奥義
 	const Vector2f cWaveInitPos = { -500.0f, 300.0f };
 	const float cWaveSpeedX = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
 	const float cWaveUpY = (60.f / (60.f * 3.5f));
+
+	enum NEGATIVE_DATA
+	{
+		NO_NEGATIVE,
+		SPEED_UP,
+		RECOVER,
+		SLIDE_IN,
+		ATTACK_DOWN,
+	};
 
 	enum MISSION_NUMBER
 	{
@@ -100,6 +115,9 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mMissionState(MISSION_START)
 	, mAlphaFont(0)
 	, mWavePos(cWaveInitPos)
+	, mNegativeAlpha(0)
+	, mNegativeState(NO_NEGATIVE)
+	, mNegativeAtkLv(0)
 	, mTime(TEN_SECOND)
 	, mFlagTimeCount(0)
 	, mSuccessTypingCount(1)
@@ -196,6 +214,12 @@ void MissionMgr::draw()
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->drawF(Vector2f(mWavePos.x, mWavePos.y), R_OUGI);
+
+	// ミッション失敗
+	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
+	mVertex->setColor(mNegativeAlpha, 255, 255, 255);
+	mVertex->drawF(Vector2f(400.f, 300.f), R_MISSION_OSIRASE);
+	mVertex->drawF(Vector2f(400.f, 300.f), R_NEGATIVE1 + mNegativeState - 1);
 }
 
 /**
@@ -205,6 +229,24 @@ int
 MissionMgr::getMissionState() const
 {
 	return mMissionState;
+}
+
+/**
+ * @ brief バッドステータス：攻撃レベルを取得
+ */
+int
+MissionMgr::getBadStatusAtkLv() const
+{
+	return mNegativeAtkLv;
+}
+
+/**
+ * @ brief バッドステータス：攻撃レベルをリセット
+ */
+void
+MissionMgr::resetBadStatusAtkLv()
+{
+	mNegativeAtkLv = 0;
 }
 
 void MissionMgr::updateMission1()	//『10秒以内に100回連打せよ！！』
@@ -1438,10 +1480,62 @@ MissionMgr::stateOugi()
 void
 MissionMgr::stateEnterBadStatus()
 {
+	int rand_negative = rand() % 100 + 1;
+	if (rand_negative > 0 && rand_negative <= cNegativePar1) {
+		mNegativeState = SPEED_UP;
+	}
+	else if (rand_negative > cNegativePar1 && rand_negative <= cNegativePar2) {
+		mNegativeState = RECOVER;
+	}
+	else if (rand_negative > cNegativePar2 && rand_negative <= cNegativePar3) {
+		mNegativeState = SLIDE_IN;
+	}
+	else if (rand_negative > cNegativePar3 && rand_negative <= cNegativePar4) {
+		mNegativeState = ATTACK_DOWN;
+	}
+
+	mNegativeState = SLIDE_IN;
 }
 void
 MissionMgr::stateBadStatus()
 {
+	int count = mState.getStateCount();
+
+	if (count >= 0 && 60 > count) {
+		mNegativeAlpha += 5;
+		if (mNegativeAlpha > 255) {
+			mNegativeAlpha = 255;
+		}
+	}
+	else if (count >= 60 && 120 > count) {
+		mNegativeAlpha = 255;
+	}
+	else if (count >= 120 && 180 > count) {
+		mNegativeAlpha -= 5;
+		if (mNegativeAlpha < 0) {
+			mNegativeAlpha = 0;
+		}
+	}
+	else if (count >= 180)
+	{
+		switch (mNegativeState)
+		{
+		case SPEED_UP:
+			mActorBoss->mSpeedX = 3;
+			break;
+		case RECOVER:
+			mActorBoss->mLife = mActorBoss->mMaxLife;
+			break;
+		case SLIDE_IN:
+			mActorBoss->mMoveX = 500;
+			break;
+		case ATTACK_DOWN:
+			mNegativeAtkLv++;
+			break;
+		}
+		mMissionState = MISSION_END;
+		mState.changeState(cState_End);
+	}
 }
 
 /**
@@ -1450,6 +1544,7 @@ MissionMgr::stateBadStatus()
 void
 MissionMgr::stateEnterEnd()
 {
+	mNegativeState = NO_NEGATIVE;
 }
 void
 MissionMgr::stateEnd()

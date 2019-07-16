@@ -386,11 +386,10 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// ‚Ý‚Á‚µ‚å‚ñ‚ðŒˆ‚ß‚½‚è‰Šú‰»‚µ‚½‚è
-	mCurrentMissionNo = cMissionId_Mission14; // rand() % 100 + 1;
+	mCurrentMissionNo = rand() % 100 + 1;
 
-	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {
-		mCurrentMissionNo = MISSIcMissionId_Mission1;
+		mCurrentMissionNo = cMissionId_Mission1;
 	}
 	else if (mCurrentMissionNo > MISSION_1PAR && mCurrentMissionNo <= MISSION_2PAR) {
 		mCurrentMissionNo = cMissionId_Mission2;
@@ -440,7 +439,6 @@ MissionMgr::stateEnterStartShake()
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
-	*/
 }
 void
 MissionMgr::stateStartShake()

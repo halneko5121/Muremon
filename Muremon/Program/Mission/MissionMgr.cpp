@@ -121,7 +121,6 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mTime(TEN_SECOND)
 	, mFlagTimeCount(0)
 	, mSuccessTypingCount(1)
-	, mFlagMissionState(MISSION_SEIKO)
 	, mKeyCount(0)
 	, mKeyCountNikuman(0)
 	, mKeyCountYoshitaro(0)
@@ -150,7 +149,6 @@ void MissionMgr::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mTime		= TEN_SECOND;
 	mKeyCount		= 0;
 	mSuccessTypingCount	= 1;
-	mFlagMissionState = MISSION_SEIKO;
 	mFlagDraw	= 0;
 	mAlpha		= 0;
 	mAlphaPushZ= 255;

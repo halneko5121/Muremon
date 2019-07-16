@@ -7,17 +7,6 @@
 
 class ActorBoss;
 
-enum MISSION_STATE
-{
-	MISSION_START,
-	MISSION_MIDDLE,
-	MISSION_SEIKO,
-	MISSION_SIPPAI,
-	MISSION_OUGI,
-	MISSION_NEGATIVE,
-	MISSION_END,
-};
-
 class MissionMgr
 {
 public:
@@ -110,7 +99,6 @@ private:
 	int						mTime;					// 時間
 	int						mFlagTimeCount;			// タイムカウントのフラグ
 	int						mSuccessTypingCount;	// タイピング時正解しているか判定
-	int						mFlagMissionState;		// ミッション成功・失敗
 
 	int						mKeyCount;				// キーの連打数を保存する変数
 

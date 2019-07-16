@@ -32,6 +32,7 @@ public:
 	void	update();
 	void	draw();
 
+	int		isEnd() const;
 	int		getMissionState() const;
 	int		getBadStatusAtkLv() const;
 	void	resetBadStatusAtkLv();

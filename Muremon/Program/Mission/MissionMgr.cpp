@@ -223,6 +223,15 @@ void MissionMgr::draw()
 }
 
 /**
+ * @ brief ミッションが終了したか
+ */
+int
+MissionMgr::isEnd() const
+{
+	return (mState.isEqual(cState_End));
+}
+
+/**
  * @ brief ミッションステートを取得
  */
 int

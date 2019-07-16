@@ -56,7 +56,6 @@ private:
 
 	void	updateMissionD();
 
-	void	updateMission4();	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 	void	updateMission5();	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 	void	updateMission6();	//『「YOSITAROHIPATACK」と入力せよ！！』
 	void	updateMission7();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
@@ -68,7 +67,6 @@ private:
 	void	updateMission13();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void	updateMission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	void	updateMission4D();	//『「NIKUMANTOTUGEKI」と入力せよ！！』
 	void	updateMission5D();	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
 	void	updateMission6D();	//『「YOSITAROHIPATACK」と入力せよ！！』
 	void	updateMission7D();	//『「YOSITAROHUSENSHOOT」と入力せよ！！』

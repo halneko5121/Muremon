@@ -77,7 +77,7 @@ namespace
 	};
 }
 
-MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, const ActorBoss* boss)
+MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	: mTexture(texture)
 	, mVertex(vertex)
 	, mActorBoss(boss)

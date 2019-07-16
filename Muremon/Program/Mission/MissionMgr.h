@@ -21,7 +21,7 @@ enum MISSION_STATE
 class MissionMgr
 {
 public:
-	MissionMgr(Texture* texture, Vertex* vertex, const ActorBoss* boss);
+	MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss);
 	~MissionMgr();
 
 	int		getCountKeyNikuman() { return mKeyCountNikuman; };
@@ -86,7 +86,7 @@ private:
 	StateMachine<MissionMgr>	mState;	// ステート
 	Texture*				mTexture;
 	Vertex*					mVertex;
-	const ActorBoss*		mActorBoss;
+	ActorBoss*				mActorBoss;
 
 	Vector2f				mMissionStartPos;	//みっしょん開始の位置
 

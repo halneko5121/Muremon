@@ -31,13 +31,9 @@ namespace
 	const int cNegativePar4 = 100;
 
 	const int cTimeLimitCount = 10800;					// 制限時間(仮　3:00)
-	const int cMissionClearAddScore = 50000;			// ミッションクリア加算スコア
 	const Vector2f cHitEffectPos = { 100.0f, 450.0 };
 
 	// 奥義
-	const Vector2f cWaveInitPos = { -500.0f, 300.0f };
-	const float cWaveSpeedX = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
-	const float cWaveUpY = (60.f / (60.f * 3.5f));
 	const int cMaxMissionGauge = 5000;
 
 	enum NEGATIVE_DATA
@@ -87,7 +83,6 @@ SceneGameNormal::SceneGameNormal()
 	, mNoppoCurrentIndex(0)
 	, mAlphaFont(0)
 	, mTimeCount(0)
-	, mWavePos(cWaveInitPos)
 	, mNegativeState(NO_NEGATIVE)
 	, mNegativeAtkLv(0)
 {
@@ -181,16 +176,15 @@ SceneGameNormal::draw()
 
 	if(mMissionStateKeep == MISSION_OUGI)
 	{
-		drawMissionOugi();
 	}
 	else if(mMissionStateKeep == MISSION_NEGATIVE)
 	{
 		drawMissionNegative();
 	}
+	mMission->draw();
 
 	mUINormalGame->draw(*mBoss, mMissionGauge, mTime);
 
-	mMission->draw();
 }
 
 /**
@@ -266,71 +260,6 @@ SceneGameNormal::drawBg()
 	mVertex->setColor(255, 255, 255, 255);
 	mVertex->drawF(cDispBgPos, R_GAME_BG);
 	mVertex->drawF(cDispFlagPos, R_FLAG);
-}
-
-/**
- * @brief	アクシデント奥義の更新
- */
-void
-SceneGameNormal::updateMissionOugi()
-{
-	if(mTimeCount >= 0 && 60 > mTimeCount){
-		mAlphaFont += 5;
-		if(mAlphaFont > 255){
-			mAlphaFont = 255;
-		}
-	}
-	else if(mTimeCount >= 60 && 120 > mTimeCount){
-		mAlphaFont = 255;
-	}
-	else if(mTimeCount >= 120 && 180 > mTimeCount){
-		mAlphaFont -= 5;
-		if(mAlphaFont < 0){
-			mAlphaFont = 0;
-		}
-	}
-	else if(mTimeCount >= 180 && 210 > mTimeCount){
-		if(mTimeCount == 180){
-			UtilSound::playOnce(S_NAMI);
-		}
-	}
-	else if(mTimeCount >= 210 && 420 > mTimeCount){		//波を動かす(3.5sec)
-		mWavePos.x += cWaveSpeedX;
-		mWavePos.y -= cWaveUpY;
-		if(mTimeCount % 10 <= 4){
-			mWavePos.y -= 2.f;
-		}
-		else if(mTimeCount % 10 <= 9){
-			mWavePos.y += 2.f;
-		}
-	}
-	else if(mTimeCount >= 420 && 450 > mTimeCount){
-	}
-	else if(mTimeCount >= 450 && 630 > mTimeCount){
-	}
-	if(mTimeCount > 630){
-		mBoss->mLife -= 7000;
-		recover();
-		mMissionStateKeep = MISSION_END;
-		mWavePos = cWaveInitPos;
-		UtilGame::addScore(cMissionClearAddScore);
-	}
-	mTimeCount++;
-}
-
-/**
- * @brief	アクシデント奥義の描画
- */
-void
-SceneGameNormal::drawMissionOugi()
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
-	mVertex->setColor(mAlphaFont,255,255,255);
-	mVertex->drawF(Vector2f(400.0f, 300.0f), R_MISSION_OSIRASE);
-	mVertex->drawF(Vector2f(400.f, 300.0f), R_OUGI_FONT);
-
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->drawF(Vector2f(mWavePos.x, mWavePos.y), R_OUGI);
 }
 
 /**
@@ -695,8 +624,7 @@ void
 SceneGameNormal::stateMissionSeccess()
 {
 	mMission->update();
-
-	updateMissionOugi();
+	mMissionStateKeep = mMission->getMissionState();
 
 	if (mMissionStateKeep == MISSION_END)
 	{

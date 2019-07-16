@@ -100,6 +100,9 @@ private:
 	int						mCurrentMissionNo;		// どのミッションが選択されたかを記憶
 	int						mMissionState;			// ミッションが今どの状況か
 
+	int						mAlphaFont;
+	Vector2f				mWavePos;
+
 	int						mTime;					// 時間
 	int						mFlagTimeCount;			// タイムカウントのフラグ
 	int						mSuccessTypingCount;	// タイピング時正解しているか判定

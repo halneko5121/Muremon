@@ -3,6 +3,8 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Util/UtilGame.h"
+#include "Program/Actor/ActorBoss.h"
 
 #define TEN_SECOND	(600)
 
@@ -44,6 +46,13 @@ const Vector2f MISSION_OSIRASE = { 400.0f, 300.0f };
 
 namespace
 {
+	const int cMissionClearAddScore = 50000;			// ミッションクリア加算スコア
+
+	// 奥義
+	const Vector2f cWaveInitPos = { -500.0f, 300.0f };
+	const float cWaveSpeedX = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
+	const float cWaveUpY = (60.f / (60.f * 3.5f));
+
 	enum MISSION_NUMBER
 	{
 		MISSION_1,	//『10秒以内に100回連打せよ！！』
@@ -89,6 +98,8 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mMoveCount(0)
 	, mCurrentMissionNo(0)
 	, mMissionState(MISSION_START)
+	, mAlphaFont(0)
+	, mWavePos(cWaveInitPos)
 	, mTime(TEN_SECOND)
 	, mFlagTimeCount(0)
 	, mSuccessTypingCount(1)
@@ -176,6 +187,15 @@ void MissionMgr::draw()
 	if(mMissionState == MISSION_MIDDLE){
 		updateMissionD();
 	}
+
+	// ミッション奥義
+	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
+	mVertex->setColor(mAlphaFont, 255, 255, 255);
+	mVertex->drawF(Vector2f(400.0f, 300.0f), R_MISSION_OSIRASE);
+	mVertex->drawF(Vector2f(400.f, 300.0f), R_OUGI_FONT);
+
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
+	mVertex->drawF(Vector2f(mWavePos.x, mWavePos.y), R_OUGI);
 }
 
 /**
@@ -1366,6 +1386,50 @@ MissionMgr::stateEnterOugi()
 void
 MissionMgr::stateOugi()
 {
+	int count = mState.getStateCount();
+
+	if (count >= 0 && 60 > count) {
+		mAlphaFont += 5;
+		if (mAlphaFont > 255) {
+			mAlphaFont = 255;
+		}
+	}
+	else if (count >= 60 && 120 > count) {
+		mAlphaFont = 255;
+	}
+	else if (count >= 120 && 180 > count) {
+		mAlphaFont -= 5;
+		if (mAlphaFont < 0) {
+			mAlphaFont = 0;
+		}
+	}
+	else if (count >= 180 && 210 > count) {
+		if (count == 180) {
+			UtilSound::playOnce(S_NAMI);
+		}
+	}
+	else if (count >= 210 && 420 > count) {		//波を動かす(3.5sec)
+		mWavePos.x += cWaveSpeedX;
+		mWavePos.y -= cWaveUpY;
+		if (count % 10 <= 4) {
+			mWavePos.y -= 2.f;
+		}
+		else if (count % 10 <= 9) {
+			mWavePos.y += 2.f;
+		}
+	}
+	else if (count >= 420 && 450 > count) {
+	}
+	else if (count >= 450 && 630 > count) {
+	}
+
+	if (count > 630) {
+		mActorBoss->mLife -= 7000;
+		mWavePos = cWaveInitPos;
+		UtilGame::addScore(cMissionClearAddScore);
+		mMissionState = MISSION_END;
+		mState.changeState(cState_End);
+	}
 }
 
 /**

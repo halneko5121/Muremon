@@ -33,9 +33,6 @@ private:
 	void				updateRunAtk();
 	void				drawBg();
 
-	void				updateMissionOugi();		// アクシデント奥義の更新
-	void				drawMissionOugi();			// アクシデント奥義を描画
-
 	void				updateMissionNegative();	// ミッション失敗時の処理
 	void				selectNegative();			// どの処理にするかを判断
 	void				drawMissionNegative();		// ミッション失敗時の処理
@@ -84,8 +81,6 @@ private:
 	// 奥義内で使用
 	int					mAlphaFont;
 	int					mTimeCount;
-
-	Vector2f			mWavePos;
 
 	// NEGATIVEで使用
 	int					mNegativeState;

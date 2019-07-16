@@ -14,7 +14,7 @@
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilGraphics.h"
-#include "Program/Mission/Mission.h"
+#include "Program/Mission/MissionMgr.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Actor/Actornikuman.h"
 #include "Program/Actor/ActorNoppo.h"

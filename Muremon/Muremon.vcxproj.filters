@@ -77,9 +77,6 @@
     <ClCompile Include="Program\Scene\SceneTutorial.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Mission\Mission.cpp">
-      <Filter>Mission</Filter>
-    </ClCompile>
     <ClCompile Include="Library\Graphics\FadeMgr.cpp">
       <Filter>Library\Graphics</Filter>
     </ClCompile>
@@ -134,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="Program\UI\UINormalGame.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\MissionMgr.cpp">
+      <Filter>Mission</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +215,6 @@
     <ClInclude Include="Program\Scene\SceneTutorial.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Mission\Mission.h">
-      <Filter>Mission</Filter>
-    </ClInclude>
     <ClInclude Include="Library\Graphics\FadeMgr.h">
       <Filter>Library\Graphics</Filter>
     </ClInclude>
@@ -272,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="Program\UI\UINormalGame.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\MissionMgr.h">
+      <Filter>Mission</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

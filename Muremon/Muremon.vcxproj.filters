@@ -141,6 +141,45 @@
     <ClCompile Include="Program\Mission\Mission1.cpp">
       <Filter>Mission</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Mission\Mission2.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission3.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission4.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission5.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission6.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission7.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission8.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission9.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission10.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission11.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission12.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission13.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Mission\Mission14.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -283,6 +322,45 @@
       <Filter>Mission</Filter>
     </ClInclude>
     <ClInclude Include="Program\Mission\Mission1.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission2.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission3.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission4.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission5.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission6.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission7.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission8.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission9.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission10.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission11.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission12.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission13.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\Mission14.h">
       <Filter>Mission</Filter>
     </ClInclude>
   </ItemGroup>

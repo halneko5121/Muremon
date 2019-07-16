@@ -25,8 +25,9 @@ MissionBase::MissionBase(MissionId id, Texture* texture, Vertex* vertex)
 	: mId(id)
 	, mTexture(texture)
 	, mVertex(vertex)
-	, mTime(0)
 	, mKeyCount(0)
+	, mSuccessTypingCount(1)
+	, mTime(0)
 {
 }
 
@@ -45,6 +46,7 @@ MissionBase::run()
 {
 	mTime = TEN_SECOND;
 	mKeyCount = 0;
+	mSuccessTypingCount = 1;
 
 	runImple();
 }

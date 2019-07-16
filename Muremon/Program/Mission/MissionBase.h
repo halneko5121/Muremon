@@ -34,9 +34,10 @@ protected:
 
 protected:
 	MissionId		mId;
-	Texture*		mTexture;		// テクスチャ
-	Vertex*			mVertex;		// バーテックス
+	Texture*		mTexture;				// テクスチャ
+	Vertex*			mVertex;				// バーテックス
 	int				mKeyCount;
+	int				mSuccessTypingCount;	// タイピング時正解している数
 
 private:
 	int				mTime;

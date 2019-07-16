@@ -17,7 +17,7 @@ public:
 
 	virtual void	update() = 0;
 	virtual void	draw() = 0;
-	virtual bool	isEnd() = 0;
+	virtual bool	isEnd() const = 0;
 
 protected:
 	MissionId		mId;

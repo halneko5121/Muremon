@@ -301,50 +301,6 @@ MissionMgr::resetBadStatusAtkLv()
 	mNegativeAtkLv = 0;
 }
 
-void MissionMgr::updateMission11()	//w5•b”‚¦‚Ä‘OŒã1•bˆÈ“à‚Åu‚yƒL[v‚ğ‰Ÿ‚¹Ix
-{
-	if(mFlagTimeCount == 0){
-		mTime = 0;
-		if(!mFlagZ){
-			mAlphaPushZ += 5;
-			if(mAlphaPushZ == 240){
-				mFlagZ = true;
-			}
-		}
-		else{
-			mAlphaPushZ -= 5;
-			if(mAlphaPushZ == 50){
-				mFlagZ = false;
-			}
-		}
-	}
-	if (UtilInput::isKeyPushedDecide())
-	{
-		mFlagTimeCount += 1;
-		if(mFlagTimeCount > 2)
-		{
-			mFlagTimeCount = 2;
-		}
-	}
-	if(mFlagTimeCount == 1)
-	{
-		mTime++;
-	}
-	else if(mFlagTimeCount == 2)
-	{
-		if(mTime <= 6*60 - 31 && mTime >= 4*60 + 31)
-		{
-			mState.changeState(cState_Success);
-			return;
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-			return;
-		}
-	}
-}
-
 void MissionMgr::updateMission12()	//w10•bˆÈ“à‚Éu‚É‚­‚Ü‚ñv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
 {
 	if (mTime <= 0)
@@ -417,18 +373,6 @@ void MissionMgr::updateMission14()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚
 void MissionMgr::updateMissionD()
 {
 	mMission[mCurrentMissionNo]->draw();
-}
-
-void MissionMgr::updateMission11D()	//w5•b”‚¦‚Ä‘OŒã1•bˆÈ“à‚Åu‚yƒL[v‚ğ‰Ÿ‚¹Ix
-{
-	if(mFlagTimeCount == 0)
-	{
-		mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI);
-
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(mAlphaPushZ,255,255,255);
-		mVertex->drawF(Vector2f(400.0f, 450.0f),R_Z_PUSH_START);
-	}
 }
 
 void MissionMgr::updateMission12D()	//w10•bˆÈ“à‚Éu‚É‚­‚Ü‚ñv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
@@ -526,7 +470,7 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// ‚İ‚Á‚µ‚å‚ñ‚ğŒˆ‚ß‚½‚è‰Šú‰»‚µ‚½‚è
-	mCurrentMissionNo = cMissionId_Mission10; // rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission11; // rand() % 100 + 1;
 
 	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {

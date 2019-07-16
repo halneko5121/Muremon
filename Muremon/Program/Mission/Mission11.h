@@ -1,7 +1,7 @@
 #pragma once
 /******************************************************************
  *	@file	Mission11.h
- *	@brief	ミッション11
+ *	@brief	ミッション11（5秒数えて前後1秒以内で「Ｚキー」を押せ！）
  *
  *	製作者：三上
  *	管理者：三上
@@ -33,5 +33,9 @@ private:
 	DECLAR_STATE_FUNC2(Failure);
 
 private:
-	StateMachine<Mission11>	mState;		// ステート
+	StateMachine<Mission11>	mState;				// ステート
+	int						mFlagTimeCount;		// タイムカウントのフラグ
+	int						mAlphaPushZ;		// 「PushZ」用のアルファ値
+	int						mFlagZ;				//
+	Vector2f				mMissionStartPos;	// みっしょん開始の位置
 };

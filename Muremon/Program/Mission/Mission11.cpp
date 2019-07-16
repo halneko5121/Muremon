@@ -1,12 +1,20 @@
 /******************************************************************
  *	@file	Mission11.cpp
- *	@brief	ミッション11
+ *	@brief	ミッション11（5秒数えて前後1秒以内で「Ｚキー」を押せ！）
  *
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
 
 #include "Mission11.h"
+
+#include "Library/Graphics/Vertex.h"
+#include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilGraphics.h"
+#include "Program/DefineGame.h"
+
+#define MISSION_HASSEI_X	(400.f)
+#define MISSION_HASSEI_Y	(50.f)
 
 namespace
 {
@@ -26,6 +34,10 @@ namespace
 Mission11::Mission11(MissionId id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
+	, mFlagTimeCount(0)
+	, mAlphaPushZ(255)
+	, mFlagZ(true)
+	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission11, mState, Idle,		cState_Idle);
@@ -66,6 +78,14 @@ Mission11::updateImple()
 void
 Mission11::draw()
 {
+	if (mFlagTimeCount == 0)
+	{
+		mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI);
+
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+		mVertex->setColor(mAlphaPushZ, 255, 255, 255);
+		mVertex->drawF(Vector2f(400.0f, 450.0f), R_Z_PUSH_START);
+	}
 }
 
 /**
@@ -74,7 +94,7 @@ Mission11::draw()
 bool
 Mission11::isSuccess() const
 {
-	return false;
+	return (mState.isEqual(cState_Success));
 }
 
 /**
@@ -83,7 +103,7 @@ Mission11::isSuccess() const
 bool
 Mission11::isFailure() const
 {
-	return (!isSuccess());
+	return (mState.isEqual(cState_Failure));
 }
 
 
@@ -109,10 +129,56 @@ Mission11::stateIdle()
 void
 Mission11::stateEnterRun()
 {
+	mFlagTimeCount = 0;
+	mAlphaPushZ = 255;
+	mFlagZ = true;
 }
 void
 Mission11::stateRun()
 {
+	if (mFlagTimeCount == 0)
+	{
+		mTime = 0;
+		if (!mFlagZ) 
+		{
+			mAlphaPushZ += 5;
+			if (mAlphaPushZ == 240) {
+				mFlagZ = true;
+			}
+		}
+		else
+		{
+			mAlphaPushZ -= 5;
+			if (mAlphaPushZ == 50) {
+				mFlagZ = false;
+			}
+		}
+	}
+	if (UtilInput::isKeyPushedDecide())
+	{
+		mFlagTimeCount += 1;
+		if (mFlagTimeCount > 2)
+		{
+			mFlagTimeCount = 2;
+		}
+	}
+	if (mFlagTimeCount == 1)
+	{
+		mTime++;
+	}
+	else if (mFlagTimeCount == 2)
+	{
+		if (mTime <= 6 * 60 - 31 && mTime >= 4 * 60 + 31)
+		{
+			mState.changeState(cState_Success);
+			return;
+		}
+		else
+		{
+			mState.changeState(cState_Failure);
+			return;
+		}
+	}
 }
 
 /**

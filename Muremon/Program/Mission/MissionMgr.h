@@ -56,13 +56,11 @@ private:
 
 	void	updateMissionD();
 
-	void	updateMission10();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	void	updateMission11();	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	void	updateMission12();	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 	void	updateMission13();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void	updateMission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	void	updateMission10D();	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	void	updateMission11D();	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 	void	updateMission12D();	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
 	void	updateMission13D();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』

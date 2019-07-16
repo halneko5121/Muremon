@@ -301,45 +301,6 @@ MissionMgr::resetBadStatusAtkLv()
 	mNegativeAtkLv = 0;
 }
 
-void MissionMgr::updateMission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
-{
-	if(mFlagTimeCount == 0){
-		mTime = 0;
-		if(!mFlagZ){
-			mAlphaPushZ += 5;
-			if(mAlphaPushZ == 240){
-				mFlagZ = true;
-			}
-		}
-		else{
-			mAlphaPushZ -= 5;
-			if(mAlphaPushZ == 50){
-				mFlagZ = false;
-			}
-		}
-	}
-	if (UtilInput::isKeyPushedDecide())
-	{
-		mFlagTimeCount += 1;
-	}
-	if(mFlagTimeCount == 1){
-		mTime++;
-	}
-	else if(mFlagTimeCount == 2)
-	{
-		if(mTime <= 11*60 - 31 && mTime >= 9*60 + 31)
-		{
-			mState.changeState(cState_Success);
-			return;
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-			return;
-		}
-	}
-}
-
 void MissionMgr::updateMission11()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0){
@@ -458,18 +419,6 @@ void MissionMgr::updateMissionD()
 	mMission[mCurrentMissionNo]->draw();
 }
 
-void MissionMgr::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
-{
-	if(mFlagTimeCount == 0)
-	{
-		mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI);
-
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(mAlphaPushZ,255,255,255);
-		mVertex->drawF(Vector2f(400.0f, 450.0f), R_Z_PUSH_START);
-	}
-}
-
 void MissionMgr::updateMission11D()	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0)
@@ -577,7 +526,7 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// みっしょんを決めたり初期化したり
-	mCurrentMissionNo = cMissionId_Mission9; // rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission10; // rand() % 100 + 1;
 
 	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {

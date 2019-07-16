@@ -58,6 +58,9 @@ namespace
 		cState_Ready,			// 準備
 		cState_ReadyFadeOut,	// 準備フェードアウト
 		cState_Game,			// ゲーム中
+		cState_Mission,			// ミッション中
+		cState_MissionSeccess,	// ミッション成功
+		cState_MissionFailure,	// ミッション失敗
 		cState_GameOver,		// ゲームオーバー
 		cState_TimeOver,		// タイムオーバー
 		cState_Count
@@ -96,6 +99,9 @@ SceneGameNormal::SceneGameNormal()
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, Ready,			cState_Ready);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, ReadyFadeOut,	cState_ReadyFadeOut);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, Game,			cState_Game);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, Mission,		cState_Mission);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, MissionSeccess,	cState_MissionSeccess);
+	REGIST_STATE_FUNC2(SceneGameNormal, mState, MissionFailure,	cState_MissionFailure);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, GameOver,		cState_GameOver);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, TimeOver,		cState_TimeOver);
 	mState.changeState(cState_Idle);
@@ -157,19 +163,20 @@ SceneGameNormal::draw()
 	// 背景
 	drawBg();
 
-	if (mState.isEqual(cState_Game))
+	if (mState.isEqual(cState_GameOver) ||
+		mState.isEqual(cState_TimeOver))
+	{
+		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+		mVertex->setColor(mGameStateFontAlpha, 255, 255, 255);
+		mVertex->drawF(cDispBgPos, mGameStateRectNum);
+	}
+	else
 	{
 		// アクターの描画
 		GetActorMgr()->draw();
 
 		// エフェクト描画
 		GetEffectMgr()->draw();
-	}
-	else
-	{
-		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(mGameStateFontAlpha, 255, 255, 255);
-		mVertex->drawF(cDispBgPos, mGameStateRectNum);
 	}
 
 	if(mMissionStateKeep == MISSION_OUGI)
@@ -547,46 +554,10 @@ SceneGameNormal::stateGame()
 		return;
 	}
 
-	//ミッションが起動する段階までいったら
+	// ミッションが起動する段階までいったら
 	if (mMissionGauge >= cMaxMissionGauge)
 	{
-		if (!mIsInit)
-		{
-			mMission->init(
-				UtilBattle::getWeakAtkCount(),
-				UtilBattle::getMediumAtkCount(),
-				UtilBattle::getStrongAtkCount());
-			mIsInit = true;
-		}
-		if (mMissionStateKeep < MISSION_OUGI) {
-			mMission->update();
-			mMissionStateKeep = mMission->getMissionState();
-			if (UtilBattle::getWeakAtkCount() != mMission->getCountKeyNikuman()) 
-			{
-				UtilBattle::setWeakAtkCount(mMission->getCountKeyNikuman());
-			}
-			if (UtilBattle::getMediumAtkCount() != mMission->getCountKeyYoshitaro())
-			{
-				UtilBattle::setMediumAtkCount(mMission->getCountKeyYoshitaro());
-			}
-			if (UtilBattle::getStrongAtkCount() != mMission->getCountKeyNoppo())
-			{
-				UtilBattle::setStrongAtkCount(mMission->getCountKeyNoppo());
-			}
-		}
-		else if (mMissionStateKeep == MISSION_OUGI) {
-			updateMissionOugi();
-		}
-		else if (mMissionStateKeep == MISSION_NEGATIVE) {
-			updateMissionNegative();
-		}
-		else if (mMissionStateKeep == MISSION_END) {
-			mNegativeState = NO_NEGATIVE;
-			mTimeCount = 0;
-			mMissionStateKeep = 0;
-			mMissionGauge = 0;
-			mIsInit = false;
-		}
+		mState.changeState(cState_Mission);
 		return;
 	}
 
@@ -668,6 +639,94 @@ SceneGameNormal::stateGame()
 	if (mBoss->isWin())
 	{
 		mState.changeState(cState_GameOver);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:Mission
+ */
+void
+SceneGameNormal::stateEnterMission()
+{
+	mMission->init(
+		UtilBattle::getWeakAtkCount(),
+		UtilBattle::getMediumAtkCount(),
+		UtilBattle::getStrongAtkCount());
+}
+void
+SceneGameNormal::stateMission()
+{
+	mMission->update();
+	mMissionStateKeep = mMission->getMissionState();
+
+	if (mMissionStateKeep < MISSION_OUGI) {
+		if (UtilBattle::getWeakAtkCount() != mMission->getCountKeyNikuman())
+		{
+			UtilBattle::setWeakAtkCount(mMission->getCountKeyNikuman());
+		}
+		if (UtilBattle::getMediumAtkCount() != mMission->getCountKeyYoshitaro())
+		{
+			UtilBattle::setMediumAtkCount(mMission->getCountKeyYoshitaro());
+		}
+		if (UtilBattle::getStrongAtkCount() != mMission->getCountKeyNoppo())
+		{
+			UtilBattle::setStrongAtkCount(mMission->getCountKeyNoppo());
+		}
+	}
+	else if (mMissionStateKeep == MISSION_OUGI) {
+		mState.changeState(cState_MissionSeccess);
+		return;
+	}
+	else if (mMissionStateKeep == MISSION_NEGATIVE) {
+		mState.changeState(cState_MissionFailure);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:MissionSeccess
+ */
+void
+SceneGameNormal::stateEnterMissionSeccess()
+{
+}
+void
+SceneGameNormal::stateMissionSeccess()
+{
+	mMission->update();
+
+	updateMissionOugi();
+
+	if (mMissionStateKeep == MISSION_END)
+	{
+		mNegativeState = NO_NEGATIVE;
+		mTimeCount = 0;
+		mMissionGauge = 0;
+		mState.changeState(cState_Game);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:MissionFailure
+ */
+void
+SceneGameNormal::stateEnterMissionFailure()
+{
+}
+void
+SceneGameNormal::stateMissionFailure()
+{
+	mMission->update();
+	updateMissionNegative();
+
+	if (mMissionStateKeep == MISSION_END)
+	{
+		mNegativeState = NO_NEGATIVE;
+		mTimeCount = 0;
+		mMissionGauge = 0;
+		mState.changeState(cState_Game);
 		return;
 	}
 }

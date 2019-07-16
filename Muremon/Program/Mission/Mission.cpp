@@ -145,16 +145,6 @@ void Mission::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 void Mission::update()
 {
 	mState.executeState();
-
-	if( mMissionState != MISSION_START && 
-		mMissionState != MISSION_MIDDLE)
-	{
-		if (mAlpha != 0) 
-		{
-			mAlpha -= MISSION_ALPHA_INCREASE;
-			if (mAlpha < 0) { mAlpha = 0; }
-		}
-	}
 }
 
 void Mission::draw()
@@ -1331,6 +1321,9 @@ Mission::stateEnterSuccess()
 void
 Mission::stateSuccess()
 {
+	mAlpha -= MISSION_ALPHA_INCREASE;
+	if (mAlpha < 0) { mAlpha = 0; }
+
 	if (mAlpha == 0)
 	{
 		mMissionState = MISSION_OUGI;
@@ -1350,7 +1343,11 @@ Mission::stateEnterFailure()
 void
 Mission::stateFailure()
 {
-	if (mAlpha == 0) {
+	mAlpha -= MISSION_ALPHA_INCREASE;
+	if (mAlpha < 0) { mAlpha = 0; }
+
+	if (mAlpha == 0)
+	{
 		mMissionState = MISSION_NEGATIVE;
 		mState.changeState(cState_BadStatus);
 		return;
@@ -1367,6 +1364,9 @@ Mission::stateEnterOugi()
 void
 Mission::stateOugi()
 {
+	mAlpha -= MISSION_ALPHA_INCREASE;
+	if (mAlpha < 0) { mAlpha = 0; }
+
 }
 
 /**
@@ -1379,6 +1379,8 @@ Mission::stateEnterBadStatus()
 void
 Mission::stateBadStatus()
 {
+	mAlpha -= MISSION_ALPHA_INCREASE;
+	if (mAlpha < 0) { mAlpha = 0; }
 }
 
 /**

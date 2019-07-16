@@ -72,9 +72,4 @@ private:
 	int					mNikumanCurrentIndex;	// ‚É‚­‚Ü‚ñ‚ÌŒ»İ‚Ì”Ô†
 	int					mYoshitaroCurrentIndex;	// ‹g‚½‚ë‚¤‚ÌŒ»İ‚Ì”Ô†
 	int					mNoppoCurrentIndex;		// ‚Ì‚Á‚Û‚ÌŒ»İ‚Ì”Ô†
-
-
-	// ‰œ‹`“à‚Åg—p
-	int					mAlphaFont;
-	int					mTimeCount;
 };

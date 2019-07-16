@@ -68,8 +68,6 @@ SceneGameNormal::SceneGameNormal()
 	, mNikumanCurrentIndex(0)
 	, mYoshitaroCurrentIndex(0)
 	, mNoppoCurrentIndex(0)
-	, mAlphaFont(0)
-	, mTimeCount(0)
 {
 	mUINormalGame = new UINormalGame();
 
@@ -525,7 +523,6 @@ SceneGameNormal::stateMissionSeccess()
 
 	if (mMissionStateKeep == MISSION_END)
 	{
-		mTimeCount = 0;
 		mMissionGauge = 0;
 		mState.changeState(cState_Game);
 		return;
@@ -547,7 +544,6 @@ SceneGameNormal::stateMissionFailure()
 
 	if (mMissionStateKeep == MISSION_END)
 	{
-		mTimeCount = 0;
 		mMissionGauge = 0;
 		mState.changeState(cState_Game);
 		return;

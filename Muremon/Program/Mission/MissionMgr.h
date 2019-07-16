@@ -56,10 +56,6 @@ private:
 
 	void	updateMissionD();
 
-	void	updateMission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
-
-	void	updateMission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
-
 private:
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);

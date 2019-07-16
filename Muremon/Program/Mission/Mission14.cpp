@@ -1,12 +1,16 @@
 /******************************************************************
  *	@file	Mission14.cpp
- *	@brief	ミッション14
+ *	@brief	ミッション14（10秒以内に「のっぽ」の連打数を一番高くしろ！）
  *
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
 
 #include "Mission14.h"
+
+#include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilBattle.h"
+#include "Program/DefineGame.h"
 
 namespace
 {
@@ -66,6 +70,7 @@ Mission14::updateImple()
 void
 Mission14::draw()
 {
+	drawTime();
 }
 
 /**
@@ -74,7 +79,7 @@ Mission14::draw()
 bool
 Mission14::isSuccess() const
 {
-	return false;
+	return (mState.isEqual(cState_Success));
 }
 
 /**
@@ -83,7 +88,7 @@ Mission14::isSuccess() const
 bool
 Mission14::isFailure() const
 {
-	return (!isSuccess());
+	return (mState.isEqual(cState_Failure));
 }
 
 
@@ -113,6 +118,29 @@ Mission14::stateEnterRun()
 void
 Mission14::stateRun()
 {
+	if (mTime <= 0)
+	{
+		int key_count_niku = UtilBattle::getWeakAtkCount();
+		int key_count_yoshi = UtilBattle::getMediumAtkCount();
+		int key_count_noppo = UtilBattle::getStrongAtkCount();
+
+		if (key_count_noppo > key_count_niku && key_count_noppo > key_count_yoshi)
+		{
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mState.changeState(cState_Failure);
+		}
+		return;
+	}
+
+	if (UtilInput::isKeyPushedLineThree())
+	{
+		UtilBattle::addStrongAtkCount();
+	}
+	mTime--;
+
 }
 
 /**

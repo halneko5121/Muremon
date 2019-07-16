@@ -301,37 +301,9 @@ MissionMgr::resetBadStatusAtkLv()
 	mNegativeAtkLv = 0;
 }
 
-void MissionMgr::updateMission14()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
-{
-	if(mTime <= 0)
-	{
-		if(mKeyCountNoppo > mKeyCountNikuman && mKeyCountNoppo > mKeyCountYoshitaro)
-		{
-			mState.changeState(cState_Success);
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-		}
-		return;
-	}
-	
-	if (UtilInput::isKeyPushedLineThree())
-	{
-		UtilBattle::addStrongAtkCount();
-		mKeyCountNoppo++;
-	}
-	mTime--;
-}
-
 void MissionMgr::updateMissionD()
 {
 	mMission[mCurrentMissionNo]->draw();
-}
-
-void MissionMgr::updateMission14D()	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
-{
-	drawTime();
 }
 
 /**
@@ -414,7 +386,7 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// みっしょんを決めたり初期化したり
-	mCurrentMissionNo = cMissionId_Mission13; // rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission14; // rand() % 100 + 1;
 
 	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {

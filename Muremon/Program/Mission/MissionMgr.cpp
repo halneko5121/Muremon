@@ -232,15 +232,6 @@ MissionMgr::isEnd() const
 }
 
 /**
- * @ brief ミッションステートを取得
- */
-int
-MissionMgr::getMissionState() const
-{
-	return mMissionState;
-}
-
-/**
  * @ brief バッドステータス：攻撃レベルを取得
  */
 int

@@ -18,7 +18,6 @@ public:
 	void	draw();
 
 	int		isEnd() const;
-	int		getMissionState() const;
 	int		getBadStatusAtkLv() const;
 	void	resetBadStatusAtkLv();
 
@@ -73,36 +72,35 @@ private:
 
 private:
 	StateMachine<MissionMgr>	mState;	// ステート
-	Texture*				mTexture;
-	Vertex*					mVertex;
-	ActorBoss*				mActorBoss;
+	Texture*					mTexture;
+	Vertex*						mVertex;
+	ActorBoss*					mActorBoss;
 
-	Vector2f				mMissionStartPos;	//みっしょん開始の位置
+	Vector2f					mMissionStartPos;	//みっしょん開始の位置
 
-	int						mAlpha;			//
-	int						mAlphaPushZ;	//
+	int							mAlpha;			//
+	int							mAlphaPushZ;	//
 
-	int						mFlagZ;			//
-	int						mFlagDraw;		//
+	int							mFlagZ;			//
+	int							mFlagDraw;		//
 
-	int						mMoveCount;		//
-	int						mCurrentMissionNo;		// どのミッションが選択されたかを記憶
-	int						mMissionState;			// ミッションが今どの状況か
+	int							mMoveCount;		//
+	int							mCurrentMissionNo;		// どのミッションが選択されたかを記憶
 
-	int						mAlphaFont;
-	Vector2f				mWavePos;
+	int							mAlphaFont;
+	Vector2f					mWavePos;
 
-	int						mNegativeAlpha;
-	int						mNegativeState;
-	int						mNegativeAtkLv;
+	int							mNegativeAlpha;
+	int							mNegativeState;
+	int							mNegativeAtkLv;
 
-	int						mTime;					// 時間
-	int						mFlagTimeCount;			// タイムカウントのフラグ
-	int						mSuccessTypingCount;	// タイピング時正解しているか判定
+	int							mTime;					// 時間
+	int							mFlagTimeCount;			// タイムカウントのフラグ
+	int							mSuccessTypingCount;	// タイピング時正解しているか判定
 
-	int						mKeyCount;				// キーの連打数を保存する変数
+	int							mKeyCount;				// キーの連打数を保存する変数
 
-	int						mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
-	int						mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント
-	int						mKeyCountNoppo;			// のっぽの押されたキーの数をカウント
+	int							mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
+	int							mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント
+	int							mKeyCountNoppo;			// のっぽの押されたキーの数をカウント
 };

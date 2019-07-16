@@ -23,8 +23,8 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-Mission14::Mission14(MissionId id)
-	: MissionBase(id)
+Mission14::Mission14(MissionId id, Texture* texture, Vertex* vertex)
+	: MissionBase(id, texture, vertex)
 	, mState()
 {
 	mState.initialize(cState_Count, cState_Idle);
@@ -46,7 +46,7 @@ Mission14::~Mission14()
  * @brief	開始
  */
 void
-Mission14::run()
+Mission14::runImple()
 {
 	mState.changeStateIfDiff(cState_Run);
 }

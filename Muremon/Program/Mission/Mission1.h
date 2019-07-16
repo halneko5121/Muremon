@@ -1,7 +1,7 @@
 #pragma once
 /******************************************************************
  *	@file	Mission1.h
- *	@brief	ミッション1
+ *	@brief	ミッション1（10秒以内に100回連打せよ！！）
  *
  *	製作者：三上
  *	管理者：三上
@@ -10,13 +10,16 @@
 #include "Library/StateMachine.h"
 #include "MissionBase.h"
 
+class Texture;
+class Vertex;
+
 class Mission1 : public MissionBase
 {
 public:
-	Mission1(MissionId id);
+	Mission1(MissionId id, Texture* texture, Vertex* vertex);
 	virtual ~Mission1();
 
-	void					run() override;
+	void					runImple() override;
 	void					update() override;
 	void					draw() override;
 	bool					isSuccess() const override;

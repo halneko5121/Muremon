@@ -1,12 +1,14 @@
 /******************************************************************
  *	@file	Mission1.cpp
- *	@brief	ミッション1
+ *	@brief	ミッション1（10秒以内に100回連打せよ！！）
  *
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
 
 #include "Mission1.h"
+
+#include "Program/Util/UtilInput.h"
 
 namespace
 {
@@ -23,8 +25,8 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-Mission1::Mission1(MissionId id)
-	: MissionBase(id)
+Mission1::Mission1(MissionId id, Texture* texture, Vertex* vertex)
+	: MissionBase(id, texture, vertex)
 	, mState()
 {
 	mState.initialize(cState_Count, cState_Idle);
@@ -46,7 +48,7 @@ Mission1::~Mission1()
  * @brief	開始
  */
 void
-Mission1::run()
+Mission1::runImple()
 {
 	mState.changeStateIfDiff(cState_Run);
 }
@@ -113,6 +115,24 @@ Mission1::stateEnterRun()
 void
 Mission1::stateRun()
 {
+	if (mTime <= 0)
+	{
+		if (mKeyCount >= 100)
+		{
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mState.changeState(cState_Failure);
+		}
+		return;
+	}
+
+	if (UtilInput::isAnyKeyPushed())
+	{
+		mKeyCount++;
+	}
+	mTime--;
 }
 
 /**

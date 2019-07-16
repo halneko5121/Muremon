@@ -7,20 +7,31 @@
  *	管理者：三上
  ******************************************************************/
 
+class Texture;
+class Vertex;
 enum MissionId;
 
 class MissionBase
 {
 public:
-	MissionBase(MissionId id);
+	MissionBase(MissionId id, Texture* texture, Vertex* vertex);
 	virtual ~MissionBase();
 
-	virtual void	run() = 0;
+	void			run();
+
+	virtual void	runImple() = 0;
 	virtual void	update() = 0;
 	virtual void	draw() = 0;
 	virtual bool	isSuccess() const = 0;
 	virtual bool	isFailure() const = 0;
 
+	void			drawTime();
+	void			drawCombo();
+
 protected:
 	MissionId		mId;
+	Texture*		mTexture;		// テクスチャ
+	Vertex*			mVertex;		// バーテックス
+	int				mTime;
+	int				mKeyCount;
 };

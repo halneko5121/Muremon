@@ -124,24 +124,24 @@ namespace
 	};
 
 	MissionBase*
-	createMission(MissionId id)
+	createMission(MissionId id, Texture* texture, Vertex* vertex)
 	{
 		switch (id)
 		{
-		case cMissionId_Mission1:	return (new Mission1(id));
-		case cMissionId_Mission2:	return (new Mission2(id));
-		case cMissionId_Mission3:	return (new Mission3(id));
-		case cMissionId_Mission4:	return (new Mission4(id));
-		case cMissionId_Mission5:	return (new Mission5(id));
-		case cMissionId_Mission6:	return (new Mission6(id));
-		case cMissionId_Mission7:	return (new Mission7(id));
-		case cMissionId_Mission8:	return (new Mission8(id));
-		case cMissionId_Mission9:	return (new Mission9(id));
-		case cMissionId_Mission10:	return (new Mission10(id));
-		case cMissionId_Mission11:	return (new Mission11(id));
-		case cMissionId_Mission12:	return (new Mission12(id));
-		case cMissionId_Mission13:	return (new Mission13(id));
-		case cMissionId_Mission14:	return (new Mission14(id));
+		case cMissionId_Mission1:	return (new Mission1(id, texture, vertex));
+		case cMissionId_Mission2:	return (new Mission2(id, texture, vertex));
+		case cMissionId_Mission3:	return (new Mission3(id, texture, vertex));
+		case cMissionId_Mission4:	return (new Mission4(id, texture, vertex));
+		case cMissionId_Mission5:	return (new Mission5(id, texture, vertex));
+		case cMissionId_Mission6:	return (new Mission6(id, texture, vertex));
+		case cMissionId_Mission7:	return (new Mission7(id, texture, vertex));
+		case cMissionId_Mission8:	return (new Mission8(id, texture, vertex));
+		case cMissionId_Mission9:	return (new Mission9(id, texture, vertex));
+		case cMissionId_Mission10:	return (new Mission10(id, texture, vertex));
+		case cMissionId_Mission11:	return (new Mission11(id, texture, vertex));
+		case cMissionId_Mission12:	return (new Mission12(id, texture, vertex));
+		case cMissionId_Mission13:	return (new Mission13(id, texture, vertex));
+		case cMissionId_Mission14:	return (new Mission14(id, texture, vertex));
 		}
 
 		return nullptr;
@@ -174,7 +174,7 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 {
 	for (int i = 0; i < cMissionId_Count; i++)
 	{
-		mMission[i] = createMission(static_cast<MissionId>(i));
+		mMission[i] = createMission(static_cast<MissionId>(i), texture, vertex);
 	}
 
 	mState.initialize(cState_Count, cState_Idle);

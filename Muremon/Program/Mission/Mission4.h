@@ -10,13 +10,16 @@
 #include "Library/StateMachine.h"
 #include "MissionBase.h"
 
+class Texture;
+class Vertex;
+
 class Mission4 : public MissionBase
 {
 public:
-	Mission4(MissionId id);
+	Mission4(MissionId id, Texture* texture, Vertex* vertex);
 	virtual ~Mission4();
 
-	void					run() override;
+	void					runImple() override;
 	void					update() override;
 	void					draw() override;
 	bool					isSuccess() const override;

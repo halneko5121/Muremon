@@ -44,6 +44,7 @@ void
 MissionBase::run()
 {
 	mTime = TEN_SECOND;
+	mKeyCount = 0;
 
 	runImple();
 }

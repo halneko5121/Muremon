@@ -552,7 +552,6 @@ SceneGameNormal::stateGame()
 	{
 		if (!mIsInit)
 		{
-			UtilSound::playOnce(S_OSIRASE);
 			mMission->init(
 				UtilBattle::getWeakAtkCount(),
 				UtilBattle::getMediumAtkCount(),

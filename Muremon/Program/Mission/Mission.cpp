@@ -1141,6 +1141,7 @@ Mission::stateIdle()
 void
 Mission::stateEnterStartShake()
 {
+	UtilSound::playOnce(S_OSIRASE);
 	mMoveCount = 0;
 
 	// ‚İ‚Á‚µ‚å‚ñ‚ğŒˆ‚ß‚½‚è‰Šú‰»‚µ‚½‚è
@@ -1364,9 +1365,6 @@ Mission::stateEnterOugi()
 void
 Mission::stateOugi()
 {
-	mAlpha -= MISSION_ALPHA_INCREASE;
-	if (mAlpha < 0) { mAlpha = 0; }
-
 }
 
 /**
@@ -1379,8 +1377,6 @@ Mission::stateEnterBadStatus()
 void
 Mission::stateBadStatus()
 {
-	mAlpha -= MISSION_ALPHA_INCREASE;
-	if (mAlpha < 0) { mAlpha = 0; }
 }
 
 /**

@@ -13,6 +13,7 @@
 #include "Program/DefineGame.h"
 
 class ActorBoss;
+class MissionBase;
 
 enum MissionId
 {
@@ -102,6 +103,7 @@ private:
 	Texture*					mTexture;
 	Vertex*						mVertex;
 	ActorBoss*					mActorBoss;
+	MissionBase*				mMission[cMissionId_Count];
 
 	Vector2f					mMissionStartPos;	//‚Ý‚Á‚µ‚å‚ñŠJŽn‚ÌˆÊ’u
 

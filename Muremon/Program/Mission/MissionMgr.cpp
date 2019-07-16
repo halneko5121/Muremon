@@ -13,6 +13,21 @@
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Actor/ActorBoss.h"
+#include "Program/Mission/MissionBase.h"
+#include "Program/Mission/Mission1.h"
+#include "Program/Mission/Mission2.h"
+#include "Program/Mission/Mission3.h"
+#include "Program/Mission/Mission4.h"
+#include "Program/Mission/Mission5.h"
+#include "Program/Mission/Mission6.h"
+#include "Program/Mission/Mission7.h"
+#include "Program/Mission/Mission8.h"
+#include "Program/Mission/Mission9.h"
+#include "Program/Mission/Mission10.h"
+#include "Program/Mission/Mission11.h"
+#include "Program/Mission/Mission12.h"
+#include "Program/Mission/Mission13.h"
+#include "Program/Mission/Mission14.h"
 
 #define TEN_SECOND	(600)
 
@@ -107,6 +122,30 @@ namespace
 		cState_End,				// èIóπ
 		cState_Count
 	};
+
+	MissionBase*
+	createMission(MissionId id)
+	{
+		switch (id)
+		{
+		case cMissionId_Mission1:	return (new Mission1(id));
+		case cMissionId_Mission2:	return (new Mission2(id));
+		case cMissionId_Mission3:	return (new Mission3(id));
+		case cMissionId_Mission4:	return (new Mission4(id));
+		case cMissionId_Mission5:	return (new Mission5(id));
+		case cMissionId_Mission6:	return (new Mission6(id));
+		case cMissionId_Mission7:	return (new Mission7(id));
+		case cMissionId_Mission8:	return (new Mission8(id));
+		case cMissionId_Mission9:	return (new Mission9(id));
+		case cMissionId_Mission10:	return (new Mission10(id));
+		case cMissionId_Mission11:	return (new Mission11(id));
+		case cMissionId_Mission12:	return (new Mission12(id));
+		case cMissionId_Mission13:	return (new Mission13(id));
+		case cMissionId_Mission14:	return (new Mission14(id));
+		}
+
+		return nullptr;
+	}
 }
 
 MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
@@ -133,6 +172,11 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mKeyCountYoshitaro(0)
 	, mKeyCountNoppo(0)
 {
+	for (int i = 0; i < cMissionId_Count; i++)
+	{
+		mMission[i] = createMission(static_cast<MissionId>(i));
+	}
+
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(MissionMgr, mState, Idle,			cState_Idle);
 	REGIST_STATE_FUNC2(MissionMgr, mState, StartShake,		cState_StartShake);
@@ -1332,6 +1376,8 @@ MissionMgr::stateEnterRun()
 void
 MissionMgr::stateRun()
 {
+//	mMissionBase[mCurrentMissionNo]->update();
+
 	switch (mCurrentMissionNo)
 	{
 	case MISSION_1:

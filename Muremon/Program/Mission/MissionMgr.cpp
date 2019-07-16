@@ -301,28 +301,6 @@ MissionMgr::resetBadStatusAtkLv()
 	mNegativeAtkLv = 0;
 }
 
-void MissionMgr::updateMission2()	//『10秒間でちょうど50回連打せよ！！』
-{
-	if (mTime <= 0)
-	{
-		if (mKeyCount == 50)
-		{
-			mState.changeState(cState_Success);
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-		}
-		return;
-	}
-	
-	if (UtilInput::isAnyKeyPushed())
-	{
-		mKeyCount++;
-	}
-	mTime--;
-}
-
 void MissionMgr::updateMission3()	//『10秒間でちょうど100回連打せよ！！』
 {
 	if(mTime <= 0)
@@ -984,12 +962,6 @@ void MissionMgr::updateMissionD()
 	mMission[mCurrentMissionNo]->draw();
 }
 
-void MissionMgr::updateMission2D()	//『10秒間でちょうど50回連打せよ！！』
-{
-	drawTime();
-	drawCombo();
-}
-
 void MissionMgr::updateMission3D()	//『10秒間でちょうど100回連打せよ！！』
 {
 	drawTime();
@@ -1187,59 +1159,61 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// みっしょんを決めたり初期化したり
-	mCurrentMissionNo = cMissionId_Mission1; // rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission2; // rand() % 100 + 1;
 
+	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {
-		mCurrentMissionNo = MISSION_1;
+		mCurrentMissionNo = MISSIcMissionId_Mission1;
 	}
 	else if (mCurrentMissionNo > MISSION_1PAR && mCurrentMissionNo <= MISSION_2PAR) {
-		mCurrentMissionNo = MISSION_2;
+		mCurrentMissionNo = cMissionId_Mission2;
 	}
 	else if (mCurrentMissionNo > MISSION_2PAR && mCurrentMissionNo <= MISSION_3PAR) {
-		mCurrentMissionNo = MISSION_3;
+		mCurrentMissionNo = cMissionId_Mission3;
 	}
 	else if (mCurrentMissionNo > MISSION_3PAR && mCurrentMissionNo <= MISSION_4PAR) {
-		mCurrentMissionNo = MISSION_4;
+		mCurrentMissionNo = cMissionId_Mission4;
 	}
 	else if (mCurrentMissionNo > MISSION_4PAR && mCurrentMissionNo <= MISSION_5PAR) {
-		mCurrentMissionNo = MISSION_5;
+		mCurrentMissionNo = cMissionId_Mission5;
 	}
 	else if (mCurrentMissionNo > MISSION_5PAR && mCurrentMissionNo <= MISSION_6PAR) {
-		mCurrentMissionNo = MISSION_6;
+		mCurrentMissionNo = cMissionId_Mission6;
 	}
 	else if (mCurrentMissionNo > MISSION_6PAR && mCurrentMissionNo <= MISSION_7PAR) {
-		mCurrentMissionNo = MISSION_7;
+		mCurrentMissionNo = cMissionId_Mission7;
 	}
 	else if (mCurrentMissionNo > MISSION_7PAR && mCurrentMissionNo <= MISSION_8PAR) {
-		mCurrentMissionNo = MISSION_8;
+		mCurrentMissionNo = cMissionId_Mission8;
 	}
 	else if (mCurrentMissionNo > MISSION_8PAR && mCurrentMissionNo <= MISSION_9PAR) {
-		mCurrentMissionNo = MISSION_9;
+		mCurrentMissionNo = cMissionId_Mission9;
 	}
 	else if (mCurrentMissionNo > MISSION_9PAR && mCurrentMissionNo <= MISSION_10PAR) {
-		mCurrentMissionNo = MISSION_10;
+		mCurrentMissionNo = cMissionId_Mission10;
 	}
 	else if (mCurrentMissionNo > MISSION_10PAR && mCurrentMissionNo <= MISSION_11PAR) {
-		mCurrentMissionNo = MISSION_11;
+		mCurrentMissionNo = cMissionId_Mission11;
 	}
 	else if (mCurrentMissionNo > MISSION_11PAR && mCurrentMissionNo <= MISSION_12PAR) {
-		mCurrentMissionNo = MISSION_12;
+		mCurrentMissionNo = cMissionId_Mission12;
 		if (mKeyCountNikuman >= mKeyCountNoppo && mKeyCountNikuman >= mKeyCountYoshitaro) {
-			mCurrentMissionNo = MISSION_1;
+			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
 	else if (mCurrentMissionNo > MISSION_12PAR && mCurrentMissionNo <= MISSION_13PAR) {
-		mCurrentMissionNo = MISSION_13;
+		mCurrentMissionNo = cMissionId_Mission13;
 		if (mKeyCountYoshitaro >= mKeyCountNikuman && mKeyCountYoshitaro >= mKeyCountNoppo) {
-			mCurrentMissionNo = MISSION_1;
+			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
 	else if (mCurrentMissionNo > MISSION_13PAR && mCurrentMissionNo <= MISSION_14PAR) {
-		mCurrentMissionNo = MISSION_14;
+		mCurrentMissionNo = cMissionId_Mission14;
 		if (mKeyCountNoppo >= mKeyCountNikuman && mKeyCountNoppo >= mKeyCountYoshitaro) {
-			mCurrentMissionNo = MISSION_1;
+			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
+	*/
 }
 void
 MissionMgr::stateStartShake()

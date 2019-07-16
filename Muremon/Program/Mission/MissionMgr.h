@@ -56,10 +56,8 @@ private:
 
 	void	updateMissionD();
 
-	void	updateMission13();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void	updateMission14();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
-	void	updateMission13D();	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
 	void	updateMission14D();	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
 
 private:

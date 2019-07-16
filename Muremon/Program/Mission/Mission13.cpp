@@ -1,12 +1,16 @@
 /******************************************************************
  *	@file	Mission13.cpp
- *	@brief	ミッション13
+ *	@brief	ミッション13（10秒以内に「よしたろう」の連打数を一番高くしろ！）
  *
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
 
 #include "Mission13.h"
+
+#include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilBattle.h"
+#include "Program/DefineGame.h"
 
 namespace
 {
@@ -66,6 +70,7 @@ Mission13::updateImple()
 void
 Mission13::draw()
 {
+	drawTime();
 }
 
 /**
@@ -74,7 +79,7 @@ Mission13::draw()
 bool
 Mission13::isSuccess() const
 {
-	return false;
+	return (mState.isEqual(cState_Success));
 }
 
 /**
@@ -83,7 +88,7 @@ Mission13::isSuccess() const
 bool
 Mission13::isFailure() const
 {
-	return (!isSuccess());
+	return (mState.isEqual(cState_Failure));
 }
 
 
@@ -113,6 +118,28 @@ Mission13::stateEnterRun()
 void
 Mission13::stateRun()
 {
+	if (isTimeOver())
+	{
+		int key_count_niku = UtilBattle::getWeakAtkCount();
+		int key_count_yoshi = UtilBattle::getMediumAtkCount();
+		int key_count_noppo = UtilBattle::getStrongAtkCount();
+
+		if (key_count_yoshi > key_count_niku && key_count_yoshi > key_count_noppo)
+		{
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mState.changeState(cState_Failure);
+		}
+		return;
+	}
+
+	if (UtilInput::isKeyPushedLineOne())
+	{
+		UtilBattle::addMediumAtkCount();
+	}
+	mTime--;
 }
 
 /**

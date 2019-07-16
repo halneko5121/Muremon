@@ -301,29 +301,6 @@ MissionMgr::resetBadStatusAtkLv()
 	mNegativeAtkLv = 0;
 }
 
-void MissionMgr::updateMission13()	//w10•bˆÈ“à‚Éu‚æ‚µ‚½‚ë‚¤v‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
-{
-	if (mTime <= 0)
-	{
-		if (mKeyCountYoshitaro > mKeyCountNikuman && mKeyCountYoshitaro > mKeyCountNoppo)
-		{
-			mState.changeState(cState_Success);
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-		}
-		return;
-	}
-	
-	if (UtilInput::isKeyPushedLineOne())
-	{
-		UtilBattle::addMediumAtkCount();
-		mKeyCountYoshitaro++;
-	}
-	mTime--;
-}
-
 void MissionMgr::updateMission14()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
 {
 	if(mTime <= 0)
@@ -350,11 +327,6 @@ void MissionMgr::updateMission14()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚
 void MissionMgr::updateMissionD()
 {
 	mMission[mCurrentMissionNo]->draw();
-}
-
-void MissionMgr::updateMission13D()	//w10•bˆÈ“à‚Éu‚æ‚µ‚½‚ë‚¤v‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
-{
-	drawTime();
 }
 
 void MissionMgr::updateMission14D()	//w10•bˆÈ“à‚Éu‚Ì‚Á‚Ûv‚Ì˜A‘Å”‚ğˆê”Ô‚‚­‚µ‚ëIx
@@ -442,7 +414,7 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// ‚İ‚Á‚µ‚å‚ñ‚ğŒˆ‚ß‚½‚è‰Šú‰»‚µ‚½‚è
-	mCurrentMissionNo = cMissionId_Mission12; // rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission13; // rand() % 100 + 1;
 
 	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {

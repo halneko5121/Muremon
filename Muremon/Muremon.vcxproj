@@ -32,6 +32,7 @@
     <ClCompile Include="Program\Effect\EffectFont.cpp" />
     <ClCompile Include="Program\Effect\EffectHit.cpp" />
     <ClCompile Include="Program\Effect\EffectMgr.cpp" />
+    <ClCompile Include="Program\Mission\Mission1.cpp" />
     <ClCompile Include="Program\Mission\MissionBase.cpp" />
     <ClCompile Include="Program\Mission\MissionMgr.cpp" />
     <ClCompile Include="Program\stdafx.cpp">
@@ -85,6 +86,7 @@
     <ClInclude Include="Program\Effect\EffectFont.h" />
     <ClInclude Include="Program\Effect\EffectHit.h" />
     <ClInclude Include="Program\Effect\EffectMgr.h" />
+    <ClInclude Include="Program\Mission\Mission1.h" />
     <ClInclude Include="Program\Mission\MissionBase.h" />
     <ClInclude Include="Program\Mission\MissionMgr.h" />
     <ClInclude Include="Program\stdafx.h" />

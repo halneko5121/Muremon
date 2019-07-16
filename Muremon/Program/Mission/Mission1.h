@@ -16,9 +16,18 @@ public:
 	Mission1(MissionId id);
 	virtual ~Mission1();
 
+	void					run() override;
 	void					update() override;
 	void					draw() override;
-	bool					isEnd() const override;
+	bool					isSuccess() const override;
+	bool					isFailure() const override;
+
+private:
+	// ステート関数
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Run);
+	DECLAR_STATE_FUNC2(Success);
+	DECLAR_STATE_FUNC2(Failure);
 
 private:
 	StateMachine<Mission1>	mState;		// ステート

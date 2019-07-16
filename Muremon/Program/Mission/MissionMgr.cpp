@@ -301,90 +301,6 @@ MissionMgr::resetBadStatusAtkLv()
 	mNegativeAtkLv = 0;
 }
 
-void MissionMgr::updateMission9()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
-{
-	if (mTime <= 0)
-	{
-		if (mSuccessTypingCount == MISSION9_FONT_NUM)
-		{
-			mState.changeState(cState_Success);
-		}
-		else
-		{
-			mState.changeState(cState_Failure);
-		}
-		return;
-	}
-
-	if(mSuccessTypingCount < MISSION9_FONT_NUM)
-	{
-		switch (mSuccessTypingCount)
-		{
-		case 1:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_N)) mSuccessTypingCount++;
-			break;
-		case 2:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
-			break;
-		case 3:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
-			break;
-		case 4:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
-			break;
-		case 5:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
-			break;
-		case 6:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_B)) mSuccessTypingCount++;
-			break;
-		case 7:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
-			break;
-		case 8:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
-			break;
-		case 9:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
-			break;
-		case 10:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_S)) mSuccessTypingCount++;
-			break;
-
-		case 11:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
-			break;
-		case 12:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_R)) mSuccessTypingCount++;
-			break;
-		case 13:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_I)) mSuccessTypingCount++;
-			break;
-		case 14:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_K)) mSuccessTypingCount++;
-			break;
-		case 15:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_O)) mSuccessTypingCount++;
-			break;
-		case 16:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_P)) mSuccessTypingCount++;
-			break;
-		case 17:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_U)) mSuccessTypingCount++;
-			break;
-		case 18:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_T)) mSuccessTypingCount++;
-			break;
-		case 19:
-			if (UtilInput::isKeyPushed(UtilInput::cKey_A)) mSuccessTypingCount++;
-			break;
-		default:
-			break;
-		}
-	}
-	mTime--;
-}
-
 void MissionMgr::updateMission10()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0){
@@ -542,18 +458,6 @@ void MissionMgr::updateMissionD()
 	mMission[mCurrentMissionNo]->draw();
 }
 
-void MissionMgr::updateMission9D()	//『「NOPPOBOKUSIRIKOPUTA」と入力せよ！！』
-{
-	drawTime();
-
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-
-	for(int i = 1;i < mSuccessTypingCount;i++)
-	{
-		mVertex->drawF(Vector2f(96.0f + 29.5f * (i - 1), 278.0f), R_F_NIKUMAN);
-	}
-}
-
 void MissionMgr::updateMission10D()	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
 {
 	if(mFlagTimeCount == 0)
@@ -673,7 +577,7 @@ MissionMgr::stateEnterStartShake()
 	mMoveCount = 0;
 
 	// みっしょんを決めたり初期化したり
-	mCurrentMissionNo = cMissionId_Mission8; // rand() % 100 + 1;
+	mCurrentMissionNo = cMissionId_Mission9; // rand() % 100 + 1;
 
 	/*
 	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {

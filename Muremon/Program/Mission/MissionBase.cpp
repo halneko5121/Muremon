@@ -35,7 +35,7 @@ MissionBase::~MissionBase()
  * @brief	é¿çs
  */
 void
-MissionBase::runImple()
+MissionBase::run()
 {
 	mTime = TEN_SECOND;
 

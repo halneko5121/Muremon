@@ -29,21 +29,6 @@
 #include "Program/Mission/Mission13.h"
 #include "Program/Mission/Mission14.h"
 
-#define TEN_SECOND	(600)
-
-#define M_TIMENUM_X	(375.f)
-#define M_TIMENUM_Y	(125.f)
-
-#define M_COMBO_X	(500.f)
-#define M_COMBO_Y	(245.f)
-
-#define MISSION4_FONT_NUM	(16)
-#define MISSION5_FONT_NUM	(23)
-#define MISSION6_FONT_NUM	(17)
-#define MISSION7_FONT_NUM	(19)
-#define MISSION8_FONT_NUM	(15)
-#define MISSION9_FONT_NUM	(20)
-
 #define MISSION_1PAR	(10)
 #define MISSION_2PAR	(20)
 #define MISSION_3PAR	(25)
@@ -60,7 +45,6 @@
 #define MISSION_14PAR	(100)
 
 #define MISSION_ALPHA_INCREASE	(5)
-#define MISSION_ALPHA_MAX	(255)
 
 #define MISSION_HASSEI_X	(400.f)
 #define MISSION_HASSEI_Y	(50.f)
@@ -154,8 +138,6 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mActorBoss(boss)
 	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
 	, mAlpha(0)
-	, mAlphaPushZ(255)
-	, mFlagZ(true)
 	, mFlagDraw(0)
 	, mMoveCount(0)
 	, mCurrentMissionNo(0)
@@ -164,10 +146,6 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mNegativeAlpha(0)
 	, mNegativeState(NO_NEGATIVE)
 	, mNegativeAtkLv(0)
-	, mTime(TEN_SECOND)
-	, mFlagTimeCount(0)
-	, mSuccessTypingCount(1)
-	, mKeyCount(0)
 	, mKeyCountNikuman(0)
 	, mKeyCountYoshitaro(0)
 	, mKeyCountNoppo(0)
@@ -197,16 +175,8 @@ MissionMgr::~MissionMgr()
 void MissionMgr::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 {
 	mCurrentMissionNo	= 0;
-	mTime		= TEN_SECOND;
-	mKeyCount		= 0;
-	mSuccessTypingCount	= 1;
 	mFlagDraw	= 0;
 	mAlpha		= 0;
-	mAlphaPushZ= 255;
-
-	mFlagTimeCount = 0;
-
-	mFlagZ		= true;
 
 	mMissionStartPos.x = MISSION_HASSEI_X;
 	mMissionStartPos.y = -50.f;
@@ -326,38 +296,6 @@ MissionMgr::calcRectIndex(int state_index) const
 	default:
 		return 0;
 	}
-}
-
-void MissionMgr::drawTime()
-{
-	// タイム
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	for(int i = 0;i < 2;i++){
-		int num = mTime;
-		for(int j = 0;j < 2 - i;j++){
-			if(j == 0){
-				num = num / 60;
-			}
-			else{
-				num = num / 10;
-			}
-		}
-		mVertex->drawF(Vector2f(M_TIMENUM_X + 50.f * i, M_TIMENUM_Y), R_0_B + num % 10);
-	}
-}
-
-void MissionMgr::drawCombo()
-{
-	// コンボ
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	for(int i = 0;i < 3;i++){
-		int num = mKeyCount;
-		for(int j = 1;j < 3 - i;j++){
-			num = num / 10;
-		}
-		mVertex->drawF(Vector2f(M_COMBO_X + 50.f + 50.f * i, M_COMBO_Y), R_0_B + num % 10);
-	}
-	mVertex->drawF(Vector2f(M_COMBO_X, M_COMBO_Y), R_COMBO);
 }
 
 // -----------------------------------------------------------------
@@ -482,11 +420,11 @@ void
 MissionMgr::stateStartFadeOut()
 {
 	mAlpha += MISSION_ALPHA_INCREASE;
-	if (mAlpha > MISSION_ALPHA_MAX)
+	if (mAlpha > 255)
 	{
-		mAlpha = MISSION_ALPHA_MAX;
+		mAlpha = 255;
 	}
-	if (mAlpha == MISSION_ALPHA_MAX)
+	if (mAlpha == 255)
 	{
 		mState.changeState(cState_Run);
 		return;

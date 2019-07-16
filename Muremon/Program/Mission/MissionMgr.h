@@ -51,9 +51,6 @@ public:
 
 private:
 	int		calcRectIndex(int state_index) const;
-	void	drawTime();		//時間を表示
-	void	drawCombo();
-
 	void	updateMissionD();
 
 private:
@@ -78,9 +75,6 @@ private:
 	Vector2f					mMissionStartPos;	//みっしょん開始の位置
 
 	int							mAlpha;			//
-	int							mAlphaPushZ;	//
-
-	int							mFlagZ;			//
 	int							mFlagDraw;		//
 
 	int							mMoveCount;		//
@@ -92,12 +86,6 @@ private:
 	int							mNegativeAlpha;
 	int							mNegativeState;
 	int							mNegativeAtkLv;
-
-	int							mTime;					// 時間
-	int							mFlagTimeCount;			// タイムカウントのフラグ
-	int							mSuccessTypingCount;	// タイピング時正解しているか判定
-
-	int							mKeyCount;				// キーの連打数を保存する変数
 
 	int							mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
 	int							mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント

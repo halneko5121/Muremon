@@ -68,6 +68,8 @@ Mission1::update()
 void
 Mission1::draw()
 {
+	drawTime();
+	drawCombo();
 }
 
 /**
@@ -76,7 +78,7 @@ Mission1::draw()
 bool
 Mission1::isSuccess() const
 {
-	return false;
+	return (mState.isEqual(cState_Success));
 }
 
 /**
@@ -85,7 +87,7 @@ Mission1::isSuccess() const
 bool
 Mission1::isFailure() const
 {
-	return (!isSuccess());
+	return (mState.isEqual(cState_Failure));
 }
 
 

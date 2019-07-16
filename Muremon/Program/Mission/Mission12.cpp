@@ -1,12 +1,16 @@
 /******************************************************************
  *	@file	Mission12.cpp
- *	@brief	ミッション12
+ *	@brief	ミッション12（10秒以内に「にくまん」の連打数を一番高くしろ！）
  *
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
 
 #include "Mission12.h"
+
+#include "Program/Util/UtilInput.h"
+#include "Program/Util/UtilBattle.h"
+#include "Program/DefineGame.h"
 
 namespace
 {
@@ -66,6 +70,7 @@ Mission12::updateImple()
 void
 Mission12::draw()
 {
+	drawTime();
 }
 
 /**
@@ -74,7 +79,7 @@ Mission12::draw()
 bool
 Mission12::isSuccess() const
 {
-	return false;
+	return (mState.isEqual(cState_Success));
 }
 
 /**
@@ -83,7 +88,7 @@ Mission12::isSuccess() const
 bool
 Mission12::isFailure() const
 {
-	return (!isSuccess());
+	return (mState.isEqual(cState_Failure));
 }
 
 
@@ -113,6 +118,28 @@ Mission12::stateEnterRun()
 void
 Mission12::stateRun()
 {
+	if (isTimeOver())
+	{
+		int key_count_niku	= UtilBattle::getWeakAtkCount();
+		int key_count_yoshi	= UtilBattle::getMediumAtkCount();
+		int key_count_noppo	= UtilBattle::getStrongAtkCount();
+
+		if (key_count_niku > key_count_noppo && key_count_niku > key_count_yoshi)
+		{
+			mState.changeState(cState_Success);
+		}
+		else
+		{
+			mState.changeState(cState_Failure);
+		}
+		return;
+	}
+
+	if (UtilInput::isKeyPushedLineTwo())
+	{
+		UtilBattle::addWeakAtkCount();
+	}
+	mTime--;
 }
 
 /**

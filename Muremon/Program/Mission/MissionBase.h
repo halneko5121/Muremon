@@ -38,7 +38,5 @@ protected:
 	Vertex*			mVertex;				// バーテックス
 	int				mKeyCount;
 	int				mSuccessTypingCount;	// タイピング時正解している数
-
-private:
 	int				mTime;
 };

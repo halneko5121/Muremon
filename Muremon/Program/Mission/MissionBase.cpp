@@ -58,8 +58,6 @@ void
 MissionBase::update()
 {
 	updateImple();
-	mTime--;
-	if (mTime <= 0) mTime = 0;
 }
 
 /**

@@ -205,6 +205,8 @@ Mission7::stateRun()
 		}
 	}
 
+	mTime--;
+	if (mTime <= 0) mTime = 0;
 }
 
 /**

@@ -207,6 +207,9 @@ Mission9::stateRun()
 			break;
 		}
 	}
+
+	mTime--;
+	if (mTime <= 0) mTime = 0;
 }
 
 /**

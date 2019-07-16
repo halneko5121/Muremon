@@ -135,6 +135,9 @@ Mission1::stateRun()
 	{
 		mKeyCount++;
 	}
+
+	mTime--;
+	if (mTime <= 0) mTime = 0;
 }
 
 /**

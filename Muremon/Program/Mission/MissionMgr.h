@@ -38,6 +38,7 @@ public:
 	void	resetBadStatusAtkLv();
 
 private:
+	int		calcRectIndex(int state_index) const;
 	void	drawTime();		//ŽžŠÔ‚ð•\Ž¦
 	void	drawCombo();
 

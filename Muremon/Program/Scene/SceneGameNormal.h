@@ -63,7 +63,6 @@ private:
 	int					mGameStateFontAlpha;	// げ～むすた～とのアルファ差分
 	int					mGameStateRectNum;		// ゲームステートの応じた矩形番号
 
-	bool				mIsInit;				// 初期化したかどうか
 	int					mMissionGauge;			// 必殺ゲージ
 
 	int					mNikumanCurrentIndex;	// にくまんの現在の番号

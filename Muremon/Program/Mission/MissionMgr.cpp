@@ -113,7 +113,6 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mFlagDraw(0)
 	, mMoveCount(0)
 	, mCurrentMissionNo(0)
-	, mMissionState(MISSION_START)
 	, mAlphaFont(0)
 	, mWavePos(cWaveInitPos)
 	, mNegativeAlpha(0)
@@ -132,12 +131,12 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	REGIST_STATE_FUNC2(MissionMgr, mState, Idle,			cState_Idle);
 	REGIST_STATE_FUNC2(MissionMgr, mState, StartShake,		cState_StartShake);
 	REGIST_STATE_FUNC2(MissionMgr, mState, StartFadeOut,	cState_StartFadeOut);
-	REGIST_STATE_FUNC2(MissionMgr, mState, Run,			cState_Run);
-	REGIST_STATE_FUNC2(MissionMgr, mState, Success,		cState_Success);
-	REGIST_STATE_FUNC2(MissionMgr, mState, Failure,		cState_Failure);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Run,				cState_Run);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Success,			cState_Success);
+	REGIST_STATE_FUNC2(MissionMgr, mState, Failure,			cState_Failure);
 	REGIST_STATE_FUNC2(MissionMgr, mState, Ougi,			cState_Ougi);
 	REGIST_STATE_FUNC2(MissionMgr, mState, BadStatus,		cState_BadStatus);
-	REGIST_STATE_FUNC2(MissionMgr, mState, End,			cState_End);
+	REGIST_STATE_FUNC2(MissionMgr, mState, End,				cState_End);
 	mState.changeState(cState_Idle);
 }
 
@@ -152,7 +151,6 @@ void MissionMgr::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 	mKeyCount		= 0;
 	mSuccessTypingCount	= 1;
 	mFlagMissionState = MISSION_SEIKO;
-	mMissionState = MISSION_START;
 	mFlagDraw	= 0;
 	mAlpha		= 0;
 	mAlphaPushZ= 255;
@@ -182,12 +180,14 @@ void MissionMgr::draw()
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 
-	if(mMissionState != MISSION_START)
+	if (!mState.isEqual(cState_StartShake)&&
+		!mState.isEqual(cState_StartFadeOut))
 	{
 		mVertex->setColor(mAlpha,255,255,255);
 	}
 
-	mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI + mMissionState);	//Ç›Ç¡ÇµÇÂÇÒî≠ê∂
+	int rect_index = calcRectIndex(mState.getStateIndex());
+	mVertex->drawF(mMissionStartPos, rect_index);	//Ç›Ç¡ÇµÇÂÇÒî≠ê∂
 
 	mVertex->setColor(mAlpha,255,255,255);
 	mVertex->drawF(MISSION_OSIRASE, R_MISSION_OSIRASE);	//Ç›Ç¡ÇµÇÂÇÒÇ®ímÇÁÇπòg
@@ -195,7 +195,8 @@ void MissionMgr::draw()
 
 	if(mCurrentMissionNo == MISSION_10 || mCurrentMissionNo == MISSION_11)
 	{
-		if(mMissionState == MISSION_START)
+		if (mState.isEqual(cState_StartShake) ||
+			mState.isEqual(cState_StartFadeOut))
 		{
 			UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 			mVertex->setColor(mAlpha,255,255,255);
@@ -203,7 +204,7 @@ void MissionMgr::draw()
 		}
 	}
 
-	if(mMissionState == MISSION_MIDDLE){
+	if(mState.isEqual(cState_Run)){
 		updateMissionD();
 	}
 
@@ -265,12 +266,10 @@ void MissionMgr::updateMission1()	//Åw10ïbà»ì‡Ç…100âÒòAë≈ÇπÇÊÅIÅIÅx
 	{
 		if (mKeyCount >= 100)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -289,12 +288,10 @@ void MissionMgr::updateMission2()	//Åw10ïbä‘Ç≈ÇøÇÂÇ§Ç«50âÒòAë≈ÇπÇÊÅIÅIÅx
 	{
 		if (mKeyCount == 50)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -313,12 +310,10 @@ void MissionMgr::updateMission3()	//Åw10ïbä‘Ç≈ÇøÇÂÇ§Ç«100âÒòAë≈ÇπÇÊÅIÅIÅx
 	{
 		if (mKeyCount == 100)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -337,12 +332,10 @@ void MissionMgr::updateMission4()	//ÅwÅuNIKUMANTOTUGEKIÅvÇ∆ì¸óÕÇπÇÊÅIÅIÅx
 	{
 		if (mSuccessTypingCount == MISSION4_FONT_NUM)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -418,12 +411,10 @@ void MissionMgr::updateMission5()	//ÅwÅuNIKUMANINSEKIRAKKAJUTUÅvÇ∆ì¸óÕÇπÇÊÅIÅIÅx
 	{
 		if (mSuccessTypingCount == MISSION5_FONT_NUM)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -514,12 +505,10 @@ void MissionMgr::updateMission6()	//ÅwÅuYOSITAROHIPATACKÅvÇ∆ì¸óÕÇπÇÊÅIÅIÅx
 	{
 		if (mSuccessTypingCount == MISSION6_FONT_NUM)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -591,12 +580,10 @@ void MissionMgr::updateMission7()	//ÅwÅuYOSITAROHUSENSHOOTÅvÇ∆ì¸óÕÇπÇÊÅIÅIÅx
 	{
 		if (mSuccessTypingCount == MISSION7_FONT_NUM)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -674,12 +661,10 @@ void MissionMgr::updateMission8()	//ÅwÅuNOPPOKOKEPPETIÅvÇ∆ì¸óÕÇπÇÊÅIÅIÅx
 	{
 		if (mSuccessTypingCount == MISSION8_FONT_NUM)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -745,12 +730,10 @@ void MissionMgr::updateMission9()	//ÅwÅuNOPPOBOKUSIRIKOPUTAÅvÇ∆ì¸óÕÇπÇÊÅIÅIÅx
 	{
 		if (mSuccessTypingCount == MISSION9_FONT_NUM)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -851,13 +834,13 @@ void MissionMgr::updateMission10()	//Åw10ïbêîÇ¶ÇƒëOå„1ïbà»ì‡Ç≈ÅuÇyÉLÅ[ÅvÇâüÇπÅI
 	}
 	else if(mFlagTimeCount == 2)
 	{
-		if(mTime <= 11*60 - 31 && mTime >= 9*60 + 31){
-			mMissionState = MISSION_SEIKO;
+		if(mTime <= 11*60 - 31 && mTime >= 9*60 + 31)
+		{
 			mState.changeState(cState_Success);
 			return;
 		}
-		else{
-			mMissionState = MISSION_SIPPAI;
+		else
+		{
 			mState.changeState(cState_Failure);
 			return;
 		}
@@ -897,13 +880,11 @@ void MissionMgr::updateMission11()	//Åw5ïbêîÇ¶ÇƒëOå„1ïbà»ì‡Ç≈ÅuÇyÉLÅ[ÅvÇâüÇπÅIÅ
 	{
 		if(mTime <= 6*60 - 31 && mTime >= 4*60 + 31)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 			return;
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 			return;
 		}
@@ -916,12 +897,10 @@ void MissionMgr::updateMission12()	//Åw10ïbà»ì‡Ç…ÅuÇ…Ç≠Ç‹ÇÒÅvÇÃòAë≈êîÇàÍî‘çÇÇ≠Ç
 	{
 		if (mKeyCountNikuman > mKeyCountNoppo && mKeyCountNikuman > mKeyCountYoshitaro)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -941,12 +920,10 @@ void MissionMgr::updateMission13()	//Åw10ïbà»ì‡Ç…ÅuÇÊÇµÇΩÇÎÇ§ÅvÇÃòAë≈êîÇàÍî‘çÇÇ
 	{
 		if (mKeyCountYoshitaro > mKeyCountNikuman && mKeyCountYoshitaro > mKeyCountNoppo)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -966,12 +943,10 @@ void MissionMgr::updateMission14()	//Åw10ïbà»ì‡Ç…ÅuÇÃÇ¡Ç€ÅvÇÃòAë≈êîÇàÍî‘çÇÇ≠ÇµÇ
 	{
 		if(mKeyCountNoppo > mKeyCountNikuman && mKeyCountNoppo > mKeyCountYoshitaro)
 		{
-			mMissionState = MISSION_SEIKO;
 			mState.changeState(cState_Success);
 		}
 		else
 		{
-			mMissionState = MISSION_SIPPAI;
 			mState.changeState(cState_Failure);
 		}
 		return;
@@ -1163,6 +1138,28 @@ void MissionMgr::updateMission14D()	//Åw10ïbà»ì‡Ç…ÅuÇÃÇ¡Ç€ÅvÇÃòAë≈êîÇàÍî‘çÇÇ≠Çµ
 	drawTime();
 }
 
+/**
+ * @brief åªç›ÇÃÉXÉeÅ[ÉgÇ©ÇÁãÈå`î‘çÜÇéZèoÇ∑ÇÈ
+ */
+int
+MissionMgr::calcRectIndex(int state_index) const
+{
+	switch (state_index)
+	{
+	case cState_StartShake:
+	case cState_StartFadeOut:
+		return R_MISSION_HASSEI;
+	case cState_Run:
+		return R_MISSION_KAISI;
+	case cState_Success:
+		return R_MISSION_SEIKO;
+	case cState_Failure:
+		return R_MISSION_SIPPAI;
+	default:
+		return 0;
+	}
+}
+
 void MissionMgr::drawTime()
 {
 	// É^ÉCÉÄ
@@ -1323,7 +1320,6 @@ MissionMgr::stateStartFadeOut()
 	}
 	if (mAlpha == MISSION_ALPHA_MAX)
 	{
-		mMissionState = MISSION_MIDDLE;
 		mState.changeState(cState_Run);
 		return;
 	}
@@ -1403,7 +1399,6 @@ MissionMgr::stateSuccess()
 
 	if (mAlpha == 0)
 	{
-		mMissionState = MISSION_OUGI;
 		mState.changeState(cState_Ougi);
 		return;
 	}
@@ -1425,7 +1420,6 @@ MissionMgr::stateFailure()
 
 	if (mAlpha == 0)
 	{
-		mMissionState = MISSION_NEGATIVE;
 		mState.changeState(cState_BadStatus);
 		return;
 	}
@@ -1482,7 +1476,6 @@ MissionMgr::stateOugi()
 		mActorBoss->mLife -= 7000;
 		mWavePos = cWaveInitPos;
 		UtilGame::addScore(cMissionClearAddScore);
-		mMissionState = MISSION_END;
 		mState.changeState(cState_End);
 	}
 }
@@ -1546,7 +1539,6 @@ MissionMgr::stateBadStatus()
 			mNegativeAtkLv++;
 			break;
 		}
-		mMissionState = MISSION_END;
 		mState.changeState(cState_End);
 	}
 }

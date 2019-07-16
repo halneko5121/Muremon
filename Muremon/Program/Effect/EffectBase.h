@@ -20,8 +20,8 @@ struct EffectParam
 	{
 	}
 
-	Texture*		mTexture;
-	Vertex*			mVertex;
+	Texture*	mTexture;
+	Vertex*		mVertex;
 	Vector2f	mPos;
 };
 
@@ -40,6 +40,6 @@ protected:
 	Texture*		mTexture;		// テクスチャ
 	Vertex*			mVertex;		// バーテックス
 	int				mRectIndex;
-	Vector2f	mPos;
+	Vector2f		mPos;
 	int				mAlpha;
 };

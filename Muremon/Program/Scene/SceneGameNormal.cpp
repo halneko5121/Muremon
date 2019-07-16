@@ -42,8 +42,6 @@ namespace
 		cState_ReadyFadeOut,	// 準備フェードアウト
 		cState_Game,			// ゲーム中
 		cState_Mission,			// ミッション中
-		cState_MissionSeccess,	// ミッション成功
-		cState_MissionFailure,	// ミッション失敗
 		cState_GameOver,		// ゲームオーバー
 		cState_TimeOver,		// タイムオーバー
 		cState_Count
@@ -77,8 +75,6 @@ SceneGameNormal::SceneGameNormal()
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, ReadyFadeOut,	cState_ReadyFadeOut);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, Game,			cState_Game);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, Mission,		cState_Mission);
-	REGIST_STATE_FUNC2(SceneGameNormal, mState, MissionSeccess,	cState_MissionSeccess);
-	REGIST_STATE_FUNC2(SceneGameNormal, mState, MissionFailure,	cState_MissionFailure);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, GameOver,		cState_GameOver);
 	REGIST_STATE_FUNC2(SceneGameNormal, mState, TimeOver,		cState_TimeOver);
 	mState.changeState(cState_Idle);
@@ -488,30 +484,6 @@ SceneGameNormal::stateMission()
 		mState.changeState(cState_Game);
 		return;
 	}
-}
-
-/**
- * @brief ステート:MissionSeccess
- */
-void
-SceneGameNormal::stateEnterMissionSeccess()
-{
-}
-void
-SceneGameNormal::stateMissionSeccess()
-{
-}
-
-/**
- * @brief ステート:MissionFailure
- */
-void
-SceneGameNormal::stateEnterMissionFailure()
-{
-}
-void
-SceneGameNormal::stateMissionFailure()
-{
 }
 
 /**

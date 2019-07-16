@@ -47,8 +47,6 @@ private:
 	DECLAR_STATE_FUNC2(ReadyFadeOut);
 	DECLAR_STATE_FUNC2(Game);
 	DECLAR_STATE_FUNC2(Mission);
-	DECLAR_STATE_FUNC2(MissionSeccess);
-	DECLAR_STATE_FUNC2(MissionFailure);
 	DECLAR_STATE_FUNC2(GameOver);
 	DECLAR_STATE_FUNC2(TimeOver);
 

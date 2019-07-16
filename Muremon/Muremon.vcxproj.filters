@@ -135,6 +135,9 @@
     <ClCompile Include="Program\Mission\MissionMgr.cpp">
       <Filter>Mission</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Mission\MissionBase.cpp">
+      <Filter>Mission</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -271,6 +274,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Program\Mission\MissionMgr.h">
+      <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Mission\MissionBase.h">
       <Filter>Mission</Filter>
     </ClInclude>
   </ItemGroup>

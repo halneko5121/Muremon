@@ -467,10 +467,7 @@ SceneGameNormal::stateGame()
 void
 SceneGameNormal::stateEnterMission()
 {
-	mMission->init(
-		UtilBattle::getWeakAtkCount(),
-		UtilBattle::getMediumAtkCount(),
-		UtilBattle::getStrongAtkCount());
+	mMission->init();
 }
 void
 SceneGameNormal::stateMission()

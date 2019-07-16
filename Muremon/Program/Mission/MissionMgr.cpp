@@ -146,9 +146,6 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mNegativeAlpha(0)
 	, mNegativeState(NO_NEGATIVE)
 	, mNegativeAtkLv(0)
-	, mKeyCountNikuman(0)
-	, mKeyCountYoshitaro(0)
-	, mKeyCountNoppo(0)
 {
 	for (int i = 0; i < cMissionId_Count; i++)
 	{
@@ -172,7 +169,7 @@ MissionMgr::~MissionMgr()
 {
 }
 
-void MissionMgr::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
+void MissionMgr::init()
 {
 	mCurrentMissionNo	= 0;
 	mFlagDraw	= 0;
@@ -180,12 +177,6 @@ void MissionMgr::init(int cnt_nikuman,int cnt_yoshitaro,int cnt_noppo)
 
 	mMissionStartPos.x = MISSION_HASSEI_X;
 	mMissionStartPos.y = -50.f;
-
-	mKeyCountNikuman		= cnt_nikuman;		//にくまんの押されたキーの数をカウント
-
-	mKeyCountYoshitaro	= cnt_yoshitaro;	//吉たろうの押されたキーの数をカウント
-
-	mKeyCountNoppo		= cnt_noppo;		//のっぽの押されたキーの数をカウント
 
 	mState.changeState(cState_StartShake);
 }
@@ -323,6 +314,10 @@ MissionMgr::stateEnterStartShake()
 	UtilSound::playOnce(S_OSIRASE);
 	mMoveCount = 0;
 
+	int key_count_niku = UtilBattle::getWeakAtkCount();
+	int key_count_yoshi = UtilBattle::getMediumAtkCount();
+	int key_count_noppo = UtilBattle::getStrongAtkCount();
+
 	// みっしょんを決めたり初期化したり
 	mCurrentMissionNo = rand() % 100 + 1;
 
@@ -361,19 +356,19 @@ MissionMgr::stateEnterStartShake()
 	}
 	else if (mCurrentMissionNo > MISSION_11PAR && mCurrentMissionNo <= MISSION_12PAR) {
 		mCurrentMissionNo = cMissionId_Mission12;
-		if (mKeyCountNikuman >= mKeyCountNoppo && mKeyCountNikuman >= mKeyCountYoshitaro) {
+		if (key_count_niku >= key_count_noppo && key_count_niku >= key_count_yoshi) {
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
 	else if (mCurrentMissionNo > MISSION_12PAR && mCurrentMissionNo <= MISSION_13PAR) {
 		mCurrentMissionNo = cMissionId_Mission13;
-		if (mKeyCountYoshitaro >= mKeyCountNikuman && mKeyCountYoshitaro >= mKeyCountNoppo) {
+		if (key_count_yoshi >= key_count_niku && key_count_yoshi >= key_count_noppo) {
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
 	else if (mCurrentMissionNo > MISSION_13PAR && mCurrentMissionNo <= MISSION_14PAR) {
 		mCurrentMissionNo = cMissionId_Mission14;
-		if (mKeyCountNoppo >= mKeyCountNikuman && mKeyCountNoppo >= mKeyCountYoshitaro) {
+		if (key_count_noppo >= key_count_niku && key_count_noppo >= key_count_yoshi) {
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}

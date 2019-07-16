@@ -41,7 +41,7 @@ public:
 	MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss);
 	~MissionMgr();
 
-	void	init(int cnt_nikuman, int cnt_yoshitaro, int cnt_noppo);
+	void	init();
 	void	update();
 	void	draw();
 
@@ -86,8 +86,4 @@ private:
 	int							mNegativeAlpha;
 	int							mNegativeState;
 	int							mNegativeAtkLv;
-
-	int							mKeyCountNikuman;		// にくまんの押されたキーの数をカウント
-	int							mKeyCountYoshitaro;		// 吉たろうの押されたキーの数をカウント
-	int							mKeyCountNoppo;			// のっぽの押されたキーの数をカウント
 };

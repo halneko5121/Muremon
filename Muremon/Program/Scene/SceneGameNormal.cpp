@@ -359,12 +359,7 @@ SceneGameNormal::stateGame()
 
 	if (UtilInput::isKeyPushedReturn())
 	{
-		if (mIsPose) {
-			mIsPose = false;
-		}
-		else {
-			mIsPose = true;
-		}
+		mIsPose = !mIsPose;
 	}
 
 	if (mIsPose) 

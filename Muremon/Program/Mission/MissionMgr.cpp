@@ -514,10 +514,6 @@ MissionMgr::stateOugi()
 			mWavePos.y += 2.f;
 		}
 	}
-	else if (count >= 420 && 450 > count) {
-	}
-	else if (count >= 450 && 630 > count) {
-	}
 
 	if (count > 630) {
 		mActorBoss->mLife -= 7000;

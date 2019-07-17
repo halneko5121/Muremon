@@ -19,12 +19,12 @@ public:
 	~UINormalGame();
 	void				init();
 	void				update();
-	void				draw(const ActorBoss& boss, const float& mission_guage, const int& time);
+	void				draw(const ActorBoss& boss, const float& mission_guage, const int& time) const;
 
 private:
-	void				drawMissionGuage(const float& mission_guage);
-	void				drawScore();
-	void				drawTime(const int& time);
+	void				drawMissionGuage(const float& mission_guage) const;
+	void				drawScore() const;
+	void				drawTime(const int& time) const;
 
 private:
 	Texture*			mTexture;				// テクスチャ

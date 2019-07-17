@@ -70,7 +70,7 @@ UINormalGame::update()
  * @brief	描画
  */
 void
-UINormalGame::draw(const ActorBoss& boss, const float& mission_guage, const int& time)
+UINormalGame::draw(const ActorBoss& boss, const float& mission_guage, const int& time) const
 {
 	mUIRefreshGame->draw(boss);
 
@@ -85,7 +85,7 @@ UINormalGame::draw(const ActorBoss& boss, const float& mission_guage, const int&
  * @brief	ミッションゲージの描画
  */
 void
-UINormalGame::drawMissionGuage(const float& mission_guage)
+UINormalGame::drawMissionGuage(const float& mission_guage) const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
@@ -107,7 +107,7 @@ UINormalGame::drawMissionGuage(const float& mission_guage)
  * @brief	スコアの描画
  */
 void
-UINormalGame::drawScore()
+UINormalGame::drawScore() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
@@ -127,7 +127,7 @@ UINormalGame::drawScore()
  * @brief	タイムの描画
  */
 void
-UINormalGame::drawTime(const int& time)
+UINormalGame::drawTime(const int& time) const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 

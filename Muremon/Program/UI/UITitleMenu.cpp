@@ -176,7 +176,7 @@ UITitleMenu::update()
  * @brief	•`‰æ
  */
 void
-UITitleMenu::draw()
+UITitleMenu::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_FONT);
 

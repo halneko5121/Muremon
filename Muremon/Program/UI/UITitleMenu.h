@@ -20,7 +20,7 @@ public:
 	~UITitleMenu();
 	void	init();
 	void	update();
-	void	draw();
+	void	draw() const;
 
 	// メニューセレクト
 	bool	isDecideMenuSelectGame() const;

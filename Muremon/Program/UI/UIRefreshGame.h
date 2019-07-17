@@ -18,11 +18,11 @@ public:
 	~UIRefreshGame();
 	void				init();
 	void				update();
-	void				draw(const ActorBoss& boss);
+	void				draw(const ActorBoss& boss) const;
 
 private:
-	void				drawKeyCount();
-	void				drawHpGauge(const ActorBoss& boss);
+	void				drawKeyCount() const;
+	void				drawHpGauge(const ActorBoss& boss) const;
 
 private:
 	Texture*			mTexture;				// テクスチャ

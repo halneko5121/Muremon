@@ -64,7 +64,7 @@ UIRefreshGame::update()
  * @brief	ï`âÊ
  */
 void
-UIRefreshGame::draw(const ActorBoss& boss)
+UIRefreshGame::draw(const ActorBoss& boss) const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
@@ -83,7 +83,7 @@ UIRefreshGame::draw(const ActorBoss& boss)
  * @brief	òAë≈êîï`âÊ
  */
 void 
-UIRefreshGame::drawKeyCount()
+UIRefreshGame::drawKeyCount() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
@@ -117,7 +117,7 @@ UIRefreshGame::drawKeyCount()
  * @brief	HPÉQÅ[ÉWÇÃï`âÊ
  */
 void
-UIRefreshGame::drawHpGauge(const ActorBoss& boss)
+UIRefreshGame::drawHpGauge(const ActorBoss& boss) const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 

@@ -32,13 +32,13 @@ namespace
 
 //l,t,r,b
 //中心から、上下左右の幅
-RectF rect_pos_p[] = {
+Rect rect_pos_p[] = {
 	{ cNikumanRadius ,cNikumanRadius ,cNikumanRadius ,cNikumanRadius },
 	{ cYoshiHitRadius.x, cYoshiHitRadius.y, cYoshiHitRadius.x, cYoshiHitRadius.y },
 	{ cNoppoHitRadius.x, cNoppoHitRadius.y, cNoppoHitRadius.x ,cNoppoHitRadius.y },
 };
 
-RectF rect_pos_e = {
+Rect rect_pos_e = {
 	cDispBossRadiusX, cDispBossRadiusY, cDispBossRadiusX, cDispBossRadiusY
 };
 
@@ -174,8 +174,8 @@ ActorBase::isHit(const Vector2f& draw_cc_p, const Vector2f& draw_cc_e, int chara
 		if (draw_cc_p.y < 0) return FALSE;	break;
 	}
 
-	RectF check_rect_p = { 0.f,0.f,0.f,0.f };
-	RectF check_rect_e = { 0.f,0.f,0.f,0.f };
+	Rect check_rect_p = { 0.f,0.f,0.f,0.f };
+	Rect check_rect_e = { 0.f,0.f,0.f,0.f };
 	calculateBackRect(&check_rect_p, rect_pos_p[chara_id], draw_cc_p);
 	calculateBackRect(&check_rect_e, rect_pos_e, draw_cc_e);
 
@@ -191,7 +191,7 @@ ActorBase::isHit(const Vector2f& draw_cc_p, const Vector2f& draw_cc_e, int chara
  * @brief 中心座標から矩形を逆算
  */
 void
-ActorBase::calculateBackRect(RectF* dst_pos, const RectF& rect_pos, const Vector2f& draw_cc) const
+ActorBase::calculateBackRect(Rect* dst_pos, const Rect& rect_pos, const Vector2f& draw_cc) const
 {
 	APP_POINTER_ASSERT(dst_pos);
 

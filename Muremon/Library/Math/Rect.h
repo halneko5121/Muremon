@@ -7,7 +7,6 @@
  *	ä«óùé“ÅFéOè„
  ******************************************************************/
 
-template <class T>
 class Rect {
 public:
 	Rect()
@@ -17,18 +16,15 @@ public:
 		, bottom(0)
 	{}
 
-	Rect(T in_left, T in_top, T in_right, T in_bottom)
+	Rect(float in_left, float in_top, float in_right, float in_bottom)
 		: left(in_left)
 		, top(in_top)
 		, right(in_right)
 		, bottom(in_bottom)
 	{}
 
-	T   left;
-	T   top;
-	T   right;
-	T   bottom;
+	float	left;
+	float	top;
+	float	right;
+	float	bottom;
 };
-
-typedef Rect<int>	RectI;
-typedef Rect<float>	RectF;

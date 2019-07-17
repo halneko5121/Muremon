@@ -81,8 +81,6 @@ Mission10::draw() const
 {
 	if (mState.isEqual(cState_Ready))
 	{
-		mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI);
-
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(mAlphaPushZ, 255, 255, 255);
 		mVertex->drawF(Vector2f(400.0f, 450.0f), R_Z_PUSH_START);

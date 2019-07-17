@@ -58,6 +58,11 @@ public:
 	EffectBase*			createEffect(EffectId id, const EffectParam& param);
 
 	/**
+	 * @brief	不要になったエフェクトを削除する
+	 */
+	void				cleanup();
+
+	/**
 	 * @brief	更新
 	 */
 	void				update();

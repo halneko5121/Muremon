@@ -85,6 +85,29 @@ EffectMgr::createEffect(EffectId id, const EffectParam& param)
 }
 
 /**
+ * @brief	不要になったエフェクトを削除する
+ */
+void
+EffectMgr::cleanup()
+{
+	EffectIterator it = mEffectList.begin();
+	while (it != mEffectList.end())
+	{
+		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
+		if (effect->isEnd())
+		{
+			delete effect;
+			it = mEffectList.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+
+}
+
+/**
  * @brief	エフェクトの更新
  */
 void
@@ -95,16 +118,7 @@ EffectMgr::update()
 	{
 		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
 		effect->update();
-
-		if (effect->isEnd())
-		{
-			delete effect;
-			it = mEffectList.erase(it);
-		}
-		else
-		{
-			it++;
-		}
+		it++;
 	}
 }
 

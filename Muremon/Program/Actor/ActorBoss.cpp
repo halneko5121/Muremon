@@ -10,8 +10,8 @@
 namespace
 {
 	// ボス関連
-	const int cInitLife = 3000;			// ボスの初期ライフ
-	const int cAddLife = 1000;			// ボスが死んだ時増加していくライフ
+	const float cInitLife = 3000.0f;	// ボスの初期ライフ
+	const float cAddLife = 1000.0f;		// ボスが死んだ時増加していくライフ
 	const int cDeadAlpha = 5;			// ボスが滅した時のアルファ減値
 	const int cAppearPosX = 950;		// ボスの出現中心位置
 	const int cAppearPosY = 350;		// ボスY位置の固定
@@ -120,7 +120,7 @@ ActorBoss::drawImple()
 /**
  * 衝突時の処理
  */
-void ActorBoss::hit(const float& hit_pos, int damage)
+void ActorBoss::hit(const float& hit_pos, float damage)
 {
 	EffectParam param(mTexture, mVertex, Vector2f(mMoveX, hit_pos));
 	GetEffectMgr()->createEffect(cEffectId_HitEffect1, param);

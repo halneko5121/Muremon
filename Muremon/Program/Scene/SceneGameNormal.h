@@ -63,7 +63,7 @@ private:
 	int					mGameStateFontAlpha;	// げ～むすた～とのアルファ差分
 	int					mGameStateRectNum;		// ゲームステートの応じた矩形番号
 
-	int					mMissionGauge;			// 必殺ゲージ
+	float				mMissionGauge;			// 必殺ゲージ
 
 	int					mNikumanCurrentIndex;	// にくまんの現在の番号
 	int					mYoshitaroCurrentIndex;	// 吉たろうの現在の番号

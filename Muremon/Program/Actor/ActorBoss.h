@@ -19,13 +19,13 @@ public:
 	void		drawImple() override;
 	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
-	void		hit(const float& hit_pos, int damage);
+	void		hit(const float& hit_pos, float damage);
 	bool		isDead() const;
 	bool		isWin() const;
 
 public:
-	int			mLife;
-	int			mMaxLife;
+	float		mLife;
+	float		mMaxLife;
 	float		mMoveX;
 	float		mMoveY;
 	int			mHitCount;

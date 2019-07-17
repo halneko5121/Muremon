@@ -377,7 +377,7 @@ void
 ActorNoppo::stateSkyDeath()
 {
 	// ‰ñ“]‚³‚¹‚é
-	mAngleDegree += SPIN_SPEED;
+	mAngleDegree += cSpinSpeed;
 
 	mAnimation = 0;																	//•`‰æ‚ðŒÅ’è
 	mRectNum = ANIME_S_ATK2_NOPPO;

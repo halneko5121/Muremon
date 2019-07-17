@@ -13,9 +13,6 @@
 #include "Program/Util/Orbit/OrbitCalculation.h"
 #include "Program/DefineGame.h"
 
-// ‰ñ“]ŠÖŒW(•`‰æ)
-const int SPIN_SPEED = 30;				// ‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				
-
 // •`‰æˆÊ’u
 const float cDispBossRadiusX = 150.f;	// BOSS‚Ì”¼Œa(X)
 const float cDispBossRadiusY = 200.f;	// BOSS‚Ì”¼Œa(Y)
@@ -113,6 +110,9 @@ public:
 	int					getMissionPower() const { return mMissionPower; }
 
 	int					getScore() const { return mScore; }
+
+protected:
+	enum { cSpinSpeed = 30 };	// ‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				
 
 protected:
 	OrbitCalculation*	mOrbit;

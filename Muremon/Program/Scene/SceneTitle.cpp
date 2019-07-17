@@ -16,9 +16,6 @@
 #include "Program/UI/UITitleMenu.h"
 #include "Program/DefineGame.h"
 
-#define MENU_MAX		(3)		
-#define MENU_MAX_GAME	(2)
-
 namespace
 {
 	// ï\é¶ç¿ïW

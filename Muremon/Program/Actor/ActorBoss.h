@@ -25,7 +25,7 @@ public:
 
 public:
 	int			mLife;
-	float		mMaxLife;
+	int			mMaxLife;
 	float		mMoveX;
 	float		mMoveY;
 	int			mHitCount;
@@ -45,7 +45,7 @@ private:
 private:
 	StateMachine<ActorBoss>	mState;	// ステート
 
-	float		mLvCount;
+	int			mLvCount;
 	int			mRectData;
 
 	int			mMoveCount;

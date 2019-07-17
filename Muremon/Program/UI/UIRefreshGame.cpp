@@ -13,12 +13,11 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Actor/ActorBoss.h"
-#include "Program/DefineGame.h"
 
 namespace
 {
 	// •\Ž¦ˆÊ’u
-	// ...
+	const Vector2f cDispStateFramePos = { 400.0f, 560.0f };
 }
 
 /**

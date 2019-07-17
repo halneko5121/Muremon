@@ -15,12 +15,12 @@
 #include "Program/Util/UtilGame.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/UI/UIRefreshGame.h"
-#include "Program/DefineGame.h"
 
 namespace
 {
 	// •\Ž¦ˆÊ’u
-	// ...
+	const Vector2f cDispScorePos = { 60.0f, 20.0f };
+	const Vector2f cDispTimePos = { 60.0f, 70.0f };
 
 	const float cMaxMissionGauge = 5000.0f;
 }

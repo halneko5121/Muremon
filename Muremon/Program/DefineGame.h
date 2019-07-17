@@ -25,9 +25,6 @@ const Vector2f cNoppoHitRadius = { 50.0f, 100.0f };
 
 // •`‰æˆÊ’u
 const Vector2f cDispBgPos = { 400.0f, 300.0f };
-const Vector2f cDispScorePos = { 60.0f, 20.0f };
-const Vector2f cDispTimePos = { 60.0f, 70.0f };
-const Vector2f cDispStateFramePos = { 400.0f, 560.0f };
 const Vector2f cDispMissionPos = { 260.0f, 540.0f };
 const Vector2f cDispMissionGaugePos = { 260.0f, 570.0f };
 const Vector2f cDispBossHpPos = { 675.0f, 540.0f };

@@ -8,6 +8,7 @@
 
 #include "ActorBase.h"
 
+#include "Library/Math/Rect.h"
 #include "Library/Graphics/DirectGraphics.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -31,13 +32,6 @@ namespace
 	const float cDeadLinePosX = 300.f;			// ゲームオーバーライン
 }
 
-//l,t,r,b
-//中心から、上下左右の幅
-RECT rect_pos_p[] = {
-	{ cNikumanRadius ,cNikumanRadius ,cNikumanRadius ,cNikumanRadius },
-	{ cYoshiHitRadius.x, cYoshiHitRadius.y, cYoshiHitRadius.x, cYoshiHitRadius.y },
-	{ cNoppoHitRadius.x, cNoppoHitRadius.y, cNoppoHitRadius.x ,cNoppoHitRadius.y },
-};
 
 RECT rect_pos_e = {
 	cDispBossRadiusX, cDispBossRadiusY, cDispBossRadiusX, cDispBossRadiusY
@@ -169,19 +163,18 @@ ActorBase::isHit(const ActorBase& owner, const ActorBase& target) const
 
 	switch (owner.getActorId()) {
 	case cActorId_Yoshi:
-		if (owner.getNowPos().y < 50) return false;
+		if (owner.getNowPos().y < 50)		return false;
 	case cActorId_Nikuman:
-		if (owner.getNowPos().y < 75) return false;
+		if (owner.getNowPos().y < 75)		return false;
 	case cActorId_Noppo:
-		if (owner.getNowPos().y < 0) return false;
+		if (owner.getNowPos().y < 0)		return false;
 	}
 
-	/*
-	if ((check_rect_p.right >= check_rect_e.left) && (check_rect_p.left <= check_rect_e.right) &&
-		(check_rect_p.top <= check_rect_e.bottom) && (check_rect_p.bottom >= check_rect_e.top)) {
-		return TRUE;
+	// 矩形の重なりをチェック
+	if (owner.getRect().isInclude(target.getRect()))
+	{
+		return true;
 	}
-	*/
 
-	return FALSE;
+	return false;
 }

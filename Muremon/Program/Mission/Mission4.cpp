@@ -13,10 +13,10 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
 
-#define MISSION4_FONT_NUM	(16)
-
 namespace
 {
+	const int cSuccessTypingCount = 16;
+
 	enum State
 	{
 		cState_Idle,			// ‘Ò‹@
@@ -130,7 +130,7 @@ Mission4::stateRun()
 {
 	if (isTimeOver())
 	{
-		if (mSuccessTypingCount == MISSION4_FONT_NUM)
+		if (mSuccessTypingCount == cSuccessTypingCount)
 		{
 			mState.changeState(cState_Success);
 		}
@@ -149,7 +149,7 @@ Mission4::stateRun()
 		}
 	}
 
-	if (mSuccessTypingCount < MISSION4_FONT_NUM)
+	if (mSuccessTypingCount < cSuccessTypingCount)
 	{
 		switch (mSuccessTypingCount)
 		{

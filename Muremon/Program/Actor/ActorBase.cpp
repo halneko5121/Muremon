@@ -179,8 +179,8 @@ ActorBase::isHit(const Vector2f& draw_cc_p, const Vector2f& draw_cc_e, int chara
 	calculateBackRect(&check_rect_p, rect_pos_p[chara_id], draw_cc_p);
 	calculateBackRect(&check_rect_e, rect_pos_e, draw_cc_e);
 
-	if ((check_rect_p.right >= check_rect_e.left) && (check_rect_p.left <= check_rect_e.right) &&
-		(check_rect_p.top <= check_rect_e.bottom) && (check_rect_p.bottom >= check_rect_e.top)) {
+	if ((check_rect_p.mRight >= check_rect_e.mLeft) && (check_rect_p.mLeft <= check_rect_e.mRight) &&
+		(check_rect_p.mTop <= check_rect_e.mBottom) && (check_rect_p.mBottom >= check_rect_e.mTop)) {
 		return TRUE;
 	}
 
@@ -196,8 +196,8 @@ ActorBase::calculateBackRect(Rect* dst_pos, const Rect& rect_pos, const Vector2f
 	APP_POINTER_ASSERT(dst_pos);
 
 	// ’†SÀ•W‚©‚ç‚»‚ê‚¼‚êŠG‚Ì”¼Œa‚ð‰ÁEŒ¸ŽZ 
-	dst_pos->left = (draw_cc.x - rect_pos.left);
-	dst_pos->top = (draw_cc.y - rect_pos.top);
-	dst_pos->right = (draw_cc.x + rect_pos.right);
-	dst_pos->bottom = (draw_cc.y + rect_pos.bottom);
+	dst_pos->mLeft = (draw_cc.x - rect_pos.mLeft);
+	dst_pos->mTop = (draw_cc.y - rect_pos.mTop);
+	dst_pos->mRight = (draw_cc.x + rect_pos.mRight);
+	dst_pos->mBottom = (draw_cc.y + rect_pos.mBottom);
 }

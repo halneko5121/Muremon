@@ -29,13 +29,13 @@ public:
 private:
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Ready);
 	DECLAR_STATE_FUNC2(Run);
 	DECLAR_STATE_FUNC2(Success);
 	DECLAR_STATE_FUNC2(Failure);
 
 private:
 	StateMachine<Mission10>	mState;				// ステート
-	int						mFlagTimeCount;		// タイムカウントのフラグ
 	int						mAlphaPushZ;		// 「PushZ」用のアルファ値
 	int						mFlagZ;				//
 	Vector2f				mMissionStartPos;	// みっしょん開始の位置

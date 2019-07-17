@@ -21,6 +21,7 @@ namespace
 	enum State
 	{
 		cState_Idle,			// 待機
+		cState_Ready,			// 準備
 		cState_Run,				// 実行
 		cState_Success,			// 成功
 		cState_Failure,			// 失敗
@@ -34,13 +35,13 @@ namespace
 Mission10::Mission10(MissionId id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
-	, mFlagTimeCount(0)
 	, mAlphaPushZ(255)
 	, mFlagZ(true)
 	, mMissionStartPos(cDispMissionOccurrencePos)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission10, mState, Idle,		cState_Idle);
+	REGIST_STATE_FUNC2(Mission10, mState, Ready,	cState_Ready);
 	REGIST_STATE_FUNC2(Mission10, mState, Run,		cState_Run);
 	REGIST_STATE_FUNC2(Mission10, mState, Success,	cState_Success);
 	REGIST_STATE_FUNC2(Mission10, mState, Failure,	cState_Failure);
@@ -60,7 +61,7 @@ Mission10::~Mission10()
 void
 Mission10::runImple()
 {
-	mState.changeStateIfDiff(cState_Run);
+	mState.changeStateIfDiff(cState_Ready);
 }
 
 /**
@@ -78,7 +79,7 @@ Mission10::updateImple()
 void
 Mission10::draw() const
 {
-	if (mFlagTimeCount == 0)
+	if (mState.isEqual(cState_Ready))
 	{
 		mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI);
 
@@ -133,41 +134,52 @@ Mission10::stateIdle()
 }
 
 /**
+ * @brief ステート:Ready
+ */
+void
+Mission10::stateEnterReady()
+{
+	mFlagZ = true;
+	mAlphaPushZ = 255;
+}
+void
+Mission10::stateReady()
+{
+	if (!mFlagZ)
+	{
+		mAlphaPushZ += 5;
+		if (mAlphaPushZ == 240) {
+			mFlagZ = true;
+		}
+	}
+	else 
+	{
+		mAlphaPushZ -= 5;
+		if (mAlphaPushZ == 50) {
+			mFlagZ = false;
+		}
+	}
+
+	if (UtilInput::isKeyPushedDecide())
+	{
+		mState.changeState(cState_Run);
+		return;
+	}
+}
+
+
+/**
  * @brief ステート:Run
  */
 void
 Mission10::stateEnterRun()
 {
-	mFlagTimeCount = 0;
-	mAlphaPushZ = 255;
-	mFlagZ = true;
+	mTime = 0;
 }
 void
 Mission10::stateRun()
 {
-	if (mFlagTimeCount == 0) {
-		mTime = 0;
-		if (!mFlagZ) {
-			mAlphaPushZ += 5;
-			if (mAlphaPushZ == 240) {
-				mFlagZ = true;
-			}
-		}
-		else {
-			mAlphaPushZ -= 5;
-			if (mAlphaPushZ == 50) {
-				mFlagZ = false;
-			}
-		}
-	}
 	if (UtilInput::isKeyPushedDecide())
-	{
-		mFlagTimeCount += 1;
-	}
-	if (mFlagTimeCount == 1) {
-		mTime++;
-	}
-	else if (mFlagTimeCount == 2)
 	{
 		if (mTime <= 11 * 60 - 31 && mTime >= 9 * 60 + 31)
 		{
@@ -180,6 +192,7 @@ Mission10::stateRun()
 			return;
 		}
 	}
+	mTime++;
 }
 
 /**

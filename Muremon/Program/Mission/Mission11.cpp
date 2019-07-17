@@ -13,9 +13,6 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
 
- // 「ミッション発生」
-const Vector2f cDispMissionOccurrencePos = { 400.0f, -50.0f };
-
 namespace
 {
 	enum State
@@ -35,10 +32,8 @@ namespace
 Mission11::Mission11(MissionId id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
-	, mFlagTimeCount(0)
 	, mAlphaPushZ(255)
 	, mFlagZ(true)
-	, mMissionStartPos(cDispMissionOccurrencePos)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission11, mState, Idle,		cState_Idle);
@@ -82,8 +77,6 @@ Mission11::draw() const
 {
 	if (mState.isEqual(cState_Ready))
 	{
-		mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI);
-
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 		mVertex->setColor(mAlphaPushZ, 255, 255, 255);
 		mVertex->drawF(Vector2f(400.0f, 450.0f), R_Z_PUSH_START);

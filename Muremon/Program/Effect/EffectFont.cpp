@@ -19,7 +19,6 @@ namespace
 	const int cAliveFrame = 30;
 	const float cShakeX = 1.f;				// 揺れ幅
 	const float cShakeY = 0.5f;
-	const float cEffectSizeX = 30.f;		// フォントの大きさ
 
 	enum State
 	{
@@ -36,7 +35,6 @@ namespace
   */
 EffectFont::EffectFont(EffectId	id, int rect_index, const EffectParam& param)
 	: EffectBase(id, rect_index, param)
-	, mInitPos(param.mPos)
 	, mShakeX(0.0f)
 	, mShakeY(0.0f)
 	, mIsShakeRight(false)
@@ -90,33 +88,14 @@ EffectFont::isEnd() const
 }
 
 /**
- * @brief エフェクトフォント位置の設定
- * @param	font_cc			開始位置
- * @param	chara_radius	キャラ半径
- * @param	range_font		フォントの大きさ
- * @return	中心座標
- */
-Vector2f
-EffectFont::setPos(Vector2f font_cc, float chara_radius, float range_font)
-{
-	Vector2f pos_effectfont = { 0.f, 0.f };
-
-	//『べチャ！』とか表示位置(中心座標から左上)
-	pos_effectfont.x = (font_cc.x - (chara_radius + range_font));
-	pos_effectfont.y = (font_cc.y - (chara_radius + range_font));
-
-	return pos_effectfont;
-}
-
-/**
  * @brief シェイク効果
  * @param	change_x		揺れ幅
  * @param	change_y		揺れ幅
  * @param	font_cc			フォントの中心位置
  * @return	中心座標
  */
-Vector2f
-EffectFont::setEffectShake(float change_x, float change_y, Vector2f font_cc)
+void
+EffectFont::setEffectShake(Vector2f* dst_pos, float change_x, float change_y, const Vector2f& font_cc)
 {
 	if (mShakeX > change_x) { mIsShakeRight = false; mShakeCount++; }
 	else if (mShakeX < (-change_x)) { mIsShakeRight = true;  mShakeCount++; }
@@ -126,10 +105,8 @@ EffectFont::setEffectShake(float change_x, float change_y, Vector2f font_cc)
 
 	if (mShakeCount > 5) { mIsShakeDown = true;  mShakeCount = 0; }
 
-	font_cc.x += (mIsShakeRight) ? mShakeX++ : mShakeX--;
-	font_cc.y += (mIsShakeDown) ? mShakeY++ : mShakeY--;
-
-	return font_cc;
+	dst_pos->x += (mIsShakeRight) ? mShakeX++ : mShakeX--;
+	dst_pos->y += (mIsShakeDown) ? mShakeY++ : mShakeY--;
 }
 
 
@@ -155,14 +132,13 @@ EffectFont::stateIdle()
 void
 EffectFont::stateEnterRun()
 {
-	mPos = setPos(mInitPos, cNoppoRadius, cEffectSizeX);
 }
 void
 EffectFont::stateRun()
 {
 	if (mState.getStateCount() < cAliveFrame)
 	{
-		mPos = setEffectShake(cShakeX, cShakeY, mPos);
+		setEffectShake(&mPos, cShakeX, cShakeY, mPos);
 	}
 	else
 	{

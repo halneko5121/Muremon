@@ -24,8 +24,7 @@ public:
 	bool			isEnd() const override;
 
 private:
-	Vector2f	setPos(Vector2f font_cc, float chara_radius, float range_font);
-	Vector2f	setEffectShake(float change_x, float change_y, Vector2f font_cc);
+	void			setEffectShake(Vector2f* dst_pos, float change_x, float change_y, const Vector2f& font_cc);
 
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
@@ -35,7 +34,6 @@ private:
 
 private:
 	StateMachine<EffectFont>	mState;			// ステート
-	Vector2f					mInitPos;
 
 	float						mShakeX;
 	float						mShakeY;

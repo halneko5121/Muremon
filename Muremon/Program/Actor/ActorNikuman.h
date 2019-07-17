@@ -15,7 +15,7 @@ public:
 	ActorNikuman(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorNikuman();
 
-	Vector2f	updateAttack2(Vector2f boss_cc);
+	void			updateAttack2(const Vector2f& boss_cc);
 
 	void			initImple() override;
 	void			runImple() override;

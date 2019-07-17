@@ -162,8 +162,8 @@ ActorNikuman::drawImple() const
 /**
  * @brief UŒ‚ˆ—
  */
-Vector2f
-ActorNikuman::updateAttack2(Vector2f boss_cc)
+void
+ActorNikuman::updateAttack2(const Vector2f& boss_cc)
 {
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
@@ -176,8 +176,6 @@ ActorNikuman::updateAttack2(Vector2f boss_cc)
 
 	mNowPos.x += plus_x;								//’†S‚ÉŒü‚©‚Á‚Ä‰E‚ÉˆÚ“®
 	mNowPos.y += plus_y;								//’†S‚ÉŒü‚©‚Á‚Ä‰º‚ÉˆÚ“®
-
-	return mNowPos;
 }
 
 // -----------------------------------------------------------------
@@ -294,7 +292,7 @@ ActorNikuman::stateSkyAtk()
 	if (mNowPos.x - cNikumanRadius < cWindowWidth) 
 	{
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_NIKU);
-		mNowPos = updateAttack2(boss->getNowPos());
+		updateAttack2(boss->getNowPos());
 	}
 	else
 	{

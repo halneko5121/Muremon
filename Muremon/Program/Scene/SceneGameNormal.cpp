@@ -391,7 +391,8 @@ SceneGameNormal::stateGame()
 	// アクターの更新
 	GetActorMgr()->update(boss_cc2);
 
-	// エフェクトの更新
+	// エフェクトの掃除＆更新
+	GetEffectMgr()->cleanup();
 	GetEffectMgr()->update();
 
 	// ヒットチェック
@@ -472,6 +473,8 @@ SceneGameNormal::stateEnterMission()
 void
 SceneGameNormal::stateMission()
 {
+	GetEffectMgr()->update();
+
 	mMission->update();
 
 	if (mMission->isEnd())

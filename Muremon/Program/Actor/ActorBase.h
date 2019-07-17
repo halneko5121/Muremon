@@ -85,7 +85,7 @@ public:
 	 * @param	rect_pos		矩形情報(各半径情報)	
 	 * @return	与えた中心座標からrect_posの値を与えたRECT
 	 */
-	RectF				calculateBackRect(Vector2f draw_cc, RectF rect_pos) const;
+	void				calculateBackRect(RectF* dst_pos, const RectF& rect_pos, const Vector2f& draw_cc) const;
 
 	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }
 

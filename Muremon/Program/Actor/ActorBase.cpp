@@ -222,8 +222,8 @@ ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
 		if (draw_cc_p.y < 0) return FALSE;	break;
 	}
 
-	check_rect_p = calculateBackRect(draw_cc_p, rect_pos_p[chara_id]);
-	check_rect_e = calculateBackRect(draw_cc_e, rect_pos_e);
+	calculateBackRect(&check_rect_p, rect_pos_p[chara_id], draw_cc_p);
+	calculateBackRect(&check_rect_e, rect_pos_e, draw_cc_e);
 
 	if ((check_rect_p.right >= check_rect_e.left) && (check_rect_p.left <= check_rect_e.right) &&
 		(check_rect_p.top <= check_rect_e.bottom) && (check_rect_p.bottom >= check_rect_e.top)) {
@@ -236,14 +236,14 @@ ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
 /**
  * @brief ’†SÀ•W‚©‚ç‹éŒ`‚ð‹tŽZ
  */
-RectF
-ActorBase::calculateBackRect(Vector2f draw_cc, RectF rect_pos) const
+void
+ActorBase::calculateBackRect(RectF* dst_pos, const RectF& rect_pos, const Vector2f& draw_cc) const
 {
-	// ’†SÀ•W‚©‚ç‚»‚ê‚¼‚êŠG‚Ì”¼Œa‚ð‰ÁEŒ¸ŽZ 
-	rect_pos.left = (draw_cc.x - rect_pos.left);
-	rect_pos.top = (draw_cc.y - rect_pos.top);
-	rect_pos.right = (draw_cc.x + rect_pos.right);
-	rect_pos.bottom = (draw_cc.y + rect_pos.bottom);
+	APP_POINTER_ASSERT(dst_pos);
 
-	return rect_pos;
+	// ’†SÀ•W‚©‚ç‚»‚ê‚¼‚êŠG‚Ì”¼Œa‚ð‰ÁEŒ¸ŽZ 
+	dst_pos->left = (draw_cc.x - rect_pos.left);
+	dst_pos->top = (draw_cc.y - rect_pos.top);
+	dst_pos->right = (draw_cc.x + rect_pos.right);
+	dst_pos->bottom = (draw_cc.y + rect_pos.bottom);
 }

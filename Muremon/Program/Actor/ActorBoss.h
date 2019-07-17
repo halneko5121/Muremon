@@ -53,5 +53,4 @@ private:
 	unsigned int mMoveAnime;
 	int			mDamageX;
 	int			mDamageY;
-	Vector2f	mHitPos;
 };

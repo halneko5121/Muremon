@@ -51,7 +51,6 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mMoveAnime(0)
 	, mDamageX(0)
 	, mDamageY(0)
-	, mHitPos(0.0f, 0.0f)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorBoss, mState, Idle,			cState_Idle);

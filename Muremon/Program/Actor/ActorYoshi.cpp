@@ -20,6 +20,7 @@ namespace
 	const int cDegRandMin = 180 + 45;						// 75ÅãÇ‹Ç≈ÇÃä‘
 
 	// äJénç¿ïW
+	const float GroundAtkStartY = (cGroundPos + 40.0f - cYoshiRadius);
 	const int cRandY = 400;
 	const int cRandYMin = 100;
 
@@ -217,7 +218,7 @@ ActorYoshi::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cYoshiRadius, G_ATK_1_START_Y);
+	mNowPos = Vector2f(-cYoshiRadius, GroundAtkStartY);
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }

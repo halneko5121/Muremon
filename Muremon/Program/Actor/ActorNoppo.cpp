@@ -29,6 +29,7 @@ namespace
 	const int cWaveLimitX = 500;									// この座標まで来ると直線運動へ移行
 
 	// 開始座標
+	const float GroundAtkStartY = (cGroundPos + 70.0f - cNoppoRadius);
 	const int cRandY = 400;
 	const int cRandYMin = 100;
 
@@ -222,7 +223,7 @@ ActorNoppo::stateEnterGroundAtk()
 	}
 	mIsAtk1 = true;
 	mSpeed = getSpeed();
-	mNowPos = Vector2f(-cNoppoRadius, G_ATK_3_START_Y);
+	mNowPos = Vector2f(-cNoppoRadius, GroundAtkStartY);
 	mAngleDegree = 0.0f;
 }
 void

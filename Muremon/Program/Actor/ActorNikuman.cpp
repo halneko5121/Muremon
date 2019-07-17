@@ -20,6 +20,7 @@ namespace
 	const int cDegRandMin = 180 + 45;				// 75ÅãÇ‹Ç≈ÇÃä‘
 
 	// äJénç¿ïW
+	const float GroundAtkStartY = (cGroundPos + 20.0f - cNikumanRadius);
 	const int cRandY = 300;
 	const int cRandYMin = -200;
 
@@ -213,7 +214,7 @@ ActorNikuman::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getNikumanSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cNikumanRadius, G_ATK_2_START_Y);
+	mNowPos = Vector2f(-cNikumanRadius, GroundAtkStartY);
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }

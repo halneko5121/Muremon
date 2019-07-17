@@ -14,16 +14,12 @@
 #include "Program/DefineGame.h"
 
 // âÒì]ä÷åW(ï`âÊ)
-#define SPIN_SPEED					(30)		//âÒì]Ç≥ÇπÇÈë¨Ç≥(äpìx)				
+const int SPIN_SPEED = 30;				// âÒì]Ç≥ÇπÇÈë¨Ç≥(äpìx)				
+
 // ï`âÊà íu
-#define POS_GROUND					(500.f)		//ínñ ÇÃç¿ïW		
-
-#define DRAW_E_RAD_X				(150.f)		//BOSSÇÃîºåa(X)
-#define DRAW_E_RAD_Y				(200.f)		//BOSSÇÃîºåa(Y)
-
-#define G_ATK_1_START_Y				(POS_GROUND + 40 - cYoshiRadius)	
-#define G_ATK_2_START_Y				(POS_GROUND + 20 - cNikumanRadius)		
-#define G_ATK_3_START_Y				(POS_GROUND + 70 - cNoppoRadius)	
+const float cGroundPos = 500.f;			// ínñ ÇÃç¿ïW		
+const float cDispBossRadiusX = 150.f;	// BOSSÇÃîºåa(X)
+const float cDispBossRadiusY = 200.f;	// BOSSÇÃîºåa(Y)
 
 // RECTÇÃ float_ver
 typedef struct F_RECT{

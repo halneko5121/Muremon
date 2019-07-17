@@ -51,7 +51,7 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mMoveAnime(0)
 	, mDamageX(0)
 	, mDamageY(0)
-	, mHitPos(0.0f)
+	, mHitPos(0.0f, 0.0f)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorBoss, mState, Idle,			cState_Idle);
@@ -120,9 +120,9 @@ ActorBoss::drawImple() const
 /**
  * Õ“ËŽž‚Ìˆ—
  */
-void ActorBoss::hit(const float& hit_pos, float damage)
+void ActorBoss::hit(const Vector2f& hit_pos, float damage)
 {
-	EffectParam param(mTexture, mVertex, Vector2f(mMoveX, hit_pos));
+	EffectParam param(mTexture, mVertex, hit_pos);
 	GetEffectMgr()->createEffect(cEffectId_HitEffect1, param);
 	mHitPos = hit_pos;
 	mHitCount++;

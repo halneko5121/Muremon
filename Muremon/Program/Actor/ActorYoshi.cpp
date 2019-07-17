@@ -228,7 +228,7 @@ ActorYoshi::stateGroundAtk()
 	if (isHit(mNowPos, mBossPos, ID_YOSHI))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mNowPos.y;
+		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_YOSHI_HIP))
 		{
@@ -285,7 +285,7 @@ ActorYoshi::stateSkyAtk()
 	if (isHit(mNowPos, mBossPos, ID_YOSHI))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mNowPos.y;
+		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_YOSHI_HUSEN))
 		{

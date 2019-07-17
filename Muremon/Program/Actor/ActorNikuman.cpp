@@ -225,7 +225,7 @@ ActorNikuman::stateGroundAtk()
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
-		mHitPosY = mNowPos.y;
+		mHitPos = mNowPos;
 
 		EffectParam param(mTexture, mVertex, mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect2, param);
@@ -276,7 +276,7 @@ ActorNikuman::stateSkyAtk()
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
-		mHitPosY = mNowPos.y;
+		mHitPos = mNowPos;
 
 		EffectParam param(mTexture, mVertex, mNowPos);
 		GetEffectMgr()->createEffect(cEffectId_HitEffect2, param);

@@ -307,7 +307,7 @@ SceneGameRefresh::stateGame()
 		{
 			if (actor->isHitCheck())
 			{
-				mBoss->hit(actor->getHitPosY(), actor->getAtkPower());
+				mBoss->hit(actor->getHitPos(), actor->getAtkPower());
 				actor->setIsHitCheck(false);
 			}
 		}

@@ -232,7 +232,7 @@ ActorNoppo::stateGroundAtk()
 	if (isHit(mNowPos, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mNowPos.y;
+		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_NOPPO_GANMEN))
 		{
@@ -292,7 +292,7 @@ ActorNoppo::stateSkyAtk()
 	if (isHit(mNowPos, mBossPos, ID_NOPPO))
 	{
 		setIsHitCheck(true);
-		mHitPosY = mNowPos.y;
+		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_NOPPO_KOKE))
 		{

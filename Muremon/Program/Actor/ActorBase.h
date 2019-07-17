@@ -105,7 +105,7 @@ public:
 
 	bool				isRun() const { return mIsRun; }
 
-	float				getHitPosY() const { return mHitPosY; }
+	Vector2f			getHitPos() const { return mHitPos; }
 
 	int					getAtkPower() const { return mAtkPower; }
 
@@ -147,5 +147,5 @@ protected:
 	bool				mIsHitCheck;
 	bool				mIsRun;
 	Vector2f			mBossPos;
-	float				mHitPosY;
+	Vector2f			mHitPos;
 };

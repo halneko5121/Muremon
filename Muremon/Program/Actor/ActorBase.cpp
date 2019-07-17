@@ -58,7 +58,7 @@ ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mIsHitCheck(false)
 	, mIsRun(false)
 	, mBossPos(0.0f, 0.0f)
-	, mHitPosY(0.0f)
+	, mHitPos(0.0f, 0.0f)
 {
 	mOrbit	 = new OrbitCalculation();
 }

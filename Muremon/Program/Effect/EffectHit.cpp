@@ -101,7 +101,6 @@ EffectHit::stateIdle()
 void
 EffectHit::stateEnterRun()
 {
-	mPos.x -= cDispBossRadiusX;
 }
 void
 EffectHit::stateRun()

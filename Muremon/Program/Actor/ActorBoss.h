@@ -19,7 +19,7 @@ public:
 	void		drawImple() const override;
 	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
-	void		hit(const float& hit_pos, float damage);
+	void		hit(const Vector2f& hit_pos, float damage);
 	bool		isDead() const;
 	bool		isWin() const;
 
@@ -53,5 +53,5 @@ private:
 	unsigned int mMoveAnime;
 	int			mDamageX;
 	int			mDamageY;
-	float		mHitPos;
+	Vector2f	mHitPos;
 };

@@ -35,7 +35,7 @@ private:
 
 private:
 	StateMachine<EffectFont>	mState;			// ステート
-	Vector2f				mInitPos;
+	Vector2f					mInitPos;
 
 	float						mShakeX;
 	float						mShakeY;

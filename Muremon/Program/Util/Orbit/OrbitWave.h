@@ -69,7 +69,7 @@ public:
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	Vector2f orbitSinWave(float limit_x, Vector2f draw_cc);
+	void orbitSinWave(Vector2f* dst_pos, float limit_x, const Vector2f& draw_cc);
 
 private:
 	int		mAmplitude;

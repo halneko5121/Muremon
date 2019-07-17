@@ -185,7 +185,7 @@ ActorNoppo::drawImple() const
 void
 ActorNoppo::updateAttack2()
 {
-	mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX,mNowPos);
+	mOrbit->mWave->orbitSinWave(&mNowPos, cWaveLimitX, mNowPos);
 }
 
 // -----------------------------------------------------------------

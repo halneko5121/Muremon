@@ -188,7 +188,7 @@ ActorYoshi::drawImple() const
 void
 ActorYoshi::updateAttack2()
 {
-	mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX, mNowPos);
+	mOrbit->mWave->orbitSinWave(&mNowPos, cWaveLimitX, mNowPos);
 }
 
 // -----------------------------------------------------------------

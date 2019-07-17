@@ -12,11 +12,12 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
 
-#define TEN_SECOND	(600)
-#define M_TIMENUM_X	(375.f)
-#define M_TIMENUM_Y	(125.f)
-#define M_COMBO_X	(500.f)
-#define M_COMBO_Y	(245.f)
+namespace
+{
+	const int cTimeLimitFrame = 600;
+	const Vector2f cDispMissionTimePos = { 375.0f, 125.0f };
+	const Vector2f cDispCombo = { 500.0f, 245.0f };
+}
 
  /**
   * @brief	コンストラクタ
@@ -44,7 +45,7 @@ MissionBase::~MissionBase()
 void
 MissionBase::run()
 {
-	mTime = TEN_SECOND;
+	mTime = cTimeLimitFrame;
 	mKeyCount = 0;
 	mSuccessTypingCount = 1;
 
@@ -84,7 +85,7 @@ MissionBase::drawTime() const
 				num = num / 10;
 			}
 		}
-		mVertex->drawF(Vector2f(M_TIMENUM_X + 50.f * i, M_TIMENUM_Y), R_0_B + num % 10);
+		mVertex->drawF(Vector2f(cDispMissionTimePos.x + 50.f * i, cDispMissionTimePos.y), R_0_B + num % 10);
 	}
 }
 
@@ -98,7 +99,7 @@ MissionBase::drawCombo() const
 		for (int j = 1;j < 3 - i;j++) {
 			num = num / 10;
 		}
-		mVertex->drawF(Vector2f(M_COMBO_X + 50.f + 50.f * i, M_COMBO_Y), R_0_B + num % 10);
+		mVertex->drawF(Vector2f(cDispCombo.x + 50.f + 50.f * i, cDispCombo.y), R_0_B + num % 10);
 	}
-	mVertex->drawF(Vector2f(M_COMBO_X, M_COMBO_Y), R_COMBO);
+	mVertex->drawF(cDispCombo, R_COMBO);
 }

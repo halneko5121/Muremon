@@ -14,6 +14,7 @@
     <ClCompile Include="Library\Font\DirectFont.cpp" />
     <ClCompile Include="Library\Graphics\FadeMgr.cpp" />
     <ClCompile Include="Library\Input\DirectInput.cpp" />
+    <ClCompile Include="Library\Math\Rect.cpp" />
     <ClCompile Include="Library\Math\Vector.cpp" />
     <ClCompile Include="Library\Sound\DirectSound.cpp" />
     <ClCompile Include="Library\Graphics\DirectGraphics.cpp" />

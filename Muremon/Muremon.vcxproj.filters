@@ -186,6 +186,9 @@
     <ClCompile Include="Program\Util\UtilActor.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="Library\Math\Rect.cpp">
+      <Filter>Library\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />

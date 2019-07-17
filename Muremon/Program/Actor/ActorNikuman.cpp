@@ -223,7 +223,7 @@ ActorNikuman::stateGroundAtk()
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
 
-	if (isHit(mNowPos, boss->getNowPos(), ID_NIKUMAN))
+	if (isHit(*this, *boss))
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
@@ -277,7 +277,7 @@ ActorNikuman::stateSkyAtk()
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
 
-	if (isHit(mNowPos, boss->getNowPos(), ID_NIKUMAN))
+	if (isHit(*this, *boss))
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);

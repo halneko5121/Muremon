@@ -11,6 +11,7 @@
 #include "Library/Graphics/DirectGraphics.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Actor/ActorMgr.h"
 
 namespace
 {
@@ -32,13 +33,13 @@ namespace
 
 //l,t,r,b
 //中心から、上下左右の幅
-Rect rect_pos_p[] = {
+RECT rect_pos_p[] = {
 	{ cNikumanRadius ,cNikumanRadius ,cNikumanRadius ,cNikumanRadius },
 	{ cYoshiHitRadius.x, cYoshiHitRadius.y, cYoshiHitRadius.x, cYoshiHitRadius.y },
 	{ cNoppoHitRadius.x, cNoppoHitRadius.y, cNoppoHitRadius.x ,cNoppoHitRadius.y },
 };
 
-Rect rect_pos_e = {
+RECT rect_pos_e = {
 	cDispBossRadiusX, cDispBossRadiusY, cDispBossRadiusX, cDispBossRadiusY
 };
 
@@ -51,6 +52,7 @@ ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mOrbit(nullptr)
 	, mTexture(texture)
 	, mVertex(vertex)
+	, mRect(Vector2f(0.0f, 0.0f), 1.0f, 1.0f)
 	, mRectStartNum(0)
 	, mSoundStartNum(0)
 	, mSpeed(0.0f)
@@ -161,43 +163,25 @@ ActorBase::updateAttack1()
  * @brief 衝突チェック
  */
 bool
-ActorBase::isHit(const Vector2f& draw_cc_p, const Vector2f& draw_cc_e, int chara_id) const
+ActorBase::isHit(const ActorBase& owner, const ActorBase& target) const
 {
-	if (draw_cc_p.x < cDeadLinePosX) return FALSE;
+	if (owner.getNowPos().x < cDeadLinePosX) return false;
 
-	switch (chara_id) {
-	case ID_YOSHI:
-		if (draw_cc_p.y < 50) return FALSE;	break;
-	case ID_NIKUMAN:
-		if (draw_cc_p.y < 75) return FALSE;	break;
-	case ID_NOPPO:
-		if (draw_cc_p.y < 0) return FALSE;	break;
+	switch (owner.getActorId()) {
+	case cActorId_Yoshi:
+		if (owner.getNowPos().y < 50) return false;
+	case cActorId_Nikuman:
+		if (owner.getNowPos().y < 75) return false;
+	case cActorId_Noppo:
+		if (owner.getNowPos().y < 0) return false;
 	}
 
-	Rect check_rect_p = { 0.f,0.f,0.f,0.f };
-	Rect check_rect_e = { 0.f,0.f,0.f,0.f };
-	calculateBackRect(&check_rect_p, rect_pos_p[chara_id], draw_cc_p);
-	calculateBackRect(&check_rect_e, rect_pos_e, draw_cc_e);
-
-	if ((check_rect_p.mRight >= check_rect_e.mLeft) && (check_rect_p.mLeft <= check_rect_e.mRight) &&
-		(check_rect_p.mTop <= check_rect_e.mBottom) && (check_rect_p.mBottom >= check_rect_e.mTop)) {
+	/*
+	if ((check_rect_p.right >= check_rect_e.left) && (check_rect_p.left <= check_rect_e.right) &&
+		(check_rect_p.top <= check_rect_e.bottom) && (check_rect_p.bottom >= check_rect_e.top)) {
 		return TRUE;
 	}
+	*/
 
 	return FALSE;
-}
-
-/**
- * @brief 中心座標から矩形を逆算
- */
-void
-ActorBase::calculateBackRect(Rect* dst_pos, const Rect& rect_pos, const Vector2f& draw_cc) const
-{
-	APP_POINTER_ASSERT(dst_pos);
-
-	// 中心座標からそれぞれ絵の半径を加・減算 
-	dst_pos->mLeft = (draw_cc.x - rect_pos.mLeft);
-	dst_pos->mTop = (draw_cc.y - rect_pos.mTop);
-	dst_pos->mRight = (draw_cc.x + rect_pos.mRight);
-	dst_pos->mBottom = (draw_cc.y + rect_pos.mBottom);
 }

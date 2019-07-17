@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************
- *	@file	Rect.h.h
+ *	@file	Rect.h
  *	@brief	矩形をまとめたファイル
  *
  *	製作者：三上
@@ -9,22 +9,27 @@
 
 class Rect {
 public:
-	Rect()
-		: mLeft(0)
-		, mTop(0)
-		, mRight(0)
-		, mBottom(0)
-	{}
+	Rect(const Vector2f& cehter_pos, float height, float width);
 
-	Rect(float in_left, float in_top, float in_right, float in_bottom)
-		: mLeft(in_left)
-		, mTop(in_top)
-		, mRight(in_right)
-		, mBottom(in_bottom)
-	{}
+public:
+	bool				isInclude(const Rect& target) const;
 
-	float	mLeft;
-	float	mTop;
-	float	mRight;
-	float	mBottom;
+	void				setCenterPos(const Vector2f& pos);
+	const Vector2f&		getCenterPos() const;
+
+	float				getWidth() const;
+	float				getHeight() const;
+
+	float				getHalfWidth() const;
+	float				getHalfHeight() const;
+
+private:
+	Vector2f			mCenterPos;
+	float				mWidth;
+	float				mHeight;
+
+	float				mLeft;
+	float				mTop;
+	float				mRight;
+	float				mBottom;
 };

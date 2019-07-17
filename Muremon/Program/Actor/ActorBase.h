@@ -59,15 +59,7 @@ public:
 	 * @param	chara_id		キャラの『何体目か』
 	 * @return	敵と当たったかどうかのフラグ
 	 */
-	bool				isHit(const Vector2f& draw_cc_p, const Vector2f& draw_cc_e, int chara_id) const;
-
-	/**
-	 * @brief 中心座標から矩形を逆算
-	 * @param	draw_cc			中心座標
-	 * @param	rect_pos		矩形情報(各半径情報)	
-	 * @return	与えた中心座標からrect_posの値を与えたRECT
-	 */
-	void				calculateBackRect(Rect* dst_pos, const Rect& rect_pos, const Vector2f& draw_cc) const;
+	bool				isHit(const ActorBase& owner, const ActorBase& target) const;
 
 	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }
 
@@ -83,6 +75,8 @@ public:
 	int					getAtkPower() const { return mAtkPower; }
 
 	int					getMissionPower() const { return mMissionPower; }
+
+	const Rect&			getRect() const { return mRect; }
 
 	int					getScore() const { return mScore; }
 
@@ -101,6 +95,7 @@ protected:
 
 	Texture*			mTexture;
 	Vertex*				mVertex;
+	Rect				mRect;
 	int					mRectStartNum;
 	int					mSoundStartNum;
 

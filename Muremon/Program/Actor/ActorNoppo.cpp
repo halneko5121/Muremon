@@ -231,7 +231,7 @@ ActorNoppo::stateGroundAtk()
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
 
-	if (isHit(mNowPos, boss->getNowPos(), ID_NOPPO))
+	if (isHit(*this, *boss))
 	{
 		setIsHitCheck(true);
 		mHitPos = mNowPos;
@@ -294,7 +294,7 @@ ActorNoppo::stateSkyAtk()
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
 
-	if (isHit(mNowPos, boss->getNowPos(), ID_NOPPO))
+	if (isHit(*this, *boss))
 	{
 		setIsHitCheck(true);
 		mHitPos = mNowPos;

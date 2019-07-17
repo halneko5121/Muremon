@@ -387,7 +387,7 @@ ActorNoppo::stateSkyDeath()
 	mAnimation = 0;																	//•`‰æ‚ðŒÅ’è
 	mRectNum = ANIME_S_ATK2_NOPPO;
 
-	mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if ((mNowPos.x < -(cNoppoRadius + 50)) || (mNowPos.x > cWindowWidth + cNoppoRadius + 50) &&

@@ -13,7 +13,7 @@ enum EffectId;
 
 struct EffectParam
 {
-	EffectParam(Texture* texture, Vertex* vertex, Vector2f pos)
+	EffectParam(Texture* texture, Vertex* vertex, const Vector2f& pos)
 		: mTexture(texture)
 		, mVertex(vertex)
 		, mPos(pos)

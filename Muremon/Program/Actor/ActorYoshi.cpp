@@ -379,7 +379,7 @@ void
 ActorYoshi::stateSkyDeath()
 {
 	mAngleDegree += cSpinSpeed;
-	mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	if ((mNowPos.y < -cYoshiRadius) || (mNowPos.y > cWindowHeight + cYoshiRadius))
 	{

@@ -341,7 +341,7 @@ ActorNikuman::stateSkyDeath()
 	mAnimation = 0;
 	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
 
-	mNowPos = mOrbit->mParabora->orbitParabola(mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	if ((mNowPos.y < -cNikumanRadius) || (mNowPos.y > cWindowHeight + cNikumanRadius))
 	{

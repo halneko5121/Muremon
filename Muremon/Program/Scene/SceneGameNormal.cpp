@@ -386,8 +386,7 @@ SceneGameNormal::stateGame()
 	// アクターの更新
 	GetActorMgr()->update(boss_cc2);
 
-	// エフェクトの掃除＆更新
-	GetEffectMgr()->cleanup();
+	// エフェクトの更新
 	GetEffectMgr()->update();
 
 	// ヒットチェック

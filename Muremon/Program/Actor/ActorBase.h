@@ -13,10 +13,6 @@
 #include "Program/Util/Orbit/OrbitCalculation.h"
 #include "Program/DefineGame.h"
 
-// •`‰æˆÊ’u
-const float cDispBossRadiusX = 150.f;	// BOSS‚Ì”¼Œa(X)
-const float cDispBossRadiusY = 200.f;	// BOSS‚Ì”¼Œa(Y)
-
 // RECT‚Ì float_ver
 typedef struct F_RECT{
 	float   left;

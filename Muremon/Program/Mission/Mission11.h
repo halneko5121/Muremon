@@ -29,6 +29,7 @@ public:
 private:
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Ready);
 	DECLAR_STATE_FUNC2(Run);
 	DECLAR_STATE_FUNC2(Success);
 	DECLAR_STATE_FUNC2(Failure);

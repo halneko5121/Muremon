@@ -21,6 +21,7 @@ namespace
 	enum State
 	{
 		cState_Idle,			// 待機
+		cState_Ready,			// 準備
 		cState_Run,				// 実行
 		cState_Success,			// 成功
 		cState_Failure,			// 失敗
@@ -41,6 +42,7 @@ Mission11::Mission11(MissionId id, Texture* texture, Vertex* vertex)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission11, mState, Idle,		cState_Idle);
+	REGIST_STATE_FUNC2(Mission11, mState, Ready,	cState_Ready);
 	REGIST_STATE_FUNC2(Mission11, mState, Run,		cState_Run);
 	REGIST_STATE_FUNC2(Mission11, mState, Success,	cState_Success);
 	REGIST_STATE_FUNC2(Mission11, mState, Failure,	cState_Failure);
@@ -60,7 +62,7 @@ Mission11::~Mission11()
 void
 Mission11::runImple()
 {
-	mState.changeStateIfDiff(cState_Run);
+	mState.changeStateIfDiff(cState_Ready);
 }
 
 /**
@@ -78,7 +80,7 @@ Mission11::updateImple()
 void
 Mission11::draw() const
 {
-	if (mFlagTimeCount == 0)
+	if (mState.isEqual(cState_Ready))
 	{
 		mVertex->drawF(mMissionStartPos, R_MISSION_HASSEI);
 
@@ -133,49 +135,51 @@ Mission11::stateIdle()
 }
 
 /**
+ * @brief ステート:Ready
+ */
+void
+Mission11::stateEnterReady()
+{
+	mFlagZ = true;
+	mAlphaPushZ = 255;
+}
+void
+Mission11::stateReady()
+{
+	if (!mFlagZ)
+	{
+		mAlphaPushZ += 5;
+		if (mAlphaPushZ == 240) {
+			mFlagZ = true;
+		}
+	}
+	else
+	{
+		mAlphaPushZ -= 5;
+		if (mAlphaPushZ == 50) {
+			mFlagZ = false;
+		}
+	}
+
+	if (UtilInput::isKeyPushedDecide())
+	{
+		mState.changeState(cState_Run);
+		return;
+	}
+}
+
+/**
  * @brief ステート:Run
  */
 void
 Mission11::stateEnterRun()
 {
-	mFlagTimeCount = 0;
-	mAlphaPushZ = 255;
-	mFlagZ = true;
+	mTime = 0;
 }
 void
 Mission11::stateRun()
 {
-	if (mFlagTimeCount == 0)
-	{
-		mTime = 0;
-		if (!mFlagZ) 
-		{
-			mAlphaPushZ += 5;
-			if (mAlphaPushZ == 240) {
-				mFlagZ = true;
-			}
-		}
-		else
-		{
-			mAlphaPushZ -= 5;
-			if (mAlphaPushZ == 50) {
-				mFlagZ = false;
-			}
-		}
-	}
 	if (UtilInput::isKeyPushedDecide())
-	{
-		mFlagTimeCount += 1;
-		if (mFlagTimeCount > 2)
-		{
-			mFlagTimeCount = 2;
-		}
-	}
-	if (mFlagTimeCount == 1)
-	{
-		mTime++;
-	}
-	else if (mFlagTimeCount == 2)
 	{
 		if (mTime <= 6 * 60 - 31 && mTime >= 4 * 60 + 31)
 		{
@@ -188,6 +192,7 @@ Mission11::stateRun()
 			return;
 		}
 	}
+	mTime++;
 }
 
 /**

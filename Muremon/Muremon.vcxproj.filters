@@ -183,6 +183,9 @@
     <ClCompile Include="Program\Effect\EffectOugi.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Util\UtilActor.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -368,6 +371,9 @@
     </ClInclude>
     <ClInclude Include="Program\Effect\EffectOugi.h">
       <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Util\UtilActor.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

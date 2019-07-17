@@ -70,6 +70,7 @@
     <ClCompile Include="Program\Scene\SceneRanking.cpp" />
     <ClCompile Include="Program\Scene\SceneTitle.cpp" />
     <ClCompile Include="Program\Scene\SceneTutorial.cpp" />
+    <ClCompile Include="Program\Util\UtilActor.cpp" />
     <ClCompile Include="Program\Util\UtilBattle.cpp" />
     <ClCompile Include="Program\Util\UtilGraphics.cpp" />
     <ClCompile Include="Program\Util\UtilInput.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Program\Scene\SceneRanking.h" />
     <ClInclude Include="Program\Scene\SceneTitle.h" />
     <ClInclude Include="Program\Scene\SceneTutorial.h" />
+    <ClInclude Include="Program\Util\UtilActor.h" />
     <ClInclude Include="Program\Util\UtilBattle.h" />
     <ClInclude Include="Program\Util\UtilGraphics.h" />
     <ClInclude Include="Program\Util\UtilInput.h" />

@@ -3,6 +3,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Util/UtilGame.h"
 #include "Program/Effect/EffectMgr.h"
 
 namespace 
@@ -20,7 +21,6 @@ namespace
 	const int cDegRandMin = 180 + 45;				// 75ÅãÇ‹Ç≈ÇÃä‘
 
 	// äJénç¿ïW
-	const float GroundAtkStartY = (cGroundPos + 20.0f - cNikumanRadius);
 	const int cRandY = 300;
 	const int cRandYMin = -200;
 
@@ -214,7 +214,7 @@ ActorNikuman::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getNikumanSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cNikumanRadius, GroundAtkStartY);
+	mNowPos = Vector2f(-cNikumanRadius, (UtilGame::getGroundPosY() + 20.0f - cNikumanRadius));
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }

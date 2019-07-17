@@ -3,6 +3,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Util/UtilGame.h"
 #include "Program/Effect/EffectMgr.h"
 
 namespace
@@ -20,7 +21,6 @@ namespace
 	const int cDegRandMin = 180 + 45;						// 75ÅãÇ‹Ç≈ÇÃä‘
 
 	// äJénç¿ïW
-	const float GroundAtkStartY = (cGroundPos + 40.0f - cYoshiRadius);
 	const int cRandY = 400;
 	const int cRandYMin = 100;
 
@@ -218,7 +218,7 @@ ActorYoshi::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cYoshiRadius, GroundAtkStartY);
+	mNowPos = Vector2f(-cYoshiRadius, (UtilGame::getGroundPosY() + 40.0f - cYoshiRadius));
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }

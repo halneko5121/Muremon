@@ -17,7 +17,6 @@
 const int SPIN_SPEED = 30;				// ‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				
 
 // •`‰æˆÊ’u
-const float cGroundPos = 500.f;			// ’n–Ê‚ÌÀ•W		
 const float cDispBossRadiusX = 150.f;	// BOSS‚Ì”¼Œa(X)
 const float cDispBossRadiusY = 200.f;	// BOSS‚Ì”¼Œa(Y)
 

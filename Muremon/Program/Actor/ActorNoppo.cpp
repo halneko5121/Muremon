@@ -11,6 +11,7 @@
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
+#include "Program/Util/UtilGame.h"
 #include "Program/Effect/EffectMgr.h"
 
 namespace
@@ -29,7 +30,6 @@ namespace
 	const int cWaveLimitX = 500;									// この座標まで来ると直線運動へ移行
 
 	// 開始座標
-	const float GroundAtkStartY = (cGroundPos + 70.0f - cNoppoRadius);
 	const int cRandY = 400;
 	const int cRandYMin = 100;
 
@@ -223,7 +223,7 @@ ActorNoppo::stateEnterGroundAtk()
 	}
 	mIsAtk1 = true;
 	mSpeed = getSpeed();
-	mNowPos = Vector2f(-cNoppoRadius, GroundAtkStartY);
+	mNowPos = Vector2f(-cNoppoRadius, (UtilGame::getGroundPosY() + 70.0f - cNoppoRadius));
 	mAngleDegree = 0.0f;
 }
 void

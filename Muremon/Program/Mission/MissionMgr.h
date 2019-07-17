@@ -14,6 +14,7 @@
 
 class ActorBoss;
 class MissionBase;
+class EffectBase;
 
 enum MissionId
 {
@@ -70,6 +71,7 @@ private:
 	Vertex*						mVertex;
 	ActorBoss*					mActorBoss;
 	MissionBase*				mMission[cMissionId_Count];
+	EffectBase*					mOugiEffect;
 
 	Vector2f					mMissionStartPos;	//みっしょん開始の位置
 
@@ -80,7 +82,6 @@ private:
 	int							mCurrentMissionNo;		// どのミッションが選択されたかを記憶
 
 	int							mAlphaFont;
-	Vector2f					mWavePos;
 
 	int							mNegativeAlpha;
 	int							mNegativeState;

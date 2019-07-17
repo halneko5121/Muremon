@@ -66,6 +66,12 @@ EffectOugi::update()
 void
 EffectOugi::draw()
 {
+	// 「ミッション奥義」
+	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
+	mVertex->setColor(mAlpha, 255, 255, 255);
+	mVertex->drawF(Vector2f(400.0f, 300.0f), R_MISSION_OSIRASE);
+	mVertex->drawF(Vector2f(400.0f, 300.0f), R_OUGI_FONT);
+
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->drawF(mPos, mRectIndex);
 }

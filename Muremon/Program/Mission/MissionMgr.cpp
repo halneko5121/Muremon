@@ -13,6 +13,7 @@
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Actor/ActorBoss.h"
+#include "Program/Effect/EffectMgr.h"
 #include "Program/Mission/MissionBase.h"
 #include "Program/Mission/Mission1.h"
 #include "Program/Mission/Mission2.h"
@@ -60,11 +61,6 @@ namespace
 	const int cNegativePar2 = 60;
 	const int cNegativePar3 = 70;
 	const int cNegativePar4 = 100;
-
-	// 奥義
-	const Vector2f cWaveInitPos = { -500.0f, 300.0f };
-	const float cWaveSpeedX = ((800.f + 500.f + 500.f) / (60.f * 3.5f));
-	const float cWaveUpY = (60.f / (60.f * 3.5f));
 
 	enum NEGATIVE_DATA
 	{
@@ -118,13 +114,13 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	: mTexture(texture)
 	, mVertex(vertex)
 	, mActorBoss(boss)
+	, mOugiEffect(nullptr)
 	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
 	, mAlpha(0)
 	, mFlagDraw(0)
 	, mMoveCount(0)
 	, mCurrentMissionNo(0)
 	, mAlphaFont(0)
-	, mWavePos(cWaveInitPos)
 	, mNegativeAlpha(0)
 	, mNegativeState(NO_NEGATIVE)
 	, mNegativeAtkLv(0)
@@ -201,15 +197,6 @@ void MissionMgr::draw()
 	{
 		mMission[mCurrentMissionNo]->draw();
 	}
-
-	// ミッション奥義
-	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
-	mVertex->setColor(mAlphaFont, 255, 255, 255);
-	mVertex->drawF(Vector2f(400.0f, 300.0f), R_MISSION_OSIRASE);
-	mVertex->drawF(Vector2f(400.f, 300.0f), R_OUGI_FONT);
-
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->drawF(Vector2f(mWavePos.x, mWavePos.y), R_OUGI);
 
 	// ミッション失敗
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
@@ -478,48 +465,18 @@ MissionMgr::stateFailure()
 void
 MissionMgr::stateEnterOugi()
 {
+	EffectParam param(mTexture, mVertex, Vector2f(0.0f, 0.0f));
+	mOugiEffect = GetEffectMgr()->createEffect(cEffectId_OugiEffect, param);
 }
 void
 MissionMgr::stateOugi()
 {
-	int count = mState.getStateCount();
-
-	if (count >= 0 && 60 > count) {
-		mAlphaFont += 5;
-		if (mAlphaFont > 255) {
-			mAlphaFont = 255;
-		}
-	}
-	else if (count >= 60 && 120 > count) {
-		mAlphaFont = 255;
-	}
-	else if (count >= 120 && 180 > count) {
-		mAlphaFont -= 5;
-		if (mAlphaFont < 0) {
-			mAlphaFont = 0;
-		}
-	}
-	else if (count >= 180 && 210 > count) {
-		if (count == 180) {
-			UtilSound::playOnce(S_NAMI);
-		}
-	}
-	else if (count >= 210 && 420 > count) {		//波を動かす(3.5sec)
-		mWavePos.x += cWaveSpeedX;
-		mWavePos.y -= cWaveUpY;
-		if (count % 10 <= 4) {
-			mWavePos.y -= 2.f;
-		}
-		else if (count % 10 <= 9) {
-			mWavePos.y += 2.f;
-		}
-	}
-
-	if (count > 630) {
+	if (mOugiEffect->isEnd())
+	{
 		mActorBoss->mLife -= 7000;
-		mWavePos = cWaveInitPos;
 		UtilGame::addScore(cMissionClearAddScore);
 		mState.changeState(cState_End);
+		return;
 	}
 }
 

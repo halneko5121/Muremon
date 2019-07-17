@@ -180,6 +180,9 @@
     <ClCompile Include="Program\Mission\Mission14.cpp">
       <Filter>Mission</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Effect\EffectOugi.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -362,6 +365,9 @@
     </ClInclude>
     <ClInclude Include="Program\Mission\Mission14.h">
       <Filter>Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Effect\EffectOugi.h">
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

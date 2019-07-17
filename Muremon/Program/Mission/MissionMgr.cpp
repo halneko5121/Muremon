@@ -58,10 +58,10 @@ namespace
 	const int cMission14Rate = 100;
 
 	// バッドステータスが選択されるパーセンテージ
-	const int cNegativePar1 = 40;
-	const int cNegativePar2 = 60;
-	const int cNegativePar3 = 70;
-	const int cNegativePar4 = 100;
+	const int cBadStatus1Rate = 40;
+	const int cBadStatus2Rate = 60;
+	const int cBadStatus3Rate = 70;
+	const int cBadStatus4Rate = 100;
 
 	enum NEGATIVE_DATA
 	{
@@ -487,16 +487,16 @@ void
 MissionMgr::stateEnterBadStatus()
 {
 	int rand_negative = rand() % 100 + 1;
-	if (rand_negative > 0 && rand_negative <= cNegativePar1) {
+	if (rand_negative > 0 && rand_negative <= cBadStatus1Rate) {
 		mNegativeState = SPEED_UP;
 	}
-	else if (rand_negative > cNegativePar1 && rand_negative <= cNegativePar2) {
+	else if (rand_negative > cBadStatus1Rate && rand_negative <= cBadStatus2Rate) {
 		mNegativeState = RECOVER;
 	}
-	else if (rand_negative > cNegativePar2 && rand_negative <= cNegativePar3) {
+	else if (rand_negative > cBadStatus2Rate && rand_negative <= cBadStatus3Rate) {
 		mNegativeState = SLIDE_IN;
 	}
-	else if (rand_negative > cNegativePar3 && rand_negative <= cNegativePar4) {
+	else if (rand_negative > cBadStatus3Rate && rand_negative <= cBadStatus4Rate) {
 		mNegativeState = ATTACK_DOWN;
 	}
 

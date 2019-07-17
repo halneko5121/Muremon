@@ -27,7 +27,7 @@ namespace
 	const int cRandYMin = -200;
 
 	const int cAtkPowerNikuman = 20;				// にくまんの攻撃力
-	const int cAddGaugePowerNikuman = 30;			// にくまんミッションゲージ増加量
+	const int cAddGaugePowerNikuman = 300;			// にくまんミッションゲージ増加量
 	const int cAddScoreNikuman = 30;				// にくまんスコア加算
 
 	enum ANIME_NIKU

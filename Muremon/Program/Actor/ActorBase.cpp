@@ -146,53 +146,6 @@ ActorBase::setSkyAtkFlag()
 }
 
 /**
- * @brief エフェクトフォント位置の設定
- * @param	font_cc			開始位置
- * @param	chara_radius	キャラ半径
- * @param	range_font		フォントの大きさ
- * @return	中心座標
- */
-Vector2f
-ActorBase::setEffectFont(Vector2f font_cc ,float chara_radius, float range_font)
-{
-	Vector2f pos_effectfont = { 0.f	,0.f };
-
-	//『べチャ！』とか表示位置(中心座標から左上)
-	pos_effectfont.x = (font_cc.x - (chara_radius + range_font) );
-	pos_effectfont.y = (font_cc.y - (chara_radius + range_font) );
-
-	return pos_effectfont;
-}
-
-/**
- * @brief シェイク効果
- * @param	change_x		揺れ幅
- * @param	change_y		揺れ幅
- * @param	font_cc			フォントの中心位置
- * @return	中心座標
- */
-Vector2f
-ActorBase::setEffectShake(float change_x ,float change_y, Vector2f font_cc)
-{
-	static float shake_x	,shake_y	= 0.f; 
-	static bool  flag_shake_right,flag_shake_down = false; 
-	static int	 shake_count = 0;
-
-	if(shake_x > change_x)			{ flag_shake_right = false; shake_count++; }
-	else if(shake_x < (-change_x))	{ flag_shake_right = true;  shake_count++; }
-
-	if(shake_y > change_y)		  { flag_shake_down = false; }
-	else if(shake_y <-(change_y)) { flag_shake_down = true;  }
-
-	if(shake_count > 5)	{ flag_shake_down = true;  shake_count = 0; }
-
-	font_cc.x += (flag_shake_right) ? shake_x++ : shake_x--;
-	font_cc.y += (flag_shake_down ) ? shake_y++ : shake_y--;
-
-	return font_cc;
-}
-
-/**
  * @brief 攻撃処理
  */
 void

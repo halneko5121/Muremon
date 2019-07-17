@@ -47,24 +47,6 @@ public:
 	void				setSkyAtkFlag();
 
 	/**
-	 * @brief エフェクトフォント位置の設定
-	 * @param	font_cc			フォントの中心位置
-	 * @param	chara_radius	キャラ半径
-	 * @param	range_font		フォントの大きさ
-	 * @return	中心座標
-	 */
-	Vector2f			setEffectFont(Vector2f font_cc, float chara_radius, float range_font);
-
-	/**
-	 * @brief シェイク効果
-	 * @param	change_x		揺れ幅
-	 * @param	change_y		揺れ幅
-	 * @param	font_cc			フォントの中心位置
-	 * @return	中心座標
-	 */
-	Vector2f			setEffectShake(float change_x, float change_y, Vector2f font_cc);
-
-	/**
 	 * @brief 攻撃処理１
 	 * @return	中心座標
 	 */

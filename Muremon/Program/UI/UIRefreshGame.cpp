@@ -18,6 +18,8 @@ namespace
 {
 	// •\Ž¦ˆÊ’u
 	const Vector2f cDispStateFramePos = { 400.0f, 560.0f };
+	const Vector2f cDispBossHpPos = { 675.0f, 540.0f };
+	const Vector2f cDispGaugePos = { 675.0f, 570.0f };
 }
 
 /**

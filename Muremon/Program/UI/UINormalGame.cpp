@@ -21,6 +21,10 @@ namespace
 	// •\Ž¦ˆÊ’u
 	const Vector2f cDispScorePos = { 60.0f, 20.0f };
 	const Vector2f cDispTimePos = { 60.0f, 70.0f };
+	const Vector2f cDispMissionPos = { 260.0f, 540.0f };
+	const Vector2f cDispMissionGaugePos = { 260.0f, 570.0f };
+	const Vector2f cDispScoreNumPos = { 30.0f, 40.0f };
+	const Vector2f cDispTimeNumPos = { 30.0f, 90.0f };
 
 	const float cMaxMissionGauge = 5000.0f;
 }

@@ -30,15 +30,12 @@
 #include "Program/Mission/Mission13.h"
 #include "Program/Mission/Mission14.h"
 
-#define MISSION_ALPHA_INCREASE	(5)
-
-#define MISSION_HASSEI_X	(400.f)
-#define MISSION_HASSEI_Y	(50.f)
-
 namespace
 {
-	const int cMissionClearAddScore = 50000;			// ミッションクリア加算スコア
+	const int cMissionClearAddScore = 50000;						// ミッションクリア加算スコア
 	const Vector2f cDispMissionAlertPos = { 400.0f, 300.0f };
+	const int cMissionAlphaIncrease = 5;
+	const Vector2f cDispMissionOccurrencePos = { 400.0f, 50.0f };	// 「ミッション発生」
 
 	// 各ミッションが選択されるパーセンテージ
 	const int cMission1Rate = 10;
@@ -196,7 +193,7 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mVertex(vertex)
 	, mActorBoss(boss)
 	, mOugiEffect(nullptr)
-	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
+	, mMissionStartPos(cDispMissionOccurrencePos.x, -50.f)
 	, mAlpha(0)
 	, mFlagDraw(0)
 	, mMoveCount(0)
@@ -233,7 +230,7 @@ void MissionMgr::init()
 	mFlagDraw	= 0;
 	mAlpha		= 0;
 
-	mMissionStartPos.x = MISSION_HASSEI_X;
+	mMissionStartPos.x = cDispMissionOccurrencePos.x;
 	mMissionStartPos.y = -50.f;
 
 	mState.changeState(cState_StartShake);
@@ -365,7 +362,7 @@ MissionMgr::stateStartShake()
 {
 	if (mFlagDraw % 2 == 0) 
 	{
-		if (mMissionStartPos.y < MISSION_HASSEI_Y) 
+		if (mMissionStartPos.y < cDispMissionOccurrencePos.y)
 		{
 			mMissionStartPos.y += 5.f;
 		}
@@ -401,7 +398,7 @@ MissionMgr::stateEnterStartFadeOut()
 void
 MissionMgr::stateStartFadeOut()
 {
-	mAlpha += MISSION_ALPHA_INCREASE;
+	mAlpha += cMissionAlphaIncrease;
 	if (mAlpha > 255)
 	{
 		mAlpha = 255;
@@ -450,7 +447,7 @@ MissionMgr::stateEnterSuccess()
 void
 MissionMgr::stateSuccess()
 {
-	mAlpha -= MISSION_ALPHA_INCREASE;
+	mAlpha -= cMissionAlphaIncrease;
 	if (mAlpha < 0) { mAlpha = 0; }
 
 	if (mAlpha == 0)
@@ -471,7 +468,7 @@ MissionMgr::stateEnterFailure()
 void
 MissionMgr::stateFailure()
 {
-	mAlpha -= MISSION_ALPHA_INCREASE;
+	mAlpha -= cMissionAlphaIncrease;
 	if (mAlpha < 0) { mAlpha = 0; }
 
 	if (mAlpha == 0)

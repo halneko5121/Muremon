@@ -321,7 +321,14 @@ MissionMgr::calcRectIndex(int state_index) const
 	case cState_StartFadeOut:
 		return R_MISSION_HASSEI;
 	case cState_Run:
-		return R_MISSION_KAISI;
+		if (mMission[mCurrentMissionNo]->isRunning())
+		{
+			return R_MISSION_KAISI;
+		}
+		else
+		{
+			return R_MISSION_HASSEI;
+		}
 	case cState_Success:
 		return R_MISSION_SEIKO;
 	case cState_Failure:

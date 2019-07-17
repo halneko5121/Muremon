@@ -9,7 +9,6 @@
 
 namespace
 {
-	// ボス関連
 	const float cInitLife = 3000.0f;	// ボスの初期ライフ
 	const float cAddLife = 1000.0f;		// ボスが死んだ時増加していくライフ
 	const int cDeadAlpha = 5;			// ボスが滅した時のアルファ減値
@@ -20,6 +19,7 @@ namespace
 	const int cDeadSeTime = 60;
 	const int cDamagePosRand = 5;
 	const int cMoveInterval = 3;
+	const int cGameOverPosX = 450;
 
 	enum State
 	{

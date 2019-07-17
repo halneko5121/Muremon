@@ -25,6 +25,9 @@ namespace
 	// 描画位置
 	const float cDispBossRadiusX = 150.f;		// BOSSの半径(X)
 	const float cDispBossRadiusY = 200.f;		// BOSSの半径(Y)
+
+
+	const float cDeadLinePosX = 300.f;			// ゲームオーバーライン
 }
 
 //l,t,r,b

@@ -14,8 +14,6 @@ const int cWindowWidth = 800;
 const float cWindowCenterX = (cWindowWidth / 2.f);
 const float cWindowCenterY = (cWindowHeight / 2.f);
 
-const float cDeadLinePosX = 300.f;			// ゲームオーバーライン
-
 const float cNikumanRadius = 37.5f;			// キャラの半径
 const float cYoshiRadius = 76.5f;			// キャラの半径
 const float cNoppoRadius = 150.f;			// キャラの半径
@@ -27,13 +25,6 @@ const Vector2f cNoppoHitRadius = { 50.0f, 100.0f };
 const Vector2f cDispBgPos = { 400.0f, 300.0f };
 const Vector2f cDispFlagPos = { 400.0f, 450.0f };
 
-const float cDispFaceIconPosX = 30.f;
-const float cDispFaceIconYoshiPosY = 535.f;
-const float cDispFaceIconNikumanPosY = 560.f;
-const float cDispFaceIconNoppoPosY = 585.f;
-const float cDispPushKeyCountPosX = 60.f;
-
-const int cGameOverPosX = 450;
 const int cAlphaIncrease = 15;
 const int cMaxPlayerCount = 100;		// キャラ1種類につきの総数
 const float cGravity = 0.98f;			// 重力加速度

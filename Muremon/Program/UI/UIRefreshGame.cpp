@@ -20,6 +20,11 @@ namespace
 	const Vector2f cDispStateFramePos = { 400.0f, 560.0f };
 	const Vector2f cDispBossHpPos = { 675.0f, 540.0f };
 	const Vector2f cDispGaugePos = { 675.0f, 570.0f };
+	const float cDispFaceIconPosX = 30.f;
+	const float cDispFaceIconYoshiPosY = 535.f;
+	const float cDispFaceIconNikumanPosY = 560.f;
+	const float cDispFaceIconNoppoPosY = 585.f;
+	const float cDispPushKeyCountPosX = 60.f;
 }
 
 /**

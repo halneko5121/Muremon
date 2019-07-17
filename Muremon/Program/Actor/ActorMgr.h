@@ -57,7 +57,7 @@ public:
 	/**
 	 * @brief	アクターの更新
 	 */
-	void				update(Vector2f boss_cc);
+	void				update();
 
 	/**
 	 * @brief	アクターの描画

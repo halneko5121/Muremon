@@ -4,7 +4,9 @@
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Util/UtilActor.h"
 #include "Program/Effect/EffectMgr.h"
+#include "Program/Actor/ActorBoss.h"
 
 namespace
 {
@@ -65,6 +67,15 @@ namespace
 		cState_End,					// 終了
 		cState_Count
 	};
+
+	/**
+	 * @brief ボスアクターを取得する
+	 */
+	ActorBase*
+	getBoss()
+	{
+		return UtilActor::searchSingleActor(cActorId_Boss);
+	}
 }
 
 /**
@@ -132,9 +143,8 @@ ActorYoshi::runImple()
  * @brief 更新
  */
 void
-ActorYoshi::updateImple(Vector2f boss_cc)
+ActorYoshi::updateImple()
 {
-	mBossPos = boss_cc;
 	mState.executeState();
 }
 
@@ -225,7 +235,10 @@ ActorYoshi::stateEnterGroundAtk()
 void
 ActorYoshi::stateGroundAtk()
 {
-	if (isHit(mNowPos, mBossPos, ID_YOSHI))
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+
+	if (isHit(mNowPos, boss->getNowPos(), ID_YOSHI))
 	{
 		setIsHitCheck(true);
 		mHitPos = mNowPos;
@@ -282,7 +295,10 @@ ActorYoshi::stateEnterSkyAtk()
 void
 ActorYoshi::stateSkyAtk()
 {
-	if (isHit(mNowPos, mBossPos, ID_YOSHI))
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+
+	if (isHit(mNowPos, boss->getNowPos(), ID_YOSHI))
 	{
 		setIsHitCheck(true);
 		mHitPos = mNowPos;

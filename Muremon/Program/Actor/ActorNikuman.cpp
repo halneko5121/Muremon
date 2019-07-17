@@ -4,7 +4,9 @@
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Util/UtilActor.h"
 #include "Program/Effect/EffectMgr.h"
+#include "Program/Actor/ActorBoss.h"
 
 namespace 
 {
@@ -117,9 +119,8 @@ ActorNikuman::runImple()
  * @brief XV
  */
 void
-ActorNikuman::updateImple(Vector2f boss_cc)
+ActorNikuman::updateImple()
 {
-	mBossPos = boss_cc;
 	mState.executeState();
 }
 
@@ -221,7 +222,10 @@ ActorNikuman::stateEnterGroundAtk()
 void
 ActorNikuman::stateGroundAtk()
 {
-	if (isHit(mNowPos, mBossPos, ID_NIKUMAN)) 
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+
+	if (isHit(mNowPos, boss->getNowPos(), ID_NIKUMAN))
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
@@ -272,7 +276,10 @@ ActorNikuman::stateEnterSkyAtk()
 void
 ActorNikuman::stateSkyAtk()
 {
-	if (isHit(mNowPos, mBossPos, ID_NIKUMAN))
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+
+	if (isHit(mNowPos, boss->getNowPos(), ID_NIKUMAN))
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
@@ -287,7 +294,7 @@ ActorNikuman::stateSkyAtk()
 	if (mNowPos.x - cNikumanRadius < cWindowWidth) 
 	{
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_NIKU);
-		mNowPos = updateAttack2(mBossPos);
+		mNowPos = updateAttack2(boss->getNowPos());
 	}
 	else
 	{

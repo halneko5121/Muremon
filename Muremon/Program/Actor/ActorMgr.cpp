@@ -101,14 +101,14 @@ ActorMgr::init()
  * @brief	アクターの更新
  */
 void
-ActorMgr::update(Vector2f boss_cc)
+ActorMgr::update()
 {
 	ActorIterator it_begin = mActorList.begin();
 	ActorIterator it_end = mActorList.end();
 	for (ActorIterator it = it_begin; it != it_end; it++)
 	{
 		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
-		actor->update(boss_cc);
+		actor->update();
 	}
 }
 

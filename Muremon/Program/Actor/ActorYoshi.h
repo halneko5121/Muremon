@@ -15,11 +15,11 @@ public:
 	ActorYoshi(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorYoshi();
 
-	Vector2f	updateAttack2();
+	Vector2f		updateAttack2();
 
 	void			initImple() override;
 	void			runImple() override;
-	void			updateImple(Vector2f boss_cc) override;
+	void			updateImple() override;
 	void			drawImple() const override;
 	int				setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 

@@ -39,6 +39,8 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mLife(cInitLife)
 	, mMaxLife(cInitLife)
+	, mMoveX(cAppearPosX)
+	, mMoveY(cAppearPosY)
 	, mHitCount(0)
 	, mSpeedX(1)
 
@@ -79,7 +81,7 @@ ActorBoss::runImple()
 }
 
 void
-ActorBoss::updateImple(Vector2f boss_cc)
+ActorBoss::updateImple()
 {
 	mState.executeState();
 

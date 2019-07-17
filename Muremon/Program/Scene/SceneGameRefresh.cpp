@@ -280,15 +280,13 @@ SceneGameRefresh::stateEnterGame()
 void
 SceneGameRefresh::stateGame()
 {
-	boss_cc = mBoss->getNowPos();
-
 	UtilSound::playLoop(S_BGM_BATTLE);
 
 	// 各攻撃の開始
 	updateRunAtk();
 
 	// アクターの更新
-	GetActorMgr()->update(boss_cc);
+	GetActorMgr()->update();
 
 	// エフェクトの更新
 	GetEffectMgr()->update();

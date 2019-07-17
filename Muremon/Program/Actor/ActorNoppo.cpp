@@ -12,7 +12,9 @@
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Util/UtilActor.h"
 #include "Program/Effect/EffectMgr.h"
+#include "Program/Actor/ActorBoss.h"
 
 namespace
 {
@@ -133,9 +135,8 @@ ActorNoppo::runImple()
  * @brief XV
  */
 void
-ActorNoppo::updateImple(Vector2f boss_cc)
+ActorNoppo::updateImple()
 {
-	mBossPos = boss_cc;
 	mState.executeState();
 }
 
@@ -229,7 +230,10 @@ ActorNoppo::stateEnterGroundAtk()
 void
 ActorNoppo::stateGroundAtk()
 {
-	if (isHit(mNowPos, mBossPos, ID_NOPPO))
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+
+	if (isHit(mNowPos, boss->getNowPos(), ID_NOPPO))
 	{
 		setIsHitCheck(true);
 		mHitPos = mNowPos;
@@ -289,7 +293,10 @@ ActorNoppo::stateEnterSkyAtk()
 void
 ActorNoppo::stateSkyAtk()
 {
-	if (isHit(mNowPos, mBossPos, ID_NOPPO))
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+
+	if (isHit(mNowPos, boss->getNowPos(), ID_NOPPO))
 	{
 		setIsHitCheck(true);
 		mHitPos = mNowPos;

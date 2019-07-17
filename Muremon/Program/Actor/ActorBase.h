@@ -25,12 +25,12 @@ public:
 	virtual void		drawImple() const {};
 	virtual void		runImple() {};
 	virtual void		initImple() {};
-	virtual void		updateImple(Vector2f boss_cc) {};
+	virtual void		updateImple() {};
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				init();
 	void				run();
-	void				update(Vector2f boss_cc);
+	void				update();
 	void				draw() const;
 
 	/**
@@ -119,6 +119,5 @@ protected:
 
 	bool				mIsHitCheck;
 	bool				mIsRun;
-	Vector2f			mBossPos;
 	Vector2f			mHitPos;
 };

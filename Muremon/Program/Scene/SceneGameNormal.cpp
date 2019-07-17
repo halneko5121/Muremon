@@ -346,8 +346,6 @@ SceneGameNormal::stateEnterGame()
 void
 SceneGameNormal::stateGame()
 {
-	boss_cc2 = mBoss->getNowPos();
-
 	if ((boss_cc2.x - 150) < 500) {
 		UtilSound::playLoop(S_SAIREN);
 	}
@@ -383,7 +381,7 @@ SceneGameNormal::stateGame()
 	updateRunAtk();
 
 	// アクターの更新
-	GetActorMgr()->update(boss_cc2);
+	GetActorMgr()->update();
 
 	// エフェクトの更新
 	GetEffectMgr()->update();

@@ -63,7 +63,6 @@ ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mAngleDegree(0.0f)
 	, mIsHitCheck(false)
 	, mIsRun(false)
-	, mBossPos(0.0f, 0.0f)
 	, mHitPos(0.0f, 0.0f)
 {
 	mOrbit	 = new OrbitCalculation();
@@ -100,9 +99,9 @@ ActorBase::run()
  * @brief çXêV
  */
 void
-ActorBase::update(Vector2f boss_cc)
+ActorBase::update()
 {
-	updateImple(boss_cc);
+	updateImple();
 }
 
 /**

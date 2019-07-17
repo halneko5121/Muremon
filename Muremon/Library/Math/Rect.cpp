@@ -57,12 +57,30 @@ Rect::getCenterPos() const
 }
 
 /**
+ * @brief	‰¡•‚ğİ’è
+ */
+void
+Rect::setWidth(float width)
+{
+	mWidth = width;
+}
+
+/**
  * @brief	‰¡•‚ğæ“¾
  */
 float
 Rect::getWidth() const
 {
 	return mWidth;
+}
+
+/**
+ * @brief	‚‚³‚ğİ’è
+ */
+void
+Rect::setHeight(float height)
+{
+	mHeight = height;
 }
 
 /**

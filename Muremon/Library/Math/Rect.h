@@ -17,7 +17,10 @@ public:
 	void				setCenterPos(const Vector2f& pos);
 	const Vector2f&		getCenterPos() const;
 
+	void				setWidth(float width);
 	float				getWidth() const;
+
+	void				setHeight(float height);
 	float				getHeight() const;
 
 	float				getHalfWidth() const;

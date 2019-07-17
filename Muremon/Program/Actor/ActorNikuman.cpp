@@ -245,6 +245,7 @@ ActorNikuman::stateGroundAtk()
 	{
 		mAnimation = setAnimetion(ANIME_G_ATK4_NIKU, mAnimation, NULL);
 		updateAttack1();
+		mRect.setCenterPos(mNowPos);
 	}
 	else
 	{
@@ -299,6 +300,7 @@ ActorNikuman::stateSkyAtk()
 	{
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_NIKU);
 		updateAttack2(boss->getNowPos());
+		mRect.setCenterPos(mNowPos);
 	}
 	else
 	{

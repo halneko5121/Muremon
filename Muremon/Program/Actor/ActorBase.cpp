@@ -24,18 +24,8 @@ namespace
 	const int SPEED_RAND_NIKU	= 15;			// その回数をかけて目的地点に到達する
 	const int SPEED_MIN_NIKU	= 15;
 
-	// 描画位置
-	const float cDispBossRadiusX = 150.f;		// BOSSの半径(X)
-	const float cDispBossRadiusY = 200.f;		// BOSSの半径(Y)
-
-
 	const float cDeadLinePosX = 300.f;			// ゲームオーバーライン
 }
-
-
-RECT rect_pos_e = {
-	cDispBossRadiusX, cDispBossRadiusY, cDispBossRadiusX, cDispBossRadiusY
-};
 
 /**
  * @brief コンストラクタ

@@ -92,6 +92,10 @@ ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
+	mRect.setWidth(cNoppoHitRadius.x);
+	mRect.setHeight(cNoppoHitRadius.y);
+	mRect.setCenterPos(mNowPos);
+
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorNoppo, mState, Idle,			 cState_Idle);
 	REGIST_STATE_FUNC2(ActorNoppo, mState, GroundAtk,		 cState_GroundAtk);
@@ -258,6 +262,7 @@ ActorNoppo::stateGroundAtk()
 		{
 			updateAttack1();
 			mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mAnimation, NULL);
+			mRect.setCenterPos(mNowPos);
 		}
 		else
 		{
@@ -330,6 +335,7 @@ ActorNoppo::stateSkyAtk()
 			mOrbit->mWave->setSpeed(mSpeed);
 			updateAttack2();
 			mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mAnimation, ANIME_S_ATK1_NOPPO);
+			mRect.setCenterPos(mNowPos);
 		}
 		else
 		{

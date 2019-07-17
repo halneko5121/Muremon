@@ -100,6 +100,10 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
+	mRect.setWidth(cYoshiHitRadius.x);
+	mRect.setHeight(cYoshiHitRadius.y);
+	mRect.setCenterPos(mNowPos);
+
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorYoshi, mState, Idle,				cState_Idle);
 	REGIST_STATE_FUNC2(ActorYoshi, mState, GroundAtk,			cState_GroundAtk);
@@ -261,6 +265,7 @@ ActorYoshi::stateGroundAtk()
 	{
 		updateAttack1();
 		mAnimation = setAnimetion(ANIME_G_ATK4_YOSHI, mAnimation, NULL);
+		mRect.setCenterPos(mNowPos);
 	}
 	else
 	{
@@ -321,6 +326,7 @@ ActorYoshi::stateSkyAtk()
 		mOrbit->mWave->setSpeed(mSpeed);
 		updateAttack2();
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_YOSHI);
+		mRect.setCenterPos(mNowPos);
 	}
 	else
 	{

@@ -17,7 +17,7 @@ public:
 
 	void		impleInit() override;
 	void		update() override;
-	void		draw() override;
+	void		draw() const override;
 	void		end() override;
 
 private:
@@ -34,10 +34,10 @@ private:
 	int			checkRankingIn();			// ランクインしてるかチェック
 	void		sortRanking(int new_rank);	// スコアの並び替え
 
-	void		drawBackGround();			// ランキング背景
-	void		drawRankingPlace();			// ランキング位置
-	void		drawRankingName();			// ランキング名前
-	void		drawRankingScore();			// ランキングスコア
+	void		drawBackGround() const;		// ランキング背景
+	void		drawRankingPlace() const;	// ランキング位置
+	void		drawRankingName() const;	// ランキング名前
+	void		drawRankingScore() const;	// ランキングスコア
 
 private:
 	RankingData mRankData[5];

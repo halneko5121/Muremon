@@ -130,7 +130,7 @@ SceneGameNormal::update()
  * @brief	•`‰æ
  */
 void
-SceneGameNormal::draw()
+SceneGameNormal::draw() const
 {
 	// ”wŒi
 	drawBg();
@@ -225,7 +225,7 @@ SceneGameNormal::updateRunAtk()
  * @brief	”wŒi•`‰æ
  */
 void
-SceneGameNormal::drawBg()
+SceneGameNormal::drawBg() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 	mVertex->setColor(255, 255, 255, 255);

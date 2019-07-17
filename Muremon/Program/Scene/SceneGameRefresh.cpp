@@ -93,7 +93,7 @@ void SceneGameRefresh::update()
 	mState.executeState();
 }
 
-void SceneGameRefresh::draw()
+void SceneGameRefresh::draw() const
 {
 	// ”wŒi
 	drawBg();
@@ -172,7 +172,7 @@ void SceneGameRefresh::updateRunAtk()
 	}
 }
 
-void SceneGameRefresh::drawBg()
+void SceneGameRefresh::drawBg() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
 	mVertex->setColor(255, 255, 255, 255);

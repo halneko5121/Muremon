@@ -193,7 +193,7 @@ SceneRanking::updateRanking(int rank)
  * @brief	•`‰æ
  */
 void
-SceneRanking::draw()
+SceneRanking::draw() const
 {
 	drawBackGround();
 	drawRankingPlace();
@@ -216,7 +216,7 @@ SceneRanking::end()
  * @brief	”wŒi‚Ì•`‰æ
  */
 void
-SceneRanking::drawBackGround()
+SceneRanking::drawBackGround() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_BG);
 	mVertex->setColor(255,255,255,255);
@@ -227,7 +227,7 @@ SceneRanking::drawBackGround()
  * @brief	‡ˆÊ‚Ì•`‰æ
  */
 void
-SceneRanking::drawRankingPlace()
+SceneRanking::drawRankingPlace() const
 {
 	for(int i=0;i<5;i++)
 	{
@@ -242,7 +242,7 @@ SceneRanking::drawRankingPlace()
  * @brief	–¼‘O‚Ì•`‰æ
  */
 void
-SceneRanking::drawRankingName()
+SceneRanking::drawRankingName() const
 {
 	for(int j=0;j<5;j++)
 	{
@@ -259,7 +259,7 @@ SceneRanking::drawRankingName()
  * @brief	ƒXƒRƒA‚Ì•`‰æ
  */
 void
-SceneRanking::drawRankingScore()
+SceneRanking::drawRankingScore() const
 {
 	int j=0;
 

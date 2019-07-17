@@ -103,7 +103,7 @@ SceneTutorial::update()
  * @brief	•`‰æ
  */
 void
-SceneTutorial::draw()
+SceneTutorial::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL1);
 	mVertex->drawF(mTexturePos[TR_REFRESH], R_TUTORIAL1);

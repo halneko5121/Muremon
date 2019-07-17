@@ -90,7 +90,7 @@ SceneTitle::update()
  * @brief	•`‰æ
  */
 void
-SceneTitle::draw()
+SceneTitle::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TITLE_BG);
 	mVertex->drawF(Vector2f(cDispTitleBgX, cDispTitleBgY), R_TITLE_BG);

@@ -62,7 +62,7 @@ public:
 	/**
 	 * @brief	•`‰æˆ—
 	 */
-	virtual void		draw() = 0;
+	virtual void		draw() const = 0;
 
 	/**
 	 * @brief	I—¹ˆ—

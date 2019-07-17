@@ -18,7 +18,7 @@ public:
 
 	void			impleInit() override;
 	void			update() override;
-	void			draw() override;
+	void			draw() const override;
 	void			end() override;
 
 private:

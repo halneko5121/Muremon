@@ -26,12 +26,12 @@ public:
 
 	void				impleInit() override;
 	void				update() override;
-	void				draw() override;
+	void				draw() const override;
 	void				end() override;
 
 private:
 	void				updateRunAtk();
-	void				drawBg();
+	void				drawBg() const;
 
 	ActorBase*			getActorNikuman(int index);
 	ActorBase*			getActorYoshi(int index);

@@ -63,7 +63,7 @@ SceneLogo::update()
  * @brief	•`‰æ
  */
 void
-SceneLogo::draw()
+SceneLogo::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_LOGO);
 	mVertex->drawF(Vector2f(400.0f, 300.0f), R_LOGO);

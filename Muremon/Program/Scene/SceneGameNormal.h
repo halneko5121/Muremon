@@ -26,12 +26,12 @@ public:
 
 	void				impleInit() override;
 	void				update() override;
-	void				draw() override;
+	void				draw() const override;
 	void				end() override;
 
 private:
 	void				updateRunAtk();
-	void				drawBg();
+	void				drawBg() const;
 	
 	void				recover();					// ƒ~ƒbƒVƒ‡ƒ“Ž¸”s‚Å‰º‚ª‚Á‚½‚à‚Ì‚ðŒ³‚É–ß‚·
 

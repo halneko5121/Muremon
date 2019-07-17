@@ -30,21 +30,6 @@
 #include "Program/Mission/Mission13.h"
 #include "Program/Mission/Mission14.h"
 
-#define MISSION_1PAR	(10)
-#define MISSION_2PAR	(20)
-#define MISSION_3PAR	(25)
-#define MISSION_4PAR	(35)
-#define MISSION_5PAR	(40)
-#define MISSION_6PAR	(50)
-#define MISSION_7PAR	(55)
-#define MISSION_8PAR	(65)
-#define MISSION_9PAR	(70)
-#define MISSION_10PAR	(75)
-#define MISSION_11PAR	(85)
-#define MISSION_12PAR	(90)
-#define MISSION_13PAR	(95)
-#define MISSION_14PAR	(100)
-
 #define MISSION_ALPHA_INCREASE	(5)
 
 #define MISSION_HASSEI_X	(400.f)
@@ -55,6 +40,22 @@ const Vector2f MISSION_OSIRASE = { 400.0f, 300.0f };
 namespace
 {
 	const int cMissionClearAddScore = 50000;			// ミッションクリア加算スコア
+
+	// 各ミッションが選択されるパーセンテージ
+	const int cMission1Rate = 10;
+	const int cMission2Rate = 20;
+	const int cMission3Rate = 25;
+	const int cMission4Rate = 35;
+	const int cMission5Rate = 40;
+	const int cMission6Rate = 50;
+	const int cMission7Rate = 55;
+	const int cMission8Rate = 65;
+	const int cMission9Rate = 70;
+	const int cMission10Rate = 75;
+	const int cMission11Rate = 85;
+	const int cMission12Rate = 90;
+	const int cMission13Rate = 95;
+	const int cMission14Rate = 100;
 
 	// バッドステータスが選択されるパーセンテージ
 	const int cNegativePar1 = 40;
@@ -285,52 +286,52 @@ MissionMgr::stateEnterStartShake()
 	// みっしょんを決めたり初期化したり
 	mCurrentMissionNo = rand() % 100 + 1;
 
-	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= MISSION_1PAR) {
+	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= cMission1Rate) {
 		mCurrentMissionNo = cMissionId_Mission1;
 	}
-	else if (mCurrentMissionNo > MISSION_1PAR && mCurrentMissionNo <= MISSION_2PAR) {
+	else if (mCurrentMissionNo > cMission1Rate && mCurrentMissionNo <= cMission2Rate) {
 		mCurrentMissionNo = cMissionId_Mission2;
 	}
-	else if (mCurrentMissionNo > MISSION_2PAR && mCurrentMissionNo <= MISSION_3PAR) {
+	else if (mCurrentMissionNo > cMission2Rate && mCurrentMissionNo <= cMission3Rate) {
 		mCurrentMissionNo = cMissionId_Mission3;
 	}
-	else if (mCurrentMissionNo > MISSION_3PAR && mCurrentMissionNo <= MISSION_4PAR) {
+	else if (mCurrentMissionNo > cMission3Rate && mCurrentMissionNo <= cMission4Rate) {
 		mCurrentMissionNo = cMissionId_Mission4;
 	}
-	else if (mCurrentMissionNo > MISSION_4PAR && mCurrentMissionNo <= MISSION_5PAR) {
+	else if (mCurrentMissionNo > cMission4Rate && mCurrentMissionNo <= cMission5Rate) {
 		mCurrentMissionNo = cMissionId_Mission5;
 	}
-	else if (mCurrentMissionNo > MISSION_5PAR && mCurrentMissionNo <= MISSION_6PAR) {
+	else if (mCurrentMissionNo > cMission5Rate && mCurrentMissionNo <= cMission6Rate) {
 		mCurrentMissionNo = cMissionId_Mission6;
 	}
-	else if (mCurrentMissionNo > MISSION_6PAR && mCurrentMissionNo <= MISSION_7PAR) {
+	else if (mCurrentMissionNo > cMission6Rate && mCurrentMissionNo <= cMission7Rate) {
 		mCurrentMissionNo = cMissionId_Mission7;
 	}
-	else if (mCurrentMissionNo > MISSION_7PAR && mCurrentMissionNo <= MISSION_8PAR) {
+	else if (mCurrentMissionNo > cMission7Rate && mCurrentMissionNo <= cMission8Rate) {
 		mCurrentMissionNo = cMissionId_Mission8;
 	}
-	else if (mCurrentMissionNo > MISSION_8PAR && mCurrentMissionNo <= MISSION_9PAR) {
+	else if (mCurrentMissionNo > cMission8Rate && mCurrentMissionNo <= cMission9Rate) {
 		mCurrentMissionNo = cMissionId_Mission9;
 	}
-	else if (mCurrentMissionNo > MISSION_9PAR && mCurrentMissionNo <= MISSION_10PAR) {
+	else if (mCurrentMissionNo > cMission9Rate && mCurrentMissionNo <= cMission10Rate) {
 		mCurrentMissionNo = cMissionId_Mission10;
 	}
-	else if (mCurrentMissionNo > MISSION_10PAR && mCurrentMissionNo <= MISSION_11PAR) {
+	else if (mCurrentMissionNo > cMission10Rate && mCurrentMissionNo <= cMission11Rate) {
 		mCurrentMissionNo = cMissionId_Mission11;
 	}
-	else if (mCurrentMissionNo > MISSION_11PAR && mCurrentMissionNo <= MISSION_12PAR) {
+	else if (mCurrentMissionNo > cMission11Rate && mCurrentMissionNo <= cMission12Rate) {
 		mCurrentMissionNo = cMissionId_Mission12;
 		if (key_count_niku >= key_count_noppo && key_count_niku >= key_count_yoshi) {
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
-	else if (mCurrentMissionNo > MISSION_12PAR && mCurrentMissionNo <= MISSION_13PAR) {
+	else if (mCurrentMissionNo > cMission12Rate && mCurrentMissionNo <= cMission13Rate) {
 		mCurrentMissionNo = cMissionId_Mission13;
 		if (key_count_yoshi >= key_count_niku && key_count_yoshi >= key_count_noppo) {
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
-	else if (mCurrentMissionNo > MISSION_13PAR && mCurrentMissionNo <= MISSION_14PAR) {
+	else if (mCurrentMissionNo > cMission13Rate && mCurrentMissionNo <= cMission14Rate) {
 		mCurrentMissionNo = cMissionId_Mission14;
 		if (key_count_noppo >= key_count_niku && key_count_noppo >= key_count_yoshi) {
 			mCurrentMissionNo = cMissionId_Mission1;

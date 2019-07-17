@@ -15,7 +15,7 @@ public:
 	ActorYoshi(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorYoshi();
 
-	Vector2f		updateAttack2();
+	void			updateAttack2();
 
 	void			initImple() override;
 	void			runImple() override;

@@ -182,12 +182,10 @@ ActorNoppo::drawImple() const
 /**
  * @brief UŒ‚ˆ—
  */
-Vector2f
-ActorNoppo::updateAttack2()	
+void
+ActorNoppo::updateAttack2()
 {
 	mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX,mNowPos);
-
-	return mNowPos;
 }
 
 // -----------------------------------------------------------------
@@ -327,7 +325,7 @@ ActorNoppo::stateSkyAtk()
 	{
 		if (mNowPos.x - cNoppoRadius < cWindowWidth) {
 			mOrbit->mWave->setSpeed(mSpeed);
-			mNowPos = updateAttack2();
+			updateAttack2();
 			mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mAnimation, ANIME_S_ATK1_NOPPO);
 		}
 		else

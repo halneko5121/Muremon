@@ -185,12 +185,10 @@ ActorYoshi::drawImple() const
 /**
  * @brief UŒ‚ˆ—
  */
-Vector2f
-ActorYoshi::updateAttack2()														//ƒL[“ü—Í‚É‚æ‚é“®ì‚»‚Ì2
+void
+ActorYoshi::updateAttack2()
 {
-	mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX,mNowPos);
-
-	return mNowPos;
+	mNowPos = mOrbit->mWave->orbitSinWave(cWaveLimitX, mNowPos);
 }
 
 // -----------------------------------------------------------------
@@ -318,7 +316,7 @@ ActorYoshi::stateSkyAtk()
 	if (mNowPos.x - cYoshiRadius < cWindowWidth)
 	{
 		mOrbit->mWave->setSpeed(mSpeed);
-		mNowPos = updateAttack2();
+		updateAttack2();
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_YOSHI);
 	}
 	else

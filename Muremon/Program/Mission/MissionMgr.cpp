@@ -109,6 +109,87 @@ namespace
 
 		return nullptr;
 	}
+
+	/**
+	 * @brief ランダムでミッションを選択する
+	 */
+	int
+	randomSelectMission()
+	{
+		int key_count_niku = UtilBattle::getWeakAtkCount();
+		int key_count_yoshi = UtilBattle::getMediumAtkCount();
+		int key_count_noppo = UtilBattle::getStrongAtkCount();
+
+		// みっしょんを決めたり初期化したり
+		int rand_mission_rate = rand() % 100 + 1;
+
+		if (rand_mission_rate >= 0 && rand_mission_rate <= cMission1Rate) {
+			return cMissionId_Mission1;
+		}
+		else if (rand_mission_rate > cMission1Rate && rand_mission_rate <= cMission2Rate) {
+			return cMissionId_Mission2;
+		}
+		else if (rand_mission_rate > cMission2Rate && rand_mission_rate <= cMission3Rate) {
+			return cMissionId_Mission3;
+		}
+		else if (rand_mission_rate > cMission3Rate && rand_mission_rate <= cMission4Rate) {
+			return cMissionId_Mission4;
+		}
+		else if (rand_mission_rate > cMission4Rate && rand_mission_rate <= cMission5Rate) {
+			return cMissionId_Mission5;
+		}
+		else if (rand_mission_rate > cMission5Rate && rand_mission_rate <= cMission6Rate) {
+			return cMissionId_Mission6;
+		}
+		else if (rand_mission_rate > cMission6Rate && rand_mission_rate <= cMission7Rate) {
+			return cMissionId_Mission7;
+		}
+		else if (rand_mission_rate > cMission7Rate && rand_mission_rate <= cMission8Rate) {
+			return cMissionId_Mission8;
+		}
+		else if (rand_mission_rate > cMission8Rate && rand_mission_rate <= cMission9Rate) {
+			return cMissionId_Mission9;
+		}
+		else if (rand_mission_rate > cMission9Rate && rand_mission_rate <= cMission10Rate) {
+			return cMissionId_Mission10;
+		}
+		else if (rand_mission_rate > cMission10Rate && rand_mission_rate <= cMission11Rate) {
+			return cMissionId_Mission11;
+		}
+		else if (rand_mission_rate > cMission11Rate && rand_mission_rate <= cMission12Rate) {
+			if (key_count_niku >= key_count_noppo && key_count_niku >= key_count_yoshi) 
+			{
+				return cMissionId_Mission1;
+			}
+			else
+			{
+				return cMissionId_Mission12;
+			}
+		}
+		else if (rand_mission_rate > cMission12Rate && rand_mission_rate <= cMission13Rate) {
+			if (key_count_yoshi >= key_count_niku && key_count_yoshi >= key_count_noppo)
+			{
+				return cMissionId_Mission1;
+			}
+			else
+			{
+				return cMissionId_Mission13;
+			}
+		}
+		else if (rand_mission_rate > cMission13Rate && rand_mission_rate <= cMission14Rate) {
+			if (key_count_noppo >= key_count_niku && key_count_noppo >= key_count_yoshi)
+			{
+				return cMissionId_Mission1;
+			}
+			else
+			{
+				return cMissionId_Mission14;
+			}
+		}
+
+		APP_ASSERT_FALSE_MESSAGE("どのミッションも選択されませんでした");
+		return cMissionId_Null;
+	}
 }
 
 MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
@@ -278,65 +359,7 @@ MissionMgr::stateEnterStartShake()
 {
 	UtilSound::playOnce(S_OSIRASE);
 	mMoveCount = 0;
-
-	int key_count_niku = UtilBattle::getWeakAtkCount();
-	int key_count_yoshi = UtilBattle::getMediumAtkCount();
-	int key_count_noppo = UtilBattle::getStrongAtkCount();
-
-	// みっしょんを決めたり初期化したり
-	int rand_mission_rate =rand() % 100 + 1;
-
-	if (rand_mission_rate >= 0 && rand_mission_rate <= cMission1Rate) {
-		mCurrentMissionNo = cMissionId_Mission1;
-	}
-	else if (rand_mission_rate > cMission1Rate && rand_mission_rate <= cMission2Rate) {
-		mCurrentMissionNo = cMissionId_Mission2;
-	}
-	else if (rand_mission_rate > cMission2Rate && rand_mission_rate <= cMission3Rate) {
-		mCurrentMissionNo = cMissionId_Mission3;
-	}
-	else if (rand_mission_rate > cMission3Rate && rand_mission_rate <= cMission4Rate) {
-		mCurrentMissionNo = cMissionId_Mission4;
-	}
-	else if (rand_mission_rate > cMission4Rate && rand_mission_rate <= cMission5Rate) {
-		mCurrentMissionNo = cMissionId_Mission5;
-	}
-	else if (rand_mission_rate > cMission5Rate && rand_mission_rate <= cMission6Rate) {
-		mCurrentMissionNo = cMissionId_Mission6;
-	}
-	else if (rand_mission_rate > cMission6Rate && rand_mission_rate <= cMission7Rate) {
-		mCurrentMissionNo = cMissionId_Mission7;
-	}
-	else if (rand_mission_rate > cMission7Rate && rand_mission_rate <= cMission8Rate) {
-		mCurrentMissionNo = cMissionId_Mission8;
-	}
-	else if (rand_mission_rate > cMission8Rate && rand_mission_rate <= cMission9Rate) {
-		mCurrentMissionNo = cMissionId_Mission9;
-	}
-	else if (rand_mission_rate > cMission9Rate && rand_mission_rate <= cMission10Rate) {
-		mCurrentMissionNo = cMissionId_Mission10;
-	}
-	else if (rand_mission_rate > cMission10Rate && rand_mission_rate <= cMission11Rate) {
-		mCurrentMissionNo = cMissionId_Mission11;
-	}
-	else if (rand_mission_rate > cMission11Rate && rand_mission_rate <= cMission12Rate) {
-		mCurrentMissionNo = cMissionId_Mission12;
-		if (key_count_niku >= key_count_noppo && key_count_niku >= key_count_yoshi) {
-			mCurrentMissionNo = cMissionId_Mission1;
-		}
-	}
-	else if (rand_mission_rate > cMission12Rate && rand_mission_rate <= cMission13Rate) {
-		mCurrentMissionNo = cMissionId_Mission13;
-		if (key_count_yoshi >= key_count_niku && key_count_yoshi >= key_count_noppo) {
-			mCurrentMissionNo = cMissionId_Mission1;
-		}
-	}
-	else if (rand_mission_rate > cMission13Rate && rand_mission_rate <= cMission14Rate) {
-		mCurrentMissionNo = cMissionId_Mission14;
-		if (key_count_noppo >= key_count_niku && key_count_noppo >= key_count_yoshi) {
-			mCurrentMissionNo = cMissionId_Mission1;
-		}
-	}
+	mCurrentMissionNo = randomSelectMission();
 }
 void
 MissionMgr::stateStartShake()

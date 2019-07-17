@@ -85,7 +85,7 @@ public:
 	 * @param	pos_x	X座標
 	 * @param	pos_y	Y座標
 	 */
-	void				draw(LPSTR str, long pos_x, long pos_y);
+	void				draw(LPSTR str, long pos_x, long pos_y) const;
 
 	/**
 	 * @brief	文字の描画(uFormatの設定をしたい場合)
@@ -94,7 +94,7 @@ public:
 	 * @param	pos_y	Y座標
 	 * @param	option　DrawTextのuFormatオプション
 	 */
-	void				draw(LPSTR str, long pos_x, long pos_y, DWORD option);
+	void				draw(LPSTR str, long pos_x, long pos_y, DWORD option) const;
 
 private:
 	/**

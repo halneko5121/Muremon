@@ -178,7 +178,7 @@ Vertex::setTextureRect(long left , long top , long right , long bottom)
  * @brief	テクスチャの描画を行う
  * @param	pos	座標
  */
-void Vertex::draw(const Vector2f& pos)
+void Vertex::draw(const Vector2f& pos) const
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
@@ -232,7 +232,7 @@ void Vertex::draw(const Vector2f& pos)
  * @param	pos	座標
  */
 void
-Vertex::drawLT(const Vector2f& pos)
+Vertex::drawLT(const Vector2f& pos) const
 {
 	// テクスチャの距離を計算(ここで倍率も計算)
 	float texSizeX = (float)abs(mRectPosition.right - mRectPosition.left);
@@ -286,7 +286,7 @@ Vertex::drawLT(const Vector2f& pos)
  * @param	pos		座標
  */
 void
-Vertex::drawRB(const Vector2f& pos)
+Vertex::drawRB(const Vector2f& pos) const
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
@@ -339,7 +339,7 @@ Vertex::drawRB(const Vector2f& pos)
  * @brief	テクスチャの描画を行う（中心の下から）
  * @param	pos		座標
  */
-void Vertex::drawCB(const Vector2f& pos)
+void Vertex::drawCB(const Vector2f& pos) const
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
@@ -394,7 +394,7 @@ void Vertex::drawCB(const Vector2f& pos)
  * @param	rect_num	登録されている矩形のNo
  */
 void
-Vertex::drawF(const Vector2f& pos, int rect_num)
+Vertex::drawF(const Vector2f& pos, int rect_num) const
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left) / 2.0f;

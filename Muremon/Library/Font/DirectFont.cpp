@@ -191,7 +191,7 @@ DirectFont::setItalic(bool is_italic)
  * @param	option　DrawTextのuFormatオプション
  */
 void
-DirectFont::draw(LPSTR str , long pos_x, long pos_y)
+DirectFont::draw(LPSTR str , long pos_x, long pos_y) const
 {
 	draw(str, pos_x, pos_y, DT_LEFT);
 }
@@ -204,7 +204,7 @@ DirectFont::draw(LPSTR str , long pos_x, long pos_y)
  * @param	option　DrawTextのuFormatオプション
  */
 void
-DirectFont::draw(LPSTR str , long pos_x, long pos_y, DWORD option)
+DirectFont::draw(LPSTR str , long pos_x, long pos_y, DWORD option) const
 {
     // 表示位置を設定
 	RECT l_rect = { pos_x, pos_y, CW_USEDEFAULT, CW_USEDEFAULT};

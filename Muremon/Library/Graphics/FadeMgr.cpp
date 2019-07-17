@@ -86,7 +86,7 @@ FadeMgr::update()
  * @brief	•`‰æ
  */
 void
-FadeMgr::draw()
+FadeMgr::draw() const
 {
 	mVertex->setTextureData(mTexture->getTextureData(0), mDevice);
 	mVertex->setColor(mAlpha, mColorR, mColorG, mColorB);

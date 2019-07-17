@@ -43,7 +43,7 @@ public:
 	/**
 	 * @brief	描画
 	 */
-	void				draw();
+	void				draw() const;
 
 	/**
 	 * @brief	フェードイン

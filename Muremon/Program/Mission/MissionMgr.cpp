@@ -284,54 +284,54 @@ MissionMgr::stateEnterStartShake()
 	int key_count_noppo = UtilBattle::getStrongAtkCount();
 
 	// ‚Ý‚Á‚µ‚å‚ñ‚ðŒˆ‚ß‚½‚è‰Šú‰»‚µ‚½‚è
-	mCurrentMissionNo = rand() % 100 + 1;
+	int rand_mission_rate =rand() % 100 + 1;
 
-	if (mCurrentMissionNo >= 0 && mCurrentMissionNo <= cMission1Rate) {
+	if (rand_mission_rate >= 0 && rand_mission_rate <= cMission1Rate) {
 		mCurrentMissionNo = cMissionId_Mission1;
 	}
-	else if (mCurrentMissionNo > cMission1Rate && mCurrentMissionNo <= cMission2Rate) {
+	else if (rand_mission_rate > cMission1Rate && rand_mission_rate <= cMission2Rate) {
 		mCurrentMissionNo = cMissionId_Mission2;
 	}
-	else if (mCurrentMissionNo > cMission2Rate && mCurrentMissionNo <= cMission3Rate) {
+	else if (rand_mission_rate > cMission2Rate && rand_mission_rate <= cMission3Rate) {
 		mCurrentMissionNo = cMissionId_Mission3;
 	}
-	else if (mCurrentMissionNo > cMission3Rate && mCurrentMissionNo <= cMission4Rate) {
+	else if (rand_mission_rate > cMission3Rate && rand_mission_rate <= cMission4Rate) {
 		mCurrentMissionNo = cMissionId_Mission4;
 	}
-	else if (mCurrentMissionNo > cMission4Rate && mCurrentMissionNo <= cMission5Rate) {
+	else if (rand_mission_rate > cMission4Rate && rand_mission_rate <= cMission5Rate) {
 		mCurrentMissionNo = cMissionId_Mission5;
 	}
-	else if (mCurrentMissionNo > cMission5Rate && mCurrentMissionNo <= cMission6Rate) {
+	else if (rand_mission_rate > cMission5Rate && rand_mission_rate <= cMission6Rate) {
 		mCurrentMissionNo = cMissionId_Mission6;
 	}
-	else if (mCurrentMissionNo > cMission6Rate && mCurrentMissionNo <= cMission7Rate) {
+	else if (rand_mission_rate > cMission6Rate && rand_mission_rate <= cMission7Rate) {
 		mCurrentMissionNo = cMissionId_Mission7;
 	}
-	else if (mCurrentMissionNo > cMission7Rate && mCurrentMissionNo <= cMission8Rate) {
+	else if (rand_mission_rate > cMission7Rate && rand_mission_rate <= cMission8Rate) {
 		mCurrentMissionNo = cMissionId_Mission8;
 	}
-	else if (mCurrentMissionNo > cMission8Rate && mCurrentMissionNo <= cMission9Rate) {
+	else if (rand_mission_rate > cMission8Rate && rand_mission_rate <= cMission9Rate) {
 		mCurrentMissionNo = cMissionId_Mission9;
 	}
-	else if (mCurrentMissionNo > cMission9Rate && mCurrentMissionNo <= cMission10Rate) {
+	else if (rand_mission_rate > cMission9Rate && rand_mission_rate <= cMission10Rate) {
 		mCurrentMissionNo = cMissionId_Mission10;
 	}
-	else if (mCurrentMissionNo > cMission10Rate && mCurrentMissionNo <= cMission11Rate) {
+	else if (rand_mission_rate > cMission10Rate && rand_mission_rate <= cMission11Rate) {
 		mCurrentMissionNo = cMissionId_Mission11;
 	}
-	else if (mCurrentMissionNo > cMission11Rate && mCurrentMissionNo <= cMission12Rate) {
+	else if (rand_mission_rate > cMission11Rate && rand_mission_rate <= cMission12Rate) {
 		mCurrentMissionNo = cMissionId_Mission12;
 		if (key_count_niku >= key_count_noppo && key_count_niku >= key_count_yoshi) {
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
-	else if (mCurrentMissionNo > cMission12Rate && mCurrentMissionNo <= cMission13Rate) {
+	else if (rand_mission_rate > cMission12Rate && rand_mission_rate <= cMission13Rate) {
 		mCurrentMissionNo = cMissionId_Mission13;
 		if (key_count_yoshi >= key_count_niku && key_count_yoshi >= key_count_noppo) {
 			mCurrentMissionNo = cMissionId_Mission1;
 		}
 	}
-	else if (mCurrentMissionNo > cMission13Rate && mCurrentMissionNo <= cMission14Rate) {
+	else if (rand_mission_rate > cMission13Rate && rand_mission_rate <= cMission14Rate) {
 		mCurrentMissionNo = cMissionId_Mission14;
 		if (key_count_noppo >= key_count_niku && key_count_noppo >= key_count_yoshi) {
 			mCurrentMissionNo = cMissionId_Mission1;

@@ -23,6 +23,7 @@ class ActorMgr
 {
 public:
 	typedef std::vector<ActorBase*>::iterator ActorIterator;
+	typedef std::vector<ActorBase*>::const_iterator ActorConstIterator;
 
 public:
 	ActorMgr();
@@ -61,7 +62,7 @@ public:
 	/**
 	 * @brief	アクターの描画
 	 */
-	void				draw();
+	void				draw() const;
 
 	/**
 	 * @brief	イテレーターの取得

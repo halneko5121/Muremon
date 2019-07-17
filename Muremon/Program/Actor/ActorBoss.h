@@ -16,7 +16,7 @@ public:
 	void		initImple() override;
 	void		runImple() override;
 	void		updateImple(Vector2f boss_cc) override;
-	void		drawImple() override;
+	void		drawImple() const override;
 	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
 	void		hit(const float& hit_pos, float damage);

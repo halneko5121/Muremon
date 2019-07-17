@@ -110,7 +110,7 @@ ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
 }
 
 void
-ActorBoss::drawImple()
+ActorBoss::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);

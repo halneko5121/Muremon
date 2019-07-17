@@ -40,7 +40,7 @@ public:
 	virtual ~ActorBase();
 
 	// こちらをoverride して下さい
-	virtual void		drawImple() {};
+	virtual void		drawImple() const {};
 	virtual void		runImple() {};
 	virtual void		initImple() {};
 	virtual void		updateImple(Vector2f boss_cc) {};
@@ -49,7 +49,7 @@ public:
 	void				init();
 	void				run();
 	void				update(Vector2f boss_cc);
-	void				draw();
+	void				draw() const;
 
 	/**
 	 * @brief スピードの設定

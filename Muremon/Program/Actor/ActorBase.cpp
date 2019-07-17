@@ -101,7 +101,7 @@ ActorBase::update(Vector2f boss_cc)
  * @brief •`‰æ
  */
 void
-ActorBase::draw()
+ActorBase::draw() const
 {
 	drawImple();
 }

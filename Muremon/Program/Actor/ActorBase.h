@@ -113,6 +113,10 @@ public:
 
 	int					getScore() const { return mScore; }
 
+	int					getActorId() const { return static_cast<int>(mActorId); }
+
+	int					getUniqId() const { return mUniqId; }
+
 protected:
 	enum { cSpinSpeed = 30 };	// ‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				
 

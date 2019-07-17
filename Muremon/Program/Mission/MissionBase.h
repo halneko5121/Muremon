@@ -21,8 +21,8 @@ public:
 	void			update();
 
 	// override —p
-	virtual void	runImple() = 0;
-	virtual void	updateImple() = 0;
+	virtual void	runImple() {};
+	virtual void	updateImple() {};
 	virtual void	draw() = 0;
 	virtual bool	isSuccess() const = 0;
 	virtual bool	isFailure() const = 0;

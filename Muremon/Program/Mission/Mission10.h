@@ -38,5 +38,4 @@ private:
 	StateMachine<Mission10>	mState;				// ステート
 	int						mAlphaPushZ;		// 「PushZ」用のアルファ値
 	int						mFlagZ;				//
-	Vector2f				mMissionStartPos;	// みっしょん開始の位置
 };

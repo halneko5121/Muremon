@@ -15,9 +15,6 @@
 
 namespace
 {
-	// 「ミッション発生」
-	const Vector2f cDispMissionOccurrencePos = { 400.0f, -50.0f };
-
 	enum State
 	{
 		cState_Idle,			// 待機
@@ -37,7 +34,6 @@ Mission10::Mission10(MissionId id, Texture* texture, Vertex* vertex)
 	, mState()
 	, mAlphaPushZ(255)
 	, mFlagZ(true)
-	, mMissionStartPos(cDispMissionOccurrencePos)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission10, mState, Idle,		cState_Idle);

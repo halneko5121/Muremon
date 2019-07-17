@@ -68,7 +68,7 @@ Mission14::updateImple()
  * @brief	•`‰æ
  */
 void
-Mission14::draw()
+Mission14::draw() const
 {
 	drawTime();
 }

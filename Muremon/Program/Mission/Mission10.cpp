@@ -76,7 +76,7 @@ Mission10::updateImple()
  * @brief	•`‰æ
  */
 void
-Mission10::draw()
+Mission10::draw() const
 {
 	if (mFlagTimeCount == 0)
 	{

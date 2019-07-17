@@ -66,7 +66,7 @@ Mission2::updateImple()
  * @brief	•`‰æ
  */
 void
-Mission2::draw()
+Mission2::draw() const
 {
 	drawTime();
 	drawCombo();

@@ -44,7 +44,7 @@ public:
 
 	void	init();
 	void	update();
-	void	draw();
+	void	draw() const;
 
 	int		isEnd() const;
 	int		getBadStatusAtkLv() const;

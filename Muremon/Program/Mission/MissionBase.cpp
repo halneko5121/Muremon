@@ -70,7 +70,7 @@ MissionBase::isTimeOver() const
 }
 
 void 
-MissionBase::drawTime()
+MissionBase::drawTime() const
 {
 	// タイム
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
@@ -89,7 +89,7 @@ MissionBase::drawTime()
 }
 
 void 
-MissionBase::drawCombo()
+MissionBase::drawCombo() const
 {
 	// コンボ
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);

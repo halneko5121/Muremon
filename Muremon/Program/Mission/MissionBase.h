@@ -23,14 +23,14 @@ public:
 	// override —p
 	virtual void	runImple() {};
 	virtual void	updateImple() {};
-	virtual void	draw() = 0;
+	virtual void	draw() const = 0;
 	virtual bool	isSuccess() const = 0;
 	virtual bool	isFailure() const = 0;
 
 protected:
 	bool			isTimeOver() const;
-	void			drawTime();
-	void			drawCombo();
+	void			drawTime() const;
+	void			drawCombo() const;
 
 protected:
 	MissionId		mId;

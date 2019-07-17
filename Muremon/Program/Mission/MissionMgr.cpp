@@ -163,7 +163,7 @@ void MissionMgr::update()
 	mState.executeState();
 }
 
-void MissionMgr::draw()
+void MissionMgr::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 

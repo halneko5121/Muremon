@@ -71,7 +71,7 @@ Mission5::updateImple()
  * @brief	•`‰æ
  */
 void
-Mission5::draw()
+Mission5::draw() const
 {
 	drawTime();
 

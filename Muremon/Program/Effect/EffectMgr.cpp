@@ -74,11 +74,12 @@ EffectMgr::destroy()
 /**
  * @brief	エフェクトの生成
  */
-void
+EffectBase*
 EffectMgr::createEffect(EffectId id, const EffectParam& param)
 {
 	EffectBase* effect = createEffectImple(id, param);
 	mEffectList.push_back(effect);
+	return effect;
 }
 
 /**

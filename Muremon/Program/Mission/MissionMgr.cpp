@@ -35,11 +35,10 @@
 #define MISSION_HASSEI_X	(400.f)
 #define MISSION_HASSEI_Y	(50.f)
 
-const Vector2f MISSION_OSIRASE = { 400.0f, 300.0f };
-
 namespace
 {
 	const int cMissionClearAddScore = 50000;			// ミッションクリア加算スコア
+	const Vector2f cDispMissionAlertPos = { 400.0f, 300.0f };
 
 	// 各ミッションが選択されるパーセンテージ
 	const int cMission1Rate = 10;
@@ -259,8 +258,8 @@ void MissionMgr::draw() const
 	mVertex->drawF(mMissionStartPos, rect_index);	//みっしょん発生
 
 	mVertex->setColor(mAlpha,255,255,255);
-	mVertex->drawF(MISSION_OSIRASE, R_MISSION_OSIRASE);	//みっしょんお知らせ枠
-	mVertex->drawF(MISSION_OSIRASE, R_MISSION_1 + mCurrentMissionNo);	//みっしょん
+	mVertex->drawF(cDispMissionAlertPos, R_MISSION_OSIRASE);	//みっしょんお知らせ枠
+	mVertex->drawF(cDispMissionAlertPos, R_MISSION_1 + mCurrentMissionNo);	//みっしょん
 
 	if( mCurrentMissionNo == cMissionId_Mission10 ||
 		mCurrentMissionNo == cMissionId_Mission11)

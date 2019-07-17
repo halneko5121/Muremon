@@ -84,6 +84,15 @@ Mission6::draw() const
 }
 
 /**
+ * @brief	Às’†‚©H
+ */
+bool
+Mission6::isRunning() const
+{
+	return (mState.isEqual(cState_Run));
+}
+
+/**
  * @brief	¬Œ÷‚µ‚½‚©H
  */
 bool

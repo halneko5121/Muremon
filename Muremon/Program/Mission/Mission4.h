@@ -22,6 +22,7 @@ public:
 	void					runImple() override;
 	void					updateImple() override;
 	void					draw() const override;
+	bool					isRunning() const override;
 	bool					isSuccess() const override;
 	bool					isFailure() const override;
 

@@ -74,6 +74,15 @@ Mission14::draw() const
 }
 
 /**
+ * @brief	Às’†‚©H
+ */
+bool
+Mission14::isRunning() const
+{
+	return (mState.isEqual(cState_Run));
+}
+
+/**
  * @brief	¬Œ÷‚µ‚½‚©H
  */
 bool

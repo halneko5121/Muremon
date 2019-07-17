@@ -24,8 +24,9 @@ public:
 	virtual void	runImple() {};
 	virtual void	updateImple() {};
 	virtual void	draw() const = 0;
-	virtual bool	isSuccess() const = 0;
-	virtual bool	isFailure() const = 0;
+	virtual bool	isRunning() const = 0;	// 実行中か？
+	virtual bool	isSuccess() const = 0;	// 成功したか？
+	virtual bool	isFailure() const = 0;	// 失敗したか？
 
 protected:
 	bool			isTimeOver() const;

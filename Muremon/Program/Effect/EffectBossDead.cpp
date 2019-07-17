@@ -80,7 +80,7 @@ EffectBossDead::draw() const
  * @brief	èIóπÇµÇΩÇ©ÅH
  */
 bool
-EffectBossDead::isEnd()
+EffectBossDead::isEnd() const
 {
 	return (mState.isEqual(cState_End));
 }

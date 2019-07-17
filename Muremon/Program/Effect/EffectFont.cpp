@@ -84,7 +84,7 @@ EffectFont::draw() const
  * @brief	èIóπÇµÇΩÇ©ÅH
  */
 bool
-EffectFont::isEnd()
+EffectFont::isEnd() const
 {
 	return (mState.isEqual(cState_End));
 }

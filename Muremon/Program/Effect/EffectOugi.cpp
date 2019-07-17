@@ -80,7 +80,7 @@ EffectOugi::draw() const
  * @brief	èIóπÇµÇΩÇ©ÅH
  */
 bool
-EffectOugi::isEnd()
+EffectOugi::isEnd() const
 {
 	return (mState.isEqual(cState_End));
 }

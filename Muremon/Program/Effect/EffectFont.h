@@ -21,7 +21,7 @@ public:
 
 	void			update() override;
 	void			draw() const override;
-	bool			isEnd() override;
+	bool			isEnd() const override;
 
 private:
 	Vector2f	setPos(Vector2f font_cc, float chara_radius, float range_font);

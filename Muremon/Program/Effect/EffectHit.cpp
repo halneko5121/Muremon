@@ -74,7 +74,7 @@ EffectHit::draw() const
  * @brief	èIóπÇµÇΩÇ©ÅH
  */
 bool
-EffectHit::isEnd()
+EffectHit::isEnd() const
 {
 	return (mState.isEqual(cState_End));
 }

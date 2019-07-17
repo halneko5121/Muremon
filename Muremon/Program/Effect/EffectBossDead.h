@@ -21,7 +21,7 @@ public:
 
 	void			update() override;
 	void			draw() const override;
-	bool			isEnd() override;
+	bool			isEnd() const override;
 
 private:
 	// ステート関数

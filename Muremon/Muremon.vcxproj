@@ -81,6 +81,7 @@
     <ClInclude Include="Library\Font\DirectFont.h" />
     <ClInclude Include="Library\Graphics\FadeMgr.h" />
     <ClInclude Include="Library\Input\DirectInput.h" />
+    <ClInclude Include="Library\Math\Rect.h" />
     <ClInclude Include="Library\Math\Vector.h" />
     <ClInclude Include="Library\Sound\DirectSound.h" />
     <ClInclude Include="Library\Graphics\DirectGraphics.h" />

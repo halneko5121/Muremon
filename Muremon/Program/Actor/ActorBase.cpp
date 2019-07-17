@@ -29,13 +29,13 @@ namespace
 
 //l,t,r,b
 //中心から、上下左右の幅
-F_RECT rect_pos_p[] = {
+RectF rect_pos_p[] = {
 	{ cNikumanRadius ,cNikumanRadius ,cNikumanRadius ,cNikumanRadius },
 	{ cYoshiHitRadius.x, cYoshiHitRadius.y, cYoshiHitRadius.x, cYoshiHitRadius.y },
 	{ cNoppoHitRadius.x, cNoppoHitRadius.y, cNoppoHitRadius.x ,cNoppoHitRadius.y },
 };
 
-F_RECT rect_pos_e = {
+RectF rect_pos_e = {
 	cDispBossRadiusX, cDispBossRadiusY, cDispBossRadiusX, cDispBossRadiusY
 };
 
@@ -208,8 +208,8 @@ ActorBase::updateAttack1()
 bool
 ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
 {
-	F_RECT check_rect_p = { 0.f,0.f,0.f,0.f };
-	F_RECT check_rect_e = { 0.f,0.f,0.f,0.f };
+	RectF check_rect_p = { 0.f,0.f,0.f,0.f };
+	RectF check_rect_e = { 0.f,0.f,0.f,0.f };
 
 	if (draw_cc_p.x < cDeadLinePosX) return FALSE;
 
@@ -236,8 +236,8 @@ ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
 /**
  * @brief 中心座標から矩形を逆算
  */
-F_RECT
-ActorBase::calculateBackRect(Vector2f draw_cc, F_RECT rect_pos) const
+RectF
+ActorBase::calculateBackRect(Vector2f draw_cc, RectF rect_pos) const
 {
 	// 中心座標からそれぞれ絵の半径を加・減算 
 	rect_pos.left = (draw_cc.x - rect_pos.left);

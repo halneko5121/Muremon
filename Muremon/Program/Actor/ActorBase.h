@@ -13,14 +13,6 @@
 #include "Program/Util/Orbit/OrbitCalculation.h"
 #include "Program/DefineGame.h"
 
-// RECTの float_ver
-typedef struct F_RECT{
-	float   left;
-    float   top;
-    float   right;
-    float   bottom;
-}F_RECT;
-
 enum ActorId;
 
 class ActorBase
@@ -93,7 +85,7 @@ public:
 	 * @param	rect_pos		矩形情報(各半径情報)	
 	 * @return	与えた中心座標からrect_posの値を与えたRECT
 	 */
-	F_RECT				calculateBackRect(Vector2f draw_cc, F_RECT rect_pos) const;
+	RectF				calculateBackRect(Vector2f draw_cc, RectF rect_pos) const;
 
 	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }
 

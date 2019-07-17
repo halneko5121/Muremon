@@ -16,6 +16,7 @@
 #include <string>
 #include <d3dx9math.h>
 #include "Library/Math/Vector.h"
+#include "Library/Math/Rect.h"
 
 #define RAD								(D3DX_PI/180.0f)	// 角度からラジアンを求める
 #define DEG								(180.0f/D3DX_PI)	// ラジアンから角度を求める

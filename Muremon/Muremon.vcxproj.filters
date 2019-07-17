@@ -375,6 +375,9 @@
     <ClInclude Include="Program\Util\UtilActor.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="Library\Math\Rect.h">
+      <Filter>Library\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

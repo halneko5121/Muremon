@@ -346,8 +346,7 @@ SceneGameNormal::stateEnterGame()
 void
 SceneGameNormal::stateGame()
 {
-	boss_cc2.x = mBoss->mMoveX;
-	boss_cc2.y = mBoss->mMoveY;
+	boss_cc2 = mBoss->getNowPos();
 
 	if ((boss_cc2.x - 150) < 500) {
 		UtilSound::playLoop(S_SAIREN);

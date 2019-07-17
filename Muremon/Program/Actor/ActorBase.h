@@ -75,7 +75,10 @@ public:
 
 	bool				isRun() const { return mIsRun; }
 
-	Vector2f			getHitPos() const { return mHitPos; }
+	void				setNowPos(const Vector2f& pos) { mNowPos = pos;	}
+	const Vector2f&		getNowPos() const { return mNowPos; }
+
+	const Vector2f&		getHitPos() const { return mHitPos; }
 
 	int					getAtkPower() const { return mAtkPower; }
 

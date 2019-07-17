@@ -39,8 +39,6 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mLife(cInitLife)
 	, mMaxLife(cInitLife)
-	, mMoveX(cAppearPosX)
-	, mMoveY(cAppearPosY)
 	, mHitCount(0)
 	, mSpeedX(1)
 
@@ -52,6 +50,8 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mDamageX(0)
 	, mDamageY(0)
 {
+	mNowPos = Vector2f(cAppearPosX, cAppearPosY);
+
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorBoss, mState, Idle,			cState_Idle);
 	REGIST_STATE_FUNC2(ActorBoss, mState, Move,			cState_Move);
@@ -113,7 +113,7 @@ ActorBoss::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);
-	mVertex->drawF(Vector2f(mMoveX + mDamageX, mMoveY + mDamageY), mRectData);
+	mVertex->drawF(Vector2f(mNowPos.x + mDamageX, mNowPos.y + mDamageY), mRectData);
 }
 
 /**
@@ -175,14 +175,14 @@ ActorBoss::stateMove()
 	// êîÉtÉåÅ[ÉÄÇ®Ç´Ç…à⁄ìÆ
 	if (mState.getStateCount() % cMoveInterval == 0)
 	{ 
-		mMoveX--;
+		mNowPos.x--;
 	}
 	mMoveAnimeTime++;
 
 	mRectData = R_BOSS_MOVE1 + mMoveAnime % 2;
 	if (UtilGame::isGameModeRefresh())
 	{
-		if (mMoveX == cRefreshStopX)
+		if (mNowPos.x == cRefreshStopX)
 		{
 			mState.changeState(cState_Stop);
 			return;
@@ -190,7 +190,7 @@ ActorBoss::stateMove()
 	}
 	else
 	{
-		if (mMoveX <= cGameOverPosX)
+		if (mNowPos.x <= cGameOverPosX)
 		{
 			mState.changeState(cState_End);
 			return;
@@ -218,7 +218,7 @@ ActorBoss::stateDamage()
 		mDamageY = 0;
 		if (UtilGame::isGameModeRefresh())
 		{
-			if (mMoveX == cRefreshStopX)
+			if (mNowPos.x == cRefreshStopX)
 			{
 				mState.changeState(cState_Stop);
 				return;
@@ -259,7 +259,7 @@ ActorBoss::stateEnterDead()
 {
 	mRectData = R_BOSS_FALL;
 
-	EffectParam param(mTexture, mVertex, Vector2f(mMoveX, mMoveY));
+	EffectParam param(mTexture, mVertex, mNowPos);
 	GetEffectMgr()->createEffect(cEffectId_HitEffect7, param);
 }
 void
@@ -309,7 +309,7 @@ ActorBoss::stateEnterRevival()
 	mHitCount = 0;
 	mAlpha = 255;
 	mRectData = R_BOSS_MOVE1;
-	mMoveX = cAppearPosX;
+	mNowPos.x = cAppearPosX;
 	mMoveAnime = 0;
 	mMoveAnimeTime = 0;
 	mSpeedX = 1;

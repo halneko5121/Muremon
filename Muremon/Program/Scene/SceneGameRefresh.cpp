@@ -280,8 +280,7 @@ SceneGameRefresh::stateEnterGame()
 void
 SceneGameRefresh::stateGame()
 {
-	boss_cc.x = mBoss->mMoveX;
-	boss_cc.y = mBoss->mMoveY;
+	boss_cc = mBoss->getNowPos();
 
 	UtilSound::playLoop(S_BGM_BATTLE);
 

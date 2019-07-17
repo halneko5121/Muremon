@@ -532,7 +532,7 @@ MissionMgr::stateBadStatus()
 			mActorBoss->mLife = mActorBoss->mMaxLife;
 			break;
 		case SLIDE_IN:
-			mActorBoss->mMoveX = 500;
+			mActorBoss->setNowPos(Vector2f(500, mActorBoss->getNowPos().y));
 			break;
 		case ATTACK_DOWN:
 			mNegativeAtkLv++;

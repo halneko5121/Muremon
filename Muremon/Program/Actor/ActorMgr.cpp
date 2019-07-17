@@ -16,14 +16,14 @@
 namespace
 {
 	ActorBase*
-	createActror(ActorId id, Texture* texture, Vertex* vertex)
+	createActror(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	{
-		switch (id)
+		switch (actor_id)
 		{
-		case cActorId_Noppo:	return (new ActorNoppo(texture, vertex));
-		case cActorId_Nikuman:	return (new ActorNikuman(texture, vertex));
-		case cActorId_Yoshi:	return (new ActorYoshi(texture, vertex));
-		case cActorId_Boss:		return (new ActorBoss(texture, vertex));
+		case cActorId_Noppo:	return (new ActorNoppo(actor_id, uniq_id, texture, vertex));
+		case cActorId_Nikuman:	return (new ActorNikuman(actor_id, uniq_id, texture, vertex));
+		case cActorId_Yoshi:	return (new ActorYoshi(actor_id, uniq_id, texture, vertex));
+		case cActorId_Boss:		return (new ActorBoss(actor_id, uniq_id, texture, vertex));
 		}
 
 		return nullptr;
@@ -75,7 +75,7 @@ ActorMgr::destroy()
 ActorBase*
 ActorMgr::createActor(ActorId id, Texture* texture, Vertex* vertex)
 {
-	ActorBase* actor = createActror(id, texture, vertex);
+	ActorBase* actor = createActror(id, mUniqId, texture, vertex);
 	mActorList.push_back(actor);
 	mUniqId++;
 

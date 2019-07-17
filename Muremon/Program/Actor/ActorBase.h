@@ -25,10 +25,12 @@ typedef struct F_RECT{
     float   bottom;
 }F_RECT;
 
+enum ActorId;
+
 class ActorBase
 {
 public:
-	ActorBase(Texture* texture, Vertex* vertex);
+	ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorBase();
 
 	// ‚±‚¿‚ç‚ðoverride ‚µ‚Ä‰º‚³‚¢
@@ -115,6 +117,9 @@ protected:
 	enum { cSpinSpeed = 30 };	// ‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				
 
 protected:
+	ActorId				mActorId;
+	int					mUniqId;
+
 	OrbitCalculation*	mOrbit;
 
 	Texture*			mTexture;

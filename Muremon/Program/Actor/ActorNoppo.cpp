@@ -72,8 +72,8 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorNoppo::ActorNoppo(Texture* texture, Vertex* vertex)
-	: ActorBase(texture, vertex)
+ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)

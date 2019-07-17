@@ -36,8 +36,10 @@ F_RECT rect_pos_e = {cDispBossRadiusX,cDispBossRadiusY,cDispBossRadiusX,cDispBos
 /**
  * @brief コンストラクタ
  */
-ActorBase::ActorBase(Texture* texture, Vertex* vertex)
-	: mOrbit(nullptr)
+ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+	: mActorId(actor_id)
+	, mUniqId(uniq_id)
+	, mOrbit(nullptr)
 	, mTexture(texture)
 	, mVertex(vertex)
 	, mRectStartNum(0)

@@ -10,7 +10,7 @@ class Texture;
 class ActorBoss : public ActorBase
 {
 public:
-	ActorBoss(Texture* texture, Vertex* vertex);
+	ActorBoss(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorBoss();
 
 	void		initImple() override;

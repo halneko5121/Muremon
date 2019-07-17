@@ -13,7 +13,7 @@
 class ActorNoppo : public ActorBase
 {
 public:
-	ActorNoppo(Texture* texture, Vertex* vertex);
+	ActorNoppo(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorNoppo(void);
 
 	Vector2f	updateAttack2();

@@ -12,7 +12,7 @@
 class ActorNikuman :	public ActorBase
 {
 public:
-	ActorNikuman(Texture* texture, Vertex* vertex);
+	ActorNikuman(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorNikuman();
 
 	Vector2f	updateAttack2(Vector2f boss_cc);

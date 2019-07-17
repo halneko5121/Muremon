@@ -12,7 +12,7 @@
 class ActorYoshi : public ActorBase
 {
 public:
-	ActorYoshi(Texture* texture, Vertex* vertex);
+	ActorYoshi(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorYoshi();
 
 	Vector2f	updateAttack2();

@@ -35,8 +35,8 @@ namespace
 	};
 }
 
-ActorBoss::ActorBoss(Texture* texture, Vertex* vertex)
-	: ActorBase(texture, vertex)
+ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mLife(cInitLife)
 	, mMaxLife(cInitLife)
 	, mMoveX(cAppearPosX)

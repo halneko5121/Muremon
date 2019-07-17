@@ -28,8 +28,8 @@ private:
 	};
 
 private:
-	void		updateRanking(int rank);	// ランクインした時、名前をを入力する
 	void		loadRanking();				// データの読み込み
+	void		updateRanking(int rank);	// ランクインした時、名前をを入力する
 	void		writeRanking();				// データの書き込み
 	int			checkRankingIn();			// ランクインしてるかチェック
 	void		sortRanking(int new_rank);	// スコアの並び替え

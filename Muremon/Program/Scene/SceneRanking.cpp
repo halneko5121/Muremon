@@ -129,6 +129,51 @@ SceneRanking::update()
 }
 
 /**
+ * @brief	描画
+ */
+void
+SceneRanking::draw() const
+{
+	drawBackGround();
+	drawRankingPlace();
+	drawRankingName();
+	drawRankingScore();
+}
+
+/**
+ * @brief	シーン終了
+ */
+void
+SceneRanking::end()
+{
+	requestChangeScene(cSceneName_Title);
+	mTexture->release();
+	mVertex->release();
+}
+
+/**
+ * @brief	ランキングの読み込み
+ */
+void
+SceneRanking::loadRanking()
+{
+	FILE *fp;
+	fopen_s(&fp, "Data\\rankingdata.txt", "r");		//ファイルを開く
+
+	if (fp == NULL)					//ファイルがなかった場合
+	{
+		MessageBox(NULL, "ファイルを開けませんでした", "エラー", NULL);	//赤の文字のところを表示
+		return;
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		fscanf(fp, "%hhd,%hhd,%hhd,%d\n", &mRankData[i].mName[0], &mRankData[i].mName[1], &mRankData[i].mName[2], &mRankData[i].mScore);
+	}
+	fclose(fp);
+}
+
+/**
  * @brief	ランキングの更新
  */
 void
@@ -158,9 +203,9 @@ SceneRanking::updateRanking(int rank)
 	}
 
 	// キー入力に連動する
-	for(int i = 'A'; i <= 'Z'; i++)
+	for (int i = 'A'; i <= 'Z'; i++)
 	{
-		if(GetAsyncKeyState(i))
+		if (GetAsyncKeyState(i))
 		{
 			UtilSound::playOnce(S_SE_CURSOR_MOVE);
 			mInputKey = i - 'A';
@@ -175,7 +220,7 @@ SceneRanking::updateRanking(int rank)
 		mNameAlpha[rank][mInputIndex] -= 5;
 		if (mNameAlpha[rank][mInputIndex] == 0) mIsNameAlphaDown = false;
 	}
-	else 
+	else
 	{
 		mNameAlpha[rank][mInputIndex] += 5;
 		if (mNameAlpha[rank][mInputIndex] = 255) mIsNameAlphaDown = true;
@@ -187,121 +232,6 @@ SceneRanking::updateRanking(int rank)
 		mNameAlpha[rank][mInputIndex] = 255;
 		mInputIndex++;
 	}
-}
-
-/**
- * @brief	描画
- */
-void
-SceneRanking::draw() const
-{
-	drawBackGround();
-	drawRankingPlace();
-	drawRankingName();
-	drawRankingScore();
-}
-
-/**
- * @brief	シーン終了
- */
-void
-SceneRanking::end()
-{
-	requestChangeScene(cSceneName_Title);
-	mTexture->release();
-	mVertex->release();
-}
-
-/**
- * @brief	背景の描画
- */
-void
-SceneRanking::drawBackGround() const
-{
-	UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_BG);
-	mVertex->setColor(255,255,255,255);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_RANKING_BG);
-}
-
-/**
- * @brief	順位の描画
- */
-void
-SceneRanking::drawRankingPlace() const
-{
-	for(int i=0;i<5;i++)
-	{
-		UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
-		mVertex->setColor(255,255,255,255);
-		mVertex->drawF(Vector2f((float)cPlacePosX, (float)cNamePosY + i * cDislocateY), R_FONT_1 + i);
-		mVertex->drawF(Vector2f((float)cDotX, (float)cNamePosY+i * cDislocateY), R_FONT_DOT);
-	}
-}
-
-/**
- * @brief	名前の描画
- */
-void
-SceneRanking::drawRankingName() const
-{
-	for(int j=0;j<5;j++)
-	{
-		for(int i=0;i<3;i++)
-		{
-			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
-			mVertex->setColor(mNameAlpha[j][i],255,255,255);
-			mVertex->drawF(Vector2f((float)cNamePosX+i*cDislocateX, (float)cNamePosY+j*cDislocateY), R_FONT_A + mRankData[j].mName[i]);
-		}
-	}
-}
-
-/**
- * @brief	スコアの描画
- */
-void
-SceneRanking::drawRankingScore() const
-{
-	int j=0;
-
-	for(int i = 0; i < 5; i++)
-	{	
-		int num[9]={0};
-		int figure=0;
-
-		figure = (int)log10((double)mRankData[i].mScore) + 1;	// スコアの桁を計算する
-		for(int j = figure ; j > 0 ; j--)						// 桁ごとの数字算出
-		{
-			num[9-j] = mRankData[i].mScore / (int)pow((double)10,j - 1) - mRankData[i].mScore / (int)pow((double)10,j) * 10;
-		}
-		for(int j = figure ; j > 0 ; j--)
-		{
-			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
-			mVertex->setColor(255,255,255,255);
-			mVertex->drawF(Vector2f((float)cScorePosX+(9-j)*cDislocateX,(float)cNamePosY+i*cDislocateY),R_FONT_0 + num[9-j]);
-		}
-	}
-}
-
-/**
- * @brief	ランキングの読み込み
- */
-void
-SceneRanking::loadRanking()
-{
-	FILE *fp;
-	fopen_s(&fp, "Data\\rankingdata.txt", "r");		//ファイルを開く
-
-	if (fp == NULL)					//ファイルがなかった場合
-	{
-		MessageBox(NULL, "ファイルを開けませんでした", "エラー", NULL);	//赤の文字のところを表示
-		return;
-	}
-
-	for (int i = 0; i < 5; i++)
-	{
-		fscanf(fp, "%hhd,%hhd,%hhd,%d\n", &mRankData[i].mName[0], &mRankData[i].mName[1], &mRankData[i].mName[2], &mRankData[i].mScore);
-	}
-	fclose(fp);
 }
 
 /**
@@ -356,5 +286,75 @@ void SceneRanking::sortRanking(int new_rank)
 		mRankData[new_rank].mName[1] = mRankNewData.mName[1];
 		mRankData[new_rank].mName[2] = mRankNewData.mName[2];
 		mRankData[new_rank].mScore	 = mRankNewData.mScore;
+	}
+}
+
+/**
+ * @brief	背景の描画
+ */
+void
+SceneRanking::drawBackGround() const
+{
+	UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_BG);
+	mVertex->setColor(255, 255, 255, 255);
+	mVertex->drawF(Vector2f(400.f, 300.f), R_RANKING_BG);
+}
+
+/**
+ * @brief	順位の描画
+ */
+void
+SceneRanking::drawRankingPlace() const
+{
+	for (int i = 0;i < 5;i++)
+	{
+		UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
+		mVertex->setColor(255, 255, 255, 255);
+		mVertex->drawF(Vector2f((float)cPlacePosX, (float)cNamePosY + i * cDislocateY), R_FONT_1 + i);
+		mVertex->drawF(Vector2f((float)cDotX, (float)cNamePosY + i * cDislocateY), R_FONT_DOT);
+	}
+}
+
+/**
+ * @brief	名前の描画
+ */
+void
+SceneRanking::drawRankingName() const
+{
+	for (int j = 0;j < 5;j++)
+	{
+		for (int i = 0;i < 3;i++)
+		{
+			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
+			mVertex->setColor(mNameAlpha[j][i], 255, 255, 255);
+			mVertex->drawF(Vector2f((float)cNamePosX + i * cDislocateX, (float)cNamePosY + j * cDislocateY), R_FONT_A + mRankData[j].mName[i]);
+		}
+	}
+}
+
+/**
+ * @brief	スコアの描画
+ */
+void
+SceneRanking::drawRankingScore() const
+{
+	int j = 0;
+
+	for (int i = 0; i < 5; i++)
+	{
+		int num[9] = { 0 };
+		int figure = 0;
+
+		figure = (int)log10((double)mRankData[i].mScore) + 1;	// スコアの桁を計算する
+		for (int j = figure; j > 0; j--)						// 桁ごとの数字算出
+		{
+			num[9 - j] = mRankData[i].mScore / (int)pow((double)10, j - 1) - mRankData[i].mScore / (int)pow((double)10, j) * 10;
+		}
+		for (int j = figure; j > 0; j--)
+		{
+			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
+			mVertex->setColor(255, 255, 255, 255);
+			mVertex->drawF(Vector2f((float)cScorePosX + (9 - j)*cDislocateX, (float)cNamePosY + i * cDislocateY), R_FONT_0 + num[9 - j]);
+		}
 	}
 }

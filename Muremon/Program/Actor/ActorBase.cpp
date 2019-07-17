@@ -206,11 +206,8 @@ ActorBase::updateAttack1()
  * @brief 衝突チェック
  */
 bool
-ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
+ActorBase::isHit(const Vector2f& draw_cc_p, const Vector2f& draw_cc_e, int chara_id) const
 {
-	RectF check_rect_p = { 0.f,0.f,0.f,0.f };
-	RectF check_rect_e = { 0.f,0.f,0.f,0.f };
-
 	if (draw_cc_p.x < cDeadLinePosX) return FALSE;
 
 	switch (chara_id) {
@@ -222,6 +219,8 @@ ActorBase::isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const
 		if (draw_cc_p.y < 0) return FALSE;	break;
 	}
 
+	RectF check_rect_p = { 0.f,0.f,0.f,0.f };
+	RectF check_rect_e = { 0.f,0.f,0.f,0.f };
 	calculateBackRect(&check_rect_p, rect_pos_p[chara_id], draw_cc_p);
 	calculateBackRect(&check_rect_e, rect_pos_e, draw_cc_e);
 

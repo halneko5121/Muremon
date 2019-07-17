@@ -77,7 +77,7 @@ public:
 	 * @param	chara_id		キャラの『何体目か』
 	 * @return	敵と当たったかどうかのフラグ
 	 */
-	bool				isHit(Vector2f draw_cc_p, Vector2f draw_cc_e, int chara_id) const;
+	bool				isHit(const Vector2f& draw_cc_p, const Vector2f& draw_cc_e, int chara_id) const;
 
 	/**
 	 * @brief 中心座標から矩形を逆算

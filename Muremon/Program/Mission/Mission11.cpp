@@ -13,8 +13,8 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
 
-#define MISSION_HASSEI_X	(400.f)
-#define MISSION_HASSEI_Y	(50.f)
+ // 「ミッション発生」
+const Vector2f cDispMissionOccurrencePos = { 400.0f, -50.0f };
 
 namespace
 {
@@ -37,7 +37,7 @@ Mission11::Mission11(MissionId id, Texture* texture, Vertex* vertex)
 	, mFlagTimeCount(0)
 	, mAlphaPushZ(255)
 	, mFlagZ(true)
-	, mMissionStartPos(MISSION_HASSEI_X, -50.f)
+	, mMissionStartPos(cDispMissionOccurrencePos)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission11, mState, Idle,		cState_Idle);

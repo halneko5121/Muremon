@@ -337,7 +337,7 @@ ActorYoshi::stateEnterGroundDeath()
 void
 ActorYoshi::stateGroundDeath()
 {
-	mNowPos = mOrbit->mRebound->orbitRebound(mRandDeg, mSpeed, mNowPos);
+	mOrbit->mRebound->orbitRebound(&mNowPos, mRandDeg, mSpeed, mNowPos);
 
 	// ’†SÀ•W‚ª‰æ–ÊŠO‚È‚ç€–S
 	if ((mNowPos.x < -cYoshiRadius) || (mNowPos.x > cWindowWidth + cYoshiRadius) &&

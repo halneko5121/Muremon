@@ -23,5 +23,5 @@ public:
 	*	作成日	：2009年 3月 20日														*
 	*	更新日	：	年	月	 日							by	三上　亘					*
 	************************************************************************************/
-	Vector2f orbitRebound(float deg, float radius, Vector2f draw_cc);
+	void orbitRebound(Vector2f* dst_pos, float deg, float radius, Vector2f draw_cc);
 };

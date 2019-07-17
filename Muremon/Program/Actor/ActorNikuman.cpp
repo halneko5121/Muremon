@@ -313,7 +313,7 @@ ActorNikuman::stateGroundDeath()
 	mAnimation = 0;
 	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
 
-	mNowPos = mOrbit->mRebound->orbitRebound(mRandDeg, mSpeed, mNowPos);
+	 mOrbit->mRebound->orbitRebound(&mNowPos, mRandDeg, mSpeed, mNowPos);
 
 	if ((mNowPos.y < -cNikumanRadius) || (mNowPos.y > cWindowHeight + cNikumanRadius)) 
 	{

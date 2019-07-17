@@ -83,7 +83,6 @@ UtilInput::isKeyPushedLineTwo()
 	if (GetInputKey()->isKeyPushed(cKey_J))				return true;
 	if (GetInputKey()->isKeyPushed(cKey_K))				return true;
 	if (GetInputKey()->isKeyPushed(cKey_L))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_P))				return true;
 
 	if (GetInputKey()->isKeyPushed(cKey_SemiColon))		return true;
 	if (GetInputKey()->isKeyPushed(cKey_Colon))			return true;

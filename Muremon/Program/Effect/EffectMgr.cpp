@@ -11,6 +11,7 @@
 #include "EffectFont.h"
 #include "EffectHit.h"
 #include "EffectBossDead.h"
+#include "EffectOugi.h"
 
 namespace
 {
@@ -26,6 +27,7 @@ namespace
 		case cEffectId_HitEffect5:	return (new EffectFont(id, R_NOPPO_PETI, param));
 		case cEffectId_HitEffect6:	return (new EffectFont(id, R_NOPPO_GOTU, param));
 		case cEffectId_HitEffect7:	return (new EffectBossDead(id, R_BOSS_EFFECT, param));
+		case cEffectId_OugiEffect:	return (new EffectOugi(id, R_OUGI, param));
 		}
 
 		return nullptr;

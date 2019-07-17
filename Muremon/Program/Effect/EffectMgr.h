@@ -20,6 +20,7 @@ enum EffectId
 	cEffectId_HitEffect5,	//『ペチッ』	
 	cEffectId_HitEffect6,	//『ゴッ！』
 	cEffectId_HitEffect7,	//『NO～！！』
+	cEffectId_OugiEffect,	// 奥義エフェクト
 	cEffectId_Count,
 };
 

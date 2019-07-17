@@ -81,8 +81,6 @@ private:
 	int							mMoveCount;		//
 	int							mCurrentMissionNo;		// どのミッションが選択されたかを記憶
 
-	int							mAlphaFont;
-
 	int							mNegativeAlpha;
 	int							mNegativeState;
 	int							mNegativeAtkLv;

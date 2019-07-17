@@ -20,4 +20,7 @@ namespace UtilGame
 	int					getScore();
 	void				addScore(int add_score);
 	void				mulScore(int mul_score);
+
+	// ‚»‚Ì‘¼
+	int					getGroundPosY();
 }

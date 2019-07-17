@@ -10,6 +10,11 @@
 #include "Program/System/GameInfoMgr.h"
 #include "Program/System/GameScore.h"
 
+namespace
+{
+	const float cGroundPosY = 500.f;		// 地面の座標		
+}
+
 /**
  * @brief	ゲームモードをリフレッシュモードに設定
  */
@@ -81,3 +86,13 @@ UtilGame::mulScore(int mul_score)
 {
 	GetGameInfoMgr()->getGameScore()->mulScore(mul_score);
 }
+
+/**
+ * @brief	地面の座標を取得
+ */
+int
+UtilGame::getGroundPosY()
+{
+	return cGroundPosY;
+}
+

@@ -51,7 +51,6 @@ public:
 
 private:
 	int		calcRectIndex(int state_index) const;
-	void	updateMissionD();
 
 private:
 	// ステート関数

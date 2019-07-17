@@ -75,24 +75,6 @@ namespace
 		ATTACK_DOWN,
 	};
 
-	enum MISSION_NUMBER
-	{
-		MISSION_1,	//『10秒以内に100回連打せよ！！』
-		MISSION_2,	//『10秒間でちょうど50回連打せよ！！』
-		MISSION_3,	//『10秒間でちょうど100回連打せよ！！』
-		MISSION_4,	//『「NIKUMANTOTUGEKI」と入力せよ！！』
-		MISSION_5,	//『「NIKUMANINSEKIRAKKAJUTU」と入力せよ！！』
-		MISSION_6,	//『「YOSITAROHIPATACK」と入力せよ！！』
-		MISSION_7,	//『「YOSITAROHUSENSHOOT」と入力せよ！！』
-		MISSION_8,	//『「NOPPOKOKEPPETI」と入力せよ！！』
-		MISSION_9,	//『「NOPPOBOKＵSIRIKOPUTA」と入力せよ！！』
-		MISSION_10,	//『10秒数えて前後1秒以内で「Ｚキー」を押せ！』
-		MISSION_11,	//『5秒数えて前後1秒以内で「Ｚキー」を押せ！』
-		MISSION_12,	//『10秒以内に「にくまん」の連打数を一番高くしろ！』
-		MISSION_13,	//『10秒以内に「よしたろう」の連打数を一番高くしろ！』
-		MISSION_14,	//『10秒以内に「のっぽ」の連打数を一番高くしろ！』
-	};
-
 	enum State
 	{
 		cState_Idle,			// 待機
@@ -203,7 +185,8 @@ void MissionMgr::draw()
 	mVertex->drawF(MISSION_OSIRASE, R_MISSION_OSIRASE);	//みっしょんお知らせ枠
 	mVertex->drawF(MISSION_OSIRASE, R_MISSION_1 + mCurrentMissionNo);	//みっしょん
 
-	if(mCurrentMissionNo == MISSION_10 || mCurrentMissionNo == MISSION_11)
+	if( mCurrentMissionNo == cMissionId_Mission10 ||
+		mCurrentMissionNo == cMissionId_Mission11)
 	{
 		if (mState.isEqual(cState_StartShake) ||
 			mState.isEqual(cState_StartFadeOut))
@@ -216,7 +199,7 @@ void MissionMgr::draw()
 
 	if(mState.isEqual(cState_Run))
 	{
-		updateMissionD();
+		mMission[mCurrentMissionNo]->draw();
 	}
 
 	// ミッション奥義
@@ -260,11 +243,6 @@ void
 MissionMgr::resetBadStatusAtkLv()
 {
 	mNegativeAtkLv = 0;
-}
-
-void MissionMgr::updateMissionD()
-{
-	mMission[mCurrentMissionNo]->draw();
 }
 
 /**

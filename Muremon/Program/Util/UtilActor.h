@@ -7,7 +7,10 @@
  *	ä«óùé“ÅFéOè„
  ******************************************************************/
 
+#include "Program/Actor/ActorMgr.h"
+
 class ActorBase;
+class ActorBoss;
 class Texture;
 class Vertex;
 enum ActorId;
@@ -19,4 +22,5 @@ namespace UtilActor
 
 	// åüçı
 	ActorBase*			searchSingleActor(const ActorId& id);
+	ActorBoss*			searchBossActor();
 }

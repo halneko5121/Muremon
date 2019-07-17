@@ -10,6 +10,7 @@
 
 #include "Program/Actor/ActorMgr.h"
 #include "Program/Actor/ActorBase.h"
+#include "Program/Actor/ActorBoss.h"
 
  /**
   * @brief	アクターの生成
@@ -42,4 +43,15 @@ UtilActor::searchSingleActor(const ActorId& id)
 	}
 
 	return nullptr;
+}
+
+/**
+ * @brief	指定したアクターIDのアクターを検索
+ * @return	見つかった最初のアクターを返す
+ *			見つからなかったら nullptr
+ */
+ActorBoss*
+UtilActor::searchBossActor()
+{
+	return dynamic_cast<ActorBoss*>(searchSingleActor(cActorId_Boss));
 }

@@ -71,7 +71,7 @@ EffectFont::update()
  * @brief	•`‰æ
  */
 void
-EffectFont::draw()
+EffectFont::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 

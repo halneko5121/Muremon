@@ -106,11 +106,11 @@ EffectMgr::update()
  * @brief	エフェクトの描画
  */
 void
-EffectMgr::draw()
+EffectMgr::draw() const
 {
-	EffectIterator it_begin = mEffectList.begin();
-	EffectIterator it_end = mEffectList.end();
-	for (EffectIterator it = it_begin; it != it_end; it++)
+	EffectConstIterator it_begin = mEffectList.cbegin();
+	EffectConstIterator it_end = mEffectList.cend();
+	for (EffectConstIterator it = it_begin; it != it_end; it++)
 	{
 		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
 		effect->draw();

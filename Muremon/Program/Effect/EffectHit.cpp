@@ -61,7 +61,7 @@ EffectHit::update()
  * @brief	•`‰æ
  */
 void
-EffectHit::draw()
+EffectHit::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 

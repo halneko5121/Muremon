@@ -64,7 +64,7 @@ EffectOugi::update()
  * @brief	描画
  */
 void
-EffectOugi::draw()
+EffectOugi::draw() const
 {
 	// 「ミッション奥義」
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);

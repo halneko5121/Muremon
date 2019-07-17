@@ -69,7 +69,7 @@ EffectBossDead::update()
  * @brief	•`‰æ
  */
 void
-EffectBossDead::draw()
+EffectBossDead::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
 	mVertex->setColor(mAlpha, 255, 255, 255);

@@ -32,6 +32,7 @@ class EffectMgr
 {
 public:
 	typedef std::list<EffectBase*>::iterator EffectIterator;
+	typedef std::list<EffectBase*>::const_iterator EffectConstIterator;
 
 public:
 	EffectMgr();
@@ -65,7 +66,7 @@ public:
 	/**
 	 * @brief	•`‰æ
 	 */
-	void				draw();
+	void				draw() const;
 
 private:
 	/**

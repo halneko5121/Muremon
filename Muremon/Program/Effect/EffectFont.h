@@ -20,7 +20,7 @@ public:
 	~EffectFont();
 
 	void			update() override;
-	void			draw() override;
+	void			draw() const override;
 	bool			isEnd() override;
 
 private:

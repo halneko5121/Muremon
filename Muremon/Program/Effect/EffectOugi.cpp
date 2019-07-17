@@ -107,6 +107,7 @@ EffectOugi::stateIdle()
 void
 EffectOugi::stateEnterRun()
 {
+	mAlpha = 0;
 	mPos = cWaveInitPos;
 }
 void

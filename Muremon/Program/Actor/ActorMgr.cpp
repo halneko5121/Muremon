@@ -137,6 +137,12 @@ ActorMgr::begin()
 	return mActorList.begin();
 }
 
+ActorMgr::ActorConstIterator
+ActorMgr::cbegin()
+{
+	return mActorList.cbegin();
+}
+
 /**
  * @brief	イテレーターの取得
  */
@@ -144,4 +150,10 @@ ActorMgr::ActorIterator
 ActorMgr::end()
 {
 	return mActorList.end();
+}
+
+ActorMgr::ActorConstIterator
+ActorMgr::cend()
+{
+	return mActorList.cend();
 }

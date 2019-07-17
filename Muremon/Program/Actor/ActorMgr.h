@@ -68,11 +68,13 @@ public:
 	 * @brief	イテレーターの取得
 	 */
 	ActorIterator		begin();
+	ActorConstIterator	cbegin();
 
 	/**
 	 * @brief	イテレーターの取得
 	 */
 	ActorIterator		end();
+	ActorConstIterator	cend();
 
 private:
 	typedef std::vector<ActorBase*>	ActorList;

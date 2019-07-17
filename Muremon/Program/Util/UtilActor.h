@@ -15,8 +15,8 @@ enum ActorId;
 namespace UtilActor
 {
 	// ê∂ê¨
-	ActorBase*			createActor(ActorId id, Texture* texture, Vertex* vertex);
+	ActorBase*			createActor(const ActorId& id, Texture* texture, Vertex* vertex);
 
 	// åüçı
-	ActorBase*			searchSingleActor(ActorId id);
+	ActorBase*			searchSingleActor(const ActorId& id);
 }

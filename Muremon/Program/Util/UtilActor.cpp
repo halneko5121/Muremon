@@ -15,7 +15,7 @@
   * @brief	アクターの生成
   */
 ActorBase*
-UtilActor::createActor(ActorId id, Texture* texture, Vertex* vertex)
+UtilActor::createActor(const ActorId& id, Texture* texture, Vertex* vertex)
 {
 	return GetActorMgr()->createActor(id, texture, vertex);
 }
@@ -26,7 +26,7 @@ UtilActor::createActor(ActorId id, Texture* texture, Vertex* vertex)
  *			見つからなかったら nullptr
  */
 ActorBase*
-UtilActor::searchSingleActor(ActorId id)
+UtilActor::searchSingleActor(const ActorId& id)
 {
 	ActorMgr::ActorIterator it = GetActorMgr()->begin();
 	while (it != GetActorMgr()->end())

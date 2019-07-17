@@ -148,10 +148,3 @@ enum RECT_DATA_GAME
 	R_OUGI,
 	R_POSE,
 };
-
-enum CHARA_ID
-{
-	ID_YOSHI,
-	ID_NIKUMAN,
-	ID_NOPPO,
-};

@@ -10,6 +10,8 @@
 
 namespace 
 {
+	const float cNikumanRadius = 37.5f;				// ƒLƒƒƒ‰‚Ì”¼Œa
+
 	// •ú•¨üŠÖŒW
 	const int cParaRandAcc = 15;					// ‰Á‘¬“x
 	const int cParaRandAccMin = 5;
@@ -73,6 +75,10 @@ ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vert
 	mMissionPower = cAddGaugePowerNikuman;
 	mScore = cAddScoreNikuman;
 	mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
+
+	mRect.setWidth(cNikumanRadius);
+	mRect.setHeight(cNikumanRadius);
+	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(ActorNikuman, mState, Idle,			cState_Idle);

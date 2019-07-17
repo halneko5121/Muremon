@@ -10,6 +10,9 @@
 
 namespace
 {
+	const float cYoshiRadius = 76.5f;						// ƒLƒƒƒ‰‚Ì”¼Œa
+	const Vector2f cYoshiHitRadius = { 30.0f, 40.0f };
+
 	// •ú•¨üŠÖŒW
 	const int cParaRandAcc = 15;							// ‰Á‘¬“x
 	const int cParaRandAccMin = 5;

@@ -14,13 +14,6 @@ const int cWindowWidth = 800;
 const float cWindowCenterX = (cWindowWidth / 2.f);
 const float cWindowCenterY = (cWindowHeight / 2.f);
 
-const float cNikumanRadius = 37.5f;			// ƒLƒƒƒ‰‚Ì”¼Œa
-const float cYoshiRadius = 76.5f;			// ƒLƒƒƒ‰‚Ì”¼Œa
-const float cNoppoRadius = 150.f;			// ƒLƒƒƒ‰‚Ì”¼Œa
-
-const Vector2f cYoshiHitRadius = { 30.0f, 40.0f };
-const Vector2f cNoppoHitRadius = { 50.0f, 100.0f };
-
 // •`‰æˆÊ’u
 const Vector2f cDispBgPos = { 400.0f, 300.0f };
 const Vector2f cDispFlagPos = { 400.0f, 450.0f };

@@ -18,6 +18,9 @@
 
 namespace
 {
+	const float cNoppoRadius = 150.f;			// ƒLƒƒƒ‰‚Ì”¼Œa
+	const Vector2f cNoppoHitRadius = { 50.0f, 100.0f };
+
 	//•ú•¨üŠÖŒW
 	const int cParaRandAcc = 15;									// ‰Á‘¬“x
 	const int cParaRandAccMin = 5;

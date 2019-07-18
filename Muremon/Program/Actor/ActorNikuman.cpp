@@ -26,7 +26,7 @@ namespace
 
 	// 開始座標
 	const int cRandY = 300;
-	const int cRandYMin = -200;
+	const int cRandYMin = 0;
 
 	const int cAtkPowerNikuman = 20;				// にくまんの攻撃力
 	const int cAddGaugePowerNikuman = 30;			// にくまんミッションゲージ増加量

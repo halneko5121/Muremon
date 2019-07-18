@@ -22,10 +22,10 @@ public:
 	virtual ~ActorBase();
 
 	// ‚±‚¿‚ç‚ðoverride ‚µ‚Ä‰º‚³‚¢
-	virtual void		drawImple() const {};
-	virtual void		runImple() {};
 	virtual void		initImple() {};
+	virtual void		runImple() {};
 	virtual void		updateImple() {};
+	virtual void		drawImple() const {};
 	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				init();

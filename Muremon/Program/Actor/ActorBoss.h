@@ -25,6 +25,7 @@ public:
 
 	void		recoveryLife();
 	void		setDead();
+	float		getLifeRate() const;
 
 public:
 	float		mLife;

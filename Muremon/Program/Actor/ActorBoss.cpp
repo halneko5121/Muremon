@@ -168,6 +168,14 @@ ActorBoss::setDead()
 	mLife = 0;
 }
 
+/**
+ * @brief ライフの残量をパーセンテージで
+ */
+float
+ActorBoss::getLifeRate() const
+{
+	return (mLife / mMaxLife);
+}
 
 // -----------------------------------------------------------------
 // ステート関数

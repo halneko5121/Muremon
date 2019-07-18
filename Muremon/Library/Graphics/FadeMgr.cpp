@@ -7,8 +7,23 @@
  ******************************************************************/
 
 #include "FadeMgr.h"
+
+#include "DirectGraphics.h"
 #include "Texture.h"
 #include "Vertex.h"
+
+/* 頂点フォーマット（基本形）*/
+#define FVF_CUSTOM2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE)
+
+namespace
+{
+	struct SimpleVertex
+	{
+		float x, y, z;
+		float rhw;
+		DWORD color;
+	};
+}
 
 FadeMgr* FadeMgr::mInstance = nullptr;
 
@@ -47,8 +62,6 @@ void
 FadeMgr::init(LPDIRECT3DDEVICE9 device)
 {
 	mDevice = device;
-	mTexture->load("Library\\Data\\T_Fade.txt", mDevice); // 絵の読み込み
-	mVertex->load("Library\\Data\\R_Fade.txt");
 }
 
 /**
@@ -88,9 +101,19 @@ FadeMgr::update()
 void
 FadeMgr::draw() const
 {
-	mVertex->setTextureData(mTexture->getTextureData(0), mDevice);
-	mVertex->setColor(mAlpha, mColorR, mColorG, mColorB);
-	mVertex->drawF(Vector2f(400.0f, 300.0f), 0);
+	// 頂点フォーマットの指定
+	SimpleVertex cVertexDataTable[4] =
+	{
+		{ 0.0f,		0.0f,	0.0f, 1.0f, D3DCOLOR_ARGB(mAlpha, mColorR, mColorG, mColorB), },
+		{ 800.0f,	0.0f,	0.0f, 1.0f, D3DCOLOR_ARGB(mAlpha, mColorR, mColorG, mColorB), },
+		{ 0.0f,		600.0f,	0.0f, 1.0f, D3DCOLOR_ARGB(mAlpha, mColorR, mColorG, mColorB), },
+		{ 800.0f,	600.0f,	0.0f, 1.0f, D3DCOLOR_ARGB(mAlpha, mColorR, mColorG, mColorB), },
+	};
+
+	// 描画
+	mDevice->SetTexture(0, nullptr);
+	mDevice->SetFVF(FVF_CUSTOM2D);
+	mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, cVertexDataTable, sizeof(SimpleVertex));
 }
 
 /**

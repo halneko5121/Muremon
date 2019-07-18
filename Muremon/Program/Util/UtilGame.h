@@ -25,6 +25,6 @@ namespace UtilGame
 	void				mulScore(int mul_score);
 
 	// ‚»‚Ì‘¼
-	int					getGroundPosY();
+	float				getGroundPosY();
 	bool				isScreenOut(const ActorBase& owner);
 }

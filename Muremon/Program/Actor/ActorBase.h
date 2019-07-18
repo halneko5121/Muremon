@@ -65,7 +65,7 @@ public:
 	void				setNowPos(const Vector2f& pos) { mNowPos = pos;	}
 	const Vector2f&		getNowPos() const { return mNowPos; }
 
-	int					getAtkPower() const { return mAtkPower; }
+	float				getAtkPower() const { return mAtkPower; }
 
 	int					getMissionPower() const { return mMissionPower; }
 
@@ -101,7 +101,7 @@ protected:
 
 	int					mScore;
 	int					mMissionPower;
-	int					mAtkPower;
+	float				mAtkPower;
 	bool				mIsAtk1;
 	bool				mIsAtk2;
 

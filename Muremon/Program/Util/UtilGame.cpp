@@ -93,7 +93,7 @@ UtilGame::mulScore(int mul_score)
 /**
  * @brief	’n–Ê‚ÌÀ•W‚ğæ“¾
  */
-int
+float
 UtilGame::getGroundPosY()
 {
 	return cGroundPosY;

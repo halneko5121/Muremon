@@ -40,13 +40,11 @@ private:
 
 private:
 	StateMachine<ActorBoss>	mState;	// ステート
-
-	float		mLife;
-	float		mMaxLife;
-	int			mLvCount;
-	int			mHitCount;
-
-	unsigned int mMoveAnime;
-	int			mDamageX;
-	int			mDamageY;
+	float					mLife;
+	float					mMaxLife;
+	int						mLvCount;
+	int						mHitCount;
+	unsigned int			mMoveAnime;
+	int						mDamageX;
+	int						mDamageY;
 };

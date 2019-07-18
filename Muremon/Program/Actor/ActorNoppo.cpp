@@ -35,7 +35,7 @@ namespace
 	const int cWaveLimitX = 500;									// この座標まで来ると直線運動へ移行
 
 	// 開始座標
-	const int cRandY = 400;
+	const int cRandY = 350;
 	const int cRandYMin = 100;
 
 	const int cWaitMotion = 15;

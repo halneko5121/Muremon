@@ -26,7 +26,7 @@ namespace
 	const int cDegRandMin = 180 + 45;						// 75‹‚Ü‚Å‚ÌŠÔ
 
 	// ŠJnÀ•W
-	const int cRandY = 400;
+	const int cRandY = 350;
 	const int cRandYMin = 100;
 
 	// ”gˆ—ŠÖŒW

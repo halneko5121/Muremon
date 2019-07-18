@@ -260,7 +260,7 @@ ActorNoppo::stateGroundAtk()
 	{
 		if (mNowPos.x - cNoppoRadius < cWindowWidth) 
 		{
-			updateAttack1();
+			mNowPos.x += mSpeed;
 			mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mAnimation, NULL);
 			mRect.setCenterPos(mNowPos);
 		}

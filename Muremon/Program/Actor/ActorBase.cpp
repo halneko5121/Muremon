@@ -153,16 +153,6 @@ ActorBase::setSkyAtkFlag()
 }
 
 /**
- * @brief 攻撃処理
- */
-void
-ActorBase::updateAttack1()
-{
-	// 右に移動
-	mNowPos.x += mSpeed;
-}
-
-/**
  * @brief 衝突チェック
  */
 bool

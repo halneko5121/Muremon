@@ -244,7 +244,7 @@ ActorNikuman::stateGroundAtk()
 	if (mNowPos.x - cNikumanRadius < cWindowWidth)
 	{
 		mAnimation = setAnimetion(ANIME_G_ATK4_NIKU, mAnimation, NULL);
-		updateAttack1();
+		mNowPos.x += mSpeed;
 		mRect.setCenterPos(mNowPos);
 	}
 	else

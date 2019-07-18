@@ -49,12 +49,6 @@ public:
 	void				setSkyAtkFlag();
 
 	/**
-	 * @brief 攻撃処理１
-	 * @return	中心座標
-	 */
-	void				updateAttack1();
-
-	/**
 	 * @brief 衝突チェック
 	 * @param	draw_cc_p		プレイヤーの位置
 	 * @param	draw_cc_e		エネミーの位置

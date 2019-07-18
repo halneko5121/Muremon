@@ -263,7 +263,7 @@ ActorYoshi::stateGroundAtk()
 
 	if (mNowPos.x - cYoshiRadius < cWindowWidth)
 	{
-		updateAttack1();
+		mNowPos.x += mSpeed;
 		mAnimation = setAnimetion(ANIME_G_ATK4_YOSHI, mAnimation, NULL);
 		mRect.setCenterPos(mNowPos);
 	}

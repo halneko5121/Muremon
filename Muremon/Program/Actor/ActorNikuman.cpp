@@ -268,13 +268,13 @@ ActorNikuman::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
 	}
-	mIsAtk2 = true;
-	mSpeed = getRandomNikumanSpeed();
-	mNowPos = Vector2f(-cNikumanRadius.x, mAtkStartY);
-
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+
+	mIsAtk2 = true;
+	mSpeed = getRandomNikumanSpeed();
+	mNowPos = Vector2f(-cNikumanRadius.x, mAtkStartY);
 	mAngleDegree = 0.0f;
 }
 void

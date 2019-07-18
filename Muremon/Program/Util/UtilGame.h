@@ -7,6 +7,9 @@
  *	管理者：三上
  ******************************************************************/
 
+class Rect;
+class ActorBase;
+
 namespace UtilGame
 {
 	// ゲームモード
@@ -23,4 +26,5 @@ namespace UtilGame
 
 	// その他
 	int					getGroundPosY();
+	bool				isScreenOut(const ActorBase& owner);
 }

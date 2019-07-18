@@ -7,8 +7,11 @@
  ******************************************************************/
 
 #include "UtilGame.h"
+
 #include "Program/System/GameInfoMgr.h"
 #include "Program/System/GameScore.h"
+#include "Program/Actor/ActorBase.h"
+#include "Program/DefineGame.h"
 
 namespace
 {
@@ -96,3 +99,21 @@ UtilGame::getGroundPosY()
 	return cGroundPosY;
 }
 
+/**
+ * @brief	指定アクターが画面外へ出たか
+ */
+bool
+UtilGame::isScreenOut(const ActorBase& owner)
+{
+	const float&	radius		= owner.getRect().getHalfWidth();
+	const Vector2f&	now_pos		= owner.getNowPos();
+	const float&	check_pos_x = now_pos.x - radius;
+	const float&	check_pos_y = now_pos.y + radius;
+
+	if (cWindowWidth < check_pos_x)		return true;	// 画面右端
+	if (now_pos.x < -radius)			return true;	// 画面左端
+	if (now_pos.y < -radius)			return true;	// 画面上端
+	if (cWindowHeight < check_pos_y)	return true;	// 画面下端
+
+	return false;
+}

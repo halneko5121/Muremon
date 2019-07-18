@@ -204,6 +204,7 @@ GameMain::msgLoop(void)
 				GetFadeMgr()->update();
 
 				mState.executeState();
+				mScene->draw();
 
 				GetFadeMgr()->draw();
 				mGraphics->renderEnd();
@@ -333,8 +334,6 @@ GameMain::stateInit()
 		mState.changeState(cState_Run);
 		return;
 	}
-
-	mScene->draw();
 }
 
 /**
@@ -343,7 +342,6 @@ GameMain::stateInit()
 void
 GameMain::stateEnterRun()
 {
-	mScene->draw();
 }
 void
 GameMain::stateRun()
@@ -368,8 +366,6 @@ GameMain::stateRun()
 		mState.changeState(cState_End);
 		return;
 	}
-
-	mScene->draw();
 }
 
 /**
@@ -379,7 +375,6 @@ void
 GameMain::stateEnterEnd()
 {
 	GetFadeMgr()->fadeOut();
-	mScene->draw();
 }
 void
 GameMain::stateEnd()
@@ -391,6 +386,4 @@ GameMain::stateEnd()
 		mState.changeState(cState_Init);
 		return;
 	}
-
-	mScene->draw();
 }

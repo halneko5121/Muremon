@@ -240,15 +240,15 @@ ActorNikuman::stateGroundAtk()
 		mState.changeState(cState_GroundDeath);
 	}
 
-	if (mNowPos.x - cNikumanRadius < cWindowWidth)
+	if (UtilGame::isScreenOutWithoutLeft(*this))
+	{
+		mState.changeState(cState_End);
+	}
+	else
 	{
 		mAnimation = setAnimetion(ANIME_G_ATK4_NIKU, mAnimation, NULL);
 		mNowPos.x += mSpeed;
 		mRect.setCenterPos(mNowPos);
-	}
-	else
-	{
-		mState.changeState(cState_End);
 	}
 }
 
@@ -294,15 +294,15 @@ ActorNikuman::stateSkyAtk()
 		mState.changeState(cState_SkyDeath);
 	}
 
-	if (mNowPos.x - cNikumanRadius < cWindowWidth) 
+	if (UtilGame::isScreenOutWithoutLeft(*this))
+	{
+		mState.changeState(cState_End);
+	}
+	else
 	{
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_NIKU);
 		updateAttack2(boss->getNowPos());
 		mRect.setCenterPos(mNowPos);
-	}
-	else
-	{
-		mState.changeState(cState_End);
 	}
 }
 
@@ -326,9 +326,8 @@ ActorNikuman::stateGroundDeath()
 		mState.changeState(cState_End);
 	}
 
-	// 中心座標が画面外なら死亡
-	if ((mNowPos.x < -cNikumanRadius) || (mNowPos.x > cWindowWidth + cNikumanRadius) &&
-		(mNowPos.y < -cNikumanRadius) || (mNowPos.y > cWindowHeight + cNikumanRadius))
+	// 画面外なら死亡
+	if (UtilGame::isScreenOut(*this))
 	{
 		mState.changeState(cState_End);
 	}
@@ -354,9 +353,8 @@ ActorNikuman::stateSkyDeath()
 		mState.changeState(cState_End);
 	}
 
-	// 中心座標が画面外なら死亡
-	if ((mNowPos.x < -cNikumanRadius) || (mNowPos.x > cWindowWidth + cNikumanRadius) &&
-		(mNowPos.y < -cNikumanRadius) || (mNowPos.y > cWindowHeight + cNikumanRadius)) 
+	// 画面外なら死亡
+	if (UtilGame::isScreenOut(*this))
 	{
 		mState.changeState(cState_End);
 	}

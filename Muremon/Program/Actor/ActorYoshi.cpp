@@ -260,15 +260,15 @@ ActorYoshi::stateGroundAtk()
 		return;
 	}
 
-	if (mNowPos.x - cYoshiRadius < cWindowWidth)
+	if (UtilGame::isScreenOutWithoutLeft(*this))
+	{
+		mState.changeState(cState_End);
+	}
+	else
 	{
 		mNowPos.x += mSpeed;
 		mAnimation = setAnimetion(ANIME_G_ATK4_YOSHI, mAnimation, NULL);
 		mRect.setCenterPos(mNowPos);
-	}
-	else
-	{
-		mState.changeState(cState_End);
 	}
 }
 
@@ -319,16 +319,17 @@ ActorYoshi::stateSkyAtk()
 		mState.changeState(cState_SkyDeathAnime);
 	}
 
-	if (mNowPos.x - cYoshiRadius < cWindowWidth)
+	if (UtilGame::isScreenOutWithoutLeft(*this))
+	{
+		mState.changeState(cState_End);
+		return;
+	}
+	else
 	{
 		mOrbit->mWave->setSpeed(mSpeed);
 		updateAttack2();
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_YOSHI);
 		mRect.setCenterPos(mNowPos);
-	}
-	else
-	{
-		mState.changeState(cState_End);
 	}
 }
 
@@ -346,11 +347,11 @@ ActorYoshi::stateGroundDeath()
 {
 	mOrbit->mRebound->orbitRebound(&mNowPos, mRandDeg, mSpeed, mNowPos);
 
-	// 中心座標が画面外なら死亡
-	if ((mNowPos.x < -cYoshiRadius) || (mNowPos.x > cWindowWidth + cYoshiRadius) &&
-		(mNowPos.y < -cYoshiRadius) || (mNowPos.y > cWindowHeight + cYoshiRadius))
+	// 画面外なら死亡
+	if (UtilGame::isScreenOut(*this))
 	{
 		mState.changeState(cState_End);
+		return;
 	}
 }
 
@@ -393,11 +394,11 @@ ActorYoshi::stateSkyDeath()
 		mState.changeState(cState_End);
 	}
 
-	// 中心座標が画面外なら死亡
-	if ((mNowPos.x < -cYoshiRadius) || (mNowPos.x > cWindowWidth + cYoshiRadius) &&
-		(mNowPos.y < -cYoshiRadius) || (mNowPos.y > cWindowHeight + cYoshiRadius)) 
+	// 画面外なら死亡
+	if (UtilGame::isScreenOut(*this))
 	{
 		mState.changeState(cState_End);
+		return;
 	}
 }
 

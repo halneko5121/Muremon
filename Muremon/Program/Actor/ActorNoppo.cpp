@@ -257,15 +257,15 @@ ActorNoppo::stateGroundAtk()
 	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
 	else
 	{
-		if (mNowPos.x - cNoppoRadius < cWindowWidth) 
+		if (UtilGame::isScreenOutWithoutLeft(*this))
+		{
+			mState.changeState(cState_End);
+		}
+		else
 		{
 			mNowPos.x += mSpeed;
 			mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mAnimation, NULL);
 			mRect.setCenterPos(mNowPos);
-		}
-		else
-		{
-			mState.changeState(cState_End);
 		}
 	}
 }
@@ -329,15 +329,16 @@ ActorNoppo::stateSkyAtk()
 	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
 	else
 	{
-		if (mNowPos.x - cNoppoRadius < cWindowWidth) {
+		if (UtilGame::isScreenOutWithoutLeft(*this))
+		{
+			mState.changeState(cState_End);
+		}
+		else
+		{
 			mOrbit->mWave->setSpeed(mSpeed);
 			updateAttack2();
 			mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mAnimation, ANIME_S_ATK1_NOPPO);
 			mRect.setCenterPos(mNowPos);
-		}
-		else
-		{
-			mState.changeState(cState_End);
 		}
 	}
 }
@@ -397,13 +398,7 @@ ActorNoppo::stateSkyDeath()
 	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	// ‰æ–ÊŠO‚È‚ç€–S
-	if ((mNowPos.x < -(cNoppoRadius + 50)) || (mNowPos.x > cWindowWidth + cNoppoRadius + 50) &&
-		(mNowPos.y < -(cNoppoRadius + 50)) || (mNowPos.y > cWindowHeight + cNoppoRadius + 50)) 
-	{
-		mState.changeState(cState_End);
-	}
-
-	if ((mNowPos.y < (-cNoppoRadius)) || (mNowPos.y > cWindowHeight + cNoppoRadius + 30))
+	if (UtilGame::isScreenOut(*this))
 	{
 		mState.changeState(cState_End);
 	}

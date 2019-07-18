@@ -89,7 +89,7 @@ ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
 	mScore = cAddScoreNoppo;
-	mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
+	mNowPos = Vector2f(-cNoppoRadius, -cNoppoRadius);
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
 	mRect.setWidth(cNoppoHitRadius.x);
@@ -225,7 +225,7 @@ ActorNoppo::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
+		mNowPos = Vector2f(-cNoppoRadius, -cNoppoRadius);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();

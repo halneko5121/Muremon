@@ -97,7 +97,7 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mScore = cAddScoreYoshitaro;
-	mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
+	mNowPos = Vector2f(-cYoshiRadius, -cYoshiRadius);
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
 	mRect.setWidth(cYoshiHitRadius.x);
@@ -228,7 +228,7 @@ ActorYoshi::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
+		mNowPos = Vector2f(-cYoshiRadius, -cYoshiRadius);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();

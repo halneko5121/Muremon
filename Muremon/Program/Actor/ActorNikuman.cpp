@@ -219,7 +219,7 @@ ActorNikuman::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getRandomNikumanSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cNikumanRadius.x, (UtilGame::getGroundPosY() + 20.0f - cNikumanRadius.y));
+	mNowPos = Vector2f(-cNikumanRadius.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }

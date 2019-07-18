@@ -61,6 +61,8 @@ SceneGameRefresh::SceneGameRefresh()
 
 SceneGameRefresh::~SceneGameRefresh(void)
 {
+	GetActorMgr()->clearActor();
+	APP_SAFE_DELETE(mUIRefreshGame);
 }
 
 void SceneGameRefresh::impleInit()

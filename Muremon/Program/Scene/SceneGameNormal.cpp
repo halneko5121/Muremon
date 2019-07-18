@@ -82,6 +82,8 @@ SceneGameNormal::SceneGameNormal()
  */
 SceneGameNormal::~SceneGameNormal()
 {
+	GetActorMgr()->clearActor();
+	APP_SAFE_DELETE(mUINormalGame);
 }
 
 /**

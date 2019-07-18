@@ -182,7 +182,14 @@ ActorNoppo::drawImple() const
 
 	mVertex->setAngle(mAngleDegree);
 	mVertex->setColor(static_cast<D3DCOLOR>(mAlpha), 255, 255, 255);
-	mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+	if (mState.isEqual(cState_SkyDeath))
+	{
+		mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+	}
+	else
+	{
+		mVertex->drawCB(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+	}
 }
 
 /**

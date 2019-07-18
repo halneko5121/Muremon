@@ -286,13 +286,13 @@ ActorNoppo::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	}
+	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
+	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
+	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+
 	mIsAtk2 = true;
 	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cNoppoRadius, mAtkStartY);
-
-	mAtkStartY = (float)(rand() % cRandY);
-	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
-	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 	mAngleDegree = 0.0f;
 }
 void

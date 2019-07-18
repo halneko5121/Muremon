@@ -288,13 +288,13 @@ ActorYoshi::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	}
-	mIsAtk2 = true;
-	mSpeed = getRandomSpeed();
-	mNowPos = Vector2f(-cYoshiRadius, mAtkStartY);
-
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+
+	mIsAtk2 = true;
+	mNowPos = Vector2f(-cYoshiRadius, mAtkStartY);
+	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
 }
 void

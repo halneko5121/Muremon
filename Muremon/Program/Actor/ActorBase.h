@@ -36,8 +36,10 @@ public:
 	/**
 	 * @brief スピードの設定
 	 */
+	void				setSpeed(int speed);
 	float				getSpeed() const;
-	float				getNikumanSpeed() const;
+	float				getRandomSpeed() const;
+	float				getRandomNikumanSpeed() const;
 
 	/**
 	 * @brief	攻撃フラグの設定

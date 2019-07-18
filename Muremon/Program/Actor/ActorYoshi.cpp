@@ -231,7 +231,7 @@ ActorYoshi::stateEnterGroundAtk()
 		mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	}
 	mIsAtk1 = true;
-	mSpeed = getSpeed();
+	mSpeed = getRandomSpeed();
 	mAnimation = 0;
 	mNowPos = Vector2f(-cYoshiRadius, (UtilGame::getGroundPosY() + 40.0f - cYoshiRadius));
 	mAngleDegree = 0.0f;
@@ -290,7 +290,7 @@ ActorYoshi::stateEnterSkyAtk()
 		mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
 	}
 	mIsAtk2 = true;
-	mSpeed = getSpeed();
+	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cYoshiRadius, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);

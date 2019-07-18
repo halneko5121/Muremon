@@ -228,7 +228,7 @@ ActorNoppo::stateEnterGroundAtk()
 		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	}
 	mIsAtk1 = true;
-	mSpeed = getSpeed();
+	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cNoppoRadius, (UtilGame::getGroundPosY() + 70.0f - cNoppoRadius));
 	mAngleDegree = 0.0f;
 }
@@ -288,7 +288,7 @@ ActorNoppo::stateEnterSkyAtk()
 		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
 	}
 	mIsAtk2 = true;
-	mSpeed = getSpeed();
+	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cNoppoRadius, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY);

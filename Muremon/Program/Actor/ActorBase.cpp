@@ -102,17 +102,36 @@ ActorBase::draw() const
 	drawImple();
 }
 
+
 /**
  * @brief スピードの設定
  */
+void
+ActorBase::setSpeed(int speed)
+{
+	mSpeed = speed;
+}
+
+/**
+ * @brief スピードの取得
+ */
 float
 ActorBase::getSpeed() const
+{
+	return mSpeed;
+}
+
+/**
+ * @brief ランダムなスピードの取得
+ */
+float
+ActorBase::getRandomSpeed() const
 {
 	return (float)(rand() % SPEED_RAND) + SPEED_MIN;
 }
 
 float
-ActorBase::getNikumanSpeed() const
+ActorBase::getRandomNikumanSpeed() const
 {
 	return (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
 }

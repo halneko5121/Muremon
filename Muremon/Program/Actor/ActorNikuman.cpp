@@ -217,7 +217,7 @@ ActorNikuman::stateEnterGroundAtk()
 		mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
 	}
 	mIsAtk1 = true;
-	mSpeed = getNikumanSpeed();
+	mSpeed = getRandomNikumanSpeed();
 	mAnimation = 0;
 	mNowPos = Vector2f(-cNikumanRadius, (UtilGame::getGroundPosY() + 20.0f - cNikumanRadius));
 	mAngleDegree = 0.0f;
@@ -270,7 +270,7 @@ ActorNikuman::stateEnterSkyAtk()
 		mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
 	}
 	mIsAtk2 = true;
-	mSpeed = getNikumanSpeed();
+	mSpeed = getRandomNikumanSpeed();
 	mNowPos = Vector2f(-cNikumanRadius, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);

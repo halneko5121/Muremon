@@ -93,7 +93,7 @@ SceneTutorial::update()
 {
 	mState.executeState();
 
-	if (UtilInput::isKeyPushed(DIK_Z))
+	if (UtilInput::isKeyPushedDecide())
 	{
 		mIsSceneEnd = true;
 	}
@@ -167,7 +167,7 @@ SceneTutorial::stateEnterRefresh()
 void
 SceneTutorial::stateRefresh()
 {
-	if (UtilInput::isKeyPushed(DIK_RIGHT))
+	if (UtilInput::isKeyPushed(UtilInput::cKey_Right))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		mState.changeState(cState_NormalSlide);
@@ -222,7 +222,7 @@ SceneTutorial::stateEnterNormal()
 void
 SceneTutorial::stateNormal()
 {
-	if (UtilInput::isKeyPushed(DIK_LEFT))
+	if (UtilInput::isKeyPushed(UtilInput::cKey_Left))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		mState.changeState(cState_NormalSlide);
@@ -230,7 +230,7 @@ SceneTutorial::stateNormal()
 		return;
 	}
 
-	if (UtilInput::isKeyPushed(DIK_RIGHT))
+	if (UtilInput::isKeyPushed(UtilInput::cKey_Right))
 	{
 		UtilSound::playOnce(S_SE_CURSOR_MOVE);
 		mState.changeState(cState_EndSlide);

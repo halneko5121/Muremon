@@ -110,7 +110,7 @@ UtilGame::isScreenOut(const ActorBase& owner)
 	const float&	radius_y	= owner.getRect().getHalfHeight();
 	const Vector2f&	now_pos		= owner.getNowPos();
 	const float&	check_pos_x = now_pos.x - radius_x;
-	const float&	check_pos_y = now_pos.y + radius_y;
+	const float&	check_pos_y = now_pos.y - radius_y;
 
 	if (cWindowWidth + cScreenOutMargin < check_pos_x)	return true;	// 画面右端
 	if (now_pos.x < -(radius_x + cScreenOutMargin))		return true;	// 画面左端
@@ -130,7 +130,7 @@ UtilGame::isScreenOutWithoutLeft(const ActorBase& owner)
 	const float&	radius_y = owner.getRect().getHalfHeight();
 	const Vector2f&	now_pos = owner.getNowPos();
 	const float&	check_pos_x = now_pos.x - radius_x;
-	const float&	check_pos_y = now_pos.y + radius_y;
+	const float&	check_pos_y = now_pos.y - radius_y;
 
 	if (cWindowWidth + cScreenOutMargin < check_pos_x)	return true;	// 画面右端
 	if (now_pos.y < -(radius_y + cScreenOutMargin))		return true;	// 画面上端

@@ -43,12 +43,12 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mMaxLife(cInitLife)
 	, mLvCount(0)
 	, mHitCount(0)
-	, mRectData(R_BOSS_MOVE1)
 	, mMoveAnimeTime(0)
 	, mMoveAnime(0)
 	, mDamageX(0)
 	, mDamageY(0)
 {
+	mRectNum = R_BOSS_MOVE1;
 	mSpeed = 1;
 	mNowPos = Vector2f(cAppearPosX, cAppearPosY);
 
@@ -116,7 +116,7 @@ ActorBoss::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);
-	mVertex->drawF(Vector2f(mNowPos.x + mDamageX, mNowPos.y + mDamageY), mRectData);
+	mVertex->drawF(Vector2f(mNowPos.x + mDamageX, mNowPos.y + mDamageY), mRectNum);
 }
 
 /**
@@ -211,7 +211,7 @@ ActorBoss::stateMove()
 	}
 	mMoveAnimeTime++;
 
-	mRectData = R_BOSS_MOVE1 + mMoveAnime % 2;
+	mRectNum = R_BOSS_MOVE1 + mMoveAnime % 2;
 	if (UtilGame::isGameModeRefresh())
 	{
 		if (mNowPos.x == cRefreshStopX)
@@ -239,7 +239,7 @@ ActorBoss::stateEnterDamage()
 	mDamageX = rand() % cDamagePosRand;
 	mDamageY = rand() % cDamagePosRand;
 	mHitCount = 0;
-	mRectData = R_BOSS_DAMAGE;
+	mRectNum = R_BOSS_DAMAGE;
 }
 void
 ActorBoss::stateDamage()
@@ -276,7 +276,7 @@ ActorBoss::stateDamage()
 void
 ActorBoss::stateEnterStop()
 {
-	mRectData = R_BOSS_USUALLY;
+	mRectNum = R_BOSS_USUALLY;
 }
 void
 ActorBoss::stateStop()
@@ -289,7 +289,7 @@ ActorBoss::stateStop()
 void
 ActorBoss::stateEnterDead()
 {
-	mRectData = R_BOSS_FALL;
+	mRectNum = R_BOSS_FALL;
 
 	EffectParam param(mTexture, mVertex, mNowPos);
 	GetEffectMgr()->createEffect(cEffectId_HitEffect7, param);
@@ -340,7 +340,7 @@ ActorBoss::stateEnterRevival()
 	// ƒŠƒZƒbƒg
 	mHitCount = 0;
 	mAlpha = 255;
-	mRectData = R_BOSS_MOVE1;
+	mRectNum = R_BOSS_MOVE1;
 	mNowPos.x = cAppearPosX;
 	mMoveAnime = 0;
 	mMoveAnimeTime = 0;

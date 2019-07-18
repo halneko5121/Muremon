@@ -45,7 +45,6 @@ private:
 	float		mMaxLife;
 	int			mLvCount;
 	int			mHitCount;
-	int			mRectData;
 
 	int			mMoveCount;
 	int			mMoveAnimeTime;

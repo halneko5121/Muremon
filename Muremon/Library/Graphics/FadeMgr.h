@@ -9,9 +9,6 @@
 
 #include "Library/Graphics/DirectGraphics.h"
 
-class Texture;
-class Vertex;
-
 class FadeMgr
 {
 public:

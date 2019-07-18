@@ -150,6 +150,25 @@ ActorBoss::isWin() const
 	return (mState.isEqual(cState_End));
 }
 
+/**
+ * @brief ライフの回復
+ */
+void
+ActorBoss::recoveryLife()
+{
+	mLife = mMaxLife;
+}
+
+/**
+ * @brief ライフを０に
+ */
+void
+ActorBoss::setDead()
+{
+	mLife = 0;
+}
+
+
 // -----------------------------------------------------------------
 // ステート関数
 // -----------------------------------------------------------------

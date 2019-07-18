@@ -23,6 +23,9 @@ public:
 	bool		isDead() const;
 	bool		isWin() const;
 
+	void		recoveryLife();
+	void		setDead();
+
 public:
 	float		mLife;
 	float		mMaxLife;

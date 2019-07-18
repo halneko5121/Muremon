@@ -321,11 +321,6 @@ ActorNikuman::stateGroundDeath()
 
 	 mOrbit->mRebound->orbitRebound(&mNowPos, mRandDeg, mSpeed, mNowPos);
 
-	if ((mNowPos.y < -cNikumanRadius.y) || (mNowPos.y > cWindowHeight + cNikumanRadius.y)) 
-	{
-		mState.changeState(cState_End);
-	}
-
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))
 	{
@@ -347,11 +342,6 @@ ActorNikuman::stateSkyDeath()
 	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
 
 	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
-
-	if ((mNowPos.y < -cNikumanRadius.y) || (mNowPos.y > cWindowHeight + cNikumanRadius.y))
-	{
-		mState.changeState(cState_End);
-	}
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))

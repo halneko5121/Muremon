@@ -10,7 +10,7 @@
 
 namespace 
 {
-	const float cNikumanRadius = 37.5f;				// キャラの半径
+	const Vector2f cNikumanRadius = { 37.5f, 37.5f };// キャラの半径
 
 	// 放物線関係
 	const int cParaRandAcc = 15;					// 加速度
@@ -18,7 +18,7 @@ namespace
 	const int cParaRandMoveX = -15;					// 移動量				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = 600.f + cNikumanRadius;	// 放物線の最終座標
+	const float cParaLimitY = 600.f + cNikumanRadius.y;	// 放物線の最終座標
 
 	// バウンド関係
 	const int cDegRand = 30;						// ランダムの幅
@@ -74,10 +74,10 @@ ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vert
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
 	mScore = cAddScoreNikuman;
-	mNowPos = Vector2f(-cNikumanRadius, -cNikumanRadius);
+	mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
 
-	mRect.setWidth(cNikumanRadius);
-	mRect.setHeight(cNikumanRadius);
+	mRect.setWidth(cNikumanRadius.x);
+	mRect.setHeight(cNikumanRadius.y);
 	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);
@@ -174,7 +174,7 @@ ActorNikuman::updateAttack2(const Vector2f& boss_cc)
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
 
-	range_x = fabsf(mNowPos.x - (boss_cc.x + cNikumanRadius));
+	range_x = fabsf(mNowPos.x - (boss_cc.x + cNikumanRadius.x));
 	range_y = fabsf(mNowPos.y - boss_cc.y);
 
 	plus_x = (range_x / mSpeed);
@@ -214,12 +214,12 @@ ActorNikuman::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNikumanRadius, -cNikumanRadius);
+		mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomNikumanSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cNikumanRadius, (UtilGame::getGroundPosY() + 20.0f - cNikumanRadius));
+	mNowPos = Vector2f(-cNikumanRadius.x, (UtilGame::getGroundPosY() + 20.0f - cNikumanRadius.y));
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }
@@ -266,11 +266,11 @@ ActorNikuman::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNikumanRadius, -cNikumanRadius);
+		mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
 	}
 	mIsAtk2 = true;
 	mSpeed = getRandomNikumanSpeed();
-	mNowPos = Vector2f(-cNikumanRadius, mAtkStartY);
+	mNowPos = Vector2f(-cNikumanRadius.x, mAtkStartY);
 
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
@@ -321,7 +321,7 @@ ActorNikuman::stateGroundDeath()
 
 	 mOrbit->mRebound->orbitRebound(&mNowPos, mRandDeg, mSpeed, mNowPos);
 
-	if ((mNowPos.y < -cNikumanRadius) || (mNowPos.y > cWindowHeight + cNikumanRadius)) 
+	if ((mNowPos.y < -cNikumanRadius.y) || (mNowPos.y > cWindowHeight + cNikumanRadius.y)) 
 	{
 		mState.changeState(cState_End);
 	}
@@ -348,7 +348,7 @@ ActorNikuman::stateSkyDeath()
 
 	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
-	if ((mNowPos.y < -cNikumanRadius) || (mNowPos.y > cWindowHeight + cNikumanRadius))
+	if ((mNowPos.y < -cNikumanRadius.y) || (mNowPos.y > cWindowHeight + cNikumanRadius.y))
 	{
 		mState.changeState(cState_End);
 	}

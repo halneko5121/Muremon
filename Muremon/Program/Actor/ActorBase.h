@@ -50,10 +50,9 @@ public:
 
 	/**
 	 * @brief 衝突チェック
-	 * @param	draw_cc_p		プレイヤーの位置
-	 * @param	draw_cc_e		エネミーの位置
-	 * @param	chara_id		キャラの『何体目か』
-	 * @return	敵と当たったかどうかのフラグ
+	 * @param	owner		自身
+	 * @param	target		衝突対象
+	 * @return	対象と衝突したかどうか
 	 */
 	bool				isHit(const ActorBase& owner, const ActorBase& target) const;
 
@@ -92,21 +91,21 @@ protected:
 	Texture*			mTexture;
 	Vertex*				mVertex;
 	Rect				mRect;
+	int					mRectNum;
 	int					mRectStartNum;
 	int					mSoundStartNum;
 
-	float				mSpeed;
-	int					mAnimation;
-	int					mRectNum;
-	int					mAlpha;
 	Vector2f			mNowPos;
+	float				mSpeed;
+	float				mAngleDegree;
+	int					mAnimation;
+	int					mAlpha;
 
 	int					mScore;
 	int					mMissionPower;
 	int					mAtkPower;
 	bool				mIsAtk1;
 	bool				mIsAtk2;
-	float				mAngleDegree;
 
 	bool				mIsHitCheck;
 	bool				mIsRun;

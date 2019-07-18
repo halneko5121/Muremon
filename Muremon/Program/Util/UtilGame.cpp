@@ -15,7 +15,8 @@
 
 namespace
 {
-	const float cGroundPosY = 500.f;		// 地面の座標		
+	const float cGroundPosY = 500.0f;		// 地面の座標
+	const float cScreenOutMargin = 50.0f;	// 画面外の余白
 }
 
 /**
@@ -110,10 +111,10 @@ UtilGame::isScreenOut(const ActorBase& owner)
 	const float&	check_pos_x = now_pos.x - radius;
 	const float&	check_pos_y = now_pos.y + radius;
 
-	if (cWindowWidth < check_pos_x)		return true;	// 画面右端
-	if (now_pos.x < -radius)			return true;	// 画面左端
-	if (now_pos.y < -radius)			return true;	// 画面上端
-	if (cWindowHeight < check_pos_y)	return true;	// 画面下端
+	if (cWindowWidth + cScreenOutMargin < check_pos_x)	return true;	// 画面右端
+	if (now_pos.x < -(radius + cScreenOutMargin))		return true;	// 画面左端
+	if (now_pos.y < -(radius + cScreenOutMargin))		return true;	// 画面上端
+	if (cWindowHeight + cScreenOutMargin < check_pos_y)	return true;	// 画面下端
 
 	return false;
 }
@@ -129,9 +130,9 @@ UtilGame::isScreenOutWithoutLeft(const ActorBase& owner)
 	const float&	check_pos_x = now_pos.x - radius;
 	const float&	check_pos_y = now_pos.y + radius;
 
-	if (cWindowWidth < check_pos_x)		return true;	// 画面右端
-	if (now_pos.y < -radius)			return true;	// 画面上端
-	if (cWindowHeight < check_pos_y)	return true;	// 画面下端
+	if (cWindowWidth + cScreenOutMargin < check_pos_x)	return true;	// 画面右端
+	if (now_pos.y < -(radius + cScreenOutMargin))		return true;	// 画面上端
+	if (cWindowHeight + cScreenOutMargin < check_pos_y)	return true;	// 画面下端
 
 	return false;
 }

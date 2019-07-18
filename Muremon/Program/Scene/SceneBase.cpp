@@ -30,8 +30,10 @@ SceneBase::SceneBase()
  */
 SceneBase::~SceneBase()
 {
-	APP_SAFE_DELETE(mVertex);
+	mTexture->release();
 	APP_SAFE_DELETE(mTexture);
+	mVertex->release();
+	APP_SAFE_DELETE(mVertex);
 }
 
 /**

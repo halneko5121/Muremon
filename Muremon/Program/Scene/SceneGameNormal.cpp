@@ -32,8 +32,6 @@ namespace
 	// ‰œ‹`
 	const int cMaxMissionGauge = 5000;
 
-	Vector2f boss_cc2 = { 600, 350 };
-
 	enum State
 	{
 		cState_Idle,			// ‘Ò‹@
@@ -347,7 +345,8 @@ SceneGameNormal::stateEnterGame()
 void
 SceneGameNormal::stateGame()
 {
-	if ((boss_cc2.x - 150) < 500) {
+	if ((mBoss->getNowPos().x - 150) < 500) 
+	{
 		UtilSound::playLoop(S_SAIREN);
 	}
 	else

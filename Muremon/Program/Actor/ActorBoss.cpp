@@ -13,7 +13,6 @@ namespace
 	const float cAddLife = 1000.0f;		// ボスが死んだ時増加していくライフ
 	const int cDeadAlpha = 5;			// ボスが滅した時のアルファ減値
 	const int cAppearPosX = 950;		// ボスの出現中心位置
-	const int cAppearPosY = 350;		// ボスY位置の固定
 	const int cRefreshStopX = 550;		// スッキリモードのボスの止める中心座標
 	const int cDamageHitCount = 50;		// ボスが攻撃を何回食らった時に痛がり表示
 	const int cDeadSeTime = 60;
@@ -49,7 +48,7 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 {
 	mRectNum = R_BOSS_MOVE1;
 	mSpeed = 1;
-	mNowPos = Vector2f(cAppearPosX, cAppearPosY);
+	mNowPos = Vector2f(cAppearPosX, UtilGame::getGroundPosY() + 20.0f);
 
 	mRect.setWidth(cRadius.x);
 	mRect.setHeight(cRadius.y);
@@ -109,7 +108,7 @@ ActorBoss::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);
-	mVertex->drawF(Vector2f(mNowPos.x + mDamageX, mNowPos.y + mDamageY), mRectNum);
+	mVertex->drawCB(Vector2f(mNowPos.x + mDamageX, mNowPos.y + mDamageY), mRectNum);
 }
 
 /**

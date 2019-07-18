@@ -40,7 +40,7 @@ Rect::updateCenterPosCenter(const Vector2f& pos)
 {
 	// ’†SˆÊ’u‚ğ’†‰›‚É‚·‚é
 	Vector2f temp_pos = pos;
-	temp_pos.y += getHalfHeight();
+	temp_pos.y -= getHalfHeight();
 	setCenterPos(temp_pos);
 }
 

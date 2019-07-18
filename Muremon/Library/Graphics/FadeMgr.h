@@ -87,8 +87,6 @@ private:
 private:
 	static FadeMgr*		mInstance;		// インスタンス
 	LPDIRECT3DDEVICE9	mDevice;		// デバイス
-	Texture*			mTexture;		// テクスチャ
-	Vertex*				mVertex;		// バーテックス
 
 	int					mAlpha;			// アルファ
 	int					mColorR;		// カラー(R)

@@ -161,8 +161,6 @@ FadeMgr::setColor(int r, int g, int b)
  */
 FadeMgr::FadeMgr()
 	: mDevice(nullptr)
-	, mTexture(nullptr)
-	, mVertex(nullptr)
 	, mAlpha(255)
 	, mColorR(255)
 	, mColorG(255)
@@ -170,8 +168,6 @@ FadeMgr::FadeMgr()
 	, mFadeSpeed(0)
 	, mState(cFadeState_None)
 {
-	mTexture = new Texture();
-	mVertex = new Vertex();
 }
 
 /**
@@ -179,6 +175,4 @@ FadeMgr::FadeMgr()
  */
 FadeMgr::~FadeMgr()
 {
-	APP_SAFE_DELETE(mTexture);
-	APP_SAFE_DELETE(mVertex);
 }

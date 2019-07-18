@@ -18,8 +18,7 @@
 
 namespace
 {
-	const float cNoppoRadius = 150.f;			// ƒLƒƒƒ‰‚Ì”¼Œa
-	const Vector2f cNoppoHitRadius = { 50.0f, 100.0f };
+	const Vector2f cNoppoRadius = { 50.0f, 150.0f };				// ƒLƒƒƒ‰‚Ì”¼Œa
 
 	//•ú•¨üŠÖŒW
 	const int cParaRandAcc = 15;									// ‰Á‘¬“x
@@ -27,7 +26,7 @@ namespace
 	const int cParaRandMoveX = -15;									// ˆÚ“®—Ê				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = cWindowHeight + cNoppoRadius + 50;	// •ú•¨ü‚ÌÅIÀ•W
+	const float cParaLimitY = cWindowHeight + cNoppoRadius.x + 50;	// •ú•¨ü‚ÌÅIÀ•W
 
 	// ”gˆ—ŠÖŒW
 	const int cWaveAmplit = 20;										// U•(ã‰º‚É“®‚­•)					
@@ -89,11 +88,11 @@ ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
 	mScore = cAddScoreNoppo;
-	mNowPos = Vector2f(-cNoppoRadius, -cNoppoRadius);
+	mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
-	mRect.setWidth(cNoppoHitRadius.x);
-	mRect.setHeight(cNoppoHitRadius.y);
+	mRect.setWidth(cNoppoRadius.x);
+	mRect.setHeight(cNoppoRadius.y);
 	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);
@@ -225,11 +224,11 @@ ActorNoppo::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNoppoRadius, -cNoppoRadius);
+		mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
-	mNowPos = Vector2f(-cNoppoRadius, (UtilGame::getGroundPosY() + 70.0f - cNoppoRadius));
+	mNowPos = Vector2f(-cNoppoRadius.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 }
 void
@@ -284,7 +283,7 @@ ActorNoppo::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNoppoRadius, -cNoppoRadius);
+		mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
 	}
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
@@ -292,7 +291,7 @@ ActorNoppo::stateEnterSkyAtk()
 
 	mIsAtk2 = true;
 	mSpeed = getRandomSpeed();
-	mNowPos = Vector2f(-cNoppoRadius, mAtkStartY);
+	mNowPos = Vector2f(-cNoppoRadius.x, mAtkStartY);
 	mAngleDegree = 0.0f;
 }
 void

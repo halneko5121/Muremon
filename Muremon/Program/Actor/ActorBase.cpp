@@ -61,6 +61,7 @@ ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
  */
 ActorBase::~ActorBase()
 {
+	APP_SAFE_DELETE(mOrbit);
 }
 
 /**

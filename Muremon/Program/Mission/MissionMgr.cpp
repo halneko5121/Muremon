@@ -499,7 +499,7 @@ MissionMgr::stateOugi()
 {
 	if (mOugiEffect->isEnd())
 	{
-		mActorBoss->mLife -= 7000;
+		mActorBoss->setDead();
 		UtilGame::addScore(cMissionClearAddScore);
 		mState.changeState(cState_End);
 		return;
@@ -556,7 +556,7 @@ MissionMgr::stateBadStatus()
 			mActorBoss->setSpeed(3);
 			break;
 		case RECOVER:
-			mActorBoss->mLife = mActorBoss->mMaxLife;
+			mActorBoss->recoveryLife();
 			break;
 		case SLIDE_IN:
 			mActorBoss->setNowPos(Vector2f(500, mActorBoss->getNowPos().y));

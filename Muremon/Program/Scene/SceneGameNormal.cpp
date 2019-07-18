@@ -239,7 +239,8 @@ SceneGameNormal::drawBg() const
 void
 SceneGameNormal::recover()
 {
-	if(mBoss->mLife <= 0){
+	if(mBoss->isDead())
+	{
 		mMission->resetBadStatusAtkLv();
 	}
 }

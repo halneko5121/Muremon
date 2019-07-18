@@ -286,7 +286,7 @@ ActorYoshi::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f((-cYoshiRadius), (cWindowWidth + 50.f + cYoshiRadius));
+		mNowPos = Vector2f(-cYoshiRadius, -cYoshiRadius);
 	}
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);

@@ -74,7 +74,7 @@ ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vert
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
 	mScore = cAddScoreNikuman;
-	mNowPos = Vector2f((-cNikumanRadius), (cWindowWidth + 50.f + cNikumanRadius));
+	mNowPos = Vector2f(-cNikumanRadius, -cNikumanRadius);
 
 	mRect.setWidth(cNikumanRadius);
 	mRect.setHeight(cNikumanRadius);

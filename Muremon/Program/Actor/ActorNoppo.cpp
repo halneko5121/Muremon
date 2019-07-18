@@ -284,7 +284,7 @@ ActorNoppo::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f((-cNoppoRadius), (cWindowWidth + 50.f + cNoppoRadius));
+		mNowPos = Vector2f(-cNoppoRadius, -cNoppoRadius);
 	}
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);

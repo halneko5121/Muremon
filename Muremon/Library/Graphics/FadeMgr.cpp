@@ -23,6 +23,14 @@ namespace
 		float rhw;
 		DWORD color;
 	};
+
+	enum State
+	{
+		cState_Idle,		// 待機
+		cState_FadeIn,		// フェードイン
+		cState_FadeOut,		// フェードアウト
+		cState_Count
+	};
 }
 
 FadeMgr* FadeMgr::mInstance = nullptr;
@@ -70,29 +78,7 @@ FadeMgr::init(LPDIRECT3DDEVICE9 device)
 void
 FadeMgr::update()
 {
-	switch (mState)
-	{
-	case cFadeState_FadeIn:
-		mAlpha += mFadeSpeed;
-		if (mAlpha <= 0)
-		{
-			mAlpha = 0;
-			mState = cFadeState_None;
-		}
-		break;
-
-	case cFadeState_FadeOut:
-		mAlpha += mFadeSpeed;
-		if (255 <= mAlpha)
-		{
-			mAlpha = 255;
-			mState = cFadeState_None;
-		}
-		break;
-
-	default:
-		break;
-	}
+	mState.executeState();
 }
 
 /**
@@ -122,8 +108,7 @@ FadeMgr::draw() const
 void
 FadeMgr::fadeIn()
 {
-	mState = cFadeState_FadeIn;
-	mFadeSpeed = -6;
+	mState.changeStateIfDiff(cState_FadeIn);
 }
 
 /**
@@ -132,8 +117,7 @@ FadeMgr::fadeIn()
 void
 FadeMgr::fadeOut()
 {
-	mState = cFadeState_FadeOut;
-	mFadeSpeed = 6;
+	mState.changeStateIfDiff(cState_FadeOut);
 }
 
 /**
@@ -142,7 +126,7 @@ FadeMgr::fadeOut()
 bool
 FadeMgr::isFadeEnd() const
 {
-	return (mState == cFadeState_None);
+	return (mState.isEqual(cState_Idle));
 }
 
 /**
@@ -166,8 +150,13 @@ FadeMgr::FadeMgr()
 	, mColorG(255)
 	, mColorB(255)
 	, mFadeSpeed(0)
-	, mState(cFadeState_None)
+	, mState()
 {
+	mState.initialize(cState_Count, cState_Idle);
+	REGIST_STATE_FUNC2(FadeMgr, mState, Idle,		cState_Idle);
+	REGIST_STATE_FUNC2(FadeMgr, mState, FadeIn,		cState_FadeIn);
+	REGIST_STATE_FUNC2(FadeMgr, mState, FadeOut,	cState_FadeOut);
+	mState.changeState(cState_Idle);
 }
 
 /**
@@ -175,4 +164,60 @@ FadeMgr::FadeMgr()
  */
 FadeMgr::~FadeMgr()
 {
+}
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+FadeMgr::stateEnterIdle()
+{
+}
+void
+FadeMgr::stateIdle()
+{
+}
+
+/**
+ * @brief ステート:FadeIn
+ */
+void
+FadeMgr::stateEnterFadeIn()
+{
+	mFadeSpeed = -6;
+}
+void
+FadeMgr::stateFadeIn()
+{
+	mAlpha += mFadeSpeed;
+	if (mAlpha <= 0)
+	{
+		mAlpha = 0;
+		mState.changeState(cState_Idle);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:FadeOut
+ */
+void
+FadeMgr::stateEnterFadeOut()
+{
+	mFadeSpeed = 6;
+}
+void
+FadeMgr::stateFadeOut()
+{
+	mAlpha += mFadeSpeed;
+	if (255 <= mAlpha)
+	{
+		mAlpha = 255;
+		mState.changeState(cState_Idle);
+		return;
+	}
 }

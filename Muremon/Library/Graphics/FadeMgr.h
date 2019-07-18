@@ -8,6 +8,7 @@
  ******************************************************************/
 
 #include "Library/Graphics/DirectGraphics.h"
+#include "Library/StateMachine.h"
 
 class FadeMgr
 {
@@ -63,14 +64,6 @@ public:
 	void				setColor(int r, int g, int b);
 
 private:
-	enum FadeState
-	{
-		cFadeState_None,
-		cFadeState_FadeIn,
-		cFadeState_FadeOut,
-	};
-
-private:
 	/**
 	 * @brief	コンストラクタ
 	*/
@@ -82,15 +75,21 @@ private:
 	~FadeMgr();
 
 private:
-	static FadeMgr*		mInstance;		// インスタンス
-	LPDIRECT3DDEVICE9	mDevice;		// デバイス
+	// ステート関数
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(FadeIn);
+	DECLAR_STATE_FUNC2(FadeOut);
 
-	int					mAlpha;			// アルファ
-	int					mColorR;		// カラー(R)
-	int					mColorG;		// カラー(R)
-	int					mColorB;		// カラー(R)
-	int					mFadeSpeed;		// フェード速度
-	FadeState			mState;			// ステート
+private:
+	static FadeMgr*			mInstance;		// インスタンス
+
+	StateMachine<FadeMgr>	mState;			// ステート
+	LPDIRECT3DDEVICE9		mDevice;		// デバイス
+	int						mAlpha;			// アルファ
+	int						mColorR;		// カラー(R)
+	int						mColorG;		// カラー(R)
+	int						mColorB;		// カラー(R)
+	int						mFadeSpeed;		// フェード速度
 };
 
 static FadeMgr* GetFadeMgr() { return FadeMgr::getInstance(); }

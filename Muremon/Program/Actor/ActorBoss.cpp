@@ -41,8 +41,6 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mLife(cInitLife)
 	, mMaxLife(cInitLife)
 	, mHitCount(0)
-	, mSpeedX(1)
-
 	, mState()
 	, mLvCount(0)
 	, mRectData(R_BOSS_MOVE1)
@@ -51,6 +49,7 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mDamageX(0)
 	, mDamageY(0)
 {
+	mSpeed = 1;
 	mNowPos = Vector2f(cAppearPosX, cAppearPosY);
 
 	mRect.setWidth(cRadius.x);
@@ -180,7 +179,7 @@ ActorBoss::stateMove()
 	// êîÉtÉåÅ[ÉÄÇ®Ç´Ç…à⁄ìÆ
 	if (mState.getStateCount() % cMoveInterval == 0)
 	{ 
-		mNowPos.x--;
+		mNowPos.x -= mSpeed;
 		mRect.setCenterPos(mNowPos);
 	}
 	mMoveAnimeTime++;
@@ -318,7 +317,7 @@ ActorBoss::stateEnterRevival()
 	mNowPos.x = cAppearPosX;
 	mMoveAnime = 0;
 	mMoveAnimeTime = 0;
-	mSpeedX = 1;
+	mSpeed = 1;
 	mDamageX = 0;
 	mDamageY = 0;
 	mLife = cInitLife + (cAddLife * mLvCount);

@@ -27,7 +27,6 @@ public:
 	float		mLife;
 	float		mMaxLife;
 	int			mHitCount;
-	int			mSpeedX;
 
 private:
 	// ステート関数

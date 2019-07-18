@@ -156,8 +156,6 @@ FadeMgr::FadeMgr()
  */
 FadeMgr::~FadeMgr()
 {
-	mTexture->release();
-	mVertex->release();
 	APP_SAFE_DELETE(mTexture);
 	APP_SAFE_DELETE(mVertex);
 }

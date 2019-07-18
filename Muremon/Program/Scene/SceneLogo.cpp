@@ -76,8 +76,5 @@ void
 SceneLogo::end()
 {
 	requestChangeScene(cSceneName_Title);
-	mTexture->release();
-	mVertex->release();
-
 }
 

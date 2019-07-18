@@ -119,9 +119,6 @@ void SceneGameRefresh::end()
 	requestChangeScene(cSceneName_Title);
 
 	UtilSound::stop(S_BGM_BATTLE);
-
-	mTexture->release();
-	mVertex->release();
 }
 
 /**

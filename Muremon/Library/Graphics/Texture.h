@@ -30,11 +30,6 @@ public:
 	 */
 	bool					load(LPCSTR file_name, LPDIRECT3DDEVICE9 device);
 
-	/**
-	 * @brief	テクスチャデータを全て開放する
-	 */
-	void					release();
-
 	//-情報取得関数-
 
 	/**

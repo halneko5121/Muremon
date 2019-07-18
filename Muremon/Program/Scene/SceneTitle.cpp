@@ -110,9 +110,6 @@ SceneTitle::end()
 	{
 		UtilSound::stop(S_BGM_TITLE);
 	}
-
-	mTexture->release();
-	mVertex->release();
 }
 
 /**

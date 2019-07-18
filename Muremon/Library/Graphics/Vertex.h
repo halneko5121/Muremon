@@ -92,11 +92,6 @@ public:
 	 */
 	bool	load(const char* file_name);
 
-	/**
-	 * @brief	矩形データを開放
-	 */
-	void	release();
-
 private:
 	int					mTextureWidth;		// 横幅
 	int					mTextureHeight;		// 縦幅

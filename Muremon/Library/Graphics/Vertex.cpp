@@ -45,6 +45,8 @@ Vertex::Vertex()
  */
 Vertex::~Vertex()
 {
+	// 読み込まれた矩形データを全て開放する処理
+	APP_SAFE_DELETE_ARRAY(mRectPosition2);
 }
 
 /**
@@ -491,15 +493,4 @@ Vertex::load(const char *file_name)
 	}
 
 	return true;
-}
-
-/**
- * @brief	矩形データを開放
- */
-void
-Vertex::release(void)
-{
-	// 読み込まれた矩形データを全て開放する処理
-	APP_SAFE_DELETE_ARRAY(mRectPosition2);	// 開放処理
-	mLoadedRectCount = 0;					// 全体数を初期化しておく(一応)
 }

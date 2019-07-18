@@ -164,9 +164,6 @@ SceneGameNormal::end()
 {
 	//ゲームオーバーの場合
 	requestChangeScene(cSceneName_Ranking);
-
-	mTexture->release();
-	mVertex->release();
 	delete mMission;
 }
 

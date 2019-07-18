@@ -22,6 +22,7 @@ Texture::Texture()
  */
 Texture::~Texture()
 {
+	APP_SAFE_DELETE_ARRAY(mTexture);	// 開放処理
 }
 
 /**
@@ -88,14 +89,4 @@ Texture::load(LPCSTR file_name, LPDIRECT3DDEVICE9 device)
 
 	// 正常終了
 	return true;
-}
-
-/**
- * @brief	テクスチャデータを全て開放する
- */
-void
-Texture::release()
-{
-	mLoadedTextureCount = 0;			// 全体数を初期化しておく
-	APP_SAFE_DELETE_ARRAY(mTexture);	// 開放処理
 }

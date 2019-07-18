@@ -553,7 +553,7 @@ MissionMgr::stateBadStatus()
 		switch (mNegativeState)
 		{
 		case SPEED_UP:
-			mActorBoss->mSpeedX = 3;
+			mActorBoss->setSpeed(3);
 			break;
 		case RECOVER:
 			mActorBoss->mLife = mActorBoss->mMaxLife;

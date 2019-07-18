@@ -93,8 +93,7 @@ ActorBoss::updateImple()
 		mMoveAnime++;
 	}
 
-	//ライフが０になった時のコントロール
-	if (mLife < 0) mLife = 0;
+	// ライフが０になった時のコントロール
 	if (mLife == 0)
 	{
 		mState.changeStateIfDiff(cState_Dead);
@@ -130,6 +129,7 @@ void ActorBoss::hit(const Vector2f& hit_pos, float damage)
 	mHitPos = hit_pos;
 	mHitCount++;
 	mLife -= damage;
+	if (mLife < 0) mLife = 0;
 }
 
 /**
@@ -347,8 +347,8 @@ ActorBoss::stateEnterRevival()
 	mSpeed = 1;
 	mDamageX = 0;
 	mDamageY = 0;
-	mLife = cInitLife + (cAddLife * mLvCount);
 	mMaxLife = cInitLife + (cAddLife * mLvCount);
+	mLife = mMaxLife;
 }
 void
 ActorBoss::stateRevival()

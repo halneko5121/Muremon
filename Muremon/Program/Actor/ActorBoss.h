@@ -46,8 +46,6 @@ private:
 	int			mLvCount;
 	int			mHitCount;
 
-	int			mMoveCount;
-	int			mMoveAnimeTime;
 	unsigned int mMoveAnime;
 	int			mDamageX;
 	int			mDamageY;

@@ -43,7 +43,6 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mMaxLife(cInitLife)
 	, mLvCount(0)
 	, mHitCount(0)
-	, mMoveAnimeTime(0)
 	, mMoveAnime(0)
 	, mDamageX(0)
 	, mDamageY(0)
@@ -86,12 +85,6 @@ void
 ActorBoss::updateImple()
 {
 	mState.executeState();
-
-	// ボスの移動アニメーションコントロール
-	if (mMoveAnimeTime % 16 == 15)
-	{
-		mMoveAnime++;
-	}
 
 	// ライフが０になった時のコントロール
 	if (mLife == 0)
@@ -209,9 +202,14 @@ ActorBoss::stateMove()
 		mNowPos.x -= mSpeed;
 		mRect.setCenterPos(mNowPos);
 	}
-	mMoveAnimeTime++;
 
+	// ボスの移動アニメーションコントロール
+	if (mState.getStateCount() % 16 == 15)
+	{
+		mMoveAnime++;
+	}
 	mRectNum = R_BOSS_MOVE1 + mMoveAnime % 2;
+
 	if (UtilGame::isGameModeRefresh())
 	{
 		if (mNowPos.x == cRefreshStopX)
@@ -343,7 +341,6 @@ ActorBoss::stateEnterRevival()
 	mRectNum = R_BOSS_MOVE1;
 	mNowPos.x = cAppearPosX;
 	mMoveAnime = 0;
-	mMoveAnimeTime = 0;
 	mSpeed = 1;
 	mDamageX = 0;
 	mDamageY = 0;

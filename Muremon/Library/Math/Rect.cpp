@@ -33,7 +33,19 @@ Rect::isInclude(const Rect& target) const
 }
 
 /**
- * @brief	中心位置を取得
+ * @brief	中心位置を更新（中心を中央に）
+ */
+void
+Rect::updateCenterPosCenter(const Vector2f& pos)
+{
+	// 中心位置を中央にする
+	Vector2f temp_pos = pos;
+	temp_pos.y += getHalfHeight();
+	setCenterPos(temp_pos);
+}
+
+/**
+ * @brief	中心位置を設定
  */
 void
 Rect::setCenterPos(const Vector2f& pos)

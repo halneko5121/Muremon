@@ -14,6 +14,8 @@ public:
 public:
 	bool				isInclude(const Rect& target) const;
 
+	void				updateCenterPosCenter(const Vector2f& pos);
+
 	void				setCenterPos(const Vector2f& pos);
 	const Vector2f&		getCenterPos() const;
 

@@ -10,8 +10,7 @@
 
 namespace
 {
-	const float cYoshiRadius = 76.5f;						// キャラの半径
-	const Vector2f cYoshiHitRadius = { 30.0f, 40.0f };
+	const Vector2f cYoshiRadius = { 50.0f, 100.0f };		// キャラの半径
 
 	// 放物線関係
 	const int cParaRandAcc = 15;							// 加速度
@@ -19,7 +18,7 @@ namespace
 	const int cParaRandMoveX = -15;							// 移動量				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = 600.f + cYoshiRadius + 50.f;	// 放物線の最終座標
+	const float cParaLimitY = 600.f + cYoshiRadius.y + 50.f;	// 放物線の最終座標
 
 	// バウンド関係
 	const int cDegRand = 30;								// ランダムの幅
@@ -97,11 +96,11 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mScore = cAddScoreYoshitaro;
-	mNowPos = Vector2f(-cYoshiRadius, -cYoshiRadius);
+	mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
 	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
 
-	mRect.setWidth(cYoshiHitRadius.x);
-	mRect.setHeight(cYoshiHitRadius.y);
+	mRect.setWidth(cYoshiRadius.x);
+	mRect.setHeight(cYoshiRadius.y);
 	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);
@@ -228,12 +227,12 @@ ActorYoshi::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cYoshiRadius, -cYoshiRadius);
+		mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cYoshiRadius, (UtilGame::getGroundPosY() + 40.0f - cYoshiRadius));
+	mNowPos = Vector2f(-cYoshiRadius.x, (UtilGame::getGroundPosY() + 40.0f - cYoshiRadius.y));
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }
@@ -286,14 +285,14 @@ ActorYoshi::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cYoshiRadius, -cYoshiRadius);
+		mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
 	}
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	mIsAtk2 = true;
-	mNowPos = Vector2f(-cYoshiRadius, mAtkStartY);
+	mNowPos = Vector2f(-cYoshiRadius.x, mAtkStartY);
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
 }

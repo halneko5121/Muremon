@@ -26,8 +26,6 @@ public:
 public:
 	float		mLife;
 	float		mMaxLife;
-	float		mMoveX;
-	float		mMoveY;
 	int			mHitCount;
 	int			mSpeedX;
 

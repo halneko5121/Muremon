@@ -199,7 +199,7 @@ ActorBoss::stateMove()
 	if (mState.getStateCount() % cMoveInterval == 0)
 	{ 
 		mNowPos.x -= mSpeed;
-		mRect.setCenterPos(mNowPos);
+		mRect.updateCenterPosCenter(mNowPos);
 	}
 
 	// ボスの移動アニメーションコントロール

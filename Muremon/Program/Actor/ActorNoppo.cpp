@@ -271,7 +271,7 @@ ActorNoppo::stateGroundAtk()
 		{
 			mNowPos.x += mSpeed;
 			mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mAnimation, NULL);
-			mRect.setCenterPos(mNowPos);
+			mRect.updateCenterPosCenter(mNowPos);
 		}
 	}
 }
@@ -344,7 +344,7 @@ ActorNoppo::stateSkyAtk()
 			mOrbit->mWave->setSpeed(mSpeed);
 			updateAttack2();
 			mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mAnimation, ANIME_S_ATK1_NOPPO);
-			mRect.setCenterPos(mNowPos);
+			mRect.updateCenterPosCenter(mNowPos);
 		}
 	}
 }

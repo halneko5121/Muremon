@@ -10,7 +10,7 @@
 
 namespace 
 {
-	const Vector2f cNikumanRadius = { 50.0f, 50.0f };// ƒLƒƒƒ‰‚Ì”¼Œa
+	const Vector2f cNikumanRadius = { 40.0f, 40.0f };// ƒLƒƒƒ‰‚Ì”¼Œa
 
 	// •ú•¨üŠÖŒW
 	const int cParaRandAcc = 15;					// ‰Á‘¬“x
@@ -248,7 +248,7 @@ ActorNikuman::stateGroundAtk()
 	{
 		mAnimation = setAnimetion(ANIME_G_ATK4_NIKU, mAnimation, NULL);
 		mNowPos.x += mSpeed;
-		mRect.setCenterPos(mNowPos);
+		mRect.updateCenterPosCenter(mNowPos);
 	}
 }
 
@@ -302,7 +302,7 @@ ActorNikuman::stateSkyAtk()
 	{
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_NIKU);
 		updateAttack2(boss->getNowPos());
-		mRect.setCenterPos(mNowPos);
+		mRect.updateCenterPosCenter(mNowPos);
 	}
 }
 

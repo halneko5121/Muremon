@@ -117,3 +117,21 @@ UtilGame::isScreenOut(const ActorBase& owner)
 
 	return false;
 }
+
+/**
+ * @brief	指定アクターが画面外へ出たか（左端なしver）
+ */
+bool
+UtilGame::isScreenOutWithoutLeft(const ActorBase& owner)
+{
+	const float&	radius = owner.getRect().getHalfWidth();
+	const Vector2f&	now_pos = owner.getNowPos();
+	const float&	check_pos_x = now_pos.x - radius;
+	const float&	check_pos_y = now_pos.y + radius;
+
+	if (cWindowWidth < check_pos_x)		return true;	// 画面右端
+	if (now_pos.y < -radius)			return true;	// 画面上端
+	if (cWindowHeight < check_pos_y)	return true;	// 画面下端
+
+	return false;
+}

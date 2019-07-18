@@ -27,4 +27,5 @@ namespace UtilGame
 	// ‚»‚Ì‘¼
 	float				getGroundPosY();
 	bool				isScreenOut(const ActorBase& owner);
+	bool				isScreenOutWithoutLeft(const ActorBase& owner);
 }

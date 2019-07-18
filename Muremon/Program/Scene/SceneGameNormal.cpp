@@ -401,7 +401,7 @@ SceneGameNormal::stateGame()
 			if (actor->isHitCheck())
 			{
 				float mul_power = pow(0.5f, mMission->getBadStatusAtkLv());
-				mBoss->hit(actor->getHitPos(), (actor->getAtkPower() * mul_power));
+				mBoss->hit(actor->getNowPos(), (actor->getAtkPower() * mul_power));
 				actor->setIsHitCheck(false);
 				mMissionGauge += actor->getMissionPower();
 				UtilGame::addScore(actor->getScore());

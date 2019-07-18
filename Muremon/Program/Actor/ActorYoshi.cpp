@@ -246,7 +246,6 @@ ActorYoshi::stateGroundAtk()
 	if (isHit(*this, *boss))
 	{
 		setIsHitCheck(true);
-		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_YOSHI_HIP))
 		{
@@ -307,7 +306,6 @@ ActorYoshi::stateSkyAtk()
 	if (isHit(*this, *boss))
 	{
 		setIsHitCheck(true);
-		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_YOSHI_HUSEN))
 		{

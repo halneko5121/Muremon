@@ -241,7 +241,6 @@ ActorNoppo::stateGroundAtk()
 	if (isHit(*this, *boss))
 	{
 		setIsHitCheck(true);
-		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_NOPPO_GANMEN))
 		{
@@ -305,7 +304,6 @@ ActorNoppo::stateSkyAtk()
 	if (isHit(*this, *boss))
 	{
 		setIsHitCheck(true);
-		mHitPos = mNowPos;
 
 		if (UtilSound::isPlaying(S_NOPPO_KOKE))
 		{

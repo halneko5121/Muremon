@@ -119,7 +119,6 @@ void ActorBoss::hit(const Vector2f& hit_pos, float damage)
 {
 	EffectParam param(mTexture, mVertex, hit_pos);
 	GetEffectMgr()->createEffect(cEffectId_HitEffect1, param);
-	mHitPos = hit_pos;
 	mHitCount++;
 	mLife -= damage;
 	if (mLife < 0) mLife = 0;

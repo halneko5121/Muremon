@@ -65,8 +65,6 @@ public:
 	void				setNowPos(const Vector2f& pos) { mNowPos = pos;	}
 	const Vector2f&		getNowPos() const { return mNowPos; }
 
-	const Vector2f&		getHitPos() const { return mHitPos; }
-
 	int					getAtkPower() const { return mAtkPower; }
 
 	int					getMissionPower() const { return mMissionPower; }
@@ -109,5 +107,4 @@ protected:
 
 	bool				mIsHitCheck;
 	bool				mIsRun;
-	Vector2f			mHitPos;
 };

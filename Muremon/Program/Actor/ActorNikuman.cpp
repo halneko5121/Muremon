@@ -162,7 +162,7 @@ ActorNikuman::drawImple() const
 
 	mVertex->setAngle(mAngleDegree);
 	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation) );
+	mVertex->drawCB(mNowPos, (mRectStartNum + mRectNum + mAnimation) );
 }
 
 /**

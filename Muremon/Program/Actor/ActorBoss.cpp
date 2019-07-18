@@ -20,7 +20,7 @@ namespace
 	const int cDamagePosRand = 5;
 	const int cMoveInterval = 3;
 	const int cGameOverPosX = 450;
-	const Vector2f cRadius = { 300.0f, 350.0f };
+	const Vector2f cRadius = { 300.0f, 380.0f };
 
 	enum State
 	{

@@ -185,7 +185,15 @@ ActorYoshi::drawImple() const
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
 
 	mVertex->setAngle(mAngleDegree);
-	mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+
+	if (mState.isEqual(cState_SkyDeath))
+	{
+		mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+	}
+	else
+	{
+		mVertex->drawCB(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+	}
 }
 
 /**
@@ -232,7 +240,7 @@ ActorYoshi::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cYoshiRadius.x, (UtilGame::getGroundPosY() + 40.0f - cYoshiRadius.y));
+	mNowPos = Vector2f(-cYoshiRadius.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }

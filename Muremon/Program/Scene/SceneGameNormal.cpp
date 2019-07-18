@@ -459,6 +459,7 @@ SceneGameNormal::stateGame()
 void
 SceneGameNormal::stateEnterMission()
 {
+	UtilSound::stop(S_SAIREN);
 	mMission->init();
 }
 void

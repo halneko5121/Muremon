@@ -83,6 +83,23 @@ ActorMgr::createActor(ActorId id, Texture* texture, Vertex* vertex)
 }
 
 /**
+ * @brief	アクターの生成
+ */
+void
+ActorMgr::clearActor()
+{
+	ActorIterator it = mActorList.begin();
+	while (it != mActorList.end())
+	{
+		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
+		delete actor;
+		it++;
+	}
+
+	mActorList.clear();
+}
+
+/**
  * @brief	アクターの初期化
  */
 void

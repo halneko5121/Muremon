@@ -50,6 +50,11 @@ public:
 	ActorBase*			createActor(ActorId id, Texture* texture, Vertex* vertex);
 
 	/**
+	 * @brief	アクターの破棄
+	 */
+	void				clearActor();
+
+	/**
 	 * @brief	アクターの初期化
 	 */
 	void				init();

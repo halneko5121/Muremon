@@ -10,7 +10,7 @@
 
 namespace 
 {
-	const Vector2f cNikumanRadius = { 37.5f, 37.5f };// ƒLƒƒƒ‰‚Ì”¼Œa
+	const Vector2f cNikumanRadius = { 50.0f, 50.0f };// ƒLƒƒƒ‰‚Ì”¼Œa
 
 	// •ú•¨üŠÖŒW
 	const int cParaRandAcc = 15;					// ‰Á‘¬“x

@@ -131,7 +131,7 @@ UIRefreshGame::drawHpGauge(const ActorBoss& boss) const
 	mVertex->drawF(cDispBossHpPos, R_HP);
 
 	// 実際の体力ゲージ量
-	float num = boss.mLife / boss.mMaxLife;
+	float num = boss.getLifeRate();
 	mVertex->setScale(num, 1.0f);
 	mVertex->setColor(255, 255, 0, 0);
 	mVertex->drawF(Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//体力ゲージ

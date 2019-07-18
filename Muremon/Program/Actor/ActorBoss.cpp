@@ -38,9 +38,9 @@ namespace
 
 ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
+	, mState()
 	, mLife(cInitLife)
 	, mMaxLife(cInitLife)
-	, mState()
 	, mLvCount(0)
 	, mHitCount(0)
 	, mRectData(R_BOSS_MOVE1)

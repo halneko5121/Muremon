@@ -27,10 +27,6 @@ public:
 	void		setDead();
 	float		getLifeRate() const;
 
-public:
-	float		mLife;
-	float		mMaxLife;
-
 private:
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
@@ -45,6 +41,8 @@ private:
 private:
 	StateMachine<ActorBoss>	mState;	// ステート
 
+	float		mLife;
+	float		mMaxLife;
 	int			mLvCount;
 	int			mHitCount;
 	int			mRectData;

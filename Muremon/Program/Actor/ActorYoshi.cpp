@@ -389,11 +389,6 @@ ActorYoshi::stateSkyDeath()
 	mAngleDegree += cSpinSpeed;
 	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
-	if ((mNowPos.y < -cYoshiRadius) || (mNowPos.y > cWindowHeight + cYoshiRadius))
-	{
-		mState.changeState(cState_End);
-	}
-
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))
 	{

@@ -20,8 +20,6 @@ namespace
 	const int cParaRandMoveX = -15;							// 移動量				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = 600.f + cYoshiRadius.y + 50.f;	// 放物線の最終座標
-
 	// バウンド関係
 	const int cDegRand = 30;								// ランダムの幅
 	const int cDegRandMin = 180 + 45;						// 75°までの間
@@ -394,14 +392,22 @@ ActorYoshi::stateSkyDeathAnime()
 void
 ActorYoshi::stateEnterSkyDeath()
 {
-	mAnimation = 0;																//描画を固定
+	//描画を固定
+	mAnimation = 0;
 	mRectNum = ANIME_DEATH_YOSHI;
+
+	// 放物線処理
+	mSpeed -= mRandAcc;
 }
 void
 ActorYoshi::stateSkyDeath()
 {
 	mAngleDegree += cSpinSpeed;
-	mOrbit->mParabora->update(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+
+	// 放物線処理
+	mNowPos.x += mRandMoveX;
+	mSpeed += cGravity;
+	mNowPos.y += mSpeed;
 
 	// 画面外なら死亡
 	if (UtilGame::isScreenOut(*this))

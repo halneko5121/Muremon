@@ -14,12 +14,10 @@ namespace
 	const Vector2f cNikumanRadius = { 40.0f, 40.0f };// キャラの半径
 
 	// 放物線関係
-	const int cParaRandAcc = 15;					// 加速度
-	const int cParaRandAccMin = 5;
+	const int cParaRandAcc = 20;					// 加速度
+	const int cParaRandAccMin = 20;
 	const int cParaRandMoveX = -15;					// 移動量				
 	const int cParaRandMoveXMin = -5;
-
-	const float cParaLimitY = 600.f + cNikumanRadius.y;	// 放物線の最終座標
 
 	// バウンド関係
 	const int cDegRand = 30;						// ランダムの幅
@@ -343,6 +341,8 @@ ActorNikuman::stateGroundDeath()
 void
 ActorNikuman::stateEnterSkyDeath()
 {
+	// 放物線処理
+	mSpeed -= mRandAcc;
 }
 void
 ActorNikuman::stateSkyDeath()
@@ -350,7 +350,10 @@ ActorNikuman::stateSkyDeath()
 	mAnimation = 0;
 	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
 
-	mOrbit->mParabora->update(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+	// 放物線処理
+	mNowPos.x += mRandMoveX;
+	mSpeed += cGravity;
+	mNowPos.y += mSpeed;
 
 	// 画面外なら死亡
 	if (UtilGame::isScreenOut(*this))

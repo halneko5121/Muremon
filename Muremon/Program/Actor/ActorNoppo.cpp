@@ -27,8 +27,6 @@ namespace
 	const int cParaRandMoveX = -15;									// 移動量				
 	const int cParaRandMoveXMin = -5;
 
-	const float cParaLimitY = cWindowHeight + cNoppoRadius.x + 50;	// 放物線の最終座標
-
 	// 波処理関係
 	const int cWaveAmplit = 10;										// 振幅(上下に動く幅)					
 	const int cWaveCycle = 60;										// 周期フレーム
@@ -396,6 +394,8 @@ ActorNoppo::stateGroundDeath()
 void
 ActorNoppo::stateEnterSkyDeath()
 {
+	// 放物線処理
+	mSpeed -= mRandAcc;
 }
 void
 ActorNoppo::stateSkyDeath()
@@ -407,7 +407,10 @@ ActorNoppo::stateSkyDeath()
 	mAnimation = 0;
 	mRectNum = ANIME_S_ATK2_NOPPO;
 
-	mOrbit->mParabora->update(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+	// 放物線処理
+	mNowPos.x += mRandMoveX;
+	mSpeed += cGravity;
+	mNowPos.y += mSpeed;
 
 	// 画面外なら死亡
 	if (UtilGame::isScreenOut(*this))

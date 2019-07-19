@@ -353,7 +353,7 @@ ActorYoshi::stateEnterGroundDeath()
 void
 ActorYoshi::stateGroundDeath()
 {
-	mOrbit->mRebound->orbitRebound(&mNowPos, mRandDeg, mSpeed, mNowPos);
+	mOrbit->mRebound->updateOrbitRebound(&mNowPos, mRandDeg, mSpeed);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))

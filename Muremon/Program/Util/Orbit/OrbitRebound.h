@@ -19,9 +19,8 @@ public:
 	*	関数名	：POS_CC OrbitRebound(float deg, float radius, POS_CC draw_cc)			*
 	*	引数	：float deg			角度	：float radius			半径				*
 	*	引数	：POS_CC draw_cc	中心座標											*
-	*	戻り値	：POS_CC draw_cc	中心座標											*
 	*	作成日	：2009年 3月 20日														*
 	*	更新日	：	年	月	 日							by	三上　亘					*
 	************************************************************************************/
-	void orbitRebound(Vector2f* dst_pos, float deg, float radius, Vector2f draw_cc);
+	void updateOrbitRebound(Vector2f* dst_pos, float deg, float radius);
 };

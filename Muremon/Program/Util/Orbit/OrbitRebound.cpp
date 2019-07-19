@@ -9,16 +9,12 @@ OrbitRebound::~OrbitRebound()
 }
 
 void
-OrbitRebound::orbitRebound(Vector2f* dst_pos, float deg, float radius, Vector2f draw_cc)
+OrbitRebound::updateOrbitRebound(Vector2f* dst_pos, float deg, float radius)
 {
-	float rad = 0.f;
-	float draw_x,draw_y = 0.f;
+	float rad = deg * RAD;
+	float add_x = radius * static_cast<float>(cos(rad));		// ‘¬‚³‚Í”¼Œa‚Ì‘å‚«‚³‚É”ä—á
+	float add_y = radius * static_cast<float>(sin(rad));
 
-	rad = deg * RAD;									// Šp“x‚ðƒ‰ƒWƒAƒ“‚É•ÏŠ·
-
-	draw_x = radius * static_cast<float>(cos(rad));		// ‘¬‚³‚Í”¼Œa‚Ì‘å‚«‚³‚É”ä—á
-	draw_y = radius * static_cast<float>(sin(rad));
-
-	dst_pos->x += draw_x;
-	dst_pos->y += draw_y;
+	dst_pos->x += add_x;
+	dst_pos->y += add_y;
 }

@@ -41,7 +41,6 @@ OrbitWave::init(int amplitude, int cycle_frame, float speed_x)
 	mSpeedX = speed_x;
 }
 
-
 /**
  * @brief U•‚Ìİ’è
  * @param amplitude		U•‚Ì—Ê(ã‰º‚Ì•)

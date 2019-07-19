@@ -19,7 +19,7 @@ public:
 	
 	void	setSpeed(float speed_x);
 	
-	void	updateSinWave(Vector2f* dst_pos);
+	void	update(Vector2f* dst_pos);
 
 private:
 	int		mAmplitude;		// U•

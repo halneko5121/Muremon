@@ -65,7 +65,7 @@ OrbitWave::setSpeed(float speed_x)
  * @param dst_pos	ˆÊ’u‚Ìo—Í
  */
 void
-OrbitWave::updateSinWave(Vector2f* dst_pos)
+OrbitWave::update(Vector2f* dst_pos)
 {
 	dst_pos->x += mSpeedX;
 	dst_pos->y = dst_pos->y + sin(PI * 2 / mCycleFrame * mTime) * mAmplitude;

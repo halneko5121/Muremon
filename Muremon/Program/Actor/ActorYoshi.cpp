@@ -206,7 +206,7 @@ ActorYoshi::drawImple() const
 void
 ActorYoshi::updateAttack2()
 {
-	mOrbitWave->updateSinWave(&mNowPos);
+	mOrbitWave->update(&mNowPos);
 }
 
 // -----------------------------------------------------------------

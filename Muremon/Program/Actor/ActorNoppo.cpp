@@ -199,7 +199,7 @@ ActorNoppo::drawImple() const
 void
 ActorNoppo::updateAttack2()
 {
-	mOrbitWave->updateSinWave(&mNowPos);
+	mOrbitWave->update(&mNowPos);
 }
 
 // -----------------------------------------------------------------

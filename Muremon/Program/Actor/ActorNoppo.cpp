@@ -404,7 +404,7 @@ ActorNoppo::stateSkyDeath()
 	mAnimation = 0;
 	mRectNum = ANIME_S_ATK2_NOPPO;
 
-	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+	mOrbit->mParabora->update(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))

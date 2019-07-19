@@ -346,7 +346,7 @@ ActorNikuman::stateSkyDeath()
 	mAnimation = 0;
 	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
 
-	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
+	mOrbit->mParabora->update(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))

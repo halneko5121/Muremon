@@ -8,6 +8,9 @@
 
 #include "BadStatusRecover.h"
 
+#include "Program/Util/UtilActor.h"
+#include "Program/Actor/ActorBoss.h"
+
 /**
  * @brief	コンストラクタ
  */
@@ -29,4 +32,7 @@ BadStatusRecover::~BadStatusRecover()
 void
 BadStatusRecover::run()
 {
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+	boss->recoveryLife();
 }

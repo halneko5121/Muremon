@@ -273,6 +273,7 @@ ActorYoshi::stateGroundAtk()
 	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
 		mState.changeState(cState_End);
+		return;
 	}
 	else
 	{
@@ -328,6 +329,7 @@ ActorYoshi::stateSkyAtk()
 		GetEffectMgr()->createEffect(cEffectId_HitEffect4, param);
 
 		mState.changeState(cState_SkyDeathAnime);
+		return;
 	}
 
 	if (UtilGame::isScreenOutWithoutLeft(*this))
@@ -385,7 +387,6 @@ ActorYoshi::stateSkyDeathAnime()
 		return;
 	}
 }
-
 
 /**
  * @brief ステート:SkyDeath

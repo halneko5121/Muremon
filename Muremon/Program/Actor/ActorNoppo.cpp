@@ -267,6 +267,7 @@ ActorNoppo::stateGroundAtk()
 		if (UtilGame::isScreenOutWithoutLeft(*this))
 		{
 			mState.changeState(cState_End);
+			return;
 		}
 		else
 		{
@@ -340,6 +341,7 @@ ActorNoppo::stateSkyAtk()
 		if (UtilGame::isScreenOutWithoutLeft(*this))
 		{
 			mState.changeState(cState_End);
+			return;
 		}
 		else
 		{
@@ -365,6 +367,7 @@ ActorNoppo::stateGroundDeathAnime()
 	if (mAnimation == 2)
 	{
 		mState.changeState(cState_GroundDeath);
+		return;
 	}
 }
 
@@ -410,6 +413,7 @@ ActorNoppo::stateSkyDeath()
 	if (UtilGame::isScreenOut(*this))
 	{
 		mState.changeState(cState_End);
+		return;
 	}
 }
 

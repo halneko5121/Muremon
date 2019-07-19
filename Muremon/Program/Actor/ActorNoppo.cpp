@@ -89,7 +89,7 @@ ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mMissionPower = cAddGaugePowerNoppo;
 	mScore = cAddScoreNoppo;
 	mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
-	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
+	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL);
 
 	mRect.setWidth(cNoppoRadius.x);
 	mRect.setHeight(cNoppoRadius.y);
@@ -198,7 +198,7 @@ ActorNoppo::drawImple() const
 void
 ActorNoppo::updateAttack2()
 {
-	mOrbit->mWave->orbitSinWave(&mNowPos, cWaveLimitX, mNowPos);
+	mOrbit->mWave->updateSinWave(&mNowPos);
 }
 
 // -----------------------------------------------------------------

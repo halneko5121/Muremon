@@ -30,9 +30,8 @@ namespace
 
 	// ”gˆ—ŠÖŒW
 	const int cWaveAmplit = 10;								// U•(ã‰º‚É“®‚­•)					
-	const int cWaveCycle = 200;								// ŽüŠú(‘½‚«‚¯‚ê‚Î‘å‚«‚¢’öŽüŠú‚ª’Z‚­)
-	const int cWaveLimitX = 400;							// ‚±‚ÌÀ•W‚Ü‚Å—ˆ‚é‚Æ’¼ü‰^“®‚ÖˆÚs
-
+	const int cWaveCycle = 60;								// ŽüŠú(1Žü‚·‚éƒtƒŒ[ƒ€”)
+	
 	const int cAtkPowerYoshitaro = 40;						// ‚æ‚µ‚½‚ë‚¤‚ÌUŒ‚—Í
 	const int cAddGaugePowerYoshitaro = 20;					// ‚æ‚µ‚½‚ë‚¤ƒ~ƒbƒVƒ‡ƒ“ƒQ[ƒW‘‰Á—Ê
 	const int cAddScoreYoshitaro = 20;						// ‚æ‚µ‚½‚ë‚¤ƒXƒRƒA‰ÁŽZ
@@ -97,7 +96,7 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mScore = cAddScoreYoshitaro;
 	mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
-	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL, WAVE_MODE_GAME);
+	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, mSpeed);
 
 	mRect.setWidth(cYoshiRadius.x);
 	mRect.setHeight(cYoshiRadius.y);
@@ -202,7 +201,7 @@ ActorYoshi::drawImple() const
 void
 ActorYoshi::updateAttack2()
 {
-	mOrbit->mWave->orbitSinWave(&mNowPos, cWaveLimitX, mNowPos);
+	mOrbit->mWave->updateSinWave(&mNowPos);
 }
 
 // -----------------------------------------------------------------
@@ -303,6 +302,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mNowPos = Vector2f(-cYoshiRadius.x, mAtkStartY);
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
+	mOrbit->mWave->setSpeed(mSpeed);
 }
 void
 ActorYoshi::stateSkyAtk()
@@ -333,7 +333,6 @@ ActorYoshi::stateSkyAtk()
 	}
 	else
 	{
-		mOrbit->mWave->setSpeed(mSpeed);
 		updateAttack2();
 		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_YOSHI);
 		mRect.updateCenterPosCenter(mNowPos);

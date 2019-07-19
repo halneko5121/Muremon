@@ -1,17 +1,11 @@
 #pragma once
-
-/**********************************
-	役割：正弦波処理の設定															
-	説明：																			
-	作成日：2009年 3月 20日															
-	更新日：	年	月	 日															
- **********************************/
-
-enum WAVE_MODE
-{
-	WAVE_MODE_NORMAL,										//通常の正弦波処理
-	WAVE_MODE_GAME,											//だんだんと波が収まる(ゲーム仕様)
-};
+/******************************************************************
+ *	@file	OrbitWave.cpp
+ *	@brief	正弦波軌道
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
 class OrbitWave
 {
@@ -29,7 +23,7 @@ public:
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	void init(int set_amplitude, int set_cycle,	float set_speed_x, int set_mode);
+	void init(int set_amplitude, int set_cycle,	float set_speed_x);
 
 	/********************************************************************************************
 	*	役割	：振幅の変更(上下に動く幅)														*
@@ -53,13 +47,6 @@ public:
 	void setSpeed(float set_speed_x)		 { mSpeedX	 = set_speed_x; }
 	
 	/********************************************************************************************
-	*	役割	：モード変更																	*
-	*	作成日	：2009年 3月 22日																*
-	*	更新日	：	年	月	 日							by	三上　亘							*
-	********************************************************************************************/
-	void setMode(int set_mode)			 { mMode	 = set_mode; }
-
-	/********************************************************************************************
 	*	役割	：正弦波処理																	*
 	*	関数名	：POS_CC OrbitSinWave(int amplitude, int cycle, float limit_x, POS_CC draw_cc)	*
 	*	引数	：int limit_x			xの限界値を設けて初期化									*
@@ -69,15 +56,11 @@ public:
 	*	作成日	：2009年 3月 22日																*
 	*	更新日	：	年	月	 日							by	三上　亘							*
 	********************************************************************************************/
-	void orbitSinWave(Vector2f* dst_pos, float limit_x, const Vector2f& draw_cc);
+	void updateSinWave(Vector2f* dst_pos);
 
 private:
-	int		mAmplitude;
-	int		mCycle;
-	float	mSpeedX;
-	int		mMode;
-	int		mTime1;
-	int		mTime2;
-	int		mSettle;
-	float	mDeg;
+	int		mAmplitude;		// 振幅
+	int		mCycle;			// 周期
+	float	mSpeedX;		// 移動スピード
+	int		mTime;			// 
 };

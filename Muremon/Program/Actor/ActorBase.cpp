@@ -33,7 +33,6 @@ namespace
 ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: mActorId(actor_id)
 	, mUniqId(uniq_id)
-	, mOrbit(nullptr)
 	, mTexture(texture)
 	, mVertex(vertex)
 	, mRect(Vector2f(0.0f, 0.0f), 1.0f, 1.0f)
@@ -53,7 +52,6 @@ ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	, mIsHitCheck(false)
 	, mIsRun(false)
 {
-	mOrbit	 = new OrbitCalculation();
 }
 
 /**
@@ -61,7 +59,6 @@ ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
  */
 ActorBase::~ActorBase()
 {
-	APP_SAFE_DELETE(mOrbit);
 }
 
 /**

@@ -28,12 +28,6 @@
     <ClCompile Include="Program\Actor\ActorYoshi.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp">
-      <Filter>Util\Orbit</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp">
-      <Filter>Util\Orbit</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp">
       <Filter>Util\Orbit</Filter>
     </ClCompile>
@@ -218,12 +212,6 @@
     </ClInclude>
     <ClInclude Include="Program\Actor\ActorYoshi.h">
       <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h">
-      <Filter>Util\Orbit</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Util\Orbit\OrbitParadora.h">
-      <Filter>Util\Orbit</Filter>
     </ClInclude>
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h">
       <Filter>Util\Orbit</Filter>

@@ -61,8 +61,6 @@
     <ClCompile Include="Program\UI\UINormalGame.cpp" />
     <ClCompile Include="Program\UI\UIRefreshGame.cpp" />
     <ClCompile Include="Program\UI\UITitleMenu.cpp" />
-    <ClCompile Include="Program\Util\Orbit\OrbitCalculation.cpp" />
-    <ClCompile Include="Program\Util\Orbit\OrbitParadora.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitRebound.cpp" />
     <ClCompile Include="Program\Util\Orbit\OrbitWave.cpp" />
     <ClCompile Include="Program\Scene\SceneGameNormal.cpp" />
@@ -129,8 +127,6 @@
     <ClInclude Include="Program\UI\UINormalGame.h" />
     <ClInclude Include="Program\UI\UIRefreshGame.h" />
     <ClInclude Include="Program\UI\UITitleMenu.h" />
-    <ClInclude Include="Program\Util\Orbit\OrbitCalculation.h" />
-    <ClInclude Include="Program\Util\Orbit\OrbitParadora.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitRebound.h" />
     <ClInclude Include="Program\Util\Orbit\OrbitWave.h" />
     <ClInclude Include="Program\Scene\SceneGameNormal.h" />

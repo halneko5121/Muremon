@@ -10,7 +10,6 @@
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
 
-#include "Program/Util/Orbit/OrbitCalculation.h"
 #include "Program/DefineGame.h"
 
 enum ActorId;
@@ -83,8 +82,6 @@ protected:
 protected:
 	ActorId				mActorId;
 	int					mUniqId;
-
-	OrbitCalculation*	mOrbit;
 
 	Texture*			mTexture;
 	Vertex*				mVertex;

@@ -240,11 +240,13 @@ ActorNikuman::stateGroundAtk()
 		GetEffectMgr()->createEffect(cEffectId_HitEffect2, param);
 
 		mState.changeState(cState_GroundDeath);
+		return;
 	}
 
 	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
 		mState.changeState(cState_End);
+		return;
 	}
 	else
 	{
@@ -294,11 +296,13 @@ ActorNikuman::stateSkyAtk()
 		GetEffectMgr()->createEffect(cEffectId_HitEffect2, param);
 
 		mState.changeState(cState_SkyDeath);
+		return;
 	}
 
 	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
 		mState.changeState(cState_End);
+		return;
 	}
 	else
 	{

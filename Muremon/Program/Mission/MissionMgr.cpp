@@ -29,6 +29,10 @@
 #include "Program/Mission/Mission12.h"
 #include "Program/Mission/Mission13.h"
 #include "Program/Mission/Mission14.h"
+#include "Program/BadStatus/BadStatusSpeedUp.h"
+#include "Program/BadStatus/BadStatusRecover.h"
+#include "Program/BadStatus/BadStatusAlertPos.h"
+#include "Program/BadStatus/BadStatusAtackPowerDown.h"
 
 namespace
 {
@@ -101,6 +105,20 @@ namespace
 		case cMissionId_Mission12:	return (new Mission12(id, texture, vertex));
 		case cMissionId_Mission13:	return (new Mission13(id, texture, vertex));
 		case cMissionId_Mission14:	return (new Mission14(id, texture, vertex));
+		}
+
+		return nullptr;
+	}
+
+	BadStatusBase*
+	createBadStatus(BadStatusId id)
+	{
+		switch (id)
+		{
+		case cBadStatusId_SpeedUp:			return (new BadStatusSpeedUp(id));
+		case cBadStatusId_Recover:			return (new BadStatusRecover(id));
+		case cBadStatusId_AlertPos:			return (new BadStatusAlertPos(id));
+		case cBadStatusId_AtackPowerDown:	return (new BadStatusAtackPowerDown(id));
 		}
 
 		return nullptr;
@@ -230,6 +248,11 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	for (int i = 0; i < cMissionId_Count; i++)
 	{
 		mMission[i] = createMission(static_cast<MissionId>(i), texture, vertex);
+	}
+
+	for (int i = 0; i < cBadStatusId_Count; i++)
+	{
+		mBadStatusBase[i] = createBadStatus(static_cast<BadStatusId>(i));
 	}
 
 	mState.initialize(cState_Count, cState_Idle);

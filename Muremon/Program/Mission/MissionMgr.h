@@ -10,6 +10,7 @@
 #include "Library/StateMachine.h"
 #include "Library/Graphics/Texture.h"
 #include "Library/Graphics/Vertex.h"
+#include "Program/BadStatus/BadStatusBase.h"
 #include "Program/DefineGame.h"
 
 class ActorBoss;
@@ -71,6 +72,7 @@ private:
 	Vertex*						mVertex;
 	ActorBoss*					mActorBoss;
 	MissionBase*				mMission[cMissionId_Count];
+	BadStatusBase*				mBadStatusBase[cBadStatusId_Count];
 	EffectBase*					mOugiEffect;
 
 	Vector2f					mMissionStartPos;	//‚Ý‚Á‚µ‚å‚ñŠJŽn‚ÌˆÊ’u

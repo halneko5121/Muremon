@@ -29,6 +29,7 @@
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
     <ClCompile Include="Program\BadStatus\BadStatusBase.cpp" />
+    <ClCompile Include="Program\BadStatus\BadStatusSpeedUp.cpp" />
     <ClCompile Include="Program\Effect\EffectBase.cpp" />
     <ClCompile Include="Program\Effect\EffectBossDead.cpp" />
     <ClCompile Include="Program\Effect\EffectFont.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="Program\Actor\ActorNoppo.h" />
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
     <ClInclude Include="Program\BadStatus\BadStatusBase.h" />
+    <ClInclude Include="Program\BadStatus\BadStatusSpeedUp.h" />
     <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Program\DefineGame.h" />
     <ClInclude Include="Program\Effect\EffectBase.h" />

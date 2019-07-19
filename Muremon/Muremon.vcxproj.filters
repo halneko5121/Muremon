@@ -186,6 +186,9 @@
     <ClCompile Include="Program\BadStatus\BadStatusBase.cpp">
       <Filter>BadStatus</Filter>
     </ClCompile>
+    <ClCompile Include="Program\BadStatus\BadStatusSpeedUp.cpp">
+      <Filter>BadStatus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -373,6 +376,9 @@
       <Filter>Library\Math</Filter>
     </ClInclude>
     <ClInclude Include="Program\BadStatus\BadStatusBase.h">
+      <Filter>BadStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\BadStatus\BadStatusSpeedUp.h">
       <Filter>BadStatus</Filter>
     </ClInclude>
   </ItemGroup>

@@ -183,6 +183,9 @@
     <ClCompile Include="Library\Math\Rect.cpp">
       <Filter>Library\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Program\BadStatus\BadStatusBase.cpp">
+      <Filter>BadStatus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -369,6 +372,9 @@
     <ClInclude Include="Library\Math\Rect.h">
       <Filter>Library\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Program\BadStatus\BadStatusBase.h">
+      <Filter>BadStatus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -415,6 +421,9 @@
     </Filter>
     <Filter Include="Library\Math">
       <UniqueIdentifier>{6639024e-fef0-40c6-a460-411e31df5631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BadStatus">
+      <UniqueIdentifier>{69efc18c-8915-41c8-b4a7-80abb03f31b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

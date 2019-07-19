@@ -51,21 +51,19 @@ private:
 	DECLAR_STATE_FUNC2(TimeOver);
 
 private:
-	StateMachine<SceneGameNormal>	mState;	// ステート
+	StateMachine<SceneGameNormal>	mState;					// ステート
+	MissionMgr*						mMissionMgr;			// ミッション
+	ActorBoss*						mBoss;					// ボス
+	ActorBase*						mActor[cActorId_Count][cMaxPlayerCount]; // アクター
+	UINormalGame*					mUINormalGame;			// UI
 
-	MissionMgr*			mMissionMgr;
-	ActorBoss*			mBoss;
-	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
-	UINormalGame*		mUINormalGame;
+	int								mTime;					// 時間をはかる
+	bool							mIsPose;				// ポーズをしているかしていないか
+	int								mGameStateFontAlpha;	// げ～むすた～とのアルファ差分
+	int								mGameStateRectNum;		// ゲームステートの応じた矩形番号
+	float							mMissionGauge;			// 必殺ゲージ
 
-	int					mTime;					// 時間をはかる
-	bool				mIsPose;				// ポーズをしているかしていないか
-	int					mGameStateFontAlpha;	// げ～むすた～とのアルファ差分
-	int					mGameStateRectNum;		// ゲームステートの応じた矩形番号
-
-	float				mMissionGauge;			// 必殺ゲージ
-
-	int					mNikumanCurrentIndex;	// にくまんの現在の番号
-	int					mYoshitaroCurrentIndex;	// 吉たろうの現在の番号
-	int					mNoppoCurrentIndex;		// のっぽの現在の番号
+	int								mNikumanCurrentIndex;	// にくまんの現在の番号
+	int								mYoshitaroCurrentIndex;	// 吉たろうの現在の番号
+	int								mNoppoCurrentIndex;		// のっぽの現在の番号
 };

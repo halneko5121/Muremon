@@ -10,8 +10,10 @@
 class OrbitWave
 {
 public:
-	OrbitWave(int amplitude, int cycle_frame, float speed_x);
+	OrbitWave();
 	~OrbitWave();
+
+	void	init(int amplitude, int cycle_frame, float speed_x);
 
 	void	setAmplitude(int amplitude);
 

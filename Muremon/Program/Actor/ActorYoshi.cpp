@@ -100,7 +100,7 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mScore = cAddScoreYoshitaro;
 	mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
-	mOrbitWave = new OrbitWave(cWaveAmplit, cWaveCycle, mSpeed);
+	mOrbitWave = new OrbitWave();
 	mOrbitRebound = new OrbitRebound(mRandDeg, mSpeed);
 
 	mRect.setWidth(cYoshiRadius.x);
@@ -306,7 +306,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mNowPos = Vector2f(-cYoshiRadius.x, mAtkStartY);
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
-	mOrbitWave->setSpeed(mSpeed);
+	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);
 }
 void
 ActorYoshi::stateSkyAtk()

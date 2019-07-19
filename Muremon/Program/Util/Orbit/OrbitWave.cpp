@@ -10,14 +10,11 @@
 
 /**
  * @brief コンストラクタ
- * @param amplitude		振幅の量(上下の幅)
- * @param cycle_frame	周期の時間（フレーム）
- * @param speed_x		移動の早さ
  */
-OrbitWave::OrbitWave(int amplitude, int cycle_frame, float speed_x)
-	: mAmplitude(amplitude)
-	, mCycleFrame(cycle_frame)
-	, mSpeedX(speed_x)
+OrbitWave::OrbitWave()
+	: mAmplitude(0)
+	, mCycleFrame(0)
+	, mSpeedX(0.0f)
 	, mTime(0)
 {
 }
@@ -27,8 +24,23 @@ OrbitWave::OrbitWave(int amplitude, int cycle_frame, float speed_x)
  */
 OrbitWave::~OrbitWave()
 {
-
 }
+
+/**
+ * @brief 初期化
+ * @param amplitude		振幅の量(上下の幅)
+ * @param cycle_frame	周期の時間（フレーム）
+ * @param speed_x		移動の早さ
+ */
+void
+OrbitWave::init(int amplitude, int cycle_frame, float speed_x)
+{
+	mTime = 0;
+	mAmplitude = amplitude;
+	mCycleFrame = cycle_frame;
+	mSpeedX = speed_x;
+}
+
 
 /**
  * @brief 振幅の設定

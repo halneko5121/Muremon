@@ -169,12 +169,18 @@ GameInfoMgr::isGameModeNormal() const
 	return (mGameMode == cGameMode_Normal);
 }
 
+/**
+ * @brief	UŒ‚—Í’á‰ºLV‚ğİ’è‚·‚é
+ */
 void
 GameInfoMgr::setBadStatusAtkLv(int lv)
 {
 	mBadStatusAtkLv = lv;
 }
 
+/**
+ * @brief	UŒ‚—Í’á‰ºLV‚ğæ“¾
+ */
 int
 GameInfoMgr::getBadStatusAtkLv() const
 {

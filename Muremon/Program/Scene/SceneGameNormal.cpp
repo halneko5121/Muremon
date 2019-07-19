@@ -246,18 +246,21 @@ SceneGameNormal::recover()
 ActorBase*
 SceneGameNormal::getActorNikuman(int index)
 {
+	APP_ASSERT((0 <= index || index < cMaxPlayerCount));
 	return mActor[cActorId_Nikuman][index];
 }
 
 ActorBase*
 SceneGameNormal::getActorYoshi(int index)
 {
+	APP_ASSERT((0 <= index || index < cMaxPlayerCount));
 	return mActor[cActorId_Yoshi][index];
 }
 
 ActorBase*
 SceneGameNormal::getActorNoppo(int index)
 {
+	APP_ASSERT((0 <= index || index < cMaxPlayerCount));
 	return mActor[cActorId_Noppo][index];
 }
 

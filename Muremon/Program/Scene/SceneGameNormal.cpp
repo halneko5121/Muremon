@@ -26,7 +26,7 @@
 namespace
 {
 
-	const int cTimeLimitCount = 10800;					// 制限時間(仮　3:00)
+	const int cTimeLimitCount = 10800;					// 制限時間(3:00)
 	const Vector2f cHitEffectPos = { 100.0f, 450.0 };
 
 	// 奥義
@@ -82,6 +82,7 @@ SceneGameNormal::SceneGameNormal()
  */
 SceneGameNormal::~SceneGameNormal()
 {
+	APP_SAFE_DELETE(mMission);
 	GetActorMgr()->clearActor();
 	APP_SAFE_DELETE(mUINormalGame);
 }
@@ -165,9 +166,8 @@ SceneGameNormal::draw() const
 void
 SceneGameNormal::end()
 {
-	//ゲームオーバーの場合
+	// ゲーム終了
 	requestChangeScene(cSceneName_Ranking);
-	delete mMission;
 }
 
 /**

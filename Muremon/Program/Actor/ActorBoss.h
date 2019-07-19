@@ -21,7 +21,6 @@ public:
 
 	void		hit(const Vector2f& hit_pos, float damage);
 	bool		isDead() const;
-	bool		isWin() const;
 
 	void		recoveryLife();
 	void		setDead();

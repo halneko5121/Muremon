@@ -18,7 +18,6 @@ namespace
 	const int cDeadSeTime = 60;
 	const int cDamagePosRand = 5;
 	const int cMoveInterval = 3;
-	const int cGameOverPosX = 450;
 	const Vector2f cActorSize = { 300.0f, 380.0f };
 
 	enum State
@@ -133,15 +132,6 @@ ActorBoss::isDead() const
 }
 
 /**
- * @brief 勝ったか！？
- */
-bool
-ActorBoss::isWin() const
-{
-	return (mState.isEqual(cState_End));
-}
-
-/**
  * @brief ライフの回復
  */
 void
@@ -213,14 +203,6 @@ ActorBoss::stateMove()
 		if (mNowPos.x == cRefreshStopX)
 		{
 			mState.changeState(cState_Stop);
-			return;
-		}
-	}
-	else
-	{
-		if (mNowPos.x <= cGameOverPosX)
-		{
-			mState.changeState(cState_End);
 			return;
 		}
 	}

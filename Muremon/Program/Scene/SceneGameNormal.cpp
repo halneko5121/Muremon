@@ -29,6 +29,8 @@ namespace
 	const int cTimeLimitCount = 10800;					// 制限時間(3:00)
 	const Vector2f cHitEffectPos = { 100.0f, 450.0 };
 
+	const int cGameOverPosX = 450;
+
 	// 奥義
 	const int cMaxMissionGauge = 5000;
 
@@ -448,8 +450,8 @@ SceneGameNormal::stateGame()
 	}
 	recover();
 
-	//ゲームオーバー条件
-	if (mBoss->isWin())
+	// ゲームオーバー条件
+	if (mBoss->getNowPos().x <= cGameOverPosX)
 	{
 		mState.changeState(cState_GameOver);
 		return;

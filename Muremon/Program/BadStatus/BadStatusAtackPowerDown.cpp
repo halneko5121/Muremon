@@ -8,6 +8,8 @@
 
 #include "BadStatusAtackPowerDown.h"
 
+#include "Program/Util/UtilBattle.h"
+
 /**
  * @brief	コンストラクタ
  */
@@ -29,4 +31,5 @@ BadStatusAtackPowerDown::~BadStatusAtackPowerDown()
 void
 BadStatusAtackPowerDown::run()
 {
+	UtilBattle::addBadStatusAtkLv();
 }

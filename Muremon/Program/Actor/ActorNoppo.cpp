@@ -110,6 +110,7 @@ ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
  */
 ActorNoppo::~ActorNoppo(void)
 {
+	APP_SAFE_DELETE(mOrbitWave);
 }
 
 /**

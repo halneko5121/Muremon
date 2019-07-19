@@ -96,6 +96,7 @@ ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vert
  */
 ActorNikuman::~ActorNikuman(void)
 {
+	APP_SAFE_DELETE(mOrbitRebound);
 }
 
 /**

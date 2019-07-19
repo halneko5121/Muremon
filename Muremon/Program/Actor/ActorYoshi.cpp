@@ -121,6 +121,8 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
  */
 ActorYoshi::~ActorYoshi(void)
 {
+	APP_SAFE_DELETE(mOrbitWave);
+	APP_SAFE_DELETE(mOrbitRebound);
 }
 
 /**

@@ -5,6 +5,7 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilActor.h"
+#include "Program/Util/Orbit/OrbitWave.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
 
@@ -29,8 +30,8 @@ namespace
 	const int cRandYMin = 100;
 
 	// ”gˆ—ŠÖŒW
-	const int cWaveAmplit = 10;								// U•(ã‰º‚É“®‚­•)					
-	const int cWaveCycle = 60;								// ŽüŠú(1Žü‚·‚éƒtƒŒ[ƒ€”)
+	const int cWaveAmplit = 5;								// U•(ã‰º‚É“®‚­•)					
+	const int cWaveCycle = 30;								// ŽüŠú(1Žü‚·‚éƒtƒŒ[ƒ€”)
 	
 	const int cAtkPowerYoshitaro = 40;						// ‚æ‚µ‚½‚ë‚¤‚ÌUŒ‚—Í
 	const int cAddGaugePowerYoshitaro = 20;					// ‚æ‚µ‚½‚ë‚¤ƒ~ƒbƒVƒ‡ƒ“ƒQ[ƒW‘‰Á—Ê
@@ -85,6 +86,7 @@ namespace
 ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mOrbitWave(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f) 
@@ -96,7 +98,7 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mScore = cAddScoreYoshitaro;
 	mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
-	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, mSpeed);
+	mOrbitWave = new OrbitWave(cWaveAmplit, cWaveCycle, mSpeed);
 
 	mRect.setWidth(cYoshiRadius.x);
 	mRect.setHeight(cYoshiRadius.y);
@@ -201,7 +203,7 @@ ActorYoshi::drawImple() const
 void
 ActorYoshi::updateAttack2()
 {
-	mOrbit->mWave->updateSinWave(&mNowPos);
+	mOrbitWave->updateSinWave(&mNowPos);
 }
 
 // -----------------------------------------------------------------
@@ -302,7 +304,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mNowPos = Vector2f(-cYoshiRadius.x, mAtkStartY);
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
-	mOrbit->mWave->setSpeed(mSpeed);
+	mOrbitWave->setSpeed(mSpeed);
 }
 void
 ActorYoshi::stateSkyAtk()

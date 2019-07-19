@@ -13,6 +13,7 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilActor.h"
+#include "Program/Util/Orbit/OrbitWave.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
 
@@ -29,10 +30,9 @@ namespace
 	const float cParaLimitY = cWindowHeight + cNoppoRadius.x + 50;	// •ú•¨ü‚ÌÅIÀ•W
 
 	// ”gˆ—ŠÖŒW
-	const int cWaveAmplit = 20;										// U•(ã‰º‚É“®‚­•)					
-	const int cWaveCycle = 200;										// ŽüŠú(‘½‚«‚¯‚ê‚Î‘å‚«‚¢’öŽüŠú‚ª’Z‚­)
-	const int cWaveLimitX = 500;									// ‚±‚ÌÀ•W‚Ü‚Å—ˆ‚é‚Æ’¼ü‰^“®‚ÖˆÚs
-
+	const int cWaveAmplit = 10;										// U•(ã‰º‚É“®‚­•)					
+	const int cWaveCycle = 60;										// ŽüŠúƒtƒŒ[ƒ€
+	
 	// ŠJŽnÀ•W
 	const int cRandY = 350;
 	const int cRandYMin = 100;
@@ -79,6 +79,7 @@ namespace
 ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mOrbitWave(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
@@ -89,7 +90,7 @@ ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mMissionPower = cAddGaugePowerNoppo;
 	mScore = cAddScoreNoppo;
 	mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
-	mOrbit->mWave->init(cWaveAmplit, cWaveCycle, NULL);
+	mOrbitWave = new OrbitWave(cWaveAmplit, cWaveCycle, mSpeed);
 
 	mRect.setWidth(cNoppoRadius.x);
 	mRect.setHeight(cNoppoRadius.y);
@@ -198,7 +199,7 @@ ActorNoppo::drawImple() const
 void
 ActorNoppo::updateAttack2()
 {
-	mOrbit->mWave->updateSinWave(&mNowPos);
+	mOrbitWave->updateSinWave(&mNowPos);
 }
 
 // -----------------------------------------------------------------
@@ -300,6 +301,7 @@ ActorNoppo::stateEnterSkyAtk()
 	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cNoppoRadius.x, mAtkStartY);
 	mAngleDegree = 0.0f;
+	mOrbitWave->setSpeed(mSpeed);
 }
 void
 ActorNoppo::stateSkyAtk()
@@ -341,7 +343,7 @@ ActorNoppo::stateSkyAtk()
 		}
 		else
 		{
-			mOrbit->mWave->setSpeed(mSpeed);
+			mOrbitWave->setSpeed(mSpeed);
 			updateAttack2();
 			mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mAnimation, ANIME_S_ATK1_NOPPO);
 			mRect.updateCenterPosCenter(mNowPos);
@@ -398,7 +400,8 @@ ActorNoppo::stateSkyDeath()
 	// ‰ñ“]‚³‚¹‚é
 	mAngleDegree += cSpinSpeed;
 
-	mAnimation = 0;																	//•`‰æ‚ðŒÅ’è
+	// •`‰æ‚ðŒÅ’è
+	mAnimation = 0;
 	mRectNum = ANIME_S_ATK2_NOPPO;
 
 	mOrbit->mParabora->orbitParabola(&mNowPos, mRandAcc, mRandMoveX, cParaLimitY, mNowPos);

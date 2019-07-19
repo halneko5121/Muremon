@@ -10,57 +10,20 @@
 class OrbitWave
 {
 public:
-	OrbitWave();
+	OrbitWave(int amplitude, int cycle_frame, float speed_x);
 	~OrbitWave();
 
-	/********************************************************************************************
-	*	役割	：初期化																		*
-	*	関数名	：POS_CC OrbitSinWave(int amplitude, int cycle, float limit_x, POS_CC draw_cc)	*
-	*	引数	：int set_amplitude			振幅の量(上下の幅)									*
-	*			：int set_cycle				周期の速さ(大きい程周期は短く)						*
-	*			：float set_speed_x			移動の早さ											*
-	*			：int set_mode				1:通常の正弦波処理	2:ゲームの使用に沿った処理		*
-	*	作成日	：2009年 3月 22日																*
-	*	更新日	：	年	月	 日							by	三上　亘							*
-	********************************************************************************************/
-	void init(int set_amplitude, int set_cycle,	float set_speed_x);
+	void	setAmplitude(int amplitude);
 
-	/********************************************************************************************
-	*	役割	：振幅の変更(上下に動く幅)														*
-	*	作成日	：2009年 3月 22日																*
-	*	更新日	：	年	月	 日							by	三上　亘							*
-	********************************************************************************************/
-	void setAmplitude(int set_amplitude) { mAmplitude = set_amplitude; }
-
-	/********************************************************************************************
-	*	役割	：周期の変更(多きければ大きい程周期が短く)										*
-	*	作成日	：2009年 3月 22日																*
-	*	更新日	：	年	月	 日							by	三上　亘							*
-	********************************************************************************************/
-	void setCycle(int set_cycle)		 { mCycle	 = set_cycle; }
+	void	setCycleFrame(int cycle_frame);
 	
-	/********************************************************************************************
-	*	役割	：進む速さ																		*
-	*	作成日	：2009年 3月 22日																*
-	*	更新日	：	年	月	 日							by	三上　亘							*
-	********************************************************************************************/
-	void setSpeed(float set_speed_x)		 { mSpeedX	 = set_speed_x; }
+	void	setSpeed(float speed_x);
 	
-	/********************************************************************************************
-	*	役割	：正弦波処理																	*
-	*	関数名	：POS_CC OrbitSinWave(int amplitude, int cycle, float limit_x, POS_CC draw_cc)	*
-	*	引数	：int limit_x			xの限界値を設けて初期化									*
-	*			：POS_CC drae_cc		中心座標												*
-	*			：int mode				1:通常の正弦波処理	2:ゲーム仕様の正弦波処理 			*
-	*	戻り値	：中心座標																		*
-	*	作成日	：2009年 3月 22日																*
-	*	更新日	：	年	月	 日							by	三上　亘							*
-	********************************************************************************************/
-	void updateSinWave(Vector2f* dst_pos);
+	void	updateSinWave(Vector2f* dst_pos);
 
 private:
 	int		mAmplitude;		// 振幅
-	int		mCycle;			// 周期
+	int		mCycleFrame;	// 周期フレーム
 	float	mSpeedX;		// 移動スピード
-	int		mTime;			// 
+	int		mTime;			// 経過時間
 };

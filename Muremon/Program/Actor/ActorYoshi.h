@@ -9,6 +9,8 @@
 #include "Library/StateMachine.h"
 #include "ActorBase.h"
 
+class OrbitWave;
+
 class ActorYoshi : public ActorBase
 {
 public:
@@ -35,6 +37,7 @@ private:
 
 private:
 	StateMachine<ActorYoshi>	mState;	// ステート
+	OrbitWave*					mOrbitWave;
 	float						mRandAcc;
 	float						mRandMoveX;
 	float						mAtkStartY;

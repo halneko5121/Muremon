@@ -12,48 +12,20 @@ class StateMachine
 public:
 	/**
 	 * @brief	コンストラクタ
-	*/
-	StateMachine()
-		: mMaxStateNum(0)
-		, mFirstStateIndex(-1)
-		, mCurrentStateIndex(-1)
-		, mPrevStateIndex(-1)
-		, mCurrentStateCounter(0)
-		, mPrevStateCounter(0)
-		, mIsChangeStateInExe(false)
-	{
-		for (int i = 0; i < cMaxRegistState; i++)
-		{
-			mDelegate[i] = nullptr;
-		}
-	}
+	 */
+	StateMachine();
 
 	/**
 	 * @brief	デストラクタ
 	 */
-	~StateMachine()
-	{
-	}
+	~StateMachine();
 
 	/**
 	 * @brief	初期化
 	 * @param	max_state_count		最大ステート数
 	 * @param	first_state_index	初期ステート番号
 	 */
-	void			
-	initialize(int max_state_num, int first_state_index)
-	{
-		if ((cMaxRegistState <= max_state_num))
-		{
-			OutputDebugString("最大登録数を超えました");
-			assert(false);
-		}
-
-		mFirstStateIndex = first_state_index;
-		mMaxStateNum = max_state_num;
-		mCurrentStateIndex = mFirstStateIndex;
-		mPrevStateIndex = mFirstStateIndex;
-	}
+	void initialize(int max_state_num, int first_state_index);
 
 	/**
 	 * @brief	ステート関数の登録
@@ -81,165 +53,75 @@ public:
 	/**
 	 * @brief	ステートのリセット
 	 */
-	void
-	resetState()
-	{
-		mCurrentStateIndex = -1;
-		mCurrentStateCounter = 0;
-		mPrevStateIndex = -1;
-		mPrevStateCounter = 0;
-	}
+	void resetState();
 
 	/**
 	 * @brief	ステート関数の実行
 	 */
-	void
-	executeState()
-	{
-		if ((mCurrentStateIndex == -1))
-		{
-			OutputDebugString("Initialize() を呼んで下さい");
-			assert(false);
-		}
-
-		mIsChangeStateInExe = false;
-
-		exeState_();
-
-		// ステート実行中にステート変更されていなかったらフレーム加算
-		if (!mIsChangeStateInExe)
-		{
-			mCurrentStateCounter++;
-		}
-	}
+	void executeState();
 
 	/**
 	 * @brief	ステートの終了
 	 */
-	void
-	exitState()
-	{
-		exitState_(-1);
-		changeState_(-1);
-	}
+	void exitState();
 
-	
 	/**
 	 * @brief	最初のステートに変更
 	 */
-	void
-	changeFirstState()
-	{
-		changeState_(mFirstStateIndex);
-		enterState_();
-	}
+	void changeFirstState();
 
 	/**
 	 * @brief	指定ステートに変更
 	 * @param	state_index	ステート番号
 	 */
-	void
-	changeState(int next_state_index)
-	{
-		if ((next_state_index == -1))
-		{
-			OutputDebugString("Initialize() を呼んで下さい");
-			assert(false);
-		}
-
-		exitState_(next_state_index);
-		changeState_(next_state_index);
-		enterState_();
-	}
+	void changeState(int next_state_index);
 
 	/**
 	 * @brief	指定ステートに変更
 	 * @param	next_state_index	ステート番号
 	 * @note	同じなら何もしない
 	 */
-	bool
-	changeStateIfDiff(int next_state_index)
-	{
-		if (mCurrentStateIndex == next_state_index)
-		{
-			return false;
-		}
-
-		changeState(next_state_index);
-		return true;
-	}
+	bool changeStateIfDiff(int next_state_index);
 
 	/**
 	 * @brief	ステート番号の取得
 	 */
-	int
-	getStateIndex() const
-	{
-		return mCurrentStateIndex;
-	}
+	int getStateIndex() const;
 
 	/**
 	 * @brief	前回のステート番号の取得
 	 */
-	int
-	getPrevStateIndex() const
-	{
-		return mPrevStateIndex;
-	}
+	int getPrevStateIndex() const;
 
 	/**
 	 * @brief	登録ステート最大数の取得
 	 */
-	int
-	getMaxStateNum() const
-	{
-		return mMaxStateNum;
-	}
+	int getMaxStateNum() const;
 
 	/**
 	 * @brief	ステート実行フレーム数の取得
 	 */
-	int
-	getStateCount()
-	{
-		return mCurrentStateCounter;
-	}
+	int getStateCount();
 
 	/**
 	 * @brief	ステートが切り替わってから最初のフレームか
 	 */
-	bool
-	isStateCountFirst() const
-	{
-		return (mCurrentStateCounter == 0);
-	}
+	bool isStateCountFirst() const;
 
 	/**
 	 * @brief	指定したステートと同じステートか
 	 */
-	bool
-	isEqual(int state_index) const
-	{
-		return (state_index == getStateIndex());
-	}
+	bool isEqual(int state_index) const;
 
 	/**
 	 * @brief	無効か？
 	 */
-	bool
-	isInvalid() const
-	{
-		return (getStateIndex() == -1);
-	}
+	bool isInvalid() const;
 
 	/**
 	 * @brief	有効か？
 	 */
-	bool
-	isValid() const
-	{
-		return (!isInvalid());
-	}
+	bool isValid() const;
 
 private:
 	class IDelegate
@@ -307,51 +189,22 @@ private:
 	/**
 	 * @brief	ステートの変更
 	 */
-	void
-	changeState_(int state_index)
-	{
-		mPrevStateIndex = mCurrentStateIndex;
-		mPrevStateCounter = mCurrentStateCounter;
-		mCurrentStateIndex = state_index;
-		mCurrentStateCounter = 0;
-		mIsChangeStateInExe = true;
-	}
+	void changeState_(int state_index);
 
 	/**
 	 * @brief	ステートの開始
 	 */
-	void
-	enterState_()
-	{
-		if (mDelegate[mCurrentStateIndex] != nullptr)
-		{
-			mDelegate[mCurrentStateIndex]->enter();
-		}
-	}
+	void enterState_();
 
 	/**
 	 * @brief	ステートの実行
 	 */
-	void
-	exeState_()
-	{
-		if (mDelegate[mCurrentStateIndex] != nullptr)
-		{
-			mDelegate[mCurrentStateIndex]->exe();
-		}
-	}
+	void exeState_();
 
 	/**
 	 * @brief	ステートの終了
 	 */
-	void
-	exitState_(int next_state_index)
-	{
-		if (mDelegate[mCurrentStateIndex] != nullptr)
-		{
-			mDelegate[mCurrentStateIndex]->exit(next_state_index);
-		}
-	}
+	void exitState_(int next_state_index);
 
 private:
 	int					mMaxStateNum;					// 最大ステート数

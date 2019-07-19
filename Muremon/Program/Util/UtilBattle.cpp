@@ -179,3 +179,32 @@ UtilBattle::getStrongAtkCount()
 {
 	return GetGameInfoMgr()->getStrongAtkCount();
 }
+
+/**
+ * @brief	UŒ‚—Í’á‰ºLV‚ðã‚°‚é
+ */
+void
+UtilBattle::addBadStatusAtkLv()
+{
+	int lv = getBadStatusAtkLv();
+	lv++;
+	GetGameInfoMgr()->setBadStatusAtkLv(lv);
+}
+
+/**
+ * @brief	UŒ‚—Í’á‰ºLV‚ðƒŠƒZƒbƒg‚·‚é
+ */
+void
+UtilBattle::resetBadStatusAtkLv()
+{
+	GetGameInfoMgr()->setBadStatusAtkLv(0);
+}
+
+/**
+ * @brief	UŒ‚—Í’á‰ºLV‚ðŽæ“¾‚·‚é
+ */
+int
+UtilBattle::getBadStatusAtkLv()
+{
+	return 	GetGameInfoMgr()->getBadStatusAtkLv();
+}

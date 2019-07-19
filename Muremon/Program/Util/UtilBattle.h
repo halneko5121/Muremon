@@ -37,6 +37,8 @@ namespace UtilBattle
 	void		addStrongAtkCount();
 	int			getStrongAtkCount();
 
-
-
+	// UŒ‚—Í’á‰º
+	void		addBadStatusAtkLv();
+	void		resetBadStatusAtkLv();
+	int			getBadStatusAtkLv();
 }

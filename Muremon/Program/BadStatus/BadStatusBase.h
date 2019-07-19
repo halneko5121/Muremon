@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************
- *	@file	BadStatusBase.cpp
+ *	@file	BadStatusBase.h
  *	@brief	バッドステータス処理
  *
  *	製作者：三上

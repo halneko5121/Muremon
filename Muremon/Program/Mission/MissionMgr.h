@@ -82,6 +82,6 @@ private:
 	int							mCurrentMissionNo;		// どのミッションが選択されたかを記憶
 
 	int							mNegativeAlpha;
-	int							mNegativeState;
+	int							mBadStatusId;
 	int							mNegativeAtkLv;
 };

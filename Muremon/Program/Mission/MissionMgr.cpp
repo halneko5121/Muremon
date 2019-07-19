@@ -186,6 +186,31 @@ namespace
 		APP_ASSERT_FALSE_MESSAGE("どのミッションも選択されませんでした");
 		return cMissionId_Null;
 	}
+
+	/**
+	 * @brief ランダムでバッドステータスを選択する
+	 */
+	int
+	randomSelectBadStatus()
+	{
+		int rand_negative = rand() % 100 + 1;
+		if (rand_negative > 0 && rand_negative <= cBadStatus1Rate)
+		{
+			return SPEED_UP;
+		}
+		else if (rand_negative > cBadStatus1Rate && rand_negative <= cBadStatus2Rate)
+		{
+			return RECOVER;
+		}
+		else if (rand_negative > cBadStatus2Rate && rand_negative <= cBadStatus3Rate)
+		{
+			return SLIDE_IN;
+		}
+		else if (rand_negative > cBadStatus3Rate && rand_negative <= cBadStatus4Rate)
+		{
+			return ATTACK_DOWN;
+		}
+	}
 }
 
 MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
@@ -199,7 +224,7 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mMoveCount(0)
 	, mCurrentMissionNo(0)
 	, mNegativeAlpha(0)
-	, mNegativeState(NO_NEGATIVE)
+	, mBadStatusId(NO_NEGATIVE)
 	, mNegativeAtkLv(0)
 {
 	for (int i = 0; i < cMissionId_Count; i++)
@@ -279,7 +304,7 @@ void MissionMgr::draw() const
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 	mVertex->setColor(mNegativeAlpha, 255, 255, 255);
 	mVertex->drawF(Vector2f(400.f, 300.f), R_MISSION_OSIRASE);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_NEGATIVE1 + mNegativeState - 1);
+	mVertex->drawF(Vector2f(400.f, 300.f), R_NEGATIVE1 + mBadStatusId - 1);
 }
 
 /**
@@ -512,21 +537,8 @@ MissionMgr::stateOugi()
 void
 MissionMgr::stateEnterBadStatus()
 {
-	int rand_negative = rand() % 100 + 1;
-	if (rand_negative > 0 && rand_negative <= cBadStatus1Rate) {
-		mNegativeState = SPEED_UP;
-	}
-	else if (rand_negative > cBadStatus1Rate && rand_negative <= cBadStatus2Rate) {
-		mNegativeState = RECOVER;
-	}
-	else if (rand_negative > cBadStatus2Rate && rand_negative <= cBadStatus3Rate) {
-		mNegativeState = SLIDE_IN;
-	}
-	else if (rand_negative > cBadStatus3Rate && rand_negative <= cBadStatus4Rate) {
-		mNegativeState = ATTACK_DOWN;
-	}
-
-	mNegativeState = SLIDE_IN;
+	mBadStatusId = randomSelectBadStatus();
+	mBadStatusId = SLIDE_IN;
 }
 void
 MissionMgr::stateBadStatus()
@@ -550,7 +562,7 @@ MissionMgr::stateBadStatus()
 	}
 	else if (count >= 180)
 	{
-		switch (mNegativeState)
+		switch (mBadStatusId)
 		{
 		case SPEED_UP:
 			mActorBoss->setSpeed(3);
@@ -575,7 +587,7 @@ MissionMgr::stateBadStatus()
 void
 MissionMgr::stateEnterEnd()
 {
-	mNegativeState = NO_NEGATIVE;
+	mBadStatusId = NO_NEGATIVE;
 }
 void
 MissionMgr::stateEnd()

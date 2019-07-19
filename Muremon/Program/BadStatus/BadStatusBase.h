@@ -7,7 +7,15 @@
  *	ä«óùé“ÅFéOè„
  ******************************************************************/
 
-enum BadStatusId;
+enum BadStatusId
+{
+	cBadStatusId_Null = -1,
+	cBadStatusId_SpeedUp,
+	cBadStatusId_Recover,
+	cBadStatusId_AlertPos,
+	cBadStatusId_AtackPowerDown,
+	cBadStatusId_Count
+};
 
 class BadStatusBase
 {

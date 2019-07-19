@@ -53,7 +53,7 @@ private:
 private:
 	StateMachine<SceneGameNormal>	mState;	// ステート
 
-	MissionMgr*			mMission;
+	MissionMgr*			mMissionMgr;
 	ActorBoss*			mBoss;
 	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
 	UINormalGame*		mUINormalGame;

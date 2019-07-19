@@ -53,7 +53,7 @@ namespace
  */
 SceneGameNormal::SceneGameNormal()
 	: mState()
-	, mMission(nullptr)
+	, mMissionMgr(nullptr)
 	, mBoss(nullptr)
 	, mUINormalGame(nullptr)
 	, mTime(cTimeLimitCount)
@@ -84,7 +84,7 @@ SceneGameNormal::SceneGameNormal()
  */
 SceneGameNormal::~SceneGameNormal()
 {
-	APP_SAFE_DELETE(mMission);
+	APP_SAFE_DELETE(mMissionMgr);
 	GetActorMgr()->clearActor();
 	APP_SAFE_DELETE(mUINormalGame);
 }
@@ -116,7 +116,7 @@ SceneGameNormal::impleInit()
 
 	mUINormalGame->init();
 
-	mMission = new MissionMgr(mTexture, mVertex, mBoss);
+	mMissionMgr = new MissionMgr(mTexture, mVertex, mBoss);
 
 	mState.changeState(cState_ReadyFadeIn);
 }
@@ -156,7 +156,7 @@ SceneGameNormal::draw() const
 	}
 
 	// ミッション関連
-	mMission->draw();
+	mMissionMgr->draw();
 
 	// 各種UI
 	mUINormalGame->draw(*mBoss, mMissionGauge, mTime);
@@ -241,7 +241,7 @@ SceneGameNormal::recover()
 {
 	if(mBoss->isDead())
 	{
-		mMission->resetBadStatusAtkLv();
+		mMissionMgr->resetBadStatusAtkLv();
 	}
 }
 
@@ -404,7 +404,7 @@ SceneGameNormal::stateGame()
 		{
 			if (actor->isHitCheck())
 			{
-				float mul_power = pow(0.5f, mMission->getBadStatusAtkLv());
+				float mul_power = pow(0.5f, mMissionMgr->getBadStatusAtkLv());
 				mBoss->hit(actor->getNowPos(), (actor->getAtkPower() * mul_power));
 				actor->setIsHitCheck(false);
 				mMissionGauge += actor->getMissionPower();
@@ -465,16 +465,16 @@ void
 SceneGameNormal::stateEnterMission()
 {
 	UtilSound::stop(S_SAIREN);
-	mMission->init();
+	mMissionMgr->init();
 }
 void
 SceneGameNormal::stateMission()
 {
 	GetEffectMgr()->update();
 
-	mMission->update();
+	mMissionMgr->update();
 
-	if (mMission->isEnd())
+	if (mMissionMgr->isEnd())
 	{
 		mMissionGauge = 0;
 		mState.changeState(cState_Game);

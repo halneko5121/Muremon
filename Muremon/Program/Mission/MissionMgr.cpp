@@ -536,7 +536,6 @@ void
 MissionMgr::stateEnterBadStatus()
 {
 	mBadStatusId = randomSelectBadStatus();
-	mBadStatusId = cBadStatusId_AlertPos;
 }
 void
 MissionMgr::stateBadStatus()

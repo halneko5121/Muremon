@@ -63,15 +63,6 @@ namespace
 	const int cBadStatus3Rate = 70;
 	const int cBadStatus4Rate = 100;
 
-	enum NEGATIVE_DATA
-	{
-		NO_NEGATIVE,
-		SPEED_UP,
-		RECOVER,
-		SLIDE_IN,
-		ATTACK_DOWN,
-	};
-
 	enum State
 	{
 		cState_Idle,			// 待機
@@ -214,20 +205,23 @@ namespace
 		int rand_negative = rand() % 100 + 1;
 		if (rand_negative > 0 && rand_negative <= cBadStatus1Rate)
 		{
-			return SPEED_UP;
+			return cBadStatusId_SpeedUp;
 		}
 		else if (rand_negative > cBadStatus1Rate && rand_negative <= cBadStatus2Rate)
 		{
-			return RECOVER;
+			return cBadStatusId_Recover;
 		}
 		else if (rand_negative > cBadStatus2Rate && rand_negative <= cBadStatus3Rate)
 		{
-			return SLIDE_IN;
+			return cBadStatusId_AlertPos;
 		}
 		else if (rand_negative > cBadStatus3Rate && rand_negative <= cBadStatus4Rate)
 		{
-			return ATTACK_DOWN;
+			return cBadStatusId_AtackPowerDown;
 		}
+
+		APP_ASSERT_FALSE_MESSAGE("どのバッドステータスも選択されませんでした");
+		return cBadStatusId_Null;
 	}
 }
 
@@ -242,7 +236,7 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mMoveCount(0)
 	, mCurrentMissionNo(0)
 	, mNegativeAlpha(0)
-	, mBadStatusId(NO_NEGATIVE)
+	, mBadStatusId(cBadStatusId_Null)
 {
 	for (int i = 0; i < cMissionId_Count; i++)
 	{
@@ -326,7 +320,7 @@ void MissionMgr::draw() const
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 	mVertex->setColor(mNegativeAlpha, 255, 255, 255);
 	mVertex->drawF(Vector2f(400.f, 300.f), R_MISSION_OSIRASE);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_NEGATIVE1 + mBadStatusId - 1);
+	mVertex->drawF(Vector2f(400.f, 300.f), R_NEGATIVE1 + mBadStatusId);
 }
 
 /**
@@ -542,7 +536,7 @@ void
 MissionMgr::stateEnterBadStatus()
 {
 	mBadStatusId = randomSelectBadStatus();
-	mBadStatusId = SLIDE_IN;
+	mBadStatusId = cBadStatusId_AlertPos;
 }
 void
 MissionMgr::stateBadStatus()
@@ -578,7 +572,7 @@ MissionMgr::stateBadStatus()
 void
 MissionMgr::stateEnterEnd()
 {
-	mBadStatusId = NO_NEGATIVE;
+	mBadStatusId = cBadStatusId_Null;
 }
 void
 MissionMgr::stateEnd()

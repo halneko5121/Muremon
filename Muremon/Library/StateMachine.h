@@ -325,8 +325,7 @@ private:
 	{
 		if (mDelegate[mCurrentStateIndex] != nullptr)
 		{
-			IDelegate* delegate = reinterpret_cast<IDelegate*>(mDelegate[mCurrentStateIndex]);
-			delegate->enter();
+			mDelegate[mCurrentStateIndex]->enter();
 		}
 	}
 
@@ -338,8 +337,7 @@ private:
 	{
 		if (mDelegate[mCurrentStateIndex] != nullptr)
 		{
-			IDelegate* delegate = reinterpret_cast<IDelegate*>(mDelegate[mCurrentStateIndex]);
-			delegate->exe();
+			mDelegate[mCurrentStateIndex]->exe();
 		}
 	}
 
@@ -351,8 +349,7 @@ private:
 	{
 		if (mDelegate[mCurrentStateIndex] != nullptr)
 		{
-			IDelegate* delegate = reinterpret_cast<IDelegate*>(mDelegate[mCurrentStateIndex]);
-			delegate->exit(next_state_index);
+			mDelegate[mCurrentStateIndex]->exit(next_state_index);
 		}
 	}
 
@@ -364,7 +361,7 @@ private:
 	int					mCurrentStateCounter;			// 現在のステート実行フレーム数 
 	int					mPrevStateCounter;				// 前回のステート実行フレーム数
 	bool				mIsChangeStateInExe;			// execute() 内部で changeState() を呼び出したか
-	void*				mDelegate[cMaxRegistState];		// デリゲート配列
+	IDelegate*			mDelegate[cMaxRegistState];		// デリゲート配列
 };
 
 // ステート関数宣言

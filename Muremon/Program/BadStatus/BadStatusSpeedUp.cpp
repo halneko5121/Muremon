@@ -8,6 +8,9 @@
 
 #include "BadStatusSpeedUp.h"
 
+#include "Program/Util/UtilActor.h"
+#include "Program/Actor/ActorBoss.h"
+
 /**
  * @brief	コンストラクタ
  */
@@ -29,4 +32,8 @@ BadStatusSpeedUp::~BadStatusSpeedUp()
 void
 BadStatusSpeedUp::run()
 {
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+	float current_speed = boss->getSpeed();
+	boss->setSpeed(current_speed * 3);
 }

@@ -19,7 +19,5 @@ public:
 	~OrbitCalculation(void);
 
 public:
-	OrbitWave*			mWave;
-	OrbitRebound*		mRebound;
 	OrbitParabora*		mParabora;
 };

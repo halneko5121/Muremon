@@ -9,6 +9,8 @@
 #include "Library/StateMachine.h"
 #include "ActorBase.h"
 
+class OrbitRebound;
+
 class ActorNikuman :	public ActorBase
 {
 public:
@@ -34,6 +36,7 @@ private:
 
 private:
 	StateMachine<ActorNikuman>	mState;	// ステート
+	OrbitRebound*				mOrbitRebound;
 	float						mRandAcc;
 	float						mRandMoveX;
 	float						mAtkStartY;

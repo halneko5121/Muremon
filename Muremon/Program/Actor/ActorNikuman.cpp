@@ -5,6 +5,7 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilActor.h"
+#include "Program/Util/Orbit/OrbitRebound.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
 
@@ -64,6 +65,7 @@ namespace
 ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mOrbitRebound(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
@@ -75,6 +77,7 @@ ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vert
 	mMissionPower = cAddGaugePowerNikuman;
 	mScore = cAddScoreNikuman;
 	mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
+	mOrbitRebound = new OrbitRebound(mRandDeg, mSpeed);
 
 	mRect.setWidth(cNikumanRadius.x);
 	mRect.setHeight(cNikumanRadius.y);
@@ -221,7 +224,6 @@ ActorNikuman::stateEnterGroundAtk()
 	mAnimation = 0;
 	mNowPos = Vector2f(-cNikumanRadius.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
-	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }
 void
 ActorNikuman::stateGroundAtk()
@@ -312,6 +314,9 @@ ActorNikuman::stateSkyAtk()
 void
 ActorNikuman::stateEnterGroundDeath()
 {
+	float rand_deg = (float)(rand() % cDegRand + cDegRandMin);
+	mOrbitRebound->setDegree(rand_deg);
+	mOrbitRebound->setSpeed(mSpeed);
 }
 void
 ActorNikuman::stateGroundDeath()
@@ -319,7 +324,7 @@ ActorNikuman::stateGroundDeath()
 	mAnimation = 0;
 	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
 
-	 mOrbit->mRebound->updateOrbitRebound(&mNowPos, mRandDeg, mSpeed);
+	mOrbitRebound->update(&mNowPos);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))

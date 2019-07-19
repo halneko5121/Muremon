@@ -6,6 +6,7 @@
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilActor.h"
 #include "Program/Util/Orbit/OrbitWave.h"
+#include "Program/Util/Orbit/OrbitRebound.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
 
@@ -87,6 +88,7 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
 	, mOrbitWave(nullptr)
+	, mOrbitRebound(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f) 
@@ -99,6 +101,7 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mScore = cAddScoreYoshitaro;
 	mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
 	mOrbitWave = new OrbitWave(cWaveAmplit, cWaveCycle, mSpeed);
+	mOrbitRebound = new OrbitRebound(mRandDeg, mSpeed);
 
 	mRect.setWidth(cYoshiRadius.x);
 	mRect.setHeight(cYoshiRadius.y);
@@ -243,7 +246,6 @@ ActorYoshi::stateEnterGroundAtk()
 	mAnimation = 0;
 	mNowPos = Vector2f(-cYoshiRadius.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
-	mRandDeg = (float)(rand() % cDegRand + cDegRandMin);
 }
 void
 ActorYoshi::stateGroundAtk()
@@ -349,11 +351,14 @@ ActorYoshi::stateEnterGroundDeath()
 {
 	mAnimation = 0;
 	mRectNum = ANIME_DEATH_YOSHI;
+	float rand_deg = (float)(rand() % cDegRand + cDegRandMin);
+	mOrbitRebound->setDegree(rand_deg);
+	mOrbitRebound->setSpeed(mSpeed);
 }
 void
 ActorYoshi::stateGroundDeath()
 {
-	mOrbit->mRebound->updateOrbitRebound(&mNowPos, mRandDeg, mSpeed);
+	mOrbitRebound->update(&mNowPos);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))

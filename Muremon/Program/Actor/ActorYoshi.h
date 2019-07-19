@@ -10,6 +10,7 @@
 #include "ActorBase.h"
 
 class OrbitWave;
+class OrbitRebound;
 
 class ActorYoshi : public ActorBase
 {
@@ -38,6 +39,7 @@ private:
 private:
 	StateMachine<ActorYoshi>	mState;	// ステート
 	OrbitWave*					mOrbitWave;
+	OrbitRebound*				mOrbitRebound;
 	float						mRandAcc;
 	float						mRandMoveX;
 	float						mAtkStartY;

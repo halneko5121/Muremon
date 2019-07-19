@@ -7,7 +7,6 @@
  *	管理者：三上
  ******************************************************************/
 
-template<class OWNER>
 class StateMachine
 {
 public:
@@ -63,6 +62,7 @@ public:
 	 * @param	ExeFunc		登録する実行関数
 	 * @param	ExitFunc	登録する終了関数
 	 */
+	template<class OWNER>
 	void
 	registState(OWNER* owner, void (OWNER::*enterFunc)(), void (OWNER::*exeFunc)(), void (OWNER::*exitFunc)(int), int state_index)
 	{
@@ -211,7 +211,7 @@ public:
 	bool
 	isStateCountFirst() const
 	{
-		return (getStateCount() == 0);
+		return (mCurrentStateCounter == 0);
 	}
 
 	/**
@@ -242,8 +242,16 @@ public:
 	}
 
 private:
+	class IDelegate
+	{
+	public:
+		virtual void enter() = 0;
+		virtual void exe() = 0;
+		virtual void exit(int next_state_index) = 0;
+	};
+
 	template<class OWNER>
-	class Delegate
+	class Delegate : public IDelegate
 	{
 	public:
 		typedef void(OWNER::*EnterFunc)();
@@ -251,7 +259,16 @@ private:
 		typedef void(OWNER::*ExitFunc)(int);
 
 		// コンストラクタ
-		Delegate::Delegate(OWNER* owner, EnterFunc enter_func, ExeFunc exe_func, ExitFunc exit_func)
+		Delegate()
+			: mOwner(nullptr)
+			, mEnterFunc(nullptr)
+			, mExeFunc(nullptr)
+			, mExitFunc(nullptr)
+		{
+		}
+
+		// コンストラクタ
+		Delegate(OWNER* owner, EnterFunc enter_func, ExeFunc exe_func, ExitFunc exit_func)
 			: mOwner(owner)
 			, mEnterFunc(enter_func)
 			, mExeFunc(exe_func)
@@ -260,17 +277,17 @@ private:
 		}
 
 		virtual void
-		Delegate::enter()
+		enter() override
 		{
 			if (mEnterFunc != nullptr) (mOwner->*mEnterFunc)();
 		}
 		virtual void
-		Delegate::exe()
+		exe() override
 		{
 			if (mExeFunc != nullptr) (mOwner->*mExeFunc)();
 		}
 		virtual void
-		Delegate::exit(int next_state_index)
+		exit(int next_state_index) override
 		{
 			if (mExitFunc != nullptr) (mOwner->*mExitFunc)(next_state_index);
 		}
@@ -308,7 +325,8 @@ private:
 	{
 		if (mDelegate[mCurrentStateIndex] != nullptr)
 		{
-			mDelegate[mCurrentStateIndex]->enter();
+			IDelegate* delegate = reinterpret_cast<IDelegate*>(mDelegate[mCurrentStateIndex]);
+			delegate->enter();
 		}
 	}
 
@@ -320,7 +338,8 @@ private:
 	{
 		if (mDelegate[mCurrentStateIndex] != nullptr)
 		{
-			mDelegate[mCurrentStateIndex]->exe();
+			IDelegate* delegate = reinterpret_cast<IDelegate*>(mDelegate[mCurrentStateIndex]);
+			delegate->exe();
 		}
 	}
 
@@ -332,7 +351,8 @@ private:
 	{
 		if (mDelegate[mCurrentStateIndex] != nullptr)
 		{
-			mDelegate[mCurrentStateIndex]->exit(next_state_index);
+			IDelegate* delegate = reinterpret_cast<IDelegate*>(mDelegate[mCurrentStateIndex]);
+			delegate->exit(next_state_index);
 		}
 	}
 
@@ -344,7 +364,7 @@ private:
 	int					mCurrentStateCounter;			// 現在のステート実行フレーム数 
 	int					mPrevStateCounter;				// 前回のステート実行フレーム数
 	bool				mIsChangeStateInExe;			// execute() 内部で changeState() を呼び出したか
-	Delegate<OWNER>*	mDelegate[cMaxRegistState];		// デリゲート配列
+	void*				mDelegate[cMaxRegistState];		// デリゲート配列
 };
 
 // ステート関数宣言
@@ -362,21 +382,21 @@ private:
 
 // ステート関数登録
 #define REGIST_STATE_FUNC1(owner_type, state_obj, func_name, state_index)	\
-	state_obj.registState(this,												\
+	state_obj.registState<owner_type>(this,									\
 						  nullptr,											\
 						  &owner_type::state##func_name,					\
 						  nullptr,											\
 						  state_index)										\
 
 #define REGIST_STATE_FUNC2(owner_type, state_obj, func_name, state_index)	\
-	state_obj.registState(this,												\
+	state_obj.registState<owner_type>(this,									\
 						  &owner_type::stateEnter##func_name,				\
 						  &owner_type::state##func_name,					\
 						  nullptr,											\
 						  state_index)										\
 
 #define REGIST_STATE_FUNC3(owner_type, state_obj, func_name, state_index)	\
-	state_obj.registState(this,												\
+	state_obj.registState<owner_type>(this,									\
 						  &owner_type::stateEnter##func_name,				\
 						  &owner_type::state##func_name,					\
 						  &owner_type::stateExit##func_name,				\

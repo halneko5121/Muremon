@@ -37,7 +37,7 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<ActorYoshi>	mState;	// ステート
+	StateMachine				mState;	// ステート
 	OrbitWave*					mOrbitWave;
 	OrbitRebound*				mOrbitRebound;
 	float						mRandAcc;

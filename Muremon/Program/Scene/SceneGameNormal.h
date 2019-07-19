@@ -51,7 +51,7 @@ private:
 	DECLAR_STATE_FUNC2(TimeOver);
 
 private:
-	StateMachine<SceneGameNormal>	mState;					// ステート
+	StateMachine					mState;					// ステート
 	MissionMgr*						mMissionMgr;			// ミッション
 	ActorBoss*						mBoss;					// ボス
 	ActorBase*						mActor[cActorId_Count][cMaxPlayerCount]; // アクター

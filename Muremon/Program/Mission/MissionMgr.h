@@ -64,7 +64,7 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<MissionMgr>	mState;	// ステート
+	StateMachine				mState;	// ステート
 	Texture*					mTexture;
 	Vertex*						mVertex;
 	ActorBoss*					mActorBoss;

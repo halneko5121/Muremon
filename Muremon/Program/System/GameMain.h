@@ -69,7 +69,7 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<GameMain>	mState;			// ステート
+	StateMachine			mState;			// ステート
 	Window*					mWindow;		// ウィンドウクラスへのポインタ
 	SceneBase*				mScene;			// シーンクラスへのポインタ
 	DirectGraphics*			mGraphics;		// グラフィッククラスへのポインタ

@@ -30,5 +30,5 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<EffectOugi>	mState;		// ステート
+	StateMachine	mState;		// ステート
 };

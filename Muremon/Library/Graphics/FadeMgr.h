@@ -83,7 +83,7 @@ private:
 private:
 	static FadeMgr*			mInstance;		// インスタンス
 
-	StateMachine<FadeMgr>	mState;			// ステート
+	StateMachine			mState;			// ステート
 	LPDIRECT3DDEVICE9		mDevice;		// デバイス
 	int						mAlpha;			// アルファ
 	int						mColorR;		// カラー(R)

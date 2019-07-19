@@ -30,6 +30,6 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<EffectHit>	mState;		// ステート
+	StateMachine	mState;		// ステート
 
 };

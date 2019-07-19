@@ -32,7 +32,7 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<SceneTutorial>	mState;			// ステート
+	StateMachine				mState;			// ステート
 	int							mSlideState;
 	Vector2f					mTexturePos[2];
 };

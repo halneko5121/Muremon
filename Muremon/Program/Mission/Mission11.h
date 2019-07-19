@@ -35,7 +35,7 @@ private:
 	DECLAR_STATE_FUNC2(Failure);
 
 private:
-	StateMachine<Mission11>	mState;				// ステート
+	StateMachine			mState;				// ステート
 	int						mAlphaPushZ;		// 「PushZ」用のアルファ値
 	int						mFlagZ;				//
 };

@@ -40,7 +40,7 @@ private:
 	DECLAR_STATE_FUNC2(GameSelect);
 
 private:
-	StateMachine<UITitleMenu>	mState;					// ステート
+	StateMachine				mState;					// ステート
 	Texture*					mTexture;				// テクスチャ
 	Vertex*						mVertex;				// バーテックス
 	Vector2f					mCursorPos;				// カーソル位置

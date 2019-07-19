@@ -32,6 +32,6 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<EffectBossDead>	mState;		// ステート
+	StateMachine	mState;		// ステート
 
 };

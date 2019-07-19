@@ -34,5 +34,5 @@ private:
 	DECLAR_STATE_FUNC2(Failure);
 
 private:
-	StateMachine<Mission2>	mState;		// ステート
+	StateMachine			mState;		// ステート
 };

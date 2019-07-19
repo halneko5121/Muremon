@@ -38,7 +38,7 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<ActorBoss>	mState;	// ステート
+	StateMachine			mState;	// ステート
 	float					mLife;
 	float					mMaxLife;
 	int						mLvCount;

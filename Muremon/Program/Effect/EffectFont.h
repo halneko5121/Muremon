@@ -33,7 +33,7 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine<EffectFont>	mState;			// ステート
+	StateMachine				mState;			// ステート
 
 	float						mShakeX;
 	float						mShakeY;

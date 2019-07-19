@@ -45,7 +45,7 @@ private:
 	DECLAR_STATE_FUNC2(Game);
 
 private:
-	StateMachine<SceneGameRefresh>	mState;	// ステート
+	StateMachine		mState;	// ステート
 	ActorBoss*			mBoss;
 	ActorBase*			mActor[cActorId_Count][cMaxPlayerCount];
 	UIRefreshGame*		mUIRefreshGame;			// UI

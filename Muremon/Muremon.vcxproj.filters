@@ -189,6 +189,15 @@
     <ClCompile Include="Program\BadStatus\BadStatusSpeedUp.cpp">
       <Filter>BadStatus</Filter>
     </ClCompile>
+    <ClCompile Include="Program\BadStatus\BadStatusRecover.cpp">
+      <Filter>BadStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\BadStatus\BadStatusAlertPos.cpp">
+      <Filter>BadStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\BadStatus\BadStatusAtackPowerDown.cpp">
+      <Filter>BadStatus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -379,6 +388,15 @@
       <Filter>BadStatus</Filter>
     </ClInclude>
     <ClInclude Include="Program\BadStatus\BadStatusSpeedUp.h">
+      <Filter>BadStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\BadStatus\BadStatusRecover.h">
+      <Filter>BadStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\BadStatus\BadStatusAlertPos.h">
+      <Filter>BadStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\BadStatus\BadStatusAtackPowerDown.h">
       <Filter>BadStatus</Filter>
     </ClInclude>
   </ItemGroup>

@@ -28,7 +28,10 @@
     <ClCompile Include="Program\Actor\ActorNikuman.cpp" />
     <ClCompile Include="Program\Actor\ActorNoppo.cpp" />
     <ClCompile Include="Program\Actor\ActorYoshi.cpp" />
+    <ClCompile Include="Program\BadStatus\BadStatusAlertPos.cpp" />
+    <ClCompile Include="Program\BadStatus\BadStatusAtackPowerDown.cpp" />
     <ClCompile Include="Program\BadStatus\BadStatusBase.cpp" />
+    <ClCompile Include="Program\BadStatus\BadStatusRecover.cpp" />
     <ClCompile Include="Program\BadStatus\BadStatusSpeedUp.cpp" />
     <ClCompile Include="Program\Effect\EffectBase.cpp" />
     <ClCompile Include="Program\Effect\EffectBossDead.cpp" />
@@ -96,7 +99,10 @@
     <ClInclude Include="Program\Actor\ActorNikuman.h" />
     <ClInclude Include="Program\Actor\ActorNoppo.h" />
     <ClInclude Include="Program\Actor\ActorYoshi.h" />
+    <ClInclude Include="Program\BadStatus\BadStatusAlertPos.h" />
+    <ClInclude Include="Program\BadStatus\BadStatusAtackPowerDown.h" />
     <ClInclude Include="Program\BadStatus\BadStatusBase.h" />
+    <ClInclude Include="Program\BadStatus\BadStatusRecover.h" />
     <ClInclude Include="Program\BadStatus\BadStatusSpeedUp.h" />
     <ClInclude Include="Program\Define.h" />
     <ClInclude Include="Program\DefineGame.h" />

@@ -8,6 +8,9 @@
 
 #include "BadStatusAlertPos.h"
 
+#include "Program/Util/UtilActor.h"
+#include "Program/Actor/ActorBoss.h"
+
 /**
  * @brief	コンストラクタ
  */
@@ -29,4 +32,7 @@ BadStatusAlertPos::~BadStatusAlertPos()
 void
 BadStatusAlertPos::run()
 {
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+	boss->setNowPos(Vector2f(500, boss->getNowPos().y));
 }

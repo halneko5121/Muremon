@@ -60,6 +60,10 @@ public:
 	bool					isGameModeRefresh() const;
 	bool					isGameModeNormal() const;
 
+	// 攻撃力低下
+	void					setBadStatusAtkLv(int lv);
+	int						getBadStatusAtkLv() const;
+
 private:
 	static GameInfoMgr*		mInstance;			// インスタンス
 	GameScore*				mScore;				// スコア
@@ -67,6 +71,7 @@ private:
 	int						mWeakAtkCount;		// 弱攻撃（にくまん）を行った回数
 	int						mMediumAtkCount;	// 中攻撃（吉たろう）を行った回数
 	int						mStrongAtkCount;	// 強攻撃（のっぽ）を行った回数
+	int						mBadStatusAtkLv;	// 攻撃力低下のLV　@todo: ここで管理は違う気がする
 };
 
 static GameInfoMgr* GetGameInfoMgr() { return GameInfoMgr::getInstance(); }

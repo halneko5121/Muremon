@@ -30,6 +30,7 @@ GameInfoMgr::GameInfoMgr()
 	, mWeakAtkCount(0)
 	, mMediumAtkCount(0)
 	, mStrongAtkCount(0)
+	, mBadStatusAtkLv(0)
 {
 	mScore = new GameScore();
 }
@@ -166,4 +167,16 @@ bool
 GameInfoMgr::isGameModeNormal() const
 {
 	return (mGameMode == cGameMode_Normal);
+}
+
+void
+GameInfoMgr::setBadStatusAtkLv(int lv)
+{
+	mBadStatusAtkLv = lv;
+}
+
+int
+GameInfoMgr::getBadStatusAtkLv() const
+{
+	return mBadStatusAtkLv;
 }

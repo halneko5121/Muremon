@@ -70,6 +70,9 @@ void SceneGameRefresh::impleInit()
 	UtilGame::setGameModeNormal();
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
+	// ボス
+	mBoss = dynamic_cast<ActorBoss*>(GetActorMgr()->createActor(cActorId_Boss, mTexture, mVertex));
+
 	// プレイヤー3種類分
 	for (int actor_id = cActorId_Noppo; actor_id <= cActorId_Yoshi; actor_id++)
 	{
@@ -79,8 +82,6 @@ void SceneGameRefresh::impleInit()
 			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id), mTexture, mVertex);
 		}
 	}
-	// ボス
-	mBoss = dynamic_cast<ActorBoss*>(GetActorMgr()->createActor(cActorId_Boss, mTexture, mVertex));
 
 	// 初期化
 	GetActorMgr()->init();

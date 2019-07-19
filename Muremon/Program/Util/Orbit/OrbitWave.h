@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************
- *	@file	OrbitWave.cpp
+ *	@file	OrbitWave.h
  *	@brief	ê≥å∑îgãOìπ
  *
  *	êªçÏé“ÅFéOè„

@@ -243,7 +243,6 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
 	, mCurrentMissionNo(0)
 	, mNegativeAlpha(0)
 	, mBadStatusId(NO_NEGATIVE)
-	, mNegativeAtkLv(0)
 {
 	for (int i = 0; i < cMissionId_Count; i++)
 	{
@@ -337,24 +336,6 @@ int
 MissionMgr::isEnd() const
 {
 	return (mState.isEqual(cState_End));
-}
-
-/**
- * @ brief バッドステータス：攻撃レベルを取得
- */
-int
-MissionMgr::getBadStatusAtkLv() const
-{
-	return mNegativeAtkLv;
-}
-
-/**
- * @ brief バッドステータス：攻撃レベルをリセット
- */
-void
-MissionMgr::resetBadStatusAtkLv()
-{
-	mNegativeAtkLv = 0;
 }
 
 /**
@@ -585,21 +566,8 @@ MissionMgr::stateBadStatus()
 	}
 	else if (count >= 180)
 	{
-		switch (mBadStatusId)
-		{
-		case SPEED_UP:
-			mActorBoss->setSpeed(3);
-			break;
-		case RECOVER:
-			mActorBoss->recoveryLife();
-			break;
-		case SLIDE_IN:
-			mActorBoss->setNowPos(Vector2f(500, mActorBoss->getNowPos().y));
-			break;
-		case ATTACK_DOWN:
-			mNegativeAtkLv++;
-			break;
-		}
+		// バッドステータス実行
+		mBadStatusBase[mBadStatusId]->run();
 		mState.changeState(cState_End);
 	}
 }

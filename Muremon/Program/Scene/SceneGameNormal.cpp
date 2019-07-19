@@ -241,7 +241,7 @@ SceneGameNormal::recover()
 {
 	if(mBoss->isDead())
 	{
-		mMissionMgr->resetBadStatusAtkLv();
+		UtilBattle::resetBadStatusAtkLv();
 	}
 }
 
@@ -404,7 +404,7 @@ SceneGameNormal::stateGame()
 		{
 			if (actor->isHitCheck())
 			{
-				float mul_power = pow(0.5f, mMissionMgr->getBadStatusAtkLv());
+				float mul_power = pow(0.5f, UtilBattle::getBadStatusAtkLv());
 				mBoss->hit(actor->getNowPos(), (actor->getAtkPower() * mul_power));
 				actor->setIsHitCheck(false);
 				mMissionGauge += actor->getMissionPower();

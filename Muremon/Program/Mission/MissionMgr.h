@@ -46,10 +46,7 @@ public:
 	void	init();
 	void	update();
 	void	draw() const;
-
 	int		isEnd() const;
-	int		getBadStatusAtkLv() const;
-	void	resetBadStatusAtkLv();
 
 private:
 	int		calcRectIndex(int state_index) const;
@@ -85,5 +82,4 @@ private:
 
 	int							mNegativeAlpha;
 	int							mBadStatusId;
-	int							mNegativeAtkLv;
 };

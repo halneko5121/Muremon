@@ -12,7 +12,7 @@
 
 namespace
 {
-	const Vector2f cYoshiRadius = { 50.0f, 150.0f };		// キャラの半径
+	const Vector2f cActorSize = { 50.0f, 150.0f };			// キャラのサイズ
 
 	// 放物線関係
 	const int cParaRandAcc = 15;							// 加速度
@@ -97,12 +97,12 @@ ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mScore = cAddScoreYoshitaro;
-	mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
+	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mOrbitWave = new OrbitWave();
 	mOrbitRebound = new OrbitRebound(mRandDeg, mSpeed);
 
-	mRect.setWidth(cYoshiRadius.x);
-	mRect.setHeight(cYoshiRadius.y);
+	mRect.setWidth(cActorSize.x);
+	mRect.setHeight(cActorSize.y);
 	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);
@@ -239,12 +239,12 @@ ActorYoshi::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
+		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cYoshiRadius.x, UtilGame::getGroundPosY());
+	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 }
 void
@@ -297,14 +297,14 @@ ActorYoshi::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cYoshiRadius.x, -cYoshiRadius.y);
+		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	mIsAtk2 = true;
-	mNowPos = Vector2f(-cYoshiRadius.x, mAtkStartY);
+	mNowPos = Vector2f(-cActorSize.x, mAtkStartY);
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);

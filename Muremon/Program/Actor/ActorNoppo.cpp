@@ -19,17 +19,17 @@
 
 namespace
 {
-	const Vector2f cNoppoRadius = { 50.0f, 150.0f };				// キャラの半径
+	const Vector2f cActorSize = { 50.0f, 150.0f };				// キャラのサイズ
 
 	//放物線関係
-	const int cParaRandAcc = 15;									// 加速度
+	const int cParaRandAcc = 15;								// 加速度
 	const int cParaRandAccMin = 5;
-	const int cParaRandMoveX = -15;									// 移動量				
+	const int cParaRandMoveX = -15;								// 移動量				
 	const int cParaRandMoveXMin = -5;
 
 	// 波処理関係
-	const int cWaveAmplit = 10;										// 振幅(上下に動く幅)					
-	const int cWaveCycle = 60;										// 周期フレーム
+	const int cWaveAmplit = 10;									// 振幅(上下に動く幅)					
+	const int cWaveCycle = 60;									// 周期フレーム
 	
 	// 開始座標
 	const int cRandY = 350;
@@ -87,11 +87,11 @@ ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* 
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
 	mScore = cAddScoreNoppo;
-	mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
+	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mOrbitWave = new OrbitWave();
 
-	mRect.setWidth(cNoppoRadius.x);
-	mRect.setHeight(cNoppoRadius.y);
+	mRect.setWidth(cActorSize.x);
+	mRect.setHeight(cActorSize.y);
 	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);
@@ -231,11 +231,11 @@ ActorNoppo::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
+		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
-	mNowPos = Vector2f(-cNoppoRadius.x, UtilGame::getGroundPosY());
+	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 }
 void
@@ -291,7 +291,7 @@ ActorNoppo::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNoppoRadius.x, -cNoppoRadius.y);
+		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
@@ -299,7 +299,7 @@ ActorNoppo::stateEnterSkyAtk()
 
 	mIsAtk2 = true;
 	mSpeed = getRandomSpeed();
-	mNowPos = Vector2f(-cNoppoRadius.x, mAtkStartY);
+	mNowPos = Vector2f(-cActorSize.x, mAtkStartY);
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);
 }

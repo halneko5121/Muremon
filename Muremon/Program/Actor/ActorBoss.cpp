@@ -19,7 +19,7 @@ namespace
 	const int cDamagePosRand = 5;
 	const int cMoveInterval = 3;
 	const int cGameOverPosX = 450;
-	const Vector2f cRadius = { 300.0f, 380.0f };
+	const Vector2f cActorSize = { 300.0f, 380.0f };
 
 	enum State
 	{
@@ -50,8 +50,8 @@ ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* ve
 	mSpeed = 1;
 	mNowPos = Vector2f(cAppearPosX, UtilGame::getGroundPosY() + 20.0f);
 
-	mRect.setWidth(cRadius.x);
-	mRect.setHeight(cRadius.y);
+	mRect.setWidth(cActorSize.x);
+	mRect.setHeight(cActorSize.y);
 	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);

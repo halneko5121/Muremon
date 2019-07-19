@@ -11,7 +11,7 @@
 
 namespace 
 {
-	const Vector2f cNikumanRadius = { 40.0f, 40.0f };// キャラの半径
+	const Vector2f cActorSize = { 40.0f, 40.0f };	// キャラのサイズ
 
 	// 放物線関係
 	const int cParaRandAcc = 20;					// 加速度
@@ -74,11 +74,11 @@ ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vert
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
 	mScore = cAddScoreNikuman;
-	mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
+	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mOrbitRebound = new OrbitRebound(mRandDeg, mSpeed);
 
-	mRect.setWidth(cNikumanRadius.x);
-	mRect.setHeight(cNikumanRadius.y);
+	mRect.setWidth(cActorSize.x);
+	mRect.setHeight(cActorSize.y);
 	mRect.setCenterPos(mNowPos);
 
 	mState.initialize(cState_Count, cState_Idle);
@@ -176,7 +176,7 @@ ActorNikuman::updateAttack2(const Vector2f& boss_cc)
 	float range_y,range_x = 0;
 	float plus_y ,plus_x  = 0;
 
-	range_x = fabsf(mNowPos.x - (boss_cc.x + cNikumanRadius.x));
+	range_x = fabsf(mNowPos.x - (boss_cc.x + cActorSize.x));
 	range_y = fabsf(mNowPos.y - boss_cc.y);
 
 	plus_x = (range_x / mSpeed);
@@ -216,12 +216,12 @@ ActorNikuman::stateEnterGroundAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
+		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomNikumanSpeed();
 	mAnimation = 0;
-	mNowPos = Vector2f(-cNikumanRadius.x, UtilGame::getGroundPosY());
+	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 }
 void
@@ -269,7 +269,7 @@ ActorNikuman::stateEnterSkyAtk()
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
-		mNowPos = Vector2f(-cNikumanRadius.x, -cNikumanRadius.y);
+		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
 	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
@@ -277,7 +277,7 @@ ActorNikuman::stateEnterSkyAtk()
 
 	mIsAtk2 = true;
 	mSpeed = getRandomNikumanSpeed();
-	mNowPos = Vector2f(-cNikumanRadius.x, mAtkStartY);
+	mNowPos = Vector2f(-cActorSize.x, mAtkStartY);
 	mAngleDegree = 0.0f;
 }
 void

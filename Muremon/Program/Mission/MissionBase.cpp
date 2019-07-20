@@ -22,7 +22,7 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-MissionBase::MissionBase(MissionId id, Texture* texture, Vertex* vertex)
+MissionBase::MissionBase(const MissionId& id, Texture* texture, Vertex* vertex)
 	: mId(id)
 	, mTexture(texture)
 	, mVertex(vertex)

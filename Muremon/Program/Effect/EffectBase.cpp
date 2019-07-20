@@ -11,7 +11,7 @@
  /**
   * @brief	コンストラクタ
   */
-EffectBase::EffectBase(EffectId	id, int rect_index, const EffectParam& param)
+EffectBase::EffectBase(const EffectId& id, int rect_index, const EffectParam& param)
 	: mId(id)
 	, mTexture(param.mTexture)
 	, mVertex(param.mVertex)

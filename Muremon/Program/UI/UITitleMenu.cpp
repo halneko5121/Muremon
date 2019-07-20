@@ -13,7 +13,6 @@
 #include "Library/Graphics/Vertex.h"
 #include "Library/Graphics/Texture.h"
 #include "Program/Util/UtilInput.h"
-#include "Program/DefineGame.h"
 
 namespace
 {

@@ -7,7 +7,6 @@
  *	ŠÇ—ÒFOã
  ******************************************************************/
 
-#include "Library/Graphics/DirectGraphics.h"
 #include "Library/StateMachine.h"
 
 class Texture;

@@ -7,6 +7,7 @@
  *	管理者：三上
  ******************************************************************/
 
+#include "Library/StateMachine.h"
 #include "Program/Scene/SceneBase.h"
 
 class SceneRanking : public SceneBase
@@ -40,13 +41,21 @@ private:
 	void		drawRankingScore() const;	// ランキングスコア
 
 private:
-	RankingData mRankData[5];
-	RankingData mRankNewData;				// 名前とスコアの初期化のため
+	// ステート関数
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(View);
+	DECLAR_STATE_FUNC2(Input);
+	DECLAR_STATE_FUNC2(End);
 
-	int			mRankingNo;					// ランキング順位
-	int			mInputIndex;				// 入力するランキングネームのインデックス
-	int			mInputKey;					// 入力したキー
+private:
+	StateMachine		mState;						// ステート
+	RankingData			mRankData[5];
+	RankingData			mRankNewData;				// 名前とスコアの初期化のため
 
-	int			mNameAlpha[5][3];
-	bool		mIsNameAlphaDown;
+	int					mRankingNo;					// ランキング順位
+	int					mInputIndex;				// 入力するランキングネームのインデックス
+	int					mInputKey;					// 入力したキー
+
+	int					mNameAlpha[5][3];
+	bool				mIsNameAlphaDown;
 };

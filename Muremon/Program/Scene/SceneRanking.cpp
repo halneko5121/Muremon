@@ -73,6 +73,15 @@ namespace
 		R_FONT_9,
 		R_FONT_DOT,
 	};
+
+	enum State
+	{
+		cState_Idle,			// 待機
+		cState_View,			// 確認
+		cState_Input,			// 入力
+		cState_End,				// 終了
+		cState_Count
+	};
 }
 
 SceneRanking::SceneRanking()
@@ -89,6 +98,13 @@ SceneRanking::SceneRanking()
 			mNameAlpha[j][i] = 255;
 		}
 	}
+
+	mState.initialize(cState_Count, cState_Idle);
+	REGIST_STATE_FUNC2(SceneRanking, mState, Idle,		cState_Idle);
+	REGIST_STATE_FUNC2(SceneRanking, mState, View,		cState_View);
+	REGIST_STATE_FUNC2(SceneRanking, mState, Input,		cState_Input);
+	REGIST_STATE_FUNC2(SceneRanking, mState, End,		cState_End);
+	mState.changeState(cState_Idle);
 }
 
 SceneRanking::~SceneRanking()
@@ -355,4 +371,56 @@ SceneRanking::drawRankingScore() const
 			mVertex->drawF(Vector2f((float)cScorePosX + (9 - j)*cDislocateX, (float)cNamePosY + i * cDislocateY), R_FONT_0 + num[9 - j]);
 		}
 	}
+}
+
+// -----------------------------------------------------------------
+// ステート関数
+// -----------------------------------------------------------------
+
+/**
+ * @brief ステート:Idle
+ */
+void
+SceneRanking::stateEnterIdle()
+{
+}
+void
+SceneRanking::stateIdle()
+{
+}
+
+/**
+ * @brief ステート:View
+ */
+void
+SceneRanking::stateEnterView()
+{
+}
+void
+SceneRanking::stateView()
+{
+}
+
+/**
+ * @brief ステート:Input
+ */
+void
+SceneRanking::stateEnterInput()
+{
+}
+void
+SceneRanking::stateInput()
+{
+}
+
+/**
+ * @brief ステート:End
+ */
+void
+SceneRanking::stateEnterEnd()
+{
+}
+void
+SceneRanking::stateEnd()
+{
 }

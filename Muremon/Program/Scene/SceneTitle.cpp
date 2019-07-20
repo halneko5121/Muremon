@@ -156,7 +156,8 @@ void SceneTitle::checkSceneChange()
 	}
 	if (mUITitleMenu->isDecideMenuSelectExit())
 	{
-		PostQuitMessage(0);
+		mIsSceneEnd = true;
+		mNextSceneIndex = cSceneName_GameEnd;
 		return;
 	}
 

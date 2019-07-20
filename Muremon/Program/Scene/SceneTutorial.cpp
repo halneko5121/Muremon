@@ -33,11 +33,11 @@ namespace
 		R_TUTORIAL2,
 	};
 
-	enum TUTORIAL_MODE
+	enum cTutorialPage
 	{
-		TR_REFRESH,
-		TR_NORMAL,
-		TR_END,
+		cTutorialPage_Refresh,
+		cTutorialPage_Normal,
+		cTutorialPage_End,
 	};
 
 	enum State
@@ -57,8 +57,8 @@ SceneTutorial::SceneTutorial()
 	: mState()
 	, mSlideState(2)
 {
-	mTexturePos[TR_REFRESH].y = mTexturePos[TR_NORMAL].y = cTrRightY;
-	mTexturePos[TR_REFRESH].x = mTexturePos[TR_NORMAL].x  = cTrRightX;
+	mTexturePos[cTutorialPage_Refresh].y = mTexturePos[cTutorialPage_Normal].y = cTrRightY;
+	mTexturePos[cTutorialPage_Refresh].x = mTexturePos[cTutorialPage_Normal].x  = cTrRightX;
 
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(SceneTutorial, mState, Idle,			cState_Idle);
@@ -106,10 +106,10 @@ void
 SceneTutorial::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL1);
-	mVertex->drawF(mTexturePos[TR_REFRESH], R_TUTORIAL1);
+	mVertex->drawF(mTexturePos[cTutorialPage_Refresh], R_TUTORIAL1);
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL2);
-	mVertex->drawF(mTexturePos[TR_NORMAL], R_TUTORIAL2);
+	mVertex->drawF(mTexturePos[cTutorialPage_Normal], R_TUTORIAL2);
 }
 
 /**
@@ -149,9 +149,9 @@ SceneTutorial::stateEnterRefreshSlide()
 void
 SceneTutorial::stateRefreshSlide()
 {
-	mTexturePos[TR_REFRESH].x -= 10.f;
+	mTexturePos[cTutorialPage_Refresh].x -= 10.f;
 
-	if (mTexturePos[TR_REFRESH].x <= cTrCenterX)
+	if (mTexturePos[cTutorialPage_Refresh].x <= cTrCenterX)
 	{
 		mState.changeState(cState_Refresh);
 	}
@@ -190,10 +190,10 @@ SceneTutorial::stateNormalSlide()
 	// ¶‚ÖˆÚ“®‚µ‚Ä‚¢‚é
 	if (mSlideState == 1)
 	{
-		mTexturePos[TR_REFRESH].x += 10.f;
-		mTexturePos[TR_NORMAL].x += 10.f;
+		mTexturePos[cTutorialPage_Refresh].x += 10.f;
+		mTexturePos[cTutorialPage_Normal].x += 10.f;
 
-		if (cTrCenterX <= mTexturePos[TR_REFRESH].x)
+		if (cTrCenterX <= mTexturePos[cTutorialPage_Refresh].x)
 		{
 			mState.changeState(cState_Refresh);
 		}
@@ -201,10 +201,10 @@ SceneTutorial::stateNormalSlide()
 	// ‰E‚ÖˆÚ“®‚µ‚Ä‚¢‚é
 	else if (mSlideState == 2)
 	{
-		mTexturePos[TR_NORMAL].x -= 10.f;
-		mTexturePos[TR_REFRESH].x -= 10.f;
+		mTexturePos[cTutorialPage_Normal].x -= 10.f;
+		mTexturePos[cTutorialPage_Refresh].x -= 10.f;
 
-		if (mTexturePos[TR_NORMAL].x <= cTrCenterX)
+		if (mTexturePos[cTutorialPage_Normal].x <= cTrCenterX)
 		{
 			mState.changeState(cState_Normal);
 		}
@@ -253,10 +253,10 @@ SceneTutorial::stateEndSlide()
 	// ¶‚ÖˆÚ“®‚µ‚Ä‚¢‚é
 	if (mSlideState == 1)
 	{
-		mTexturePos[TR_REFRESH].x += 10.f;
-		mTexturePos[TR_NORMAL].x += 10.f;
+		mTexturePos[cTutorialPage_Refresh].x += 10.f;
+		mTexturePos[cTutorialPage_Normal].x += 10.f;
 
-		if (cTrCenterX <= mTexturePos[TR_REFRESH].x)
+		if (cTrCenterX <= mTexturePos[cTutorialPage_Refresh].x)
 		{
 			mState.changeState(cState_End);
 		}
@@ -264,10 +264,10 @@ SceneTutorial::stateEndSlide()
 	// ‰E‚ÖˆÚ“®‚µ‚Ä‚¢‚é
 	else if (mSlideState == 2)
 	{
-		mTexturePos[TR_REFRESH].x -= 10.f;
-		mTexturePos[TR_NORMAL].x -= 10.f;
+		mTexturePos[cTutorialPage_Refresh].x -= 10.f;
+		mTexturePos[cTutorialPage_Normal].x -= 10.f;
 
-		if (mTexturePos[TR_NORMAL].x <= -cTrCenterX)
+		if (mTexturePos[cTutorialPage_Normal].x <= -cTrCenterX)
 		{
 			mState.changeState(cState_End);
 		}

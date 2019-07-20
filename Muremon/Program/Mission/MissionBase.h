@@ -35,8 +35,8 @@ protected:
 
 protected:
 	MissionId		mId;
-	Texture*		mTexture;				// テクスチャ
-	Vertex*			mVertex;				// バーテックス
-	int				mKeyCount;
-	int				mTime;
+	Texture*		mTexture;			// テクスチャ
+	Vertex*			mVertex;			// バーテックス
+	int				mKeyCount;			// キー入力数
+	int				mTime;				// ミッション時間
 };

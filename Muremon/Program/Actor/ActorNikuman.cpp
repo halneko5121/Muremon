@@ -61,7 +61,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorNikuman::ActorNikuman(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
 	, mOrbitRebound(nullptr)

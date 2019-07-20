@@ -34,7 +34,7 @@ namespace
 	};
 }
 
-ActorBoss::ActorBoss(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+ActorBoss::ActorBoss(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
 	, mLife(cInitLife)

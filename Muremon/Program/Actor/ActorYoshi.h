@@ -15,7 +15,7 @@ class OrbitRebound;
 class ActorYoshi : public ActorBase
 {
 public:
-	ActorYoshi(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
+	ActorYoshi(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorYoshi();
 
 	void			updateAttack2();

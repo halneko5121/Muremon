@@ -83,7 +83,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorYoshi::ActorYoshi(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
 	, mOrbitWave(nullptr)

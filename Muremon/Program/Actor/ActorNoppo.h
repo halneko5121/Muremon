@@ -15,7 +15,7 @@ class OrbitWave;
 class ActorNoppo : public ActorBase
 {
 public:
-	ActorNoppo(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
+	ActorNoppo(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorNoppo(void);
 
 	void			updateAttack2();

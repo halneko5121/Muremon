@@ -47,7 +47,7 @@ public:
 	/**
 	 * @brief	アクターの生成
 	 */
-	ActorBase*			createActor(ActorId id, Texture* texture, Vertex* vertex);
+	ActorBase*			createActor(const ActorId& id, Texture* texture, Vertex* vertex);
 
 	/**
 	 * @brief	アクターの破棄

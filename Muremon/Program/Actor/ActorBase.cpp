@@ -30,7 +30,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorBase::ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+ActorBase::ActorBase(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: mActorId(actor_id)
 	, mUniqId(uniq_id)
 	, mTexture(texture)

@@ -75,7 +75,7 @@ namespace
 /**
  * @brief コンストラクタ
  */
-ActorNoppo::ActorNoppo(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
 	, mOrbitWave(nullptr)

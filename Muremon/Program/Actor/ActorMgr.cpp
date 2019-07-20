@@ -16,7 +16,7 @@
 namespace
 {
 	ActorBase*
-	createActror(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex)
+	createActror(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	{
 		switch (actor_id)
 		{
@@ -73,7 +73,7 @@ ActorMgr::destroy()
  * @brief	アクターの生成
  */
 ActorBase*
-ActorMgr::createActor(ActorId id, Texture* texture, Vertex* vertex)
+ActorMgr::createActor(const ActorId& id, Texture* texture, Vertex* vertex)
 {
 	ActorBase* actor = createActror(id, mUniqId, texture, vertex);
 	mActorList.push_back(actor);

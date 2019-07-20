@@ -14,7 +14,7 @@ class OrbitRebound;
 class ActorNikuman :	public ActorBase
 {
 public:
-	ActorNikuman(ActorId id, int uniq_id, Texture* texture, Vertex* vertex);
+	ActorNikuman(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorNikuman();
 
 	void			updateAttack2(const Vector2f& boss_cc);

@@ -16,7 +16,7 @@ enum ActorId;
 class ActorBase
 {
 public:
-	ActorBase(ActorId actor_id, int uniq_id, Texture* texture, Vertex* vertex);
+	ActorBase(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorBase();
 
 	// ‚±‚¿‚ç‚ðoverride ‚µ‚Ä‰º‚³‚¢

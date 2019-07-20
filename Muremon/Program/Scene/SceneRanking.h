@@ -22,22 +22,25 @@ public:
 	void		end() override;
 
 private:
+	enum { cRankingCount = 5 };
+	enum { cRankingNameCount = 3 };
+
 	struct RankingData
 	{
-		char	mName[3];	// 名前
-		int		mScore;		// スコア
+		char	mName[cRankingNameCount];	// 名前
+		int		mScore;						// スコア
 	};
 
 private:
-	void		loadRanking();				// データの読み込み
-	void		writeRanking();				// データの書き込み
-	int			checkRankingIn();			// ランクインしてるかチェック
-	void		sortRanking(int new_rank);	// スコアの並び替え
+	void		loadRanking();						// データの読み込み
+	void		writeRanking();						// データの書き込み
+	int			checkRankingIn();					// ランクインしてるかチェック
+	void		sortRanking(int new_rank_index);	// スコアの並び替え
 
-	void		drawBackGround() const;		// ランキング背景
-	void		drawRankingPlace() const;	// ランキング位置
-	void		drawRankingName() const;	// ランキング名前
-	void		drawRankingScore() const;	// ランキングスコア
+	void		drawBackGround() const;				// ランキング背景
+	void		drawRankingPlace() const;			// ランキング位置
+	void		drawRankingName() const;			// ランキング名前
+	void		drawRankingScore() const;			// ランキングスコア
 
 private:
 	// ステート関数
@@ -48,13 +51,13 @@ private:
 
 private:
 	StateMachine		mState;						// ステート
-	RankingData			mRankData[5];
+	RankingData			mRankData[cRankingCount];
 	RankingData			mRankNewData;				// 名前とスコアの初期化のため
 
 	int					mRankingNo;					// ランキング順位
 	int					mInputIndex;				// 入力するランキングネームのインデックス
 	int					mInputKey;					// 入力したキー
 
-	int					mNameAlpha[5][3];
+	int					mNameAlpha[cRankingCount][cRankingNameCount];
 	bool				mIsNameAlphaDown;
 };

@@ -91,9 +91,9 @@ SceneRanking::SceneRanking()
 	, mInputKey(0)
 	, mIsNameAlphaDown(false)
 {
-	for (int j = 0; j < 5; j++)
+	for (int j = 0; j < cRankingCount; j++)
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < cRankingNameCount; i++)
 		{
 			mNameAlpha[j][i] = 255;
 		}
@@ -185,7 +185,7 @@ SceneRanking::loadRanking()
 		return;
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < cRankingCount; i++)
 	{
 		fscanf(fp, "%hhd,%hhd,%hhd,%d\n", &mRankData[i].mName[0], &mRankData[i].mName[1], &mRankData[i].mName[2], &mRankData[i].mScore);
 	}
@@ -201,7 +201,7 @@ SceneRanking::writeRanking()
 	FILE *fp;
 	fopen_s(&fp, "Data\\rankingdata.txt", "w");
 
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < cRankingCount; i++)
 	{
 		fprintf(fp,"%d,%d,%d,%d\n",mRankData[i].mName[0],mRankData[i].mName[1],mRankData[i].mName[2],mRankData[i].mScore);
 	}
@@ -215,7 +215,7 @@ int
 SceneRanking::checkRankingIn()
 {
 	int ranking_num = -1;
-	for (int i = 0; i < 5;i++)
+	for (int i = 0; i < cRankingCount;i++)
 	{
 		if (mRankData[i].mScore < mRankNewData.mScore) {
 			ranking_num = i;
@@ -229,21 +229,21 @@ SceneRanking::checkRankingIn()
 /**
  * @brief	ランキングのソート
  */
-void SceneRanking::sortRanking(int new_rank)
+void SceneRanking::sortRanking(int new_rank_index)
 {
 	// ランクインした順位からずれていく
-	if (new_rank < 5)
+	if (new_rank_index < cRankingCount)
 	{
-		for (int j = 4 ; j > new_rank; j--)
+		for (int j = (cRankingCount-1) ; j > new_rank_index; j--)
 		{
 			mRankData[j] = mRankData[j-1];
 		}
 
 		// ランクインしたところにプレイしたデータを入れる
-		mRankData[new_rank].mName[0] = mRankNewData.mName[0];
-		mRankData[new_rank].mName[1] = mRankNewData.mName[1];
-		mRankData[new_rank].mName[2] = mRankNewData.mName[2];
-		mRankData[new_rank].mScore	 = mRankNewData.mScore;
+		mRankData[new_rank_index].mName[0] = mRankNewData.mName[0];
+		mRankData[new_rank_index].mName[1] = mRankNewData.mName[1];
+		mRankData[new_rank_index].mName[2] = mRankNewData.mName[2];
+		mRankData[new_rank_index].mScore	 = mRankNewData.mScore;
 	}
 }
 
@@ -264,7 +264,7 @@ SceneRanking::drawBackGround() const
 void
 SceneRanking::drawRankingPlace() const
 {
-	for (int i = 0;i < 5;i++)
+	for (int i = 0;i < cRankingCount;i++)
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
 		mVertex->setColor(255, 255, 255, 255);
@@ -279,9 +279,9 @@ SceneRanking::drawRankingPlace() const
 void
 SceneRanking::drawRankingName() const
 {
-	for (int j = 0;j < 5;j++)
+	for (int j = 0;j < cRankingCount;j++)
 	{
-		for (int i = 0;i < 3;i++)
+		for (int i = 0;i < cRankingNameCount;i++)
 		{
 			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
 			mVertex->setColor(mNameAlpha[j][i], 255, 255, 255);
@@ -395,7 +395,7 @@ SceneRanking::stateInput()
 	}
 
 	// 入力完了
-	if (mInputIndex == 3)
+	if (mInputIndex == cRankingNameCount)
 	{
 		mState.changeState(cState_End);
 		return;

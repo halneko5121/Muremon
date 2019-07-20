@@ -24,10 +24,6 @@ enum EffectId
 	cEffectId_Count,
 };
 
-class EffectBase;
-class Texture;
-class Vertex;
-
 class EffectMgr
 {
 public:

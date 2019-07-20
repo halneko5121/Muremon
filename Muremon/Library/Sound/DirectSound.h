@@ -146,4 +146,4 @@ private:
 	int						mMaxSound;
 };
 
-static DirectSound* GetDirectSound() { return DirectSound::getInstance(); }
+static DirectSound* getDirectSound() { return DirectSound::getInstance(); }

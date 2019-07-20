@@ -18,7 +18,7 @@
 ActorBase*
 UtilActor::createActor(const ActorId& id, Texture* texture, Vertex* vertex)
 {
-	return GetActorMgr()->createActor(id, texture, vertex);
+	return getActorMgr()->createActor(id, texture, vertex);
 }
 
 /**
@@ -29,8 +29,8 @@ UtilActor::createActor(const ActorId& id, Texture* texture, Vertex* vertex)
 ActorBase*
 UtilActor::searchSingleActor(const ActorId& id)
 {
-	ActorMgr::ActorIterator it = GetActorMgr()->begin();
-	while (it != GetActorMgr()->end())
+	ActorMgr::ActorIterator it = getActorMgr()->begin();
+	while (it != getActorMgr()->end())
 	{
 		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
 		APP_POINTER_ASSERT(actor);

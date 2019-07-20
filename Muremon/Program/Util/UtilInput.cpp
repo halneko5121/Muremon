@@ -15,7 +15,7 @@
 bool
 UtilInput::isKeyPushed(unsigned short key)
 {
-	return GetInputKey()->isKeyPushed(key);
+	return getInputKey()->isKeyPushed(key);
 }
 
 /**
@@ -24,7 +24,7 @@ UtilInput::isKeyPushed(unsigned short key)
 bool
 UtilInput::isAnyKeyPushed()
 {
-	return GetInputKey()->isAnyKeyPushed();
+	return getInputKey()->isAnyKeyPushed();
 }
 
 /**
@@ -33,7 +33,7 @@ UtilInput::isAnyKeyPushed()
 bool
 UtilInput::isKeyPushedDecide()
 {
-	return GetInputKey()->isKeyPushed(cKey_Z);
+	return getInputKey()->isKeyPushed(cKey_Z);
 }
 
 /**
@@ -42,7 +42,7 @@ UtilInput::isKeyPushedDecide()
 bool
 UtilInput::isKeyPushedReturn()
 {
-	return GetInputKey()->isKeyPushed(cKey_Return);
+	return getInputKey()->isKeyPushed(cKey_Return);
 }
 
 /**
@@ -51,19 +51,19 @@ UtilInput::isKeyPushedReturn()
 bool
 UtilInput::isKeyPushedLineOne()
 {
-	if (GetInputKey()->isKeyPushed(cKey_Q))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_W))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_E))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_R))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_T))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_Y))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_U))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_I))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_O))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_P))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Q))				return true;
+	if (getInputKey()->isKeyPushed(cKey_W))				return true;
+	if (getInputKey()->isKeyPushed(cKey_E))				return true;
+	if (getInputKey()->isKeyPushed(cKey_R))				return true;
+	if (getInputKey()->isKeyPushed(cKey_T))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Y))				return true;
+	if (getInputKey()->isKeyPushed(cKey_U))				return true;
+	if (getInputKey()->isKeyPushed(cKey_I))				return true;
+	if (getInputKey()->isKeyPushed(cKey_O))				return true;
+	if (getInputKey()->isKeyPushed(cKey_P))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_AT))			return true;
-	if (GetInputKey()->isKeyPushed(cKey_Lbracket))		return true;
+	if (getInputKey()->isKeyPushed(cKey_AT))			return true;
+	if (getInputKey()->isKeyPushed(cKey_Lbracket))		return true;
 
 	return false;
 }
@@ -74,19 +74,19 @@ UtilInput::isKeyPushedLineOne()
 bool
 UtilInput::isKeyPushedLineTwo()
 {
-	if (GetInputKey()->isKeyPushed(cKey_A))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_S))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_D))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_F))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_G))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_H))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_J))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_K))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_L))				return true;
+	if (getInputKey()->isKeyPushed(cKey_A))				return true;
+	if (getInputKey()->isKeyPushed(cKey_S))				return true;
+	if (getInputKey()->isKeyPushed(cKey_D))				return true;
+	if (getInputKey()->isKeyPushed(cKey_F))				return true;
+	if (getInputKey()->isKeyPushed(cKey_G))				return true;
+	if (getInputKey()->isKeyPushed(cKey_H))				return true;
+	if (getInputKey()->isKeyPushed(cKey_J))				return true;
+	if (getInputKey()->isKeyPushed(cKey_K))				return true;
+	if (getInputKey()->isKeyPushed(cKey_L))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_SemiColon))		return true;
-	if (GetInputKey()->isKeyPushed(cKey_Colon))			return true;
-	if (GetInputKey()->isKeyPushed(cKey_Rbracket))		return true;
+	if (getInputKey()->isKeyPushed(cKey_SemiColon))		return true;
+	if (getInputKey()->isKeyPushed(cKey_Colon))			return true;
+	if (getInputKey()->isKeyPushed(cKey_Rbracket))		return true;
 
 	return false;
 }
@@ -97,18 +97,18 @@ UtilInput::isKeyPushedLineTwo()
 bool
 UtilInput::isKeyPushedLineThree()
 {
-	if (GetInputKey()->isKeyPushed(cKey_Z))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_X))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_C))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_V))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_B))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_N))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_M))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Z))				return true;
+	if (getInputKey()->isKeyPushed(cKey_X))				return true;
+	if (getInputKey()->isKeyPushed(cKey_C))				return true;
+	if (getInputKey()->isKeyPushed(cKey_V))				return true;
+	if (getInputKey()->isKeyPushed(cKey_B))				return true;
+	if (getInputKey()->isKeyPushed(cKey_N))				return true;
+	if (getInputKey()->isKeyPushed(cKey_M))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_Comma))			return true;
-	if (GetInputKey()->isKeyPushed(cKey_Period))		return true;
-	if (GetInputKey()->isKeyPushed(cKey_Slash))			return true;
-	if (GetInputKey()->isKeyPushed(cKey_BackSlash))		return true;
+	if (getInputKey()->isKeyPushed(cKey_Comma))			return true;
+	if (getInputKey()->isKeyPushed(cKey_Period))		return true;
+	if (getInputKey()->isKeyPushed(cKey_Slash))			return true;
+	if (getInputKey()->isKeyPushed(cKey_BackSlash))		return true;
 
 	return false;
 }
@@ -119,29 +119,29 @@ UtilInput::isKeyPushedLineThree()
 bool
 UtilInput::isKeyPushedOdd()
 {
-	if (GetInputKey()->isKeyPushed(cKey_Q))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_A))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_Z))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Q))				return true;
+	if (getInputKey()->isKeyPushed(cKey_A))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Z))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_E))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_D))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_C))				return true;
+	if (getInputKey()->isKeyPushed(cKey_E))				return true;
+	if (getInputKey()->isKeyPushed(cKey_D))				return true;
+	if (getInputKey()->isKeyPushed(cKey_C))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_T))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_G))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_B))				return true;
+	if (getInputKey()->isKeyPushed(cKey_T))				return true;
+	if (getInputKey()->isKeyPushed(cKey_G))				return true;
+	if (getInputKey()->isKeyPushed(cKey_B))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_U))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_J))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_M))				return true;
+	if (getInputKey()->isKeyPushed(cKey_U))				return true;
+	if (getInputKey()->isKeyPushed(cKey_J))				return true;
+	if (getInputKey()->isKeyPushed(cKey_M))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_O))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_L))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_Period))		return true;
+	if (getInputKey()->isKeyPushed(cKey_O))				return true;
+	if (getInputKey()->isKeyPushed(cKey_L))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Period))		return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_AT))			return true;
-	if (GetInputKey()->isKeyPushed(cKey_Colon))			return true;
-	if (GetInputKey()->isKeyPushed(cKey_BackSlash))		return true;
+	if (getInputKey()->isKeyPushed(cKey_AT))			return true;
+	if (getInputKey()->isKeyPushed(cKey_Colon))			return true;
+	if (getInputKey()->isKeyPushed(cKey_BackSlash))		return true;
 	
 	return false;
 }
@@ -152,28 +152,28 @@ UtilInput::isKeyPushedOdd()
 bool
 UtilInput::isKeyPushedEven()
 {
-	if (GetInputKey()->isKeyPushed(cKey_W))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_S))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_X))				return true;
+	if (getInputKey()->isKeyPushed(cKey_W))				return true;
+	if (getInputKey()->isKeyPushed(cKey_S))				return true;
+	if (getInputKey()->isKeyPushed(cKey_X))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_R))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_F))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_V))				return true;
+	if (getInputKey()->isKeyPushed(cKey_R))				return true;
+	if (getInputKey()->isKeyPushed(cKey_F))				return true;
+	if (getInputKey()->isKeyPushed(cKey_V))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_Y))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_H))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_N))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Y))				return true;
+	if (getInputKey()->isKeyPushed(cKey_H))				return true;
+	if (getInputKey()->isKeyPushed(cKey_N))				return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_I))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_K))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_Comma))			return true;
+	if (getInputKey()->isKeyPushed(cKey_I))				return true;
+	if (getInputKey()->isKeyPushed(cKey_K))				return true;
+	if (getInputKey()->isKeyPushed(cKey_Comma))			return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_P))				return true;
-	if (GetInputKey()->isKeyPushed(cKey_SemiColon))		return true;
-	if (GetInputKey()->isKeyPushed(cKey_Slash))			return true;
+	if (getInputKey()->isKeyPushed(cKey_P))				return true;
+	if (getInputKey()->isKeyPushed(cKey_SemiColon))		return true;
+	if (getInputKey()->isKeyPushed(cKey_Slash))			return true;
 
-	if (GetInputKey()->isKeyPushed(cKey_Lbracket))		return true;
-	if (GetInputKey()->isKeyPushed(cKey_Rbracket))		return true;
+	if (getInputKey()->isKeyPushed(cKey_Lbracket))		return true;
+	if (getInputKey()->isKeyPushed(cKey_Rbracket))		return true;
 
 	return false;
 }
@@ -185,7 +185,7 @@ UtilInput::isKeyPushedEven()
 bool
 UtilInput::isKeyDown(unsigned short key)
 {
-	return GetInputKey()->isKeyDown(key);
+	return getInputKey()->isKeyDown(key);
 }
 
 /**
@@ -195,7 +195,7 @@ UtilInput::isKeyDown(unsigned short key)
 bool
 UtilInput::isKeyReleased(unsigned short key)
 {
-	return GetInputKey()->isKeyReleased(key);
+	return getInputKey()->isKeyReleased(key);
 }
 
 /**
@@ -204,5 +204,5 @@ UtilInput::isKeyReleased(unsigned short key)
 bool
 UtilInput::isAnyKeyDown()
 {
-	return GetInputKey()->isAnyKeyDown();
+	return getInputKey()->isAnyKeyDown();
 }

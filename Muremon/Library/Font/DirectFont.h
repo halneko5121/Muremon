@@ -116,4 +116,4 @@ private:
     D3DXVECTOR2			mFontSize;		// フォントサイズ
 };
 
-static DirectFont* GetDirectFont() { return DirectFont::getInstance(); }
+static DirectFont* getDirectFont() { return DirectFont::getInstance(); }

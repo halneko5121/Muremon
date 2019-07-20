@@ -62,7 +62,7 @@ SceneGameRefresh::SceneGameRefresh()
 
 SceneGameRefresh::~SceneGameRefresh(void)
 {
-	GetActorMgr()->clearActor();
+	getActorMgr()->clearActor();
 	APP_SAFE_DELETE(mUIRefreshGame);
 }
 
@@ -72,7 +72,7 @@ void SceneGameRefresh::impleInit()
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	// ボス
-	mBoss = dynamic_cast<ActorBoss*>(GetActorMgr()->createActor(cActorId_Boss, mTexture, mVertex));
+	mBoss = dynamic_cast<ActorBoss*>(getActorMgr()->createActor(cActorId_Boss, mTexture, mVertex));
 
 	// プレイヤー3種類分
 	for (int actor_id = cActorId_Noppo; actor_id <= cActorId_Yoshi; actor_id++)
@@ -80,12 +80,12 @@ void SceneGameRefresh::impleInit()
 		// 各最大数生成
 		for (int j = 0; j < cMaxPlayerCount; j++)
 		{
-			mActor[actor_id][j] = GetActorMgr()->createActor(static_cast<ActorId>(actor_id), mTexture, mVertex);
+			mActor[actor_id][j] = getActorMgr()->createActor(static_cast<ActorId>(actor_id), mTexture, mVertex);
 		}
 	}
 
 	// 初期化
-	GetActorMgr()->init();
+	getActorMgr()->init();
 
 	mUIRefreshGame->init();
 
@@ -103,10 +103,10 @@ void SceneGameRefresh::draw() const
 	drawBg();
 
 	// アクターの描画
-	GetActorMgr()->draw();
+	getActorMgr()->draw();
 
 	// エフェクト描画
-	GetEffectMgr()->draw();
+	getEffectMgr()->draw();
 
 	// UI
 	mUIRefreshGame->draw(*mBoss);
@@ -286,14 +286,14 @@ SceneGameRefresh::stateGame()
 	updateRunAtk();
 
 	// アクターの更新
-	GetActorMgr()->update();
+	getActorMgr()->update();
 
 	// エフェクトの更新
-	GetEffectMgr()->update();
+	getEffectMgr()->update();
 
 	// ヒットチェック
-	ActorMgr::ActorIterator it_begin = GetActorMgr()->begin();
-	ActorMgr::ActorIterator it_end = GetActorMgr()->end();
+	ActorMgr::ActorIterator it_begin = getActorMgr()->begin();
+	ActorMgr::ActorIterator it_end = getActorMgr()->end();
 	for (ActorMgr::ActorIterator it = it_begin; it != it_end; it++)
 	{
 		ActorBase* actor = dynamic_cast<ActorBase*>(*it);

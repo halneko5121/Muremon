@@ -78,4 +78,4 @@ private:
 	EffectList			mEffectList;		// エフェクトを保管しておくリスト
 };
 
-static EffectMgr* GetEffectMgr() { return EffectMgr::getInstance(); }
+static EffectMgr* getEffectMgr() { return EffectMgr::getInstance(); }

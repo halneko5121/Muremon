@@ -25,7 +25,7 @@ namespace
 void
 UtilGame::setGameModeRefresh()
 {
-	GetGameInfoMgr()->setGameModeRefresh();
+	getGameInfoMgr()->setGameModeRefresh();
 }
 
 /**
@@ -34,7 +34,7 @@ UtilGame::setGameModeRefresh()
 void
 UtilGame::setGameModeNormal()
 {
-	GetGameInfoMgr()->setGameModeNormal();
+	getGameInfoMgr()->setGameModeNormal();
 }
 
 /**
@@ -43,7 +43,7 @@ UtilGame::setGameModeNormal()
 bool
 UtilGame::isGameModeRefresh()
 {
-	return GetGameInfoMgr()->isGameModeRefresh();
+	return getGameInfoMgr()->isGameModeRefresh();
 }
 
 /**
@@ -52,7 +52,7 @@ UtilGame::isGameModeRefresh()
 bool
 UtilGame::isGameModeNormal()
 {
-	return GetGameInfoMgr()->isGameModeNormal();
+	return getGameInfoMgr()->isGameModeNormal();
 }
 
 /**
@@ -61,7 +61,7 @@ UtilGame::isGameModeNormal()
 void
 UtilGame::setScore(int score)
 {
-	GetGameInfoMgr()->getGameScore()->setScore(score);
+	getGameInfoMgr()->getGameScore()->setScore(score);
 }
 
 /**
@@ -70,7 +70,7 @@ UtilGame::setScore(int score)
 int
 UtilGame::getScore()
 {
-	return GetGameInfoMgr()->getGameScore()->getScore();
+	return getGameInfoMgr()->getGameScore()->getScore();
 }
 
 /**
@@ -79,7 +79,7 @@ UtilGame::getScore()
 void
 UtilGame::addScore(int add_score)
 {
-	GetGameInfoMgr()->getGameScore()->addScore(add_score);
+	getGameInfoMgr()->getGameScore()->addScore(add_score);
 }
 
 /**
@@ -88,7 +88,7 @@ UtilGame::addScore(int add_score)
 void
 UtilGame::mulScore(int mul_score)
 {
-	GetGameInfoMgr()->getGameScore()->mulScore(mul_score);
+	getGameInfoMgr()->getGameScore()->mulScore(mul_score);
 }
 
 /**

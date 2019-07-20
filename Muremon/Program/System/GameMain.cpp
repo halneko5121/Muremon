@@ -118,13 +118,13 @@ GameMain::winMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 
 	// 各ライブラリの初期化
 	// DirectInput初期化
-	if(FAILED(GetInputKey()->init(mWindow->getWindowHandle())))
+	if(FAILED(getInputKey()->init(mWindow->getWindowHandle())))
 	{
 		MessageBox(NULL, TEXT("DirectInputの初期化に失敗"), NULL, MB_OK);
 		return 0;
 	}
 
-	if(FAILED(GetInputMouse()->init(mWindow->getWindowHandle())))
+	if(FAILED(getInputMouse()->init(mWindow->getWindowHandle())))
 	{
 		MessageBox(NULL, TEXT("DirectInputの初期化に失敗"), NULL, MB_OK);
 		return 0;
@@ -138,14 +138,14 @@ GameMain::winMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	}
 
 	// DirectFont初期化
-	if(FAILED(GetDirectFont()->init(mGraphics->getDevice())))
+	if(FAILED(getDirectFont()->init(mGraphics->getDevice())))
 	{
 		MessageBox(NULL, TEXT("DirectFontの初期化に失敗"), NULL, MB_OK);
 		return 0;
 	}
 
 	// DirectSound初期化
-	if(FAILED(GetDirectSound()->init(mWindow->getWindowHandle())))
+	if(FAILED(getDirectSound()->init(mWindow->getWindowHandle())))
 	{
 		MessageBox(NULL, TEXT("DirectSoundの初期化に失敗"), NULL, MB_OK);
 		return 0;
@@ -172,10 +172,10 @@ GameMain::msgLoop(void)
 
 	// 描画設定
 	mGraphics->initRender();
-	GetFadeMgr()->init(mGraphics->getDevice());
-	GetFadeMgr()->setColor(0, 0, 0);
+	getFadeMgr()->init(mGraphics->getDevice());
+	getFadeMgr()->setColor(0, 0, 0);
 
-	GetDirectSound()->load("Data\\sound_data.txt");
+	getDirectSound()->load("Data\\sound_data.txt");
 
 	// 最初のシーンの初期化
 	mState.changeState(cState_Init);
@@ -199,14 +199,14 @@ GameMain::msgLoop(void)
 
 			if(nowTime - oldTime >= 1000/60)
 			{
-				GetInputKey()->update();
+				getInputKey()->update();
 				mGraphics->renderStart(mBackground);
-				GetFadeMgr()->update();
+				getFadeMgr()->update();
 
 				mState.executeState();
 				mScene->draw();
 
-				GetFadeMgr()->draw();
+				getFadeMgr()->draw();
 				mGraphics->renderEnd();
 
 				oldTime = nowTime;
@@ -216,7 +216,7 @@ GameMain::msgLoop(void)
 			static DWORD oldTime2 = timeGetTime();
 			DWORD nowTime2 = timeGetTime();
 			if(nowTime2 - oldTime2 >= 1000){
-				GetDirectFont()->draw("a",750,550);
+				getDirectFont()->draw("a",750,550);
 				cnt = 0;
 				oldTime2 = nowTime2;
 			}
@@ -242,9 +242,9 @@ GameMain::release(void)
 	mGraphics = nullptr;
 	FadeMgr::destroy();
 	DirectFont::destroy();
-	GetInputMouse()->release();
+	getInputMouse()->release();
 	DirectInputMouse::destroy();
-	GetInputKey()->release();
+	getInputKey()->release();
 	DirectInputKey::destroy();
 	ActorMgr::destroy();
 	EffectMgr::destroy();
@@ -294,7 +294,7 @@ GameMain::stateIdle()
 void
 GameMain::stateEnterInit()
 {
-	GetFadeMgr()->fadeIn();
+	getFadeMgr()->fadeIn();
 
 	// シーンIDによって分岐
 	int next_scene_id = mScene->getChangeSceneID();
@@ -316,7 +316,7 @@ GameMain::stateEnterInit()
 void
 GameMain::stateInit()
 {
-	if (GetFadeMgr()->isFadeEnd())
+	if (getFadeMgr()->isFadeEnd())
 	{
 		mState.changeState(cState_Run);
 		return;
@@ -341,13 +341,13 @@ GameMain::stateRun()
 		if (mScene->getChangeSceneID() == cSceneId_Title)
 		{
 			mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
-			GetFadeMgr()->setColor(255, 255, 255);
+			getFadeMgr()->setColor(255, 255, 255);
 		}
 		// タイトルが終わったらクリア時の色を黒にする
 		if (mScene->getChangeSceneID() == cSceneId_Prologue)
 		{
 			mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
-			GetFadeMgr()->setColor(0, 0, 0);
+			getFadeMgr()->setColor(0, 0, 0);
 		}
 
 		mState.changeState(cState_End);
@@ -361,12 +361,12 @@ GameMain::stateRun()
 void
 GameMain::stateEnterEnd()
 {
-	GetFadeMgr()->fadeOut();
+	getFadeMgr()->fadeOut();
 }
 void
 GameMain::stateEnd()
 {
-	if (GetFadeMgr()->isFadeEnd())
+	if (getFadeMgr()->isFadeEnd())
 	{
 		// シーン終了
 		mScene->end();

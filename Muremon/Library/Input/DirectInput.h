@@ -130,7 +130,7 @@ private:
 	BYTE						mKeyStatePrev[MAX_KEYDATA];		// キー情報格納配列（1f前）
 };
 
-static DirectInputKey* GetInputKey() { return DirectInputKey::getInstance(); }
+static DirectInputKey* getInputKey() { return DirectInputKey::getInstance(); }
 
 
 // マウスからの入力を扱うクラス(仮作成)
@@ -219,4 +219,4 @@ private:
 	MouseData					mMouseData;
 };
 
-static DirectInputMouse* GetInputMouse() { return DirectInputMouse::getInstance(); }
+static DirectInputMouse* getInputMouse() { return DirectInputMouse::getInstance(); }

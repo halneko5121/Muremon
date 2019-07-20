@@ -18,7 +18,7 @@
 LPDIRECT3DDEVICE9
 UtilGraphics::getGraphicsDevice()
 {
-	return GetDirectGraphics()->getDevice();
+	return getDirectGraphics()->getDevice();
 }
 
 /**

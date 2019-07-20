@@ -516,7 +516,7 @@ void
 MissionMgr::stateEnterOugi()
 {
 	EffectParam param(mTexture, mVertex, Vector2f(0.0f, 0.0f));
-	mOugiEffect = GetEffectMgr()->createEffect(cEffectId_OugiEffect, param);
+	mOugiEffect = getEffectMgr()->createEffect(cEffectId_OugiEffect, param);
 }
 void
 MissionMgr::stateOugi()

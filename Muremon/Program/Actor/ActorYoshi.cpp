@@ -266,7 +266,7 @@ ActorYoshi::stateGroundAtk()
 		UtilSound::playOnce(S_YOSHI_HIP);
 
 		EffectParam param(mTexture, mVertex, mNowPos);
-		GetEffectMgr()->createEffect(cEffectId_HitEffect3, param);
+		getEffectMgr()->createEffect(cEffectId_HitEffect3, param);
 
 		mState.changeState(cState_GroundDeath);
 		return;
@@ -328,7 +328,7 @@ ActorYoshi::stateSkyAtk()
 		UtilSound::playOnce(S_YOSHI_HUSEN);
 
 		EffectParam param(mTexture, mVertex, mNowPos);
-		GetEffectMgr()->createEffect(cEffectId_HitEffect4, param);
+		getEffectMgr()->createEffect(cEffectId_HitEffect4, param);
 
 		mState.changeState(cState_SkyDeathAnime);
 		return;

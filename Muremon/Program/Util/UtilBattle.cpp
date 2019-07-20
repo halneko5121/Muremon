@@ -88,9 +88,9 @@ UtilBattle::isRunStrongSkyAttack()
 void
 UtilBattle::resetAtkCount()
 {
-	GetGameInfoMgr()->setWeakAtkCount(0);
-	GetGameInfoMgr()->setMediumAtkCount(0);
-	GetGameInfoMgr()->setStrongAtkCount(0);
+	getGameInfoMgr()->setWeakAtkCount(0);
+	getGameInfoMgr()->setMediumAtkCount(0);
+	getGameInfoMgr()->setStrongAtkCount(0);
 }
 
 /**
@@ -99,7 +99,7 @@ UtilBattle::resetAtkCount()
 void
 UtilBattle::setWeakAtkCount(int count)
 {
-	GetGameInfoMgr()->setWeakAtkCount(count);
+	getGameInfoMgr()->setWeakAtkCount(count);
 }
 
 /**
@@ -108,9 +108,9 @@ UtilBattle::setWeakAtkCount(int count)
 void
 UtilBattle::addWeakAtkCount()
 {
-	int count =GetGameInfoMgr()->getWeakAtkCount();
+	int count =getGameInfoMgr()->getWeakAtkCount();
 	count++;
-	GetGameInfoMgr()->setWeakAtkCount(count);
+	getGameInfoMgr()->setWeakAtkCount(count);
 }
 
 /**
@@ -119,7 +119,7 @@ UtilBattle::addWeakAtkCount()
 int
 UtilBattle::getWeakAtkCount()
 {
-	return GetGameInfoMgr()->getWeakAtkCount();
+	return getGameInfoMgr()->getWeakAtkCount();
 }
 
 /**
@@ -128,7 +128,7 @@ UtilBattle::getWeakAtkCount()
 void
 UtilBattle::setMediumAtkCount(int count)
 {
-	GetGameInfoMgr()->setMediumAtkCount(count);
+	getGameInfoMgr()->setMediumAtkCount(count);
 }
 
 /**
@@ -137,9 +137,9 @@ UtilBattle::setMediumAtkCount(int count)
 void
 UtilBattle::addMediumAtkCount()
 {
-	int count = GetGameInfoMgr()->getMediumAtkCount();
+	int count = getGameInfoMgr()->getMediumAtkCount();
 	count++;
-	GetGameInfoMgr()->setMediumAtkCount(count);
+	getGameInfoMgr()->setMediumAtkCount(count);
 }
 
 /**
@@ -148,7 +148,7 @@ UtilBattle::addMediumAtkCount()
 int
 UtilBattle::getMediumAtkCount()
 {
-	return GetGameInfoMgr()->getMediumAtkCount();
+	return getGameInfoMgr()->getMediumAtkCount();
 }
 
 /**
@@ -157,7 +157,7 @@ UtilBattle::getMediumAtkCount()
 void
 UtilBattle::setStrongAtkCount(int count)
 {
-	GetGameInfoMgr()->setStrongAtkCount(count);
+	getGameInfoMgr()->setStrongAtkCount(count);
 }
 
 /**
@@ -166,9 +166,9 @@ UtilBattle::setStrongAtkCount(int count)
 void
 UtilBattle::addStrongAtkCount()
 {
-	int count =GetGameInfoMgr()->getStrongAtkCount();
+	int count =getGameInfoMgr()->getStrongAtkCount();
 	count++;
-	GetGameInfoMgr()->setStrongAtkCount(count);
+	getGameInfoMgr()->setStrongAtkCount(count);
 }
 
 /**
@@ -177,7 +177,7 @@ UtilBattle::addStrongAtkCount()
 int
 UtilBattle::getStrongAtkCount()
 {
-	return GetGameInfoMgr()->getStrongAtkCount();
+	return getGameInfoMgr()->getStrongAtkCount();
 }
 
 /**
@@ -188,7 +188,7 @@ UtilBattle::addBadStatusAtkLv()
 {
 	int lv = getBadStatusAtkLv();
 	lv++;
-	GetGameInfoMgr()->setBadStatusAtkLv(lv);
+	getGameInfoMgr()->setBadStatusAtkLv(lv);
 }
 
 /**
@@ -197,7 +197,7 @@ UtilBattle::addBadStatusAtkLv()
 void
 UtilBattle::resetBadStatusAtkLv()
 {
-	GetGameInfoMgr()->setBadStatusAtkLv(0);
+	getGameInfoMgr()->setBadStatusAtkLv(0);
 }
 
 /**
@@ -206,5 +206,5 @@ UtilBattle::resetBadStatusAtkLv()
 int
 UtilBattle::getBadStatusAtkLv()
 {
-	return 	GetGameInfoMgr()->getBadStatusAtkLv();
+	return 	getGameInfoMgr()->getBadStatusAtkLv();
 }

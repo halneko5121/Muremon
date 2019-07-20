@@ -91,4 +91,4 @@ private:
 
 };
 
-static ActorMgr* GetActorMgr() { return ActorMgr::getInstance(); }
+static ActorMgr* getActorMgr() { return ActorMgr::getInstance(); }

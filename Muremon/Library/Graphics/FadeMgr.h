@@ -92,4 +92,4 @@ private:
 	int						mFadeSpeed;		// フェード速度
 };
 
-static FadeMgr* GetFadeMgr() { return FadeMgr::getInstance(); }
+static FadeMgr* getFadeMgr() { return FadeMgr::getInstance(); }

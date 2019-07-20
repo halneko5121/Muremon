@@ -74,4 +74,4 @@ private:
 	int						mBadStatusAtkLv;	// UŒ‚—Í’á‰º‚ÌLV@@todo: ‚±‚±‚ÅŠÇ—‚Íˆá‚¤‹C‚ª‚·‚é
 };
 
-static GameInfoMgr* GetGameInfoMgr() { return GameInfoMgr::getInstance(); }
+static GameInfoMgr* getGameInfoMgr() { return GameInfoMgr::getInstance(); }

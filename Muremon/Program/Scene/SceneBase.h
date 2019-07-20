@@ -62,12 +62,12 @@ public:
 	/**
 	 * @brief	描画処理
 	 */
-	virtual void		draw() const = 0;
+	virtual void		draw() const {};
 
 	/**
 	 * @brief	終了処理
 	 */
-	virtual void		end() = 0;
+	virtual void		end() {};
 
 	/**
 	 * @brief	シーン変更リクエストを行う

@@ -68,7 +68,6 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
-	, mRandDeg(0.0f)
 {
 	mRectStartNum = R_NIKU_G_ATK1;
 	mSoundStartNum = S_NIKUMAN;
@@ -76,7 +75,7 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	mMissionPower = cAddGaugePowerNikuman;
 	mScore = cAddScoreNikuman;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
-	mOrbitRebound = new OrbitRebound(mRandDeg, mSpeed);
+	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
 	mRect.setWidth(cActorSize.x);
 	mRect.setHeight(cActorSize.y);
@@ -224,6 +223,8 @@ ActorNikuman::stateEnterGroundAtk()
 	mAnimation = 0;
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
+	float rand_deg = static_cast<float>((rand() % cDegRand + cDegRandMin));
+	mOrbitRebound->setDegree(rand_deg);
 }
 void
 ActorNikuman::stateGroundAtk()

@@ -90,8 +90,7 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mOrbitRebound(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
-	, mAtkStartY(0.0f) 
-	, mRandDeg(0.0f)
+	, mAtkStartY(0.0f)
 {
 	mRectStartNum = R_YOSHI_G_ATK1;
 	mSoundStartNum = S_YOSHI_HIP;
@@ -100,7 +99,7 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mScore = cAddScoreYoshitaro;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mOrbitWave = new OrbitWave();
-	mOrbitRebound = new OrbitRebound(mRandDeg, mSpeed);
+	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
 	mRect.setWidth(cActorSize.x);
 	mRect.setHeight(cActorSize.y);
@@ -247,6 +246,8 @@ ActorYoshi::stateEnterGroundAtk()
 	mAnimation = 0;
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
+	float rand_deg = static_cast<float>((rand() % cDegRand + cDegRandMin));
+	mOrbitRebound->setDegree(rand_deg);
 }
 void
 ActorYoshi::stateGroundAtk()

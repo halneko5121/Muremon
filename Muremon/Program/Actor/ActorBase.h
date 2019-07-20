@@ -35,7 +35,7 @@ public:
 	/**
 	 * @brief スピードの設定
 	 */
-	void				setSpeed(int speed);
+	void				setSpeed(float speed);
 	float				getSpeed() const;
 	float				getRandomSpeed() const;
 	float				getRandomNikumanSpeed() const;

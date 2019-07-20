@@ -104,7 +104,7 @@ ActorBase::draw() const
  * @brief スピードの設定
  */
 void
-ActorBase::setSpeed(int speed)
+ActorBase::setSpeed(float speed)
 {
 	mSpeed = speed;
 }

@@ -15,6 +15,7 @@
 #include "Program/Util/UtilGame.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/UI/UIRefreshGame.h"
+#include "Program/DefineGame.h"
 
 namespace
 {

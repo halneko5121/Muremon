@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Library/StateMachine.h"
-#include "Program/DefineGame.h"
 #include "Program/Actor/ActorBase.h"
 
 class Vertex;

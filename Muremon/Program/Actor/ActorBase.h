@@ -7,8 +7,6 @@
  *	ŠÇ—ÒFOã
  ******************************************************************/
 
-#include "Program/DefineGame.h"
-
 class Vertex;
 class Texture;
 enum ActorId;

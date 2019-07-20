@@ -13,6 +13,7 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Actor/ActorBoss.h"
+#include "Program/DefineGame.h"
 
 namespace
 {

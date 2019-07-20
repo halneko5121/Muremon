@@ -277,12 +277,11 @@ SceneGameRefresh::stateReadyFadeOut()
 void
 SceneGameRefresh::stateEnterGame()
 {
+	UtilSound::playLoop(S_BGM_BATTLE);
 }
 void
 SceneGameRefresh::stateGame()
 {
-	UtilSound::playLoop(S_BGM_BATTLE);
-
 	// ŠeUŒ‚‚ÌŠJn
 	updateRunAtk();
 

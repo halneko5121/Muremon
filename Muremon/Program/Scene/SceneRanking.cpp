@@ -77,8 +77,8 @@ namespace
 	enum State
 	{
 		cState_Idle,			// 待機
-		cState_View,			// 確認
 		cState_Input,			// 入力
+		cState_View,			// 確認
 		cState_End,				// 終了
 		cState_Count
 	};
@@ -101,8 +101,8 @@ SceneRanking::SceneRanking()
 
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(SceneRanking, mState, Idle,		cState_Idle);
-	REGIST_STATE_FUNC2(SceneRanking, mState, View,		cState_View);
 	REGIST_STATE_FUNC2(SceneRanking, mState, Input,		cState_Input);
+	REGIST_STATE_FUNC2(SceneRanking, mState, View,		cState_View);
 	REGIST_STATE_FUNC2(SceneRanking, mState, End,		cState_End);
 	mState.changeState(cState_Idle);
 }
@@ -334,25 +334,6 @@ SceneRanking::stateIdle()
 }
 
 /**
- * @brief ステート:View
- */
-void
-SceneRanking::stateEnterView()
-{
-}
-void
-SceneRanking::stateView()
-{
-	// ランクインしていない時
-	if (UtilInput::isKeyPushedReturn())
-	{
-		UtilSound::playOnce(S_SE_OK);
-		mState.changeState(cState_End);
-		return;
-	}
-}
-
-/**
  * @brief ステート:Input
  */
 void
@@ -398,6 +379,25 @@ SceneRanking::stateInput()
 	if (mInputIndex == cRankingNameCount)
 	{
 		mState.changeState(cState_View);
+		return;
+	}
+}
+
+/**
+ * @brief ステート:View
+ */
+void
+SceneRanking::stateEnterView()
+{
+}
+void
+SceneRanking::stateView()
+{
+	// ランクインしていない時
+	if (UtilInput::isKeyPushedReturn())
+	{
+		UtilSound::playOnce(S_SE_OK);
+		mState.changeState(cState_End);
 		return;
 	}
 }

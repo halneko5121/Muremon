@@ -45,8 +45,8 @@ private:
 private:
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
-	DECLAR_STATE_FUNC2(View);
 	DECLAR_STATE_FUNC2(Input);
+	DECLAR_STATE_FUNC2(View);
 	DECLAR_STATE_FUNC2(End);
 
 private:

@@ -29,7 +29,6 @@ private:
 private:
 	UITitleMenu*	mUITitleMenu;			// タイトルメニューUI
 	Vector2f		mTitlePos;
-	int				mNextSceneIndex;		// 次のシーン番号
 	int				mDrawCount;
 	int				mCountMove;
 };

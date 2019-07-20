@@ -48,6 +48,7 @@ UINormalGame::~UINormalGame()
 {
 	APP_SAFE_DELETE(mTexture);
 	APP_SAFE_DELETE(mVertex);
+	APP_SAFE_DELETE(mUIRefreshGame);
 }
 
 /**

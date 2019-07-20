@@ -15,6 +15,7 @@
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Util/UtilInput.h"
 #include "Program/DefineGame.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorMgr.h"
@@ -344,7 +345,9 @@ SceneGameRefresh::stateGame()
 		}
 	}
 
-	if (GetAsyncKeyState(VK_RETURN)) {	//エンターキーが押されたらタイトルに戻る
+	// エンターキーが押されたらタイトルに戻る
+	if (UtilInput::isKeyPushed(UtilInput::cKey_Return))
+	{
 		mIsSceneEnd = true;
 	}
 }

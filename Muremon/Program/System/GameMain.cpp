@@ -255,49 +255,22 @@ GameMain::release(void)
 /**
  * @brief シーケンスの管理を行う
  */
-void
-GameMain::controlSequence(void)
+SceneBase*
+GameMain::createScene(int scene_id)
 {
-	// シーンIDによって分岐
-	switch(mScene->getChangeSceneID()){
-	case cSceneName_Logo:
-		APP_SAFE_DELETE(mScene);
-		mScene = new SceneLogo();
-		mScene->init();
-		break;
-    case cSceneName_Title:
-		APP_SAFE_DELETE(mScene);
-		mScene = new SceneTitle();
-		mScene->init();
-		UtilGame::setScore(0);
-		UtilBattle::resetAtkCount();
-		break;
-	case cSceneName_Tutorial:
-		APP_SAFE_DELETE(mScene);
-		mScene = new SceneTutorial();
-		mScene->init();
-		break;
-	case cSceneName_GameRefresh:
-		APP_SAFE_DELETE(mScene);
-		mScene = new SceneGameRefresh();
-		mScene->init();
-		break;
-	case cSceneName_GameNormal:
-		APP_SAFE_DELETE(mScene);
-		mScene = new SceneGameNormal();
-		mScene->init();
-		break;
-	case cSceneName_Ranking:
-		APP_SAFE_DELETE(mScene);
-		mScene = new SceneRanking();
-		mScene->init();
-		break;
-	case cSceneName_GameEnd:
-		PostQuitMessage(0);
-		break;
-    }
-}
+	switch (scene_id) {
+	case cSceneName_Logo:			return (new SceneLogo());
+	case cSceneName_Title:			return (new SceneTitle());
+	case cSceneName_Tutorial:		return (new SceneTutorial());
+	case cSceneName_GameRefresh:	return (new SceneGameRefresh());
+	case cSceneName_GameNormal:		return (new SceneGameNormal());
+	case cSceneName_Ranking:		return (new SceneRanking());
+	case cSceneName_GameEnd:		return (new SceneBase());
+	}
 
+	APP_ASSERT_FALSE_MESSAGE("どのシーンも生成されませんでした");
+	return nullptr;
+}
 
 // -----------------------------------------------------------------
 // ステート関数
@@ -323,8 +296,22 @@ GameMain::stateEnterInit()
 {
 	GetFadeMgr()->fadeIn();
 
-	// シーン切り替え
-	controlSequence();
+	// シーンIDによって分岐
+	int next_scene_id = mScene->getChangeSceneID();
+	APP_SAFE_DELETE(mScene);
+	mScene = createScene(next_scene_id);
+	mScene->init();
+
+	// リセット
+	if (next_scene_id == cSceneName_Title)
+	{
+		UtilGame::setScore(0);
+		UtilBattle::resetAtkCount();
+	}
+	else if (next_scene_id == cSceneName_GameEnd)
+	{
+		PostQuitMessage(0);
+	}
 }
 void
 GameMain::stateInit()

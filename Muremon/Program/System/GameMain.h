@@ -57,9 +57,9 @@ public:
     void		release();
 
 	/**
-     * @brief シーケンスの管理を行う
+	 * @brief シーンの生成
 	 */
-	void		controlSequence();
+	SceneBase*	createScene(int scene_id);
 
 private:
 	// ステート関数

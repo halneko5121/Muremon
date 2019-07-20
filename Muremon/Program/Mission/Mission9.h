@@ -34,5 +34,6 @@ private:
 	DECLAR_STATE_FUNC2(Failure);
 
 private:
-	StateMachine			mState;		// ステート
+	StateMachine	mState;					// ステート
+	int				mSuccessTypingCount;	// タイピング時正解している数
 };

@@ -33,6 +33,7 @@ namespace
 Mission9::Mission9(MissionId id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
+	, mSuccessTypingCount(1)
 {
 	mState.initialize(cState_Count, cState_Idle);
 	REGIST_STATE_FUNC2(Mission9, mState, Idle,		cState_Idle);
@@ -133,6 +134,7 @@ Mission9::stateIdle()
 void
 Mission9::stateEnterRun()
 {
+	mSuccessTypingCount = 1;
 }
 void
 Mission9::stateRun()

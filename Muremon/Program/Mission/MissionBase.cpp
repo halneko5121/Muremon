@@ -27,7 +27,6 @@ MissionBase::MissionBase(const MissionId& id, Texture* texture, Vertex* vertex)
 	, mTexture(texture)
 	, mVertex(vertex)
 	, mKeyCount(0)
-	, mSuccessTypingCount(1)
 	, mTime(0)
 {
 }
@@ -47,7 +46,6 @@ MissionBase::run()
 {
 	mTime = cTimeLimitFrame;
 	mKeyCount = 0;
-	mSuccessTypingCount = 1;
 
 	runImple();
 }

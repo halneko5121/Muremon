@@ -279,11 +279,11 @@ SceneRanking::drawRankingNum() const
 void
 SceneRanking::drawRankingName() const
 {
+	UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
 	for (int j = 0;j < cRankingCount;j++)
 	{
 		for (int i = 0;i < cRankingNameCount;i++)
 		{
-			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
 			mVertex->setColor(mNameAlpha[j][i], 255, 255, 255);
 			mVertex->drawF(Vector2f((float)cNamePosX + i * cDislocateX, (float)cNamePosY + j * cDislocateY), R_FONT_A + mRankData[j].mName[i]);
 		}

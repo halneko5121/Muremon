@@ -14,7 +14,7 @@
 /**
  * @brief	コンストラクタ
  */
-BadStatusAlertPos::BadStatusAlertPos(BadStatusId id)
+BadStatusAlertPos::BadStatusAlertPos(const BadStatusId& id)
 	: BadStatusBase(id)
 {
 }

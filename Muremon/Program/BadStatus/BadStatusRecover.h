@@ -12,7 +12,7 @@
 class BadStatusRecover : public BadStatusBase
 {
 public:
-	BadStatusRecover(BadStatusId id);
+	BadStatusRecover(const BadStatusId& id);
 	virtual ~BadStatusRecover();
 
 	void	run() override;

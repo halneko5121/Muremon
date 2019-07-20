@@ -14,7 +14,7 @@
 /**
  * @brief	コンストラクタ
  */
-BadStatusRecover::BadStatusRecover(BadStatusId id)
+BadStatusRecover::BadStatusRecover(const BadStatusId& id)
 	: BadStatusBase(id)
 {
 }

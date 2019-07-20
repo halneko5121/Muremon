@@ -12,7 +12,7 @@
 class BadStatusSpeedUp : public BadStatusBase
 {
 public:
-	BadStatusSpeedUp(BadStatusId id);
+	BadStatusSpeedUp(const BadStatusId& id);
 	virtual ~BadStatusSpeedUp();
 
 	void	run() override;

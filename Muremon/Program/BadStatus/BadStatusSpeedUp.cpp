@@ -14,7 +14,7 @@
 /**
  * @brief	コンストラクタ
  */
-BadStatusSpeedUp::BadStatusSpeedUp(BadStatusId id)
+BadStatusSpeedUp::BadStatusSpeedUp(const BadStatusId& id)
 	: BadStatusBase(id)
 {
 }

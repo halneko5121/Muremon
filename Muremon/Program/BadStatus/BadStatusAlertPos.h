@@ -12,7 +12,7 @@
 class BadStatusAlertPos : public BadStatusBase
 {
 public:
-	BadStatusAlertPos(BadStatusId id);
+	BadStatusAlertPos(const BadStatusId& id);
 	virtual ~BadStatusAlertPos();
 
 	void	run() override;

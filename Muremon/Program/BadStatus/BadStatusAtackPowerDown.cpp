@@ -13,7 +13,7 @@
 /**
  * @brief	コンストラクタ
  */
-BadStatusAtackPowerDown::BadStatusAtackPowerDown(BadStatusId id)
+BadStatusAtackPowerDown::BadStatusAtackPowerDown(const BadStatusId& id)
 	: BadStatusBase(id)
 {
 }

@@ -118,7 +118,7 @@ SceneTutorial::draw() const
 void
 SceneTutorial::end()
 {
-	requestChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneId_Title);
 }
 
 // -----------------------------------------------------------------

@@ -15,7 +15,7 @@
  * @brief	コンストラクタ
  */
 SceneBase::SceneBase()
-	: mChangeSceneID(cSceneName_Logo)
+	: mChangeSceneID(cSceneId_Logo)
 	, mTexture(nullptr)
 	, mVertex(nullptr)
 	, mIsSceneEnd(false)

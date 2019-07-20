@@ -21,17 +21,18 @@ namespace Dix
 	class C_PCMPlayer;
 }
 
-enum SceneName
+enum SceneId
 {
-	cSceneName_Logo,		// ロゴ
-    cSceneName_Title,		// タイトル
-    cSceneName_Prologue,	// あらすじ
-	cSceneName_Tutorial,	// ゲーム操作説明
-	cSceneName_GameRefresh,	// ゲーム（すっきり）
-	cSceneName_GameNormal,	// ゲーム（ノーマル）
-	cSceneName_Ending,		// エンディング
-	cSceneName_Ranking,		// ランキング
-	cSceneName_GameEnd,		// 終わり
+	cSceneId_Logo,			// ロゴ
+    cSceneId_Title,			// タイトル
+    cSceneId_Prologue,		// あらすじ
+	cSceneId_Tutorial,		// ゲーム操作説明
+	cSceneId_GameRefresh,	// ゲーム（すっきり）
+	cSceneId_GameNormal,	// ゲーム（ノーマル）
+	cSceneId_Ending,		// エンディング
+	cSceneId_Ranking,		// ランキング
+	cSceneId_GameEnd,		// 終わり
+	cSceneId_Count
 };
 
 class SceneBase

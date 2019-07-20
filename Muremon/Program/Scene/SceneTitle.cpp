@@ -105,8 +105,8 @@ void
 SceneTitle::end()
 {
 	int next_scene_id = getChangeSceneID();
-	if (next_scene_id == cSceneName_GameNormal ||
-		next_scene_id == cSceneName_GameRefresh)
+	if (next_scene_id == cSceneId_GameNormal ||
+		next_scene_id == cSceneId_GameRefresh)
 	{
 		UtilSound::stop(S_BGM_TITLE);
 	}
@@ -151,13 +151,13 @@ void SceneTitle::checkSceneChange()
 	if (mUITitleMenu->isDecideMenuSelectRanking())
 	{
 		mIsSceneEnd = true;
-		requestChangeScene(cSceneName_Ranking);
+		requestChangeScene(cSceneId_Ranking);
 		return;
 	}
 	if (mUITitleMenu->isDecideMenuSelectExit())
 	{
 		mIsSceneEnd = true;
-		requestChangeScene(cSceneName_GameEnd);
+		requestChangeScene(cSceneId_GameEnd);
 		return;
 	}
 
@@ -165,19 +165,19 @@ void SceneTitle::checkSceneChange()
 	if (mUITitleMenu->isDecideGameSelectRefresh())
 	{
 		mIsSceneEnd = true;
-		requestChangeScene(cSceneName_GameRefresh);
+		requestChangeScene(cSceneId_GameRefresh);
 		return;
 	}
 	if (mUITitleMenu->isDecideGameSelectNormal())
 	{
 		mIsSceneEnd = true;
-		requestChangeScene(cSceneName_GameNormal);
+		requestChangeScene(cSceneId_GameNormal);
 		return;
 	}
 	if (mUITitleMenu->isDecideGameSelectTutorial())
 	{
 		mIsSceneEnd = true;
-		requestChangeScene(cSceneName_Tutorial);
+		requestChangeScene(cSceneId_Tutorial);
 		return;
 	}
 }

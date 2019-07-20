@@ -169,7 +169,7 @@ void
 SceneGameNormal::end()
 {
 	// ƒQ[ƒ€I—¹
-	requestChangeScene(cSceneName_Ranking);
+	requestChangeScene(cSceneId_Ranking);
 }
 
 /**

@@ -259,13 +259,13 @@ SceneBase*
 GameMain::createScene(int scene_id)
 {
 	switch (scene_id) {
-	case cSceneName_Logo:			return (new SceneLogo());
-	case cSceneName_Title:			return (new SceneTitle());
-	case cSceneName_Tutorial:		return (new SceneTutorial());
-	case cSceneName_GameRefresh:	return (new SceneGameRefresh());
-	case cSceneName_GameNormal:		return (new SceneGameNormal());
-	case cSceneName_Ranking:		return (new SceneRanking());
-	case cSceneName_GameEnd:		return (new SceneBase());
+	case cSceneId_Logo:			return (new SceneLogo());
+	case cSceneId_Title:			return (new SceneTitle());
+	case cSceneId_Tutorial:		return (new SceneTutorial());
+	case cSceneId_GameRefresh:	return (new SceneGameRefresh());
+	case cSceneId_GameNormal:		return (new SceneGameNormal());
+	case cSceneId_Ranking:		return (new SceneRanking());
+	case cSceneId_GameEnd:		return (new SceneBase());
 	}
 
 	APP_ASSERT_FALSE_MESSAGE("どのシーンも生成されませんでした");
@@ -303,12 +303,12 @@ GameMain::stateEnterInit()
 	mScene->init();
 
 	// リセット
-	if (next_scene_id == cSceneName_Title)
+	if (next_scene_id == cSceneId_Title)
 	{
 		UtilGame::setScore(0);
 		UtilBattle::resetAtkCount();
 	}
-	else if (next_scene_id == cSceneName_GameEnd)
+	else if (next_scene_id == cSceneId_GameEnd)
 	{
 		PostQuitMessage(0);
 	}
@@ -338,13 +338,13 @@ GameMain::stateRun()
 	if (mScene->isSceneEnd())
 	{
 		// ロゴが終わったらクリア時の色を白にする
-		if (mScene->getChangeSceneID() == cSceneName_Title)
+		if (mScene->getChangeSceneID() == cSceneId_Title)
 		{
 			mBackground = D3DCOLOR_XRGB(0xFF, 0xFF, 0xFF);
 			GetFadeMgr()->setColor(255, 255, 255);
 		}
 		// タイトルが終わったらクリア時の色を黒にする
-		if (mScene->getChangeSceneID() == cSceneName_Prologue)
+		if (mScene->getChangeSceneID() == cSceneId_Prologue)
 		{
 			mBackground = D3DCOLOR_XRGB(0x00, 0x00, 0x00);
 			GetFadeMgr()->setColor(0, 0, 0);

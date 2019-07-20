@@ -120,7 +120,7 @@ void SceneGameRefresh::draw() const
 void SceneGameRefresh::end()
 {
 	//ƒ^ƒCƒgƒ‹‚Ö
-	requestChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneId_Title);
 
 	UtilSound::stop(S_BGM_BATTLE);
 }

@@ -75,6 +75,6 @@ SceneLogo::draw() const
 void
 SceneLogo::end()
 {
-	requestChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneId_Title);
 }
 

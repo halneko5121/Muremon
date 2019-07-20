@@ -167,7 +167,7 @@ SceneRanking::draw() const
 void
 SceneRanking::end()
 {
-	requestChangeScene(cSceneName_Title);
+	requestChangeScene(cSceneId_Title);
 }
 
 /**

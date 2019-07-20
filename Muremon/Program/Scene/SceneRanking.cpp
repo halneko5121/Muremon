@@ -132,6 +132,11 @@ SceneRanking::impleInit()
 	if (mRankingNo != -1)
 	{
 		sortRanking(mRankingNo);
+		mState.changeState(cState_Input);
+	}
+	else
+	{
+		mState.changeState(cState_View);
 	}
 }
 
@@ -141,7 +146,7 @@ SceneRanking::impleInit()
 void
 SceneRanking::update()
 {
-	updateRanking(mRankingNo);
+	mState.executeState();
 }
 
 /**
@@ -185,67 +190,6 @@ SceneRanking::loadRanking()
 		fscanf(fp, "%hhd,%hhd,%hhd,%d\n", &mRankData[i].mName[0], &mRankData[i].mName[1], &mRankData[i].mName[2], &mRankData[i].mScore);
 	}
 	fclose(fp);
-}
-
-/**
- * @brief	ランキングの更新
- */
-void
-SceneRanking::updateRanking(int rank)
-{
-	// ランクインしていない時
-	if (rank == -1)
-	{
-		if (UtilInput::isKeyPushedReturn())
-		{
-			UtilSound::playOnce(S_SE_OK);
-			mIsSceneEnd = true;
-		}
-		return;
-	}
-
-	// 入力完了
-	if (mInputIndex == 3)
-	{
-		if (UtilInput::isKeyPushedReturn())
-		{
-			UtilSound::playOnce(S_SE_OK);
-			writeRanking();
-			mIsSceneEnd = true;
-		}
-		return;
-	}
-
-	// キー入力に連動する
-	for (int i = 'A'; i <= 'Z'; i++)
-	{
-		if (GetAsyncKeyState(i))
-		{
-			UtilSound::playOnce(S_SE_CURSOR_MOVE);
-			mInputKey = i - 'A';
-			mRankData[rank].mName[mInputIndex] = mInputKey;
-			break;
-		}
-	}
-
-	// ブリンク
-	if (mIsNameAlphaDown)
-	{
-		mNameAlpha[rank][mInputIndex] -= 5;
-		if (mNameAlpha[rank][mInputIndex] == 0) mIsNameAlphaDown = false;
-	}
-	else
-	{
-		mNameAlpha[rank][mInputIndex] += 5;
-		if (mNameAlpha[rank][mInputIndex] = 255) mIsNameAlphaDown = true;
-	}
-
-	if (UtilInput::isKeyPushedReturn())
-	{
-		UtilSound::playOnce(S_SE_OK);
-		mNameAlpha[rank][mInputIndex] = 255;
-		mInputIndex++;
-	}
 }
 
 /**
@@ -399,6 +343,13 @@ SceneRanking::stateEnterView()
 void
 SceneRanking::stateView()
 {
+	// ランクインしていない時
+	if (UtilInput::isKeyPushedReturn())
+	{
+		UtilSound::playOnce(S_SE_OK);
+		mState.changeState(cState_End);
+		return;
+	}
 }
 
 /**
@@ -407,10 +358,48 @@ SceneRanking::stateView()
 void
 SceneRanking::stateEnterInput()
 {
+	mInputIndex = 0;
 }
 void
 SceneRanking::stateInput()
 {
+	// キー入力に連動する
+	for (int i = 'A'; i <= 'Z'; i++)
+	{
+		if (GetAsyncKeyState(i))
+		{
+			UtilSound::playOnce(S_SE_CURSOR_MOVE);
+			mInputKey = i - 'A';
+			mRankData[mRankingNo].mName[mInputIndex] = mInputKey;
+			break;
+		}
+	}
+
+	// ブリンク
+	if (mIsNameAlphaDown)
+	{
+		mNameAlpha[mRankingNo][mInputIndex] -= 5;
+		if (mNameAlpha[mRankingNo][mInputIndex] == 0) mIsNameAlphaDown = false;
+	}
+	else
+	{
+		mNameAlpha[mRankingNo][mInputIndex] += 5;
+		if (mNameAlpha[mRankingNo][mInputIndex] = 255) mIsNameAlphaDown = true;
+	}
+
+	if (UtilInput::isKeyPushedReturn())
+	{
+		UtilSound::playOnce(S_SE_OK);
+		mNameAlpha[mRankingNo][mInputIndex] = 255;
+		mInputIndex++;
+	}
+
+	// 入力完了
+	if (mInputIndex == 3)
+	{
+		mState.changeState(cState_End);
+		return;
+	}
 }
 
 /**
@@ -419,6 +408,7 @@ SceneRanking::stateInput()
 void
 SceneRanking::stateEnterEnd()
 {
+	mIsSceneEnd = true;
 }
 void
 SceneRanking::stateEnd()

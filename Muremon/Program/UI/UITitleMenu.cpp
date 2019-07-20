@@ -124,13 +124,6 @@ UITitleMenu::update()
 	//カーソル位置を計算
 	mCursorPos.y = cDispCursorPos.y + cDispCursorYRemove * mCurrentMenuItem;
 
-	if (mTimeCount % 16 == 0)
-	{
-		mCursorAnime++;
-	}
-
-	mState.executeState();
-
 	// めっちゃ上下押されても違和感にないように
 	if (UtilSound::isPlaying(S_SE_CURSOR_MOVE))
 	{
@@ -167,6 +160,13 @@ UITitleMenu::update()
 
 	mTimeCount++;
 
+	if (mTimeCount % 16 == 0)
+	{
+		mCursorAnime++;
+	}
+
+
+	mState.executeState();
 }
 
 /**

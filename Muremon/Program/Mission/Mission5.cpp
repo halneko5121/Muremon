@@ -30,7 +30,7 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-Mission5::Mission5(MissionId id, Texture* texture, Vertex* vertex)
+Mission5::Mission5(const MissionId& id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
 	, mSuccessTypingCount(1)

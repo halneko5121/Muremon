@@ -78,7 +78,7 @@ namespace
 	};
 
 	MissionBase*
-	createMission(MissionId id, Texture* texture, Vertex* vertex)
+	createMission(const MissionId& id, Texture* texture, Vertex* vertex)
 	{
 		switch (id)
 		{

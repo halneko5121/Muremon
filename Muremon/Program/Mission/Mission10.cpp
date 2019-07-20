@@ -29,7 +29,7 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-Mission10::Mission10(MissionId id, Texture* texture, Vertex* vertex)
+Mission10::Mission10(const MissionId& id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
 	, mAlphaPushZ(255)

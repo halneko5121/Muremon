@@ -25,7 +25,7 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-Mission3::Mission3(MissionId id, Texture* texture, Vertex* vertex)
+Mission3::Mission3(const MissionId& id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
 {

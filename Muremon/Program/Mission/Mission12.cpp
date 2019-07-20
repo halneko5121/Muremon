@@ -27,7 +27,7 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-Mission12::Mission12(MissionId id, Texture* texture, Vertex* vertex)
+Mission12::Mission12(const MissionId& id, Texture* texture, Vertex* vertex)
 	: MissionBase(id, texture, vertex)
 	, mState()
 {

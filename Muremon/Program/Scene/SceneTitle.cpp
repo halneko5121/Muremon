@@ -57,6 +57,7 @@ SceneTitle::SceneTitle()
 
 SceneTitle::~SceneTitle()
 {
+	APP_SAFE_DELETE(mUITitleMenu);
 }
 
 /**

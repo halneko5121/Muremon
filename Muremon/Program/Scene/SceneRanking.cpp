@@ -397,7 +397,7 @@ SceneRanking::stateInput()
 	// “ü—ÍŠ®—¹
 	if (mInputIndex == cRankingNameCount)
 	{
-		mState.changeState(cState_End);
+		mState.changeState(cState_View);
 		return;
 	}
 }

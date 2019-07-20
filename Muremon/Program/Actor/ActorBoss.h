@@ -44,6 +44,4 @@ private:
 	int						mLvCount;
 	int						mHitCount;
 	unsigned int			mMoveAnime;
-	int						mDamageX;
-	int						mDamageY;
 };

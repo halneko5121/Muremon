@@ -16,7 +16,6 @@ namespace
 	const int cRefreshStopX = 550;		// スッキリモードのボスの止める中心座標
 	const int cDamageHitCount = 50;		// ボスが攻撃を何回食らった時に痛がり表示
 	const int cDeadSeTime = 60;
-	const int cDamagePosRand = 5;
 	const int cMoveInterval = 3;
 	const Vector2f cActorSize = { 300.0f, 380.0f };
 
@@ -42,8 +41,6 @@ ActorBoss::ActorBoss(const ActorId& actor_id, int uniq_id, Texture* texture, Ver
 	, mLvCount(0)
 	, mHitCount(0)
 	, mMoveAnime(0)
-	, mDamageX(0)
-	, mDamageY(0)
 {
 	mRectNum = R_BOSS_MOVE1;
 	mSpeed = 1;
@@ -107,7 +104,7 @@ ActorBoss::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
 	mVertex->setColor(mAlpha,255,255,255);
-	mVertex->drawCB(Vector2f(mNowPos.x + mDamageX, mNowPos.y + mDamageY), mRectNum);
+	mVertex->drawCB(mNowPos, mRectNum);
 }
 
 /**
@@ -214,8 +211,6 @@ ActorBoss::stateMove()
 void
 ActorBoss::stateEnterDamage()
 {
-	mDamageX = rand() % cDamagePosRand;
-	mDamageY = rand() % cDamagePosRand;
 	mHitCount = 0;
 	mRectNum = R_BOSS_DAMAGE;
 }
@@ -224,8 +219,6 @@ ActorBoss::stateDamage()
 {
 	if (mState.getStateCount() == 60)
 	{
-		mDamageX = 0;
-		mDamageY = 0;
 		if (UtilGame::isGameModeRefresh())
 		{
 			if (mNowPos.x == cRefreshStopX)
@@ -322,8 +315,6 @@ ActorBoss::stateEnterRevival()
 	mNowPos.x = cAppearPosX;
 	mMoveAnime = 0;
 	mSpeed = 1;
-	mDamageX = 0;
-	mDamageY = 0;
 	mMaxLife = cInitLife + (cAddLife * mLvCount);
 	mLife = mMaxLife;
 }

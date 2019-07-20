@@ -11,7 +11,7 @@
 /**
  * @brief	コンストラクタ
  */
-BadStatusBase::BadStatusBase(BadStatusId id)
+BadStatusBase::BadStatusBase(const BadStatusId& id)
 	: mId(id)
 {
 }

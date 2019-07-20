@@ -20,7 +20,7 @@ enum BadStatusId
 class BadStatusBase
 {
 public:
-	BadStatusBase(BadStatusId id);
+	BadStatusBase(const BadStatusId& id);
 	virtual ~BadStatusBase();
 
 	virtual	void	run() = 0;

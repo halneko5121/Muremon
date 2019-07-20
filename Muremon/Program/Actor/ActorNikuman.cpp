@@ -1,5 +1,6 @@
 #include "ActorNikuman.h"
 
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"

@@ -7,11 +7,10 @@
  *	ä«óùé“ÅFéOè„
  ******************************************************************/
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
-
 #include "Program/DefineGame.h"
 
+class Vertex;
+class Texture;
 enum ActorId;
 
 class ActorBase

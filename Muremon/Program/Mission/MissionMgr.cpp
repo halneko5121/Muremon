@@ -7,6 +7,7 @@
  ******************************************************************/
 #include "MissionMgr.h"
 
+#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGraphics.h"

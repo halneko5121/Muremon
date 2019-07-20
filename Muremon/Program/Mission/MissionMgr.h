@@ -8,14 +8,13 @@
  ******************************************************************/
 
 #include "Library/StateMachine.h"
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/BadStatus/BadStatusBase.h"
-#include "Program/DefineGame.h"
 
 class ActorBoss;
 class MissionBase;
 class EffectBase;
+class Texture;
+class Vertex;
 
 enum MissionId
 {

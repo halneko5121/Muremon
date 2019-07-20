@@ -156,7 +156,7 @@ void
 SceneRanking::draw() const
 {
 	drawBackGround();
-	drawRankingPlace();
+	drawRankingNum();
 	drawRankingName();
 	drawRankingScore();
 }
@@ -262,7 +262,7 @@ SceneRanking::drawBackGround() const
  * @brief	‡ˆÊ‚Ì•`‰æ
  */
 void
-SceneRanking::drawRankingPlace() const
+SceneRanking::drawRankingNum() const
 {
 	for (int i = 0;i < cRankingCount;i++)
 	{

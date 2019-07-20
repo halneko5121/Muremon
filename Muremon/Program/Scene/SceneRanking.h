@@ -38,7 +38,7 @@ private:
 	void		sortRanking(int new_rank_index);	// スコアの並び替え
 
 	void		drawBackGround() const;				// ランキング背景
-	void		drawRankingPlace() const;			// ランキング位置
+	void		drawRankingNum() const;				// ランキング順位
 	void		drawRankingName() const;			// ランキング名前
 	void		drawRankingScore() const;			// ランキングスコア
 

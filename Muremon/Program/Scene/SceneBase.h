@@ -86,9 +86,11 @@ public:
 	bool				isSceneEnd() const;
 
 protected:
-    DWORD               mChangeSceneID;		// 変更するシーン番号
 	Texture*			mTexture;			// テクスチャ
 	Vertex*				mVertex;			// バーテックス
 	bool				mIsSceneEnd;		// シーン終了か
 	MouseData			mMouseData;			// マウス情報
+
+private:
+	DWORD               mChangeSceneID;		// 変更するシーン番号
 };

@@ -80,7 +80,6 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
 {
-	mRectStartNum = R_YOSHI_G_ATK1;
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);

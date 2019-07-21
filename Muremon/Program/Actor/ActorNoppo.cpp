@@ -69,7 +69,6 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
 {
-	mRectStartNum = R_NOPPO_G_ATK1;
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);

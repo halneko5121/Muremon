@@ -82,12 +82,10 @@ protected:
 	Vertex*				mVertex;
 	Rect				mRect;
 	int					mRectNum;
-	int					mRectStartNum;
 
 	Vector2f			mNowPos;
 	float				mSpeed;
 	float				mAngleDegree;
-	int					mAnimation;
 	int					mAlpha;
 
 	int					mMissionPower;

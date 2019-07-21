@@ -55,7 +55,7 @@ Animation::update()
 
 		// アニメーション番号をプラス
 		mAnimeIndex++;
-		if (mMaxAnimeIndex <= mAnimeIndex)
+		if (mMaxAnimeIndex < mAnimeIndex)
 		{
 			mAnimeIndex = 0;
 		}

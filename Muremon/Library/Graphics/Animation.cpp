@@ -21,7 +21,7 @@ namespace
 	};
 }
 
-Animation::Animation(int start_anime_num, int max_anime_index)
+Animation::Animation(int start_anime_num, int max_anime_index, float speed)
 	: mState()
 	, mIsLoop(false)
 	, mStartAnimeIndex(start_anime_num)
@@ -29,7 +29,7 @@ Animation::Animation(int start_anime_num, int max_anime_index)
 	, mCurrentIndex(0)
 	, mAnimeIndex(0)
 	, mChangeCount(0.0f)
-	, mChangeSpeed(1.0f)
+	, mChangeSpeed(speed)
 {
 	APP_ASSERT_MESSAGE((mMaxAnimeIndex != 0), "アニメーションしません");
 

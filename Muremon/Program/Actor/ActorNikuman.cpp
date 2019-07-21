@@ -59,7 +59,7 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
-	mAnimation = new Animation(R_NIKU_G_ATK1, R_NIKU_G_ATK4);
+	mAnimation = new Animation(R_NIKU_G_ATK1, R_NIKU_G_ATK4, 10);
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
 	mRect.setWidth(cActorSize.x);
@@ -81,6 +81,7 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
  */
 ActorNikuman::~ActorNikuman(void)
 {
+	APP_SAFE_DELETE(mAnimation);
 	APP_SAFE_DELETE(mOrbitRebound);
 }
 
@@ -207,7 +208,6 @@ ActorNikuman::stateEnterGroundAtk()
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 	mAnimation->startLoop();
-	mAnimation->setChangeSpeed(10);
 }
 void
 ActorNikuman::stateGroundAtk()

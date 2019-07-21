@@ -141,7 +141,6 @@ UITitleMenu::update()
 		mCursorAnime++;
 	}
 
-
 	mState.executeState();
 }
 

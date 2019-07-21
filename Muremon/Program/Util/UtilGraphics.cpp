@@ -51,3 +51,23 @@ UtilGraphics::setTexture(Vertex* vertex, const Texture& texture, int texture_id)
 	APP_POINTER_ASSERT(vertex);
 	vertex->setTextureData(texture.getTextureData(texture_id), getGraphicsDevice());
 }
+
+/**
+ * @biref テクスチャカラーの設定
+ */
+void
+UtilGraphics::setVerTexColor(Vertex* vertex, int alpha, int red, int green, int blue)
+{
+	APP_POINTER_ASSERT(vertex);
+	vertex->setColor(alpha, red, green, blue);
+}
+
+/**
+ * @biref 描画（原点：下）
+ */
+void
+UtilGraphics::drawCB(Vertex* vertex, const Vector2f& pos, int rect_num)
+{
+	APP_POINTER_ASSERT(vertex);
+	vertex->drawCB(pos, rect_num);
+}

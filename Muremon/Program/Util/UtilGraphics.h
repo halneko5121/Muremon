@@ -15,4 +15,7 @@ namespace UtilGraphics
 	LPDIRECT3DDEVICE9	getGraphicsDevice();
 	void				loadVertexAndTexture(Vertex* vertex, Texture* texture, const char* file_name);
 	void				setTexture(Vertex* vertex, const Texture& texture, int texture_id);
+
+	void				setVerTexColor(Vertex* vertex, int alpha, int red, int green, int blue);
+	void				drawCB(Vertex* vertex, const Vector2f& pos, int rect_num);
 }

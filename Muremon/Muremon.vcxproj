@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Library\Font\DirectFont.cpp" />
+    <ClCompile Include="Library\Graphics\Animation.cpp" />
     <ClCompile Include="Library\Graphics\FadeMgr.cpp" />
     <ClCompile Include="Library\Input\DirectInput.cpp" />
     <ClCompile Include="Library\Math\Rect.cpp" />
@@ -83,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Library\Font\DirectFont.h" />
+    <ClInclude Include="Library\Graphics\Animation.h" />
     <ClInclude Include="Library\Graphics\FadeMgr.h" />
     <ClInclude Include="Library\Input\DirectInput.h" />
     <ClInclude Include="Library\Math\Rect.h" />

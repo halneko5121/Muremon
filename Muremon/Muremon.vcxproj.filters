@@ -198,6 +198,9 @@
     <ClCompile Include="Program\BadStatus\BadStatusAtackPowerDown.cpp">
       <Filter>BadStatus</Filter>
     </ClCompile>
+    <ClCompile Include="Library\Graphics\Animation.cpp">
+      <Filter>Library\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -398,6 +401,9 @@
     </ClInclude>
     <ClInclude Include="Program\BadStatus\BadStatusAtackPowerDown.h">
       <Filter>BadStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Graphics\Animation.h">
+      <Filter>Library\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

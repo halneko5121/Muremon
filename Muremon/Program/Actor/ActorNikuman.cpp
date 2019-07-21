@@ -161,7 +161,7 @@ ActorNikuman::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
-	UtilGraphics::setVerTexColor(mVertex, 255, 255, 255, 255);
+	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
 	UtilGraphics::drawCB(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
 }
 

@@ -56,7 +56,7 @@ UtilGraphics::setTexture(Vertex* vertex, const Texture& texture, int texture_id)
  * @biref バーテックスカラーの設定
  */
 void
-UtilGraphics::setVerTexColor(Vertex* vertex, int alpha, int red, int green, int blue)
+UtilGraphics::setVertexColor(Vertex* vertex, int alpha, int red, int green, int blue)
 {
 	APP_POINTER_ASSERT(vertex);
 	vertex->setColor(alpha, red, green, blue);

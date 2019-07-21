@@ -180,7 +180,7 @@ ActorNoppo::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
 	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
-	UtilGraphics::setVerTexColor(mVertex, mAlpha, 255, 255, 255);
+	UtilGraphics::setVertexColor(mVertex, mAlpha, 255, 255, 255);
 	if (mState.isEqual(cState_SkyDeath))
 	{
 		UtilGraphics::drawF(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));

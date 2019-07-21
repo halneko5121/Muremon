@@ -101,7 +101,7 @@ void
 ActorBoss::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
-	UtilGraphics::setVerTexColor(mVertex, mAlpha, 255, 255, 255);
+	UtilGraphics::setVertexColor(mVertex, mAlpha, 255, 255, 255);
 	UtilGraphics::drawCB(mVertex, mNowPos, mRectNum);
 }
 

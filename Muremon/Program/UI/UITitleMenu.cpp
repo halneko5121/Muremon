@@ -134,18 +134,6 @@ UITitleMenu::update()
 		}
 	}
 
-	if (UtilInput::isKeyPushed(UtilInput::cKey_Z))
-	{
-		UtilSound::playOnce(S_SE_OK);
-		mTimeCount = 0;
-	}
-
-	if (UtilInput::isKeyPushed(UtilInput::cKey_X))
-	{
-		UtilSound::playOnce(S_CANCEL);
-		mTimeCount = 0;
-	}
-
 	mTimeCount++;
 
 	if (mTimeCount % 16 == 0)
@@ -298,6 +286,8 @@ UITitleMenu::stateTop()
 {
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Z))
 	{
+		UtilSound::playOnce(S_SE_OK);
+		mTimeCount = 0;
 		mState.changeState(cState_MenuSelect);
 		return;
 	}
@@ -358,6 +348,8 @@ UITitleMenu::stateMenuSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Z))
 	{
+		UtilSound::playOnce(S_SE_OK);
+		mTimeCount = 0;
 		if (mCurrentMenuItem == G_START)
 		{
 			mCurrentMenuItem = 0;
@@ -368,6 +360,8 @@ UITitleMenu::stateMenuSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_X))
 	{
+		UtilSound::playOnce(S_CANCEL);
+		mTimeCount = 0;
 		mCurrentMenuItem = G_START;
 		mState.changeState(cState_Top);
 		return;
@@ -412,6 +406,8 @@ UITitleMenu::stateGameSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_X))
 	{
+		UtilSound::playOnce(S_CANCEL);
+		mTimeCount = 0;
 		mCurrentMenuItem = G_CLEARLY;
 		mState.changeState(cState_MenuSelect);
 		return;

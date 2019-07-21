@@ -8,9 +8,6 @@
 
 #include "SceneGameRefresh.h"
 
-#include "Library/Graphics/DirectGraphics.h"
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -113,8 +110,8 @@ void SceneGameRefresh::draw() const
 
 	// ゲームスタート
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->setColor(mStartAlpha, 255, 255, 255);
-	mVertex->drawF(cDispBgPos, R_GAME_START);
+	UtilGraphics::setVertexColor(mVertex, mStartAlpha, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, cDispBgPos, R_GAME_START);
 }
 
 void SceneGameRefresh::end()
@@ -176,9 +173,9 @@ void SceneGameRefresh::updateRunAtk()
 void SceneGameRefresh::drawBg() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
-	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(cDispBgPos, R_GAME_BG);
-	mVertex->drawF(cDispFlagPos, R_FLAG);
+	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, cDispBgPos, R_GAME_BG);
+	UtilGraphics::drawF(mVertex, cDispFlagPos, R_FLAG);
 }
 
 ActorBase*

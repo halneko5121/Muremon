@@ -8,8 +8,6 @@
 
 #include "SceneTutorial.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGraphics.h"
@@ -106,10 +104,10 @@ void
 SceneTutorial::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL1);
-	mVertex->drawF(mTexturePos[cTutorialPage_Refresh], R_TUTORIAL1);
+	UtilGraphics::drawF(mVertex, mTexturePos[cTutorialPage_Refresh], R_TUTORIAL1);
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TUTORIAL2);
-	mVertex->drawF(mTexturePos[cTutorialPage_Normal], R_TUTORIAL2);
+	UtilGraphics::drawF(mVertex, mTexturePos[cTutorialPage_Normal], R_TUTORIAL2);
 }
 
 /**

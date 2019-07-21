@@ -8,8 +8,6 @@
 
 #include "SceneLogo.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilGraphics.h"
 
 namespace
@@ -66,7 +64,7 @@ void
 SceneLogo::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_LOGO);
-	mVertex->drawF(Vector2f(400.0f, 300.0f), R_LOGO);
+	UtilGraphics::drawF(mVertex, Vector2f(400.0f, 300.0f), R_LOGO);
 }
 
 /**

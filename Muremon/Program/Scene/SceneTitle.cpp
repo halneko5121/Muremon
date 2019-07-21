@@ -10,8 +10,6 @@
 
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilGraphics.h"
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/UI/UITitleMenu.h"
 #include "Program/DefineGame.h"
@@ -90,10 +88,10 @@ void
 SceneTitle::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_TITLE_BG);
-	mVertex->drawF(Vector2f(cDispTitleBgX, cDispTitleBgY), R_TITLE_BG);
+	UtilGraphics::drawF(mVertex, Vector2f(cDispTitleBgX, cDispTitleBgY), R_TITLE_BG);
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_FONT);
-	mVertex->drawF(mTitlePos, R_TITLE);
+	UtilGraphics::drawF(mVertex, mTitlePos, R_TITLE);
 
 	mUITitleMenu->draw();
 }

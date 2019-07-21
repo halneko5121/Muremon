@@ -7,8 +7,6 @@
  ******************************************************************/
 #include "SceneGameNormal.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilBattle.h"
@@ -143,8 +141,8 @@ SceneGameNormal::draw() const
 		mState.isEqual(cState_TimeOver))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(mGameStateFontAlpha, 255, 255, 255);
-		mVertex->drawF(cDispBgPos, mGameStateRectNum);
+		UtilGraphics::setVertexColor(mVertex, mGameStateFontAlpha, 255, 255, 255);
+		UtilGraphics::drawF(mVertex, cDispBgPos, mGameStateRectNum);
 	}
 	else
 	{
@@ -228,9 +226,9 @@ void
 SceneGameNormal::drawBg() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_BG);
-	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(cDispBgPos, R_GAME_BG);
-	mVertex->drawF(cDispFlagPos, R_FLAG);
+	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, cDispBgPos, R_GAME_BG);
+	UtilGraphics::drawF(mVertex, cDispFlagPos, R_FLAG);
 }
 
 /**

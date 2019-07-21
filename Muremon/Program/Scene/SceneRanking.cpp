@@ -8,8 +8,6 @@
 
 #include "SceneRanking.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGame.h"
@@ -254,8 +252,8 @@ void
 SceneRanking::drawBackGround() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_BG);
-	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_RANKING_BG);
+	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, Vector2f(400.f, 300.f), R_RANKING_BG);
 }
 
 /**
@@ -267,9 +265,9 @@ SceneRanking::drawRankingNum() const
 	for (int i = 0;i < cRankingCount;i++)
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
-		mVertex->setColor(255, 255, 255, 255);
-		mVertex->drawF(Vector2f((float)cPlacePosX, (float)cNamePosY + i * cDislocateY), R_FONT_1 + i);
-		mVertex->drawF(Vector2f((float)cDotX, (float)cNamePosY + i * cDislocateY), R_FONT_DOT);
+		UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
+		UtilGraphics::drawF(mVertex, Vector2f((float)cPlacePosX, (float)cNamePosY + i * cDislocateY), R_FONT_1 + i);
+		UtilGraphics::drawF(mVertex, Vector2f((float)cDotX, (float)cNamePosY + i * cDislocateY), R_FONT_DOT);
 	}
 }
 
@@ -284,8 +282,8 @@ SceneRanking::drawRankingName() const
 	{
 		for (int i = 0;i < cRankingNameCount;i++)
 		{
-			mVertex->setColor(mNameAlpha[j][i], 255, 255, 255);
-			mVertex->drawF(Vector2f((float)cNamePosX + i * cDislocateX, (float)cNamePosY + j * cDislocateY), R_FONT_A + mRankData[j].mName[i]);
+			UtilGraphics::setVertexColor(mVertex, mNameAlpha[j][i], 255, 255, 255);
+			UtilGraphics::drawF(mVertex, Vector2f((float)cNamePosX + i * cDislocateX, (float)cNamePosY + j * cDislocateY), R_FONT_A + mRankData[j].mName[i]);
 		}
 	}
 }
@@ -311,8 +309,8 @@ SceneRanking::drawRankingScore() const
 		for (int j = figure; j > 0; j--)
 		{
 			UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_FONT);
-			mVertex->setColor(255, 255, 255, 255);
-			mVertex->drawF(Vector2f((float)cScorePosX + (9 - j)*cDislocateX, (float)cNamePosY + i * cDislocateY), R_FONT_0 + num[9 - j]);
+			UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
+			UtilGraphics::drawF(mVertex, Vector2f((float)cScorePosX + (9 - j)*cDislocateX, (float)cNamePosY + i * cDislocateY), R_FONT_0 + num[9 - j]);
 		}
 	}
 }

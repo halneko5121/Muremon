@@ -32,20 +32,6 @@ namespace
 	const int cAddGaugePowerNikuman = 30;			// にくまんミッションゲージ増加量
 	const int cAddScoreNikuman = 30;				// にくまんスコア加算
 
-	enum ANIME_NIKU
-	{
-		ANIME_G_ATK1_NIKU,
-		ANIME_G_ATK2_NIKU,
-		ANIME_G_ATK3_NIKU,
-		ANIME_G_ATK4_NIKU,
-
-		ANIME_S_ATK1_NIKU,
-
-		ANIME_DEATH_NIKU,
-
-		MAX_ANIME_NIKU,
-	};
-
 	enum State
 	{
 		cState_Idle,			// 待機
@@ -73,7 +59,7 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
-	mAnimation = new Animation(R_NIKU_G_ATK1, ANIME_G_ATK4_NIKU);
+	mAnimation = new Animation(R_NIKU_G_ATK1, R_NIKU_G_ATK4);
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
 	mRect.setWidth(cActorSize.x);
@@ -165,7 +151,6 @@ ActorNikuman::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
-	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
 	UtilGraphics::drawCB(mVertex, mNowPos, mRectNum);
 }
 
@@ -213,7 +198,6 @@ ActorNikuman::stateEnterGroundAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
@@ -221,12 +205,10 @@ ActorNikuman::stateEnterGroundAtk()
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
-	mAnimation->reset();
-	mAnimation->setChangeSpeed(10);
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
-	float rand_deg = static_cast<float>((rand() % cDegRand + cDegRandMin));
-	mOrbitRebound->setDegree(rand_deg);
+	mAnimation->startLoop();
+	mAnimation->setChangeSpeed(10);
 }
 void
 ActorNikuman::stateGroundAtk()
@@ -270,7 +252,6 @@ ActorNikuman::stateEnterSkyAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
@@ -284,6 +265,7 @@ ActorNikuman::stateEnterSkyAtk()
 	mSpeed = getRandomNikumanSpeed();
 	mNowPos = Vector2f(-cActorSize.x, mAtkStartY);
 	mAngleDegree = 0.0f;
+	mRectNum = R_NIKU_S_ATK;
 }
 void
 ActorNikuman::stateSkyAtk()
@@ -312,7 +294,6 @@ ActorNikuman::stateSkyAtk()
 	}
 	else
 	{
-		mRectNum = ANIME_S_ATK1_NIKU;
 		updateAttack2(boss->getNowPos());
 		mRect.updateCenterPosCenter(mNowPos);
 	}
@@ -324,14 +305,15 @@ ActorNikuman::stateSkyAtk()
 void
 ActorNikuman::stateEnterGroundDeath()
 {
-	float rand_deg = (float)(rand() % cDegRand + cDegRandMin);
+	mRectNum = R_NIKU_DEATH;
+
+	float rand_deg = static_cast<float>((rand() % cDegRand + cDegRandMin));
 	mOrbitRebound->setDegree(rand_deg);
 	mOrbitRebound->setSpeed(mSpeed);
 }
 void
 ActorNikuman::stateGroundDeath()
 {
-	mRectNum = ANIME_DEATH_NIKU;
 	mOrbitRebound->update(&mNowPos);
 
 	// 画面外なら死亡
@@ -353,7 +335,7 @@ ActorNikuman::stateEnterSkyDeath()
 void
 ActorNikuman::stateSkyDeath()
 {
-	mRectNum = ANIME_DEATH_NIKU;
+	mRectNum = R_NIKU_DEATH;
 
 	// 放物線処理
 	mNowPos.x += mRandMoveX;

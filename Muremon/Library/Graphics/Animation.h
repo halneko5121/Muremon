@@ -7,6 +7,8 @@
  *	管理者：三上
  ******************************************************************/
 
+#include "Library/StateMachine.h"
+
 class Animation
 {
 public:
@@ -14,9 +16,16 @@ public:
 	~Animation();
 
 	/**
-	 * @brief	リセット処理
+	 * @brief	開始
 	 */
-	void	reset();
+	void	startOnce();
+	void	startLoop();
+
+	/**
+	 * @brief	終了したか？
+	 * @note	ループアニメの場合は終わらない
+	 */
+	bool	isEnd() const;
 
 	/**
 	 * @brief	アニメーションの更新
@@ -33,9 +42,18 @@ public:
 	void	resetChangeSpeed();
 
 private:
-	int		mStartAnimeIndex;	// 開始する番号
-	int		mMaxAnimeIndex;		// 最大アニメーション番号
-	int		mAnimeIndex;		// 現在のアニメーション番号
-	float	mChangeCount;		// テクスチャを切り替える速さの加算を格納
-	float	mChangeSpeed;		// 切り替え速度
+	// ステート関数
+	DECLAR_STATE_FUNC2(Idle);
+	DECLAR_STATE_FUNC2(Run);
+	DECLAR_STATE_FUNC2(End);
+
+private:
+	StateMachine	mState;
+	bool			mIsLoop;			// ループするか？
+	int				mStartAnimeIndex;	// 開始する番号
+	int				mMaxAnimeIndex;		// 最大アニメーション番号
+	int				mCurrentIndex;		// 現在のアニメ番号
+	int				mAnimeIndex;		// 現在のアニメーション番号
+	float			mChangeCount;		// テクスチャを切り替える速さの加算を格納
+	float			mChangeSpeed;		// 切り替え速度
 };

@@ -9,7 +9,6 @@
 
 class Texture;
 class Vertex;
-class ActorBoss;
 
 class UIRefreshGame
 {

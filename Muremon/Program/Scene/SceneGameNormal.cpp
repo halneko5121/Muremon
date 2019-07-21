@@ -14,12 +14,8 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Mission/MissionMgr.h"
 #include "Program/Actor/ActorBoss.h"
-#include "Program/Actor/Actornikuman.h"
-#include "Program/Actor/ActorNoppo.h"
-#include "Program/Actor/ActorYoshi.h"
 #include "Program/UI/UINormalGame.h"
 #include "Program/Effect/EffectMgr.h"
-#include "Program/DefineGame.h"
 
 namespace
 {

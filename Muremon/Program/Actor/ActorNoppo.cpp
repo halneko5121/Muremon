@@ -8,6 +8,7 @@
 
 #include "ActorNoppo.h"
 
+#include "Library/Graphics/Animation.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -41,23 +42,6 @@ namespace
 	const int cAddGaugePowerNoppo = 10;								// のっぽミッションゲージ増加量
 	const int cAddScoreNoppo = 10;									// のっぽスコア加算
 
-	enum ANIME_NOPPO
-	{
-		ANIME_G_ATK1_NOPPO,
-		ANIME_G_ATK2_NOPPO,
-		ANIME_G_ATK3_NOPPO,
-		ANIME_G_ATK4_NOPPO,
-
-		ANIME_MOTION1_NOPPO,
-		ANIME_MOTION2_NOPPO,
-		ANIME_MOTION3_NOPPO,
-
-		ANIME_S_ATK1_NOPPO,
-		ANIME_S_ATK2_NOPPO,
-
-		MAX_ANIME_NOPPO,
-	};
-
 	enum State
 	{
 		cState_Idle,				// 待機
@@ -77,6 +61,9 @@ namespace
 ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mGroundAtkAnime(nullptr)
+	, mSkyAtkAnime(nullptr)
+	, mGroundDeadAnime(nullptr)
 	, mOrbitWave(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
@@ -86,6 +73,10 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
+	mGroundAtkAnime = new Animation(R_NOPPO_G_ATK1, R_NOPPO_G_ATK4, 10);
+	mSkyAtkAnime = new Animation(R_NOPPO_S_ATK1, R_NOPPO_S_ATK2, 10);
+	mGroundDeadAnime = new Animation(R_NOPPO_MOTION1, R_NOPPO_MOTION3, 10);
+
 	mOrbitWave = new OrbitWave();
 
 	mRect.setWidth(cActorSize.x);
@@ -181,11 +172,11 @@ ActorNoppo::drawImple() const
 	UtilGraphics::setVertexColor(mVertex, mAlpha, 255, 255, 255);
 	if (mState.isEqual(cState_SkyDeath))
 	{
-		UtilGraphics::drawF(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawF(mVertex, mNowPos, mRectNum);
 	}
 	else
 	{
-		UtilGraphics::drawCB(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawCB(mVertex, mNowPos, mRectNum);
 	}
 }
 
@@ -223,8 +214,6 @@ ActorNoppo::stateEnterGroundAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAnimation = 0;
-		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
@@ -234,6 +223,8 @@ ActorNoppo::stateEnterGroundAtk()
 	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
+	mRectNum = R_NOPPO_G_ATK1;
+	mGroundAtkAnime->startLoop();
 }
 void
 ActorNoppo::stateGroundAtk()
@@ -270,7 +261,7 @@ ActorNoppo::stateGroundAtk()
 		else
 		{
 			mNowPos.x += mSpeed;
-			mAnimation = setAnimetion(ANIME_G_ATK4_NOPPO, mAnimation, NULL);
+			mRectNum = mGroundAtkAnime->update();
 			mRect.updateCenterPosCenter(mNowPos);
 		}
 	}
@@ -285,7 +276,6 @@ ActorNoppo::stateEnterSkyAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAnimation = 0;
 		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
@@ -301,6 +291,9 @@ ActorNoppo::stateEnterSkyAtk()
 	mNowPos = Vector2f(-cActorSize.x, mAtkStartY);
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);
+
+	mRectNum = R_NOPPO_S_ATK1;
+	mSkyAtkAnime->startLoop();
 }
 void
 ActorNoppo::stateSkyAtk()
@@ -347,7 +340,7 @@ ActorNoppo::stateSkyAtk()
 		{
 			mOrbitWave->setSpeed(mSpeed);
 			updateAttack2();
-			mAnimation = setAnimetion((ANIME_S_ATK2_NOPPO - ANIME_S_ATK1_NOPPO), mAnimation, ANIME_S_ATK1_NOPPO);
+			mRectNum = mSkyAtkAnime->update();
 			mRect.updateCenterPosCenter(mNowPos);
 		}
 	}
@@ -359,12 +352,14 @@ ActorNoppo::stateSkyAtk()
 void
 ActorNoppo::stateEnterGroundDeathAnime()
 {
+	mRectNum = R_NOPPO_MOTION1;
+	mGroundDeadAnime->startOnce();
 }
 void
 ActorNoppo::stateGroundDeathAnime()
 {
-	mAnimation = setAnimetion((ANIME_MOTION3_NOPPO - ANIME_MOTION1_NOPPO), mAnimation, ANIME_MOTION1_NOPPO);
-	if (mAnimation == 2)
+	mRectNum = mGroundDeadAnime->update();
+	if (mGroundDeadAnime->isEnd())
 	{
 		mState.changeState(cState_GroundDeath);
 		return;
@@ -377,8 +372,6 @@ ActorNoppo::stateGroundDeathAnime()
 void
 ActorNoppo::stateEnterGroundDeath()
 {
-	mAnimation = 0;
-	mRectNum = ANIME_MOTION3_NOPPO;
 }
 void
 ActorNoppo::stateGroundDeath()
@@ -406,8 +399,7 @@ ActorNoppo::stateSkyDeath()
 	mAngleDegree += cSpinSpeed;
 
 	// 描画を固定
-	mAnimation = 0;
-	mRectNum = ANIME_S_ATK2_NOPPO;
+	mRectNum = R_NOPPO_S_ATK2;
 
 	// 放物線処理
 	mNowPos.x += mRandMoveX;
@@ -430,7 +422,7 @@ ActorNoppo::stateEnterEnd()
 {
 	mIsAtk1 = mIsAtk2 = false;
 	mAlpha = 0;
-	mAnimation = 0;
+	mGroundAtkAnime = 0;
 }
 void
 ActorNoppo::stateEnd()

@@ -1,5 +1,6 @@
 #include "ActorNikuman.h"
 
+#include "Library/Graphics/Animation.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -63,15 +64,16 @@ namespace
 ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mAnimation(nullptr)
 	, mOrbitRebound(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 	, mAtkStartY(0.0f)
 {
-	mRectStartNum = R_NIKU_G_ATK1;
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
+	mAnimation = new Animation(R_NIKU_G_ATK1, ANIME_G_ATK4_NIKU);
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
 	mRect.setWidth(cActorSize.x);
@@ -164,7 +166,7 @@ ActorNikuman::drawImple() const
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
 	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
-	UtilGraphics::drawCB(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
+	UtilGraphics::drawCB(mVertex, mNowPos, mRectNum);
 }
 
 /**
@@ -211,7 +213,6 @@ ActorNikuman::stateEnterGroundAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAnimation = 0;
 		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
@@ -219,8 +220,9 @@ ActorNikuman::stateEnterGroundAtk()
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
 	mIsAtk1 = true;
-	mSpeed = getRandomNikumanSpeed();
-	mAnimation = 0;
+	mSpeed = getRandomSpeed();
+	mAnimation->reset();
+	mAnimation->setChangeSpeed(10);
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
 	float rand_deg = static_cast<float>((rand() % cDegRand + cDegRandMin));
@@ -253,7 +255,7 @@ ActorNikuman::stateGroundAtk()
 	}
 	else
 	{
-		mAnimation = setAnimetion(ANIME_G_ATK4_NIKU, mAnimation, NULL);
+		mRectNum = mAnimation->update();
 		mNowPos.x += mSpeed;
 		mRect.updateCenterPosCenter(mNowPos);
 	}
@@ -268,7 +270,6 @@ ActorNikuman::stateEnterSkyAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAnimation = 0;
 		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
@@ -330,7 +331,6 @@ ActorNikuman::stateEnterGroundDeath()
 void
 ActorNikuman::stateGroundDeath()
 {
-	mAnimation = 0;
 	mRectNum = ANIME_DEATH_NIKU;
 	mOrbitRebound->update(&mNowPos);
 
@@ -353,7 +353,6 @@ ActorNikuman::stateEnterSkyDeath()
 void
 ActorNikuman::stateSkyDeath()
 {
-	mAnimation = 0;
 	mRectNum = ANIME_DEATH_NIKU;
 
 	// 放物線処理

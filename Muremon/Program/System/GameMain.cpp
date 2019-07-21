@@ -10,7 +10,6 @@
 
 #include "Library/Font/DirectFont.h"
 #include "Library/Input/DirectInput.h"
-#include "Library/Graphics/Vertex.h"
 #include "Library/Graphics/FadeMgr.h"
 #include "Library/Sound/DirectSound.h"
 #include "Program/DefineGame.h"

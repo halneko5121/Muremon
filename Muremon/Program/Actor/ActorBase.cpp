@@ -9,7 +9,6 @@
 #include "ActorBase.h"
 
 #include "Library/Math/Rect.h"
-#include "Library/Graphics/DirectGraphics.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Actor/ActorMgr.h"

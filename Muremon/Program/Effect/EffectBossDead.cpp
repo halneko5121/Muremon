@@ -8,8 +8,6 @@
 
 #include "EffectBossDead.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Actor/ActorBase.h"
 #include "Program/DefineGame.h"
@@ -19,8 +17,6 @@ namespace
 	const float cAddPositionX = 150.f;
 	const float cAddPositionY = 150.f;
 	const int cAliveFrame = 3;
-
-
 
 	enum State
 	{
@@ -72,8 +68,8 @@ void
 EffectBossDead::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->setColor(mAlpha, 255, 255, 255);
-	mVertex->drawF(mPos, mRectIndex);
+	UtilGraphics::setVertexColor(mVertex, mAlpha, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, mPos, mRectIndex);
 }
 
 /**

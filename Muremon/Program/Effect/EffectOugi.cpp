@@ -8,8 +8,6 @@
 
 #include "EffectOugi.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Actor/ActorBase.h"
@@ -68,12 +66,12 @@ EffectOugi::draw() const
 {
 	// 「ミッション奥義」
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
-	mVertex->setColor(mAlpha, 255, 255, 255);
-	mVertex->drawF(Vector2f(400.0f, 300.0f), R_MISSION_OSIRASE);
-	mVertex->drawF(Vector2f(400.0f, 300.0f), R_OUGI_FONT);
+	UtilGraphics::setVertexColor(mVertex, mAlpha, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, Vector2f(400.0f, 300.0f), R_MISSION_OSIRASE);
+	UtilGraphics::drawF(mVertex, Vector2f(400.0f, 300.0f), R_OUGI_FONT);
 
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-	mVertex->drawF(mPos, mRectIndex);
+	UtilGraphics::drawF(mVertex, mPos, mRectIndex);
 }
 
 /**

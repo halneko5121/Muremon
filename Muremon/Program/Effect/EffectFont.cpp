@@ -8,8 +8,6 @@
 
 #include "EffectFont.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Actor/ActorBase.h"
 #include "Program/DefineGame.h"
@@ -72,10 +70,8 @@ void
 EffectFont::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_EFFECT);
-
-	// フォントエフェクトの描画
-	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawF(mPos, mRectIndex);
+	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, mPos, mRectIndex);
 }
 
 /**

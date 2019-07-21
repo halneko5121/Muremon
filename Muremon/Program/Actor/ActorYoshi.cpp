@@ -7,6 +7,7 @@
  ******************************************************************/
 #include "ActorYoshi.h"
 
+#include "Library/Graphics/Animation.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -43,27 +44,6 @@ namespace
 	const int cAddGaugePowerYoshitaro = 20;					// よしたろうミッションゲージ増加量
 	const int cAddScoreYoshitaro = 20;						// よしたろうスコア加算
 
-	enum ANIME_YOSHI
-	{
-		ANIME_G_ATK1_YOSHI,
-		ANIME_G_ATK2_YOSHI,
-		ANIME_G_ATK3_YOSHI,
-		ANIME_G_ATK4_YOSHI,
-
-		ANIME_MOTION1_YOSHI,
-		ANIME_MOTION2_YOSHI,
-		ANIME_MOTION3_YOSHI,
-
-		ANIME_S_ATK1_YOSHI,
-		ANIME_S_ATK2_YOSHI,
-		ANIME_S_ATK3_YOSHI,
-		ANIME_S_ATK4_YOSHI,
-
-		ANIME_DEATH_YOSHI,
-
-		MAX_ANIME_YOSHI,
-	};
-
 	enum State
 	{
 		cState_Idle,				// 待機
@@ -92,6 +72,8 @@ namespace
 ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mGroundAtkAnime(nullptr)
+	, mSkyDeadAnime(nullptr)
 	, mOrbitWave(nullptr)
 	, mOrbitRebound(nullptr)
 	, mRandAcc(0.0f)
@@ -102,6 +84,9 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
+	mGroundAtkAnime = new Animation(R_YOSHI_G_ATK1, R_YOSHI_G_ATK4, 10);
+	mSkyDeadAnime = new Animation(R_YOSHI_S_ATK2, R_YOSHI_S_ATK4, 8);
+	
 	mOrbitWave = new OrbitWave();
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
@@ -195,11 +180,11 @@ ActorYoshi::drawImple() const
 
 	if (mState.isEqual(cState_SkyDeath))
 	{
-		UtilGraphics::drawF(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawF(mVertex, mNowPos, mRectNum);
 	}
 	else
 	{
-		UtilGraphics::drawCB(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawCB(mVertex, mNowPos, mRectNum);
 	}
 }
 
@@ -228,8 +213,6 @@ ActorYoshi::stateEnterGroundAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAnimation = 0;
-		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
@@ -237,11 +220,10 @@ ActorYoshi::stateEnterGroundAtk()
 	}
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
-	mAnimation = 0;
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
 	mAngleDegree = 0.0f;
-	float rand_deg = static_cast<float>((rand() % cDegRand + cDegRandMin));
-	mOrbitRebound->setDegree(rand_deg);
+	mRectNum = R_YOSHI_G_ATK1;
+	mGroundAtkAnime->startLoop();
 }
 void
 ActorYoshi::stateGroundAtk()
@@ -276,7 +258,7 @@ ActorYoshi::stateGroundAtk()
 	else
 	{
 		mNowPos.x += mSpeed;
-		mAnimation = setAnimetion(ANIME_G_ATK4_YOSHI, mAnimation, NULL);
+		mRectNum = mGroundAtkAnime->update();
 		mRect.updateCenterPosCenter(mNowPos);
 	}
 }
@@ -290,7 +272,6 @@ ActorYoshi::stateEnterSkyAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAnimation = 0;
 		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
@@ -306,6 +287,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);
+	mRectNum = R_YOSHI_S_ATK1;
 }
 void
 ActorYoshi::stateSkyAtk()
@@ -341,7 +323,6 @@ ActorYoshi::stateSkyAtk()
 	{
 		mOrbitWave->update(&mNowPos);
 		mRect.updateCenterPosCenter(mNowPos);
-		mRectNum = ANIME_S_ATK1_YOSHI;
 	}
 }
 
@@ -351,8 +332,7 @@ ActorYoshi::stateSkyAtk()
 void
 ActorYoshi::stateEnterGroundDeath()
 {
-	mAnimation = 0;
-	mRectNum = ANIME_DEATH_YOSHI;
+	mRectNum = R_YOSHI_DEATH;
 	float rand_deg = (float)(rand() % cDegRand + cDegRandMin);
 	mOrbitRebound->setDegree(rand_deg);
 	mOrbitRebound->setSpeed(mSpeed);
@@ -376,12 +356,13 @@ ActorYoshi::stateGroundDeath()
 void
 ActorYoshi::stateEnterSkyDeathAnime()
 {
+	mSkyDeadAnime->startOnce();
 }
 void
 ActorYoshi::stateSkyDeathAnime()
 {
-	mAnimation = setAnimetion((ANIME_S_ATK4_YOSHI - ANIME_S_ATK1_YOSHI), mAnimation, ANIME_S_ATK2_YOSHI);
-	if (mAnimation == 3)
+	mRectNum = mSkyDeadAnime->update();
+	if (mSkyDeadAnime->isEnd())
 	{
 		mState.changeState(cState_SkyDeath);
 		return;
@@ -395,8 +376,7 @@ void
 ActorYoshi::stateEnterSkyDeath()
 {
 	//描画を固定
-	mAnimation = 0;
-	mRectNum = ANIME_DEATH_YOSHI;
+	mRectNum = R_YOSHI_DEATH;
 
 	// 放物線処理
 	mSpeed -= mRandAcc;
@@ -426,7 +406,6 @@ void
 ActorYoshi::stateEnterEnd()
 {
 	mIsAtk1 = mIsAtk2 = false;
-	mAnimation = 0;
 }
 void
 ActorYoshi::stateEnd()

@@ -10,6 +10,7 @@
 #include "Library/StateMachine.h"
 #include "ActorBase.h"
 
+class Animation;
 class OrbitWave;
 class OrbitRebound;
 
@@ -36,10 +37,12 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine				mState;	// ステート
-	OrbitWave*					mOrbitWave;
-	OrbitRebound*				mOrbitRebound;
-	float						mRandAcc;
-	float						mRandMoveX;
-	float						mAtkStartY;
+	StateMachine			mState;	// ステート
+	Animation*				mGroundAtkAnime;
+	Animation*				mSkyDeadAnime;
+	OrbitWave*				mOrbitWave;
+	OrbitRebound*			mOrbitRebound;
+	float					mRandAcc;
+	float					mRandMoveX;
+	float					mAtkStartY;
 };

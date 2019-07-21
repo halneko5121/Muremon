@@ -7,7 +7,6 @@
  ******************************************************************/
 #include "MissionMgr.h"
 
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGraphics.h"
@@ -290,15 +289,15 @@ void MissionMgr::draw() const
 	if (!mState.isEqual(cState_StartShake)&&
 		!mState.isEqual(cState_StartFadeOut))
 	{
-		mVertex->setColor(mAlpha,255,255,255);
+		UtilGraphics::setVertexColor(mVertex, mAlpha,255,255,255);
 	}
 
 	int rect_index = calcRectIndex(mState.getStateIndex());
-	mVertex->drawF(mMissionStartPos, rect_index);	//‚Ý‚Á‚µ‚å‚ñ”­¶
+	UtilGraphics::drawF(mVertex, mMissionStartPos, rect_index);	//‚Ý‚Á‚µ‚å‚ñ”­¶
 
-	mVertex->setColor(mAlpha,255,255,255);
-	mVertex->drawF(cDispMissionAlertPos, R_MISSION_OSIRASE);	//‚Ý‚Á‚µ‚å‚ñ‚¨’m‚ç‚¹˜g
-	mVertex->drawF(cDispMissionAlertPos, R_MISSION_1 + mCurrentMissionNo);	//‚Ý‚Á‚µ‚å‚ñ
+	UtilGraphics::setVertexColor(mVertex, mAlpha,255,255,255);
+	UtilGraphics::drawF(mVertex, cDispMissionAlertPos, R_MISSION_OSIRASE);	//‚Ý‚Á‚µ‚å‚ñ‚¨’m‚ç‚¹˜g
+	UtilGraphics::drawF(mVertex, cDispMissionAlertPos, R_MISSION_1 + mCurrentMissionNo);	//‚Ý‚Á‚µ‚å‚ñ
 
 	if( mCurrentMissionNo == cMissionId_Mission10 ||
 		mCurrentMissionNo == cMissionId_Mission11)
@@ -307,8 +306,8 @@ void MissionMgr::draw() const
 			mState.isEqual(cState_StartFadeOut))
 		{
 			UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-			mVertex->setColor(mAlpha,255,255,255);
-			mVertex->drawF(Vector2f(400.f, 450.f), R_Z_PUSH_START);
+			UtilGraphics::setVertexColor(mVertex, mAlpha,255,255,255);
+			UtilGraphics::drawF(mVertex, Vector2f(400.f, 450.f), R_Z_PUSH_START);
 		}
 	}
 
@@ -319,9 +318,9 @@ void MissionMgr::draw() const
 
 	// ƒ~ƒbƒVƒ‡ƒ“Ž¸”s
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
-	mVertex->setColor(mNegativeAlpha, 255, 255, 255);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_MISSION_OSIRASE);
-	mVertex->drawF(Vector2f(400.f, 300.f), R_NEGATIVE1 + mBadStatusId);
+	UtilGraphics::setVertexColor(mVertex, mNegativeAlpha, 255, 255, 255);
+	UtilGraphics::drawF(mVertex, Vector2f(400.f, 300.f), R_MISSION_OSIRASE);
+	UtilGraphics::drawF(mVertex, Vector2f(400.f, 300.f), R_NEGATIVE1 + mBadStatusId);
 }
 
 /**

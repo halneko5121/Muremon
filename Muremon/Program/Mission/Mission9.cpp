@@ -8,7 +8,6 @@
 
 #include "Mission9.h"
 
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
@@ -80,7 +79,7 @@ Mission9::draw() const
 
 	for (int i = 1;i < mSuccessTypingCount;i++)
 	{
-		mVertex->drawF(Vector2f(96.0f + 29.5f * (i - 1), 278.0f), R_F_NIKUMAN);
+		UtilGraphics::drawF(mVertex, Vector2f(96.0f + 29.5f * (i - 1), 278.0f), R_F_NIKUMAN);
 	}
 }
 

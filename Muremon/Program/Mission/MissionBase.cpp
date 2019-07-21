@@ -8,7 +8,6 @@
 
 #include "MissionBase.h"
 
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
 
@@ -83,7 +82,7 @@ MissionBase::drawTime() const
 				num = num / 10;
 			}
 		}
-		mVertex->drawF(Vector2f(cDispMissionTimePos.x + 50.f * i, cDispMissionTimePos.y), R_0_B + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispMissionTimePos.x + 50.f * i, cDispMissionTimePos.y), R_0_B + num % 10);
 	}
 }
 
@@ -97,7 +96,7 @@ MissionBase::drawCombo() const
 		for (int j = 1;j < 3 - i;j++) {
 			num = num / 10;
 		}
-		mVertex->drawF(Vector2f(cDispCombo.x + 50.f + 50.f * i, cDispCombo.y), R_0_B + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispCombo.x + 50.f + 50.f * i, cDispCombo.y), R_0_B + num % 10);
 	}
-	mVertex->drawF(cDispCombo, R_COMBO);
+	UtilGraphics::drawF(mVertex, cDispCombo, R_COMBO);
 }

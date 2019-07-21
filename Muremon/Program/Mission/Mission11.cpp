@@ -8,7 +8,6 @@
 
 #include "Mission11.h"
 
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilInput.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/DefineGame.h"
@@ -78,8 +77,8 @@ Mission11::draw() const
 	if (mState.isEqual(cState_Ready))
 	{
 		UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-		mVertex->setColor(mAlphaPushZ, 255, 255, 255);
-		mVertex->drawF(Vector2f(400.0f, 450.0f), R_Z_PUSH_START);
+		UtilGraphics::setVertexColor(mVertex, mAlphaPushZ, 255, 255, 255);
+		UtilGraphics::drawF(mVertex, Vector2f(400.0f, 450.0f), R_Z_PUSH_START);
 	}
 }
 

@@ -71,6 +71,8 @@ UIRefreshGame::update()
 void
 UIRefreshGame::draw(const ActorBoss& boss) const
 {
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
+
 	// ステータス枠描画
 	UtilGraphics::drawF(mVertex, cDispStateFramePos, R_STATE_FRAME);
 	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔

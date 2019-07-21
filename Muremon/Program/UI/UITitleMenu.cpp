@@ -134,18 +134,6 @@ UITitleMenu::update()
 		}
 	}
 
-	if (UtilInput::isKeyPushed(UtilInput::cKey_Up))
-	{
-		mCurrentMenuItem--;
-		mTimeCount = 0;
-	}
-
-	if (UtilInput::isKeyPushed(UtilInput::cKey_Down))
-	{
-		mCurrentMenuItem++;
-		mTimeCount = 0;
-	}
-
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Z))
 	{
 		UtilSound::playOnce(S_SE_OK);
@@ -308,11 +296,6 @@ UITitleMenu::stateEnterTop()
 void
 UITitleMenu::stateTop()
 {
-	if (UtilInput::isKeyPushed(UtilInput::cKey_Down))
-	{
-		mCurrentMenuItem--;
-	}
-
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Z))
 	{
 		mState.changeState(cState_MenuSelect);
@@ -355,6 +338,8 @@ UITitleMenu::stateMenuSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Up))
 	{
+		mCurrentMenuItem--;
+		mTimeCount = 0;
 		if (mCurrentMenuItem < G_START)
 		{
 			mCurrentMenuItem = G_END;
@@ -363,6 +348,8 @@ UITitleMenu::stateMenuSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Down))
 	{
+		mCurrentMenuItem++;
+		mTimeCount = 0;
 		if (mCurrentMenuItem > G_END)
 		{
 			mCurrentMenuItem = G_START;
@@ -405,6 +392,8 @@ UITitleMenu::stateGameSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Up))
 	{
+		mCurrentMenuItem--;
+		mTimeCount = 0;
 		if (mCurrentMenuItem < G_CLEARLY)
 		{
 			mCurrentMenuItem = G_TUTORIAL;
@@ -413,6 +402,8 @@ UITitleMenu::stateGameSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Down))
 	{
+		mCurrentMenuItem++;
+		mTimeCount = 0;
 		if (mCurrentMenuItem > G_TUTORIAL)
 		{
 			mCurrentMenuItem = G_CLEARLY;

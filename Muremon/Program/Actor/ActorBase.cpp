@@ -37,7 +37,6 @@ ActorBase::ActorBase(const ActorId& actor_id, int uniq_id, Texture* texture, Ver
 	, mRect(Vector2f(0.0f, 0.0f), 1.0f, 1.0f)
 	, mRectNum(0)
 	, mRectStartNum(0)
-	, mSoundStartNum(0)
 	, mNowPos(0.0f, 0.0f)
 	, mSpeed(0.0f)
 	, mAngleDegree(0.0f)

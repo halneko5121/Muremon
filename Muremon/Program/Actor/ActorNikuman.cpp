@@ -69,7 +69,6 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	, mAtkStartY(0.0f)
 {
 	mRectStartNum = R_NIKU_G_ATK1;
-	mSoundStartNum = S_NIKUMAN;
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
 	mScore = cAddScoreNikuman;

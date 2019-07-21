@@ -83,7 +83,6 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mAtkStartY(0.0f)
 {
 	mRectStartNum = R_NOPPO_G_ATK1;
-	mSoundStartNum = S_NOPPO_KOKE;
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
 	mScore = cAddScoreNoppo;

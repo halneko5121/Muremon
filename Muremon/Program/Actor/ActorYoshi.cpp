@@ -92,7 +92,6 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mAtkStartY(0.0f)
 {
 	mRectStartNum = R_YOSHI_G_ATK1;
-	mSoundStartNum = S_YOSHI_HIP;
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
 	mScore = cAddScoreYoshitaro;

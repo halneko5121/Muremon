@@ -85,7 +85,6 @@ protected:
 	Rect				mRect;
 	int					mRectNum;
 	int					mRectStartNum;
-	int					mSoundStartNum;
 
 	Vector2f			mNowPos;
 	float				mSpeed;

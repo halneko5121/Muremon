@@ -1,4 +1,11 @@
 #pragma once
+/******************************************************************
+ *	@file	ActorBoss.h
+ *	@brief	ボスの挙動
+ *
+ *	製作者：三上
+ *	管理者：三上
+ ******************************************************************/
 
 #include "Library/StateMachine.h"
 #include "Program/Actor/ActorBase.h"

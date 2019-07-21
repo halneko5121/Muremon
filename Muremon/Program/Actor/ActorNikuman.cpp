@@ -198,7 +198,6 @@ ActorNikuman::stateEnterGroundAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
@@ -252,7 +251,6 @@ ActorNikuman::stateEnterSkyAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);

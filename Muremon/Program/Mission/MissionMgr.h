@@ -39,7 +39,7 @@ enum MissionId
 class MissionMgr
 {
 public:
-	MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss);
+	MissionMgr(Texture* texture, Vertex* vertex);
 	~MissionMgr();
 
 	void	init();
@@ -66,7 +66,6 @@ private:
 	StateMachine				mState;	// ステート
 	Texture*					mTexture;
 	Vertex*						mVertex;
-	ActorBoss*					mActorBoss;
 	MissionBase*				mMission[cMissionId_Count];
 	BadStatusBase*				mBadStatusBase[cBadStatusId_Count];
 	EffectBase*					mOugiEffect;

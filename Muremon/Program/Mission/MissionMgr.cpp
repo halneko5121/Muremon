@@ -12,7 +12,6 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilBattle.h"
-#include "Program/Actor/ActorBoss.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Mission/MissionBase.h"
 #include "Program/Mission/Mission1.h"
@@ -225,10 +224,9 @@ namespace
 	}
 }
 
-MissionMgr::MissionMgr(Texture* texture, Vertex* vertex, ActorBoss* boss)
+MissionMgr::MissionMgr(Texture* texture, Vertex* vertex)
 	: mTexture(texture)
 	, mVertex(vertex)
-	, mActorBoss(boss)
 	, mOugiEffect(nullptr)
 	, mMissionStartPos(cDispMissionOccurrencePos.x, -50.f)
 	, mAlpha(0)
@@ -522,7 +520,7 @@ MissionMgr::stateOugi()
 {
 	if (mOugiEffect->isEnd())
 	{
-		mActorBoss->setDead();
+		UtilBattle::setBossDead();
 		UtilGame::addScore(cMissionClearAddScore);
 		mState.changeState(cState_End);
 		return;

@@ -114,7 +114,7 @@ SceneGameNormal::impleInit()
 
 	mUINormalGame->init();
 
-	mMissionMgr = new MissionMgr(mTexture, mVertex, mBoss);
+	mMissionMgr = new MissionMgr(mTexture, mVertex);
 
 	mState.changeState(cState_ReadyFadeIn);
 }

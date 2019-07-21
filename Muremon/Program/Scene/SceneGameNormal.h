@@ -14,9 +14,6 @@
 
 class MissionMgr;
 class ActorBoss;
-class ActorNikuman;
-class ActorNoppo;
-class ActorYoshi;
 class UINormalGame;
 
 class SceneGameNormal : public SceneBase

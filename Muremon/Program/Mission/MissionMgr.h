@@ -76,7 +76,7 @@ private:
 	int							mFlagDraw;		//
 
 	int							mMoveCount;		//
-	int							mCurrentMissionNo;		// どのミッションが選択されたかを記憶
+	int							mCurrentMissionId;		// どのミッションが選択されたかを記憶
 
 	int							mNegativeAlpha;
 	int							mBadStatusId;

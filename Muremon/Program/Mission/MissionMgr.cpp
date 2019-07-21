@@ -232,7 +232,7 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex)
 	, mAlpha(0)
 	, mFlagDraw(0)
 	, mMoveCount(0)
-	, mCurrentMissionNo(0)
+	, mCurrentMissionId(0)
 	, mNegativeAlpha(0)
 	, mBadStatusId(cBadStatusId_Null)
 {
@@ -265,7 +265,7 @@ MissionMgr::~MissionMgr()
 
 void MissionMgr::init()
 {
-	mCurrentMissionNo	= 0;
+	mCurrentMissionId	= 0;
 	mFlagDraw	= 0;
 	mAlpha		= 0;
 
@@ -295,10 +295,10 @@ void MissionMgr::draw() const
 
 	UtilGraphics::setVertexColor(mVertex, mAlpha,255,255,255);
 	UtilGraphics::drawF(mVertex, cDispMissionAlertPos, R_MISSION_OSIRASE);	//‚Ý‚Á‚µ‚å‚ñ‚¨’m‚ç‚¹˜g
-	UtilGraphics::drawF(mVertex, cDispMissionAlertPos, R_MISSION_1 + mCurrentMissionNo);	//‚Ý‚Á‚µ‚å‚ñ
+	UtilGraphics::drawF(mVertex, cDispMissionAlertPos, R_MISSION_1 + mCurrentMissionId);	//‚Ý‚Á‚µ‚å‚ñ
 
-	if( mCurrentMissionNo == cMissionId_Mission10 ||
-		mCurrentMissionNo == cMissionId_Mission11)
+	if( mCurrentMissionId == cMissionId_Mission10 ||
+		mCurrentMissionId == cMissionId_Mission11)
 	{
 		if (mState.isEqual(cState_StartShake) ||
 			mState.isEqual(cState_StartFadeOut))
@@ -311,7 +311,7 @@ void MissionMgr::draw() const
 
 	if(mState.isEqual(cState_Run))
 	{
-		mMission[mCurrentMissionNo]->draw();
+		mMission[mCurrentMissionId]->draw();
 	}
 
 	// ƒ~ƒbƒVƒ‡ƒ“Ž¸”s
@@ -342,7 +342,7 @@ MissionMgr::calcRectIndex(int state_index) const
 	case cState_StartFadeOut:
 		return R_MISSION_HASSEI;
 	case cState_Run:
-		if (mMission[mCurrentMissionNo]->isRunning())
+		if (mMission[mCurrentMissionId]->isRunning())
 		{
 			return R_MISSION_KAISI;
 		}
@@ -383,7 +383,7 @@ MissionMgr::stateEnterStartShake()
 {
 	UtilSound::playOnce(S_OSIRASE);
 	mMoveCount = 0;
-	mCurrentMissionNo = randomSelectMission();
+	mCurrentMissionId = randomSelectMission();
 }
 void
 MissionMgr::stateStartShake()
@@ -445,19 +445,19 @@ void
 MissionMgr::stateEnterRun()
 {
 	UtilSound::playOnce(S_OSIRASE);
-	mMission[mCurrentMissionNo]->run();
+	mMission[mCurrentMissionId]->run();
 }
 void
 MissionMgr::stateRun()
 {
-	mMission[mCurrentMissionNo]->update();
+	mMission[mCurrentMissionId]->update();
 
-	if (mMission[mCurrentMissionNo]->isSuccess())
+	if (mMission[mCurrentMissionId]->isSuccess())
 	{
 		mState.changeState(cState_Success);
 		return;
 	}
-	if (mMission[mCurrentMissionNo]->isFailure())
+	if (mMission[mCurrentMissionId]->isFailure())
 	{
 		mState.changeState(cState_Failure);
 		return;

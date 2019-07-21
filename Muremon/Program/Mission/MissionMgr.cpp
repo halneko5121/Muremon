@@ -39,6 +39,7 @@ namespace
 	const Vector2f cDispMissionAlertPos = { 400.0f, 300.0f };
 	const int cMissionAlphaIncrease = 5;
 	const Vector2f cDispMissionOccurrencePos = { 400.0f, 50.0f };	// 「ミッション発生」
+	const int cMaxMissionGauge = 5000;
 
 	// 各ミッションが選択されるパーセンテージ
 	const int cMission1Rate = 10;
@@ -228,6 +229,7 @@ MissionMgr::MissionMgr(Texture* texture, Vertex* vertex)
 	: mTexture(texture)
 	, mVertex(vertex)
 	, mOugiEffect(nullptr)
+	, mMissionPower(0)
 	, mMissionStartPos(cDispMissionOccurrencePos.x, -50.f)
 	, mAlpha(0)
 	, mFlagDraw(0)
@@ -328,6 +330,33 @@ int
 MissionMgr::isEnd() const
 {
 	return (mState.isEqual(cState_End));
+}
+
+/**
+ * @ brief ミッションゲージを設定
+ */
+void
+MissionMgr::setPower(float guage)
+{
+	mMissionPower = guage;
+}
+
+/**
+ * @ brief ミッションゲージを取得
+ */
+float
+MissionMgr::getPower() const
+{
+	return mMissionPower;
+}
+
+/**
+ * @ brief ミッションゲージが溜まったか？
+ */
+bool
+MissionMgr::isPowerFull() const
+{
+	return (cMaxMissionGauge <= mMissionPower);
 }
 
 /**
@@ -569,6 +598,7 @@ MissionMgr::stateBadStatus()
 void
 MissionMgr::stateEnterEnd()
 {
+	mMissionPower = 0;
 	mBadStatusId = cBadStatusId_Null;
 }
 void

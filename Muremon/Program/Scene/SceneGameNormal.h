@@ -31,8 +31,6 @@ private:
 	void				updateRunAtk();
 	void				drawBg() const;
 	
-	void				recover();					// ミッション失敗で下がったものを元に戻す
-
 	ActorBase*			getActorNikuman(int index);
 	ActorBase*			getActorYoshi(int index);
 	ActorBase*			getActorNoppo(int index);
@@ -59,7 +57,6 @@ private:
 	bool							mIsPose;				// ポーズをしているかしていないか
 	int								mGameStateFontAlpha;	// げ～むすた～とのアルファ差分
 	int								mGameStateRectNum;		// ゲームステートの応じた矩形番号
-	float							mMissionGauge;			// 必殺ゲージ
 
 	int								mNikumanCurrentIndex;	// にくまんの現在の番号
 	int								mYoshitaroCurrentIndex;	// 吉たろうの現在の番号

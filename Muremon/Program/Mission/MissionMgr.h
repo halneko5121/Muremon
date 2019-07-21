@@ -46,6 +46,10 @@ public:
 	void	draw() const;
 	int		isEnd() const;
 
+	void	setPower(float guage);
+	float	getPower() const;
+	bool	isPowerFull() const;
+
 private:
 	int		calcRectIndex(int state_index) const;
 
@@ -68,8 +72,8 @@ private:
 	MissionBase*				mMission[cMissionId_Count];
 	BadStatusBase*				mBadStatusBase[cBadStatusId_Count];
 	EffectBase*					mOugiEffect;
-
-	Vector2f					mMissionStartPos;	//みっしょん開始の位置
+	float						mMissionPower;		// 必殺ゲージ
+	Vector2f					mMissionStartPos;	// みっしょん開始の位置
 
 	int							mAlpha;			//
 	int							mFlagDraw;		//

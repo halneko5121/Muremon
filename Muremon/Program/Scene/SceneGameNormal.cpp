@@ -29,9 +29,6 @@ namespace
 
 	const int cGameOverPosX = 450;
 
-	// 奥義
-	const int cMaxMissionGauge = 5000;
-
 	enum State
 	{
 		cState_Idle,			// 待機
@@ -58,7 +55,6 @@ SceneGameNormal::SceneGameNormal()
 	, mIsPose(false)
 	, mGameStateFontAlpha(0)
 	, mGameStateRectNum(0)
-	, mMissionGauge(0)
 	, mNikumanCurrentIndex(0)
 	, mYoshitaroCurrentIndex(0)
 	, mNoppoCurrentIndex(0)
@@ -157,7 +153,7 @@ SceneGameNormal::draw() const
 	mMissionMgr->draw();
 
 	// 各種UI
-	mUINormalGame->draw(mMissionGauge, mTime);
+	mUINormalGame->draw(mMissionMgr->getPower(), mTime);
 }
 
 /**
@@ -229,18 +225,6 @@ SceneGameNormal::drawBg() const
 	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
 	UtilGraphics::drawF(mVertex, cDispBgPos, R_GAME_BG);
 	UtilGraphics::drawF(mVertex, cDispFlagPos, R_FLAG);
-}
-
-/**
- * @brief	失敗で下がったものの元に戻す
- */
-void
-SceneGameNormal::recover()
-{
-	if(mBoss->isDead())
-	{
-		UtilBattle::resetBadStatusAtkLv();
-	}
 }
 
 ActorBase*
@@ -368,7 +352,7 @@ SceneGameNormal::stateGame()
 	}
 
 	// ミッションが起動する段階までいったら
-	if (mMissionGauge >= cMaxMissionGauge)
+	if (mMissionMgr->isPowerFull())
 	{
 		mState.changeState(cState_Mission);
 		return;
@@ -405,7 +389,9 @@ SceneGameNormal::stateGame()
 				float mul_power = pow(0.5f, UtilBattle::getBadStatusAtkLv());
 				mBoss->hit(actor->getNowPos(), (actor->getAtkPower() * mul_power));
 				actor->setIsHitCheck(false);
-				mMissionGauge += actor->getMissionPower();
+				float mission_guage = mMissionMgr->getPower();
+				mission_guage += actor->getMissionPower();
+				mMissionMgr->setPower(mission_guage);
 			}
 		}
 	}
@@ -445,7 +431,12 @@ SceneGameNormal::stateGame()
 			mNoppoCurrentIndex = 0;
 		}
 	}
-	recover();
+
+	// ミッション失敗で下がったものを元に戻す
+	if (mBoss->isDead())
+	{
+		UtilBattle::resetBadStatusAtkLv();
+	}
 
 	// ゲームオーバー条件
 	if (mBoss->getNowPos().x <= cGameOverPosX)
@@ -473,7 +464,6 @@ SceneGameNormal::stateMission()
 
 	if (mMissionMgr->isEnd())
 	{
-		mMissionGauge = 0;
 		mState.changeState(cState_Game);
 		return;
 	}

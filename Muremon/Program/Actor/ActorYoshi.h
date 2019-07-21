@@ -18,8 +18,6 @@ public:
 	ActorYoshi(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	~ActorYoshi();
 
-	void			updateAttack2();
-
 	void			initImple() override;
 	void			runImple() override;
 	void			updateImple() override;

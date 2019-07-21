@@ -196,15 +196,6 @@ ActorYoshi::drawImple() const
 	}
 }
 
-/**
- * @brief 攻撃処理
- */
-void
-ActorYoshi::updateAttack2()
-{
-	mOrbitWave->update(&mNowPos);
-}
-
 // -----------------------------------------------------------------
 // ステート関数
 // -----------------------------------------------------------------
@@ -341,9 +332,9 @@ ActorYoshi::stateSkyAtk()
 	}
 	else
 	{
-		updateAttack2();
-		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_YOSHI);
+		mOrbitWave->update(&mNowPos);
 		mRect.updateCenterPosCenter(mNowPos);
+		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_YOSHI);
 	}
 }
 

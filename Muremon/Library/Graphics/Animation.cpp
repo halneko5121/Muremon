@@ -10,14 +10,17 @@
 
 namespace
 {
-	const int cChangeTimeCount = 60;
+	const int cChangeCount = 60;
 }
 
-Animation::Animation()
-	: mStartRect(0)
+Animation::Animation(int start_anime_num, int max_anime_index)
+	: mStartAnimeIndex(start_anime_num)
+	, mMaxAnimeIndex(max_anime_index)
 	, mAnimeIndex(0)
-	, mChangeTime(0.0f)
+	, mChangeCount(0.0f)
+	, mChangeSpeed(1.0f)
 {
+	APP_ASSERT_MESSAGE((mMaxAnimeIndex != 0), "アニメーションしません");
 }
 
 Animation::~Animation()
@@ -30,8 +33,9 @@ Animation::~Animation()
 void
 Animation::reset()
 {
-	mStartRect = mAnimeIndex	= 0;
-	mChangeTime = 0.0f;
+	mAnimeIndex	= 0;
+	mChangeCount = 0.0f;
+	mChangeSpeed = 1.0f;
 }
 
 /**
@@ -41,23 +45,35 @@ Animation::reset()
  * @return	現在の矩形番号
  */
 int
-Animation::update(int start_num, int max_animetion)
+Animation::update()
 {
-	APP_ASSERT_MESSAGE((max_animetion != 0), "アニメーションしません");
-
 	// 規定の数に達したら
-	mChangeTime++;
-	if (mChangeTime > cChangeTimeCount)
+	mChangeCount += mChangeSpeed;
+	if (cChangeCount <= mChangeCount)
 	{
+		mChangeCount = 0;
+
 		// アニメーション番号をプラス
 		mAnimeIndex++;
-		if (max_animetion <= mAnimeIndex)
+		if (mMaxAnimeIndex <= mAnimeIndex)
 		{
 			mAnimeIndex = 0;
 		}
-		mChangeTime = 0;
 	}
 
-	int rect_num = start_num + mAnimeIndex;
-	return rect_num;
+	return (mStartAnimeIndex + mAnimeIndex);
+}
+
+/**
+ * @brief 切り替える速さのを設定
+ */
+void
+Animation::setChangeSpeed(float change_speed)
+{
+	mChangeSpeed = change_speed;
+}
+void
+Animation::resetChangeSpeed()
+{
+	mChangeSpeed = 1;
 }

@@ -10,7 +10,7 @@
 class Animation
 {
 public:
-	Animation();
+	Animation(int start_anime_num, int max_anime_index);
 	~Animation();
 
 	/**
@@ -24,10 +24,18 @@ public:
 	 * @param	start_num			アニメーションさせる始まりの矩形番号
 	 * @return	現在の矩形番号
 	 */
-	int		update(int start_num, int max_animetion);
+	int		update();
+
+	/**
+	 * @brief 切り替える速さのを設定
+	 */
+	void	setChangeSpeed(float change_speed);
+	void	resetChangeSpeed();
 
 private:
-	int		mStartRect;		// 開始する矩形番号
-	int		mAnimeIndex;	// 現在のアニメーション番号
-	float	mChangeTime;	// テクスチャを切り替える速さの加算を格納
+	int		mStartAnimeIndex;	// 開始する番号
+	int		mMaxAnimeIndex;		// 最大アニメーション番号
+	int		mAnimeIndex;		// 現在のアニメーション番号
+	float	mChangeCount;		// テクスチャを切り替える速さの加算を格納
+	float	mChangeSpeed;		// 切り替え速度
 };

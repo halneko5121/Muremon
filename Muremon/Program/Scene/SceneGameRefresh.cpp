@@ -106,7 +106,7 @@ void SceneGameRefresh::draw() const
 	getEffectMgr()->draw();
 
 	// UI
-	mUIRefreshGame->draw(*mBoss);
+	mUIRefreshGame->draw();
 
 	// ゲームスタート
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);

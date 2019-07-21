@@ -157,7 +157,7 @@ SceneGameNormal::draw() const
 	mMissionMgr->draw();
 
 	// ŠeŽíUI
-	mUINormalGame->draw(*mBoss, mMissionGauge, mTime);
+	mUINormalGame->draw(mMissionGauge, mTime);
 }
 
 /**

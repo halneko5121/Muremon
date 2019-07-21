@@ -74,9 +74,9 @@ UINormalGame::update()
  * @brief	•`‰æ
  */
 void
-UINormalGame::draw(const ActorBoss& boss, const float& mission_guage, const int& time) const
+UINormalGame::draw(const float& mission_guage, const int& time) const
 {
-	mUIRefreshGame->draw(boss);
+	mUIRefreshGame->draw();
 
 	drawMissionGuage(mission_guage);
 

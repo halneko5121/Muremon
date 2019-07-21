@@ -12,7 +12,6 @@
 #include "Library/Graphics/Texture.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilBattle.h"
-#include "Program/Actor/ActorBoss.h"
 #include "Program/DefineGame.h"
 
 namespace
@@ -69,7 +68,7 @@ UIRefreshGame::update()
  * @brief	ï`âÊ
  */
 void
-UIRefreshGame::draw(const ActorBoss& boss) const
+UIRefreshGame::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
@@ -80,7 +79,7 @@ UIRefreshGame::draw(const ActorBoss& boss) const
 	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);		//ÇÃÇ¡Ç€äÁ
 
 	drawKeyCount();
-	drawHpGauge(boss);
+	drawHpGauge();
 }
 
 /**
@@ -121,7 +120,7 @@ UIRefreshGame::drawKeyCount() const
  * @brief	HPÉQÅ[ÉWÇÃï`âÊ
  */
 void
-UIRefreshGame::drawHpGauge(const ActorBoss& boss) const
+UIRefreshGame::drawHpGauge() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
@@ -129,7 +128,7 @@ UIRefreshGame::drawHpGauge(const ActorBoss& boss) const
 	UtilGraphics::drawF(mVertex, cDispBossHpPos, R_HP);
 
 	// é¿ç€ÇÃëÃóÕÉQÅ[ÉWó 
-	float num = boss.getLifeRate();
+	float num = UtilBattle::getBossLifeRate();
 	UtilGraphics::setVertexScale(mVertex, num, 1.0f);
 	UtilGraphics::setVertexColor(mVertex, 255, 255, 0, 0);
 	UtilGraphics::drawF(mVertex, Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//ëÃóÕÉQÅ[ÉW

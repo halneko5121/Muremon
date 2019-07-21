@@ -22,7 +22,6 @@ public:
 	virtual void		runImple() {};
 	virtual void		updateImple() {};
 	virtual void		drawImple() const {};
-	virtual int			setAnimetion(int max_animetion, int anime_count, int rect_num) = 0;
 
 	void				init();
 	void				run();

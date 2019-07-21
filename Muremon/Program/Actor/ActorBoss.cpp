@@ -99,12 +99,6 @@ ActorBoss::updateImple()
 	}
 }
 
-int
-ActorBoss::setAnimetion(int max_animetion, int anime_count, int rect_num)
-{
-	return anime_count;
-}
-
 void
 ActorBoss::drawImple() const
 {

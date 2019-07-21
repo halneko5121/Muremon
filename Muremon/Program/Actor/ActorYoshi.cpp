@@ -147,28 +147,6 @@ ActorYoshi::updateImple()
 }
 
 /**
- * @brief ƒAƒjƒÝ’è
- */
-int
-ActorYoshi::setAnimetion(int max_animetion, int anime_count ,int rect_num)
-{
-	static int delay = 0;
-
-	if(delay++ > 15){
-		if(max_animetion == 0) anime_count = 0;
-		else{
-			if(anime_count < max_animetion) anime_count++;
-			else anime_count = 0;
-		}
-		delay = 0;
-	}
-
-	mRectNum	= rect_num;
-
-	return anime_count;
-}
-
-/**
  * @brief •`‰æˆ—
  */
 void

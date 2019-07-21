@@ -23,7 +23,6 @@ public:
 	void		runImple() override;
 	void		updateImple() override;
 	void		drawImple() const override;
-	int			setAnimetion(int max_animetion, int anime_count, int rect_num) override;
 
 	void		hit(const Vector2f& hit_pos, float damage);
 	bool		isDead() const;

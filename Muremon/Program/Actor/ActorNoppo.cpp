@@ -85,7 +85,6 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mRectStartNum = R_NOPPO_G_ATK1;
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
-	mScore = cAddScoreNoppo;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mOrbitWave = new OrbitWave();
 
@@ -252,6 +251,8 @@ ActorNoppo::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_NOPPO_GANMEN);
 
+		UtilGame::addScore(cAddScoreNoppo);
+
 		EffectParam param(mTexture, mVertex, mNowPos);
 		getEffectMgr()->createEffect(cEffectId_HitEffect5, param);
 
@@ -325,6 +326,8 @@ ActorNoppo::stateSkyAtk()
 		{
 			UtilSound::playOnce((S_NOPPO_PETI));
 		}
+
+		UtilGame::addScore(cAddScoreNoppo);
 
 		EffectParam param(mTexture, mVertex, mNowPos);
 		getEffectMgr()->createEffect(cEffectId_HitEffect6, param);

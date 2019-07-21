@@ -406,7 +406,6 @@ SceneGameNormal::stateGame()
 				mBoss->hit(actor->getNowPos(), (actor->getAtkPower() * mul_power));
 				actor->setIsHitCheck(false);
 				mMissionGauge += actor->getMissionPower();
-				UtilGame::addScore(actor->getScore());
 			}
 		}
 	}

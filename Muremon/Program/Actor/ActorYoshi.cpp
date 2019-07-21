@@ -94,7 +94,6 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mRectStartNum = R_YOSHI_G_ATK1;
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
-	mScore = cAddScoreYoshitaro;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mOrbitWave = new OrbitWave();
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
@@ -262,6 +261,8 @@ ActorYoshi::stateGroundAtk()
 		}
 		UtilSound::playOnce(S_YOSHI_HIP);
 
+		UtilGame::addScore(cAddScoreYoshitaro);
+
 		EffectParam param(mTexture, mVertex, mNowPos);
 		getEffectMgr()->createEffect(cEffectId_HitEffect3, param);
 
@@ -323,6 +324,8 @@ ActorYoshi::stateSkyAtk()
 			UtilSound::stop(S_YOSHI_HUSEN);
 		}
 		UtilSound::playOnce(S_YOSHI_HUSEN);
+
+		UtilGame::addScore(cAddScoreYoshitaro);
 
 		EffectParam param(mTexture, mVertex, mNowPos);
 		getEffectMgr()->createEffect(cEffectId_HitEffect4, param);

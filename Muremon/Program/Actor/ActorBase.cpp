@@ -42,7 +42,6 @@ ActorBase::ActorBase(const ActorId& actor_id, int uniq_id, Texture* texture, Ver
 	, mAngleDegree(0.0f)
 	, mAnimation(0)
 	, mAlpha(255)
-	, mScore(0)
 	, mMissionPower(0)
 	, mAtkPower(0)
 	, mIsAtk1(false)

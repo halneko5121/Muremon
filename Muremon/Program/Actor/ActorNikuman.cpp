@@ -71,7 +71,6 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	mRectStartNum = R_NIKU_G_ATK1;
 	mAtkPower = cAtkPowerNikuman;
 	mMissionPower = cAddGaugePowerNikuman;
-	mScore = cAddScoreNikuman;
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
@@ -234,6 +233,8 @@ ActorNikuman::stateGroundAtk()
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
 
+		UtilGame::addScore(cAddScoreNikuman);
+
 		EffectParam param(mTexture, mVertex, mNowPos);
 		getEffectMgr()->createEffect(cEffectId_HitEffect2, param);
 
@@ -289,6 +290,8 @@ ActorNikuman::stateSkyAtk()
 	{
 		UtilSound::playOnce(S_NIKUMAN);
 		setIsHitCheck(true);
+
+		UtilGame::addScore(cAddScoreNikuman);
 
 		EffectParam param(mTexture, mVertex, mNowPos);
 		getEffectMgr()->createEffect(cEffectId_HitEffect2, param);

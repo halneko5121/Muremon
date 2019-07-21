@@ -67,8 +67,6 @@ public:
 
 	const Rect&			getRect() const { return mRect; }
 
-	int					getScore() const { return mScore; }
-
 	int					getActorId() const { return static_cast<int>(mActorId); }
 
 	int					getUniqId() const { return mUniqId; }
@@ -92,7 +90,6 @@ protected:
 	int					mAnimation;
 	int					mAlpha;
 
-	int					mScore;
 	int					mMissionPower;
 	float				mAtkPower;
 	bool				mIsAtk1;

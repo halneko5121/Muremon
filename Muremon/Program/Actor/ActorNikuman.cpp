@@ -138,8 +138,12 @@ ActorNikuman::setAnimetion(int max_animetion, int anime_count ,int rect_num)
 	static int delay = 0;
 
 	if(delay++ > 15){
-		if(max_animetion == 0) anime_count = 0;
-		else{
+		if (max_animetion == 0)
+		{
+			anime_count = 0;
+		}
+		else
+		{
 			if(anime_count < max_animetion) anime_count++;
 			else anime_count = 0;
 		}
@@ -307,7 +311,7 @@ ActorNikuman::stateSkyAtk()
 	}
 	else
 	{
-		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_NIKU);
+		mRectNum = ANIME_S_ATK1_NIKU;
 		updateAttack2(boss->getNowPos());
 		mRect.updateCenterPosCenter(mNowPos);
 	}
@@ -327,8 +331,7 @@ void
 ActorNikuman::stateGroundDeath()
 {
 	mAnimation = 0;
-	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
-
+	mRectNum = ANIME_DEATH_NIKU;
 	mOrbitRebound->update(&mNowPos);
 
 	// ‰æ–ÊŠO‚È‚ç€–S
@@ -351,7 +354,7 @@ void
 ActorNikuman::stateSkyDeath()
 {
 	mAnimation = 0;
-	mAnimation = setAnimetion(NULL, mAnimation, ANIME_DEATH_NIKU);
+	mRectNum = ANIME_DEATH_NIKU;
 
 	// •ú•¨üˆ—
 	mNowPos.x += mRandMoveX;

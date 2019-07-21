@@ -334,7 +334,7 @@ ActorYoshi::stateSkyAtk()
 	{
 		mOrbitWave->update(&mNowPos);
 		mRect.updateCenterPosCenter(mNowPos);
-		mAnimation = setAnimetion(NULL, mAnimation, ANIME_S_ATK1_YOSHI);
+		mRectNum = ANIME_S_ATK1_YOSHI;
 	}
 }
 

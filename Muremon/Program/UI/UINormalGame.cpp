@@ -91,9 +91,8 @@ UINormalGame::draw(const ActorBoss& boss, const float& mission_guage, const int&
 void
 UINormalGame::drawMissionGuage(const float& mission_guage) const
 {
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-
 	// 「みっしょんゲージ」
+	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 	UtilGraphics::drawF(mVertex, cDispMissionPos, R_MISSION_GAGE);
 
 	// 実際のミッションゲージ量
@@ -114,7 +113,6 @@ void
 UINormalGame::drawScore() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-
 	UtilGraphics::drawF(mVertex, cDispScorePos, R_SCORE);		//すこあ
 
 	//スコア

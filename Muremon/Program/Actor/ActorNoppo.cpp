@@ -8,7 +8,6 @@
 
 #include "ActorNoppo.h"
 
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -180,16 +179,15 @@ void
 ActorNoppo::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NOPPO);
-
-	mVertex->setAngle(mAngleDegree);
-	mVertex->setColor(static_cast<D3DCOLOR>(mAlpha), 255, 255, 255);
+	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
+	UtilGraphics::setVerTexColor(mVertex, mAlpha, 255, 255, 255);
 	if (mState.isEqual(cState_SkyDeath))
 	{
-		mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawF(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
 	}
 	else
 	{
-		mVertex->drawCB(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawCB(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
 	}
 }
 

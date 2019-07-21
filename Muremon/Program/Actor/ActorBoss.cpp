@@ -1,7 +1,5 @@
 #include "ActorBoss.h"
 
-#include "Library/Graphics/Texture.h"
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
@@ -103,8 +101,8 @@ void
 ActorBoss::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_BOSS);
-	mVertex->setColor(mAlpha,255,255,255);
-	mVertex->drawCB(mNowPos, mRectNum);
+	UtilGraphics::setVerTexColor(mVertex, mAlpha, 255, 255, 255);
+	UtilGraphics::drawCB(mVertex, mNowPos, mRectNum);
 }
 
 /**

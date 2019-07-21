@@ -1,6 +1,5 @@
 #include "ActorYoshi.h"
 
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -187,16 +186,15 @@ void
 ActorYoshi::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_YOSHI);
-
-	mVertex->setAngle(mAngleDegree);
+	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
 
 	if (mState.isEqual(cState_SkyDeath))
 	{
-		mVertex->drawF(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawF(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
 	}
 	else
 	{
-		mVertex->drawCB(mNowPos, (mRectStartNum + mRectNum + mAnimation));
+		UtilGraphics::drawCB(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
 	}
 }
 

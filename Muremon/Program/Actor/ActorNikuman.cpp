@@ -1,6 +1,5 @@
 #include "ActorNikuman.h"
 
-#include "Library/Graphics/Vertex.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilGraphics.h"
@@ -161,10 +160,9 @@ void
 ActorNikuman::drawImple() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
-
-	mVertex->setAngle(mAngleDegree);
-	mVertex->setColor(255, 255, 255, 255);
-	mVertex->drawCB(mNowPos, (mRectStartNum + mRectNum + mAnimation) );
+	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
+	UtilGraphics::setVerTexColor(mVertex, 255, 255, 255, 255);
+	UtilGraphics::drawCB(mVertex, mNowPos, (mRectStartNum + mRectNum + mAnimation));
 }
 
 /**

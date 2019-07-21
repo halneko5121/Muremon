@@ -145,6 +145,7 @@ Animation::stateRun()
 		}
 		else
 		{
+			mCurrentIndex = mMaxAnimeIndex;
 			mState.changeState(cState_End);
 			return;
 		}

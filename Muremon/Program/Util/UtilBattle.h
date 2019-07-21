@@ -44,4 +44,5 @@ namespace UtilBattle
 
 	// ƒ{ƒXŠÖ˜A
 	void		setBossDead();
+	float		getBossLifeRate();
 }

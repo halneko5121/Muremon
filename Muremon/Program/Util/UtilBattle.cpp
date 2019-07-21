@@ -222,3 +222,14 @@ UtilBattle::setBossDead()
 	APP_POINTER_ASSERT(boss);
 	boss->setDead();
 }
+
+/**
+ * @brief	ボスのライフ残量をパーセンテージで取得
+ */
+float
+UtilBattle::getBossLifeRate()
+{
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+	return boss->getLifeRate();
+}

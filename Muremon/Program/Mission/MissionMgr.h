@@ -10,7 +10,6 @@
 #include "Library/StateMachine.h"
 #include "Program/BadStatus/BadStatusBase.h"
 
-class ActorBoss;
 class MissionBase;
 class EffectBase;
 class Texture;

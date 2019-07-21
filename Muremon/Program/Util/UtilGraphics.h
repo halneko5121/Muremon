@@ -17,5 +17,7 @@ namespace UtilGraphics
 	void				setTexture(Vertex* vertex, const Texture& texture, int texture_id);
 
 	void				setVerTexColor(Vertex* vertex, int alpha, int red, int green, int blue);
+	void				setVertexAngle(Vertex* vertex, float degree);
+
 	void				drawCB(Vertex* vertex, const Vector2f& pos, int rect_num);
 }

@@ -53,13 +53,23 @@ UtilGraphics::setTexture(Vertex* vertex, const Texture& texture, int texture_id)
 }
 
 /**
- * @biref テクスチャカラーの設定
+ * @biref バーテックスカラーの設定
  */
 void
 UtilGraphics::setVerTexColor(Vertex* vertex, int alpha, int red, int green, int blue)
 {
 	APP_POINTER_ASSERT(vertex);
 	vertex->setColor(alpha, red, green, blue);
+}
+
+/**
+ * @biref バーテックスカラーの設定
+ */
+void
+UtilGraphics::setVertexAngle(Vertex* vertex, float degree)
+{
+	APP_POINTER_ASSERT(vertex);
+	vertex->setAngle(degree);
 }
 
 /**

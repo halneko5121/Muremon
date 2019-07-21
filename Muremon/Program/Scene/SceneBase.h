@@ -15,7 +15,6 @@ class C_DWaveSound;
 class Texture;
 class Vertex;
 class C_Sprite;
-class C_Animetion;
 namespace Dix
 {
 	class C_PCMPlayer;

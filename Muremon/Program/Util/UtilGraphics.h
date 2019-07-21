@@ -20,4 +20,5 @@ namespace UtilGraphics
 	void				setVertexAngle(Vertex* vertex, float degree);
 
 	void				drawCB(Vertex* vertex, const Vector2f& pos, int rect_num);
+	void				drawF(Vertex* vertex, const Vector2f& pos, int rect_num);
 }

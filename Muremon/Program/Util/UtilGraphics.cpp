@@ -81,3 +81,13 @@ UtilGraphics::drawCB(Vertex* vertex, const Vector2f& pos, int rect_num)
 	APP_POINTER_ASSERT(vertex);
 	vertex->drawCB(pos, rect_num);
 }
+
+/**
+ * @biref 描画（原点：中心）
+ */
+void
+UtilGraphics::drawF(Vertex* vertex, const Vector2f& pos, int rect_num)
+{
+	APP_POINTER_ASSERT(vertex);
+	vertex->drawF(pos, rect_num);
+}

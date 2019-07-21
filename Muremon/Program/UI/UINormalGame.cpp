@@ -94,17 +94,17 @@ UINormalGame::drawMissionGuage(const float& mission_guage) const
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	// 「みっしょんゲージ」
-	mVertex->drawF(cDispMissionPos, R_MISSION_GAGE);
+	UtilGraphics::drawF(mVertex, cDispMissionPos, R_MISSION_GAGE);
 
 	// 実際のミッションゲージ量
 	float num = mission_guage / cMaxMissionGauge;
-	mVertex->setScale(num, 1.f);
-	mVertex->setColor(255, 30, 30, 200);
-	mVertex->drawF(Vector2f(cDispMissionGaugePos.x - (1.f - num) * 100.f, cDispMissionGaugePos.y), R_GAGE_IN);
+	UtilGraphics::setVertexScale(mVertex, num, 1.f);
+	UtilGraphics::setVertexColor(mVertex, 255, 30, 30, 200);
+	UtilGraphics::drawF(mVertex, Vector2f(cDispMissionGaugePos.x - (1.f - num) * 100.f, cDispMissionGaugePos.y), R_GAGE_IN);
 
 	// ミッションゲージの「枠」
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->drawF(cDispMissionGaugePos, R_GAGE_FRAME);	//みっしょんゲージ枠
+	UtilGraphics::drawF(mVertex, cDispMissionGaugePos, R_GAGE_FRAME);	//みっしょんゲージ枠
 }
 
 /**
@@ -115,7 +115,7 @@ UINormalGame::drawScore() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
-	mVertex->drawF(cDispScorePos, R_SCORE);		//すこあ
+	UtilGraphics::drawF(mVertex, cDispScorePos, R_SCORE);		//すこあ
 
 	//スコア
 	for (int i = 0;i < 9;i++) {
@@ -123,7 +123,7 @@ UINormalGame::drawScore() const
 		for (int j = 1; j < 9 - i;j++) {
 			num = num / 10;
 		}
-		mVertex->drawF(Vector2f(cDispScoreNumPos.x + 20.f * i, cDispScoreNumPos.y), R_0 + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispScoreNumPos.x + 20.f * i, cDispScoreNumPos.y), R_0 + num % 10);
 	}
 }
 
@@ -135,7 +135,7 @@ UINormalGame::drawTime(const int& time) const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
-	mVertex->drawF(cDispTimePos, R_TIME);		//たいむ
+	UtilGraphics::drawF(mVertex, cDispTimePos, R_TIME);		//たいむ
 
 	//タイム
 	for (int i = 0;i < 5;i++)
@@ -169,16 +169,16 @@ UINormalGame::drawTime(const int& time) const
 			}
 			if (i == 0 || i == 3)
 			{
-				mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 6);
+				UtilGraphics::drawF(mVertex, Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 6);
 			}
 			else
 			{
-				mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 10);
+				UtilGraphics::drawF(mVertex, Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_0 + num % 10);
 			}
 		}
 		else
 		{
-			mVertex->drawF(Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_SEMICORON);
+			UtilGraphics::drawF(mVertex, Vector2f(cDispTimeNumPos.x + 20.f * i, cDispTimeNumPos.y), R_SEMICORON);
 		}
 	}
 }

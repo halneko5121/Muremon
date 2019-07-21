@@ -71,14 +71,11 @@ UIRefreshGame::update()
 void
 UIRefreshGame::draw(const ActorBoss& boss) const
 {
-	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-
 	// ステータス枠描画
-	mVertex->drawF(cDispStateFramePos, R_STATE_FRAME);
-
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
-	mVertex->drawF(Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);		//のっぽ顔
+	UtilGraphics::drawF(mVertex, cDispStateFramePos, R_STATE_FRAME);
+	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
+	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
+	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);		//のっぽ顔
 
 	drawKeyCount();
 	drawHpGauge(boss);
@@ -98,7 +95,7 @@ UIRefreshGame::drawKeyCount() const
 		for (int j = 1;j < 4 - i;j++) {
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNikumanPosY), R_0 + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNikumanPosY), R_0 + num % 10);
 	}
 	//よしたろう
 	for (int i = 0;i < 4;i++) {
@@ -106,7 +103,7 @@ UIRefreshGame::drawKeyCount() const
 		for (int j = 1;j < 4 - i;j++) {
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconYoshiPosY), R_0 + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconYoshiPosY), R_0 + num % 10);
 	}
 	//のっぽ
 	for (int i = 0;i < 4;i++) {
@@ -114,7 +111,7 @@ UIRefreshGame::drawKeyCount() const
 		for (int j = 1;j < 4 - i;j++) {
 			num = (num / 10);
 		}
-		mVertex->drawF(Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNoppoPosY), R_0 + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNoppoPosY), R_0 + num % 10);
 	}
 }
 
@@ -127,15 +124,15 @@ UIRefreshGame::drawHpGauge(const ActorBoss& boss) const
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
 
 	// 「しゃっくの体力」
-	mVertex->drawF(cDispBossHpPos, R_HP);
+	UtilGraphics::drawF(mVertex, cDispBossHpPos, R_HP);
 
 	// 実際の体力ゲージ量
 	float num = boss.getLifeRate();
-	mVertex->setScale(num, 1.0f);
-	mVertex->setColor(255, 255, 0, 0);
-	mVertex->drawF(Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//体力ゲージ
+	UtilGraphics::setVertexScale(mVertex, num, 1.0f);
+	UtilGraphics::setVertexColor(mVertex, 255, 255, 0, 0);
+	UtilGraphics::drawF(mVertex, Vector2f(cDispGaugePos.x - (1.f - num) * 100.f, cDispGaugePos.y), R_GAGE_IN);	//体力ゲージ
 
 	// 体力ゲージの「枠」
 	UtilGraphics::setTexture(mVertex, *mTexture, T_GAME_FONT);
-	mVertex->drawF(cDispGaugePos, R_GAGE_FRAME);
+	UtilGraphics::drawF(mVertex, cDispGaugePos, R_GAGE_FRAME);
 }

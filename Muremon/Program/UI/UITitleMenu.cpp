@@ -154,27 +154,27 @@ UITitleMenu::draw() const
 
 	if (mState.isEqual(cState_Top))
 	{
-		mVertex->setColor(mAlphaZPush, 255, 255, 255);
-		mVertex->drawF(cDispZPushPos, R_ZPUSH);
+		UtilGraphics::setVertexColor(mVertex, mAlphaZPush, 255, 255, 255);
+		UtilGraphics::drawF(mVertex, cDispZPushPos, R_ZPUSH);
 	}
 	else if (mState.isEqual(cState_MenuSelect))
 	{
-		mVertex->drawF(cDispStart, R_START);
-		mVertex->drawF(cDispRankingPos, R_RANKING);
-		mVertex->drawF(cDispGameEndPos, R_END);
+		UtilGraphics::drawF(mVertex, cDispStart, R_START);
+		UtilGraphics::drawF(mVertex, cDispRankingPos, R_RANKING);
+		UtilGraphics::drawF(mVertex, cDispGameEndPos, R_END);
 	}
 	else if (mState.isEqual(cState_GameSelect))
 	{
-		mVertex->drawF(cDispStartPos, R_REFRESH);
-		mVertex->drawF(cDispRankingPos, R_NORMAL);
-		mVertex->drawF(cDispGameEndPos, R_TUTORIAL_T);
+		UtilGraphics::drawF(mVertex, cDispStartPos, R_REFRESH);
+		UtilGraphics::drawF(mVertex, cDispRankingPos, R_NORMAL);
+		UtilGraphics::drawF(mVertex, cDispGameEndPos, R_TUTORIAL_T);
 	}
 
-	//カーソル
+	// カーソル
 	if (!mState.isEqual(cState_Top))
 	{
-		mVertex->drawF(mCursorPos, (R_CURSOR1 + (mCursorAnime % 2)));
-		mVertex->drawF(Vector2f(mCursorPos.x + cDispCursor2Pos.x, mCursorPos.y), (R_CURSOR1 + (mCursorAnime % 2)));
+		UtilGraphics::drawF(mVertex, mCursorPos, (R_CURSOR1 + (mCursorAnime % 2)));
+		UtilGraphics::drawF(mVertex, Vector2f(mCursorPos.x + cDispCursor2Pos.x, mCursorPos.y), (R_CURSOR1 + (mCursorAnime % 2)));
 	}
 }
 

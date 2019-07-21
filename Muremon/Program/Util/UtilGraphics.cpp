@@ -63,6 +63,21 @@ UtilGraphics::setVertexColor(Vertex* vertex, int alpha, int red, int green, int 
 }
 
 /**
+ * @biref バーテックススケールの設定
+ */
+void
+UtilGraphics::setVertexScale(Vertex* vertex, float scale_x, float scale_y)
+{
+	APP_POINTER_ASSERT(vertex);
+	vertex->setScale(scale_x, scale_y);
+}
+void
+UtilGraphics::setVertexScale(Vertex* vertex, float scale)
+{
+	setVertexScale(vertex, scale, scale);
+}
+
+/**
  * @biref バーテックスカラーの設定
  */
 void

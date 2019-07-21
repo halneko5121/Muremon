@@ -7,10 +7,13 @@
  ******************************************************************/
 
 #include "UtilBattle.h"
-#include "UtilInput.h"
-#include "Program/System/GameInfoMgr.h"
 
-/**
+#include "UtilInput.h"
+#include "UtilActor.h"
+#include "Program/System/GameInfoMgr.h"
+#include "Program/Actor/ActorBoss.h"
+
+ /**
  * @brief	地上攻撃が実行されたか？
  */
 bool
@@ -207,4 +210,15 @@ int
 UtilBattle::getBadStatusAtkLv()
 {
 	return 	getGameInfoMgr()->getBadStatusAtkLv();
+}
+
+/**
+ * @brief	ボスの死亡を設定
+ */
+void
+UtilBattle::setBossDead()
+{
+	ActorBoss* boss = UtilActor::searchBossActor();
+	APP_POINTER_ASSERT(boss);
+	boss->setDead();
 }

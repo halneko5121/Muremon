@@ -41,4 +41,7 @@ namespace UtilBattle
 	void		addBadStatusAtkLv();
 	void		resetBadStatusAtkLv();
 	int			getBadStatusAtkLv();
+
+	// ƒ{ƒXŠÖ˜A
+	void		setBossDead();
 }

@@ -234,8 +234,6 @@ ActorNikuman::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
-	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-
 	mIsAtk2 = true;
 	mSpeed = getRandomNikumanSpeed();
 	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
@@ -305,6 +303,9 @@ ActorNikuman::stateGroundDeath()
 void
 ActorNikuman::stateEnterSkyDeath()
 {
+	mRectNum = R_NIKU_DEATH;
+	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+
 	// •ú•¨üˆ—
 	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);
 	mSpeed -= rand_jump_power;
@@ -312,8 +313,6 @@ ActorNikuman::stateEnterSkyDeath()
 void
 ActorNikuman::stateSkyDeath()
 {
-	mRectNum = R_NIKU_DEATH;
-
 	// •ú•¨üˆ—
 	mNowPos.x += mRandMoveX;
 	mSpeed += cGravity;

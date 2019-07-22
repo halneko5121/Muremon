@@ -247,14 +247,11 @@ ActorNoppo::stateEnterSkyAtk()
 	// UŒ‚ŠJn
 	{
 		mSpeed = 0.0f;
-		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
-	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
-
 	mIsAtk2 = true;
 	mSpeed = getRandomSpeed();
 	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
@@ -359,6 +356,10 @@ ActorNoppo::stateGroundDeath()
 void
 ActorNoppo::stateEnterSkyDeath()
 {
+	mRectNum = R_NOPPO_S_ATK2;
+
+	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+
 	// •ú•¨üˆ—
 	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);
 	mSpeed -= rand_jump_power;
@@ -368,9 +369,6 @@ ActorNoppo::stateSkyDeath()
 {
 	// ‰ñ“]‚³‚¹‚é
 	mAngleDegree += cSpinSpeed;
-
-	// •`‰æ‚ğŒÅ’è
-	mRectNum = R_NOPPO_S_ATK2;
 
 	// •ú•¨üˆ—
 	mNowPos.x += mRandMoveX;

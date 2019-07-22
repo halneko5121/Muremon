@@ -247,13 +247,11 @@ ActorYoshi::stateEnterSkyAtk()
 	// UŒ‚ŠJn
 	{
 		mSpeed = 0.0f;
-		mRectNum = 0;
 		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
-	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	mIsAtk2 = true;
 	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
@@ -349,8 +347,8 @@ ActorYoshi::stateSkyDeathAnime()
 void
 ActorYoshi::stateEnterSkyDeath()
 {
-	//•`‰æ‚ğŒÅ’è
 	mRectNum = R_YOSHI_DEATH;
+	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	// •ú•¨üˆ—
 	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);

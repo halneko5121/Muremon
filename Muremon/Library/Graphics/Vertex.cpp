@@ -32,7 +32,6 @@ Vertex::Vertex()
 	, mDegree(0.0f)
 	, mLoadedRectCount(0)
 	, mColor(255)
-	, mRectPosition()
 	, mRectPosition2(nullptr)
 	, mDevice(nullptr)
 	, mTexture(nullptr)
@@ -162,11 +161,11 @@ Vertex::fadeOut(int fade_speed ,int texture_alpha)
  * @param	pos	座標
  */
 void
-Vertex::drawLT(const Vector2f& pos) const
+Vertex::drawLT(const Vector2f& pos, int rect_num) const
 {
 	// テクスチャの距離を計算(ここで倍率も計算)
-	float texSizeX = static_cast<float>(abs(mRectPosition.right - mRectPosition.left));
-	float texSizeY = static_cast<float>(abs(mRectPosition.bottom - mRectPosition.top));
+	float texSizeX = static_cast<float>(abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left));
+	float texSizeY = static_cast<float>(abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top));
 
     // 回転の中心座標
     D3DXVECTOR2 l_center(pos.x, pos.y);
@@ -185,10 +184,10 @@ Vertex::drawLT(const Vector2f& pos) const
     };
 
 	// 4点を設定
-	float u1 = (static_cast<float>(mRectPosition.left) + UV) * mTextureU;
-	float u2 = (static_cast<float>(mRectPosition.right) - UV) * mTextureU;
-	float v1 = (static_cast<float>(mRectPosition.top) + UV) * mTextureV;
-	float v2 = (static_cast<float>(mRectPosition.bottom) - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition2[rect_num].left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition2[rect_num].right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition2[rect_num].top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition2[rect_num].bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =

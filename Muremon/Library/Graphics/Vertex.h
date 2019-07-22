@@ -73,7 +73,7 @@ public:
 	 * @param	y			Y座標
 	 * @param	rect_num	登録されている矩形のNo
 	 */
-	void	drawLT(const Vector2f& pos) const; // マウスカーソル用仮作成
+	void	drawLT(const Vector2f& pos, int rect_num) const; // マウスカーソル用仮作成
 	void	drawCB(const Vector2f& pos, int rect_num) const; // 中心の下から
 	void	drawF(const Vector2f& pos, int rect_num) const;
 
@@ -94,7 +94,6 @@ private:
 	float				mDegree;			// 角度
 	int					mLoadedRectCount;	// 読み込まれている矩形の総数
 	D3DCOLOR			mColor;				// 色
-	RECT				mRectPosition;		// RECT情報
 	RECT*				mRectPosition2;
 	LPDIRECT3DDEVICE9	mDevice;			// デバイス
 	LPDIRECT3DTEXTURE9*	mTexture;			// テクスチャ

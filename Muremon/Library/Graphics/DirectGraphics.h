@@ -9,10 +9,11 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "Library/Window/Window.h"
 
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "dxguid.lib" )
+
+class Window;
 
 class DirectGraphics
 {

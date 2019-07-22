@@ -8,6 +8,8 @@
 
 #include "DirectGraphics.h"
 
+#include "Library/Window/Window.h"
+
 DirectGraphics* DirectGraphics::mInstance = nullptr;
 
 /**

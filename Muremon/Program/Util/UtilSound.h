@@ -39,5 +39,5 @@ namespace UtilSound
 	void pause(const SoundId& id);
 	void stop(const SoundId& id);
 	bool isPlaying(const SoundId& id);
-	void setVolume(short volume, const SoundId& id);
+	void setVolume(const SoundId& id, short volume);
 }

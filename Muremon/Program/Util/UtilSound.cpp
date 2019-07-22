@@ -61,11 +61,11 @@ UtilSound::isPlaying(const SoundId& id)
 
 /**
  * @brief	ƒ{ƒŠƒ…[ƒ€Ý’è
- * @param	volume		ƒ{ƒŠƒ…[ƒ€‚Ì’liu‚O(Å‘åƒ{ƒŠƒ…[ƒ€)v`u|‚P‚O‚O‚O‚O(Å¬ƒ{ƒŠƒ…[ƒ€)vj
  * @param	id			ƒTƒEƒ“ƒh‚ÌID
+ * @param	volume		ƒ{ƒŠƒ…[ƒ€‚Ì’liu‚O(Å‘åƒ{ƒŠƒ…[ƒ€)v`u|‚P‚O‚O‚O‚O(Å¬ƒ{ƒŠƒ…[ƒ€)vj
  */
 void
-UtilSound::setVolume(short volume, const SoundId& id)
+UtilSound::setVolume(const SoundId& id, short volume)
 {
 	getDirectSound()->setVolume(volume, id);
 }

@@ -24,7 +24,7 @@ public:
 	bool			isEnd() const override;
 
 private:
-	void			setEffectShake(Vector2f* dst_pos, float change_x, float change_y, const Vector2f& font_cc);
+	void			setEffectShake(Vector2f* dst_pos, float change_x, float change_y);
 
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);

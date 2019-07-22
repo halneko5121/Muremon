@@ -85,19 +85,18 @@ EffectFont::isEnd() const
 
 /**
  * @brief シェイク効果
- * @param	change_x		揺れ幅
- * @param	change_y		揺れ幅
- * @param	font_cc			フォントの中心位置
- * @return	中心座標
+ * @param	dst_pos		出力位置
+ * @param	change_x	揺れ幅
+ * @param	change_y	揺れ幅
  */
 void
-EffectFont::setEffectShake(Vector2f* dst_pos, float change_x, float change_y, const Vector2f& font_cc)
+EffectFont::setEffectShake(Vector2f* dst_pos, float change_x, float change_y)
 {
-	if (mShakeX > change_x) { mIsShakeRight = false; mShakeCount++; }
-	else if (mShakeX < (-change_x)) { mIsShakeRight = true;  mShakeCount++; }
+	if (mShakeX > change_x)				{ mIsShakeRight = false; mShakeCount++; }
+	else if (mShakeX < (-change_x))		{ mIsShakeRight = true;  mShakeCount++; }
 
-	if (mShakeY > change_y) { mIsShakeDown = false; }
-	else if (mShakeY < -(change_y)) { mIsShakeDown = true; }
+	if (mShakeY > change_y)				{ mIsShakeDown = false; }
+	else if (mShakeY < -(change_y))		{ mIsShakeDown = true; }
 
 	if (mShakeCount > 5) { mIsShakeDown = true;  mShakeCount = 0; }
 
@@ -134,7 +133,7 @@ EffectFont::stateRun()
 {
 	if (mState.getStateCount() < cAliveFrame)
 	{
-		setEffectShake(&mPos, cShakeX, cShakeY, mPos);
+		setEffectShake(&mPos, cShakeX, cShakeY);
 	}
 	else
 	{

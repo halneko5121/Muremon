@@ -12,10 +12,7 @@
 
 class Window;
 class SceneBase;
-class DirectInputKey;
-class DirectInputMouse;
 class DirectGraphics;
-class DirectFont;
 
 class GameMain
 {

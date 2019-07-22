@@ -68,11 +68,6 @@ public:
 	int		fadeOut(int fade_speed, int texture_alpha);
 
 	/**
-	 * @brief	テクスチャの矩形を指定
-	 */
-	void	setTextureRect(long left, long top, long right, long bottom);
-
-	/**
 	 * @brief	テクスチャの描画を行う
 	 * @param	x			X座標
 	 * @param	y			Y座標

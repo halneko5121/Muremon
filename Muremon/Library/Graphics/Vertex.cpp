@@ -158,19 +158,6 @@ Vertex::fadeOut(int fade_speed ,int texture_alpha)
 }
 
 /**
- * @brief	テクスチャの矩形を指定
- */
-void
-Vertex::setTextureRect(long left , long top , long right , long bottom)
-{
-	// 矩形データセット
-	mRectPosition.top		= top;
-	mRectPosition.bottom	= bottom;
-	mRectPosition.left		= left;
-	mRectPosition.right		= right;
-}
-
-/**
  * @brief	テクスチャの描画を行う（マウスカーソル用仮作成）
  * @param	pos	座標
  */

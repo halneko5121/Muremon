@@ -304,7 +304,7 @@ void
 ActorNikuman::stateEnterSkyDeath()
 {
 	mRectNum = R_NIKU_DEATH;
-	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+	mRandMoveX = static_cast<float>((rand() % cParaRandMoveX) + cParaRandMoveXMin);
 
 	// •ú•¨üˆ—
 	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);

@@ -357,8 +357,7 @@ void
 ActorNoppo::stateEnterSkyDeath()
 {
 	mRectNum = R_NOPPO_S_ATK2;
-
-	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+	mRandMoveX = static_cast<float>((rand() % cParaRandMoveX) + cParaRandMoveXMin);
 
 	// •ú•¨üˆ—
 	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);

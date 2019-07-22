@@ -188,7 +188,6 @@ ActorYoshi::stateEnterGroundAtk()
 	// 攻撃開始
 	{
 		mSpeed = 0.0f;
-		mAlpha = 255;
 		mIsAtk1 = false;
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
@@ -245,14 +244,7 @@ void
 ActorYoshi::stateEnterSkyAtk()
 {
 	// 攻撃開始
-	{
-		mSpeed = 0.0f;
-		mAlpha = 255;
-		mIsAtk1 = false;
-		mIsAtk2 = false;
-		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
-	}
-
+	mIsAtk1 = false;
 	mIsAtk2 = true;
 	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
 	mNowPos = Vector2f(-cActorSize.x, rand_pos_y);
@@ -348,7 +340,7 @@ void
 ActorYoshi::stateEnterSkyDeath()
 {
 	mRectNum = R_YOSHI_DEATH;
-	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
+	mRandMoveX = static_cast<float>((rand() % cParaRandMoveX) + cParaRandMoveXMin);
 
 	// 放物線処理
 	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);

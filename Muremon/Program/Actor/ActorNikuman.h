@@ -39,6 +39,5 @@ private:
 	StateMachine		mState;
 	Animation*			mAnimation;
 	OrbitRebound*		mOrbitRebound;
-	float				mRandAcc;
 	float				mRandMoveX;
 };

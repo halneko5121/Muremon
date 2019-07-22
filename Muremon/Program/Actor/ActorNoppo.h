@@ -42,6 +42,5 @@ private:
 	Animation*				mSkyAtkAnime;
 	Animation*				mGroundDeadAnime;
 	OrbitWave*				mOrbitWave;
-	float					mRandAcc;
 	float					mRandMoveX;
 };

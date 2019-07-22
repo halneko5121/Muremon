@@ -76,7 +76,6 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mSkyDeadAnime(nullptr)
 	, mOrbitWave(nullptr)
 	, mOrbitRebound(nullptr)
-	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 {
 	mAtkPower = cAtkPowerYoshitaro;
@@ -254,7 +253,6 @@ ActorYoshi::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
-	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	mIsAtk2 = true;
@@ -355,7 +353,8 @@ ActorYoshi::stateEnterSkyDeath()
 	mRectNum = R_YOSHI_DEATH;
 
 	// ï˙ï®ê¸èàóù
-	mSpeed -= mRandAcc;
+	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);
+	mSpeed -= rand_jump_power;
 }
 void
 ActorYoshi::stateSkyDeath()

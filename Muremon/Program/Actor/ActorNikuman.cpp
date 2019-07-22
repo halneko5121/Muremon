@@ -59,7 +59,6 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	, mState()
 	, mAnimation(nullptr)
 	, mOrbitRebound(nullptr)
-	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
 {
 	mAtkPower = cAtkPowerNikuman;
@@ -235,7 +234,6 @@ ActorNikuman::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
-	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	mIsAtk2 = true;
@@ -308,7 +306,8 @@ void
 ActorNikuman::stateEnterSkyDeath()
 {
 	// ï˙ï®ê¸èàóù
-	mSpeed -= mRandAcc;
+	float rand_jump_power = static_cast<float>((rand() % cParaRandAcc) + cParaRandAccMin);
+	mSpeed -= rand_jump_power;
 }
 void
 ActorNikuman::stateSkyDeath()

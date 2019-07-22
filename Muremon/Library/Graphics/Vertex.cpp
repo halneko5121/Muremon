@@ -171,59 +171,6 @@ Vertex::setTextureRect(long left , long top , long right , long bottom)
 }
 
 /**
- * @brief	テクスチャの描画を行う
- * @param	pos	座標
- */
-void Vertex::draw(const Vector2f& pos) const
-{
-	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
-	float texSizeX = abs(mRectPosition.right - mRectPosition.left) / 2.0f;
-	float texSizeY = abs(mRectPosition.bottom - mRectPosition.top) / 2.0f;
-
-    // 回転の中心座標
-    D3DXVECTOR2 l_center(pos.x, pos.y);
-
-    // 回転角度
-    float texSin = sinf(D3DXToRadian(mDegree));
-    float texCos = cosf(D3DXToRadian(mDegree));
-
-    // 中心点からの4点の距離
-    D3DXVECTOR2 vector[] = 
-    {
-        D3DXVECTOR2(-texSizeX * mScaleX , -texSizeY * mScaleY),
-        D3DXVECTOR2(texSizeX * mScaleX , -texSizeY * mScaleY),
-        D3DXVECTOR2(-texSizeX * mScaleX , texSizeY * mScaleY),
-        D3DXVECTOR2(texSizeX * mScaleX , texSizeY * mScaleY),
-    };
-
-	// 4点を設定
-	float u1 = (static_cast<float>(mRectPosition.left) + UV) * mTextureU;
-	float u2 = (static_cast<float>(mRectPosition.right) - UV) * mTextureU;
-	float v1 = (static_cast<float>(mRectPosition.top) + UV) * mTextureV;
-	float v2 = (static_cast<float>(mRectPosition.bottom) - UV) * mTextureV;
-
-	// バーテックス情報
-	CUSTOM_VERTEX ver[] =
-	{
-		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v1},
-		{0.f , 0.f , 0.5f , 1.0f , mColor , u1 , v2},
-		{0.f , 0.f , 0.5f , 1.0f , mColor , u2 , v2}
-	};
-
-    // 4点を回転させる
-    for( int i = 0 ; i < 4 ; i++)
-    {
-        ver[i].x = (vector[i].x * texCos) + (vector[i].y * -texSin) + l_center.x;
-        ver[i].y = (vector[i].x * texSin) + (vector[i].y * texCos) + l_center.y;
-    }
-
-	mDevice->SetTexture(0, *mTexture);													// テクスチャセット
-	mDevice->SetFVF(TEX_FVF);														// FVFセット
-    mDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2, ver, sizeof(CUSTOM_VERTEX));	// 描画
-}
-
-/**
  * @brief	テクスチャの描画を行う（マウスカーソル用仮作成）
  * @param	pos	座標
  */

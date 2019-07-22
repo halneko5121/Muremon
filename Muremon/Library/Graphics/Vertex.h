@@ -78,7 +78,6 @@ public:
 	 * @param	y			Y座標
 	 * @param	rect_num	登録されている矩形のNo
 	 */
-	void	draw(const Vector2f& pos) const;
 	void	drawLT(const Vector2f& pos) const; // マウスカーソル用仮作成
 	void	drawCB(const Vector2f& pos, int rect_num) const; // 中心の下から
 	void	drawF(const Vector2f& pos, int rect_num) const;

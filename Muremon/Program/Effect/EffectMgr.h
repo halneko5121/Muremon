@@ -52,7 +52,7 @@ public:
 	/**
 	 * @brief	¶¬
 	 */
-	EffectBase*			createEffect(EffectId id, const EffectParam& param);
+	EffectBase*			createEffect(const EffectId& id, const EffectParam& param);
 
 	/**
 	 * @brief	XV

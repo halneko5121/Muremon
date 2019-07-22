@@ -16,7 +16,7 @@
 namespace
 {
 	EffectBase*
-	createEffectImple(EffectId id, const EffectParam& param)
+	createEffectImple(const EffectId& id, const EffectParam& param)
 	{
 		switch (id)
 		{
@@ -77,7 +77,7 @@ EffectMgr::destroy()
  * @brief	エフェクトの生成
  */
 EffectBase*
-EffectMgr::createEffect(EffectId id, const EffectParam& param)
+EffectMgr::createEffect(const EffectId& id, const EffectParam& param)
 {
 	EffectBase* effect = createEffectImple(id, param);
 	mEffectList.push_back(effect);

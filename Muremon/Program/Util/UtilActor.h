@@ -13,7 +13,6 @@ class ActorBase;
 class ActorBoss;
 class Texture;
 class Vertex;
-enum ActorId;
 
 namespace UtilActor
 {

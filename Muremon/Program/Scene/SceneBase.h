@@ -9,9 +9,6 @@
 
 #include "Library/Input/DirectInput.h"
 
-class Texture;
-class Vertex;
-
 enum SceneId
 {
 	cSceneId_Logo,			// ÉçÉS
@@ -25,6 +22,9 @@ enum SceneId
 	cSceneId_GameEnd,		// èIÇÌÇË
 	cSceneId_Count
 };
+
+class Texture;
+class Vertex;
 
 class SceneBase
 {

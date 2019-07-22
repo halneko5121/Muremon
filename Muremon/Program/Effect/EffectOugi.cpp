@@ -134,7 +134,7 @@ EffectOugi::stateRun()
 	else if (count >= 180 && 210 > count) 
 	{
 		if (count == 180) {
-			UtilSound::playOnce(S_NAMI);
+			UtilSound::playOnce(cSoundId_SeOugiEffect);
 		}
 	}
 	// ”g‚ð“®‚©‚·(3.5sec)

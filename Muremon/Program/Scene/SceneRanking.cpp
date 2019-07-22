@@ -349,7 +349,7 @@ SceneRanking::stateInput()
 	{
 		if (GetAsyncKeyState(i))
 		{
-			UtilSound::playOnce(S_SE_CURSOR_MOVE);
+			UtilSound::playOnce(cSoundId_SeCursorMove);
 			mInputKey = i - 'A';
 			mRankData[mRankingNo].mName[mInputIndex] = mInputKey;
 			break;
@@ -370,7 +370,7 @@ SceneRanking::stateInput()
 
 	if (UtilInput::isKeyPushedReturn())
 	{
-		UtilSound::playOnce(S_SE_OK);
+		UtilSound::playOnce(cSoundId_SeOk);
 		mNameAlpha[mRankingNo][mInputIndex] = 255;
 		mInputIndex++;
 	}
@@ -396,7 +396,7 @@ SceneRanking::stateView()
 	// ƒ‰ƒ“ƒNƒCƒ“‚µ‚Ä‚¢‚È‚¢Žž
 	if (UtilInput::isKeyPushedReturn())
 	{
-		UtilSound::playOnce(S_SE_OK);
+		UtilSound::playOnce(cSoundId_SeOk);
 		mState.changeState(cState_End);
 		return;
 	}

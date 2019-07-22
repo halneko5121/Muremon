@@ -196,7 +196,7 @@ ActorNikuman::stateGroundAtk()
 
 	if (isHit(*this, *boss))
 	{
-		UtilSound::playOnce(S_NIKUMAN);
+		UtilSound::playOnce(cSoundId_SeHitNikuman);
 		setIsHitCheck(true);
 
 		UtilGame::addScore(cAddScoreNikuman);
@@ -249,7 +249,7 @@ ActorNikuman::stateSkyAtk()
 
 	if (isHit(*this, *boss))
 	{
-		UtilSound::playOnce(S_NIKUMAN);
+		UtilSound::playOnce(cSoundId_SeHitNikuman);
 		setIsHitCheck(true);
 
 		UtilGame::addScore(cAddScoreNikuman);

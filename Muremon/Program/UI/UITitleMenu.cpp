@@ -125,12 +125,12 @@ UITitleMenu::update()
 	mCursorPos.y = cDispCursorPos.y + cDispCursorYRemove * mCurrentMenuItem;
 
 	// ÇﬂÇ¡ÇøÇ·è„â∫âüÇ≥ÇÍÇƒÇ‡à·òaä¥Ç…Ç»Ç¢ÇÊÇ§Ç…
-	if (UtilSound::isPlaying(S_SE_CURSOR_MOVE))
+	if (UtilSound::isPlaying(cSoundId_SeCursorMove))
 	{
 		if (UtilInput::isKeyDown(UtilInput::cKey_Up) ||
 			UtilInput::isKeyDown(UtilInput::cKey_Down))
 		{
-			UtilSound::stop(S_SE_CURSOR_MOVE);
+			UtilSound::stop(cSoundId_SeCursorMove);
 		}
 	}
 
@@ -285,7 +285,7 @@ UITitleMenu::stateTop()
 {
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Z))
 	{
-		UtilSound::playOnce(S_SE_OK);
+		UtilSound::playOnce(cSoundId_SeOk);
 		mTimeCount = 0;
 		mState.changeState(cState_MenuSelect);
 		return;
@@ -322,7 +322,7 @@ UITitleMenu::stateMenuSelect()
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Down) ||
 		UtilInput::isKeyPushed(UtilInput::cKey_Up))
 	{
-		UtilSound::playOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(cSoundId_SeCursorMove);
 	}
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Up))
@@ -347,7 +347,7 @@ UITitleMenu::stateMenuSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Z))
 	{
-		UtilSound::playOnce(S_SE_OK);
+		UtilSound::playOnce(cSoundId_SeOk);
 		mTimeCount = 0;
 		if (mCurrentMenuItem == G_START)
 		{
@@ -359,7 +359,7 @@ UITitleMenu::stateMenuSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_X))
 	{
-		UtilSound::playOnce(S_CANCEL);
+		UtilSound::playOnce(cSoundId_SeCancel);
 		mTimeCount = 0;
 		mCurrentMenuItem = G_START;
 		mState.changeState(cState_Top);
@@ -380,7 +380,7 @@ UITitleMenu::stateGameSelect()
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Down) ||
 		UtilInput::isKeyPushed(UtilInput::cKey_Up))
 	{
-		UtilSound::playOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(cSoundId_SeCursorMove);
 	}
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Up))
@@ -405,7 +405,7 @@ UITitleMenu::stateGameSelect()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_X))
 	{
-		UtilSound::playOnce(S_CANCEL);
+		UtilSound::playOnce(cSoundId_SeCancel);
 		mTimeCount = 0;
 		mCurrentMenuItem = G_CLEARLY;
 		mState.changeState(cState_MenuSelect);

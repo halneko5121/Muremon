@@ -167,7 +167,7 @@ SceneTutorial::stateRefresh()
 {
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Right))
 	{
-		UtilSound::playOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(cSoundId_SeCursorMove);
 		mState.changeState(cState_NormalSlide);
 		mSlideState = 2;
 		return;
@@ -222,7 +222,7 @@ SceneTutorial::stateNormal()
 {
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Left))
 	{
-		UtilSound::playOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(cSoundId_SeCursorMove);
 		mState.changeState(cState_NormalSlide);
 		mSlideState = 1;
 		return;
@@ -230,7 +230,7 @@ SceneTutorial::stateNormal()
 
 	if (UtilInput::isKeyPushed(UtilInput::cKey_Right))
 	{
-		UtilSound::playOnce(S_SE_CURSOR_MOVE);
+		UtilSound::playOnce(cSoundId_SeCursorMove);
 		mState.changeState(cState_EndSlide);
 		mSlideState = 2;
 		return;

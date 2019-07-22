@@ -65,7 +65,7 @@ void
 SceneTitle::impleInit()
 {
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "title");
-	UtilSound::playLoop(S_BGM_TITLE);
+	UtilSound::playLoop(cSoundId_BgmTitle);
 
 	mUITitleMenu->init();
 }
@@ -106,7 +106,7 @@ SceneTitle::end()
 	if (next_scene_id == cSceneId_GameNormal ||
 		next_scene_id == cSceneId_GameRefresh)
 	{
-		UtilSound::stop(S_BGM_TITLE);
+		UtilSound::stop(cSoundId_BgmTitle);
 	}
 }
 

@@ -209,11 +209,11 @@ ActorYoshi::stateGroundAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(S_YOSHI_HIP))
+		if (UtilSound::isPlaying(cSoundId_SeHitYoshiGround))
 		{
-			UtilSound::stop(S_YOSHI_HIP);
+			UtilSound::stop(cSoundId_SeHitYoshiGround);
 		}
-		UtilSound::playOnce(S_YOSHI_HIP);
+		UtilSound::playOnce(cSoundId_SeHitYoshiGround);
 
 		UtilGame::addScore(cAddScoreYoshitaro);
 
@@ -263,11 +263,11 @@ ActorYoshi::stateSkyAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(S_YOSHI_HUSEN))
+		if (UtilSound::isPlaying(cSoundId_SeHitYoshiSky))
 		{
-			UtilSound::stop(S_YOSHI_HUSEN);
+			UtilSound::stop(cSoundId_SeHitYoshiSky);
 		}
-		UtilSound::playOnce(S_YOSHI_HUSEN);
+		UtilSound::playOnce(cSoundId_SeHitYoshiSky);
 
 		UtilGame::addScore(cAddScoreYoshitaro);
 

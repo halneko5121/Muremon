@@ -15,7 +15,7 @@
  * @param	id		サウンドのID
  */
 void
-UtilSound::playOnce(short id)
+UtilSound::playOnce(const SoundId& id)
 {
 	getDirectSound()->playOnce(id);
 }
@@ -25,7 +25,7 @@ UtilSound::playOnce(short id)
  * @param	id		サウンドのID
  */
 void
-UtilSound::playLoop(short id)
+UtilSound::playLoop(const SoundId& id)
 {
 	getDirectSound()->playLoop(id);
 }
@@ -35,7 +35,7 @@ UtilSound::playLoop(short id)
  * @param	id			サウンドのID
  */
 void
-UtilSound::pause(short id)
+UtilSound::pause(const SoundId& id)
 {
 	getDirectSound()->pause(id);
 }
@@ -45,7 +45,7 @@ UtilSound::pause(short id)
  * @param	id			サウンドのID
  */
 void
-UtilSound::stop(short id)
+UtilSound::stop(const SoundId& id)
 {
 	getDirectSound()->stop(id);
 }
@@ -54,7 +54,7 @@ UtilSound::stop(short id)
  * @brief	指定IDのサウンドが再生中か
  */
 bool
-UtilSound::isPlaying(short id)
+UtilSound::isPlaying(const SoundId& id)
 {
 	return getDirectSound()->isPlaying(id);
 }
@@ -65,7 +65,7 @@ UtilSound::isPlaying(short id)
  * @param	id			サウンドのID
  */
 void
-UtilSound::setVolume(short volume, short id)
+UtilSound::setVolume(short volume, const SoundId& id)
 {
 	getDirectSound()->setVolume(volume, id);
 }

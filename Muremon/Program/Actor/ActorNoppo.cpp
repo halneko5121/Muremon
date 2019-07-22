@@ -207,11 +207,11 @@ ActorNoppo::stateGroundAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(S_NOPPO_GANMEN))
+		if (UtilSound::isPlaying(cSoundId_SeHitNoppoSky))
 		{
-			UtilSound::stop(S_NOPPO_GANMEN);
+			UtilSound::stop(cSoundId_SeHitNoppoSky);
 		}
-		UtilSound::playOnce(S_NOPPO_GANMEN);
+		UtilSound::playOnce(cSoundId_SeHitNoppoSky);
 
 		UtilGame::addScore(cAddScoreNoppo);
 
@@ -272,19 +272,19 @@ ActorNoppo::stateSkyAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(S_NOPPO_KOKE))
+		if (UtilSound::isPlaying(cSoundId_SeHitNoppo))
 		{
-			UtilSound::stop(S_NOPPO_KOKE);
+			UtilSound::stop(cSoundId_SeHitNoppo);
 		}
-		UtilSound::playOnce(S_NOPPO_KOKE);
-		if ((UtilSound::isPlaying(S_NOPPO_PETI)) &&
-			(UtilSound::isPlaying(S_NOPPO_KOKE)))
+		UtilSound::playOnce(cSoundId_SeHitNoppo);
+		if ((UtilSound::isPlaying(cSoundId_SeHitNoppoDead)) &&
+			(UtilSound::isPlaying(cSoundId_SeHitNoppo)))
 		{
-			UtilSound::stop(S_NOPPO_PETI);
+			UtilSound::stop(cSoundId_SeHitNoppoDead);
 		}
-		if (UtilSound::isPlaying(S_NOPPO_KOKE))
+		if (UtilSound::isPlaying(cSoundId_SeHitNoppo))
 		{
-			UtilSound::playOnce((S_NOPPO_PETI));
+			UtilSound::playOnce((cSoundId_SeHitNoppoDead));
 		}
 
 		UtilGame::addScore(cAddScoreNoppo);

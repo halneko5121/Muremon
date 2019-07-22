@@ -410,7 +410,7 @@ MissionMgr::stateIdle()
 void
 MissionMgr::stateEnterStartShake()
 {
-	UtilSound::playOnce(S_OSIRASE);
+	UtilSound::playOnce(cSoundId_SeMissionStart);
 	mMoveCount = 0;
 	mCurrentMissionId = randomSelectMission();
 }
@@ -473,7 +473,7 @@ MissionMgr::stateStartFadeOut()
 void
 MissionMgr::stateEnterRun()
 {
-	UtilSound::playOnce(S_OSIRASE);
+	UtilSound::playOnce(cSoundId_SeMissionStart);
 	mMission[mCurrentMissionId]->run();
 }
 void
@@ -499,7 +499,7 @@ MissionMgr::stateRun()
 void
 MissionMgr::stateEnterSuccess()
 {
-	UtilSound::playOnce(S_M_CLEAR);
+	UtilSound::playOnce(cSoundId_SeMissionClear);
 }
 void
 MissionMgr::stateSuccess()
@@ -520,7 +520,7 @@ MissionMgr::stateSuccess()
 void
 MissionMgr::stateEnterFailure()
 {
-	UtilSound::playOnce(S_M_OVER);
+	UtilSound::playOnce(cSoundId_SeMissionEnd);
 }
 void
 MissionMgr::stateFailure()

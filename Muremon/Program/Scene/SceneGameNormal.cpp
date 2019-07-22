@@ -266,7 +266,7 @@ SceneGameNormal::stateIdle()
 void
 SceneGameNormal::stateEnterReadyFadeIn()
 {
-	UtilSound::playOnce(S_GAME_START);
+	UtilSound::playOnce(cSoundId_SeGameStart);
 	mGameStateRectNum = R_GAME_START;
 }
 void
@@ -323,18 +323,18 @@ SceneGameNormal::stateReadyFadeOut()
 void
 SceneGameNormal::stateEnterGame()
 {
-	UtilSound::playLoop(S_BGM_BATTLE);
+	UtilSound::playLoop(cSoundId_BgmBattle);
 }
 void
 SceneGameNormal::stateGame()
 {
 	if ((mBoss->getNowPos().x - 150) < 500) 
 	{
-		UtilSound::playLoop(S_SAIREN);
+		UtilSound::playLoop(cSoundId_SeAlert);
 	}
 	else
 	{
-		UtilSound::stop(S_SAIREN);
+		UtilSound::stop(cSoundId_SeAlert);
 	}
 
 	if (UtilInput::isKeyPushedReturn())
@@ -448,7 +448,7 @@ SceneGameNormal::stateGame()
 void
 SceneGameNormal::stateEnterMission()
 {
-	UtilSound::stop(S_SAIREN);
+	UtilSound::stop(cSoundId_SeAlert);
 	mMissionMgr->init();
 }
 void
@@ -471,9 +471,9 @@ SceneGameNormal::stateMission()
 void
 SceneGameNormal::stateEnterGameOver()
 {
-	UtilSound::stop(S_SAIREN);
-	UtilSound::stop(S_BGM_BATTLE);
-	UtilSound::playOnce(S_OVER);
+	UtilSound::stop(cSoundId_SeAlert);
+	UtilSound::stop(cSoundId_BgmBattle);
+	UtilSound::playOnce(cSoundId_SeGameOver);
 	mGameStateRectNum = R_GAME_OVER;
 	mGameStateFontAlpha = 255;
 }
@@ -492,9 +492,9 @@ SceneGameNormal::stateGameOver()
 void
 SceneGameNormal::stateEnterTimeOver()
 {
-	UtilSound::stop(S_SAIREN);
-	UtilSound::stop(S_BGM_BATTLE);
-	UtilSound::playOnce(S_G_CLEAR);
+	UtilSound::stop(cSoundId_SeAlert);
+	UtilSound::stop(cSoundId_BgmBattle);
+	UtilSound::playOnce(cSoundId_SeGameClear);
 	mGameStateRectNum = R_GAME_CLEAR;
 	mGameStateFontAlpha = 255;
 }

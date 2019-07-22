@@ -119,7 +119,7 @@ void SceneGameRefresh::end()
 	//ƒ^ƒCƒgƒ‹‚Ö
 	requestChangeScene(cSceneId_Title);
 
-	UtilSound::stop(S_BGM_BATTLE);
+	UtilSound::stop(cSoundId_BgmBattle);
 }
 
 /**
@@ -218,7 +218,7 @@ SceneGameRefresh::stateIdle()
 void
 SceneGameRefresh::stateEnterReadyFadeIn()
 {
-	UtilSound::playOnce(S_GAME_START);
+	UtilSound::playOnce(cSoundId_SeGameStart);
 }
 void
 SceneGameRefresh::stateReadyFadeIn()
@@ -274,7 +274,7 @@ SceneGameRefresh::stateReadyFadeOut()
 void
 SceneGameRefresh::stateEnterGame()
 {
-	UtilSound::playLoop(S_BGM_BATTLE);
+	UtilSound::playLoop(cSoundId_BgmBattle);
 }
 void
 SceneGameRefresh::stateGame()

@@ -269,7 +269,7 @@ ActorBoss::stateDead()
 {
 	if (mState.getStateCount() == cDeadSeTime)
 	{
-		UtilSound::playOnce(S_DEAD);
+		UtilSound::playOnce(cSoundId_SeBossDead);
 	}
 	else if (cDeadSeTime < mState.getStateCount())
 	{

@@ -20,9 +20,9 @@ struct EffectParam
 	{
 	}
 
-	Texture*	mTexture;
-	Vertex*		mVertex;
-	Vector2f	mPos;
+	Texture*		mTexture;
+	Vertex*			mVertex;
+	const Vector2f&	mPos;
 };
 
 class EffectBase

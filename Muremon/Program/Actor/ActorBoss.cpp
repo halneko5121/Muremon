@@ -196,7 +196,7 @@ ActorBoss::stateMove()
 
 	if (UtilGame::isGameModeRefresh())
 	{
-		if (mNowPos.x == cRefreshStopX)
+		if (mNowPos.x <= cRefreshStopX)
 		{
 			mState.changeState(cState_Stop);
 			return;
@@ -220,7 +220,7 @@ ActorBoss::stateDamage()
 	{
 		if (UtilGame::isGameModeRefresh())
 		{
-			if (mNowPos.x == cRefreshStopX)
+			if (mNowPos.x <= cRefreshStopX)
 			{
 				mState.changeState(cState_Stop);
 				return;

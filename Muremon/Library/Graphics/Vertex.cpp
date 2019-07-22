@@ -203,10 +203,10 @@ void Vertex::draw(const Vector2f& pos) const
     };
 
 	// 4点を設定
-	float u1 = ((float)mRectPosition.left + UV) * mTextureU;
-	float u2 = ((float)mRectPosition.right - UV) * mTextureU;
-	float v1 = ((float)mRectPosition.top + UV) * mTextureV;
-	float v2 = ((float)mRectPosition.bottom - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition.left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition.right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition.top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition.bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
@@ -237,8 +237,8 @@ void
 Vertex::drawLT(const Vector2f& pos) const
 {
 	// テクスチャの距離を計算(ここで倍率も計算)
-	float texSizeX = (float)abs(mRectPosition.right - mRectPosition.left);
-	float texSizeY = (float)abs(mRectPosition.bottom - mRectPosition.top);
+	float texSizeX = static_cast<float>(abs(mRectPosition.right - mRectPosition.left));
+	float texSizeY = static_cast<float>(abs(mRectPosition.bottom - mRectPosition.top));
 
     // 回転の中心座標
     D3DXVECTOR2 l_center(pos.x, pos.y);
@@ -257,10 +257,10 @@ Vertex::drawLT(const Vector2f& pos) const
     };
 
 	// 4点を設定
-	float u1 = ((float)mRectPosition.left + UV) * mTextureU;
-	float u2 = ((float)mRectPosition.right - UV) * mTextureU;
-	float v1 = ((float)mRectPosition.top + UV) * mTextureV;
-	float v2 = ((float)mRectPosition.bottom - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition.left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition.right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition.top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition.bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
@@ -311,10 +311,10 @@ Vertex::drawRB(const Vector2f& pos) const
     };
 
 	// 4点を設定
-	float u1 = ((float)mRectPosition.left + UV) * mTextureU;
-	float u2 = ((float)mRectPosition.right - UV) * mTextureU;
-	float v1 = ((float)mRectPosition.top + UV) * mTextureV;
-	float v2 = ((float)mRectPosition.bottom - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition.left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition.right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition.top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition.bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
@@ -345,7 +345,7 @@ void Vertex::drawCB(const Vector2f& pos, int rect_num) const
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
 	float texSizeX = abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left) / 2.0f;
-	float texSizeY = abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top);
+	float texSizeY = static_cast<float>(abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top));
 
     // 回転の中心座標
     D3DXVECTOR2 l_center(pos.x, pos.y);
@@ -364,10 +364,10 @@ void Vertex::drawCB(const Vector2f& pos, int rect_num) const
     };
 
 	// 4点を設定
-	float u1 = ((float)mRectPosition2[rect_num].left + UV) * mTextureU;
-	float u2 = ((float)mRectPosition2[rect_num].right - UV) * mTextureU;
-	float v1 = ((float)mRectPosition2[rect_num].top + UV) * mTextureV;
-	float v2 = ((float)mRectPosition2[rect_num].bottom - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition2[rect_num].left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition2[rect_num].right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition2[rect_num].top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition2[rect_num].bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
@@ -419,10 +419,10 @@ Vertex::drawF(const Vector2f& pos, int rect_num) const
     };
 
 	// 4点を設定
-	float u1 = ((float)mRectPosition2[rect_num].left + UV) * mTextureU;
-	float u2 = ((float)mRectPosition2[rect_num].right - UV) * mTextureU;
-	float v1 = ((float)mRectPosition2[rect_num].top + UV) * mTextureV;
-	float v2 = ((float)mRectPosition2[rect_num].bottom - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition2[rect_num].left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition2[rect_num].right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition2[rect_num].top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition2[rect_num].bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =

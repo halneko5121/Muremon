@@ -69,8 +69,6 @@ public:
 	bool	load(const char* file_name);
 
 private:
-	int					mTextureWidth;		// 横幅
-	int					mTextureHeight;		// 縦幅
 	float				mTextureU;			// テクスチャUV値
 	float				mTextureV;			// テクスチャUV値
 	float				mScaleX;			// X方向の拡大率

@@ -23,9 +23,7 @@ typedef struct _CUSTOM_VERTEX
  * @brief	コンストラクタ
  */
 Vertex::Vertex()
-	: mTextureWidth(0)
-	, mTextureHeight(0)
-	, mTextureU(0)
+	: mTextureU(0)
 	, mTextureV(0)
 	, mScaleX(1.0f)
 	, mScaleY(1.0f)
@@ -61,14 +59,10 @@ Vertex::setTextureData(LPDIRECT3DTEXTURE9* texture, LPDIRECT3DDEVICE9 d3d_device
 
 	// テクスチャセット
 	mTexture = texture;
-
-	// 横幅・縦幅保存
-	mTextureWidth = desc.Width;
-	mTextureHeight = desc.Height;
 	
 	// UV値設定
-	mTextureU = 1.0f / mTextureWidth;
-	mTextureV = 1.0f / mTextureHeight;
+	mTextureU = 1.0f / desc.Width;
+	mTextureV = 1.0f / desc.Height;
 
 	// メンバをここで初期化しておく
 	mScaleX	= 1.0f;			// 横倍率

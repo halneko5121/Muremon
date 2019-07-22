@@ -24,7 +24,7 @@ public:
 	bool			isEnd() const override;
 
 private:
-	void			setEffectShake(Vector2f* dst_pos, float change_x, float change_y);
+	void			updateShake(Vector2f* dst_pos, float change_x, float change_y);
 
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
@@ -33,12 +33,11 @@ private:
 	DECLAR_STATE_FUNC2(End);
 
 private:
-	StateMachine				mState;			// ステート
-
-	float						mShakeX;
-	float						mShakeY;
-	bool						mIsShakeRight;
-	bool						mIsShakeDown;
-	int							mShakeCount;
+	StateMachine		mState;			// ステート
+	float				mShakeX;
+	float				mShakeY;
+	bool				mIsShakeRight;
+	bool				mIsShakeDown;
+	int					mShakeCount;
 
 };

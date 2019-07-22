@@ -90,7 +90,7 @@ EffectFont::isEnd() const
  * @param	change_y	—h‚ê•
  */
 void
-EffectFont::setEffectShake(Vector2f* dst_pos, float change_x, float change_y)
+EffectFont::updateShake(Vector2f* dst_pos, float change_x, float change_y)
 {
 	if (mShakeX > change_x)				{ mIsShakeRight = false; mShakeCount++; }
 	else if (mShakeX < (-change_x))		{ mIsShakeRight = true;  mShakeCount++; }
@@ -133,7 +133,7 @@ EffectFont::stateRun()
 {
 	if (mState.getStateCount() < cAliveFrame)
 	{
-		setEffectShake(&mPos, cShakeX, cShakeY);
+		updateShake(&mPos, cShakeX, cShakeY);
 	}
 	else
 	{

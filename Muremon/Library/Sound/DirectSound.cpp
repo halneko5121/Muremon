@@ -74,7 +74,7 @@ DirectSound::init(HWND window_handle)
 void
 DirectSound::release()
 {
-	for(short i = 0 ; i < (short)mMaxSound ; i++)
+	for(int i = 0 ; i < (int)mMaxSound ; i++)
 	{
 		stop(i);
 		SAFE_RELEASE(mSecondaryBuffer[i]);
@@ -134,7 +134,7 @@ DirectSound::load(LPTSTR file_name)
  * @param	id		サウンドのID
  */
 void
-DirectSound::playOnce(short id)
+DirectSound::playOnce(int id)
 {
 	playImple(false, id);
 }
@@ -144,7 +144,7 @@ DirectSound::playOnce(short id)
  * @param	id		サウンドのID
  */
 void
-DirectSound::playLoop(short id)
+DirectSound::playLoop(int id)
 {
 	playImple(true, id);
 }
@@ -154,7 +154,7 @@ DirectSound::playLoop(short id)
  * @param	id		サウンドのID
  */
 void
-DirectSound::pause(short id)
+DirectSound::pause(int id)
 {
 	stopImple(true, id);
 }
@@ -164,7 +164,7 @@ DirectSound::pause(short id)
  * @param	id		サウンドのID
  */
 void
-DirectSound::stop(short id)
+DirectSound::stop(int id)
 {
 	stopImple(false, id);
 }
@@ -173,7 +173,7 @@ DirectSound::stop(short id)
  * @brief	指定IDのサウンドが再生中か
  */
 bool
-DirectSound::isPlaying(short id) const
+DirectSound::isPlaying(int id) const
 {
 	if(id >= MAX_SOUND)
 	{
@@ -197,7 +197,7 @@ DirectSound::isPlaying(short id) const
  * @param	id			サウンドのID
  */
 void
-DirectSound::setVolume(short volume, short id)
+DirectSound::setVolume(int volume, int id)
 {
 	if(id >= MAX_SOUND)
 	{
@@ -248,7 +248,7 @@ DirectSound::~DirectSound()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectSound::loadAndRegist(LPTSTR file_name, short id)
+DirectSound::loadAndRegist(LPTSTR file_name, int id)
 {
 	if (id >= MAX_SOUND)
 	{
@@ -392,7 +392,7 @@ DirectSound::createPrimaryBuffer()
  * @return	S_OK:成功   E_FAIL:失敗
  */
 HRESULT
-DirectSound::createSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id)
+DirectSound::createSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const int id)
 {
 	HRESULT				hr;
 	DSBUFFERDESC		dsbd;
@@ -429,7 +429,7 @@ DirectSound::createSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwB
  * @param	id		サウンドのID
  */
 void
-DirectSound::playImple(bool loop, short id)
+DirectSound::playImple(bool loop, int id)
 {
 	if (id >= MAX_SOUND)
 	{
@@ -452,7 +452,7 @@ DirectSound::playImple(bool loop, short id)
  * @param	id			サウンドのID
  */
 void
-DirectSound::stopImple(bool is_pouse, short id)
+DirectSound::stopImple(bool is_pouse, int id)
 {
 	if (id >= MAX_SOUND)
 	{

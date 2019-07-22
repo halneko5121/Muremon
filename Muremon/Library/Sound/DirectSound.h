@@ -54,37 +54,37 @@ public:
 	 * @brief	ワンス再生
 	 * @param	id		サウンドのID
 	 */
-	void					playOnce(short id);
+	void					playOnce(int id);
 
 	/**
 	 * @brief	ループ再生
 	 * @param	id		サウンドのID
 	 */
-	void					playLoop(short id);
+	void					playLoop(int id);
 
 	/**
 	 * @brief	一時停止
 	 * @param	id			サウンドのID
 	 */
-	void					pause(short id);
+	void					pause(int id);
 
 	/**
 	 * @brief	停止
 	 * @param	id			サウンドのID
 	 */
-	void					stop(short id);
+	void					stop(int id);
 
 	/**
 	 * @brief	指定IDのサウンドが再生中か
 	 */
-	bool					isPlaying(short id) const;
+	bool					isPlaying(int id) const;
 
 	/**
 	 * @brief	ボリューム設定
 	 * @param	volume		ボリュームの値（「０(最大ボリューム)」～「－１００００(最小ボリューム)」）
 	 * @param	id			サウンドのID
 	 */
-	void					setVolume(short volume, short id);
+	void					setVolume(int volume, int id);
 
 private:
 	/**
@@ -103,7 +103,7 @@ private:
 	 * @param	id			登録するサウンドのID
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT					loadAndRegist(LPTSTR file_name, short id);
+	HRESULT					loadAndRegist(LPTSTR file_name, int id);
 
 	/**
 	 * @brief	プライマリバッファの作成
@@ -119,21 +119,21 @@ private:
 	 * @param	id				サウンドID
 	 * @return	S_OK:成功   E_FAIL:失敗
 	 */
-	HRESULT					createSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const short id);
+	HRESULT					createSecondaryBuffer(WAVEFORMATEX &wfex, char *lpBuffer, DWORD dwBufferSize, const int id);
 
 	/**
 	 * @brief	再生
 	 * @param	loop	ループするか
 	 * @param	id		サウンドのID
 	 */
-	void					playImple(bool loop, short id);
+	void					playImple(bool loop, int id);
 
 	/**
 	 * @brief	停止
 	 * @param	is_pouse	一時停止か
 	 * @param	id			サウンドのID
 	 */
-	void					stopImple(bool is_pouse, short id);
+	void					stopImple(bool is_pouse, int id);
 
 private:
 	enum { MAX_SOUND = 20 };								// 読み込めるサウンドの最大数

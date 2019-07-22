@@ -9,16 +9,8 @@
 
 #include "Library/Input/DirectInput.h"
 
-class DirectInputKey;
-class DirectInputMouse;
-class C_DWaveSound;
 class Texture;
 class Vertex;
-class C_Sprite;
-namespace Dix
-{
-	class C_PCMPlayer;
-}
 
 enum SceneId
 {

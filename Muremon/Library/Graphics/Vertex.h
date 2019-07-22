@@ -50,7 +50,6 @@ public:
 	 * @param	blue	青の値
 	 */
 	void	setColor(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue);
-	void	setColor2(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue, int Num);	// 仮作成
 
 	/**
 	 * @brief	フェードイン処理
@@ -101,7 +100,6 @@ private:
 	float				mDegree;			// 角度
 	int					mLoadedRectCount;	// 読み込まれている矩形の総数
 	D3DCOLOR			mColor;				// 色
-	D3DCOLOR			mColor1[4];			// 色
 	RECT				mRectPosition;		// RECT情報
 	RECT*				mRectPosition2;
 	LPDIRECT3DDEVICE9	mDevice;			// デバイス

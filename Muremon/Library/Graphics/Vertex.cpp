@@ -117,12 +117,6 @@ Vertex::setColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
 	mColor = D3DCOLOR_ARGB(alpha , red , green , blue);
 }
 
-void
-Vertex::setColor2(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue , int Num)
-{
-	mColor1[Num] = D3DCOLOR_ARGB(alpha , red , green , blue);
-}
-
 /**
  * @brief	フェードイン処理
  * @param	fade_speed		フェードスピード

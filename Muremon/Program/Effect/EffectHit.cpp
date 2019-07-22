@@ -28,7 +28,7 @@ namespace
 /**
  * @brief	コンストラクタ
  */
-EffectHit::EffectHit(EffectId	id, int rect_index, const EffectParam& param)
+EffectHit::EffectHit(const EffectId&	id, int rect_index, const EffectParam& param)
 	: EffectBase(id, rect_index, param)
 	, mState()
 {

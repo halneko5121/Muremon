@@ -32,7 +32,7 @@ namespace
 /**
  * @brief	コンストラクタ
  */
-EffectBossDead::EffectBossDead(EffectId	id, int rect_index, const EffectParam& param)
+EffectBossDead::EffectBossDead(const EffectId&	id, int rect_index, const EffectParam& param)
 	: EffectBase(id, rect_index, param)
 	, mState()
 {

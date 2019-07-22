@@ -31,7 +31,7 @@ namespace
  /**
   * @brief	コンストラクタ
   */
-EffectFont::EffectFont(EffectId	id, int rect_index, const EffectParam& param)
+EffectFont::EffectFont(const EffectId& id, int rect_index, const EffectParam& param)
 	: EffectBase(id, rect_index, param)
 	, mShakeX(0.0f)
 	, mShakeY(0.0f)

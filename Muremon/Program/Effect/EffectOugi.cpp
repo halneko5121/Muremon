@@ -31,7 +31,7 @@ namespace
 /**
  * @brief	コンストラクタ
  */
-EffectOugi::EffectOugi(EffectId	id, int rect_index, const EffectParam& param)
+EffectOugi::EffectOugi(const EffectId& id, int rect_index, const EffectParam& param)
 	: EffectBase(id, rect_index, param)
 	, mState()
 {

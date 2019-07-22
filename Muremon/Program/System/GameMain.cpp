@@ -56,7 +56,6 @@ GameMain::GameMain()
 	, mWindow(nullptr)
 	, mScene(nullptr)
 	, mGraphics(nullptr)
-	, mSoundText(nullptr)
 	, mBackground(255)
 {
 }

@@ -70,6 +70,5 @@ private:
 	Window*					mWindow;		// ウィンドウクラスへのポインタ
 	SceneBase*				mScene;			// シーンクラスへのポインタ
 	DirectGraphics*			mGraphics;		// グラフィッククラスへのポインタ
-	char**					mSoundText;
 	DWORD					mBackground;
 };

@@ -52,22 +52,6 @@ public:
 	void	setColor(D3DCOLOR alpha, D3DCOLOR red, D3DCOLOR green, D3DCOLOR blue);
 
 	/**
-	 * @brief	フェードイン処理
-	 * @param	fade_speed		フェードスピード
-	 * @param	texture_alpha	テクスチャのalpha値
-	 * @return	アルファ値
-	 */
-	int		fadeIn(int fade_speed, int texture_alpha);
-
-	/**
-	 * @brief	フェードアウト処理
-	 * @param	fade_speed		フェードスピード
-	 * @param	texture_alpha	テクスチャのalpha値
-	 * @return	アルファ値
-	 */
-	int		fadeOut(int fade_speed, int texture_alpha);
-
-	/**
 	 * @brief	テクスチャの描画を行う
 	 * @param	x			X座標
 	 * @param	y			Y座標
@@ -97,5 +81,4 @@ private:
 	RECT*				mRectPosition;		// 矩形
 	LPDIRECT3DDEVICE9	mDevice;			// デバイス
 	LPDIRECT3DTEXTURE9*	mTexture;			// テクスチャ
-	int					mAlpha;
 };

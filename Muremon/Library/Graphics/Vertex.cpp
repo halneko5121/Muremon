@@ -35,7 +35,6 @@ Vertex::Vertex()
 	, mRectPosition(nullptr)
 	, mDevice(nullptr)
 	, mTexture(nullptr)
-	, mAlpha(255)
 {
 }
 
@@ -114,46 +113,6 @@ void
 Vertex::setColor(D3DCOLOR alpha , D3DCOLOR red , D3DCOLOR green , D3DCOLOR blue)
 {
 	mColor = D3DCOLOR_ARGB(alpha , red , green , blue);
-}
-
-/**
- * @brief	フェードイン処理
- * @param	fade_speed		フェードスピード
- * @param	texture_alpha	テクスチャのalpha値
- * @return	アルファ値
- */
-int
-Vertex::fadeIn(int fade_speed ,int texture_alpha)
-{
-	mAlpha = texture_alpha;
-	mAlpha += fade_speed;
-
-	if (mAlpha >= 255)
-	{
-		mAlpha = 255;
-	}
-
-	return mAlpha;
-}
-
-/**
- * @brief	フェードアウト処理
- * @param	fade_speed		フェードスピード
- * @param	texture_alpha	テクスチャのalpha値
- * @return	アルファ値
- */
-int
-Vertex::fadeOut(int fade_speed ,int texture_alpha)
-{
-	mAlpha = texture_alpha;
-	mAlpha -= fade_speed;
-
-	if (mAlpha <= 0)
-	{
-		mAlpha = 0;
-	}
-
-	return mAlpha;
 }
 
 /**

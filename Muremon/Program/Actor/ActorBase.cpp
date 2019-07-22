@@ -119,13 +119,13 @@ ActorBase::getSpeed() const
 float
 ActorBase::getRandomSpeed() const
 {
-	return (float)(rand() % SPEED_RAND) + SPEED_MIN;
+	return static_cast<float>(rand() % SPEED_RAND) + SPEED_MIN;
 }
 
 float
 ActorBase::getRandomNikumanSpeed() const
 {
-	return (float)(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
+	return static_cast<float>(rand() % SPEED_RAND_NIKU) + SPEED_MIN_NIKU;
 }
 
 /**

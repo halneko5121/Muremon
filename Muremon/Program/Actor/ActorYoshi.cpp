@@ -297,7 +297,7 @@ void
 ActorYoshi::stateEnterGroundDeath()
 {
 	mRectNum = R_YOSHI_DEATH;
-	float rand_deg = (float)(rand() % cDegRand + cDegRandMin);
+	float rand_deg = static_cast<float>((rand() % cDegRand) + cDegRandMin);
 	mOrbitRebound->setDegree(rand_deg);
 	mOrbitRebound->setSpeed(mSpeed);
 }

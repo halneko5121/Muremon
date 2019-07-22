@@ -65,7 +65,7 @@ SceneGameRefresh::~SceneGameRefresh(void)
 
 void SceneGameRefresh::impleInit()
 {
-	UtilGame::setGameModeNormal();
+	UtilGame::setGameModeRefresh();
 	UtilGraphics::loadVertexAndTexture(mVertex, mTexture, "gamenormal");
 
 	// É{ÉX

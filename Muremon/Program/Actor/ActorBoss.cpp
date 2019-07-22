@@ -8,6 +8,7 @@
 
 #include "ActorBoss.h"
 
+#include "Library/Graphics/Animation.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
@@ -42,16 +43,17 @@ namespace
 ActorBoss::ActorBoss(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mAnimation(nullptr)
 	, mLife(cInitLife)
 	, mMaxLife(cInitLife)
 	, mLvCount(0)
 	, mHitCount(0)
-	, mMoveAnime(0)
 {
+	mAnimation = new Animation(R_BOSS_MOVE1, R_BOSS_MOVE2, 5);
 	mRectNum = R_BOSS_MOVE1;
 	mSpeed = 1;
 	mNowPos = Vector2f(cAppearPosX, UtilGame::getGroundPosY() + 20.0f);
-
+	
 	mRect.setWidth(cActorSize.x);
 	mRect.setHeight(cActorSize.y);
 	mRect.setCenterPos(mNowPos);
@@ -177,6 +179,7 @@ ActorBoss::stateIdle()
 void
 ActorBoss::stateEnterMove()
 {
+	mAnimation->startLoop();
 }
 void
 ActorBoss::stateMove()
@@ -189,11 +192,7 @@ ActorBoss::stateMove()
 	}
 
 	// ボスの移動アニメーションコントロール
-	if (mState.getStateCount() % 16 == 15)
-	{
-		mMoveAnime++;
-	}
-	mRectNum = R_BOSS_MOVE1 + mMoveAnime % 2;
+	mRectNum = mAnimation->update();
 
 	if (UtilGame::isGameModeRefresh())
 	{
@@ -313,7 +312,6 @@ ActorBoss::stateEnterRevival()
 	mAlpha = 255;
 	mRectNum = R_BOSS_MOVE1;
 	mNowPos.x = cAppearPosX;
-	mMoveAnime = 0;
 	mSpeed = 1;
 	mMaxLife = cInitLife + (cAddLife * mLvCount);
 	mLife = mMaxLife;

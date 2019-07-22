@@ -12,6 +12,7 @@
 
 class Vertex;
 class Texture;
+class Animation;
 
 class ActorBoss : public ActorBase
 {
@@ -44,9 +45,9 @@ private:
 
 private:
 	StateMachine			mState;	// ステート
+	Animation*				mAnimation;
 	float					mLife;
 	float					mMaxLife;
 	int						mLvCount;
 	int						mHitCount;
-	unsigned int			mMoveAnime;
 };

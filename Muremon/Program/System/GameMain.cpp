@@ -252,17 +252,17 @@ GameMain::release(void)
 }
 
 /**
- * @brief シーケンスの管理を行う
+ * @brief シーンの生成
  */
 SceneBase*
 GameMain::createScene(int scene_id)
 {
 	switch (scene_id) {
 	case cSceneId_Logo:			return (new SceneLogo());
-	case cSceneId_Title:			return (new SceneTitle());
+	case cSceneId_Title:		return (new SceneTitle());
 	case cSceneId_Tutorial:		return (new SceneTutorial());
 	case cSceneId_GameRefresh:	return (new SceneGameRefresh());
-	case cSceneId_GameNormal:		return (new SceneGameNormal());
+	case cSceneId_GameNormal:	return (new SceneGameNormal());
 	case cSceneId_Ranking:		return (new SceneRanking());
 	case cSceneId_GameEnd:		return (new SceneBase());
 	}

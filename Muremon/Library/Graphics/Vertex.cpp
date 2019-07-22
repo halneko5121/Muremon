@@ -32,7 +32,7 @@ Vertex::Vertex()
 	, mDegree(0.0f)
 	, mLoadedRectCount(0)
 	, mColor(255)
-	, mRectPosition2(nullptr)
+	, mRectPosition(nullptr)
 	, mDevice(nullptr)
 	, mTexture(nullptr)
 	, mAlpha(255)
@@ -45,7 +45,7 @@ Vertex::Vertex()
 Vertex::~Vertex()
 {
 	// 読み込まれた矩形データを全て開放する処理
-	APP_SAFE_DELETE_ARRAY(mRectPosition2);
+	APP_SAFE_DELETE_ARRAY(mRectPosition);
 }
 
 /**
@@ -164,8 +164,8 @@ void
 Vertex::drawLT(const Vector2f& pos, int rect_num) const
 {
 	// テクスチャの距離を計算(ここで倍率も計算)
-	float texSizeX = static_cast<float>(abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left));
-	float texSizeY = static_cast<float>(abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top));
+	float texSizeX = static_cast<float>(abs(mRectPosition[rect_num].right - mRectPosition[rect_num].left));
+	float texSizeY = static_cast<float>(abs(mRectPosition[rect_num].bottom - mRectPosition[rect_num].top));
 
     // 回転の中心座標
     D3DXVECTOR2 l_center(pos.x, pos.y);
@@ -184,10 +184,10 @@ Vertex::drawLT(const Vector2f& pos, int rect_num) const
     };
 
 	// 4点を設定
-	float u1 = (static_cast<float>(mRectPosition2[rect_num].left) + UV) * mTextureU;
-	float u2 = (static_cast<float>(mRectPosition2[rect_num].right) - UV) * mTextureU;
-	float v1 = (static_cast<float>(mRectPosition2[rect_num].top) + UV) * mTextureV;
-	float v2 = (static_cast<float>(mRectPosition2[rect_num].bottom) - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition[rect_num].left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition[rect_num].right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition[rect_num].top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition[rect_num].bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
@@ -217,8 +217,8 @@ Vertex::drawLT(const Vector2f& pos, int rect_num) const
 void Vertex::drawCB(const Vector2f& pos, int rect_num) const
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
-	float texSizeX = abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left) / 2.0f;
-	float texSizeY = static_cast<float>(abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top));
+	float texSizeX = abs(mRectPosition[rect_num].right - mRectPosition[rect_num].left) / 2.0f;
+	float texSizeY = static_cast<float>(abs(mRectPosition[rect_num].bottom - mRectPosition[rect_num].top));
 
     // 回転の中心座標
     D3DXVECTOR2 l_center(pos.x, pos.y);
@@ -237,10 +237,10 @@ void Vertex::drawCB(const Vector2f& pos, int rect_num) const
     };
 
 	// 4点を設定
-	float u1 = (static_cast<float>(mRectPosition2[rect_num].left) + UV) * mTextureU;
-	float u2 = (static_cast<float>(mRectPosition2[rect_num].right) - UV) * mTextureU;
-	float v1 = (static_cast<float>(mRectPosition2[rect_num].top) + UV) * mTextureV;
-	float v2 = (static_cast<float>(mRectPosition2[rect_num].bottom) - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition[rect_num].left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition[rect_num].right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition[rect_num].top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition[rect_num].bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
@@ -272,8 +272,8 @@ void
 Vertex::drawF(const Vector2f& pos, int rect_num) const
 {
 	// テクスチャの中心点からの距離を計算(ここで倍率も計算)
-	float texSizeX = abs(mRectPosition2[rect_num].right - mRectPosition2[rect_num].left) / 2.0f;
-	float texSizeY = abs(mRectPosition2[rect_num].bottom - mRectPosition2[rect_num].top) / 2.0f;
+	float texSizeX = abs(mRectPosition[rect_num].right - mRectPosition[rect_num].left) / 2.0f;
+	float texSizeY = abs(mRectPosition[rect_num].bottom - mRectPosition[rect_num].top) / 2.0f;
 
     // 回転の中心座標
     D3DXVECTOR2 l_center(pos.x, pos.y);
@@ -292,10 +292,10 @@ Vertex::drawF(const Vector2f& pos, int rect_num) const
     };
 
 	// 4点を設定
-	float u1 = (static_cast<float>(mRectPosition2[rect_num].left) + UV) * mTextureU;
-	float u2 = (static_cast<float>(mRectPosition2[rect_num].right) - UV) * mTextureU;
-	float v1 = (static_cast<float>(mRectPosition2[rect_num].top) + UV) * mTextureV;
-	float v2 = (static_cast<float>(mRectPosition2[rect_num].bottom) - UV) * mTextureV;
+	float u1 = (static_cast<float>(mRectPosition[rect_num].left) + UV) * mTextureU;
+	float u2 = (static_cast<float>(mRectPosition[rect_num].right) - UV) * mTextureU;
+	float v1 = (static_cast<float>(mRectPosition[rect_num].top) + UV) * mTextureV;
+	float v2 = (static_cast<float>(mRectPosition[rect_num].bottom) - UV) * mTextureV;
 
 	// バーテックス情報
 	CUSTOM_VERTEX ver[] =
@@ -348,14 +348,14 @@ Vertex::load(const char *file_name)
 	// 読み込んでいるファイルを最初の位置に戻す
 	fseek(fp,0,SEEK_SET);
 
-	mRectPosition2 = new RECT[mLoadedRectCount];
+	mRectPosition = new RECT[mLoadedRectCount];
 
 	for(int i = 0;i < mLoadedRectCount;i++)
 	{
-		fscanf_s(fp,"%d,",&mRectPosition2[i].top);
-		fscanf_s(fp,"%d,",&mRectPosition2[i].bottom);
-		fscanf_s(fp,"%d,",&mRectPosition2[i].left);
-		fscanf_s(fp,"%d\n",&mRectPosition2[i].right);
+		fscanf_s(fp,"%d,",&mRectPosition[i].top);
+		fscanf_s(fp,"%d,",&mRectPosition[i].bottom);
+		fscanf_s(fp,"%d,",&mRectPosition[i].left);
+		fscanf_s(fp,"%d\n",&mRectPosition[i].right);
 	}
 	
 	// エラー処理

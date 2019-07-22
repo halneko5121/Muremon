@@ -94,7 +94,7 @@ private:
 	float				mDegree;			// 角度
 	int					mLoadedRectCount;	// 読み込まれている矩形の総数
 	D3DCOLOR			mColor;				// 色
-	RECT*				mRectPosition2;
+	RECT*				mRectPosition;		// 矩形
 	LPDIRECT3DDEVICE9	mDevice;			// デバイス
 	LPDIRECT3DTEXTURE9*	mTexture;			// テクスチャ
 	int					mAlpha;

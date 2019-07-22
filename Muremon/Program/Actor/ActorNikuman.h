@@ -41,5 +41,4 @@ private:
 	OrbitRebound*		mOrbitRebound;
 	float				mRandAcc;
 	float				mRandMoveX;
-	float				mAtkStartY;
 };

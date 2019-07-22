@@ -67,7 +67,6 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mOrbitWave(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
-	, mAtkStartY(0.0f)
 {
 	mAtkPower = cAtkPowerNoppo;
 	mMissionPower = cAddGaugePowerNoppo;
@@ -255,13 +254,13 @@ ActorNoppo::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
-	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	mIsAtk2 = true;
 	mSpeed = getRandomSpeed();
-	mNowPos = Vector2f(-cActorSize.x, mAtkStartY);
+	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
+	mNowPos = Vector2f(-cActorSize.x, rand_pos_y);
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);
 

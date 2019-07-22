@@ -78,7 +78,6 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	, mOrbitRebound(nullptr)
 	, mRandAcc(0.0f)
 	, mRandMoveX(0.0f)
-	, mAtkStartY(0.0f)
 {
 	mAtkPower = cAtkPowerYoshitaro;
 	mMissionPower = cAddGaugePowerYoshitaro;
@@ -255,12 +254,12 @@ ActorYoshi::stateEnterSkyAtk()
 		mIsAtk2 = false;
 		mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	}
-	mAtkStartY = (float)(rand() % cRandY + cRandYMin);
 	mRandAcc = (float)(rand() % cParaRandAcc + cParaRandAccMin);
 	mRandMoveX = (float)(rand() % cParaRandMoveX + cParaRandMoveXMin);
 
 	mIsAtk2 = true;
-	mNowPos = Vector2f(-cActorSize.x, mAtkStartY);
+	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
+	mNowPos = Vector2f(-cActorSize.x, rand_pos_y);
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);

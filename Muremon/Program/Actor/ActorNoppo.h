@@ -44,5 +44,4 @@ private:
 	OrbitWave*				mOrbitWave;
 	float					mRandAcc;
 	float					mRandMoveX;
-	float					mAtkStartY;
 };

@@ -126,7 +126,7 @@ Mission1::stateEnterRun()
 void
 Mission1::stateRun()
 {
-	if (isTimeOver())
+	if (mTime == 0)
 	{
 		if (mKeyCount >= 100)
 		{

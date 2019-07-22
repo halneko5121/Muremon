@@ -58,15 +58,6 @@ MissionBase::update()
 	updateImple();
 }
 
-/**
- * @brief	ŠÔØ‚ê‚©H
- */
-bool
-MissionBase::isTimeOver() const
-{
-	return (mTime == 0);
-}
-
 void 
 MissionBase::drawTime() const
 {

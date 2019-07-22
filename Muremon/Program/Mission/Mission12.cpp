@@ -127,7 +127,7 @@ Mission12::stateEnterRun()
 void
 Mission12::stateRun()
 {
-	if (isTimeOver())
+	if (mTime == 0)
 	{
 		int key_count_niku	= UtilBattle::getWeakAtkCount();
 		int key_count_yoshi	= UtilBattle::getMediumAtkCount();

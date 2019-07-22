@@ -29,7 +29,6 @@ public:
 	virtual bool	isFailure() const = 0;	// é∏îsÇµÇΩÇ©ÅH
 
 protected:
-	bool			isTimeOver() const;
 	void			drawTime() const;
 	void			drawCombo() const;
 

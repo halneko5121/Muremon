@@ -138,7 +138,7 @@ Mission9::stateEnterRun()
 void
 Mission9::stateRun()
 {
-	if (isTimeOver())
+	if (mTime == 0)
 	{
 		if (mSuccessTypingCount == cSuccessTypingCount)
 		{

@@ -138,7 +138,7 @@ Mission5::stateEnterRun()
 void
 Mission5::stateRun()
 {
-	if (isTimeOver())
+	if (mTime == 0)
 	{
 		if (mSuccessTypingCount == cSuccessTypingCount)
 		{

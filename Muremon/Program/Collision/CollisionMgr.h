@@ -8,7 +8,6 @@
  ******************************************************************/
 
 class Collision;
-enum ActorId;
 
 enum CollisionKind
 {
@@ -16,18 +15,6 @@ enum CollisionKind
 	cCollisionKind_Pleyer,
 	cCollisionKind_Enemy,
 	cCollisionKind_Count
-};
-
-struct HitParam
-{
-	HitParam(const ActorId& id, const Vector2f& pos)
-		: mActorId(id)
-		, mHitPos(pos)
-	{
-	}
-
-	const ActorId&	mActorId;
-	const Vector2f&	mHitPos;
 };
 
 class CollisionMgr

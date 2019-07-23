@@ -167,7 +167,7 @@ ActorNoppo::drawImple() const
  * @brief Õ“Ë‚µ‚½Û‚É“ü‚Á‚Ä‚­‚é
  */
 void
-ActorNoppo::hitResponce()
+ActorNoppo::hitResponce(const HitParam& param)
 {
 }
 

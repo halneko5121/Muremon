@@ -13,6 +13,7 @@
 class Animation;
 class OrbitRebound;
 class Collision;
+struct HitParam;
 
 class ActorNikuman :	public ActorBase
 {
@@ -28,7 +29,7 @@ public:
 	void			drawImple() const override;
 
 private:
-	void			hitResponce();
+	void			hitResponce(const HitParam& param);
 
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);

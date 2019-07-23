@@ -13,6 +13,7 @@
 class Animation;
 class OrbitWave;
 class Collision;
+struct HitParam;
 
 class ActorNoppo : public ActorBase
 {
@@ -28,7 +29,8 @@ public:
 	void			drawImple() const override;
 
 private:
-	void			hitResponce();
+	void			hitResponce(const HitParam& param);
+
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
 	DECLAR_STATE_FUNC2(GroundAtk);

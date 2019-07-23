@@ -151,7 +151,7 @@ ActorYoshi::updateImple()
  * @brief Õ“Ë‚µ‚½Û‚É“ü‚Á‚Ä‚­‚é
  */
 void
-ActorYoshi::hitResponce()
+ActorYoshi::hitResponce(const HitParam& param)
 {
 }
 

@@ -164,7 +164,7 @@ ActorBoss::getLifeRate() const
  * @brief Õ“Ë‚µ‚½Û‚É“ü‚Á‚Ä‚­‚é
  */
 void
-ActorBoss::hitResponce()
+ActorBoss::hitResponce(const HitParam& param)
 {
 }
 

@@ -25,7 +25,16 @@ bool
 Collision::isHit(const Collision& target) const
 {
 	const Rect& target_col = target.getCollision();
-	return (mRect->isInclude(target_col));
+	return (getCollision().isInclude(target_col));
+}
+
+/**
+ * @brief	オーナーアクターIDを取得
+ */
+const int&
+Collision::getOwnerId() const
+{
+	return mOwner->getActorId();
 }
 
 /**
@@ -34,14 +43,23 @@ Collision::isHit(const Collision& target) const
 const Rect&
 Collision::getCollision() const
 {
-	return *mRect;
+	return mOwner->getRect();
+}
+
+/**
+ * @brief	位置を取得
+ */
+const Vector2f&
+Collision::getPos() const
+{
+	return mOwner->getNowPos();
 }
 
 /**
  * @brief	登録済みの関数を削除
  */
 void
-Collision::registFuncRun()
+Collision::registFuncRun(const HitParam& param)
 {
-	mRegistFunc->exe();
+	mRegistFunc->exe(param);
 }

@@ -7,14 +7,26 @@
  *	管理者：三上
  ******************************************************************/
 
-class Rect;
+class ActorBase;
+
+struct HitParam
+{
+	HitParam(const int& id, const Vector2f& pos)
+		: mActorId(id)
+		, mHitPos(pos)
+	{
+	}
+
+	const int&		mActorId;
+	const Vector2f&	mHitPos;
+};
 
 class Collision
 {
 public:
 	template<class OWNER>
-	Collision(OWNER* owner, void(OWNER::*registFunc)())
-		: mRect(&owner->getRect())
+	Collision(OWNER* owner, void(OWNER::*registFunc)(const HitParam&))
+		: mOwner(owner)
 		, mRegistFunc(nullptr)
 	{
 		typedef Delegate<OWNER> DelegateImple;
@@ -22,22 +34,24 @@ public:
 	}
 	virtual ~Collision();
 
-	bool		isHit(const Collision& target) const;
-	const Rect&	getCollision() const;
-	void		registFuncRun();
+	bool			isHit(const Collision& target) const;
+	const int&		getOwnerId() const;
+	const Rect&		getCollision() const;
+	const Vector2f&	getPos() const;
+	void			registFuncRun(const HitParam& param);
 
 private:
 	class IDelegate
 	{
 	public:
-		virtual void exe() = 0;
+		virtual void exe(const HitParam& param) = 0;
 	};
 
 	template<class OWNER>
 	class Delegate : public IDelegate
 	{
 	public:
-		typedef void(OWNER::*ExeFunc)();
+		typedef void(OWNER::*ExeFunc)(const HitParam&);
 
 		// コンストラクタ
 		Delegate()
@@ -54,9 +68,9 @@ private:
 		}
 
 		virtual void
-		exe() override
+		exe(const HitParam& param) override
 		{
-			if (mRegistFunc != nullptr) (mOwner->*mRegistFunc)();
+			if (mRegistFunc != nullptr) (mOwner->*mRegistFunc)(param);
 		}
 
 	private:
@@ -65,6 +79,6 @@ private:
 	};
 
 private:
-	const Rect*		mRect;
+	ActorBase*		mOwner;
 	IDelegate*		mRegistFunc;
 };

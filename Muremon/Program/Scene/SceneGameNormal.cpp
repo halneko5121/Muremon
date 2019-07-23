@@ -14,6 +14,7 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Mission/MissionMgr.h"
 #include "Program/Actor/ActorBoss.h"
+#include "Program/Collision/CollisionMgr.h"
 #include "Program/UI/UINormalGame.h"
 #include "Program/Effect/EffectMgr.h"
 
@@ -362,6 +363,9 @@ SceneGameNormal::stateGame()
 
 	// 各攻撃の開始
 	updateRunAtk();
+
+	// 衝突チェックの更新
+	getCollisionMgr()->update();
 
 	// アクターの更新
 	getActorMgr()->update();

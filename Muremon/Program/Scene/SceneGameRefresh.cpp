@@ -21,6 +21,7 @@
 #include "Program/Actor/ActorNoppo.h"
 #include "Program/Actor/ActorYoshi.h"
 #include "Program/UI/UIRefreshGame.h"
+#include "Program/Collision/CollisionMgr.h"
 
 namespace
 {
@@ -281,6 +282,9 @@ SceneGameRefresh::stateGame()
 {
 	// 各攻撃の開始
 	updateRunAtk();
+
+	// 衝突チェックの更新
+	getCollisionMgr()->update();
 
 	// アクターの更新
 	getActorMgr()->update();

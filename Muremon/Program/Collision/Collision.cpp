@@ -9,14 +9,18 @@
 #include "Collision.h"
 
 #include "Library/Math/Rect.h"
+#include "Program/Actor/ActorBase.h"
 
  /**
   * @brief	コンストラクタ
   */
-Collision::Collision(Rect* rect, void (registFunc)())
-	: mRect(rect)
+template<ActorBase*>
+Collision::Collision(ActorBase* owner, void (ActorBase::*registFunc)())
+	: mRect(owner->getRect())
 	, mRegistFunc(registFunc)
 {
+	typedef Delegate<ActorBase*> DelegateImple;
+	mRegistFunc = new DelegateImple(owner, registFunc);
 }
 
 /**
@@ -48,8 +52,8 @@ Collision::getCollision() const
 /**
  * @brief	登録済みの関数を削除
  */
-void*
-Collision::getRegistFunc() const
+void
+Collision::registFuncRun()
 {
-	return mRegistFunc;
+	mRegistFunc->exe();
 }

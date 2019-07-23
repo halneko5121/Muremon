@@ -8,6 +8,8 @@
 
 #include "CollisionMgr.h"
 
+#include "Collision.h"
+
 CollisionMgr* CollisionMgr::mInstance = nullptr;
 
 /**
@@ -51,3 +53,47 @@ CollisionMgr::destroy()
 {
 	APP_SAFE_DELETE(mInstance);
 }
+
+
+/**
+ * @brief	コリジョンの登録
+ */
+void
+CollisionMgr::regist(Collision* collision, const CollisionKind& kind)
+{
+	mCollisionList[kind].push_back(collision);
+}
+
+/**
+ * @brief	衝突チェックの更新
+ */
+void
+CollisionMgr::update()
+{
+	CollisionList enemy_list = getCollisionList(cCollisionKind_Enemy);
+	CollisionList player_list = getCollisionList(cCollisionKind_Pleyer);
+
+	// Enemy vs Player
+	for (CollisionIterator it_enemy = enemy_list.begin(); it_enemy != enemy_list.end(); it_enemy++)
+	{
+		Collision* enemy_col = dynamic_cast<Collision*>(*it_enemy);
+
+		for (CollisionIterator it_player = player_list.begin(); it_player != player_list.end(); it_player++)
+		{
+			Collision* player_col = dynamic_cast<Collision*>(*it_player);
+
+			if (player_col->isHit(*enemy_col))
+			{
+				player_col->registFuncRun();
+				enemy_col->registFuncRun();
+			}
+		}
+	}
+}
+
+CollisionMgr::CollisionList
+CollisionMgr::getCollisionList(const CollisionKind& kind) const
+{
+	return mCollisionList[kind];
+}
+

@@ -7,6 +7,14 @@
  *	管理者：三上
  ******************************************************************/
 
+enum CollisionKind
+{
+	cCollisionKind_Null = -1,
+	cCollisionKind_Pleyer,
+	cCollisionKind_Enemy,
+	cCollisionKind_Count
+};
+
 class Collision;
 
 class CollisionMgr
@@ -30,12 +38,29 @@ public:
 	 */
 	static void				destroy();
 
-private:
-	typedef std::list<Collision*>	CollisionList;
+	/**
+	 * @brief	コリジョンの登録
+	 */
+	void					regist(Collision* collision, const CollisionKind& kind);
+
+	/**
+	 * @brief	衝突チェックの更新
+	 */
+	void					update();
 
 private:
-	static CollisionMgr*	mInstance;			// インスタンス
-	CollisionList			mCollisionList;
+	typedef std::list<Collision*>::iterator CollisionIterator;
+	typedef std::list<Collision*>			CollisionList;
+
+private:
+	/**
+	 * @brief	コリジョンの取得
+	 */
+	CollisionList			getCollisionList(const CollisionKind& kind) const;
+
+private:
+	static CollisionMgr*	mInstance;								// インスタンス
+	CollisionList			mCollisionList[cCollisionKind_Count];	// コリジョンリスト
 };
 
 static CollisionMgr* getEffectMgr() { return CollisionMgr::getInstance(); }

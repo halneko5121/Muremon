@@ -8,11 +8,14 @@
 
 #include "Collision.h"
 
+#include "Library/Math/Rect.h"
+
  /**
   * @brief	コンストラクタ
   */
-Collision::Collision(Rect* rect)
+Collision::Collision(Rect* rect, void (registFunc)())
 	: mRect(rect)
+	, mRegistFunc(registFunc)
 {
 }
 
@@ -40,4 +43,13 @@ const Rect&
 Collision::getCollision() const
 {
 	return *mRect;
+}
+
+/**
+ * @brief	登録済みの関数を削除
+ */
+void*
+Collision::getRegistFunc() const
+{
+	return mRegistFunc;
 }

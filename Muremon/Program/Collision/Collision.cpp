@@ -11,7 +11,8 @@
  /**
   * @brief	コンストラクタ
   */
-Collision::Collision()
+Collision::Collision(Rect* rect)
+	: mRect(rect)
 {
 }
 
@@ -20,4 +21,23 @@ Collision::Collision()
  */
 Collision::~Collision()
 {
+}
+
+/**
+ * @brief	衝突したか？
+ */
+bool
+Collision::isHit(const Collision& target) const
+{
+	const Rect& target_col = target.getCollision();
+	return (mRect->isInclude(target_col));
+}
+
+/**
+ * @brief	コリジョンの取得
+ */
+const Rect&
+Collision::getCollision() const
+{
+	return *mRect;
 }

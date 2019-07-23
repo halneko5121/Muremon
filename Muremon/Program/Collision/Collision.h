@@ -7,9 +7,17 @@
  *	ä«óùé“ÅFéOè„
  ******************************************************************/
 
+class Rect;
+
 class Collision
 {
 public:
-	Collision();
+	Collision(Rect* rect);
 	virtual ~Collision();
+
+	bool		isHit(const Collision& target) const;
+	const Rect&	getCollision() const;
+
+private:
+	Rect*	mRect;
 };

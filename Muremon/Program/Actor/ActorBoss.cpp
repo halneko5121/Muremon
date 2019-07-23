@@ -78,6 +78,7 @@ ActorBoss::ActorBoss(const ActorId& actor_id, int uniq_id, Texture* texture, Ver
 
 ActorBoss::~ActorBoss()
 {
+	APP_SAFE_DELETE(mCollision);
 }
 
 void ActorBoss::initImple()

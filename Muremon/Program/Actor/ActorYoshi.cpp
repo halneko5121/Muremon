@@ -112,6 +112,7 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
  */
 ActorYoshi::~ActorYoshi(void)
 {
+	APP_SAFE_DELETE(mCollision);
 	APP_SAFE_DELETE(mOrbitWave);
 	APP_SAFE_DELETE(mOrbitRebound);
 }

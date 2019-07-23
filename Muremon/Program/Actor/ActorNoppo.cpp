@@ -101,6 +101,10 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
  */
 ActorNoppo::~ActorNoppo(void)
 {
+	APP_SAFE_DELETE(mCollision);
+	APP_SAFE_DELETE(mGroundAtkAnime);
+	APP_SAFE_DELETE(mSkyAtkAnime);
+	APP_SAFE_DELETE(mGroundDeadAnime);
 	APP_SAFE_DELETE(mOrbitWave);
 }
 

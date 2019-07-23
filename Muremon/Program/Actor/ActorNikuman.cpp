@@ -91,6 +91,7 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
  */
 ActorNikuman::~ActorNikuman(void)
 {
+	APP_SAFE_DELETE(mCollision);
 	APP_SAFE_DELETE(mAnimation);
 	APP_SAFE_DELETE(mOrbitRebound);
 }

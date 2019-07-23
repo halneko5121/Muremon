@@ -54,7 +54,6 @@ CollisionMgr::destroy()
 	APP_SAFE_DELETE(mInstance);
 }
 
-
 /**
  * @brief	ƒRƒŠƒWƒ‡ƒ“‚Ì“o˜^
  */

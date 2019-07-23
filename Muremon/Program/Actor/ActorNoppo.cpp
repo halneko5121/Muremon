@@ -17,6 +17,7 @@
 #include "Program/Util/Orbit/OrbitWave.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
+#include "Program/Collision/Collision.h"
 
 namespace
 {
@@ -61,6 +62,7 @@ namespace
 ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mCollision(nullptr)
 	, mGroundAtkAnime(nullptr)
 	, mSkyAtkAnime(nullptr)
 	, mGroundDeadAnime(nullptr)
@@ -73,6 +75,7 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mGroundAtkAnime = new Animation(R_NOPPO_G_ATK1, R_NOPPO_G_ATK4, 10);
 	mSkyAtkAnime = new Animation(R_NOPPO_S_ATK1, R_NOPPO_S_ATK2, 10);
 	mGroundDeadAnime = new Animation(R_NOPPO_MOTION1, R_NOPPO_MOTION3, 10);
+	mCollision = new Collision(this, &ActorNoppo::hitResponce);
 
 	mOrbitWave = new OrbitWave();
 
@@ -97,6 +100,15 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 ActorNoppo::~ActorNoppo(void)
 {
 	APP_SAFE_DELETE(mOrbitWave);
+}
+
+/**
+ * @brief UŒ‚ˆ—
+ */
+void
+ActorNoppo::updateAttack2()
+{
+	mOrbitWave->update(&mNowPos);
 }
 
 /**
@@ -152,12 +164,11 @@ ActorNoppo::drawImple() const
 }
 
 /**
- * @brief UŒ‚ˆ—
+ * @brief Õ“Ë‚µ‚½Û‚É“ü‚Á‚Ä‚­‚é
  */
 void
-ActorNoppo::updateAttack2()
+ActorNoppo::hitResponce()
 {
-	mOrbitWave->update(&mNowPos);
 }
 
 // -----------------------------------------------------------------

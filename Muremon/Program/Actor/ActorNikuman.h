@@ -12,6 +12,7 @@
 
 class Animation;
 class OrbitRebound;
+class Collision;
 
 class ActorNikuman :	public ActorBase
 {
@@ -27,6 +28,8 @@ public:
 	void			drawImple() const override;
 
 private:
+	void			hitResponce();
+
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
 	DECLAR_STATE_FUNC2(GroundAtk);
@@ -37,6 +40,7 @@ private:
 
 private:
 	StateMachine		mState;
+	Collision*			mCollision;
 	Animation*			mAnimation;
 	OrbitRebound*		mOrbitRebound;
 	float				mRandMoveX;

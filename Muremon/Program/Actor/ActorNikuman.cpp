@@ -16,6 +16,7 @@
 #include "Program/Util/Orbit/OrbitRebound.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
+#include "Program/Collision/Collision.h"
 
 namespace 
 {
@@ -57,6 +58,7 @@ namespace
 ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mCollision(nullptr)
 	, mAnimation(nullptr)
 	, mOrbitRebound(nullptr)
 	, mRandMoveX(0.0f)
@@ -66,6 +68,7 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mAnimation = new Animation(R_NIKU_G_ATK1, R_NIKU_G_ATK4, 10);
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
+	mCollision = new Collision(this, &ActorNikuman::hitResponce);
 
 	mRect.setWidth(cActorSize.x);
 	mRect.setHeight(cActorSize.y);
@@ -132,6 +135,14 @@ ActorNikuman::drawImple() const
 	UtilGraphics::setTexture(mVertex, *mTexture, T_CAHRA_NIKU);
 	UtilGraphics::setVertexAngle(mVertex, mAngleDegree);
 	UtilGraphics::drawCB(mVertex, mNowPos, mRectNum);
+}
+
+/**
+ * @brief è’ìÀÇµÇΩç€Ç…ì¸Ç¡ÇƒÇ≠ÇÈ
+ */
+void
+ActorNikuman::hitResponce()
+{
 }
 
 /**

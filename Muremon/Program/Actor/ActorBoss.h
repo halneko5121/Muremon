@@ -13,6 +13,7 @@
 class Vertex;
 class Texture;
 class Animation;
+class Collision;
 
 class ActorBoss : public ActorBase
 {
@@ -33,6 +34,8 @@ public:
 	float		getLifeRate() const;
 
 private:
+	void		hitResponce();
+
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
 	DECLAR_STATE_FUNC2(Move);
@@ -45,6 +48,7 @@ private:
 
 private:
 	StateMachine			mState;	// ステート
+	Collision*				mCollision;
 	Animation*				mAnimation;
 	float					mLife;
 	float					mMaxLife;

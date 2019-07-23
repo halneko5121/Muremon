@@ -13,6 +13,7 @@
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
 #include "Program/Effect/EffectMgr.h"
+#include "Program/Collision/Collision.h"
 
 namespace
 {
@@ -43,6 +44,7 @@ namespace
 ActorBoss::ActorBoss(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mCollision(nullptr)
 	, mAnimation(nullptr)
 	, mLife(cInitLife)
 	, mMaxLife(cInitLife)
@@ -50,6 +52,7 @@ ActorBoss::ActorBoss(const ActorId& actor_id, int uniq_id, Texture* texture, Ver
 	, mHitCount(0)
 {
 	mAnimation = new Animation(R_BOSS_MOVE1, R_BOSS_MOVE2, 5);
+	mCollision = new Collision(this, &ActorBoss::hitResponce);
 	mRectNum = R_BOSS_MOVE1;
 	mSpeed = 1;
 	mNowPos = Vector2f(cAppearPosX, UtilGame::getGroundPosY() + 20.0f);
@@ -155,6 +158,14 @@ float
 ActorBoss::getLifeRate() const
 {
 	return (mLife / mMaxLife);
+}
+
+/**
+ * @brief è’ìÀÇµÇΩç€Ç…ì¸Ç¡ÇƒÇ≠ÇÈ
+ */
+void
+ActorBoss::hitResponce()
+{
 }
 
 // -----------------------------------------------------------------

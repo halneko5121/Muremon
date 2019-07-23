@@ -12,6 +12,7 @@
 
 class Animation;
 class OrbitWave;
+class Collision;
 
 class ActorNoppo : public ActorBase
 {
@@ -27,6 +28,7 @@ public:
 	void			drawImple() const override;
 
 private:
+	void			hitResponce();
 	// ステート関数
 	DECLAR_STATE_FUNC2(Idle);
 	DECLAR_STATE_FUNC2(GroundAtk);
@@ -38,6 +40,7 @@ private:
 
 private:
 	StateMachine			mState;	// ステート
+	Collision*				mCollision;
 	Animation*				mGroundAtkAnime;
 	Animation*				mSkyAtkAnime;
 	Animation*				mGroundDeadAnime;

@@ -17,6 +17,7 @@
 #include "Program/Util/Orbit/OrbitRebound.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
+#include "Program/Collision/Collision.h"
 
 namespace
 {
@@ -72,6 +73,7 @@ namespace
 ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex)
 	: ActorBase(actor_id, uniq_id, texture, vertex)
 	, mState()
+	, mCollision(nullptr)
 	, mGroundAtkAnime(nullptr)
 	, mSkyDeadAnime(nullptr)
 	, mOrbitWave(nullptr)
@@ -83,7 +85,8 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mNowPos = Vector2f(-cActorSize.x, -cActorSize.y);
 	mGroundAtkAnime = new Animation(R_YOSHI_G_ATK1, R_YOSHI_G_ATK4, 10);
 	mSkyDeadAnime = new Animation(R_YOSHI_S_ATK2, R_YOSHI_S_ATK4, 8);
-	
+	mCollision = new Collision(this, &ActorYoshi::hitResponce);
+
 	mOrbitWave = new OrbitWave();
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 
@@ -142,6 +145,14 @@ void
 ActorYoshi::updateImple()
 {
 	mState.executeState();
+}
+
+/**
+ * @brief è’ìÀÇµÇΩç€Ç…ì¸Ç¡ÇƒÇ≠ÇÈ
+ */
+void
+ActorYoshi::hitResponce()
+{
 }
 
 /**

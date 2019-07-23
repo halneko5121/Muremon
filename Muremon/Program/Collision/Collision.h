@@ -19,5 +19,5 @@ public:
 	const Rect&	getCollision() const;
 
 private:
-	Rect*	mRect;
+	Rect*		mRect;
 };

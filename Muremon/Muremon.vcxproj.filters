@@ -201,6 +201,9 @@
     <ClCompile Include="Library\Graphics\Animation.cpp">
       <Filter>Library\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Collision\CollisionMgr.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -405,6 +408,9 @@
     <ClInclude Include="Library\Graphics\Animation.h">
       <Filter>Library\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Program\Collision\CollisionMgr.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
@@ -454,6 +460,9 @@
     </Filter>
     <Filter Include="BadStatus">
       <UniqueIdentifier>{69efc18c-8915-41c8-b4a7-80abb03f31b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{8e2e8829-e842-4c4a-8ccf-7e7b9ec28685}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

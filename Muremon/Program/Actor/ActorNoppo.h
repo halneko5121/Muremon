@@ -17,7 +17,7 @@ class ActorNoppo : public ActorBase
 {
 public:
 	ActorNoppo(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
-	~ActorNoppo(void);
+	virtual ~ActorNoppo(void);
 
 	void			updateAttack2();
 

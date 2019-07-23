@@ -17,7 +17,7 @@ class EffectOugi : public EffectBase
 {
 public:
 	EffectOugi(const EffectId& id, int rect_index, const EffectParam& param);
-	~EffectOugi();
+	virtual ~EffectOugi();
 
 	void			update() override;
 	void			draw() const override;

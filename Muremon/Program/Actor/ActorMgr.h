@@ -27,7 +27,7 @@ public:
 
 public:
 	ActorMgr();
-	~ActorMgr();
+	virtual ~ActorMgr();
 
 	/**
 	 * @brief	インスタンスの取得

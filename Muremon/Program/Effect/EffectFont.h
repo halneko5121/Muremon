@@ -17,7 +17,7 @@ class EffectFont : public EffectBase
 {
 public:
 	EffectFont(const EffectId& id, int rect_index, const EffectParam& param);
-	~EffectFont();
+	virtual ~EffectFont();
 
 	void			update() override;
 	void			draw() const override;

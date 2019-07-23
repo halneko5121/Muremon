@@ -32,7 +32,7 @@ public:
 
 public:
 	EffectMgr();
-	~EffectMgr();
+	virtual ~EffectMgr();
 
 	/**
 	 * @brief	インスタンスの取得

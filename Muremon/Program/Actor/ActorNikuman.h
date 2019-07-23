@@ -17,7 +17,7 @@ class ActorNikuman :	public ActorBase
 {
 public:
 	ActorNikuman(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
-	~ActorNikuman();
+	virtual ~ActorNikuman();
 
 	void			updateAttack2(const Vector2f& boss_cc);
 

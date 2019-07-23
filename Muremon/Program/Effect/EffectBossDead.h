@@ -17,7 +17,7 @@ class EffectBossDead : public EffectBase
 {
 public:
 	EffectBossDead(const EffectId& id, int rect_index, const EffectParam& param);
-	~EffectBossDead();
+	virtual ~EffectBossDead();
 
 	void			update() override;
 	void			draw() const override;

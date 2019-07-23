@@ -18,7 +18,7 @@ class ActorBoss : public ActorBase
 {
 public:
 	ActorBoss(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
-	~ActorBoss();
+	virtual ~ActorBoss();
 
 	void		initImple() override;
 	void		runImple() override;

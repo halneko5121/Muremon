@@ -17,7 +17,7 @@ class EffectHit : public EffectBase
 {
 public:
 	EffectHit(const EffectId& id, int rect_index, const EffectParam& param);
-	~EffectHit();
+	virtual ~EffectHit();
 
 	void			update() override;
 	void			draw() const override;

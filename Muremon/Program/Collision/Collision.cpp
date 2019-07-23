@@ -11,18 +11,6 @@
 #include "Library/Math/Rect.h"
 #include "Program/Actor/ActorBase.h"
 
- /**
-  * @brief	コンストラクタ
-  */
-template<ActorBase*>
-Collision::Collision(ActorBase* owner, void (ActorBase::*registFunc)())
-	: mRect(owner->getRect())
-	, mRegistFunc(registFunc)
-{
-	typedef Delegate<ActorBase*> DelegateImple;
-	mRegistFunc = new DelegateImple(owner, registFunc);
-}
-
 /**
  * @brief	デストラクタ
  */

@@ -8,13 +8,18 @@
  ******************************************************************/
 
 class Rect;
-class ActorBase;
 
 class Collision
 {
 public:
-	template<ActorBase*>
-	Collision(ActorBase* owner, void(ActorBase::*registFunc)());
+	template<class OWNER>
+	Collision(OWNER* owner, void(OWNER::*registFunc)())
+		: mRect(&owner->getRect())
+		, mRegistFunc(nullptr)
+	{
+		typedef Delegate<OWNER> DelegateImple;
+		mRegistFunc = new DelegateImple(owner, registFunc);
+	}
 	virtual ~Collision();
 
 	bool		isHit(const Collision& target) const;
@@ -60,6 +65,6 @@ private:
 	};
 
 private:
-	Rect*		mRect;
-	IDelegate*	mRegistFunc;
+	const Rect*		mRect;
+	IDelegate*		mRegistFunc;
 };

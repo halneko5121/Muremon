@@ -20,7 +20,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~Texture();
+	virtual ~Texture();
 
 	/**
 	 * @brief	テクスチャデータをロードする

@@ -446,7 +446,7 @@ DirectInputMouse::update()
 
 /**
  * @brief	マウスの動作をチェックする
- * @return	0~7	各動作を判定し対応する値が返る
+ * @return	0virtual ~7	各動作を判定し対応する値が返る
  */
 USHORT
 DirectInputMouse::checkMouseAction()

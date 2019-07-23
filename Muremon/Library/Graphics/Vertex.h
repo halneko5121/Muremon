@@ -20,7 +20,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~Vertex();
+	virtual ~Vertex();
 
 	/**
 	 * @brief	テクスチャのデータをセットする

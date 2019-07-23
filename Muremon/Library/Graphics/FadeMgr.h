@@ -72,7 +72,7 @@ private:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~FadeMgr();
+	virtual ~FadeMgr();
 
 private:
 	// ステート関数

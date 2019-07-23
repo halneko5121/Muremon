@@ -30,7 +30,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~Window();
+	virtual ~Window();
 
 	/**
 	 * @brief	初期設定

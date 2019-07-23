@@ -95,7 +95,7 @@ private:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~DirectSound();
+	virtual ~DirectSound();
 
 	/**
 	 * @brief	音楽データ読み込み＆登録

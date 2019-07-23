@@ -113,7 +113,7 @@ private:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~DirectInputKey();
+	virtual ~DirectInputKey();
 
 	/**
 	 * @brief	デバイス全体の情報更新
@@ -145,7 +145,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~DirectInputMouse();
+	virtual ~DirectInputMouse();
 
 	/**
 	 * @brief	インスタンスの取得
@@ -181,7 +181,7 @@ public:
 
 	/**
 	 * @brief	マウスの動作をチェックする
-	 * @return	0~7	各動作を判定し対応する値が返る
+	 * @return	0virtual ~7	各動作を判定し対応する値が返る
 	 */
 	USHORT						checkMouseAction();
 

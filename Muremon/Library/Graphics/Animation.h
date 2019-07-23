@@ -13,7 +13,7 @@ class Animation
 {
 public:
 	Animation(int start_anime_num, int max_anime_index, float speed);
-	~Animation();
+	virtual ~Animation();
 
 	/**
 	 * @brief	ŠJŽn

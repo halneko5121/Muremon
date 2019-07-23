@@ -18,7 +18,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~StateMachine();
+	virtual ~StateMachine();
 
 	/**
 	 * @brief	初期化

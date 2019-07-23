@@ -87,7 +87,7 @@ private:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~DirectGraphics();
+	virtual ~DirectGraphics();
 
 private:
 	static DirectGraphics*	mInstance;				// インスタンス

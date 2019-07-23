@@ -105,7 +105,7 @@ private:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~DirectFont();
+	virtual ~DirectFont();
 
 private:
 	static DirectFont*	mInstance;		// インスタンス

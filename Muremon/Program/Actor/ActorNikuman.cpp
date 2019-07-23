@@ -17,6 +17,7 @@
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Collision/Collision.h"
+#include "Program/Collision/CollisionMgr.h"
 
 namespace 
 {
@@ -69,6 +70,7 @@ ActorNikuman::ActorNikuman(const ActorId& actor_id, int uniq_id, Texture* textur
 	mAnimation = new Animation(R_NIKU_G_ATK1, R_NIKU_G_ATK4, 10);
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);
 	mCollision = new Collision(this, &ActorNikuman::hitResponce);
+	getCollisionMgr()->regist(mCollision, cCollisionKind_Pleyer);
 
 	mRect.setWidth(cActorSize.x);
 	mRect.setHeight(cActorSize.y);

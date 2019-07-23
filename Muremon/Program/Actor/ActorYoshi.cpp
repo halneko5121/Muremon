@@ -18,6 +18,7 @@
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Collision/Collision.h"
+#include "Program/Collision/CollisionMgr.h"
 
 namespace
 {
@@ -86,6 +87,7 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mGroundAtkAnime = new Animation(R_YOSHI_G_ATK1, R_YOSHI_G_ATK4, 10);
 	mSkyDeadAnime = new Animation(R_YOSHI_S_ATK2, R_YOSHI_S_ATK4, 8);
 	mCollision = new Collision(this, &ActorYoshi::hitResponce);
+	getCollisionMgr()->regist(mCollision, cCollisionKind_Pleyer);
 
 	mOrbitWave = new OrbitWave();
 	mOrbitRebound = new OrbitRebound(0.0f, mSpeed);

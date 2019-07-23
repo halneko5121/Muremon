@@ -18,6 +18,7 @@
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Actor/ActorBoss.h"
 #include "Program/Collision/Collision.h"
+#include "Program/Collision/CollisionMgr.h"
 
 namespace
 {
@@ -76,6 +77,7 @@ ActorNoppo::ActorNoppo(const ActorId& actor_id, int uniq_id, Texture* texture, V
 	mSkyAtkAnime = new Animation(R_NOPPO_S_ATK1, R_NOPPO_S_ATK2, 10);
 	mGroundDeadAnime = new Animation(R_NOPPO_MOTION1, R_NOPPO_MOTION3, 10);
 	mCollision = new Collision(this, &ActorNoppo::hitResponce);
+	getCollisionMgr()->regist(mCollision, cCollisionKind_Pleyer);
 
 	mOrbitWave = new OrbitWave();
 

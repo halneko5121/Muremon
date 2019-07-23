@@ -14,6 +14,7 @@
 #include "Program/Util/UtilGame.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Collision/Collision.h"
+#include "Program/Collision/CollisionMgr.h"
 
 namespace
 {
@@ -53,6 +54,8 @@ ActorBoss::ActorBoss(const ActorId& actor_id, int uniq_id, Texture* texture, Ver
 {
 	mAnimation = new Animation(R_BOSS_MOVE1, R_BOSS_MOVE2, 5);
 	mCollision = new Collision(this, &ActorBoss::hitResponce);
+	getCollisionMgr()->regist(mCollision, cCollisionKind_Enemy);
+
 	mRectNum = R_BOSS_MOVE1;
 	mSpeed = 1;
 	mNowPos = Vector2f(cAppearPosX, UtilGame::getGroundPosY() + 20.0f);

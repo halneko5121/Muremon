@@ -63,4 +63,4 @@ private:
 	CollisionList			mCollisionList[cCollisionKind_Count];	// コリジョンリスト
 };
 
-static CollisionMgr* getEffectMgr() { return CollisionMgr::getInstance(); }
+static CollisionMgr* getCollisionMgr() { return CollisionMgr::getInstance(); }

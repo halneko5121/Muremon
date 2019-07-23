@@ -17,6 +17,7 @@
 #include "Program/System/GameInfoMgr.h"
 #include "Program/Actor/ActorMgr.h"
 #include "Program/Effect/EffectMgr.h"
+#include "Program/Collision/CollisionMgr.h"
 #include "Program/Util/UtilGame.h"
 #include "Program/Util/UtilBattle.h"
 
@@ -117,6 +118,7 @@ GameMain::init(void)
 	GameInfoMgr::create();
 	ActorMgr::create();
 	EffectMgr::create();
+	CollisionMgr::create();
 
 	// ç≈èâÇÃÉVÅ[ÉìÇ
 	mScene = new SceneLogo();
@@ -277,6 +279,7 @@ GameMain::release(void)
 	DirectInputKey::destroy();
 	ActorMgr::destroy();
 	EffectMgr::destroy();
+	CollisionMgr::destroy();
 	GameInfoMgr::destroy();
 	APP_SAFE_DELETE(mWindow);
 }

@@ -7,6 +7,9 @@
  *	ä«óùé“ÅFéOè„
  ******************************************************************/
 
+class Collision;
+enum ActorId;
+
 enum CollisionKind
 {
 	cCollisionKind_Null = -1,
@@ -15,7 +18,17 @@ enum CollisionKind
 	cCollisionKind_Count
 };
 
-class Collision;
+struct HitParam
+{
+	HitParam(const ActorId& id, const Vector2f& pos)
+		: mActorId(id)
+		, mHitPos(pos)
+	{
+	}
+
+	const ActorId&	mActorId;
+	const Vector2f&	mHitPos;
+};
 
 class CollisionMgr
 {

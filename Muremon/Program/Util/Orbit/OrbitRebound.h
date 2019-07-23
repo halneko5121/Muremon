@@ -11,7 +11,7 @@ class OrbitRebound
 {
 public:
 	OrbitRebound(float degree, float speed);
-	~OrbitRebound();
+	virtual ~OrbitRebound();
 
 	void	setDegree(float degree);
 

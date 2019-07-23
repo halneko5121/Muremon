@@ -15,7 +15,7 @@ class SceneTitle : public SceneBase
 {
 public:
 	SceneTitle();
-	~SceneTitle();
+	virtual ~SceneTitle();
 
 	void			impleInit() override;
 	void			update() override;

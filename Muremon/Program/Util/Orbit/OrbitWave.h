@@ -11,7 +11,7 @@ class OrbitWave
 {
 public:
 	OrbitWave();
-	~OrbitWave();
+	virtual ~OrbitWave();
 
 	void	init(int amplitude, int cycle_frame, float speed_x);
 

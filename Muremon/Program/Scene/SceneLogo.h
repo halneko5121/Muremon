@@ -13,7 +13,7 @@ class SceneLogo : public SceneBase
 {
 public:
 	SceneLogo();
-	~SceneLogo();
+	virtual ~SceneLogo();
 
 	void	impleInit() override;
 	void	update() override;

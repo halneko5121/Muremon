@@ -39,7 +39,7 @@ class MissionMgr
 {
 public:
 	MissionMgr(Texture* texture, Vertex* vertex);
-	~MissionMgr();
+	virtual ~MissionMgr();
 
 	void	init();
 	void	update();

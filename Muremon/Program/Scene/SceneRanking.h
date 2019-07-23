@@ -14,7 +14,7 @@ class SceneRanking : public SceneBase
 {
 public:
 	SceneRanking();
-	~SceneRanking();
+	virtual ~SceneRanking();
 
 	void		impleInit() override;
 	void		update() override;

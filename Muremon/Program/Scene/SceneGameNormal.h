@@ -20,7 +20,7 @@ class SceneGameNormal : public SceneBase
 {
 public:
 	SceneGameNormal();
-	~SceneGameNormal();
+	virtual ~SceneGameNormal();
 
 	void				impleInit() override;
 	void				update() override;

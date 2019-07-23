@@ -18,7 +18,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~GameScore();
+	virtual ~GameScore();
 
 	/**
 	 * @brief	スコアの設定

@@ -25,7 +25,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~GameMain();
+	virtual ~GameMain();
 
 	/**
 	 * @brief	ゲームで使うメンバの初期化

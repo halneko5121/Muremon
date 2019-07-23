@@ -14,7 +14,7 @@ class UIRefreshGame
 {
 public:
 	UIRefreshGame();
-	~UIRefreshGame();
+	virtual ~UIRefreshGame();
 	void				init();
 	void				update();
 	void				draw() const;

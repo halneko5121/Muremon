@@ -15,7 +15,7 @@ class UINormalGame
 {
 public:
 	UINormalGame();
-	~UINormalGame();
+	virtual ~UINormalGame();
 	void				init();
 	void				update();
 	void				draw(const float& mission_guage, const int& time) const;

@@ -16,7 +16,7 @@ class UITitleMenu
 {
 public:
 	UITitleMenu();
-	~UITitleMenu();
+	virtual ~UITitleMenu();
 	void	init();
 	void	update();
 	void	draw() const;

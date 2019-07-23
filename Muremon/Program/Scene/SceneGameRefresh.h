@@ -23,7 +23,7 @@ class SceneGameRefresh : public SceneBase
 {
 public:
 	SceneGameRefresh();
-	~SceneGameRefresh();
+	virtual ~SceneGameRefresh();
 
 	void				impleInit() override;
 	void				update() override;

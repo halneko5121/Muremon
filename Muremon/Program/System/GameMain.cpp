@@ -48,6 +48,35 @@ namespace
 	};
 }
 
+class Base
+{
+public:
+	Base()
+	{
+		APP_PRINT_NL("Base:コンストラクタ");
+	}
+
+	~Base()
+	{
+		APP_PRINT_NL("Base:デストラクタ");
+	}
+};
+
+class Chaild : public Base
+{
+public:
+	Chaild()
+	{
+		APP_PRINT_NL("Chaild:コンストラクタ");
+	}
+
+	~Chaild()
+	{
+		APP_PRINT_NL("Chaild:デストラクタ");
+	}
+};
+
+
 /**
  * @brief	コンストラクタ
  */
@@ -58,6 +87,8 @@ GameMain::GameMain()
 	, mGraphics(nullptr)
 	, mBackground(255)
 {
+	Base* hoge = new Chaild();
+	delete hoge;
 }
 
 /**

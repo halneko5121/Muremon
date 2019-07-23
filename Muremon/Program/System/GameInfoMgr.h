@@ -20,7 +20,7 @@ public:
 	/**
 	 * @brief	デストラクタ
 	 */
-	~GameInfoMgr();
+	virtual ~GameInfoMgr();
 
 	/**
 	 * @brief	インスタンスの取得

@@ -36,15 +36,6 @@ namespace
 
 EffectMgr* EffectMgr::mInstance = nullptr;
 
-EffectMgr::EffectMgr()
-	: mEffectList()
-{
-}
-
-EffectMgr::~EffectMgr()
-{
-}
-
 /**
  * @brief	インスタンスの取得
  */
@@ -115,6 +106,21 @@ EffectMgr::draw() const
 		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
 		effect->draw();
 	}
+}
+
+/**
+ * @brief	コンストラクタ
+ */
+EffectMgr::EffectMgr()
+	: mEffectList()
+{
+}
+
+/**
+ * @brief	デストラクタ
+ */
+EffectMgr::~EffectMgr()
+{
 }
 
 /**

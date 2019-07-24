@@ -31,9 +31,6 @@ public:
 	typedef std::list<EffectBase*>::const_iterator EffectConstIterator;
 
 public:
-	EffectMgr();
-	virtual ~EffectMgr();
-
 	/**
 	 * @brief	インスタンスの取得
 	 */
@@ -65,6 +62,9 @@ public:
 	void				draw() const;
 
 private:
+	EffectMgr();
+	virtual ~EffectMgr();
+
 	/**
 	 * @brief	不要になったエフェクトを削除する
 	 */

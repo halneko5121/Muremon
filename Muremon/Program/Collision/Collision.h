@@ -41,8 +41,8 @@ public:
 	bool			isEnable() const;
 
 	bool			isHit(const Collision& target) const;
-	const int&		getOwnerId() const;
-	const int&		getOwnerUniqId() const;
+	int				getOwnerId() const;
+	int				getOwnerUniqId() const;
 	const Rect&		getCollision() const;
 	const Vector2f&	getPos() const;
 	void			registFuncRun(const HitParam& param);

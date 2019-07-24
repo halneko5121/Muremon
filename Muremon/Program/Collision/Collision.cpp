@@ -50,7 +50,7 @@ Collision::isHit(const Collision& target) const
 /**
  * @brief	オーナーアクターIDを取得
  */
-const int&
+int
 Collision::getOwnerId() const
 {
 	return mOwner->getActorId();
@@ -59,7 +59,7 @@ Collision::getOwnerId() const
 /**
  * @brief	オーナーユニークIDを取得
  */
-const int&
+int
 Collision::getOwnerUniqId() const
 {
 	return mOwner->getUniqId();

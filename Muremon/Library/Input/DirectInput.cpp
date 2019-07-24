@@ -564,4 +564,6 @@ DirectInputKey::DirectInputKey(void)
  */
 DirectInputKey::~DirectInputKey()
 {
+	APP_SAFE_DELETE(mDirectInput);
+	APP_SAFE_DELETE(mKeyBordDevice);
 }

@@ -11,7 +11,7 @@ class ActorBase;
 
 struct HitParam
 {
-	HitParam(const int& id, int actor_uniq_id, const Vector2f& pos)
+	HitParam(const int& id, const int& actor_uniq_id, const Vector2f& pos)
 		: mActorId(id)
 		, mActorUniqId(actor_uniq_id)
 		, mHitPos(pos)

@@ -6,7 +6,6 @@
  *	管理者：三上
  ******************************************************************/
 
-#include <crtdbg.h> //メモリーリークチェック
 #include "main.h"
 #include "System/GameMain.h"
 
@@ -28,7 +27,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, in
 	int l_return = game_main.winMain(hInstance,hPrevInst,lpCmdLine,nShowCmd);
 
 	// 現在のメモリリーク状態がわかる
-	_CrtDumpMemoryLeaks();
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	return l_return;
 }

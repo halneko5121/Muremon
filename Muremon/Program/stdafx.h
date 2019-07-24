@@ -6,6 +6,15 @@
  *	製作者：三上
  *	管理者：三上
  ******************************************************************/
+ // メモリーリークチェック
+#include <cstdlib>
+#include <new>
+#include <memory>
+#include <crtdbg.h> 
+// crtdbg.h をインクルードしたあとに _CRTDBG_MAP_ALLOC を定義してやる
+// 前でも問題ないけど、それじゃつまらんので（ぉ
+#define _CRTDBG_MAP_ALLOC
+
 #include <assert.h>
 #include <time.h>
 #include <stdio.h>
@@ -18,6 +27,7 @@
 #include "Library/Math/Vector.h"
 #include "Library/Math/Rect.h"
 
+#define new								::new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #define PI								(D3DX_PI)
 #define RAD								(D3DX_PI/180.0f)	// 角度からラジアンを求める
 #define DEG								(180.0f/D3DX_PI)	// ラジアンから角度を求める

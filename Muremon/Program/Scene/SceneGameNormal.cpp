@@ -373,29 +373,6 @@ SceneGameNormal::stateGame()
 	// エフェクトの更新
 	getEffectMgr()->update();
 
-	// ヒットチェック
-	ActorMgr::ActorIterator it_begin = getActorMgr()->begin();
-	ActorMgr::ActorIterator it_end = getActorMgr()->end();
-	for (ActorMgr::ActorIterator it = it_begin; it != it_end; it++)
-	{
-		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
-		ActorBoss* actor_boss = dynamic_cast<ActorBoss*>(actor);
-
-		// ボス以外のアクター
-		if (actor != nullptr && actor != actor_boss)
-		{
-			if (actor->isHitCheck())
-			{
-				float atk_power = UtilBattle::calcAtkPower(*actor);
-				mBoss->hit(actor->getNowPos(), atk_power);
-				actor->setIsHitCheck(false);
-				float mission_guage = mMissionMgr->getPower();
-				mission_guage += actor->getMissionPower();
-				mMissionMgr->setPower(mission_guage);
-			}
-		}
-	}
-
 	mTime -= 1;
 
 	// にくまん

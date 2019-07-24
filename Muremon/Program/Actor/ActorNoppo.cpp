@@ -131,6 +131,8 @@ ActorNoppo::initImple()
 void
 ActorNoppo::runImple()
 {
+	mCollision->setEnable(true);
+	
 	if (mIsAtk1)
 	{
 		mState.changeStateIfDiff(cState_GroundAtk);
@@ -175,6 +177,20 @@ ActorNoppo::drawImple() const
 void
 ActorNoppo::hitResponce(const HitParam& param)
 {
+	UtilGame::addScore(cAddScoreNoppo);
+	mCollision->setEnable(false);
+
+	if (mState.isEqual(cState_GroundAtk))
+	{
+		mState.changeState(cState_GroundDeathAnime);
+		return;
+	}
+
+	if (mState.isEqual(cState_SkyAtk))
+	{
+		mState.changeState(cState_SkyDeath);
+		return;
+	}
 }
 
 // -----------------------------------------------------------------
@@ -221,29 +237,17 @@ ActorNoppo::stateGroundAtk()
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
 
-	if (isHit(*this, *boss))
+	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
+	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
-		setIsHitCheck(true);
-
-		UtilGame::addScore(cAddScoreNoppo);
-
-		mState.changeState(cState_GroundDeathAnime);
+		mState.changeState(cState_End);
 		return;
 	}
-	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
 	else
 	{
-		if (UtilGame::isScreenOutWithoutLeft(*this))
-		{
-			mState.changeState(cState_End);
-			return;
-		}
-		else
-		{
-			mNowPos.x += mSpeed;
-			mRectNum = mGroundAtkAnime->update();
-			mRect.updateCenterPosCenter(mNowPos);
-		}
+		mNowPos.x += mSpeed;
+		mRectNum = mGroundAtkAnime->update();
+		mRect.updateCenterPosCenter(mNowPos);
 	}
 }
 
@@ -275,33 +279,17 @@ ActorNoppo::stateEnterSkyAtk()
 void
 ActorNoppo::stateSkyAtk()
 {
-	ActorBoss* boss = UtilActor::searchBossActor();
-	APP_POINTER_ASSERT(boss);
-
-	if (isHit(*this, *boss))
+	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
-		setIsHitCheck(true);
-
-		UtilGame::addScore(cAddScoreNoppo);
-
-		mState.changeState(cState_SkyDeath);
+		mState.changeState(cState_End);
 		return;
 	}
-	// UŒ‚ˆ—(x‚ª‰æ–ÊŠO‚¶‚á‚È‚¯‚ê‚Îˆ—)
 	else
 	{
-		if (UtilGame::isScreenOutWithoutLeft(*this))
-		{
-			mState.changeState(cState_End);
-			return;
-		}
-		else
-		{
-			mOrbitWave->setSpeed(mSpeed);
-			updateAttack2();
-			mRectNum = mSkyAtkAnime->update();
-			mRect.updateCenterPosCenter(mNowPos);
-		}
+		mOrbitWave->setSpeed(mSpeed);
+		updateAttack2();
+		mRectNum = mSkyAtkAnime->update();
+		mRect.updateCenterPosCenter(mNowPos);
 	}
 }
 

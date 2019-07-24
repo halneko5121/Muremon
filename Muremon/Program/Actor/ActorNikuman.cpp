@@ -110,6 +110,8 @@ ActorNikuman::initImple()
 void
 ActorNikuman::runImple()
 {
+	mCollision->setEnable(true);
+
 	if (mIsAtk1)
 	{
 		mState.changeStateIfDiff(cState_GroundAtk);
@@ -146,6 +148,24 @@ ActorNikuman::drawImple() const
 void
 ActorNikuman::hitResponce(const HitParam& param)
 {
+	UtilSound::playOnce(cSoundId_SeHitNikuman);
+	UtilGame::addScore(cAddScoreNikuman);
+
+	EffectParam effect_param(mTexture, mVertex, mNowPos);
+	getEffectMgr()->createEffect(cEffectId_HitEffect2, effect_param);
+
+	mCollision->setEnable(false);
+
+	if (mState.isEqual(cState_GroundAtk))
+	{
+		mState.changeStateIfDiff(cState_GroundDeath);
+		return;
+	}
+	else if (mState.isEqual(cState_SkyAtk))
+	{
+		mState.changeStateIfDiff(cState_SkyDeath);
+		return;
+	}
 }
 
 /**
@@ -199,29 +219,13 @@ ActorNikuman::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
+	mRect.updateCenterPosCenter(mNowPos);
 	mAngleDegree = 0.0f;
 	mAnimation->startLoop();
 }
 void
 ActorNikuman::stateGroundAtk()
 {
-	ActorBoss* boss = UtilActor::searchBossActor();
-	APP_POINTER_ASSERT(boss);
-
-	if (isHit(*this, *boss))
-	{
-		UtilSound::playOnce(cSoundId_SeHitNikuman);
-		setIsHitCheck(true);
-
-		UtilGame::addScore(cAddScoreNikuman);
-
-		EffectParam param(mTexture, mVertex, mNowPos);
-		getEffectMgr()->createEffect(cEffectId_HitEffect2, param);
-
-		mState.changeState(cState_GroundDeath);
-		return;
-	}
-
 	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
 		mState.changeState(cState_End);
@@ -252,6 +256,7 @@ ActorNikuman::stateEnterSkyAtk()
 	mSpeed = getRandomNikumanSpeed();
 	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
 	mNowPos = Vector2f(-cActorSize.x, rand_pos_y);
+	mRect.updateCenterPosCenter(mNowPos);
 	mAngleDegree = 0.0f;
 	mRectNum = R_NIKU_S_ATK;
 }

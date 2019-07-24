@@ -113,6 +113,8 @@ ActorYoshi::ActorYoshi(const ActorId& actor_id, int uniq_id, Texture* texture, V
 ActorYoshi::~ActorYoshi(void)
 {
 	APP_SAFE_DELETE(mCollision);
+	APP_SAFE_DELETE(mGroundAtkAnime);
+	APP_SAFE_DELETE(mSkyDeadAnime);
 	APP_SAFE_DELETE(mOrbitWave);
 	APP_SAFE_DELETE(mOrbitRebound);
 }
@@ -131,6 +133,8 @@ ActorYoshi::initImple()
 void
 ActorYoshi::runImple()
 {
+	mCollision->setEnable(true);
+	
 	if (mIsAtk1)
 	{
 		mState.changeStateIfDiff(cState_GroundAtk);
@@ -156,6 +160,20 @@ ActorYoshi::updateImple()
 void
 ActorYoshi::hitResponce(const HitParam& param)
 {
+	UtilGame::addScore(cAddScoreYoshitaro);
+	mCollision->setEnable(false);
+
+	if (mState.isEqual(cState_GroundAtk))
+	{
+		mState.changeState(cState_GroundDeath);
+		return;
+	}
+
+	if (mState.isEqual(cState_SkyAtk))
+	{
+		mState.changeState(cState_SkyDeathAnime);
+		return;
+	}
 }
 
 /**
@@ -209,6 +227,7 @@ ActorYoshi::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
+	mRect.updateCenterPosCenter(mNowPos);
 	mAngleDegree = 0.0f;
 	mRectNum = R_YOSHI_G_ATK1;
 	mGroundAtkAnime->startLoop();
@@ -218,16 +237,6 @@ ActorYoshi::stateGroundAtk()
 {
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
-
-	if (isHit(*this, *boss))
-	{
-		setIsHitCheck(true);
-
-		UtilGame::addScore(cAddScoreYoshitaro);
-
-		mState.changeState(cState_GroundDeath);
-		return;
-	}
 
 	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
@@ -253,6 +262,7 @@ ActorYoshi::stateEnterSkyAtk()
 	mIsAtk2 = true;
 	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
 	mNowPos = Vector2f(-cActorSize.x, rand_pos_y);
+	mRect.updateCenterPosCenter(mNowPos);
 	mSpeed = getRandomSpeed();
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);
@@ -263,16 +273,6 @@ ActorYoshi::stateSkyAtk()
 {
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
-
-	if (isHit(*this, *boss))
-	{
-		setIsHitCheck(true);
-
-		UtilGame::addScore(cAddScoreYoshitaro);
-
-		mState.changeState(cState_SkyDeathAnime);
-		return;
-	}
 
 	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{

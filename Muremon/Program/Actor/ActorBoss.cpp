@@ -9,9 +9,11 @@
 #include "ActorBoss.h"
 
 #include "Library/Graphics/Animation.h"
+#include "Program/Util/UtilBattle.h"
 #include "Program/Util/UtilSound.h"
 #include "Program/Util/UtilGraphics.h"
 #include "Program/Util/UtilGame.h"
+#include "Program/Util/UtilActor.h"
 #include "Program/Effect/EffectMgr.h"
 #include "Program/Collision/Collision.h"
 #include "Program/Collision/CollisionMgr.h"
@@ -170,6 +172,16 @@ ActorBoss::getLifeRate() const
 void
 ActorBoss::hitResponce(const HitParam& param)
 {
+	// エフェクト
+	EffectParam effect_param(mTexture, mVertex, param.mHitPos);
+	getEffectMgr()->createEffect(cEffectId_HitEffect1, effect_param);
+	mHitCount++;
+
+	// ダメージ計算
+	ActorBase* actor = UtilActor::searchActor(param.mActorUniqId);
+	APP_POINTER_ASSERT(actor);
+	mLife -= UtilBattle::calcAtkPower(*actor);;
+	if (mLife < 0) mLife = 0;
 }
 
 // -----------------------------------------------------------------
@@ -278,6 +290,9 @@ ActorBoss::stateEnterDead()
 
 	EffectParam param(mTexture, mVertex, mNowPos);
 	getEffectMgr()->createEffect(cEffectId_HitEffect7, param);
+
+	// コリジョン設定
+	mCollision->setEnable(false);
 }
 void
 ActorBoss::stateDead()
@@ -327,9 +342,11 @@ ActorBoss::stateEnterRevival()
 	mAlpha = 255;
 	mRectNum = R_BOSS_MOVE1;
 	mNowPos.x = cAppearPosX;
+	mRect.updateCenterPosCenter(mNowPos);
 	mSpeed = 1;
 	mMaxLife = cInitLife + (cAddLife * mLvCount);
 	mLife = mMaxLife;
+	mCollision->setEnable(true);
 }
 void
 ActorBoss::stateRevival()

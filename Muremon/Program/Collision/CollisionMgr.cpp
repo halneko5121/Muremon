@@ -21,6 +21,7 @@ CollisionMgr* CollisionMgr::mInstance = nullptr;
  * @brief	コンストラクタ
  */
 CollisionMgr::CollisionMgr()
+	: mCollisionList()
 {
 }
 

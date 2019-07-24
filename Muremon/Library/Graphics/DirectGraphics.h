@@ -66,11 +66,6 @@ public:
 	 */
 	void					renderEnd();
 
-	/**
-	 * @brief	ŠJ•úˆ—
-	 */
-	void					release();
-
 	//-î•ñæ“¾ŠÖ”-
 
 	/**

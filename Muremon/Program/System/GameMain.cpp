@@ -237,8 +237,6 @@ GameMain::release(void)
 	mScene->end();
 
 	APP_SAFE_DELETE(mScene);
-	DirectGraphics::destroy();
-	mGraphics = nullptr;
 	FadeMgr::destroy();
 	DirectFont::destroy();
 	getInputMouse()->release();
@@ -250,6 +248,8 @@ GameMain::release(void)
 	DirectSound::destroy();
 	CollisionMgr::destroy();
 	GameInfoMgr::destroy();
+	DirectGraphics::destroy();
+	mGraphics = nullptr;
 	APP_SAFE_DELETE(mWindow);
 }
 

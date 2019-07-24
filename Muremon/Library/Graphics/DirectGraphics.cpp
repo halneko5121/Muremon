@@ -192,19 +192,6 @@ DirectGraphics::renderEnd()
 }
 
 /**
- * @brief	開放処理
- */
-void
-DirectGraphics::release()
-{
-	// LPDIRECT3DDEVICE9(デバイスオブジェクト)の開放
-	APP_SAFE_RELEASE(mDevice);
-	
-	// LPDIRECT3D9(DirectGraphics)の開放
-	APP_SAFE_RELEASE(mD3d);
-}
-
-/**
 * @brief	コンストラクタ
 */
 DirectGraphics::DirectGraphics()

@@ -10,6 +10,11 @@
 
 #include "Collision.h"
 
+namespace
+{
+	const float cCheckDistance = 250.f;		// チェックし始める距離
+}
+
 CollisionMgr* CollisionMgr::mInstance = nullptr;
 
 /**
@@ -80,6 +85,13 @@ CollisionMgr::update()
 		for (CollisionIterator it_player = player_list.begin(); it_player != player_list.end(); it_player++)
 		{
 			Collision* player_col = dynamic_cast<Collision*>(*it_player);
+
+			// 一定距離離れてる
+			float distance = player_col->getPos().calcDistance(enemy_col->getPos());
+			if (cCheckDistance <= distance)
+			{
+				continue;
+			}
 
 			if (player_col->isEnable() && enemy_col->isEnable())
 			{

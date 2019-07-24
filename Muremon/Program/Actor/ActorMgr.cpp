@@ -77,8 +77,8 @@ ActorMgr::createActor(const ActorId& id, Texture* texture, Vertex* vertex)
 {
 	ActorBase* actor = createActror(id, mUniqId, texture, vertex);
 	mActorList.push_back(actor);
-	mUniqId++;
 	actor->setUniqId(mUniqId);
+	mUniqId++;
 
 	return actor;
 }

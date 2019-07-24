@@ -28,11 +28,15 @@ public:
 	Collision(OWNER* owner, void(OWNER::*registFunc)(const HitParam&))
 		: mOwner(owner)
 		, mRegistFunc(nullptr)
+		, mIsEnable(true)
 	{
 		typedef Delegate<OWNER> DelegateImple;
 		mRegistFunc = new DelegateImple(owner, registFunc);
 	}
 	virtual ~Collision();
+
+	void			setEnable(bool is_enable);
+	bool			isEnable() const;
 
 	bool			isHit(const Collision& target) const;
 	const int&		getOwnerId() const;
@@ -81,4 +85,5 @@ private:
 private:
 	ActorBase*		mOwner;
 	IDelegate*		mRegistFunc;
+	bool			mIsEnable;
 };

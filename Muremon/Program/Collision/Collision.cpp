@@ -19,6 +19,25 @@ Collision::~Collision()
 }
 
 /**
+ * @brief	有効設定
+ */
+void
+Collision::setEnable(bool is_enable)
+{
+	mIsEnable = is_enable;
+}
+
+/**
+ * @brief	有効か？
+ */
+bool
+Collision::isEnable() const
+{
+	return mIsEnable;
+}
+
+
+/**
  * @brief	衝突したか？
  */
 bool

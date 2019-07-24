@@ -85,10 +85,10 @@ CollisionMgr::update()
 			{
 				if (player_col->isHit(*enemy_col))
 				{
-					HitParam param1(enemy_col->getOwnerId(), enemy_col->getPos());
+					HitParam param1(enemy_col->getOwnerId(), enemy_col->getOwnerUniqId(), enemy_col->getPos());
 					player_col->registFuncRun(param1);
 
-					HitParam param2(player_col->getOwnerId(), player_col->getPos());
+					HitParam param2(player_col->getOwnerId(), player_col->getOwnerUniqId(), player_col->getPos());
 					enemy_col->registFuncRun(param2);
 				}
 			}

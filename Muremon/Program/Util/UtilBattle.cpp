@@ -225,7 +225,7 @@ UtilBattle::getMulAtkPower()
 /**
  * @brief	UŒ‚—Í‚ğZo‚·‚é
  */
-int
+float
 UtilBattle::calcAtkPower(const ActorBase& actor)
 {
 	return static_cast<float>(actor.getAtkPower() * getMulAtkPower());

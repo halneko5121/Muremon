@@ -45,7 +45,7 @@ namespace UtilBattle
 	int			getBadStatusAtkLv();
 	int			getMulAtkPower();
 
-	int			calcAtkPower(const ActorBase& actor);
+	float		calcAtkPower(const ActorBase& actor);
 
 	// ƒ{ƒXŠÖ˜A
 	void		setBossDead();

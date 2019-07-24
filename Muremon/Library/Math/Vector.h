@@ -10,15 +10,30 @@
 template <class T>
 class Vector2 {
 public:
+	/**
+	 * @brief コンストラクタ
+	 */
 	Vector2()
 		: x(0)
 		, y(0)
 	{}
 
+	/**
+	 * @brief コンストラクタ
+	 */
 	Vector2(T in_x, T in_y)
 		: x(in_x)
 		, y(in_y)
 	{}
+
+	/**
+	 * @brief 距離を算出する
+	 */
+	float calcDistance(const Vector2<T>& pos) const
+	{
+		float distance = sqrtf((pos.x - this->x) * (pos.x - this->x) + (pos.y - this->y) * (pos.y - this->y));
+		return distance;
+	}
 
 	T x;
 	T y;

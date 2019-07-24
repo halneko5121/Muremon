@@ -210,6 +210,7 @@ ActorNoppo::stateEnterGroundAtk()
 	mIsAtk1 = true;
 	mSpeed = getRandomSpeed();
 	mNowPos = Vector2f(-cActorSize.x, UtilGame::getGroundPosY());
+	mRect.updateCenterPosCenter(mNowPos);
 	mAngleDegree = 0.0f;
 	mRectNum = R_NOPPO_G_ATK1;
 	mGroundAtkAnime->startLoop();
@@ -273,6 +274,7 @@ ActorNoppo::stateEnterSkyAtk()
 	mSpeed = getRandomSpeed();
 	float rand_pos_y = static_cast<float>((rand() % cRandY) + cRandYMin);
 	mNowPos = Vector2f(-cActorSize.x, rand_pos_y);
+	mRect.updateCenterPosCenter(mNowPos);
 	mAngleDegree = 0.0f;
 	mOrbitWave->init(cWaveAmplit, cWaveCycle, mSpeed);
 

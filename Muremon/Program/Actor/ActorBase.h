@@ -68,6 +68,7 @@ public:
 
 	int					getActorId() const { return static_cast<int>(mActorId); }
 
+	void				setUniqId(int id) { mUniqId = id; }
 	int					getUniqId() const { return mUniqId; }
 
 protected:

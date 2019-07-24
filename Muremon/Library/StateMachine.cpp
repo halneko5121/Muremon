@@ -31,6 +31,10 @@ StateMachine::StateMachine()
  */
 StateMachine::~StateMachine()
 {
+	for (int i = 0; i < mMaxStateNum; i++)
+	{
+		SAFE_DELETE(mDelegate[i]);
+	}
 }
 
 /**

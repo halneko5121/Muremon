@@ -386,8 +386,8 @@ SceneGameNormal::stateGame()
 		{
 			if (actor->isHitCheck())
 			{
-				float mul_power = UtilBattle::getMulAtkPower();
-				mBoss->hit(actor->getNowPos(), (actor->getAtkPower() * mul_power));
+				float atk_power = UtilBattle::calcAtkPower(*actor);
+				mBoss->hit(actor->getNowPos(), atk_power);
 				actor->setIsHitCheck(false);
 				float mission_guage = mMissionMgr->getPower();
 				mission_guage += actor->getMissionPower();

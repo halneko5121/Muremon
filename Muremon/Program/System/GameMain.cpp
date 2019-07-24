@@ -248,6 +248,7 @@ GameMain::release(void)
 	DirectInputKey::destroy();
 	ActorMgr::destroy();
 	EffectMgr::destroy();
+	DirectSound::destroy();
 	CollisionMgr::destroy();
 	GameInfoMgr::destroy();
 	APP_SAFE_DELETE(mWindow);

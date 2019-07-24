@@ -225,16 +225,7 @@ ActorNoppo::stateGroundAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(cSoundId_SeHitNoppoSky))
-		{
-			UtilSound::stop(cSoundId_SeHitNoppoSky);
-		}
-		UtilSound::playOnce(cSoundId_SeHitNoppoSky);
-
 		UtilGame::addScore(cAddScoreNoppo);
-
-		EffectParam param(mTexture, mVertex, mNowPos);
-		getEffectMgr()->createEffect(cEffectId_HitEffect5, param);
 
 		mState.changeState(cState_GroundDeathAnime);
 		return;
@@ -291,25 +282,7 @@ ActorNoppo::stateSkyAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(cSoundId_SeHitNoppo))
-		{
-			UtilSound::stop(cSoundId_SeHitNoppo);
-		}
-		UtilSound::playOnce(cSoundId_SeHitNoppo);
-		if ((UtilSound::isPlaying(cSoundId_SeHitNoppoDead)) &&
-			(UtilSound::isPlaying(cSoundId_SeHitNoppo)))
-		{
-			UtilSound::stop(cSoundId_SeHitNoppoDead);
-		}
-		if (UtilSound::isPlaying(cSoundId_SeHitNoppo))
-		{
-			UtilSound::playOnce((cSoundId_SeHitNoppoDead));
-		}
-
 		UtilGame::addScore(cAddScoreNoppo);
-
-		EffectParam param(mTexture, mVertex, mNowPos);
-		getEffectMgr()->createEffect(cEffectId_HitEffect6, param);
 
 		mState.changeState(cState_SkyDeath);
 		return;
@@ -338,6 +311,15 @@ ActorNoppo::stateSkyAtk()
 void
 ActorNoppo::stateEnterGroundDeathAnime()
 {
+	if (UtilSound::isPlaying(cSoundId_SeHitNoppo))
+	{
+		UtilSound::stop(cSoundId_SeHitNoppo);
+	}
+	UtilSound::playOnce(cSoundId_SeHitNoppo);
+
+	EffectParam effect_param(mTexture, mVertex, mNowPos);
+	getEffectMgr()->createEffect(cEffectId_HitEffect5, effect_param);
+
 	mRectNum = R_NOPPO_MOTION1;
 	mGroundDeadAnime->startOnce();
 }
@@ -358,6 +340,7 @@ ActorNoppo::stateGroundDeathAnime()
 void
 ActorNoppo::stateEnterGroundDeath()
 {
+	UtilSound::playOnce((cSoundId_SeHitNoppoDead));
 }
 void
 ActorNoppo::stateGroundDeath()
@@ -375,6 +358,15 @@ ActorNoppo::stateGroundDeath()
 void
 ActorNoppo::stateEnterSkyDeath()
 {
+	if (UtilSound::isPlaying(cSoundId_SeHitNoppoSky))
+	{
+		UtilSound::stop(cSoundId_SeHitNoppoSky);
+	}
+	UtilSound::playOnce(cSoundId_SeHitNoppoSky);
+	
+	EffectParam effect_param(mTexture, mVertex, mNowPos);
+	getEffectMgr()->createEffect(cEffectId_HitEffect6, effect_param);
+	
 	mRectNum = R_NOPPO_S_ATK2;
 	mRandMoveX = static_cast<float>((rand() % cParaRandMoveX) + cParaRandMoveXMin);
 

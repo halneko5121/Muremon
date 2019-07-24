@@ -163,8 +163,6 @@ GameMain::msgLoop(void)
 {
 	// ‰Šú‰»
 	MSG msg;
-	int cnt = 0;
-
 	mBackground = D3DCOLOR_XRGB(0x00,0x00,0x00);
 
 	// ‰Šú‰»
@@ -183,6 +181,7 @@ GameMain::msgLoop(void)
 	srand((unsigned int)time(NULL));
 
 	// ƒ‹[ƒv
+	int cnt = 0;
 	while(msg.message != WM_QUIT)
 	{
 		if(PeekMessage(&msg , NULL , 0 , 0 , PM_REMOVE))

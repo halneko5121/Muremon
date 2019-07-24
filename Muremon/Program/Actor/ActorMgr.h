@@ -26,9 +26,6 @@ public:
 	typedef std::vector<ActorBase*>::const_iterator ActorConstIterator;
 
 public:
-	ActorMgr();
-	virtual ~ActorMgr();
-
 	/**
 	 * @brief	インスタンスの取得
 	 */
@@ -83,6 +80,10 @@ public:
 
 private:
 	typedef std::vector<ActorBase*>	ActorList;
+
+private:
+	ActorMgr();
+	virtual ~ActorMgr();
 
 private:
 	static ActorMgr*	mInstance;		// インスタンス

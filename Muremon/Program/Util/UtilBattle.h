@@ -7,6 +7,8 @@
  *	管理者：三上
  ******************************************************************/
 
+#include "Program/Actor/ActorBase.h"
+
 namespace UtilBattle
 {
 	// 攻撃したか？
@@ -42,6 +44,8 @@ namespace UtilBattle
 	void		resetBadStatusAtkLv();
 	int			getBadStatusAtkLv();
 	int			getMulAtkPower();
+
+	int			calcAtkPower(const ActorBase& actor);
 
 	// ボス関連
 	void		setBossDead();

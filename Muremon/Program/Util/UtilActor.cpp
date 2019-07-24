@@ -22,6 +22,30 @@ UtilActor::createActor(const ActorId& id, Texture* texture, Vertex* vertex)
 }
 
 /**
+ * @brief	指定したユニークIDのアクターを検索
+ * @return	見つかったアクターを返す
+ *			見つからなかったら nullptr
+ */
+ActorBase*
+UtilActor::searchActor(const int& uniq_id)
+{
+	ActorMgr::ActorIterator it = getActorMgr()->begin();
+	while (it != getActorMgr()->end())
+	{
+		ActorBase* actor = dynamic_cast<ActorBase*>(*it);
+		APP_POINTER_ASSERT(actor);
+
+		if (actor->getUniqId() == uniq_id)
+		{
+			return actor;
+		}
+		it++;
+	}
+
+	return nullptr;
+}
+
+/**
  * @brief	指定したアクターIDのアクターを検索
  * @return	見つかった最初のアクターを返す
  *			見つからなかったら nullptr

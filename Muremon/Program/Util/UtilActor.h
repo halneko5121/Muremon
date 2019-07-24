@@ -20,6 +20,7 @@ namespace UtilActor
 	ActorBase*			createActor(const ActorId& id, Texture* texture, Vertex* vertex);
 
 	// åüçı
+	ActorBase*			searchActor(const int& uniq_id);
 	ActorBase*			searchSingleActor(const ActorId& id);
 	ActorBoss*			searchBossActor();
 }

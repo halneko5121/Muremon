@@ -182,18 +182,21 @@ void SceneGameRefresh::drawBg() const
 ActorBase*
 SceneGameRefresh::getActorNikuman(int index)
 {
+	APP_ASSERT((0 <= index) && (index < cMaxPlayerCount));
 	return mActor[cActorId_Nikuman][index];
 }
 
 ActorBase*
 SceneGameRefresh::getActorYoshi(int index)
 {
+	APP_ASSERT((0 <= index) && (index < cMaxPlayerCount));
 	return mActor[cActorId_Yoshi][index];
 }
 
 ActorBase*
 SceneGameRefresh::getActorNoppo(int index)
 {
+	APP_ASSERT((0 <= index) && (index < cMaxPlayerCount));
 	return mActor[cActorId_Noppo][index];
 }
 

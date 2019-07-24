@@ -407,7 +407,6 @@ ActorNoppo::stateEnterEnd()
 {
 	mIsAtk1 = mIsAtk2 = false;
 	mAlpha = 0;
-	mGroundAtkAnime = 0;
 }
 void
 ActorNoppo::stateEnd()

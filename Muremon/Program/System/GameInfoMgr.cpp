@@ -40,6 +40,7 @@ GameInfoMgr::GameInfoMgr()
  */
 GameInfoMgr::~GameInfoMgr()
 {
+	APP_SAFE_DELETE(mScore);
 }
 
 /**

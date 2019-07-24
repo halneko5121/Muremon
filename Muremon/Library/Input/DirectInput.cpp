@@ -252,13 +252,19 @@ DirectInputMouse*	DirectInputMouse::mInstance = nullptr;
  * @brief	コンストラクタ
  */
 DirectInputMouse::DirectInputMouse(const SIZE& size, const POINT& pos, const SIZE& cursor_size)
+	: mDirectInput(nullptr)
+	, mMouseDevice(nullptr)
+	, mWindowHandle(nullptr)
+	, mMouseState()
+	, mMouseStatePrev()
+	, mCursorSize(cursor_size)
+	, mPosCursorWindow(nullptr)
+	, mPosCursorGame(nullptr)
+	, mGameSize()
+	, mMouseData()
 {
-	// DirectInputDeviceオブジェクト(マウス)
-	mDirectInput		= nullptr;
-	mMouseDevice		= nullptr;
 	mPosCursorWindow	= new POINT();
 	mPosCursorGame		= new POINT();
-	mCursorSize			= cursor_size;
 
 	ZeroMemory(&mMouseState, sizeof(DIMOUSESTATE2));
 	ZeroMemory(&mMouseStatePrev, sizeof(DIMOUSESTATE2));
@@ -276,6 +282,10 @@ DirectInputMouse::DirectInputMouse(const SIZE& size, const POINT& pos, const SIZ
  */
 DirectInputMouse::~DirectInputMouse()
 {
+	APP_SAFE_DELETE(mPosCursorWindow);
+	APP_SAFE_DELETE(mPosCursorGame);
+	APP_SAFE_DELETE(mMouseDevice);
+	APP_SAFE_DELETE(mDirectInput);
 }
 
 /**

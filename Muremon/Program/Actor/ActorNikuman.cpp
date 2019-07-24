@@ -266,20 +266,6 @@ ActorNikuman::stateSkyAtk()
 	ActorBoss* boss = UtilActor::searchBossActor();
 	APP_POINTER_ASSERT(boss);
 
-	if (isHit(*this, *boss))
-	{
-		UtilSound::playOnce(cSoundId_SeHitNikuman);
-		setIsHitCheck(true);
-
-		UtilGame::addScore(cAddScoreNikuman);
-
-		EffectParam param(mTexture, mVertex, mNowPos);
-		getEffectMgr()->createEffect(cEffectId_HitEffect2, param);
-
-		mState.changeState(cState_SkyDeath);
-		return;
-	}
-
 	if (UtilGame::isScreenOutWithoutLeft(*this))
 	{
 		mState.changeState(cState_End);

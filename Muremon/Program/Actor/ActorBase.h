@@ -43,18 +43,6 @@ public:
 	void				setGroundAtkFlag();
 	void				setSkyAtkFlag();
 
-	/**
-	 * @brief 衝突チェック
-	 * @param	owner		自身
-	 * @param	target		衝突対象
-	 * @return	対象と衝突したかどうか
-	 */
-	bool				isHit(const ActorBase& owner, const ActorBase& target) const;
-
-	void				setIsHitCheck(bool hitcheck) { mIsHitCheck = hitcheck; }
-
-	bool				isHitCheck() const { return mIsHitCheck; }
-
 	bool				isRun() const { return mIsRun; }
 
 	void				setNowPos(const Vector2f& pos) { mNowPos = pos;	}
@@ -93,6 +81,5 @@ protected:
 	bool				mIsAtk1;
 	bool				mIsAtk2;
 
-	bool				mIsHitCheck;
 	bool				mIsRun;
 };

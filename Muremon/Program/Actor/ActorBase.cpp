@@ -22,8 +22,6 @@ namespace
 	// 肉まん(特殊)
 	const int SPEED_RAND_NIKU	= 15;			// その回数をかけて目的地点に到達する
 	const int SPEED_MIN_NIKU	= 15;
-
-	const float cDeadLinePosX = 300.f;			// ゲームオーバーライン
 }
 
 /**
@@ -44,7 +42,6 @@ ActorBase::ActorBase(const ActorId& actor_id, int uniq_id, Texture* texture, Ver
 	, mAtkPower(0)
 	, mIsAtk1(false)
 	, mIsAtk2(false)
-	, mIsHitCheck(false)
 	, mIsRun(false)
 {
 }
@@ -142,30 +139,4 @@ void
 ActorBase::setSkyAtkFlag()
 {
 	mIsAtk2 = true;
-}
-
-/**
- * @brief 衝突チェック
- */
-bool
-ActorBase::isHit(const ActorBase& owner, const ActorBase& target) const
-{
-	if (owner.getNowPos().x < cDeadLinePosX) return false;
-
-	switch (owner.getActorId()) {
-	case cActorId_Yoshi:
-		if (owner.getNowPos().y < 50)		return false;
-	case cActorId_Nikuman:
-		if (owner.getNowPos().y < 75)		return false;
-	case cActorId_Noppo:
-		if (owner.getNowPos().y < 0)		return false;
-	}
-
-	// 矩形の重なりをチェック
-	if (owner.getRect().isInclude(target.getRect()))
-	{
-		return true;
-	}
-
-	return false;
 }

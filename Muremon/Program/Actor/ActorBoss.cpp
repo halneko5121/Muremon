@@ -119,18 +119,6 @@ ActorBoss::drawImple() const
 }
 
 /**
- * Õ“ËŽž‚Ìˆ—
- */
-void ActorBoss::hit(const Vector2f& hit_pos, float damage)
-{
-	EffectParam param(mTexture, mVertex, hit_pos);
-	getEffectMgr()->createEffect(cEffectId_HitEffect1, param);
-	mHitCount++;
-	mLife -= damage;
-	if (mLife < 0) mLife = 0;
-}
-
-/**
  * @brief Ž€–S‚µ‚Ä‚¢‚é‚©H
  */
 bool

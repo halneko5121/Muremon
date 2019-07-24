@@ -27,7 +27,6 @@ public:
 	void		updateImple() override;
 	void		drawImple() const override;
 
-	void		hit(const Vector2f& hit_pos, float damage);
 	bool		isDead() const;
 
 	void		recoveryLife();

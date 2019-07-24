@@ -223,16 +223,7 @@ ActorYoshi::stateGroundAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(cSoundId_SeHitYoshiGround))
-		{
-			UtilSound::stop(cSoundId_SeHitYoshiGround);
-		}
-		UtilSound::playOnce(cSoundId_SeHitYoshiGround);
-
 		UtilGame::addScore(cAddScoreYoshitaro);
-
-		EffectParam param(mTexture, mVertex, mNowPos);
-		getEffectMgr()->createEffect(cEffectId_HitEffect3, param);
 
 		mState.changeState(cState_GroundDeath);
 		return;
@@ -277,16 +268,7 @@ ActorYoshi::stateSkyAtk()
 	{
 		setIsHitCheck(true);
 
-		if (UtilSound::isPlaying(cSoundId_SeHitYoshiSky))
-		{
-			UtilSound::stop(cSoundId_SeHitYoshiSky);
-		}
-		UtilSound::playOnce(cSoundId_SeHitYoshiSky);
-
 		UtilGame::addScore(cAddScoreYoshitaro);
-
-		EffectParam param(mTexture, mVertex, mNowPos);
-		getEffectMgr()->createEffect(cEffectId_HitEffect4, param);
 
 		mState.changeState(cState_SkyDeathAnime);
 		return;
@@ -310,6 +292,15 @@ ActorYoshi::stateSkyAtk()
 void
 ActorYoshi::stateEnterGroundDeath()
 {
+	if (UtilSound::isPlaying(cSoundId_SeHitYoshiGround))
+	{
+		UtilSound::stop(cSoundId_SeHitYoshiGround);
+	}
+	UtilSound::playOnce(cSoundId_SeHitYoshiGround);
+
+	EffectParam param(mTexture, mVertex, mNowPos);
+	getEffectMgr()->createEffect(cEffectId_HitEffect3, param);
+
 	mRectNum = R_YOSHI_DEATH;
 	float rand_deg = static_cast<float>((rand() % cDegRand) + cDegRandMin);
 	mOrbitRebound->setDegree(rand_deg);
@@ -334,6 +325,15 @@ ActorYoshi::stateGroundDeath()
 void
 ActorYoshi::stateEnterSkyDeathAnime()
 {
+	if (UtilSound::isPlaying(cSoundId_SeHitYoshiSky))
+	{
+		UtilSound::stop(cSoundId_SeHitYoshiSky);
+	}
+	UtilSound::playOnce(cSoundId_SeHitYoshiSky);
+
+	EffectParam param(mTexture, mVertex, mNowPos);
+	getEffectMgr()->createEffect(cEffectId_HitEffect4, param);
+
 	mSkyDeadAnime->startOnce();
 }
 void

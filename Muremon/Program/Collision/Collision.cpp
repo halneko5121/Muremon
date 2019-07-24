@@ -16,6 +16,7 @@
  */
 Collision::~Collision()
 {
+	APP_SAFE_DELETE(mRegistFunc);
 }
 
 /**

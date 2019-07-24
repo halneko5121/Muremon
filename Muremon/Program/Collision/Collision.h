@@ -11,13 +11,15 @@ class ActorBase;
 
 struct HitParam
 {
-	HitParam(const int& id, const Vector2f& pos)
+	HitParam(const int& id, const Vector2f& pos, int actor_uniq_id)
 		: mActorId(id)
+		, mActorUniqId(actor_uniq_id)
 		, mHitPos(pos)
 	{
 	}
 
 	const int&		mActorId;
+	const int&		mActorUniqId;
 	const Vector2f&	mHitPos;
 };
 
@@ -40,6 +42,7 @@ public:
 
 	bool			isHit(const Collision& target) const;
 	const int&		getOwnerId() const;
+	const int&		getOwnerUniqId() const;
 	const Rect&		getCollision() const;
 	const Vector2f&	getPos() const;
 	void			registFuncRun(const HitParam& param);

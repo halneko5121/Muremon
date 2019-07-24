@@ -57,6 +57,15 @@ Collision::getOwnerId() const
 }
 
 /**
+ * @brief	オーナーユニークIDを取得
+ */
+const int&
+Collision::getOwnerUniqId() const
+{
+	return mOwner->getUniqId();
+}
+
+/**
  * @brief	コリジョンの取得
  */
 const Rect&

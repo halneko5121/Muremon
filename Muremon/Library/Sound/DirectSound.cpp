@@ -69,21 +69,6 @@ DirectSound::init(HWND window_handle)
 }
 
 /**
- * @brief	開放処理
- */
-void
-DirectSound::release()
-{
-	for(int i = 0 ; i < (int)mMaxSound ; i++)
-	{
-		stop(i);
-		SAFE_RELEASE(mSecondaryBuffer[i]);
-	}
-	SAFE_RELEASE(mPrimaryBuffer);
-	SAFE_RELEASE(mDirectSound);
-}
-
-/**
  * @brief	音楽データ読み込み
  * @param	file_name	ファイル名
  * @return	true:成功   false:失敗
@@ -238,6 +223,13 @@ DirectSound::DirectSound()
  */
 DirectSound::~DirectSound()
 {
+	for (int i = 0; i < (int)mMaxSound; i++)
+	{
+		stop(i);
+		SAFE_RELEASE(mSecondaryBuffer[i]);
+	}
+	SAFE_RELEASE(mPrimaryBuffer);
+	SAFE_RELEASE(mDirectSound);
 }
 
 

@@ -39,11 +39,6 @@ public:
 	bool					init(HWND window_handle);
 
 	/**
-	 * @brief	開放処理
-	 */
-	void					release();
-
-	/**
 	 * @brief	音楽データ読み込み
 	 * @param	file_name	ファイル名
 	 * @return	true:成功   false:失敗

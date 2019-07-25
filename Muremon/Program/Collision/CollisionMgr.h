@@ -20,7 +20,7 @@ enum CollisionKind
 class CollisionMgr
 {
 public:
-	CollisionMgr();
+	explicit CollisionMgr();
 	virtual ~CollisionMgr();
 
 	/**

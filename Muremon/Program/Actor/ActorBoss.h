@@ -19,7 +19,7 @@ struct HitParam;
 class ActorBoss : public ActorBase
 {
 public:
-	ActorBoss(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
+	explicit ActorBoss(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorBoss();
 
 	void		initImple() override;

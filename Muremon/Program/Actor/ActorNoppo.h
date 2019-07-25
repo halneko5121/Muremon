@@ -18,7 +18,7 @@ struct HitParam;
 class ActorNoppo : public ActorBase
 {
 public:
-	ActorNoppo(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
+	explicit ActorNoppo(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorNoppo(void);
 
 	void			updateAttack2();

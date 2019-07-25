@@ -12,7 +12,7 @@
 class BadStatusAtackPowerDown : public BadStatusBase
 {
 public:
-	BadStatusAtackPowerDown(const BadStatusId& id);
+	explicit BadStatusAtackPowerDown(const BadStatusId& id);
 	virtual ~BadStatusAtackPowerDown();
 
 	void	run() override;

@@ -82,7 +82,7 @@ private:
 	typedef std::vector<ActorBase*>	ActorList;
 
 private:
-	ActorMgr();
+	explicit ActorMgr();
 	virtual ~ActorMgr();
 
 private:

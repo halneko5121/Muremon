@@ -19,7 +19,7 @@ struct HitParam;
 class ActorYoshi : public ActorBase
 {
 public:
-	ActorYoshi(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
+	explicit ActorYoshi(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorYoshi();
 
 	void			initImple() override;

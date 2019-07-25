@@ -27,7 +27,7 @@ class Collision
 {
 public:
 	template<class OWNER>
-	Collision(OWNER* owner, void(OWNER::*registFunc)(const HitParam&))
+	explicit Collision(OWNER* owner, void(OWNER::*registFunc)(const HitParam&))
 		: mOwner(owner)
 		, mRegistFunc(nullptr)
 		, mIsEnable(true)

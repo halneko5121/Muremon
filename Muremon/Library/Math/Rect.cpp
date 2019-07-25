@@ -121,3 +121,39 @@ Rect::getHalfHeight() const
 {
 	return (mHeight * 0.5f);
 }
+
+/**
+ * @brief	矩形の左辺を取得
+ */
+float
+Rect::getLeft() const
+{
+	return mLeft;
+}
+
+/**
+ * @brief	矩形の上辺を取得
+ */
+float
+Rect::getTop() const
+{
+	return mTop;
+}
+
+/**
+ * @brief	矩形の右辺を取得
+ */
+float
+Rect::getRight() const
+{
+	return mRight;
+}
+
+/**
+ * @brief	矩形の底辺を取得
+ */
+float
+Rect::getBottom() const
+{
+	return mBottom;
+}

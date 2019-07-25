@@ -28,6 +28,11 @@ public:
 	float				getHalfWidth() const;
 	float				getHalfHeight() const;
 
+	float				getLeft() const;
+	float				getTop() const;
+	float				getRight() const;
+	float				getBottom() const;
+
 private:
 	Vector2f			mCenterPos;
 	float				mWidth;

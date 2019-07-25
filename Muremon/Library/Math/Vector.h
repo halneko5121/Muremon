@@ -45,7 +45,7 @@ public:
 	float calcDistanceX(T pos_x) const
 	{
 		// ‚Q“_ŠÔ‚Ì‹——£‚ðŒvŽZ
-		T dx = abs(pos.x - this->x);
+		T dx = abs(pos_x - this->x);
 		float distance = sqrt(dx * dx);
 		return distance;
 	}

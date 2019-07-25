@@ -32,6 +32,9 @@ public:
 		, mRegistFunc(nullptr)
 		, mIsEnable(true)
 	{
+		// ActorBase ‚Ì‚Ý‹–‚·
+		APP_POINTER_ASSERT(dynamic_cast<ActorBase*>(mOwner));
+
 		typedef Delegate<OWNER> DelegateImple;
 		mRegistFunc = new DelegateImple(owner, registFunc);
 	}

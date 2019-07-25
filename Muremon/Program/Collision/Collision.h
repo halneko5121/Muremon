@@ -38,7 +38,8 @@ public:
 		typedef Delegate<OWNER> DelegateImple;
 		mRegistFunc = new DelegateImple(owner, registFunc);
 	}
-	virtual ~Collision();
+	virtual			~Collision();
+	void			debugDraw() const;
 
 	void			setEnable(bool is_enable);
 	bool			isEnable() const;

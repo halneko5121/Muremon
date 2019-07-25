@@ -9,7 +9,22 @@
 #include "Collision.h"
 
 #include "Library/Math/Rect.h"
+#include "Library/Graphics/DirectGraphics.h"
 #include "Program/Actor/ActorBase.h"
+#include "Program/Util/UtilGraphics.h"
+
+ /* 頂点フォーマット（基本形）*/
+#define FVF_CUSTOM2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE)
+
+namespace
+{
+	struct SimpleVertex
+	{
+		float x, y, z;
+		float rhw;
+		DWORD color;
+	};
+}
 
 /**
  * @brief	デストラクタ
@@ -17,6 +32,30 @@
 Collision::~Collision()
 {
 	APP_SAFE_DELETE(mRegistFunc);
+}
+
+/**
+ * @brief	描画
+ */
+void
+Collision::debugDraw() const
+{
+	const Rect& col_rect = getCollision();
+
+	// 頂点フォーマットの指定
+	SimpleVertex cVertexDataTable[4] =
+	{
+		{ col_rect.getLeft(),	col_rect.getTop(),		0.0f, 1.0f, D3DCOLOR_ARGB(128, 255, 0, 0), },
+		{ col_rect.getRight(),	col_rect.getTop(),		0.0f, 1.0f, D3DCOLOR_ARGB(128, 255, 0, 0), },
+		{ col_rect.getLeft(),	col_rect.getBottom(),	0.0f, 1.0f, D3DCOLOR_ARGB(128, 255, 0, 0), },
+		{ col_rect.getRight(),	col_rect.getBottom(),	0.0f, 1.0f, D3DCOLOR_ARGB(128, 255, 0, 0), },
+	};
+
+	// 描画
+	LPDIRECT3DDEVICE9 device = UtilGraphics::getGraphicsDevice();
+	device->SetTexture(0, nullptr);
+	device->SetFVF(FVF_CUSTOM2D);
+	device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, cVertexDataTable, sizeof(SimpleVertex));
 }
 
 /**

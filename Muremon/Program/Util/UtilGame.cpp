@@ -16,7 +16,7 @@
 namespace
 {
 	const float cGroundPosY = 515.0f;		// 地面の座標
-	const float cScreenOutMargin = 0.0f;	// 画面外の余白
+	const float cScreenOutMargin = 100.0f;	// 画面外の余白
 }
 
 /**

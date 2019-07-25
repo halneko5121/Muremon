@@ -23,8 +23,10 @@ Rect::Rect(const Vector2f& cehter_pos, float height, float width)
 bool
 Rect::isInclude(const Rect& target) const
 {
-	if ((mRight >= target.mLeft) && (mLeft <= target.mRight) &&
-		(mTop <= target.mBottom) && (mBottom >= target.mTop))
+	if ((target.mLeft <= mRight) &&
+		(mLeft <= target.mRight) &&
+		(mTop <= target.mBottom) &&
+		(target.mTop <= mBottom))
 	{
 		return true;
 	}

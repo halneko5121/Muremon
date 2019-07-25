@@ -140,7 +140,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	DirectInputMouse(const Sizef& size, const POINT& pos, const Sizef& cursor_size);
+	DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size);
 
 	/**
 	 * @brief	デストラクタ
@@ -155,7 +155,7 @@ public:
 	/**
 	 * @brief	インスタンスの生成
 	 */
-	static void					create(const Sizef& size, const POINT& pos, const Sizef& cursor_size);
+	static void					create(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size);
 
 	/**
 	 * @brief	インスタンスの破棄
@@ -210,7 +210,7 @@ private:
 	HWND						mWindowHandle;				// ウィンドウハンドルへのポインタ
 	DIMOUSESTATE2				mMouseState;				// マウス情報格納
 	DIMOUSESTATE2				mMouseStatePrev;			// マウス情報格納（1f前）
-	Sizef						mCursorSize;				// マウスカーソルサイズ
+	Sizei						mCursorSize;				// マウスカーソルサイズ
 	
 	// 座標取得用
 	LPPOINT						mPosCursorWindow;

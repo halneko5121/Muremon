@@ -251,7 +251,7 @@ DirectInputMouse*	DirectInputMouse::mInstance = nullptr;
 /**
  * @brief	コンストラクタ
  */
-DirectInputMouse::DirectInputMouse(const Sizef& size, const POINT& pos, const Sizef& cursor_size)
+DirectInputMouse::DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size)
 	: mDirectInput(nullptr)
 	, mMouseDevice(nullptr)
 	, mWindowHandle(nullptr)
@@ -301,7 +301,7 @@ DirectInputMouse::getInstance()
  * @brief	インスタンスの生成
  */
 void
-DirectInputMouse::create(const Sizef& size, const POINT& pos, const Sizef& cursor_size)
+DirectInputMouse::create(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size)
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
 	mInstance = new DirectInputMouse(size, pos, cursor_size);

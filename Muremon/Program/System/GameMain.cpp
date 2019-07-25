@@ -32,11 +32,10 @@
 namespace
 {
 	// Windowを表示する位置
-	const int cWindowPosY = 100;
-	const int cWindowPosX = 220;
+	const Vector2i cWindowPos = { 220, 100 };
 
 	// ゲーム用カーソルのサイズ
-	const Sizef cCursorSize = { 20.0f, 20.0f };
+	const Sizei cCursorSize = { 20, 20 };
 
 	enum State
 	{
@@ -76,8 +75,7 @@ GameMain::init(void)
 	mWindow			= new Window;
 	mGraphics		= DirectGraphics::create();
 	DirectInputKey::create();
-	POINT window_pos = { cWindowPosX, cWindowPosY };
-	DirectInputMouse::create(cWindowSize, window_pos, cCursorSize);
+	DirectInputMouse::create(cWindowSize, cWindowPos, cCursorSize);
 	DirectFont::create();
 	DirectSound::create();
 	FadeMgr::create();
@@ -111,7 +109,7 @@ GameMain::winMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	init();
 
 	// ウィンドウ初期化関数
-	mWindow->init(hInstance, cWindowSize.width, cWindowSize.height, cWindowPosX, cWindowPosY);
+	mWindow->init(hInstance, cWindowSize.width, cWindowSize.height, cWindowPos.x, cWindowPos.y);
 
 	// 各ライブラリの初期化
 	// DirectInput初期化

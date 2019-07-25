@@ -9,7 +9,7 @@
 #pragma once
 
 // Window‚Ì‘å‚«‚³
-const Sizef cWindowSize = { 800.0f, 600.0f };
+const Sizei cWindowSize = { 800, 600 };
 const float cWindowCenterX = (cWindowSize.width / 2.f);
 const float cWindowCenterY = (cWindowSize.height / 2.f);
 

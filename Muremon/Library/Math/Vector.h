@@ -39,6 +39,17 @@ public:
 		return distance;
 	}
 
+	/**
+	 * @brief ‹——£‚ðŽZo‚·‚é
+	 */
+	float calcDistanceX(T pos_x) const
+	{
+		// ‚Q“_ŠÔ‚Ì‹——£‚ðŒvŽZ
+		T dx = abs(pos.x - this->x);
+		float distance = sqrt(dx * dx);
+		return distance;
+	}
+
 	T x;
 	T y;
 };

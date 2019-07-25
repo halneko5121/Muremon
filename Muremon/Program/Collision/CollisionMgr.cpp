@@ -109,6 +109,28 @@ CollisionMgr::update()
 	}
 }
 
+/**
+ * @brief	デバッグ描画
+ */
+void
+CollisionMgr::debugDraw() const
+{
+	CollisionList enemy_list = getCollisionList(cCollisionKind_Enemy);
+	CollisionList player_list = getCollisionList(cCollisionKind_Pleyer);
+
+	for (CollisionIterator it_enemy = enemy_list.begin(); it_enemy != enemy_list.end(); it_enemy++)
+	{
+		Collision* enemy_col = dynamic_cast<Collision*>(*it_enemy);
+		enemy_col->debugDraw();
+	}
+
+	for (CollisionIterator it_player = player_list.begin(); it_player != player_list.end(); it_player++)
+	{
+		Collision* player_col = dynamic_cast<Collision*>(*it_player);
+		player_col->debugDraw();
+	}
+}
+
 CollisionMgr::CollisionList
 CollisionMgr::getCollisionList(const CollisionKind& kind) const
 {

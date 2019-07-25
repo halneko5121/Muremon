@@ -45,6 +45,11 @@ public:
 	 */
 	void					update();
 
+	/**
+	 * @brief	デバッグ描画
+	 */
+	void					debugDraw() const;
+
 private:
 	typedef std::list<Collision*>::iterator CollisionIterator;
 	typedef std::list<Collision*>			CollisionList;

@@ -43,7 +43,7 @@ namespace UtilBattle
 	void		addBadStatusAtkLv();
 	void		resetBadStatusAtkLv();
 	int			getBadStatusAtkLv();
-	int			getMulAtkPower();
+	float		getMulAtkPower();
 
 	float		calcAtkPower(const ActorBase& actor);
 

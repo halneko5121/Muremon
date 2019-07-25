@@ -215,7 +215,7 @@ UtilBattle::getBadStatusAtkLv()
 /**
  * @brief	UŒ‚—Í’á‰º‚·‚é—Í‚ğæ“¾‚·‚é
  */
-int
+float
 UtilBattle::getMulAtkPower()
 {
 	float mul_power = pow(0.5f, getBadStatusAtkLv());

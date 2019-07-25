@@ -12,7 +12,7 @@
 
 namespace
 {
-	const float cCheckDistance = 250.f;		// チェックし始める距離
+	const float cCheckDistance = 350.f;		// チェックし始める距離
 }
 
 CollisionMgr* CollisionMgr::mInstance = nullptr;

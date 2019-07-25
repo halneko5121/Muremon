@@ -148,12 +148,14 @@ void SceneTitle::checkSceneChange()
 	// メニューセレクト
 	if (mUITitleMenu->isDecideMenuSelectRanking())
 	{
+		UtilSound::playOnce(cSoundId_SeOk);
 		mIsSceneEnd = true;
 		requestChangeScene(cSceneId_Ranking);
 		return;
 	}
 	if (mUITitleMenu->isDecideMenuSelectExit())
 	{
+		UtilSound::playOnce(cSoundId_SeOk);
 		mIsSceneEnd = true;
 		requestChangeScene(cSceneId_GameEnd);
 		return;
@@ -162,18 +164,21 @@ void SceneTitle::checkSceneChange()
 	// ゲームセレクト
 	if (mUITitleMenu->isDecideGameSelectRefresh())
 	{
+		UtilSound::playOnce(cSoundId_SeOk);
 		mIsSceneEnd = true;
 		requestChangeScene(cSceneId_GameRefresh);
 		return;
 	}
 	if (mUITitleMenu->isDecideGameSelectNormal())
 	{
+		UtilSound::playOnce(cSoundId_SeOk);
 		mIsSceneEnd = true;
 		requestChangeScene(cSceneId_GameNormal);
 		return;
 	}
 	if (mUITitleMenu->isDecideGameSelectTutorial())
 	{
+		UtilSound::playOnce(cSoundId_SeOk);
 		mIsSceneEnd = true;
 		requestChangeScene(cSceneId_Tutorial);
 		return;

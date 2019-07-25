@@ -207,6 +207,9 @@
     <ClCompile Include="Program\Collision\Collision.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Library\Math\Size.cpp">
+      <Filter>Library\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Define.h" />
@@ -416,6 +419,9 @@
     </ClInclude>
     <ClInclude Include="Program\Collision\Collision.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Math\Size.h">
+      <Filter>Library\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

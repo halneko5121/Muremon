@@ -93,6 +93,7 @@ SceneTutorial::update()
 
 	if (UtilInput::isKeyPushedDecide())
 	{
+		UtilSound::playOnce(cSoundId_SeOk);
 		mIsSceneEnd = true;
 	}
 }

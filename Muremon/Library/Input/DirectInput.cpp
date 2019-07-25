@@ -251,7 +251,7 @@ DirectInputMouse*	DirectInputMouse::mInstance = nullptr;
 /**
  * @brief	コンストラクタ
  */
-DirectInputMouse::DirectInputMouse(const SIZE& size, const POINT& pos, const SIZE& cursor_size)
+DirectInputMouse::DirectInputMouse(const Sizef& size, const POINT& pos, const Sizef& cursor_size)
 	: mDirectInput(nullptr)
 	, mMouseDevice(nullptr)
 	, mWindowHandle(nullptr)
@@ -269,7 +269,7 @@ DirectInputMouse::DirectInputMouse(const SIZE& size, const POINT& pos, const SIZ
 	ZeroMemory(&mMouseState, sizeof(DIMOUSESTATE2));
 	ZeroMemory(&mMouseStatePrev, sizeof(DIMOUSESTATE2));
 
-	SetRect(&mGameSize, 0, 0, size.cx, size.cy);
+	SetRect(&mGameSize, 0, 0, size.width, size.height);
 	SetCursorPos( (pos.x + cBarX),(pos.y + cBarY) );
 
 	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
@@ -301,7 +301,7 @@ DirectInputMouse::getInstance()
  * @brief	インスタンスの生成
  */
 void
-DirectInputMouse::create(const SIZE& size, const POINT& pos, const SIZE& cursor_size)
+DirectInputMouse::create(const Sizef& size, const POINT& pos, const Sizef& cursor_size)
 {
 	APP_ASSERT_MESSAGE(mInstance == nullptr, "既に生成済みです");
 	mInstance = new DirectInputMouse(size, pos, cursor_size);
@@ -426,7 +426,7 @@ DirectInputMouse::update()
 	ScreenToClient(mWindowHandle,mPosCursorGame);	// スクリーン座標をクライアント座標に変換
 
 	SetRect(&mMouseData.mImageRect, mPosCursorWindow->x, mPosCursorWindow->y,
-		(mPosCursorWindow->x + mCursorSize.cx), (mPosCursorWindow->y + mCursorSize.cy));
+		(mPosCursorWindow->x + mCursorSize.width), (mPosCursorWindow->y + mCursorSize.height));
 
 #ifdef _WINDOW_MODE_
 	// ゲーム画面外へ行かせない(Game用カーソルなどある場合に有効か？)

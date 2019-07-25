@@ -36,8 +36,7 @@ namespace
 	const int cWindowPosX = 220;
 
 	// ゲーム用カーソルのサイズ
-	const int cCursorHeight = 20;
-	const int cCursorWidth = 20;
+	const Sizef cCursorSize = { 20.0f, 20.0f };
 
 	enum State
 	{
@@ -77,10 +76,8 @@ GameMain::init(void)
 	mWindow			= new Window;
 	mGraphics		= DirectGraphics::create();
 	DirectInputKey::create();
-	SIZE window_size = { cWindowSize.width, cWindowSize.height };
 	POINT window_pos = { cWindowPosX, cWindowPosY };
-	SIZE cursor_size = { cCursorWidth, cCursorHeight };
-	DirectInputMouse::create(window_size, window_pos, cursor_size);
+	DirectInputMouse::create(cWindowSize, window_pos, cCursorSize);
 	DirectFont::create();
 	DirectSound::create();
 	FadeMgr::create();

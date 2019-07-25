@@ -22,7 +22,7 @@ class UIRefreshGame;
 class SceneGameRefresh : public SceneBase
 {
 public:
-	SceneGameRefresh();
+	explicit SceneGameRefresh();
 	virtual ~SceneGameRefresh();
 
 	void				impleInit() override;

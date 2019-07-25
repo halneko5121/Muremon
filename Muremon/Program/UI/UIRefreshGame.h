@@ -13,7 +13,7 @@ class Vertex;
 class UIRefreshGame
 {
 public:
-	UIRefreshGame();
+	explicit UIRefreshGame();
 	virtual ~UIRefreshGame();
 	void				init();
 	void				update();

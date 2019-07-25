@@ -15,7 +15,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	GameInfoMgr();
+	explicit GameInfoMgr();
 
 	/**
 	 * @brief	デストラクタ

@@ -15,7 +15,7 @@ class Vertex;
 class UITitleMenu
 {
 public:
-	UITitleMenu();
+	explicit UITitleMenu();
 	virtual ~UITitleMenu();
 	void	init();
 	void	update();

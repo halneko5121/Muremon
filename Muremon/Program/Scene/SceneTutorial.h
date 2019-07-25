@@ -13,7 +13,7 @@
 class SceneTutorial : public SceneBase
 {
 public:
-	SceneTutorial();
+	explicit SceneTutorial();
 	virtual ~SceneTutorial();
 
 	void			impleInit() override;

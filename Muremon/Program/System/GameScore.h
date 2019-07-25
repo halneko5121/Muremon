@@ -13,7 +13,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	GameScore();
+	explicit GameScore();
 
 	/**
 	 * @brief	デストラクタ

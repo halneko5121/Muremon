@@ -20,7 +20,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	GameMain();
+	explicit GameMain();
 
 	/**
 	 * @brief	デストラクタ

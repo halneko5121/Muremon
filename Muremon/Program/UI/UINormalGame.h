@@ -14,7 +14,7 @@ class UIRefreshGame;
 class UINormalGame
 {
 public:
-	UINormalGame();
+	explicit UINormalGame();
 	virtual ~UINormalGame();
 	void				init();
 	void				update();

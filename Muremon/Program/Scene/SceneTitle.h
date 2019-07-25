@@ -14,7 +14,7 @@ class UITitleMenu;
 class SceneTitle : public SceneBase
 {
 public:
-	SceneTitle();
+	explicit SceneTitle();
 	virtual ~SceneTitle();
 
 	void			impleInit() override;

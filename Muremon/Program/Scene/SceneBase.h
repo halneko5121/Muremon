@@ -32,7 +32,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	SceneBase();
+	explicit SceneBase();
 
 	/**
 	 * @brief	デストラクタ

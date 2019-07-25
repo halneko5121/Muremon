@@ -19,7 +19,7 @@ class UINormalGame;
 class SceneGameNormal : public SceneBase
 {
 public:
-	SceneGameNormal();
+	explicit SceneGameNormal();
 	virtual ~SceneGameNormal();
 
 	void				impleInit() override;

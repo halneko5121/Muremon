@@ -12,7 +12,7 @@
 class SceneLogo : public SceneBase
 {
 public:
-	SceneLogo();
+	explicit SceneLogo();
 	virtual ~SceneLogo();
 
 	void	impleInit() override;

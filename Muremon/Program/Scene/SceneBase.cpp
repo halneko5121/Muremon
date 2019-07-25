@@ -19,7 +19,6 @@ SceneBase::SceneBase()
 	, mTexture(nullptr)
 	, mVertex(nullptr)
 	, mIsSceneEnd(false)
-	, mMouseData()
 {
 	mTexture	= new Texture();
 	mVertex		= new Vertex();
@@ -40,10 +39,6 @@ SceneBase::~SceneBase()
 void
 SceneBase::init()
 {
-	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
-	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
-	mMouseData.mIsDownRButton = mMouseData.mIsPushRButton = mMouseData.mIsReleaseRButton = false;
-
 	impleInit();
 }
 

@@ -88,13 +88,11 @@ CollisionMgr::update()
 			Collision* player_col = dynamic_cast<Collision*>(*it_player);
 
 			// ˆê’è‹——£—£‚ê‚Ä‚é
-			/*
-			float distance = player_col->getPos().calcDistance(enemy_col->getPos());
+			float distance = player_col->getPos().calcDistanceX(enemy_col->getPos().x);
 			if (cCheckDistance <= distance)
 			{
 				continue;
 			}
-			*/
 
 			if (player_col->isEnable() && enemy_col->isEnable())
 			{

@@ -21,9 +21,9 @@ namespace
 	const Vector2f cDispBossHpPos = { 675.0f, 540.0f };
 	const Vector2f cDispGaugePos = { 675.0f, 570.0f };
 	const float cDispFaceIconPosX = 30.f;
-	const float cDispFaceIconYoshiPosY = 535.f;
-	const float cDispFaceIconNikumanPosY = 560.f;
-	const float cDispFaceIconNoppoPosY = 585.f;
+	const Vector2f cDispFaceIconPosYoshi = { cDispFaceIconPosX, 535.0f };
+	const Vector2f cDispFaceIconPosNikuman = { cDispFaceIconPosX, 560.0f };
+	const Vector2f cDispFaceIconPosNoppo = { cDispFaceIconPosX, 585.0f };
 	const float cDispPushKeyCountPosX = 60.f;
 }
 
@@ -74,9 +74,9 @@ UIRefreshGame::draw() const
 
 	// ステータス枠描画
 	UtilGraphics::drawF(mVertex, cDispStateFramePos, R_STATE_FRAME);
-	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconNikumanPosY), R_F_NIKUMAN);	//にくまん顔
-	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconYoshiPosY), R_F_YOSHITARO);	//よしたろう顔
-	UtilGraphics::drawF(mVertex, Vector2f(cDispFaceIconPosX, cDispFaceIconNoppoPosY), R_F_NOPPO);		//のっぽ顔
+	UtilGraphics::drawF(mVertex, cDispFaceIconPosNikuman, R_F_NIKUMAN);	//にくまん顔
+	UtilGraphics::drawF(mVertex, cDispFaceIconPosYoshi, R_F_YOSHITARO);	//よしたろう顔
+	UtilGraphics::drawF(mVertex, cDispFaceIconPosNoppo, R_F_NOPPO);		//のっぽ顔
 
 	drawKeyCount();
 	drawHpGauge();
@@ -96,7 +96,7 @@ UIRefreshGame::drawKeyCount() const
 		for (int j = 1;j < 4 - i;j++) {
 			num = (num / 10);
 		}
-		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNikumanPosY), R_0 + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconPosNikuman.y), R_0 + num % 10);
 	}
 	//よしたろう
 	for (int i = 0;i < 4;i++) {
@@ -104,7 +104,7 @@ UIRefreshGame::drawKeyCount() const
 		for (int j = 1;j < 4 - i;j++) {
 			num = (num / 10);
 		}
-		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconYoshiPosY), R_0 + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconPosYoshi.y), R_0 + num % 10);
 	}
 	//のっぽ
 	for (int i = 0;i < 4;i++) {
@@ -112,7 +112,7 @@ UIRefreshGame::drawKeyCount() const
 		for (int j = 1;j < 4 - i;j++) {
 			num = (num / 10);
 		}
-		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconNoppoPosY), R_0 + num % 10);
+		UtilGraphics::drawF(mVertex, Vector2f(cDispPushKeyCountPosX + 20.f * i, cDispFaceIconPosNoppo.y), R_0 + num % 10);
 	}
 }
 

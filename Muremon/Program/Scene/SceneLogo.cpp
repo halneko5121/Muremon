@@ -9,6 +9,7 @@
 #include "SceneLogo.h"
 
 #include "Program/Util/UtilGraphics.h"
+#include "Program/DefineGame.h"
 
 namespace
 {
@@ -64,7 +65,7 @@ void
 SceneLogo::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_LOGO);
-	UtilGraphics::drawF(mVertex, Vector2f(400.0f, 300.0f), R_LOGO);
+	UtilGraphics::drawF(mVertex, Vector2f(cWindowCenterX, cWindowCenterY), R_LOGO);
 }
 
 /**

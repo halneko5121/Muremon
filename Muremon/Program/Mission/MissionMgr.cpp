@@ -32,6 +32,7 @@
 #include "Program/BadStatus/BadStatusRecover.h"
 #include "Program/BadStatus/BadStatusAlertPos.h"
 #include "Program/BadStatus/BadStatusAtackPowerDown.h"
+#include "Program/DefineGame.h"
 
 namespace
 {
@@ -319,8 +320,8 @@ void MissionMgr::draw() const
 	// ƒ~ƒbƒVƒ‡ƒ“Ž¸”s
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 	UtilGraphics::setVertexColor(mVertex, mNegativeAlpha, 255, 255, 255);
-	UtilGraphics::drawF(mVertex, Vector2f(400.f, 300.f), R_MISSION_OSIRASE);
-	UtilGraphics::drawF(mVertex, Vector2f(400.f, 300.f), R_NEGATIVE1 + mBadStatusId);
+	UtilGraphics::drawF(mVertex, Vector2f(cWindowCenterX, cWindowCenterY), R_MISSION_OSIRASE);
+	UtilGraphics::drawF(mVertex, Vector2f(cWindowCenterX, cWindowCenterY), R_NEGATIVE1 + mBadStatusId);
 }
 
 /**

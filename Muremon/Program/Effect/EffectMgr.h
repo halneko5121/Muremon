@@ -62,7 +62,7 @@ public:
 	void				draw() const;
 
 private:
-	EffectMgr();
+	explicit EffectMgr();
 	virtual ~EffectMgr();
 
 	/**

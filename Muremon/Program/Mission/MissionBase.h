@@ -14,7 +14,7 @@ enum MissionId;
 class MissionBase
 {
 public:
-	MissionBase(const MissionId& id, Texture* texture, Vertex* vertex);
+	explicit MissionBase(const MissionId& id, Texture* texture, Vertex* vertex);
 	virtual ~MissionBase();
 
 	void			run();

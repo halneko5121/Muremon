@@ -16,7 +16,7 @@ class Vertex;
 class Mission14 : public MissionBase
 {
 public:
-	Mission14(const MissionId& id, Texture* texture, Vertex* vertex);
+	explicit Mission14(const MissionId& id, Texture* texture, Vertex* vertex);
 	virtual ~Mission14();
 
 	void					runImple() override;

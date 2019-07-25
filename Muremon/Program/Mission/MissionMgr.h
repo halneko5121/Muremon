@@ -38,7 +38,7 @@ enum MissionId
 class MissionMgr
 {
 public:
-	MissionMgr(Texture* texture, Vertex* vertex);
+	explicit MissionMgr(Texture* texture, Vertex* vertex);
 	virtual ~MissionMgr();
 
 	void	init();

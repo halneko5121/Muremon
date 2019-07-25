@@ -16,7 +16,7 @@ class Vertex;
 class EffectOugi : public EffectBase
 {
 public:
-	EffectOugi(const EffectId& id, int rect_index, const EffectParam& param);
+	explicit EffectOugi(const EffectId& id, int rect_index, const EffectParam& param);
 	virtual ~EffectOugi();
 
 	void			update() override;

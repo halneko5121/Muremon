@@ -28,7 +28,7 @@ struct EffectParam
 class EffectBase
 {
 public:
-	EffectBase(const EffectId& id, int rect_index, const EffectParam& param);
+	explicit EffectBase(const EffectId& id, int rect_index, const EffectParam& param);
 	virtual ~EffectBase();
 
 	virtual void	update() = 0;

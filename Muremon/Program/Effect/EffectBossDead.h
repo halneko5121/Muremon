@@ -16,7 +16,7 @@ class Vertex;
 class EffectBossDead : public EffectBase
 {
 public:
-	EffectBossDead(const EffectId& id, int rect_index, const EffectParam& param);
+	explicit EffectBossDead(const EffectId& id, int rect_index, const EffectParam& param);
 	virtual ~EffectBossDead();
 
 	void			update() override;

@@ -16,7 +16,7 @@ class Vertex;
 class EffectHit : public EffectBase
 {
 public:
-	EffectHit(const EffectId& id, int rect_index, const EffectParam& param);
+	explicit EffectHit(const EffectId& id, int rect_index, const EffectParam& param);
 	virtual ~EffectHit();
 
 	void			update() override;

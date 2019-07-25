@@ -20,9 +20,6 @@ enum CollisionKind
 class CollisionMgr
 {
 public:
-	explicit CollisionMgr();
-	virtual ~CollisionMgr();
-
 	/**
 	 * @brief	インスタンスの取得
 	 */
@@ -53,6 +50,9 @@ private:
 	typedef std::list<Collision*>			CollisionList;
 
 private:
+	explicit CollisionMgr();
+	virtual ~CollisionMgr();
+
 	/**
 	 * @brief	コリジョンの取得
 	 */

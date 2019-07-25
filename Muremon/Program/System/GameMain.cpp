@@ -77,7 +77,7 @@ GameMain::init(void)
 	mWindow			= new Window;
 	mGraphics		= DirectGraphics::create();
 	DirectInputKey::create();
-	SIZE window_size = { cWindowWidth, cWindowHeight };
+	SIZE window_size = { cWindowSize.x, cWindowSize.y };
 	POINT window_pos = { cWindowPosX, cWindowPosY };
 	SIZE cursor_size = { cCursorWidth, cCursorHeight };
 	DirectInputMouse::create(window_size, window_pos, cursor_size);
@@ -114,7 +114,7 @@ GameMain::winMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	init();
 
 	// ウィンドウ初期化関数
-	mWindow->init(hInstance, cWindowWidth, cWindowHeight, cWindowPosX, cWindowPosY);
+	mWindow->init(hInstance, cWindowSize.x, cWindowSize.y, cWindowPosX, cWindowPosY);
 
 	// 各ライブラリの初期化
 	// DirectInput初期化
@@ -131,7 +131,7 @@ GameMain::winMain(HINSTANCE hInstance , HINSTANCE hPrevInst , LPSTR lpCmdLine , 
 	}
 
 	// DirectGraphics初期化
-	if(FAILED(mGraphics->init(mWindow, mWindow->getWindowHandle(), cWindowWidth, cWindowHeight)))
+	if(FAILED(mGraphics->init(mWindow, mWindow->getWindowHandle(), cWindowSize.x, cWindowSize.y)))
 	{
 		MessageBox(NULL, TEXT("DirectGraphicsの初期化に失敗"), NULL, MB_OK);
 		return 0;

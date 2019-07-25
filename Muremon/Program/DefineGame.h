@@ -9,10 +9,9 @@
 #pragma once
 
 // Window‚Ì‘å‚«‚³
-const int cWindowHeight = 600;
-const int cWindowWidth = 800;
-const float cWindowCenterX = (cWindowWidth / 2.f);
-const float cWindowCenterY = (cWindowHeight / 2.f);
+const Vector2f cWindowSize = { 800.0f, 600.0f };
+const float cWindowCenterX = (cWindowSize.x / 2.f);
+const float cWindowCenterY = (cWindowSize.y / 2.f);
 
 // •`‰æˆÊ’u
 const Vector2f cDispBgPos = { 400.0f, 300.0f };

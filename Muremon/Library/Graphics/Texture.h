@@ -15,7 +15,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	Texture();
+	explicit Texture();
 
 	/**
 	 * @brief	デストラクタ

@@ -85,7 +85,7 @@ private:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	DirectSound();
+	explicit DirectSound();
 
 	/**
 	 * @brief	デストラクタ

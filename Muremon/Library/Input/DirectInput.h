@@ -140,7 +140,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size);
+	explicit DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size);
 
 	/**
 	 * @brief	デストラクタ

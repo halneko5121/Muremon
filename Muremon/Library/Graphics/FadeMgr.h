@@ -67,7 +67,7 @@ private:
 	/**
 	 * @brief	コンストラクタ
 	*/
-	FadeMgr();
+	explicit FadeMgr();
 
 	/**
 	 * @brief	デストラクタ

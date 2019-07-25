@@ -25,7 +25,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	Window();
+	explicit Window();
 
 	/**
 	 * @brief	デストラクタ

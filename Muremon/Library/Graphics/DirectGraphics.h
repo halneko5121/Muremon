@@ -77,7 +77,7 @@ private:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	DirectGraphics();
+	explicit DirectGraphics();
 
 	/**
 	 * @brief	デストラクタ

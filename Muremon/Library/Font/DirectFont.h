@@ -100,7 +100,7 @@ private:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	DirectFont();
+	explicit DirectFont();
 
 	/**
 	 * @brief	デストラクタ

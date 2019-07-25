@@ -13,7 +13,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	StateMachine();
+	explicit StateMachine();
 
 	/**
 	 * @brief	デストラクタ

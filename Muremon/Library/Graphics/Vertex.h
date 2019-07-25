@@ -15,7 +15,7 @@ public:
 	/**
 	 * @brief	コンストラクタ
 	 */
-	Vertex();
+	explicit Vertex();
 
 	/**
 	 * @brief	デストラクタ

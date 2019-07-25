@@ -12,7 +12,7 @@
 class Animation
 {
 public:
-	Animation(int start_anime_num, int max_anime_index, float speed);
+	explicit Animation(int start_anime_num, int max_anime_index, float speed);
 	virtual ~Animation();
 
 	/**

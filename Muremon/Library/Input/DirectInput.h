@@ -138,16 +138,6 @@ class DirectInputMouse
 {
 public:
 	/**
-	 * @brief	コンストラクタ
-	 */
-	explicit DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size);
-
-	/**
-	 * @brief	デストラクタ
-	 */
-	virtual ~DirectInputMouse();
-
-	/**
 	 * @brief	インスタンスの取得
 	 */
 	static DirectInputMouse*	getInstance();
@@ -191,6 +181,16 @@ public:
 	MouseData					getMouseData() const;
 
 private:
+	/**
+	 * @brief	コンストラクタ
+	 */
+	explicit					DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size);
+
+	/**
+	 * @brief	デストラクタ
+	 */
+	virtual						~DirectInputMouse();
+
 	/**
 	 * @brief	デバイス全体の情報更新(絶対値の場合)仮
 	 */

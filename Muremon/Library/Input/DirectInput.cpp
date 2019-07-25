@@ -249,46 +249,6 @@ DirectInputKey::keyBordRefresh()
 DirectInputMouse*	DirectInputMouse::mInstance = nullptr;
 
 /**
- * @brief	コンストラクタ
- */
-DirectInputMouse::DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size)
-	: mDirectInput(nullptr)
-	, mMouseDevice(nullptr)
-	, mWindowHandle(nullptr)
-	, mMouseState()
-	, mMouseStatePrev()
-	, mCursorSize(cursor_size)
-	, mPosCursorWindow(nullptr)
-	, mPosCursorGame(nullptr)
-	, mGameSize()
-	, mMouseData()
-{
-	mPosCursorWindow	= new POINT();
-	mPosCursorGame		= new POINT();
-
-	ZeroMemory(&mMouseState, sizeof(DIMOUSESTATE2));
-	ZeroMemory(&mMouseStatePrev, sizeof(DIMOUSESTATE2));
-
-	SetRect(&mGameSize, 0, 0, size.width, size.height);
-	SetCursorPos( (pos.x + cBarX),(pos.y + cBarY) );
-
-	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
-	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
-	mMouseData.mIsDownRButton = mMouseData.mIsPushRButton = mMouseData.mIsReleaseRButton = false;
-}
-
-/**
- * @brief	デストラクタ
- */
-DirectInputMouse::~DirectInputMouse()
-{
-	APP_SAFE_DELETE(mPosCursorWindow);
-	APP_SAFE_DELETE(mPosCursorGame);
-	APP_SAFE_DELETE(mMouseDevice);
-	APP_SAFE_DELETE(mDirectInput);
-}
-
-/**
  * @brief	インスタンスの取得
  */
 DirectInputMouse*
@@ -393,6 +353,46 @@ DirectInputMouse::release()
 	APP_SAFE_DELETE(mPosCursorWindow);
 	APP_SAFE_RELEASE(mDirectInput);
 	APP_SAFE_RELEASE(mMouseDevice);
+}
+
+/**
+ * @brief	コンストラクタ
+ */
+DirectInputMouse::DirectInputMouse(const Sizei& size, const Vector2i& pos, const Sizei& cursor_size)
+	: mDirectInput(nullptr)
+	, mMouseDevice(nullptr)
+	, mWindowHandle(nullptr)
+	, mMouseState()
+	, mMouseStatePrev()
+	, mCursorSize(cursor_size)
+	, mPosCursorWindow(nullptr)
+	, mPosCursorGame(nullptr)
+	, mGameSize()
+	, mMouseData()
+{
+	mPosCursorWindow = new POINT();
+	mPosCursorGame = new POINT();
+
+	ZeroMemory(&mMouseState, sizeof(DIMOUSESTATE2));
+	ZeroMemory(&mMouseStatePrev, sizeof(DIMOUSESTATE2));
+
+	SetRect(&mGameSize, 0, 0, size.width, size.height);
+	SetCursorPos((pos.x + cBarX), (pos.y + cBarY));
+
+	mMouseData.mIsDownCButton = mMouseData.mIsPushCButton = mMouseData.mIsReleaseCButton = false;
+	mMouseData.mIsDownLButton = mMouseData.mIsPushLButton = mMouseData.mIsReleaseLButton = false;
+	mMouseData.mIsDownRButton = mMouseData.mIsPushRButton = mMouseData.mIsReleaseRButton = false;
+}
+
+/**
+ * @brief	デストラクタ
+ */
+DirectInputMouse::~DirectInputMouse()
+{
+	APP_SAFE_DELETE(mPosCursorWindow);
+	APP_SAFE_DELETE(mPosCursorGame);
+	APP_SAFE_DELETE(mMouseDevice);
+	APP_SAFE_DELETE(mDirectInput);
 }
 
 /**

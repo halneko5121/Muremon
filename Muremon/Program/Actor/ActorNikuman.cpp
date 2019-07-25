@@ -21,7 +21,7 @@
 
 namespace 
 {
-	const Vector2f cActorSize = { 40.0f, 40.0f };	// キャラのサイズ
+	const Vector2f cActorSize = { 40.0f, 65.0f };	// キャラのサイズ
 
 	// 放物線関係
 	const int cParaRandAcc = 20;					// 加速度

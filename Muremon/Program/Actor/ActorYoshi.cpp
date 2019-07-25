@@ -22,7 +22,7 @@
 
 namespace
 {
-	const Vector2f cActorSize = { 50.0f, 150.0f };			// キャラのサイズ
+	const Vector2f cActorSize = { 50.0f, 100.0f };			// キャラのサイズ
 
 	// 放物線関係
 	const int cParaRandAcc = 15;							// 加速度

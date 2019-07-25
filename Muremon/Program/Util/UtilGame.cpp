@@ -112,10 +112,10 @@ UtilGame::isScreenOut(const ActorBase& owner)
 	const float&	check_pos_x = now_pos.x - radius_x;
 	const float&	check_pos_y = now_pos.y - radius_y;
 
-	if (cWindowSize.x + cScreenOutMargin < check_pos_x)	return true;	// 画面右端
-	if (now_pos.x < -(radius_x + cScreenOutMargin))		return true;	// 画面左端
-	if (now_pos.y < -(radius_y + cScreenOutMargin))		return true;	// 画面上端
-	if (cWindowSize.y + cScreenOutMargin < check_pos_y)	return true;	// 画面下端
+	if (cWindowSize.width + cScreenOutMargin < check_pos_x)		return true;	// 画面右端
+	if (now_pos.x < -(radius_x + cScreenOutMargin))				return true;	// 画面左端
+	if (now_pos.y < -(radius_y + cScreenOutMargin))				return true;	// 画面上端
+	if (cWindowSize.height + cScreenOutMargin < check_pos_y)	return true;	// 画面下端
 
 	return false;
 }
@@ -132,9 +132,9 @@ UtilGame::isScreenOutWithoutLeft(const ActorBase& owner)
 	const float&	check_pos_x = now_pos.x - radius_x;
 	const float&	check_pos_y = now_pos.y - radius_y;
 
-	if (cWindowSize.x + cScreenOutMargin < check_pos_x)	return true;	// 画面右端
-	if (now_pos.y < -(radius_y + cScreenOutMargin))		return true;	// 画面上端
-	if (cWindowSize.y + cScreenOutMargin < check_pos_y)	return true;	// 画面下端
+	if (cWindowSize.width + cScreenOutMargin < check_pos_x)		return true;	// 画面右端
+	if (now_pos.y < -(radius_y + cScreenOutMargin))				return true;	// 画面上端
+	if (cWindowSize.height + cScreenOutMargin < check_pos_y)	return true;	// 画面下端
 
 	return false;
 }

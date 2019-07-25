@@ -31,7 +31,11 @@ public:
 	 */
 	float calcDistance(const Vector2<T>& pos) const
 	{
-		float distance = sqrtf((pos.x - this->x) * (pos.x - this->x) + (pos.y - this->y) * (pos.y - this->y));
+		T dx = abs(pos.x - this->x);
+		T dy = abs(pos.y - this->y);
+		
+   		// ‚Q“_ŠÔ‚Ì‹——£‚ðŒvŽZ
+		float distance = sqrt(dx * dx + dy * dy);
 		return distance;
 	}
 

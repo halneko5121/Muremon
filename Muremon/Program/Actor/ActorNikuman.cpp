@@ -294,6 +294,7 @@ void
 ActorNikuman::stateGroundDeath()
 {
 	mOrbitRebound->update(&mNowPos);
+	mRect.updateCenterPosCenter(mNowPos);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))
@@ -322,6 +323,7 @@ ActorNikuman::stateSkyDeath()
 	mNowPos.x += mRandMoveX;
 	mSpeed += cGravity;
 	mNowPos.y += mSpeed;
+	mRect.updateCenterPosCenter(mNowPos);
 
 	// ‰æ–ÊŠO‚È‚çŽ€–S
 	if (UtilGame::isScreenOut(*this))

@@ -142,6 +142,11 @@ SceneGameNormal::draw() const
 		// アクターの描画
 		getActorMgr()->draw();
 
+#if defined(DEBUG) || defined(_DEBUG)
+		// デバッグ描画
+		getCollisionMgr()->debugDraw();
+#endif
+
 		// エフェクト描画
 		getEffectMgr()->draw();
 	}

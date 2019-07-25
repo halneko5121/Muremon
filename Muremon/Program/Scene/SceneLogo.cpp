@@ -65,7 +65,7 @@ void
 SceneLogo::draw() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_LOGO);
-	UtilGraphics::drawF(mVertex, Vector2f(cWindowCenterX, cWindowCenterY), R_LOGO);
+	UtilGraphics::drawF(mVertex, cWindowCenterPos, R_LOGO);
 }
 
 /**

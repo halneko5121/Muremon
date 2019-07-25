@@ -10,8 +10,7 @@
 
 // Window‚Ì‘å‚«‚³
 const Sizei cWindowSize = { 800, 600 };
-const float cWindowCenterX = (cWindowSize.width / 2.f);
-const float cWindowCenterY = (cWindowSize.height / 2.f);
+const Vector2f cWindowCenterPos = { (cWindowSize.width * 0.5f), (cWindowSize.height * 0.5f) };
 
 // •`‰æˆÊ’u
 const Vector2f cDispBgPos = { 400.0f, 300.0f };

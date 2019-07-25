@@ -320,8 +320,8 @@ void MissionMgr::draw() const
 	// ƒ~ƒbƒVƒ‡ƒ“Ž¸”s
 	UtilGraphics::setTexture(mVertex, *mTexture, T_MISSION);
 	UtilGraphics::setVertexColor(mVertex, mNegativeAlpha, 255, 255, 255);
-	UtilGraphics::drawF(mVertex, Vector2f(cWindowCenterX, cWindowCenterY), R_MISSION_OSIRASE);
-	UtilGraphics::drawF(mVertex, Vector2f(cWindowCenterX, cWindowCenterY), R_NEGATIVE1 + mBadStatusId);
+	UtilGraphics::drawF(mVertex, cWindowCenterPos, R_MISSION_OSIRASE);
+	UtilGraphics::drawF(mVertex, cWindowCenterPos, R_NEGATIVE1 + mBadStatusId);
 }
 
 /**

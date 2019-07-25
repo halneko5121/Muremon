@@ -253,7 +253,7 @@ SceneRanking::drawBackGround() const
 {
 	UtilGraphics::setTexture(mVertex, *mTexture, T_RANKING_BG);
 	UtilGraphics::setVertexColor(mVertex, 255, 255, 255, 255);
-	UtilGraphics::drawF(mVertex, Vector2f(cWindowCenterX, cWindowCenterY), R_RANKING_BG);
+	UtilGraphics::drawF(mVertex, cWindowCenterPos, R_RANKING_BG);
 }
 
 /**

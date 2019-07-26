@@ -135,8 +135,8 @@ EffectMgr::cleanup()
 		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
 		if (effect->isEnd())
 		{
-			delete effect;
 			it = mEffectList.erase(it);
+			delete effect;
 		}
 		else
 		{

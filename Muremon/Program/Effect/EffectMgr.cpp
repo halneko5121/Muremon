@@ -121,6 +121,14 @@ EffectMgr::EffectMgr()
  */
 EffectMgr::~EffectMgr()
 {
+	EffectIterator it = mEffectList.begin();
+	while (it != mEffectList.end())
+	{
+		EffectBase* effect = dynamic_cast<EffectBase*>(*it);
+		APP_SAFE_DELETE(effect);
+		it++;
+	}
+	mEffectList.clear();
 }
 
 /**

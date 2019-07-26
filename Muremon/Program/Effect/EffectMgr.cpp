@@ -144,7 +144,7 @@ EffectMgr::cleanup()
 		if (effect->isEnd())
 		{
 			it = mEffectList.erase(it);
-			delete effect;
+			APP_SAFE_DELETE(effect);
 		}
 		else
 		{

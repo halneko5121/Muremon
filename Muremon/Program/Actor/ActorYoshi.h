@@ -22,12 +22,12 @@ public:
 	explicit ActorYoshi(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorYoshi();
 
+private:
 	void			initImple() override;
 	void			runImple() override;
 	void			updateImple() override;
 	void			drawImple() const override;
 
-private:
 	void			hitResponce(const HitParam& param);
 
 	// ステート関数

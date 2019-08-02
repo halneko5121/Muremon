@@ -23,12 +23,12 @@ public:
 
 	void			updateAttack2(const Vector2f& boss_cc);
 
+private:
 	void			initImple() override;
 	void			runImple() override;
 	void			updateImple() override;
 	void			drawImple() const override;
 
-private:
 	void			hitResponce(const HitParam& param);
 
 	// ステート関数

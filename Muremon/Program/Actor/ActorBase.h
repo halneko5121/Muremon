@@ -17,12 +17,6 @@ public:
 	explicit ActorBase(const ActorId& actor_id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorBase();
 
-	// ‚±‚¿‚ç‚ðoverride ‚µ‚Ä‰º‚³‚¢
-	virtual void		initImple() {};
-	virtual void		runImple() {};
-	virtual void		updateImple() {};
-	virtual void		drawImple() const {};
-
 	void				init();
 	void				run();
 	void				update();
@@ -58,6 +52,13 @@ public:
 
 	void				setUniqId(int id) { mUniqId = id; }
 	int					getUniqId() const { return mUniqId; }
+
+private:
+	// ‚±‚¿‚ç‚ðoverride ‚µ‚Ä‰º‚³‚¢
+	virtual void		initImple() {};
+	virtual void		runImple() {};
+	virtual void		updateImple() {};
+	virtual void		drawImple() const {};
 
 protected:
 	enum { cSpinSpeed = 30 };	// ‰ñ“]‚³‚¹‚é‘¬‚³(Šp“x)				

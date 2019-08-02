@@ -22,18 +22,17 @@ public:
 	explicit ActorBoss(const ActorId& id, int uniq_id, Texture* texture, Vertex* vertex);
 	virtual ~ActorBoss();
 
-	void		initImple() override;
-	void		runImple() override;
-	void		updateImple() override;
-	void		drawImple() const override;
-
 	bool		isDead() const;
-
 	void		recoveryLife();
 	void		setDead();
 	float		getLifeRate() const;
 
 private:
+	void		initImple() override;
+	void		runImple() override;
+	void		updateImple() override;
+	void		drawImple() const override;
+
 	void		hitResponce(const HitParam& param);
 
 	// ステート関数
